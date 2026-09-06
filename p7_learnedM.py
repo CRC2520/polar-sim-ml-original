@@ -1,101 +1,82 @@
-#!/usr/bin/env python
-import argparse, os, json, sys, traceback
+"""P7 corrected learned-M experiment with an explicit, matched stimulus schedule."""
+import argparse
+import os
 from copy import deepcopy
+from dataclasses import asdict
 
-# ---------- Imports ----------
-try:
-    from engine_v1_locked import TensionEngine, EngineConfig
-except Exception as e:
-    print("[ERROR] Could not import engine_v1_locked:", e)
-    traceback.print_exc()
-    sys.exit(1)
+from engine_v2_corrected import TensionEngine, EngineConfig
+from p6_stimulus_mapping import stim_from_text
+from report_utils import export_run, save_summary, latex_summary_table, bar_compare
 
-from report_utils import save_timeseries, save_summary, latex_summary_table, bar_compare, plot_hgi_inc
-
-# ---------- Runner ----------
-def run_one(cfg: EngineConfig, out_dir: str, tag: str, verbose=True):
-    os.makedirs(out_dir, exist_ok=True)
-    if verbose:
-        print(f"[P7] Running config: {tag}  → {out_dir}")
-        print("     cfg:", cfg)
-
+def run_one(cfg, out_dir, tag, verbose=True, prompt="Libertad", plots=True):
+    if not 0 <= cfg.stim_step < cfg.steps:
+        raise ValueError("P7 stim_step must address an executed zero-indexed step")
+    stimulus = stim_from_text(prompt, cfg.N, cfg.stim_scale)
     eng = TensionEngine(cfg)
-    ts = eng.run(out_dir=out_dir, print_console=verbose)
-
-    H = ts["HGI"]; I = ts["INC"]
-    summary = {
-        "Config": tag,
-        "HGI_final": float(H[-1]), "INC_final": float(I[-1]),
-        "HGI_mean": float(sum(H)/len(H)), "INC_mean": float(sum(I)/len(I)),
-        "Interventions": float(ts.get("ethics_interventions_pct", 0.0)),
-        "Recovery": ts.get("recovery_steps", "")
-    }
-    save_timeseries(out_dir, tag, ts)
-    save_summary(out_dir, tag, summary)
-    plot_hgi_inc(out_dir, tag, ts, f"P7: {tag}")
-    print(f"[P7] Done: {tag}")
-    return summary
+    for t in range(cfg.steps):
+        eng.step(stimulus=stimulus if t == cfg.stim_step else None)
+    control = TensionEngine(cfg)
+    control.run(print_console=False)
+    metadata = {"experiment": "P7", "config": asdict(cfg), "seed": cfg.seed,
+                "stimulus_protocol": {"prompt": prompt, "mapping": "explicit_signed_keyword_v1",
+                                      "step_index": cfg.stim_step, "human_step": cfg.stim_step + 1,
+                                      "scale": cfg.stim_scale, "duration_steps": 1},
+                "paired_control": "same initialization/configuration; external pulse omitted"}
+    row = export_run(out_dir, "p7", eng.ts, tag, metadata, control.ts, plots)
+    if verbose:
+        print(f"[P7] {tag}: HGI={row['HGI_final']:.4f}, INC={row['INC_final']:.4f}, return={row['Recovery_status']}")
+    return row
 
 def run_all(args):
     os.makedirs(args.out, exist_ok=True)
-    print("[P7] Start run_all →", args)
-
     base_cfg = EngineConfig(
         N=args.N, K=args.K, steps=args.steps, seed=args.seed,
         learn_M=True, lr_M=args.lr, reg_M=args.reg,
-        inc_floor=0.96, inc_gain=0.18, hgi_floor=0.95, hgi_gain=0.10,
-        ethics_kappa=1.12, ethics_alpha_min=0.60,
-        gamma_cons_start=0.20, gamma_cons_end=0.36, beta_mu=0.07
-    )
-
+        stim_step=getattr(args, "stim_step", 8), stim_scale=getattr(args, "stim_scale", .6),
+        inc_floor=.96, inc_gain=.18, hgi_floor=.95, hgi_gain=.10,
+        ethics_kappa=1.12, ethics_alpha_min=.60,
+        gamma_cons_start=.20, gamma_cons_end=.36, beta_mu=.07)
     rows = []
-
-    if not args.only_no_ethics and not args.only_no_homeostasis:
-        rows.append( run_one(base_cfg, os.path.join(args.out, "baseline"), "P7 Baseline", verbose=True) )
-
-    if args.no_ethics or args.only_no_ethics:
-        cfg_noe = deepcopy(base_cfg); cfg_noe.no_ethics = True
-        rows.append( run_one(cfg_noe, os.path.join(args.out, "no_ethics"), "P7 No Ethics", verbose=True) )
-
-    if args.no_homeostasis or args.only_no_homeostasis:
-        cfg_noh = deepcopy(base_cfg); cfg_noh.no_homeostasis = True
-        rows.append( run_one(cfg_noh, os.path.join(args.out, "no_homeostasis"), "P7 No Homeostasis", verbose=True) )
-
+    only_noe, only_noh = args.only_no_ethics, args.only_no_homeostasis
+    scheduled = []
+    if not only_noe and not only_noh:
+        scheduled.append(("baseline", "P7 Learned M", base_cfg))
+    if args.no_ethics or only_noe:
+        cfg = deepcopy(base_cfg); cfg.no_ethics = True
+        scheduled.append(("no_modulation", "P7 No modulation or override", cfg))
+    if args.no_homeostasis or only_noh:
+        cfg = deepcopy(base_cfg); cfg.no_homeostasis = True
+        scheduled.append(("no_homeostasis", "P7 No baseline restoring drive", cfg))
+    for folder, tag, cfg in scheduled:
+        rows.append(run_one(cfg, os.path.join(args.out, folder), tag,
+                            verbose=not getattr(args, "quiet", False),
+                            prompt=getattr(args, "prompt", "Libertad"), plots=not getattr(args, "no_plots", False)))
     if not rows:
-        print("[P7] Nothing was scheduled. Add --no-ethics and/or --no-homeostasis or remove --only-* filters.")
-        return
+        raise ValueError("No P7 configurations were scheduled")
+    latex_summary_table(args.out, "p7_ablation", "Matched stimulus and seed in learned-M ablations.", "tab:p7_ablation", rows)
+    if not getattr(args, "no_plots", False):
+        bar_compare(args.out, "p7_ablation", rows, "P7 descriptive dynamics")
+    save_summary(args.out, "p7_all", {"rows": rows, "seed": args.seed,
+                                    "schedule": {"stim_step_zero_index": base_cfg.stim_step,
+                                                 "stim_scale": base_cfg.stim_scale}})
+    return rows
 
-    # Combined table + bars
-    latex_summary_table(
-        args.out, "p7_ablation",
-        caption="Ablation study for learned $M$.",
-        label="tab:p7_ablation",
-        rows=rows
-    )
-    bar_compare(args.out, "p7_ablation", rows=rows, title="P7 Ablations — Final HGI/INC")
-    with open(os.path.join(args.out, "p7_all_summaries.json"), "w") as f:
-        json.dump({"rows": rows}, f, indent=2)
-
-    print("[P7] Artifacts written to:", args.out)
-
-# ---------- CLI ----------
-if __name__ == "__main__":
+def parser():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--N", type=int, default=160)
-    ap.add_argument("--K", type=int, default=12)
-    ap.add_argument("--steps", type=int, default=24)
-    ap.add_argument("--seed", type=int, default=2025)
-    ap.add_argument("--lr", type=float, default=0.0035)
+    for name, default in (("N", 160), ("K", 12), ("steps", 24), ("seed", 2025), ("stim-step", 8)):
+        ap.add_argument("--" + name, type=int, default=default)
+    ap.add_argument("--lr", type=float, default=.0035)
     ap.add_argument("--reg", type=float, default=5e-4)
-    ap.add_argument("--out", type=str, default="results_p7_learnedM")
+    ap.add_argument("--stim-scale", type=float, default=.6)
+    ap.add_argument("--prompt", default="Libertad")
+    ap.add_argument("--out", default="results_corrected/p7_learnedM")
+    ap.add_argument("--no-ethics", action="store_true", help="Compatibility alias: ablate modulation and override, not consequence evaluation")
+    ap.add_argument("--no-homeostasis", action="store_true")
+    ap.add_argument("--only-no-ethics", action="store_true")
+    ap.add_argument("--only-no-homeostasis", action="store_true")
+    ap.add_argument("--no-plots", action="store_true")
+    ap.add_argument("--quiet", action="store_true")
+    return ap
 
-    # toggles
-    ap.add_argument("--no-ethics", action="store_true", help="Add a run with ethics disabled")
-    ap.add_argument("--no-homeostasis", action="store_true", help="Add a run with homeostasis disabled")
-
-    # filters (optional): run exactly one of the ablations
-    ap.add_argument("--only-no-ethics", action="store_true", help="Run ONLY the no-ethics ablation (skip baseline)")
-    ap.add_argument("--only-no-homeostasis", action="store_true", help="Run ONLY the no-homeostasis ablation (skip baseline)")
-
-    args = ap.parse_args()
-    run_all(args)
+if __name__ == "__main__":
+    run_all(parser().parse_args())

@@ -1,0 +1,53 @@
+{
+  "protocol_sha256": "21ca01d0de32c1c0294da6d4025470e93a8da0cd943e07d2c3832f2860608426",
+  "smoke": false,
+  "python": "3.12.13",
+  "numpy": "2.3.5",
+  "started_unix": 1788654534.4297802,
+  "source_sha256": {
+    "polar/__init__.py": "afe7cc41134cdb5c9449350bddc0cc2f8a305a51ba68ccbedbe9626c6fb61b52",
+    "polar/baselines.py": "f1a3018876747a843813694c7d7cb8155f6914bdd4b47283e2c8760d8d2f5877",
+    "polar/evaluation.py": "b4299b43a6f04222bc27a5969521ad98754aa2c24a86039c15cc0ed4dc5a3c3a",
+    "polar/memory.py": "d6229c661b2d6370b45e5dc32864862f4026fd5d231b398e279cd122afbedcac",
+    "polar/model.py": "729acd40c3c19b1543b88662e4ea8b2f485104c522a2e3b8b2b555b12529921a",
+    "polar/polarities.py": "f0d6a423e3b41cb684742a2337c992c7e0c394cdd2b90363211f17d3b5935bc5",
+    "polar/tasks.py": "363bdaab6cc846c15e2b377140e063f575b0b4a4cc43d4df69d8d6f978bb331b",
+    "polar/workspace.py": "aec38344d54eb8a31baf4eed9fbb5f9ab4b7759006e02d931426c62dd3bbc460",
+    "scripts/run_benchmarks.py": "232365a8b2927da2969a8fe6a1ffcd47a62fc2b04bc83941de7efc20fd0aad3c",
+    "scripts/regenerate_reports.py": "9213d68d133ab7012501bbcf032905b5b3465f7cc681b0762874804577687cf9"
+  },
+  "trace_schema": "environment joined to controller trace by (split,task,seed,t); full precision JSON numbers",
+  "tuning": "none",
+  "model_config": {
+    "agents": 3,
+    "types": 8,
+    "seed": 0,
+    "representation": "dual_pole",
+    "step_size": 0.65,
+    "use_memory": true,
+    "use_workspace": true,
+    "use_self_model": true,
+    "memory_learning_rate": 0.5,
+    "memory_retention": 0.995,
+    "capability_learning_rate": 0.35
+  },
+  "elapsed_seconds": 65.9795248149967,
+  "completed_unix": 1788654600.419832,
+  "raw_sha256": {
+    "controllers/disconnected.jsonl.gz": "0e51ad7d2e08d88f3a32696b043f9f0aa94355078db7f4f45cbc3f2ef1c78730",
+    "controllers/dual_pole.jsonl.gz": "3cbef882430211b580cc1ef7c306b69a6663c6c4c98e043a5fa3e9ed8748a867",
+    "controllers/memory_erase.jsonl.gz": "30bc028ddb6bfefe9b35dae76f5ceb1c36adcaea881db8e29e8b49a0d54bed2a",
+    "controllers/memory_shuffle.jsonl.gz": "29912cf319aa71bc2df72beefe30fbcc8ed329bd32975e0e578b15f48eab4539",
+    "controllers/no_memory.jsonl.gz": "79a3bc300c1b7a108113c72c1d8a4d582f0fcca3315562c3ec66223a2edb2f8b",
+    "controllers/no_self_model.jsonl.gz": "294010e94e6f0adb81626e6a4d93e0d7d0141ee3e4a431b9708c8af59d374230",
+    "controllers/no_workspace.jsonl.gz": "78bfe541cdb8a254809c5b4d74bb96c41fbe35f4b70029cdd7a7f630a5e381ae",
+    "controllers/recurrent.jsonl.gz": "4a294ac26526ae170d37494f850768992b3df2120f482b646e2c4845c20bcefa",
+    "controllers/self_model_reset.jsonl.gz": "9e8f3a31624308075f557fe07c8ff2d595db4775f4d7d7db125559445c4bd3bd",
+    "controllers/signed_intensity.jsonl.gz": "a9160d459a39b8d0953add1fd6c2ef1877cd844f5bef31db93ea422ea10a19d1",
+    "controllers/uniform.jsonl.gz": "b60e892266691f11a59dbccbef12ff6005ca43aa2d55d025c54d494ffd7257ea",
+    "controllers/workspace_shuffle.jsonl.gz": "454568c9754c4cfdcf03de61018d9fbd2a78b9ba155cb2245933eaa69dc59970",
+    "controllers/zero.jsonl.gz": "db1201cdf24a5184a0a62620abe2555da449468758a0b8e4a73de5e6613a126c",
+    "environment.jsonl.gz": "eb630260356bcfb2e0b8dfc94fa7c6418de2d3cd7f01664dcc06e8294aec1339"
+  },
+  "completed_runs": 910
+}

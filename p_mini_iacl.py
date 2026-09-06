@@ -1,215 +1,96 @@
-#!/usr/bin/env python
-# p_mini_iacl.py — Mini-IACL (multi-agent consensus) with CSV/PNG/LaTeX outputs
-
+"""Mini-IACL: corrected synchronous consensus control, not a consciousness test."""
 import os
-import sys
-import json
-import traceback
+from dataclasses import asdict
+
 import numpy as np
 import torch
-
-# ---- engine + utils ----
-try:
-    from engine_v1_locked import TensionEngine, EngineConfig, DEVICE
-except Exception as e:
-    print("[ERROR] Could not import engine_v1_locked:", e)
-    traceback.print_exc()
-    sys.exit(1)
-
-try:
-    from report_utils import (
-        save_timeseries,
-        save_summary,
-        latex_summary_table,
-        plot_hgi_inc,
-    )
-except Exception as e:
-    print("[ERROR] Could not import report_utils:", e)
-    traceback.print_exc()
-    sys.exit(1)
-
+from engine_v2_corrected import TensionEngine, EngineConfig, DEVICE
+from report_utils import export_run, save_timeseries
 
 class MiniIACL:
-    """
-    Minimal multi-agent wrapper:
-      - Creates num_agents engines (no learned M here).
-      - Each step: compute group mean state from logged A; apply a small
-        consensus stimulus gamma_g * (A_mean - A_i) to each agent.
-      - Logs group-averaged HGI/INC/SAT/alpha/override each step.
-    """
+    def __init__(self, num_agents=3, N=64, K=8, steps=24, seed=2025,
+                 gamma_group_start=0., gamma_group_end=.28):
+        if num_agents < 2 or steps < 1:
+            raise ValueError("Mini-IACL requires at least two agents and one step")
+        if not 0 <= gamma_group_start <= .5 or not 0 <= gamma_group_end <= .5:
+            raise ValueError("Group coupling must remain in [0,.5] to bound signed stimuli")
+        self.num_agents, self.steps = num_agents, steps
+        self.gamma_group_start, self.gamma_group_end = gamma_group_start, gamma_group_end
+        self.agents = [TensionEngine(EngineConfig(N=N, K=K, steps=steps, seed=seed + i, learn_M=False))
+                       for i in range(num_agents)]
+        self.config = {"num_agents": num_agents, "N": N, "K": K, "steps": steps, "seed": seed,
+                       "agent_seeds": [seed + i for i in range(num_agents)],
+                       "gamma_group_start": gamma_group_start, "gamma_group_end": gamma_group_end,
+                       "schedule": "synchronous_pre_step_snapshot_no_warmup"}
+        fields = ("step", "HGI", "INC", "SAT", "alpha", "override", "continuous_modulation",
+                  "hgi_guard", "inc_guard", "numeric_clip", "override_effect", "A_before", "A", "stimulus",
+                  "group_mean_before", "gamma_group", "coupling_rms")
+        self.ts = {field: [] for field in fields}
 
-    def __init__(
-        self,
-        num_agents: int = 3,
-        N: int = 64,
-        K: int = 8,
-        steps: int = 24,
-        seed: int = 2025,
-        gamma_group_start: float = 0.00,
-        gamma_group_end: float = 0.28,
-    ):
-        self.num_agents = num_agents
-        self.steps = steps
-        self.gamma_group_start = gamma_group_start
-        self.gamma_group_end = gamma_group_end
+    def _current_A(self, eng):
+        """Fail on missing, malformed, or nonfinite states; never invent a state."""
+        if not hasattr(eng, "current_activation"):
+            raise ValueError("Engine has no current_activation state API")
+        if not hasattr(eng, "N") or not isinstance(eng.N, int) or eng.N < 1:
+            raise ValueError("Engine has no valid state dimension N")
+        state = eng.current_activation
+        if callable(state):
+            state = state()
+        if hasattr(state, "detach"):
+            state = state.detach().cpu().numpy()
+        state = np.asarray(state, dtype=float)
+        if state.shape != (eng.N,):
+            raise ValueError(f"Activation shape {state.shape} differs from required ({eng.N},)")
+        if not np.isfinite(state).all():
+            raise ValueError("Activation state contains nonfinite values")
+        return state.copy()
 
-        self.agents = []
-        for i in range(num_agents):
-            cfg = EngineConfig(
-                N=N,
-                K=K,
-                steps=steps,
-                seed=seed + i,
-                learn_M=False,  # fixed M for this demo
-            )
-            self.agents.append(TensionEngine(cfg))
-
-        # group time series (averages across agents)
-        self.ts = {
-            "step": [],
-            "HGI": [],
-            "INC": [],
-            "SAT": [],
-            "alpha": [],
-            "override": [],
-        }
-
-    def _current_A(self, eng: TensionEngine) -> np.ndarray:
-        """Get last logged state vector A from engine timeseries."""
-        if "A" in eng.ts and len(eng.ts["A"]) > 0:
-            return np.asarray(eng.ts["A"][-1], dtype=float)
-        # fallback: try attribute if engine exposes it
-        if hasattr(eng, "A"):
-            return np.asarray(getattr(eng, "A"), dtype=float)
-        # last resort: zero vec (should not happen after warm-up)
-        return np.zeros(8, dtype=float)
-
-    def _engine_N(self, eng) -> int:
-        """Infer engine state dimension N from its M matrix."""
-        if hasattr(eng, "M"):
-            M = eng.M
-            if hasattr(M, "shape"):
-                return int(M.shape[0])
-            try:
-                return int(M.detach().cpu().shape[0])
-            except Exception:
-                pass
-        # Fallback to length of last logged A if present
-        a = self._current_A(eng)
-        return int(len(a))
-
-    def _expand_to_engine_dim(self, v_small: np.ndarray, N_eng: int) -> np.ndarray:
-        """
-        Expand a small vector (e.g., 8D core) to the engine's N (e.g., 64D).
-        Strategy:
-          - if lengths match: return as is
-          - if divisible: tile evenly
-          - else: repeat & trim
-        """
-        L = int(len(v_small))
-        if L == N_eng:
-            return v_small.astype(float, copy=False)
-
-        if L == 0:
-            return np.zeros(N_eng, dtype=float)
-
-        if N_eng % L == 0:
-            reps = N_eng // L
-            return np.tile(v_small, reps).astype(float, copy=False)
-
-        # fallback: repeat & trim
-        reps = int(np.ceil(N_eng / L))
-        v = np.tile(v_small, reps)[:N_eng]
-        return v.astype(float, copy=False)
-
-    def run(self, out_dir: str = "results_p_mini_iacl", print_console: bool = True):
+    def run(self, out_dir="results_corrected/mini_iacl", print_console=True):
+        if self.ts["step"]:
+            raise RuntimeError("A MiniIACL instance can run only once; create a new seeded instance")
         os.makedirs(out_dir, exist_ok=True)
-        if print_console:
-            print(f"[IACL] Start: agents={self.num_agents}, steps={self.steps}")
-
-        # Warm-up once so eng.ts["A"] exists
-        for eng in self.agents:
-            eng.step(stimulus=None)
-
         for t in range(self.steps):
-            # 1) Compute group mean from current logged states (likely 8D)
-            A_stack_small = np.stack([self._current_A(eng) for eng in self.agents], axis=0)  # [A, L]
-            A_mean_small = A_stack_small.mean(axis=0)  # [L]
-            gamma_g = float(np.interp(t, [0, self.steps - 1],
-                                      [self.gamma_group_start, self.gamma_group_end]))
-
-            # 2) Advance each agent with expanded consensus stimulus
-            for i, eng in enumerate(self.agents):
-                A_i_small = A_stack_small[i]                       # length L (e.g., 8)
-                N_eng = self._engine_N(eng)                       # target length (e.g., 64)
-
-                # consensus pull in small space
-                stim_small = gamma_g * (A_mean_small - A_i_small)  # [L]
-
-                # expand to engine's N
-                stim_np = self._expand_to_engine_dim(stim_small, N_eng)  # [N_eng]
-
-                # torch tensor on correct device
-                stim = torch.tensor(stim_np, dtype=torch.float32, device=DEVICE)
-                eng.step(stimulus=stim)
-
-            # 3) Log group averages
-            H = float(np.mean([eng.ts["HGI"][-1] for eng in self.agents]))
-            I = float(np.mean([eng.ts["INC"][-1] for eng in self.agents]))
-            S = float(np.mean([eng.ts["SAT"][-1] for eng in self.agents]))
-            a = float(np.mean([eng.ts["alpha"][-1] for eng in self.agents]))
-            ov = float(np.mean([float(eng.ts["override"][-1]) for eng in self.agents]))
-
+            # Every agent reads the same simulation instant, before any agent advances.
+            snapshots = np.stack([self._current_A(eng) for eng in self.agents])
+            mean = snapshots.mean(axis=0)
+            fraction = t / max(1, self.steps - 1)
+            gamma = self.gamma_group_start + fraction * (self.gamma_group_end - self.gamma_group_start)
+            stimuli = gamma * (mean - snapshots)
+            for eng, stimulus in zip(self.agents, stimuli):
+                eng.step(stimulus=torch.as_tensor(stimulus, dtype=torch.float32, device=DEVICE))
             self.ts["step"].append(t)
-            self.ts["HGI"].append(H)
-            self.ts["INC"].append(I)
-            self.ts["SAT"].append(S)
-            self.ts["alpha"].append(a)
-            self.ts["override"].append(ov)
-
+            for key in ("HGI", "INC", "SAT", "alpha", "override", "continuous_modulation",
+                        "hgi_guard", "inc_guard", "numeric_clip", "override_effect"):
+                self.ts[key].append(float(np.mean([eng.ts[key][-1] for eng in self.agents])))
+            self.ts["A_before"].append(snapshots.tolist())
+            self.ts["A"].append([self._current_A(eng).tolist() for eng in self.agents])
+            self.ts["stimulus"].append(stimuli.tolist())
+            self.ts["group_mean_before"].append(mean.tolist())
+            self.ts["gamma_group"].append(float(gamma))
+            self.ts["coupling_rms"].append(float(np.sqrt(np.mean(stimuli ** 2))))
             if print_console:
-                print(f"[IACL] Step {t+1}: HGI={H:.4f}, INC={I:.4f}, SAT={S:.2f}, α={a:.3f}, override%={ov:.2f}")
-
+                print(f"[IACL] step={t} coupling_rms={self.ts['coupling_rms'][-1]:.6f}")
         return self.ts
 
-
-def run_and_export(out_dir: str = "results_p_mini_iacl", agents: int = 3, steps: int = 24):
-    env = MiniIACL(num_agents=agents, steps=steps)
-    ts = env.run(out_dir=out_dir, print_console=True)
-
-    # Figure
-    plot_hgi_inc(out_dir, "mini_iacl", ts, "Mini-IACL: Group Harmony/Coherence")
-
-    # Summary row
-    H = np.array(ts["HGI"])
-    I = np.array(ts["INC"])
-    row = {
-        "Config": f"IACL {agents} agents",
-        "HGI_final": float(H[-1]),
-        "INC_final": float(I[-1]),
-        "HGI_mean": float(H.mean()),
-        "INC_mean": float(I.mean()),
-        "Interventions": float(np.mean(ts["override"])),
-        "Recovery": "",
-    }
-
-    # Artifacts
-    save_timeseries(out_dir, "mini_iacl", ts)
-    save_summary(out_dir, "mini_iacl", row)
-    latex_summary_table(
-        out_dir,
-        "mini_iacl",
-        caption="Mini-IACL multi-agent averages.",
-        label="tab:mini_iacl",
-        rows=[row],
-    )
-    print("[IACL] Artifacts written to:", out_dir)
-
+def run_and_export(out_dir="results_corrected/mini_iacl", agents=3, steps=24,
+                   N=64, K=8, seed=2025, plots=True):
+    env = MiniIACL(num_agents=agents, steps=steps, N=N, K=K, seed=seed)
+    ts = env.run(out_dir=out_dir, print_console=False)
+    # Continuous coupling does not provide a post-withdrawal recovery interval.
+    control = MiniIACL(num_agents=agents, steps=steps, N=N, K=K, seed=seed,
+                       gamma_group_start=0., gamma_group_end=0.)
+    control.run(out_dir=out_dir, print_console=False)
+    metadata = {"experiment": "Mini-IACL", "config": env.config,
+                "interpretation": "Engine descriptors averaged over agents; flags are per-agent event fractions."}
+    row = export_run(out_dir, "mini_iacl", ts, f"Mini-IACL {agents} agents",
+                     metadata=metadata, control=control.ts, plots=plots)
+    for i, (engine, control_engine) in enumerate(zip(env.agents, control.agents)):
+        save_timeseries(out_dir, f"mini_iacl_agent_{i}", engine.ts,
+                        {"agent_index": i, "config": asdict(engine.cfg), "seed": engine.cfg.seed})
+        save_timeseries(out_dir, f"mini_iacl_agent_{i}_control", control_engine.ts,
+                        {"agent_index": i, "config": asdict(control_engine.cfg),
+                         "seed": control_engine.cfg.seed, "role": "uncoupled_control"})
+    return row
 
 if __name__ == "__main__":
-    try:
-        run_and_export()
-    except Exception as e:
-        print("[IACL] FAILED:", e)
-        traceback.print_exc()
-        sys.exit(1)
+    run_and_export()
