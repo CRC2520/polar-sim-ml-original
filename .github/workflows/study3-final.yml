@@ -1,0 +1,85 @@
+name: Study 3 registered final evaluations
+on:
+  push:
+    branches: [research/study3-network-evaluation]
+    paths: ['.github/workflows/study3-final.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  registered-finals:
+    if: github.ref == 'refs/heads/research/study3-network-evaluation'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      OMP_NUM_THREADS: 1
+      OPENBLAS_NUM_THREADS: 1
+      MKL_NUM_THREADS: 1
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install recorded numerical environment
+        run: |
+          pip install numpy==2.3.5 matplotlib==3.10.8 pandas==2.2.3 scipy==1.17.0
+          pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify regression tests before final data exposure
+        run: |
+          set -o pipefail
+          python -m unittest discover -s tests -v 2>&1 | tee /tmp/study3-final-tests.txt
+          python - <<'PY'
+          import json
+          import numpy as np
+          from study3.core import CELLS,environment,trial
+          settings=json.load(open('docs/STUDY3_ACTIVE_FREEZE.json'))['selected']
+          env=environment(791010,CELLS[0])
+          f=trial('full',settings,env); l=trial('no_K',settings,env)
+          assert f['parameters']['b']!=0 and l['parameters']['b']==0
+          assert np.max(np.abs(np.asarray([r['action'] for r in f['frames']])-np.asarray([r['action'] for r in l['frames']])))>0
+          print('Nonzero active pathway fixture passed before final generation')
+          PY
+      - name: Primary final after public registration
+        run: python -m study3.run final --registration-sha e44f783e096aafa9822ce517994780d5a89c3ae0
+      - name: Independently regenerate primary outcomes from all archived records
+        run: python -m study3.run regenerate
+      - name: Separately registered active panel on different final seeds
+        run: python scripts/run_study3_active.py final --registration-sha 054469956cf27abc193827956f5e5a4c63cbdd99
+      - name: Regenerate active panel and replay preselected controllers
+        run: python scripts/run_study3_active.py regenerate
+      - name: Preserve prior studies and publish complete current evidence
+        run: |
+          git diff --exit-code 2d2d51120409ad39559e1311897bd6b99bbf748e -- polar study2 engine_v1_locked.py engine_v2_corrected.py results_study2 results_corrected
+          cp /tmp/study3-final-tests.txt docs/study3_final_validation.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f results_study3 docs/study3_final_validation.txt
+          git commit -m 'research: record registered Study 3 and active-panel results with full verified traces [skip ci]'
+          git push origin HEAD:research/study3-network-evaluation
+      - name: Package results, configurations, audit manifests and scientific source
+        run: |
+          mkdir -p /tmp/study3-delivery/primary /tmp/study3-delivery/active
+          cp -r results_study3/final/generated/* /tmp/study3-delivery/primary/
+          cp results_study3/final/STARTED.json results_study3/final/REGENERATION.json results_study3/final/manifest.json /tmp/study3-delivery/primary/
+          cp -r results_study3/active/final/generated/* /tmp/study3-delivery/active/
+          cp results_study3/active/final/STARTED.json results_study3/active/final/REGENERATION.json results_study3/active/final/manifest.json /tmp/study3-delivery/active/
+          cp docs/STUDY3_PROTOCOL.md docs/STUDY3_FREEZE.json docs/STUDY3_ACTIVE_PANEL_PROTOCOL.md docs/STUDY3_ACTIVE_FREEZE.json docs/study3_final_validation.txt /tmp/study3-delivery/
+          git rev-parse HEAD > /tmp/study3-delivery/RESULTS_COMMIT.txt
+          tar --exclude='__pycache__' -czf /tmp/study3-delivery/scientific-source.tar.gz network_tension.py polar study2 study3 scripts tests docs engine_v1_locked.py engine_v2_corrected.py requirements-repro.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: study3-results-and-source
+          path: /tmp/study3-delivery
+          retention-days: 14
+          if-no-files-found: error
+      - name: Preserve partial evidence if a registered execution fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: study3-failure-evidence
+          path: results_study3
+          retention-days: 14
+          if-no-files-found: warn
