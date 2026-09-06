@@ -1,0 +1,26 @@
+{
+  "status": "engineering_audit_not_performance_or_consciousness_evidence",
+  "source_repository": "CRC2520/polar-sim-ml",
+  "source_commit": "22891d52600f600573d88839ae237bfd6d723a6b",
+  "source_blobs": {
+    "main_f30.py": "5e6f2fb3d2057255d28d705234b4bcac9befc418",
+    "main_f7.py": "010fbb6d94bfb60c0db5d6047eb1d66dca826028"
+  },
+  "instrumented_steps": 20,
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "torch": "2.10.0+cpu"
+  },
+  "f30_total_inputs_read_count": 0,
+  "f30_actor_parameter_max_change": 0.0,
+  "f30_actor_parameter_tensors_with_grad": 0,
+  "f30_min_final_activation": 0.0,
+  "f30_analytic_harmony_lower_bound": 0.9,
+  "f7_state_update_reads_influence_matrix": true,
+  "limitations": [
+    "Only f7/f30 are audited mechanistically; not all intermediate phases.",
+    "Runtime is an instrumented short replay; original source hashes are checked.",
+    "The 0.9 harmony floor follows ReLU/tanh and normalized positive weights, not learned competence."
+  ]
+}

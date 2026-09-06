@@ -1,0 +1,61 @@
+name: Inter-polar network validation
+on:
+  push:
+    branches: [research/inter-polar-tension-architecture]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  test-and-record:
+    runs-on: ubuntu-latest
+    env:
+      OMP_NUM_THREADS: 1
+      OPENBLAS_NUM_THREADS: 1
+      MKL_NUM_THREADS: 1
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install diagnostic environment (not a re-run of frozen studies)
+        run: |
+          pip install numpy==2.3.5 matplotlib==3.10.8 pandas==2.2.3 scipy==1.17.0
+          pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+      - name: Run all regression tests and deterministic probe
+        run: |
+          set -o pipefail
+          python -m unittest discover -s tests -v 2>&1 | tee /tmp/network-tests.log
+          python scripts/probe_network_tension.py
+      - name: Read-only audit of pinned phase source
+        run: |
+          git clone --quiet https://github.com/CRC2520/polar-sim-ml.git /tmp/polar-phases
+          git -C /tmp/polar-phases checkout --quiet 22891d52600f600573d88839ae237bfd6d723a6b
+          python scripts/audit_progressive_legacy.py --repo /tmp/polar-phases --out docs/legacy_progressive_audit.json
+      - name: Record engineering evidence without changing frozen studies
+        run: |
+          cp /tmp/network-tests.log docs/network_validation.log
+          python - <<'PY'
+          from pathlib import Path
+          text='\n\n## Inter-polar network extension 0.1\n\nThe original layered architecture remains the research object. See [the explicit network tension specification](docs/NETWORK_TENSION_SPEC.md) for the new directed W/K pathways, engineering tests, legacy phase audit and remaining empirical requirements. This extension is not a new confirmatory study and does not change the frozen Study 2 conclusion.\n'
+          for name in ('README.md','SPECIFICATION.md'):
+              p=Path(name)
+              if '## Inter-polar network extension 0.1' not in p.read_text(): p.write_text(p.read_text()+text)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/network_tension_probe.json docs/legacy_progressive_audit.json README.md SPECIFICATION.md
+          git add -f docs/network_validation.log
+          if ! git diff --cached --quiet; then
+            git commit -m 'test: record network propagation and pinned legacy audit [skip ci]'
+            git push origin HEAD:research/inter-polar-tension-architecture
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: network-engineering-evidence
+          path: |
+            docs/network_tension_probe.json
+            docs/legacy_progressive_audit.json
+            docs/network_validation.log
+            docs/NETWORK_TENSION_SPEC.md
+          retention-days: 14

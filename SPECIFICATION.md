@@ -76,3 +76,8 @@ history, while trace data remain supplemental evidence. The current draft
 integrates the engineering specification, exploratory first study, prospective
 coupling study and separate functional-consciousness protocol. See
 `PROVENANCE.json` and the acceptance checklist.
+
+
+## Inter-polar network extension 0.1
+
+The original layered architecture remains the research object. See [the explicit network tension specification](docs/NETWORK_TENSION_SPEC.md) for the new directed W/K pathways, engineering tests, legacy phase audit and remaining empirical requirements. This extension is not a new confirmatory study and does not change the frozen Study 2 conclusion.
