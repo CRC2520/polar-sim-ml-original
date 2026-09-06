@@ -1,0 +1,51 @@
+name: Study 3 development and prospective freeze
+on:
+  push:
+    branches: [research/study3-network-evaluation]
+    paths: ['study3/**', 'tests/test_study3.py', 'docs/STUDY3_PROTOCOL.md', '.github/workflows/study3-development.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  develop-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      OMP_NUM_THREADS: 1
+      OPENBLAS_NUM_THREADS: 1
+      MKL_NUM_THREADS: 1
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test environment
+        run: |
+          pip install numpy==2.3.5 matplotlib==3.10.8 pandas==2.2.3 scipy==1.17.0
+          pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+      - name: Test before development or final exposure
+        run: |
+          set -o pipefail
+          python -m unittest discover -s tests -v 2>&1 | tee /tmp/study3-tests.log
+      - name: Development only; do not generate final seeds
+        run: python -m study3.run develop
+      - name: Publicly record selected settings and freeze before final
+        run: |
+          cp /tmp/study3-tests.log docs/study3_validation.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add study3 docs/STUDY3_FREEZE.json docs/study3_validation.txt results_study3/development
+          git commit -m 'research: publicly freeze Study 3 after development and before final data [skip ci]'
+          git push origin HEAD:research/study3-network-evaluation
+      - uses: actions/upload-artifact@v4
+        with:
+          name: study3-prospective-freeze
+          path: |
+            docs/STUDY3_PROTOCOL.md
+            docs/STUDY3_FREEZE.json
+            docs/study3_validation.txt
+            results_study3/development
+          retention-days: 14

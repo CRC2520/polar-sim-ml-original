@@ -1,0 +1,1154 @@
+[
+  {
+    "cell": [
+      "linear",
+      "aligned",
+      "ample"
+    ],
+    "mode": "full",
+    "mean_loss": 0.009030307909198999,
+    "full_minus_mode": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "aligned",
+      "ample"
+    ],
+    "mode": "no_K",
+    "mean_loss": 0.007842137580680105,
+    "full_minus_mode": {
+      "mean": 0.0011881703285188915,
+      "low95": 0.0009820295749026348,
+      "high95": 0.0014133596566419247,
+      "lower99_one_sided": 0.00094724429584221,
+      "upper99_one_sided": 0.0014614892545240935
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "aligned",
+      "ample"
+    ],
+    "mode": "retuned_zero",
+    "mean_loss": 0.007842137580680105,
+    "full_minus_mode": {
+      "mean": 0.0011881703285188915,
+      "low95": 0.0009820295749026348,
+      "high95": 0.0014133596566419247,
+      "lower99_one_sided": 0.00094724429584221,
+      "upper99_one_sided": 0.0014614892545240935
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "aligned",
+      "ample"
+    ],
+    "mode": "rewired",
+    "mean_loss": 0.009132989851952631,
+    "full_minus_mode": {
+      "mean": -0.00010268194275363247,
+      "low95": -0.0002599005687209141,
+      "high95": 4.572569404343758e-05,
+      "lower99_one_sided": -0.0002906659023943768,
+      "upper99_one_sided": 7.258414575704643e-05
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "aligned",
+      "ample"
+    ],
+    "mode": "reverse",
+    "mean_loss": 0.009248260002998724,
+    "full_minus_mode": {
+      "mean": -0.0002179520937997258,
+      "low95": -0.0003836707479965868,
+      "high95": -5.861388974842253e-05,
+      "lower99_one_sided": -0.0004169239222852052,
+      "upper99_one_sided": -3.288618212370181e-05
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "aligned",
+      "ample"
+    ],
+    "mode": "generic_nonlinear",
+    "mean_loss": 0.012773628251230773,
+    "full_minus_mode": {
+      "mean": -0.0037433203420317767,
+      "low95": -0.004312220836541918,
+      "high95": -0.0032067021495543586,
+      "lower99_one_sided": -0.004418592419520766,
+      "upper99_one_sided": -0.0031205490706677857
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "aligned",
+      "scarce"
+    ],
+    "mode": "full",
+    "mean_loss": 0.01121441253531125,
+    "full_minus_mode": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "aligned",
+      "scarce"
+    ],
+    "mode": "no_K",
+    "mean_loss": 0.010530156463822507,
+    "full_minus_mode": {
+      "mean": 0.0006842560714887436,
+      "low95": 0.0005340272300292181,
+      "high95": 0.0008530385529404369,
+      "lower99_one_sided": 0.0005096952686502223,
+      "upper99_one_sided": 0.0008874252735930441
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "aligned",
+      "scarce"
+    ],
+    "mode": "retuned_zero",
+    "mean_loss": 0.010530156463822507,
+    "full_minus_mode": {
+      "mean": 0.0006842560714887436,
+      "low95": 0.0005340272300292181,
+      "high95": 0.0008530385529404369,
+      "lower99_one_sided": 0.0005096952686502223,
+      "upper99_one_sided": 0.0008874252735930441
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "aligned",
+      "scarce"
+    ],
+    "mode": "rewired",
+    "mean_loss": 0.011299157139294653,
+    "full_minus_mode": {
+      "mean": -8.474460398340139e-05,
+      "low95": -0.0002318796614670135,
+      "high95": 5.480319521537051e-05,
+      "lower99_one_sided": -0.00025994122894693815,
+      "upper99_one_sided": 8.151340512242408e-05
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "aligned",
+      "scarce"
+    ],
+    "mode": "reverse",
+    "mean_loss": 0.011428725408321877,
+    "full_minus_mode": {
+      "mean": -0.00021431287301062603,
+      "low95": -0.0003688009311999853,
+      "high95": -6.494901508770573e-05,
+      "lower99_one_sided": -0.0004017248374754951,
+      "upper99_one_sided": -4.04261504190683e-05
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "aligned",
+      "scarce"
+    ],
+    "mode": "generic_nonlinear",
+    "mean_loss": 0.013229309649154114,
+    "full_minus_mode": {
+      "mean": -0.0020148971138428625,
+      "low95": -0.0023782445901234846,
+      "high95": -0.0016460664187427732,
+      "lower99_one_sided": -0.002446406696259513,
+      "upper99_one_sided": -0.0015842168745515022
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "rewired",
+      "ample"
+    ],
+    "mode": "full",
+    "mean_loss": 0.009092791515578827,
+    "full_minus_mode": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "rewired",
+      "ample"
+    ],
+    "mode": "no_K",
+    "mean_loss": 0.007946915317621503,
+    "full_minus_mode": {
+      "mean": 0.0011458761979573236,
+      "low95": 0.0009798551841878804,
+      "high95": 0.0013236753104499304,
+      "lower99_one_sided": 0.0009508238652860586,
+      "upper99_one_sided": 0.0013633662736329797
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "rewired",
+      "ample"
+    ],
+    "mode": "retuned_zero",
+    "mean_loss": 0.007946915317621503,
+    "full_minus_mode": {
+      "mean": 0.0011458761979573236,
+      "low95": 0.0009798551841878804,
+      "high95": 0.0013236753104499304,
+      "lower99_one_sided": 0.0009508238652860586,
+      "upper99_one_sided": 0.0013633662736329797
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "rewired",
+      "ample"
+    ],
+    "mode": "rewired",
+    "mean_loss": 0.00910699111660618,
+    "full_minus_mode": {
+      "mean": -1.4199601027353985e-05,
+      "low95": -0.00012632517055810585,
+      "high95": 9.714458272975984e-05,
+      "lower99_one_sided": -0.00014634898095238288,
+      "upper99_one_sided": 0.00011830874589511895
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "rewired",
+      "ample"
+    ],
+    "mode": "reverse",
+    "mean_loss": 0.009106951539688156,
+    "full_minus_mode": {
+      "mean": -1.4160024109329753e-05,
+      "low95": -0.0001484065843662952,
+      "high95": 0.0001134092803158359,
+      "lower99_one_sided": -0.00017594067241023337,
+      "upper99_one_sided": 0.0001361984885747186
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "rewired",
+      "ample"
+    ],
+    "mode": "generic_nonlinear",
+    "mean_loss": 0.012715652797368266,
+    "full_minus_mode": {
+      "mean": -0.0036228612817894397,
+      "low95": -0.004195172612824413,
+      "high95": -0.0030839807719119272,
+      "lower99_one_sided": -0.004308314887309868,
+      "upper99_one_sided": -0.002991174247805406
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "rewired",
+      "scarce"
+    ],
+    "mode": "full",
+    "mean_loss": 0.011241354379309138,
+    "full_minus_mode": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "rewired",
+      "scarce"
+    ],
+    "mode": "no_K",
+    "mean_loss": 0.010561408558011704,
+    "full_minus_mode": {
+      "mean": 0.0006799458212974346,
+      "low95": 0.0005487587007452395,
+      "high95": 0.0008192665213359655,
+      "lower99_one_sided": 0.0005267133146767686,
+      "upper99_one_sided": 0.0008469021547438855
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "rewired",
+      "scarce"
+    ],
+    "mode": "retuned_zero",
+    "mean_loss": 0.010561408558011704,
+    "full_minus_mode": {
+      "mean": 0.0006799458212974346,
+      "low95": 0.0005487587007452395,
+      "high95": 0.0008192665213359655,
+      "lower99_one_sided": 0.0005267133146767686,
+      "upper99_one_sided": 0.0008469021547438855
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "rewired",
+      "scarce"
+    ],
+    "mode": "rewired",
+    "mean_loss": 0.011233300434314706,
+    "full_minus_mode": {
+      "mean": 8.053944994434071e-06,
+      "low95": -9.483503655895832e-05,
+      "high95": 0.0001167036596701361,
+      "lower99_one_sided": -0.00011021259608926704,
+      "upper99_one_sided": 0.0001368701283448952
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "rewired",
+      "scarce"
+    ],
+    "mode": "reverse",
+    "mean_loss": 0.01123732246914062,
+    "full_minus_mode": {
+      "mean": 4.031910168516954e-06,
+      "low95": -0.00012086680237633354,
+      "high95": 0.00013831955640650147,
+      "lower99_one_sided": -0.00014441575712035941,
+      "upper99_one_sided": 0.0001644010549568864
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "rewired",
+      "scarce"
+    ],
+    "mode": "generic_nonlinear",
+    "mean_loss": 0.013081906247850047,
+    "full_minus_mode": {
+      "mean": -0.00184055186854091,
+      "low95": -0.002195837368800995,
+      "high95": -0.0014780028722328506,
+      "lower99_one_sided": -0.0022569549454603574,
+      "upper99_one_sided": -0.0014166919373773013
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "absent",
+      "ample"
+    ],
+    "mode": "full",
+    "mean_loss": 0.009359585507047147,
+    "full_minus_mode": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "absent",
+      "ample"
+    ],
+    "mode": "no_K",
+    "mean_loss": 0.008033889227876933,
+    "full_minus_mode": {
+      "mean": 0.0013256962791702133,
+      "low95": 0.0011828189634391962,
+      "high95": 0.0014869692432821538,
+      "lower99_one_sided": 0.0011583971160264313,
+      "upper99_one_sided": 0.0015205785361670355
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "absent",
+      "ample"
+    ],
+    "mode": "retuned_zero",
+    "mean_loss": 0.008033889227876933,
+    "full_minus_mode": {
+      "mean": 0.0013256962791702133,
+      "low95": 0.0011828189634391962,
+      "high95": 0.0014869692432821538,
+      "lower99_one_sided": 0.0011583971160264313,
+      "upper99_one_sided": 0.0015205785361670355
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "absent",
+      "ample"
+    ],
+    "mode": "rewired",
+    "mean_loss": 0.009400519356431592,
+    "full_minus_mode": {
+      "mean": -4.093384938444317e-05,
+      "low95": -8.425443998645378e-05,
+      "high95": 3.092901546579158e-06,
+      "lower99_one_sided": -9.175128027686728e-05,
+      "upper99_one_sided": 1.1429660630536966e-05
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "absent",
+      "ample"
+    ],
+    "mode": "reverse",
+    "mean_loss": 0.009411297227523872,
+    "full_minus_mode": {
+      "mean": -5.1711720476725596e-05,
+      "low95": -0.00010264350312555917,
+      "high95": -1.560532639752147e-06,
+      "lower99_one_sided": -0.00011209041551324986,
+      "upper99_one_sided": 6.617664803011562e-06
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "absent",
+      "ample"
+    ],
+    "mode": "generic_nonlinear",
+    "mean_loss": 0.012140889552040905,
+    "full_minus_mode": {
+      "mean": -0.002781304044993758,
+      "low95": -0.0032463425351783163,
+      "high95": -0.0023551146311445175,
+      "lower99_one_sided": -0.0033328318016673407,
+      "upper99_one_sided": -0.002283663715335041
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "absent",
+      "scarce"
+    ],
+    "mode": "full",
+    "mean_loss": 0.014237167111474347,
+    "full_minus_mode": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "absent",
+      "scarce"
+    ],
+    "mode": "no_K",
+    "mean_loss": 0.014007912295719658,
+    "full_minus_mode": {
+      "mean": 0.00022925481575469144,
+      "low95": 0.00012732267080031625,
+      "high95": 0.0003267389426290172,
+      "lower99_one_sided": 0.00010707637878626303,
+      "upper99_one_sided": 0.0003440765139740054
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "absent",
+      "scarce"
+    ],
+    "mode": "retuned_zero",
+    "mean_loss": 0.014007912295719658,
+    "full_minus_mode": {
+      "mean": 0.00022925481575469144,
+      "low95": 0.00012732267080031625,
+      "high95": 0.0003267389426290172,
+      "lower99_one_sided": 0.00010707637878626303,
+      "upper99_one_sided": 0.0003440765139740054
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "absent",
+      "scarce"
+    ],
+    "mode": "rewired",
+    "mean_loss": 0.01426952459761385,
+    "full_minus_mode": {
+      "mean": -3.235748613950192e-05,
+      "low95": -8.791737310516514e-05,
+      "high95": 2.598145046290624e-05,
+      "lower99_one_sided": -9.810023100871685e-05,
+      "upper99_one_sided": 3.6295373660336095e-05
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "absent",
+      "scarce"
+    ],
+    "mode": "reverse",
+    "mean_loss": 0.014290305811376764,
+    "full_minus_mode": {
+      "mean": -5.3138699902412806e-05,
+      "low95": -0.00011879668235262519,
+      "high95": 1.216361285881181e-05,
+      "lower99_one_sided": -0.00013194550099152258,
+      "upper99_one_sided": 2.4376469385342716e-05
+    }
+  },
+  {
+    "cell": [
+      "linear",
+      "absent",
+      "scarce"
+    ],
+    "mode": "generic_nonlinear",
+    "mean_loss": 0.016407685182746386,
+    "full_minus_mode": {
+      "mean": -0.0021705180712720345,
+      "low95": -0.0025072316716209272,
+      "high95": -0.001841197444111895,
+      "lower99_one_sided": -0.0025725196580710123,
+      "upper99_one_sided": -0.0017768064753860724
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "aligned",
+      "ample"
+    ],
+    "mode": "full",
+    "mean_loss": 0.009991211095771677,
+    "full_minus_mode": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "aligned",
+      "ample"
+    ],
+    "mode": "no_K",
+    "mean_loss": 0.00852803542869037,
+    "full_minus_mode": {
+      "mean": 0.001463175667081308,
+      "low95": 0.001235710749078103,
+      "high95": 0.0016986959674359754,
+      "lower99_one_sided": 0.001192570177637926,
+      "upper99_one_sided": 0.001746556305158034
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "aligned",
+      "ample"
+    ],
+    "mode": "retuned_zero",
+    "mean_loss": 0.00852803542869037,
+    "full_minus_mode": {
+      "mean": 0.001463175667081308,
+      "low95": 0.001235710749078103,
+      "high95": 0.0016986959674359754,
+      "lower99_one_sided": 0.001192570177637926,
+      "upper99_one_sided": 0.001746556305158034
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "aligned",
+      "ample"
+    ],
+    "mode": "rewired",
+    "mean_loss": 0.009959976946467016,
+    "full_minus_mode": {
+      "mean": 3.1234149304661367e-05,
+      "low95": -0.00011724371461401299,
+      "high95": 0.00015676219887899976,
+      "lower99_one_sided": -0.00014977761051276643,
+      "upper99_one_sided": 0.00017736000301221428
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "aligned",
+      "ample"
+    ],
+    "mode": "reverse",
+    "mean_loss": 0.0098992550354481,
+    "full_minus_mode": {
+      "mean": 9.195606032357692e-05,
+      "low95": -7.127700485269857e-05,
+      "high95": 0.00024408541524145093,
+      "lower99_one_sided": -0.00010272286757562944,
+      "upper99_one_sided": 0.00027044753302903925
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "aligned",
+      "ample"
+    ],
+    "mode": "generic_nonlinear",
+    "mean_loss": 0.011547275982240035,
+    "full_minus_mode": {
+      "mean": -0.0015560648864683575,
+      "low95": -0.002039677224184381,
+      "high95": -0.0010904035210878341,
+      "lower99_one_sided": -0.0021275904586941456,
+      "upper99_one_sided": -0.0010075848401676247
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "aligned",
+      "scarce"
+    ],
+    "mode": "full",
+    "mean_loss": 0.013887893931061662,
+    "full_minus_mode": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "aligned",
+      "scarce"
+    ],
+    "mode": "no_K",
+    "mean_loss": 0.013341802040937023,
+    "full_minus_mode": {
+      "mean": 0.0005460918901246408,
+      "low95": 0.0004021424955489954,
+      "high95": 0.0007103656574119822,
+      "lower99_one_sided": 0.00037902601468521157,
+      "upper99_one_sided": 0.0007436878407626696
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "aligned",
+      "scarce"
+    ],
+    "mode": "retuned_zero",
+    "mean_loss": 0.013341802040937023,
+    "full_minus_mode": {
+      "mean": 0.0005460918901246408,
+      "low95": 0.0004021424955489954,
+      "high95": 0.0007103656574119822,
+      "lower99_one_sided": 0.00037902601468521157,
+      "upper99_one_sided": 0.0007436878407626696
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "aligned",
+      "scarce"
+    ],
+    "mode": "rewired",
+    "mean_loss": 0.013877547581108846,
+    "full_minus_mode": {
+      "mean": 1.0346349952818426e-05,
+      "low95": -0.00013374888368049216,
+      "high95": 0.00013173396254020074,
+      "lower99_one_sided": -0.00016266761160167972,
+      "upper99_one_sided": 0.0001508182395359316
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "aligned",
+      "scarce"
+    ],
+    "mode": "reverse",
+    "mean_loss": 0.01384625142666666,
+    "full_minus_mode": {
+      "mean": 4.1642504395000965e-05,
+      "low95": -0.0001256315875202442,
+      "high95": 0.00019523157249290028,
+      "lower99_one_sided": -0.00015707994610606891,
+      "upper99_one_sided": 0.0002231029192656433
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "aligned",
+      "scarce"
+    ],
+    "mode": "generic_nonlinear",
+    "mean_loss": 0.015308966410741625,
+    "full_minus_mode": {
+      "mean": -0.0014210724796799626,
+      "low95": -0.0017588690294257745,
+      "high95": -0.0010823103024619667,
+      "lower99_one_sided": -0.00182122473151318,
+      "upper99_one_sided": -0.0010157966707387766
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "rewired",
+      "ample"
+    ],
+    "mode": "full",
+    "mean_loss": 0.00987308513704285,
+    "full_minus_mode": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "rewired",
+      "ample"
+    ],
+    "mode": "no_K",
+    "mean_loss": 0.008465629180633868,
+    "full_minus_mode": {
+      "mean": 0.001407455956408983,
+      "low95": 0.0012161908989427059,
+      "high95": 0.0016051628308759473,
+      "lower99_one_sided": 0.0011845497659637432,
+      "upper99_one_sided": 0.0016425932446935626
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "rewired",
+      "ample"
+    ],
+    "mode": "retuned_zero",
+    "mean_loss": 0.008465629180633868,
+    "full_minus_mode": {
+      "mean": 0.001407455956408983,
+      "low95": 0.0012161908989427059,
+      "high95": 0.0016051628308759473,
+      "lower99_one_sided": 0.0011845497659637432,
+      "upper99_one_sided": 0.0016425932446935626
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "rewired",
+      "ample"
+    ],
+    "mode": "rewired",
+    "mean_loss": 0.009992278232873686,
+    "full_minus_mode": {
+      "mean": -0.00011919309583083557,
+      "low95": -0.0002122360592095095,
+      "high95": -2.148235764315645e-05,
+      "lower99_one_sided": -0.00022930063181534076,
+      "upper99_one_sided": -1.5552508135584926e-06
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "rewired",
+      "ample"
+    ],
+    "mode": "reverse",
+    "mean_loss": 0.009913979047562714,
+    "full_minus_mode": {
+      "mean": -4.089391051986341e-05,
+      "low95": -0.00017774986451415665,
+      "high95": 9.202719798907542e-05,
+      "lower99_one_sided": -0.0002039828230933559,
+      "upper99_one_sided": 0.00011488127959288118
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "rewired",
+      "ample"
+    ],
+    "mode": "generic_nonlinear",
+    "mean_loss": 0.012403855380036665,
+    "full_minus_mode": {
+      "mean": -0.002530770242993814,
+      "low95": -0.0029969203045888356,
+      "high95": -0.002080691354115751,
+      "lower99_one_sided": -0.003090455965757349,
+      "upper99_one_sided": -0.001997738740099967
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "rewired",
+      "scarce"
+    ],
+    "mode": "full",
+    "mean_loss": 0.013761549503124793,
+    "full_minus_mode": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "rewired",
+      "scarce"
+    ],
+    "mode": "no_K",
+    "mean_loss": 0.013240495395593091,
+    "full_minus_mode": {
+      "mean": 0.0005210541075317016,
+      "low95": 0.0003587474318735595,
+      "high95": 0.0006996252103461373,
+      "lower99_one_sided": 0.0003289074697395343,
+      "upper99_one_sided": 0.0007363190961783615
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "rewired",
+      "scarce"
+    ],
+    "mode": "retuned_zero",
+    "mean_loss": 0.013240495395593091,
+    "full_minus_mode": {
+      "mean": 0.0005210541075317016,
+      "low95": 0.0003587474318735595,
+      "high95": 0.0006996252103461373,
+      "lower99_one_sided": 0.0003289074697395343,
+      "upper99_one_sided": 0.0007363190961783615
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "rewired",
+      "scarce"
+    ],
+    "mode": "rewired",
+    "mean_loss": 0.013858324964591922,
+    "full_minus_mode": {
+      "mean": -9.67754614671273e-05,
+      "low95": -0.0002020152233415883,
+      "high95": 1.3668101515796974e-05,
+      "lower99_one_sided": -0.00022235931128493036,
+      "upper99_one_sided": 3.6036769111690566e-05
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "rewired",
+      "scarce"
+    ],
+    "mode": "reverse",
+    "mean_loss": 0.013757488390853962,
+    "full_minus_mode": {
+      "mean": 4.061112270830952e-06,
+      "low95": -0.00012823427568168597,
+      "high95": 0.0001411016976967404,
+      "lower99_one_sided": -0.00015414381570176555,
+      "upper99_one_sided": 0.00016840952816597003
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "rewired",
+      "scarce"
+    ],
+    "mode": "generic_nonlinear",
+    "mean_loss": 0.015547989858911673,
+    "full_minus_mode": {
+      "mean": -0.0017864403557868815,
+      "low95": -0.0021944873445442314,
+      "high95": -0.0013825682464423334,
+      "lower99_one_sided": -0.0022777757274889984,
+      "upper99_one_sided": -0.0013151595143693648
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "absent",
+      "ample"
+    ],
+    "mode": "full",
+    "mean_loss": 0.009359585507047147,
+    "full_minus_mode": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "absent",
+      "ample"
+    ],
+    "mode": "no_K",
+    "mean_loss": 0.008033889227876933,
+    "full_minus_mode": {
+      "mean": 0.0013256962791702133,
+      "low95": 0.0011828189634391962,
+      "high95": 0.0014869692432821538,
+      "lower99_one_sided": 0.0011583971160264313,
+      "upper99_one_sided": 0.0015205785361670355
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "absent",
+      "ample"
+    ],
+    "mode": "retuned_zero",
+    "mean_loss": 0.008033889227876933,
+    "full_minus_mode": {
+      "mean": 0.0013256962791702133,
+      "low95": 0.0011828189634391962,
+      "high95": 0.0014869692432821538,
+      "lower99_one_sided": 0.0011583971160264313,
+      "upper99_one_sided": 0.0015205785361670355
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "absent",
+      "ample"
+    ],
+    "mode": "rewired",
+    "mean_loss": 0.009400519356431592,
+    "full_minus_mode": {
+      "mean": -4.093384938444317e-05,
+      "low95": -8.425443998645378e-05,
+      "high95": 3.092901546579158e-06,
+      "lower99_one_sided": -9.175128027686728e-05,
+      "upper99_one_sided": 1.1429660630536966e-05
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "absent",
+      "ample"
+    ],
+    "mode": "reverse",
+    "mean_loss": 0.009411297227523872,
+    "full_minus_mode": {
+      "mean": -5.1711720476725596e-05,
+      "low95": -0.00010264350312555917,
+      "high95": -1.560532639752147e-06,
+      "lower99_one_sided": -0.00011209041551324986,
+      "upper99_one_sided": 6.617664803011562e-06
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "absent",
+      "ample"
+    ],
+    "mode": "generic_nonlinear",
+    "mean_loss": 0.012140889552040905,
+    "full_minus_mode": {
+      "mean": -0.002781304044993758,
+      "low95": -0.0032463425351783163,
+      "high95": -0.0023551146311445175,
+      "lower99_one_sided": -0.0033328318016673407,
+      "upper99_one_sided": -0.002283663715335041
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "absent",
+      "scarce"
+    ],
+    "mode": "full",
+    "mean_loss": 0.014237167111474347,
+    "full_minus_mode": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "absent",
+      "scarce"
+    ],
+    "mode": "no_K",
+    "mean_loss": 0.014007912295719658,
+    "full_minus_mode": {
+      "mean": 0.00022925481575469144,
+      "low95": 0.00012732267080031625,
+      "high95": 0.0003267389426290172,
+      "lower99_one_sided": 0.00010707637878626303,
+      "upper99_one_sided": 0.0003440765139740054
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "absent",
+      "scarce"
+    ],
+    "mode": "retuned_zero",
+    "mean_loss": 0.014007912295719658,
+    "full_minus_mode": {
+      "mean": 0.00022925481575469144,
+      "low95": 0.00012732267080031625,
+      "high95": 0.0003267389426290172,
+      "lower99_one_sided": 0.00010707637878626303,
+      "upper99_one_sided": 0.0003440765139740054
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "absent",
+      "scarce"
+    ],
+    "mode": "rewired",
+    "mean_loss": 0.01426952459761385,
+    "full_minus_mode": {
+      "mean": -3.235748613950192e-05,
+      "low95": -8.791737310516514e-05,
+      "high95": 2.598145046290624e-05,
+      "lower99_one_sided": -9.810023100871685e-05,
+      "upper99_one_sided": 3.6295373660336095e-05
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "absent",
+      "scarce"
+    ],
+    "mode": "reverse",
+    "mean_loss": 0.014290305811376764,
+    "full_minus_mode": {
+      "mean": -5.3138699902412806e-05,
+      "low95": -0.00011879668235262519,
+      "high95": 1.216361285881181e-05,
+      "lower99_one_sided": -0.00013194550099152258,
+      "upper99_one_sided": 2.4376469385342716e-05
+    }
+  },
+  {
+    "cell": [
+      "congestion",
+      "absent",
+      "scarce"
+    ],
+    "mode": "generic_nonlinear",
+    "mean_loss": 0.016407685182746386,
+    "full_minus_mode": {
+      "mean": -0.0021705180712720345,
+      "low95": -0.0025072316716209272,
+      "high95": -0.001841197444111895,
+      "lower99_one_sided": -0.0025725196580710123,
+      "upper99_one_sided": -0.0017768064753860724
+    }
+  }
+]

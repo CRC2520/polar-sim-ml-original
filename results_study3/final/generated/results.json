@@ -1,0 +1,216 @@
+{
+  "status": "prospective_final_evaluation",
+  "trials": 5760,
+  "seeds": 40,
+  "steps_per_trial": 64,
+  "bootstrap_resamples": 20000,
+  "summary": {
+    "full": {
+      "loss": 0.00974312352017664,
+      "cost": 0.4065587103641494,
+      "post_switch_loss": 0.01532903139660991,
+      "return_loss": 0.0033069874679598197,
+      "saturation": 0.031327311197916666,
+      "violations": 0.0,
+      "runtime_seconds": 0.01933195996668822
+    },
+    "no_K": {
+      "loss": 0.00974312352017664,
+      "cost": 0.4065587103641494,
+      "post_switch_loss": 0.01532903139660991,
+      "return_loss": 0.0033069874679598197,
+      "saturation": 0.031327311197916666,
+      "violations": 0.0,
+      "runtime_seconds": 0.019246353741632777
+    },
+    "no_W": {
+      "loss": 0.00974312352017664,
+      "cost": 0.4065587103641494,
+      "post_switch_loss": 0.01532903139660991,
+      "return_loss": 0.0033069874679598197,
+      "saturation": 0.031327311197916666,
+      "violations": 0.0,
+      "runtime_seconds": 0.01910183238750669
+    },
+    "no_WK": {
+      "loss": 0.00974312352017664,
+      "cost": 0.4065587103641494,
+      "post_switch_loss": 0.01532903139660991,
+      "return_loss": 0.0033069874679598197,
+      "saturation": 0.031327311197916666,
+      "violations": 0.0,
+      "runtime_seconds": 0.019023427970849244
+    },
+    "retuned_zero": {
+      "loss": 0.00974312352017664,
+      "cost": 0.4065587103641494,
+      "post_switch_loss": 0.01532903139660991,
+      "return_loss": 0.0033069874679598197,
+      "saturation": 0.031327311197916666,
+      "violations": 0.0,
+      "runtime_seconds": 0.01909067564790341
+    },
+    "rewired": {
+      "loss": 0.00974312352017664,
+      "cost": 0.4065587103641494,
+      "post_switch_loss": 0.01532903139660991,
+      "return_loss": 0.0033069874679598197,
+      "saturation": 0.031327311197916666,
+      "violations": 0.0,
+      "runtime_seconds": 0.01905217340835961
+    },
+    "reverse": {
+      "loss": 0.00974312352017664,
+      "cost": 0.4065587103641494,
+      "post_switch_loss": 0.01532903139660991,
+      "return_loss": 0.0033069874679598197,
+      "saturation": 0.031327311197916666,
+      "violations": 0.0,
+      "runtime_seconds": 0.01899230382081131
+    },
+    "generic_nonlinear": {
+      "loss": 0.00974312352017664,
+      "cost": 0.4065587103641494,
+      "post_switch_loss": 0.01532903139660991,
+      "return_loss": 0.0033069874679598197,
+      "saturation": 0.031327311197916666,
+      "violations": 0.0,
+      "runtime_seconds": 0.017312649979193986
+    },
+    "generic_equivalent": {
+      "loss": 0.00974312352017664,
+      "cost": 0.4065587103641494,
+      "post_switch_loss": 0.01532903139660991,
+      "return_loss": 0.0033069874679598197,
+      "saturation": 0.031327311197916666,
+      "violations": 0.0,
+      "runtime_seconds": 0.01688555920208401
+    },
+    "signed_intensity": {
+      "loss": 0.00974312352017664,
+      "cost": 0.4065587103641494,
+      "post_switch_loss": 0.01532903139660991,
+      "return_loss": 0.0033069874679598197,
+      "saturation": 0.031327311197916666,
+      "violations": 0.0,
+      "runtime_seconds": 0.02977356436038837
+    },
+    "gradient": {
+      "loss": 0.010632588072897329,
+      "cost": 0.40643182261889194,
+      "post_switch_loss": 0.018973977812446856,
+      "return_loss": 0.004907059828878161,
+      "saturation": 0.03125,
+      "violations": 0.0,
+      "runtime_seconds": 0.0161759995791634
+    },
+    "zero_negative": {
+      "loss": 0.22929670576791064,
+      "cost": 0.0,
+      "post_switch_loss": 0.24690934864589548,
+      "return_loss": 0.22931620043702713,
+      "saturation": 1.0,
+      "violations": 0.0,
+      "runtime_seconds": 0.015199394199986452
+    }
+  },
+  "contrasts": {
+    "tension": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0,
+      "comparator": "no_K",
+      "required_upper_below": -0.001,
+      "passes": false
+    },
+    "network": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0,
+      "comparator": "retuned_zero",
+      "required_upper_below": -0.001,
+      "passes": false
+    },
+    "topology_rewired": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0,
+      "comparator": "rewired",
+      "required_upper_below": -0.0005,
+      "passes": false
+    },
+    "topology_reverse": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0,
+      "comparator": "reverse",
+      "required_upper_below": -0.0005,
+      "passes": false
+    },
+    "feature": {
+      "mean": 0.0,
+      "low95": 0.0,
+      "high95": 0.0,
+      "lower99_one_sided": 0.0,
+      "upper99_one_sided": 0.0,
+      "comparator": "generic_nonlinear",
+      "required_upper_below": -0.0005,
+      "passes": false
+    }
+  },
+  "claims": {
+    "tension": false,
+    "network": false,
+    "topology_rewired": false,
+    "topology_reverse": false,
+    "feature": false
+  },
+  "gates": {
+    "cost": true,
+    "post_switch": true,
+    "constraints": true
+  },
+  "cost_guardrail": {
+    "mean": 0.0,
+    "low95": 0.0,
+    "high95": 0.0,
+    "lower99_one_sided": 0.0,
+    "upper99_one_sided": 0.0
+  },
+  "post_switch_guardrail": {
+    "mean": 0.0,
+    "low95": 0.0,
+    "high95": 0.0,
+    "lower99_one_sided": 0.0,
+    "upper99_one_sided": 0.0
+  },
+  "hard_violations_full": 0,
+  "equivalence_max_action_difference": {
+    "generic_equivalent": 0.0,
+    "signed_intensity": 2.220446049250313e-16
+  },
+  "negative_control": {
+    "mean": 0.219553582247734,
+    "low95": 0.20907180113867624,
+    "high95": 0.23044849193020037,
+    "lower99_one_sided": 0.20697950181164948,
+    "upper99_one_sided": 0.23261572135462438
+  },
+  "valid": true,
+  "decision": "no_confirmed_network_advantage",
+  "harm_flag": false,
+  "limitations": [
+    "Conditional on the single development-selected configuration set.",
+    "Synthetic task generators designed inside the project.",
+    "Shared coupling gains tune configured templates, not arbitrary learned topology.",
+    "Approximate percentile intervals; no consciousness inference."
+  ]
+}
