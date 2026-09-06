@@ -44,7 +44,8 @@ jobs:
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/network_tension_probe.json docs/legacy_progressive_audit.json docs/network_validation.log README.md SPECIFICATION.md
+          git add docs/network_tension_probe.json docs/legacy_progressive_audit.json README.md SPECIFICATION.md
+          git add -f docs/network_validation.log
           if ! git diff --cached --quiet; then
             git commit -m 'test: record network propagation and pinned legacy audit [skip ci]'
             git push origin HEAD:research/inter-polar-tension-architecture
