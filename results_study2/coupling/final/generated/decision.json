@@ -1,0 +1,515 @@
+{
+  "split": "final",
+  "primary": {
+    "a": "paired",
+    "b": "paired_lesion",
+    "metric": "mean_tracking_loss",
+    "ratio": false,
+    "n": 40,
+    "effect": -0.0026998024854016146,
+    "ci95": [
+      -0.0028285572084968307,
+      -0.0025766469972864792
+    ],
+    "paired_seed_sd": 0.00041677651654059317,
+    "families": null,
+    "regimes": null,
+    "a_mean": 0.0077668261757762435,
+    "b_mean": 0.01046662866117786
+  },
+  "comparisons": {
+    "paired_lesion": {
+      "a": "paired",
+      "b": "paired_lesion",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": -0.0026998024854016146,
+      "ci95": [
+        -0.0028285572084968307,
+        -0.0025766469972864792
+      ],
+      "paired_seed_sd": 0.00041677651654059317,
+      "families": null,
+      "regimes": null,
+      "a_mean": 0.0077668261757762435,
+      "b_mean": 0.01046662866117786
+    },
+    "diagonal": {
+      "a": "paired",
+      "b": "diagonal",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": -0.00100078447168447,
+      "ci95": [
+        -0.0010642009179981894,
+        -0.0009392853413490964
+      ],
+      "paired_seed_sd": 0.00020504793242570742,
+      "families": null,
+      "regimes": null,
+      "a_mean": 0.0077668261757762435,
+      "b_mean": 0.008767610647460714
+    },
+    "shuffled": {
+      "a": "paired",
+      "b": "shuffled",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": 0.0001955151470134876,
+      "ci95": [
+        0.00013356079390322809,
+        0.000261024875839142
+      ],
+      "paired_seed_sd": 0.0002114762050711018,
+      "families": null,
+      "regimes": null,
+      "a_mean": 0.0077668261757762435,
+      "b_mean": 0.007571311028762756
+    },
+    "dense": {
+      "a": "paired",
+      "b": "dense",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": 0.001990773168543617,
+      "ci95": [
+        0.0019081147562009634,
+        0.002071778564791642
+      ],
+      "paired_seed_sd": 0.00026995558843954465,
+      "families": null,
+      "regimes": null,
+      "a_mean": 0.0077668261757762435,
+      "b_mean": 0.0057760530072326274
+    },
+    "signed_intensity": {
+      "a": "paired",
+      "b": "signed_intensity",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": -2.168404344971009e-19,
+      "ci95": [
+        -4.553649124439119e-19,
+        -2.168404344971009e-20
+      ],
+      "paired_seed_sd": 7.01355241299259e-19,
+      "families": null,
+      "regimes": null,
+      "a_mean": 0.0077668261757762435,
+      "b_mean": 0.0077668261757762435
+    },
+    "zero": {
+      "a": "paired",
+      "b": "zero",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": -0.13100322330512115,
+      "ci95": [
+        -0.13346130142104604,
+        -0.12861242086303956
+      ],
+      "paired_seed_sd": 0.008013499757507226,
+      "families": null,
+      "regimes": null,
+      "a_mean": 0.0077668261757762435,
+      "b_mean": 0.1387700494808974
+    },
+    "hold": {
+      "a": "paired",
+      "b": "hold",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": -0.05893846869077647,
+      "ci95": [
+        -0.05988521209728545,
+        -0.05803879401820923
+      ],
+      "paired_seed_sd": 0.003040217375498697,
+      "families": null,
+      "regimes": null,
+      "a_mean": 0.0077668261757762435,
+      "b_mean": 0.06670529486655272
+    }
+  },
+  "regimes": {
+    "paired": {
+      "a": "paired",
+      "b": "paired_lesion",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": -0.004004197831651464,
+      "ci95": [
+        -0.004206160541185966,
+        -0.0038139787596189025
+      ],
+      "paired_seed_sd": 0.0006418365242263055,
+      "families": null,
+      "regimes": [
+        "paired"
+      ],
+      "a_mean": 0.009070178000738303,
+      "b_mean": 0.013074375832389767
+    },
+    "diagonal": {
+      "a": "paired",
+      "b": "paired_lesion",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": -0.0015422620925980637,
+      "ci95": [
+        -0.0016217429619921986,
+        -0.0014675597481686854
+      ],
+      "paired_seed_sd": 0.0002504129428063513,
+      "families": null,
+      "regimes": [
+        "diagonal"
+      ],
+      "a_mean": 0.0057131739832463795,
+      "b_mean": 0.007255436075844443
+    },
+    "misaligned": {
+      "a": "paired",
+      "b": "paired_lesion",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": -0.0025529475319553156,
+      "ci95": [
+        -0.0027357001754107174,
+        -0.00237633565268946
+      ],
+      "paired_seed_sd": 0.0005912636119152655,
+      "families": null,
+      "regimes": [
+        "misaligned"
+      ],
+      "a_mean": 0.008517126543344048,
+      "b_mean": 0.011070074075299365
+    }
+  },
+  "families": {
+    "dynamic_tracking": {
+      "a": "paired",
+      "b": "paired_lesion",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": -0.004813996268272544,
+      "ci95": [
+        -0.0050598666176728925,
+        -0.004571268592459208
+      ],
+      "paired_seed_sd": 0.0007998761818610072,
+      "families": [
+        "dynamic_tracking"
+      ],
+      "regimes": null,
+      "a_mean": 0.006100398823236736,
+      "b_mean": 0.01091439509150928
+    },
+    "cooperative_inventory": {
+      "a": "paired",
+      "b": "paired_lesion",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": -0.0005856087025306848,
+      "ci95": [
+        -0.0006465519117356558,
+        -0.0005229663087604388
+      ],
+      "paired_seed_sd": 0.00019844276234035998,
+      "families": [
+        "cooperative_inventory"
+      ],
+      "regimes": null,
+      "a_mean": 0.009433253528315751,
+      "b_mean": 0.010018862230846437
+    }
+  },
+  "guards": {
+    "failures": {
+      "a": "paired",
+      "b": "paired_lesion",
+      "metric": "failure_rate",
+      "ratio": false,
+      "n": 40,
+      "effect": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "paired_seed_sd": 0.0,
+      "families": null,
+      "regimes": null,
+      "a_mean": 0.0,
+      "b_mean": 0.0
+    },
+    "action_cost": {
+      "a": "paired",
+      "b": "paired_lesion",
+      "metric": "mean_action_cost",
+      "ratio": true,
+      "n": 40,
+      "effect": 0.9661170864959102,
+      "ci95": [
+        0.9640707172141704,
+        0.9681773116657694
+      ],
+      "paired_seed_sd": 0.02040055299252382,
+      "families": null,
+      "regimes": null,
+      "a_mean": 2.907941790309664,
+      "b_mean": 3.0099268825238545
+    },
+    "return_loss": {
+      "a": "paired",
+      "b": "paired_lesion",
+      "metric": "return_loss_change",
+      "ratio": false,
+      "n": 40,
+      "effect": 0.0022371847722869992,
+      "ci95": [
+        0.0020547994399765625,
+        0.0024226367249369682
+      ],
+      "paired_seed_sd": 0.0006106869010884234,
+      "families": null,
+      "regimes": null,
+      "a_mean": 7.131093075135959e-05,
+      "b_mean": -0.0021658738415356394
+    },
+    "stockout": {
+      "a": "paired",
+      "b": "paired_lesion",
+      "metric": "mean_stockout",
+      "ratio": false,
+      "n": 40,
+      "effect": 0.0001188121128811474,
+      "ci95": [
+        7.994146522213581e-05,
+        0.00016123304563147765
+      ],
+      "paired_seed_sd": 0.00012972273473969945,
+      "families": [
+        "cooperative_inventory"
+      ],
+      "regimes": null,
+      "a_mean": 0.0017256656267945051,
+      "b_mean": 0.0016068535139133575
+    },
+    "overflow": {
+      "a": "paired",
+      "b": "paired_lesion",
+      "metric": "mean_overflow",
+      "ratio": false,
+      "n": 40,
+      "effect": -0.0002573602701888073,
+      "ci95": [
+        -0.000328349852195012,
+        -0.00018876625202765486
+      ],
+      "paired_seed_sd": 0.00023187992882125945,
+      "families": [
+        "cooperative_inventory"
+      ],
+      "regimes": null,
+      "a_mean": 0.0009141307362153555,
+      "b_mean": 0.0011714910064041628
+    }
+  },
+  "guard_pass": {
+    "failures": true,
+    "action_cost": true,
+    "return_loss": true,
+    "stockout": true,
+    "overflow": true,
+    "hard_constraints": true,
+    "runtime": true
+  },
+  "runtime_ratio": 0.9523095352440982,
+  "dense_transfer": {
+    "a": "paired",
+    "b": "dense",
+    "metric": "mean_tracking_loss",
+    "ratio": false,
+    "n": 40,
+    "effect": 0.0014982882199274098,
+    "ci95": [
+      0.001419791744433891,
+      0.0015744587596166456
+    ],
+    "paired_seed_sd": 0.0002527719931340555,
+    "families": null,
+    "regimes": [
+      "diagonal",
+      "misaligned"
+    ],
+    "a_mean": 0.007115150263295214,
+    "b_mean": 0.005616862043367804
+  },
+  "negative_control_failures": {
+    "zero": 240,
+    "hold": 240
+  },
+  "max_signed_action_difference": 9.992007221626409e-16,
+  "practical_primary_benefit": true,
+  "distinctive_secondary_requirement": false,
+  "decision": "pivot_to_conditional_structural_prior",
+  "proposed_final_rule_outcome": "pivot_to_conditional_structural_prior",
+  "aggregates": {
+    "paired": {
+      "n_trials": 240,
+      "passes": 240,
+      "mean_tracking_loss": 0.007766826175776244,
+      "mean_action_cost": 2.907941790309664,
+      "recovery_fraction": 1.0,
+      "return_loss_change": 7.131093075135962e-05,
+      "mean_controller_seconds": 0.10302915999103182,
+      "hard_violations": 0
+    },
+    "paired_lesion": {
+      "n_trials": 240,
+      "passes": 240,
+      "mean_tracking_loss": 0.01046662866117786,
+      "mean_action_cost": 3.009926882523855,
+      "recovery_fraction": 0.9986111111111111,
+      "return_loss_change": -0.00216587384153564,
+      "mean_controller_seconds": 0.1081887308464502,
+      "hard_violations": 0
+    },
+    "diagonal": {
+      "n_trials": 240,
+      "passes": 240,
+      "mean_tracking_loss": 0.008767610647460714,
+      "mean_action_cost": 2.94823378428257,
+      "recovery_fraction": 1.0,
+      "return_loss_change": -1.731987891305052e-05,
+      "mean_controller_seconds": 0.10467927502092304,
+      "hard_violations": 0
+    },
+    "shuffled": {
+      "n_trials": 240,
+      "passes": 240,
+      "mean_tracking_loss": 0.007571311028762756,
+      "mean_action_cost": 2.9191757553345017,
+      "recovery_fraction": 1.0,
+      "return_loss_change": -1.8517006968504633e-05,
+      "mean_controller_seconds": 0.10313124466686835,
+      "hard_violations": 0
+    },
+    "dense": {
+      "n_trials": 240,
+      "passes": 240,
+      "mean_tracking_loss": 0.005776053007232627,
+      "mean_action_cost": 2.847786116180439,
+      "recovery_fraction": 1.0,
+      "return_loss_change": -4.329291481156835e-05,
+      "mean_controller_seconds": 0.10197940649474428,
+      "hard_violations": 0
+    },
+    "signed_intensity": {
+      "n_trials": 240,
+      "passes": 240,
+      "mean_tracking_loss": 0.007766826175776244,
+      "mean_action_cost": 2.907941790309664,
+      "recovery_fraction": 1.0,
+      "return_loss_change": 7.131093075135956e-05,
+      "mean_controller_seconds": 0.10463780579848389,
+      "hard_violations": 0
+    },
+    "zero": {
+      "n_trials": 240,
+      "passes": 0,
+      "mean_tracking_loss": 0.1387700494808974,
+      "mean_action_cost": 0.0,
+      "recovery_fraction": 0.0125,
+      "return_loss_change": 3.921193804206092e-05,
+      "mean_controller_seconds": 0.0019876824742823375,
+      "hard_violations": 0
+    },
+    "hold": {
+      "n_trials": 240,
+      "passes": 0,
+      "mean_tracking_loss": 0.06670529486655272,
+      "mean_action_cost": 2.331993564782287,
+      "recovery_fraction": 0.12777777777777777,
+      "return_loss_change": -0.0013008361671144253,
+      "mean_controller_seconds": 0.0020151134095309923,
+      "hard_violations": 0
+    }
+  },
+  "scope": "Internally designed computational tasks only; no exclusive polar ontology or consciousness conclusion.",
+  "registration_sha": "fde8d0ac9b56b035a0a53c40c8cd5b79b2bc6b32",
+  "manifest_sha256": "147c2a0adc054895b2787684a20379b4a3f3d9676bff4b69c6a39afad8dd7ede",
+  "trace_count": 1920,
+  "sample_size": {
+    "pilot_seeds": [
+      52001,
+      52002,
+      52003,
+      52004,
+      52005,
+      52006
+    ],
+    "pilot_sd": 0.0007284646726591249,
+    "unbounded_n": 2,
+    "chosen_n": 40,
+    "precision_target": 0.0015,
+    "pilot_precision_qualification": true,
+    "estimated_halfwidth_at_chosen_n": 0.0002257535409360385,
+    "final_seeds": [
+      62001,
+      62002,
+      62003,
+      62004,
+      62005,
+      62006,
+      62007,
+      62008,
+      62009,
+      62010,
+      62011,
+      62012,
+      62013,
+      62014,
+      62015,
+      62016,
+      62017,
+      62018,
+      62019,
+      62020,
+      62021,
+      62022,
+      62023,
+      62024,
+      62025,
+      62026,
+      62027,
+      62028,
+      62029,
+      62030,
+      62031,
+      62032,
+      62033,
+      62034,
+      62035,
+      62036,
+      62037,
+      62038,
+      62039,
+      62040
+    ],
+    "note": "Precision planning from pilot variance, not a power calculation; small-pilot SD is uncertain."
+  }
+}

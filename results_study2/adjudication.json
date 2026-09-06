@@ -1,0 +1,318 @@
+{
+  "schema": "polar-study2-postrun-adjudication-1.0",
+  "adjudicated_at_utc": "2026-09-06T02:32:51.882708+00:00",
+  "post_run_interpretation_correction": true,
+  "new_confirmatory_test": false,
+  "numeric_results_modified": false,
+  "frozen_protocol_rule": "Continue broader coupling study only if primary upper CI < -0.002, all guardrails pass, paired-minus-shuffled upper CI < 0, and paired-minus-dense upper CI <= 0.001 in combined diagonal+misaligned regimes. If only aligned paired regimes meet practical benefit, describe a conditional structural prior and pivot; otherwise suspend the exclusive polar-advantage claim. Any shortfall in pilot precision qualification is explicitly marked, never hidden.",
+  "discrepancy": "Frozen study2/evaluation.py selects pivot whenever aligned practical benefit is present after broader criteria fail; the frozen protocol says ONLY aligned regimes. The code omitted the exclusion of practical benefit in diagonal and misaligned regimes.",
+  "input_sha256": {
+    "results_study2/coupling/final/generated/decision.json": "604e1222da9b212ff865e26b46b23d8aa6a921ae3dccf7d7ccadd611a9987770",
+    "docs/study2_protocol.json": "91826e084744b1d979743e026e1adefef9200522c4616d3a347d57253121ad1c",
+    "results_study2/coupling/final/manifest.json": "147c2a0adc054895b2787684a20379b4a3f3d9676bff4b69c6a39afad8dd7ede"
+  },
+  "adjudicator_source_sha256": "9593d39c34ad507fc63ff19d25f222c15e85bd5333367a23c030dd71e1f0716d",
+  "reproduction_command": "python scripts/adjudicate_study2.py",
+  "raw_decision": "pivot_to_conditional_structural_prior",
+  "raw_proposed_final_rule_outcome": "pivot_to_conditional_structural_prior",
+  "adjudicated_decision": "suspend_exclusive_polar_advantage_claim",
+  "label_changed": true,
+  "reason": "Broader criteria fail and the aligned-only condition is false; the protocol's otherwise clause applies.",
+  "literal_rule_interpretation": "aligned_only := practical(paired) AND NOT practical(diagonal) AND NOT practical(misaligned); practical := upper95CI < -minimum_practical_improvement",
+  "evaluated_clauses": {
+    "negative_controls_valid": true,
+    "signed_equivalence_valid": true,
+    "practical_primary_benefit": true,
+    "guard_pass": {
+      "failures": true,
+      "action_cost": true,
+      "return_loss": true,
+      "stockout": true,
+      "overflow": true,
+      "hard_constraints": true,
+      "runtime": true
+    },
+    "paired_beats_shuffled": false,
+    "dense_transfer_noninferiority": false,
+    "broader_continue_criteria": false,
+    "practical_benefit_by_regime": {
+      "paired": true,
+      "diagonal": false,
+      "misaligned": true
+    },
+    "only_aligned_regime_has_practical_benefit": false
+  },
+  "numeric_evidence": {
+    "minimum_practical_improvement": 0.002,
+    "primary": {
+      "a": "paired",
+      "b": "paired_lesion",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": -0.0026998024854016146,
+      "ci95": [
+        -0.0028285572084968307,
+        -0.0025766469972864792
+      ],
+      "paired_seed_sd": 0.00041677651654059317,
+      "families": null,
+      "regimes": null,
+      "a_mean": 0.0077668261757762435,
+      "b_mean": 0.01046662866117786
+    },
+    "regimes": {
+      "paired": {
+        "a": "paired",
+        "b": "paired_lesion",
+        "metric": "mean_tracking_loss",
+        "ratio": false,
+        "n": 40,
+        "effect": -0.004004197831651464,
+        "ci95": [
+          -0.004206160541185966,
+          -0.0038139787596189025
+        ],
+        "paired_seed_sd": 0.0006418365242263055,
+        "families": null,
+        "regimes": [
+          "paired"
+        ],
+        "a_mean": 0.009070178000738303,
+        "b_mean": 0.013074375832389767
+      },
+      "diagonal": {
+        "a": "paired",
+        "b": "paired_lesion",
+        "metric": "mean_tracking_loss",
+        "ratio": false,
+        "n": 40,
+        "effect": -0.0015422620925980637,
+        "ci95": [
+          -0.0016217429619921986,
+          -0.0014675597481686854
+        ],
+        "paired_seed_sd": 0.0002504129428063513,
+        "families": null,
+        "regimes": [
+          "diagonal"
+        ],
+        "a_mean": 0.0057131739832463795,
+        "b_mean": 0.007255436075844443
+      },
+      "misaligned": {
+        "a": "paired",
+        "b": "paired_lesion",
+        "metric": "mean_tracking_loss",
+        "ratio": false,
+        "n": 40,
+        "effect": -0.0025529475319553156,
+        "ci95": [
+          -0.0027357001754107174,
+          -0.00237633565268946
+        ],
+        "paired_seed_sd": 0.0005912636119152655,
+        "families": null,
+        "regimes": [
+          "misaligned"
+        ],
+        "a_mean": 0.008517126543344048,
+        "b_mean": 0.011070074075299365
+      }
+    },
+    "paired_minus_shuffled": {
+      "a": "paired",
+      "b": "shuffled",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": 0.0001955151470134876,
+      "ci95": [
+        0.00013356079390322809,
+        0.000261024875839142
+      ],
+      "paired_seed_sd": 0.0002114762050711018,
+      "families": null,
+      "regimes": null,
+      "a_mean": 0.0077668261757762435,
+      "b_mean": 0.007571311028762756
+    },
+    "dense_transfer": {
+      "a": "paired",
+      "b": "dense",
+      "metric": "mean_tracking_loss",
+      "ratio": false,
+      "n": 40,
+      "effect": 0.0014982882199274098,
+      "ci95": [
+        0.001419791744433891,
+        0.0015744587596166456
+      ],
+      "paired_seed_sd": 0.0002527719931340555,
+      "families": null,
+      "regimes": [
+        "diagonal",
+        "misaligned"
+      ],
+      "a_mean": 0.007115150263295214,
+      "b_mean": 0.005616862043367804
+    },
+    "guards": {
+      "failures": {
+        "a": "paired",
+        "b": "paired_lesion",
+        "metric": "failure_rate",
+        "ratio": false,
+        "n": 40,
+        "effect": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "paired_seed_sd": 0.0,
+        "families": null,
+        "regimes": null,
+        "a_mean": 0.0,
+        "b_mean": 0.0
+      },
+      "action_cost": {
+        "a": "paired",
+        "b": "paired_lesion",
+        "metric": "mean_action_cost",
+        "ratio": true,
+        "n": 40,
+        "effect": 0.9661170864959102,
+        "ci95": [
+          0.9640707172141704,
+          0.9681773116657694
+        ],
+        "paired_seed_sd": 0.02040055299252382,
+        "families": null,
+        "regimes": null,
+        "a_mean": 2.907941790309664,
+        "b_mean": 3.0099268825238545
+      },
+      "return_loss": {
+        "a": "paired",
+        "b": "paired_lesion",
+        "metric": "return_loss_change",
+        "ratio": false,
+        "n": 40,
+        "effect": 0.0022371847722869992,
+        "ci95": [
+          0.0020547994399765625,
+          0.0024226367249369682
+        ],
+        "paired_seed_sd": 0.0006106869010884234,
+        "families": null,
+        "regimes": null,
+        "a_mean": 7.131093075135959e-05,
+        "b_mean": -0.0021658738415356394
+      },
+      "stockout": {
+        "a": "paired",
+        "b": "paired_lesion",
+        "metric": "mean_stockout",
+        "ratio": false,
+        "n": 40,
+        "effect": 0.0001188121128811474,
+        "ci95": [
+          7.994146522213581e-05,
+          0.00016123304563147765
+        ],
+        "paired_seed_sd": 0.00012972273473969945,
+        "families": [
+          "cooperative_inventory"
+        ],
+        "regimes": null,
+        "a_mean": 0.0017256656267945051,
+        "b_mean": 0.0016068535139133575
+      },
+      "overflow": {
+        "a": "paired",
+        "b": "paired_lesion",
+        "metric": "mean_overflow",
+        "ratio": false,
+        "n": 40,
+        "effect": -0.0002573602701888073,
+        "ci95": [
+          -0.000328349852195012,
+          -0.00018876625202765486
+        ],
+        "paired_seed_sd": 0.00023187992882125945,
+        "families": [
+          "cooperative_inventory"
+        ],
+        "regimes": null,
+        "a_mean": 0.0009141307362153555,
+        "b_mean": 0.0011714910064041628
+      }
+    },
+    "runtime_ratio": 0.9523095352440982,
+    "negative_control_failures": {
+      "zero": 240,
+      "hold": 240
+    },
+    "max_signed_action_difference": 9.992007221626409e-16
+  },
+  "sample_size_qualification": {
+    "pilot_seeds": [
+      52001,
+      52002,
+      52003,
+      52004,
+      52005,
+      52006
+    ],
+    "pilot_sd": 0.0007284646726591249,
+    "unbounded_n": 2,
+    "chosen_n": 40,
+    "precision_target": 0.0015,
+    "pilot_precision_qualification": true,
+    "estimated_halfwidth_at_chosen_n": 0.0002257535409360385,
+    "final_seeds": [
+      62001,
+      62002,
+      62003,
+      62004,
+      62005,
+      62006,
+      62007,
+      62008,
+      62009,
+      62010,
+      62011,
+      62012,
+      62013,
+      62014,
+      62015,
+      62016,
+      62017,
+      62018,
+      62019,
+      62020,
+      62021,
+      62022,
+      62023,
+      62024,
+      62025,
+      62026,
+      62027,
+      62028,
+      62029,
+      62030,
+      62031,
+      62032,
+      62033,
+      62034,
+      62035,
+      62036,
+      62037,
+      62038,
+      62039,
+      62040
+    ],
+    "note": "Precision planning from pilot variance, not a power calculation; small-pilot SD is uncertain."
+  },
+  "scope": "Post-run interpretation correction using existing statistics; not a new prospectively registered confirmatory test. Numeric results, raw decisions, frozen code and protocol are preserved."
+}

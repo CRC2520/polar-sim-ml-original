@@ -1,0 +1,48 @@
+{
+  "schema": "polar-functional-indicators-1.0",
+  "status": "exploratory_functional_audit_not_external_preregistration",
+  "model": "unchanged_contextual_v2.1",
+  "phenomenal_consciousness_test": null,
+  "consciousness_score": null,
+  "seeds": [73001, 73002, 73003, 73004, 73005, 73006, 73007, 73008, 73009, 73010],
+  "agents": 3,
+  "types": 8,
+  "memory_learning_steps": 8,
+  "capability_learning_steps": 25,
+  "step_size": 0.65,
+  "bootstrap_draws": 2000,
+  "bootstrap_seed": 73000,
+  "inferential_unit": "paired_synthetic_seed",
+  "uncertainty_interpretation": "heuristic_count_and_prediction_residual_not_probability",
+  "assays": {
+    "cue_only_memory": {
+      "conditions": ["intact", "erase", "edit_opposite", "unknown_cue"],
+      "intervention_time": "after_identical_training_before_hidden_target_recall",
+      "matched_controls": ["same_training", "q_reset_to_zero", "same_hidden_input", "same_budget", "same_clock"],
+      "prediction": "erasure_or_unknown_cue_removes_cue_specific_action_and_opposite_edit_reverses_orientation"
+    },
+    "own_action_prediction": {
+      "conditions": ["intact", "reset", "foreign_feedback"],
+      "matched_controls": ["identical_replayed_own_actions", "same_training_duration", "same_observation", "q_reset_before_probe"],
+      "reset_scope": "gain_hat_counts_and_error_ema_reset_together; not_an_isolated_gain_intervention",
+      "foreign_gain": "2 - own_gain",
+      "prediction": "own_effect_training_improves_prediction_relative_to_reset_but_foreign_feedback_can_corrupt_it_without_source_discrimination",
+      "test_action": "0.25_in_every_channel",
+      "note": "replay_forces_q_with_horizon_zero_using_existing_API; this_is_a_mechanism_audit_not_an_autonomous_task"
+    },
+    "allocator_content_permutation": {
+      "conditions": ["original", "content_permuted"],
+      "matched_controls": ["same_per_agent_weighted_demand", "same_budget", "uniform_costs_and_weights"],
+      "prediction": "allocations_do_not_change_when_channel_content_changes_but_per_agent_demand_is_preserved",
+      "note": "diagnoses_budget_sufficiency_statistics_not_a_GWT_test"
+    }
+  },
+  "future_not_executed": {
+    "global_content_access": "requires_content_broadcast_to_independent_consumers_and_selective_message_lesions",
+    "metacognitive_calibration": "requires_probability_of_own_trial_success_before_feedback; report_calibration_discrimination_and_task_performance_separately",
+    "causal_self_other_attribution": "requires_actor_identity_hypotheses_and_interventions_on_action_effect_sources",
+    "theory_comparison": "requires_independent_theory_review_blinded_controller_labels_frozen_divergent_predictions_and_new_external_data",
+    "biological_correspondence": "requires_explicit_neural_measurement_mapping_and_appropriate_independent_dataset; no_human_data_collected_here"
+  },
+  "decision_rule": "report_each_functional_effect_and_gap_separately; never_infer_experience_from_pass_count"
+}

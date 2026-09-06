@@ -7,3 +7,8 @@ __pycache__/
 *.log
 .venv/
 tmp/
+
+# Large derived records and redundant loose copies are regenerated from checked trace archives.
+results_study2/coupling/*/generated/trial_summaries.json
+results_study2/coupling/*/traces/
+results_study2/coupling/*/environments/

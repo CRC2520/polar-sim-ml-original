@@ -6,5 +6,17 @@
   "original_engine_sha256": "35c7e3716f5d13cdf7b37e6c1a58fd4ae1708aa6aa0abd53aba259c31741cad6",
   "corrected_engine_version": "2.0.1",
   "contextual_model_version": "2.1",
-  "original_artifacts_policy": "Preserved in original result directories and pinned Git history; revised runs use separate paths."
+  "original_artifacts_policy": "Original code and recorded data preserved; manuscript history retained in Git, with one current manuscript.",
+  "manuscript_status": "One current unpublished research draft; earlier manuscript revisions in Git history only",
+  "authoritative_manuscript": "CRC2520/POLAR_MODEL_CRC/main.tex -> main.pdf",
+  "coupling_experiment_version": "2.2",
+  "study2_registration": {
+    "repository": "CRC2520/polar-sim-ml-original",
+    "commit": "fde8d0ac9b56b035a0a53c40c8cd5b79b2bc6b32",
+    "committed_utc": "2026-09-06T02:20:56Z",
+    "freeze": "docs/STUDY2_FREEZE.json",
+    "status": "Public Git source/protocol record made before final outcome generation; internal review, not external peer review."
+  },
+  "study1_evidence_status": "Exploratory: some original evaluation seeds were inspected during development; original results retained unchanged.",
+  "study2_evidence_scope": "Two internally designed task families, two labelled control groups within one centralized planner; not autonomous multi-agent negotiation or consciousness evidence."
 }

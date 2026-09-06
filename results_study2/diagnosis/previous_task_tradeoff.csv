@@ -1,0 +1,7 @@
+task,controller,n,mean_regret,pass_count
+switching_memory,dual_pole,30,0.0034034410275968333,28
+switching_memory,recurrent,30,0.0033266656348532988,30
+switching_memory,no_self_model,30,0.0025202374248926235,30
+gain_resource_shift,dual_pole,30,0.004624996757242425,30
+gain_resource_shift,recurrent,30,0.005832017116411659,30
+gain_resource_shift,no_self_model,30,0.013432324911809007,29
