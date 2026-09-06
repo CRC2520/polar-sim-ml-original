@@ -1,0 +1,15 @@
+{
+  "status": "verified_post_run_additional_audit",
+  "audit_utc": "2026-09-06T06:01:02.676292+00:00",
+  "audit_source_sha256": "2b0499ecfd901cc4c74e812c9fa7e117d248f8887f98575f26db3fd043b73ee7",
+  "p0_records_verified": 2448,
+  "p0_condition_means_and_main_effects_recalculated": true,
+  "p2_capability_seed_replays": 24,
+  "source_identifications_correct": 278,
+  "source_trials": 288,
+  "p2_coordination_replays": 48,
+  "p2_trajectories_verified": 192,
+  "monitor_and_review_outcomes_recalculated": true,
+  "original_final_manifest_sha256": "7bba2f8b27ddceda9dcc7034c634e73760ac5aa9b35998cc3156f9155ad545c3",
+  "scope": "Internal post-run audit of frozen records and mechanism replays; does not change registered statistics or constitute a new confirmatory study."
+}

@@ -1,0 +1,21 @@
+{
+  "status": "verified",
+  "p1_records": 1056,
+  "p2_trajectory_records": 192,
+  "controller_replays": 20,
+  "maximum_replay_action_difference": 0.0,
+  "coordination_replays": 2,
+  "checked_utc": "2026-09-06T05:53:50.491868+00:00",
+  "manifest_sha256": "7bba2f8b27ddceda9dcc7034c634e73760ac5aa9b35998cc3156f9155ad545c3",
+  "checks": [
+    "archive/record hashes",
+    "frozen source",
+    "expected P1 design",
+    "all physical transitions",
+    "outcome recomputation",
+    "generic equivalence",
+    "P1 decision",
+    "monitor scores",
+    "policy replays"
+  ]
+}

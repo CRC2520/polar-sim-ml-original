@@ -81,3 +81,10 @@ coupling study and separate functional-consciousness protocol. See
 ## Inter-polar network extension 0.1
 
 The original layered architecture remains the research object. See [the explicit network tension specification](docs/NETWORK_TENSION_SPEC.md) for the new directed W/K pathways, engineering tests, legacy phase audit and remaining empirical requirements. This extension is not a new confirmatory study and does not change the frozen Study 2 conclusion.
+
+
+## Integrated P0-P2 gap realization
+
+The original layered architecture now has a bounded integrated implementation in `integrated_polar/`, with separate internal state/intention/action, learned directed effects, priority-sensitive planning, content broadcast, gated memory and institutional constraints. See [the Spanish gap-closure report](docs/P0P2_CIERRE_GAPS.md). The 128 tests passed. The registered P1 decision is `engineering_verified_with_partial_empirical_support`: priority use and return-cue memory pass the practical criteria; coupled planning and the longer horizon do not. The P2 probability forecast is calibrated on the tested domain, but its experimental review policy harms tracking and is not enabled by default. General ethics, intrinsic motivation, philosophical semantics and consciousness are not established. Prior Studies 1–3 remain unchanged.
+
+The new experiment entry point is `python -m gap_resolution.run regenerate`; final seeds are already observed and their replays are not new confirmation. `docs/P0P2_ADDITIONAL_AUDIT.json` records post-run diagnostic/capability verification, separate from the original final records.
