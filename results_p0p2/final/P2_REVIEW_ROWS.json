@@ -1,0 +1,2498 @@
+[
+  {
+    "seed": 951001,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.04256992354081895,
+      "post_change": 0.050118475888653785,
+      "return_loss": 0.045122607021358986,
+      "cost": 0.07456806997861581,
+      "violations": 0,
+      "max_internal_action_separation": 0.7515794408309896,
+      "off_pair_coefficient_norm": 0.057051975916533326
+    },
+    "review": {
+      "loss": 0.12821354466338714,
+      "post_change": 0.1244011344606266,
+      "return_loss": 0.15334109947395963,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.05637419197526368
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951001,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.009590194801582902,
+      "post_change": 0.014191205693240701,
+      "return_loss": 0.006578467255565902,
+      "cost": 0.18481259535509173,
+      "violations": 0,
+      "max_internal_action_separation": 0.06656566818712756,
+      "off_pair_coefficient_norm": 0.05654482442236609
+    },
+    "review": {
+      "loss": 0.12821354466338714,
+      "post_change": 0.1244011344606266,
+      "return_loss": 0.15334109947395963,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.05637419197526368
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951001,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.046661733385067794,
+      "post_change": 0.054710545935368504,
+      "return_loss": 0.056904720775704076,
+      "cost": 0.07456806997861581,
+      "violations": 0,
+      "max_internal_action_separation": 0.7926581581177149,
+      "off_pair_coefficient_norm": 0.0499182596918676
+    },
+    "review": {
+      "loss": 0.12821354466338714,
+      "post_change": 0.1244011344606266,
+      "return_loss": 0.15334109947395963,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.05637419197526368
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951001,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.016692256947371167,
+      "post_change": 0.02481512724198949,
+      "return_loss": 0.01564673114327252,
+      "cost": 0.1628027491478315,
+      "violations": 0,
+      "max_internal_action_separation": 0.1242640172613359,
+      "off_pair_coefficient_norm": 0.04769882435079379
+    },
+    "review": {
+      "loss": 0.12821354466338714,
+      "post_change": 0.1244011344606266,
+      "return_loss": 0.15334109947395963,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.05637419197526368
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951002,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.021038334960210393,
+      "post_change": 0.0325089202893619,
+      "return_loss": 0.03726569319455998,
+      "cost": 0.07067225521184077,
+      "violations": 0,
+      "max_internal_action_separation": 0.9815345982756022,
+      "off_pair_coefficient_norm": 0.06319709408727064
+    },
+    "review": {
+      "loss": 0.09658399806964969,
+      "post_change": 0.08868510213011739,
+      "return_loss": 0.13467618426600206,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9985728899255047,
+      "off_pair_coefficient_norm": 0.06334869616208846
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951002,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.005033451443642031,
+      "post_change": 0.014424662145403265,
+      "return_loss": 0.009395545321404348,
+      "cost": 0.14609874153524194,
+      "violations": 0,
+      "max_internal_action_separation": 0.07800579115461997,
+      "off_pair_coefficient_norm": 0.0634443932607084
+    },
+    "review": {
+      "loss": 0.09658399806964969,
+      "post_change": 0.08868510213011739,
+      "return_loss": 0.13467618426600206,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9985728899255047,
+      "off_pair_coefficient_norm": 0.06334869616208846
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951002,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.025618987059710108,
+      "post_change": 0.03745795790348427,
+      "return_loss": 0.055450980767287376,
+      "cost": 0.0723014678231166,
+      "violations": 0,
+      "max_internal_action_separation": 0.9943229003951345,
+      "off_pair_coefficient_norm": 0.05831278537258706
+    },
+    "review": {
+      "loss": 0.09658399806964969,
+      "post_change": 0.08868510213011739,
+      "return_loss": 0.13467618426600206,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9985728899255047,
+      "off_pair_coefficient_norm": 0.06334869616208846
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951002,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.006341630605105335,
+      "post_change": 0.019237601267289284,
+      "return_loss": 0.014254803423283514,
+      "cost": 0.15358416365790795,
+      "violations": 0,
+      "max_internal_action_separation": 0.07336604175516778,
+      "off_pair_coefficient_norm": 0.06020097368738452
+    },
+    "review": {
+      "loss": 0.09658399806964969,
+      "post_change": 0.08868510213011739,
+      "return_loss": 0.13467618426600206,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9985728899255047,
+      "off_pair_coefficient_norm": 0.06334869616208846
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951003,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.02852983412578161,
+      "post_change": 0.044599931919921176,
+      "return_loss": 0.02918421122106157,
+      "cost": 0.07401259042903764,
+      "violations": 0,
+      "max_internal_action_separation": 0.8128461975443744,
+      "off_pair_coefficient_norm": 0.06423792591634057
+    },
+    "review": {
+      "loss": 0.0944537796931287,
+      "post_change": 0.08286204132374951,
+      "return_loss": 0.14524157362675374,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999789639144245,
+      "off_pair_coefficient_norm": 0.06406158378795948
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951003,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.008629525786661173,
+      "post_change": 0.02591837091091673,
+      "return_loss": 0.006728569333229153,
+      "cost": 0.18002367734016236,
+      "violations": 0,
+      "max_internal_action_separation": 0.06060951044122467,
+      "off_pair_coefficient_norm": 0.06325508831999738
+    },
+    "review": {
+      "loss": 0.0944537796931287,
+      "post_change": 0.08286204132374951,
+      "return_loss": 0.14524157362675374,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999789639144245,
+      "off_pair_coefficient_norm": 0.06406158378795948
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951003,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.026774804787610736,
+      "post_change": 0.04396329399619849,
+      "return_loss": 0.027378218446622443,
+      "cost": 0.07401259042903764,
+      "violations": 0,
+      "max_internal_action_separation": 0.9431132830157516,
+      "off_pair_coefficient_norm": 0.05749194430155726
+    },
+    "review": {
+      "loss": 0.0944537796931287,
+      "post_change": 0.08286204132374951,
+      "return_loss": 0.14524157362675374,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999789639144245,
+      "off_pair_coefficient_norm": 0.06406158378795948
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951003,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.008030717580151689,
+      "post_change": 0.024454197394270946,
+      "return_loss": 0.0071880480909638144,
+      "cost": 0.17350648453161513,
+      "violations": 0,
+      "max_internal_action_separation": 0.0742935697784276,
+      "off_pair_coefficient_norm": 0.054498524095259834
+    },
+    "review": {
+      "loss": 0.0944537796931287,
+      "post_change": 0.08286204132374951,
+      "return_loss": 0.14524157362675374,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999789639144245,
+      "off_pair_coefficient_norm": 0.06406158378795948
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951004,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.03733557867394685,
+      "post_change": 0.0532245967261416,
+      "return_loss": 0.05542036639345437,
+      "cost": 0.07516404731555215,
+      "violations": 0,
+      "max_internal_action_separation": 0.8681551640604392,
+      "off_pair_coefficient_norm": 0.0783854119259779
+    },
+    "review": {
+      "loss": 0.10257273643720306,
+      "post_change": 0.09169472724992905,
+      "return_loss": 0.14945072929009806,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989377357,
+      "off_pair_coefficient_norm": 0.07815472463989849
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951004,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.012147004572953113,
+      "post_change": 0.03528188438926489,
+      "return_loss": 0.02717948084704651,
+      "cost": 0.20479237038793255,
+      "violations": 0,
+      "max_internal_action_separation": 0.11013110635299198,
+      "off_pair_coefficient_norm": 0.07811849069389382
+    },
+    "review": {
+      "loss": 0.10257273643720306,
+      "post_change": 0.09169472724992905,
+      "return_loss": 0.14945072929009806,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989377357,
+      "off_pair_coefficient_norm": 0.07815472463989849
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951004,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.037528757639875385,
+      "post_change": 0.056306474466350974,
+      "return_loss": 0.05709844736853221,
+      "cost": 0.07516404731555215,
+      "violations": 0,
+      "max_internal_action_separation": 0.8040541891244799,
+      "off_pair_coefficient_norm": 0.07510698912194577
+    },
+    "review": {
+      "loss": 0.10257273643720306,
+      "post_change": 0.09169472724992905,
+      "return_loss": 0.14945072929009806,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989377357,
+      "off_pair_coefficient_norm": 0.07815472463989849
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951004,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.012919994042255167,
+      "post_change": 0.03761077511349311,
+      "return_loss": 0.03206764749753207,
+      "cost": 0.2009866378807301,
+      "violations": 0,
+      "max_internal_action_separation": 0.11379868672296126,
+      "off_pair_coefficient_norm": 0.08232431704426417
+    },
+    "review": {
+      "loss": 0.10257273643720306,
+      "post_change": 0.09169472724992905,
+      "return_loss": 0.14945072929009806,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989377357,
+      "off_pair_coefficient_norm": 0.07815472463989849
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951005,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.03499648931990101,
+      "post_change": 0.04153412998379899,
+      "return_loss": 0.0599361734766346,
+      "cost": 0.07380515164150786,
+      "violations": 0,
+      "max_internal_action_separation": 0.9944459546596434,
+      "off_pair_coefficient_norm": 0.06743137268289619
+    },
+    "review": {
+      "loss": 0.10906778120059712,
+      "post_change": 0.10101499624192227,
+      "return_loss": 0.14885808284163457,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06722458088903002
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951005,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.00818195353044916,
+      "post_change": 0.02009610695368107,
+      "return_loss": 0.010621140657754935,
+      "cost": 0.19900081791345622,
+      "violations": 0,
+      "max_internal_action_separation": 0.05726544379529591,
+      "off_pair_coefficient_norm": 0.06705578233265255
+    },
+    "review": {
+      "loss": 0.10906778120059712,
+      "post_change": 0.10101499624192227,
+      "return_loss": 0.14885808284163457,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06722458088903002
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951005,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.03352901007387193,
+      "post_change": 0.041753080202397264,
+      "return_loss": 0.04920758597993197,
+      "cost": 0.07380515164150786,
+      "violations": 0,
+      "max_internal_action_separation": 0.9807396675102555,
+      "off_pair_coefficient_norm": 0.06825261685939968
+    },
+    "review": {
+      "loss": 0.10906778120059712,
+      "post_change": 0.10101499624192227,
+      "return_loss": 0.14885808284163457,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06722458088903002
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951005,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.012181545898897592,
+      "post_change": 0.02947216580948676,
+      "return_loss": 0.019323226912750163,
+      "cost": 0.2217496174271154,
+      "violations": 0,
+      "max_internal_action_separation": 0.12138761257632488,
+      "off_pair_coefficient_norm": 0.06804712219263089
+    },
+    "review": {
+      "loss": 0.10906778120059712,
+      "post_change": 0.10101499624192227,
+      "return_loss": 0.14885808284163457,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06722458088903002
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951006,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.04163625978895743,
+      "post_change": 0.05322169527080033,
+      "return_loss": 0.08440810198733485,
+      "cost": 0.0733615995088181,
+      "violations": 0,
+      "max_internal_action_separation": 0.7815846303556173,
+      "off_pair_coefficient_norm": 0.05186749349203537
+    },
+    "review": {
+      "loss": 0.09037641528167535,
+      "post_change": 0.07329963993233064,
+      "return_loss": 0.1558764053897984,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999679435374265,
+      "off_pair_coefficient_norm": 0.05283564193846255
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951006,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.010235578304727941,
+      "post_change": 0.024123648202367214,
+      "return_loss": 0.016867668322586772,
+      "cost": 0.168480473006569,
+      "violations": 0,
+      "max_internal_action_separation": 0.10739105805064206,
+      "off_pair_coefficient_norm": 0.05229124697670318
+    },
+    "review": {
+      "loss": 0.08367682771506497,
+      "post_change": 0.06775528888172433,
+      "return_loss": 0.1513244082842046,
+      "cost": 0.02528389890636969,
+      "violations": 0,
+      "max_internal_action_separation": 0.999968568737161,
+      "off_pair_coefficient_norm": 0.05238176558661512
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951006,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.046766132705277595,
+      "post_change": 0.061521795248093175,
+      "return_loss": 0.09703541482069149,
+      "cost": 0.0733615995088181,
+      "violations": 0,
+      "max_internal_action_separation": 0.9943120893004544,
+      "off_pair_coefficient_norm": 0.051468015817648614
+    },
+    "review": {
+      "loss": 0.09037641528167535,
+      "post_change": 0.07329963993233064,
+      "return_loss": 0.1558764053897984,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999679435374265,
+      "off_pair_coefficient_norm": 0.05283564193846255
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951006,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.01646237260827867,
+      "post_change": 0.03712485872353306,
+      "return_loss": 0.029769758340797006,
+      "cost": 0.157744816511921,
+      "violations": 0,
+      "max_internal_action_separation": 0.18253807358366564,
+      "off_pair_coefficient_norm": 0.0628343497747669
+    },
+    "review": {
+      "loss": 0.08367682771506497,
+      "post_change": 0.06775528888172433,
+      "return_loss": 0.1513244082842046,
+      "cost": 0.02528389890636969,
+      "violations": 0,
+      "max_internal_action_separation": 0.999968568737161,
+      "off_pair_coefficient_norm": 0.05238176558661512
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951007,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.03326705311568996,
+      "post_change": 0.0500019669198565,
+      "return_loss": 0.06131035207518956,
+      "cost": 0.07051768982110064,
+      "violations": 0,
+      "max_internal_action_separation": 0.9679428191747077,
+      "off_pair_coefficient_norm": 0.07419483134385152
+    },
+    "review": {
+      "loss": 0.09665636518013114,
+      "post_change": 0.08742564051812411,
+      "return_loss": 0.14938729863949998,
+      "cost": 0.012720489800651193,
+      "violations": 0,
+      "max_internal_action_separation": 0.9979591838156421,
+      "off_pair_coefficient_norm": 0.0745435869413853
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951007,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.010589068254360033,
+      "post_change": 0.030667088083167707,
+      "return_loss": 0.015142606285414105,
+      "cost": 0.16550241727527054,
+      "violations": 0,
+      "max_internal_action_separation": 0.08466725072666695,
+      "off_pair_coefficient_norm": 0.07422443131369322
+    },
+    "review": {
+      "loss": 0.09693237121540525,
+      "post_change": 0.08783624248937323,
+      "return_loss": 0.15049711140717972,
+      "cost": 0.019120644451885608,
+      "violations": 0,
+      "max_internal_action_separation": 0.9980795265719362,
+      "off_pair_coefficient_norm": 0.07435038291100526
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951007,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.03300359434523926,
+      "post_change": 0.05099538494290728,
+      "return_loss": 0.05844070293930434,
+      "cost": 0.07125195609225338,
+      "violations": 0,
+      "max_internal_action_separation": 0.9201974334870425,
+      "off_pair_coefficient_norm": 0.06738043094555846
+    },
+    "review": {
+      "loss": 0.09501721251896371,
+      "post_change": 0.0844203902299759,
+      "return_loss": 0.14332367266603205,
+      "cost": 0.012130698060089986,
+      "violations": 0,
+      "max_internal_action_separation": 0.9974512429990763,
+      "off_pair_coefficient_norm": 0.0698275323393161
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951007,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.010224406358903463,
+      "post_change": 0.02986819761636562,
+      "return_loss": 0.011995162682757502,
+      "cost": 0.16665249851279704,
+      "violations": 0,
+      "max_internal_action_separation": 0.05722477634930346,
+      "off_pair_coefficient_norm": 0.06890428719635358
+    },
+    "review": {
+      "loss": 0.09501986632013155,
+      "post_change": 0.08431952373875824,
+      "return_loss": 0.1435164129188172,
+      "cost": 0.018597142979145803,
+      "violations": 0,
+      "max_internal_action_separation": 0.9974673916937971,
+      "off_pair_coefficient_norm": 0.07448369978304782
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951008,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.04112222460845321,
+      "post_change": 0.05518632480894086,
+      "return_loss": 0.0648646729468995,
+      "cost": 0.07789874709274225,
+      "violations": 0,
+      "max_internal_action_separation": 0.9945286336756993,
+      "off_pair_coefficient_norm": 0.07800503861418254
+    },
+    "review": {
+      "loss": 0.12522991061282593,
+      "post_change": 0.12559563663036258,
+      "return_loss": 0.1370393789206298,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.07824150068488452
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951008,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.013040722444702162,
+      "post_change": 0.037811857264035825,
+      "return_loss": 0.029839803058729075,
+      "cost": 0.20274047974969966,
+      "violations": 0,
+      "max_internal_action_separation": 0.17022694859800905,
+      "off_pair_coefficient_norm": 0.07829568039654272
+    },
+    "review": {
+      "loss": 0.12522991061282593,
+      "post_change": 0.12559563663036258,
+      "return_loss": 0.1370393789206298,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.07824150068488452
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951008,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.04051394847483019,
+      "post_change": 0.05588495527583932,
+      "return_loss": 0.06091834644011832,
+      "cost": 0.07789874709274225,
+      "violations": 0,
+      "max_internal_action_separation": 0.9948945119686571,
+      "off_pair_coefficient_norm": 0.07689925844548641
+    },
+    "review": {
+      "loss": 0.12522991061282593,
+      "post_change": 0.12559563663036258,
+      "return_loss": 0.1370393789206298,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.07824150068488452
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951008,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.01131837078050966,
+      "post_change": 0.0325026975062377,
+      "return_loss": 0.022657374668938645,
+      "cost": 0.20186996900503748,
+      "violations": 0,
+      "max_internal_action_separation": 0.12280461110571134,
+      "off_pair_coefficient_norm": 0.08673764366244026
+    },
+    "review": {
+      "loss": 0.12522991061282593,
+      "post_change": 0.12559563663036258,
+      "return_loss": 0.1370393789206298,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.07824150068488452
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951009,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.023613890863683238,
+      "post_change": 0.03388048358711591,
+      "return_loss": 0.05192274062548888,
+      "cost": 0.06573096756138352,
+      "violations": 0,
+      "max_internal_action_separation": 0.9250948028823576,
+      "off_pair_coefficient_norm": 0.07192304311989185
+    },
+    "review": {
+      "loss": 0.06552304115434811,
+      "post_change": 0.051764408686093215,
+      "return_loss": 0.14480121745212118,
+      "cost": 0.027503954160999582,
+      "violations": 0,
+      "max_internal_action_separation": 0.9948239861728084,
+      "off_pair_coefficient_norm": 0.0720722850142546
+    },
+    "review_fraction": 0.5
+  },
+  {
+    "seed": 951009,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.006116232814135141,
+      "post_change": 0.016695515476398495,
+      "return_loss": 0.015051180775060203,
+      "cost": 0.12484056588806298,
+      "violations": 0,
+      "max_internal_action_separation": 0.04926798978316199,
+      "off_pair_coefficient_norm": 0.07204950019386384
+    },
+    "review": {
+      "loss": 0.0653284952809468,
+      "post_change": 0.05106598381379601,
+      "return_loss": 0.14464687123319295,
+      "cost": 0.03255457773139073,
+      "violations": 0,
+      "max_internal_action_separation": 0.9947948004720374,
+      "off_pair_coefficient_norm": 0.0720895878097963
+    },
+    "review_fraction": 0.5
+  },
+  {
+    "seed": 951009,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.02460416223803617,
+      "post_change": 0.035054481721549915,
+      "return_loss": 0.05556505131186371,
+      "cost": 0.06629146906396637,
+      "violations": 0,
+      "max_internal_action_separation": 0.7902943219877381,
+      "off_pair_coefficient_norm": 0.0685196225683085
+    },
+    "review": {
+      "loss": 0.06567951790892822,
+      "post_change": 0.052222543527950006,
+      "return_loss": 0.14509033212346806,
+      "cost": 0.027994061838783234,
+      "violations": 0,
+      "max_internal_action_separation": 0.9947608339821425,
+      "off_pair_coefficient_norm": 0.07216287362003797
+    },
+    "review_fraction": 0.5
+  },
+  {
+    "seed": 951009,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.0074140545187266265,
+      "post_change": 0.021128087268366194,
+      "return_loss": 0.02017434233930802,
+      "cost": 0.12424729695536209,
+      "violations": 0,
+      "max_internal_action_separation": 0.061369367390587515,
+      "off_pair_coefficient_norm": 0.07055941412068693
+    },
+    "review": {
+      "loss": 0.06540968302859561,
+      "post_change": 0.05127056882505895,
+      "return_loss": 0.14490680764891214,
+      "cost": 0.03329930490314805,
+      "violations": 0,
+      "max_internal_action_separation": 0.9947311038984509,
+      "off_pair_coefficient_norm": 0.07367729822522515
+    },
+    "review_fraction": 0.5
+  },
+  {
+    "seed": 951010,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.04437692702339404,
+      "post_change": 0.0653001818028595,
+      "return_loss": 0.061724536251255034,
+      "cost": 0.0732147951908138,
+      "violations": 0,
+      "max_internal_action_separation": 0.7432612003811021,
+      "off_pair_coefficient_norm": 0.07688748573237797
+    },
+    "review": {
+      "loss": 0.0874543566728141,
+      "post_change": 0.07323623629403113,
+      "return_loss": 0.14425428487564151,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999722415239537,
+      "off_pair_coefficient_norm": 0.07640189891204481
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951010,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.020263288597586117,
+      "post_change": 0.04128951233977203,
+      "return_loss": 0.012306822864729663,
+      "cost": 0.18845309609621674,
+      "violations": 0,
+      "max_internal_action_separation": 0.034270349366301966,
+      "off_pair_coefficient_norm": 0.07673565391269951
+    },
+    "review": {
+      "loss": 0.08942179586690736,
+      "post_change": 0.08192191844213555,
+      "return_loss": 0.1460852476935595,
+      "cost": 0.02405607809729224,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999690956230263,
+      "off_pair_coefficient_norm": 0.07652647747791531
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951010,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.04020778944060348,
+      "post_change": 0.060231870267008915,
+      "return_loss": 0.05337783497467707,
+      "cost": 0.0732147951908138,
+      "violations": 0,
+      "max_internal_action_separation": 0.7018641693699808,
+      "off_pair_coefficient_norm": 0.07047443411317597
+    },
+    "review": {
+      "loss": 0.0874543566728141,
+      "post_change": 0.07323623629403113,
+      "return_loss": 0.14425428487564151,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999722415239537,
+      "off_pair_coefficient_norm": 0.07640189891204481
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951010,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.016101780025182547,
+      "post_change": 0.03315653736186098,
+      "return_loss": 0.007739716825924395,
+      "cost": 0.18919052535710734,
+      "violations": 0,
+      "max_internal_action_separation": 0.03202069848512673,
+      "off_pair_coefficient_norm": 0.0805420005267032
+    },
+    "review": {
+      "loss": 0.08942179586690736,
+      "post_change": 0.08192191844213555,
+      "return_loss": 0.1460852476935595,
+      "cost": 0.02405607809729224,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999690956230263,
+      "off_pair_coefficient_norm": 0.07652647747791531
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951011,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.03858313945882267,
+      "post_change": 0.047302001725529584,
+      "return_loss": 0.029735357515747882,
+      "cost": 0.07379257398916501,
+      "violations": 0,
+      "max_internal_action_separation": 0.9943121723041423,
+      "off_pair_coefficient_norm": 0.05236161969765991
+    },
+    "review": {
+      "loss": 0.14670664779890527,
+      "post_change": 0.1507847086030322,
+      "return_loss": 0.14677530688709672,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.05272390867582661
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951011,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.008156438313135466,
+      "post_change": 0.01815044728277309,
+      "return_loss": 0.008692960068770133,
+      "cost": 0.17739133019873007,
+      "violations": 0,
+      "max_internal_action_separation": 0.07202056722055113,
+      "off_pair_coefficient_norm": 0.052650920556920534
+    },
+    "review": {
+      "loss": 0.14670664779890527,
+      "post_change": 0.1507847086030322,
+      "return_loss": 0.14677530688709672,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.05272390867582661
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951011,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.039764435009826134,
+      "post_change": 0.04649636735443616,
+      "return_loss": 0.017536603821403218,
+      "cost": 0.07379257398916501,
+      "violations": 0,
+      "max_internal_action_separation": 0.76250972561544,
+      "off_pair_coefficient_norm": 0.06053848098201343
+    },
+    "review": {
+      "loss": 0.14670664779890527,
+      "post_change": 0.1507847086030322,
+      "return_loss": 0.14677530688709672,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.05272390867582661
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951011,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.00834624554626669,
+      "post_change": 0.016783367381004215,
+      "return_loss": 0.007396222471650332,
+      "cost": 0.18546127500590848,
+      "violations": 0,
+      "max_internal_action_separation": 0.04508953094265966,
+      "off_pair_coefficient_norm": 0.06970952823690578
+    },
+    "review": {
+      "loss": 0.14670664779890527,
+      "post_change": 0.1507847086030322,
+      "return_loss": 0.14677530688709672,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.05272390867582661
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951012,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.03528072903083204,
+      "post_change": 0.04734167404544711,
+      "return_loss": 0.06315100324176273,
+      "cost": 0.07256483548168202,
+      "violations": 0,
+      "max_internal_action_separation": 0.9570172473982723,
+      "off_pair_coefficient_norm": 0.06766796358308409
+    },
+    "review": {
+      "loss": 0.08086290801221029,
+      "post_change": 0.06759375439488279,
+      "return_loss": 0.13475340072179445,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.999991636085911,
+      "off_pair_coefficient_norm": 0.06842006640679048
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951012,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.013949246150310636,
+      "post_change": 0.02503629230257892,
+      "return_loss": 0.014920014421696463,
+      "cost": 0.14951093442662025,
+      "violations": 0,
+      "max_internal_action_separation": 0.06175393699216125,
+      "off_pair_coefficient_norm": 0.0678830182868136
+    },
+    "review": {
+      "loss": 0.07395074272873005,
+      "post_change": 0.058396277372417225,
+      "return_loss": 0.1213333024973517,
+      "cost": 0.026785545553715383,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999714626163779,
+      "off_pair_coefficient_norm": 0.06821233385488686
+    },
+    "review_fraction": 0.8125
+  },
+  {
+    "seed": 951012,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.03143588404215903,
+      "post_change": 0.042872118129627136,
+      "return_loss": 0.054829258710988836,
+      "cost": 0.07523669849483063,
+      "violations": 0,
+      "max_internal_action_separation": 0.9943166753630158,
+      "off_pair_coefficient_norm": 0.06640196788637899
+    },
+    "review": {
+      "loss": 0.08086290801221029,
+      "post_change": 0.06759375439488279,
+      "return_loss": 0.13475340072179445,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.999991636085911,
+      "off_pair_coefficient_norm": 0.06842006640679048
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951012,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.010051805915475215,
+      "post_change": 0.02392352862674142,
+      "return_loss": 0.01704482036889649,
+      "cost": 0.1659452490589026,
+      "violations": 0,
+      "max_internal_action_separation": 0.0959485788315875,
+      "off_pair_coefficient_norm": 0.06523945109070813
+    },
+    "review": {
+      "loss": 0.07395074272873005,
+      "post_change": 0.058396277372417225,
+      "return_loss": 0.1213333024973517,
+      "cost": 0.026785545553715383,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999714626163779,
+      "off_pair_coefficient_norm": 0.06821233385488686
+    },
+    "review_fraction": 0.8125
+  },
+  {
+    "seed": 951013,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.026968339205317427,
+      "post_change": 0.03167710898373924,
+      "return_loss": 0.03670284467256262,
+      "cost": 0.07706487504539057,
+      "violations": 0,
+      "max_internal_action_separation": 0.8658348048599918,
+      "off_pair_coefficient_norm": 0.07245416890440516
+    },
+    "review": {
+      "loss": 0.09362206354306087,
+      "post_change": 0.0803136774878753,
+      "return_loss": 0.14910163643115484,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999758058215148,
+      "off_pair_coefficient_norm": 0.07323432441828966
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951013,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.007524755579756545,
+      "post_change": 0.018537600157546564,
+      "return_loss": 0.011226398689810948,
+      "cost": 0.17414603720481017,
+      "violations": 0,
+      "max_internal_action_separation": 0.06106138868149849,
+      "off_pair_coefficient_norm": 0.07340828135422829
+    },
+    "review": {
+      "loss": 0.08508034923934209,
+      "post_change": 0.06866542290541892,
+      "return_loss": 0.1390915137488797,
+      "cost": 0.03583989553454711,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999705340449478,
+      "off_pair_coefficient_norm": 0.07294490989901282
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951013,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.027392992674458633,
+      "post_change": 0.034273520573530974,
+      "return_loss": 0.034337366579356196,
+      "cost": 0.07706487504539057,
+      "violations": 0,
+      "max_internal_action_separation": 0.7912395913801015,
+      "off_pair_coefficient_norm": 0.06632713950619379
+    },
+    "review": {
+      "loss": 0.09362206354306087,
+      "post_change": 0.0803136774878753,
+      "return_loss": 0.14910163643115484,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999758058215148,
+      "off_pair_coefficient_norm": 0.07323432441828966
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951013,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.009361952317232889,
+      "post_change": 0.02458434261442585,
+      "return_loss": 0.016373953447493112,
+      "cost": 0.18353669722686905,
+      "violations": 0,
+      "max_internal_action_separation": 0.08218578223251147,
+      "off_pair_coefficient_norm": 0.07059503144087619
+    },
+    "review": {
+      "loss": 0.08508034923934209,
+      "post_change": 0.06866542290541892,
+      "return_loss": 0.1390915137488797,
+      "cost": 0.03583989553454711,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999705340449478,
+      "off_pair_coefficient_norm": 0.07294490989901282
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951014,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.04028905371690891,
+      "post_change": 0.06027510612194573,
+      "return_loss": 0.06795624923553988,
+      "cost": 0.07856395954802152,
+      "violations": 0,
+      "max_internal_action_separation": 0.994477090811433,
+      "off_pair_coefficient_norm": 0.07603868521609378
+    },
+    "review": {
+      "loss": 0.08989401704497589,
+      "post_change": 0.07541196529912554,
+      "return_loss": 0.14765412801009012,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999678295328528,
+      "off_pair_coefficient_norm": 0.07635239782666062
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951014,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.014004286066711247,
+      "post_change": 0.03745216534231576,
+      "return_loss": 0.01552483559912042,
+      "cost": 0.21258321077645434,
+      "violations": 0,
+      "max_internal_action_separation": 0.1355304055408536,
+      "off_pair_coefficient_norm": 0.07662308220050357
+    },
+    "review": {
+      "loss": 0.08989401704497589,
+      "post_change": 0.07541196529912554,
+      "return_loss": 0.14765412801009012,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999678295328528,
+      "off_pair_coefficient_norm": 0.07635239782666062
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951014,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.0451497686480584,
+      "post_change": 0.07141257352070549,
+      "return_loss": 0.07860653928580023,
+      "cost": 0.07856395954802153,
+      "violations": 0,
+      "max_internal_action_separation": 0.719333446257564,
+      "off_pair_coefficient_norm": 0.06719822683486971
+    },
+    "review": {
+      "loss": 0.08989401704497589,
+      "post_change": 0.07541196529912554,
+      "return_loss": 0.14765412801009012,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999678295328528,
+      "off_pair_coefficient_norm": 0.07635239782666062
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951014,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.02030297593447601,
+      "post_change": 0.050440110251742255,
+      "return_loss": 0.02317678258651253,
+      "cost": 0.17910220678394081,
+      "violations": 0,
+      "max_internal_action_separation": 0.07658585787073897,
+      "off_pair_coefficient_norm": 0.06336819608674871
+    },
+    "review": {
+      "loss": 0.08989401704497589,
+      "post_change": 0.07541196529912554,
+      "return_loss": 0.14765412801009012,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999678295328528,
+      "off_pair_coefficient_norm": 0.07635239782666062
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951015,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.0223500964967131,
+      "post_change": 0.031155402398890277,
+      "return_loss": 0.04570206783576753,
+      "cost": 0.07564211705585207,
+      "violations": 0,
+      "max_internal_action_separation": 0.9078709167157448,
+      "off_pair_coefficient_norm": 0.0820457850921997
+    },
+    "review": {
+      "loss": 0.07899106810535121,
+      "post_change": 0.06297794799343041,
+      "return_loss": 0.14110907777935364,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.08201400802682417
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951015,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.005647845572384802,
+      "post_change": 0.013196690115219489,
+      "return_loss": 0.01036311294066008,
+      "cost": 0.15293066951366943,
+      "violations": 0,
+      "max_internal_action_separation": 0.05867309576441902,
+      "off_pair_coefficient_norm": 0.08233015802874998
+    },
+    "review": {
+      "loss": 0.06639219799880867,
+      "post_change": 0.04689193105745825,
+      "return_loss": 0.13692596136604251,
+      "cost": 0.0670987610242853,
+      "violations": 0,
+      "max_internal_action_separation": 0.9992045589675812,
+      "off_pair_coefficient_norm": 0.0821751058516803
+    },
+    "review_fraction": 0.5
+  },
+  {
+    "seed": 951015,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.021454151280555014,
+      "post_change": 0.027718642856855744,
+      "return_loss": 0.04468054732795219,
+      "cost": 0.07564211705585208,
+      "violations": 0,
+      "max_internal_action_separation": 0.9943121373193502,
+      "off_pair_coefficient_norm": 0.07541610250087477
+    },
+    "review": {
+      "loss": 0.07899106810535121,
+      "post_change": 0.06297794799343041,
+      "return_loss": 0.14110907777935364,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.08201400802682417
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951015,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.005805751952064546,
+      "post_change": 0.014616504556352411,
+      "return_loss": 0.012225480241334243,
+      "cost": 0.15701075825287256,
+      "violations": 0,
+      "max_internal_action_separation": 0.08825386458324566,
+      "off_pair_coefficient_norm": 0.07927579493720319
+    },
+    "review": {
+      "loss": 0.06343021575815666,
+      "post_change": 0.04194151409142435,
+      "return_loss": 0.12629184844143138,
+      "cost": 0.06630901266442622,
+      "violations": 0,
+      "max_internal_action_separation": 0.9979518630115527,
+      "off_pair_coefficient_norm": 0.08951770175841008
+    },
+    "review_fraction": 0.5
+  },
+  {
+    "seed": 951016,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.031310749101538596,
+      "post_change": 0.039988834494176735,
+      "return_loss": 0.028929356397639026,
+      "cost": 0.07713695257577188,
+      "violations": 0,
+      "max_internal_action_separation": 0.6729216025852873,
+      "off_pair_coefficient_norm": 0.06290814611373448
+    },
+    "review": {
+      "loss": 0.09831253701166566,
+      "post_change": 0.08784803125046546,
+      "return_loss": 0.14373577546738064,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06347597907715305
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951016,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.01480101341053273,
+      "post_change": 0.024692129366884138,
+      "return_loss": 0.005645922263882021,
+      "cost": 0.17260485471244338,
+      "violations": 0,
+      "max_internal_action_separation": 0.031496551635228937,
+      "off_pair_coefficient_norm": 0.062754207194089
+    },
+    "review": {
+      "loss": 0.08517198692822847,
+      "post_change": 0.06791555440128093,
+      "return_loss": 0.14015370351972545,
+      "cost": 0.03178811347961258,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999704026121042,
+      "off_pair_coefficient_norm": 0.062816371938274
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951016,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.031756394220483555,
+      "post_change": 0.04129929896861869,
+      "return_loss": 0.027639681205197202,
+      "cost": 0.07713695257577187,
+      "violations": 0,
+      "max_internal_action_separation": 0.6461389559341855,
+      "off_pair_coefficient_norm": 0.05945132443477981
+    },
+    "review": {
+      "loss": 0.09831253701166566,
+      "post_change": 0.08784803125046546,
+      "return_loss": 0.14373577546738064,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06347597907715305
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951016,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.01612798629682061,
+      "post_change": 0.02815416590379417,
+      "return_loss": 0.0072708914362486915,
+      "cost": 0.17286566104529263,
+      "violations": 0,
+      "max_internal_action_separation": 0.031023403670270233,
+      "off_pair_coefficient_norm": 0.0637756208394944
+    },
+    "review": {
+      "loss": 0.08517198692822847,
+      "post_change": 0.06791555440128093,
+      "return_loss": 0.14015370351972545,
+      "cost": 0.03178811347961258,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999704026121042,
+      "off_pair_coefficient_norm": 0.062816371938274
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951017,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.02458779989892065,
+      "post_change": 0.03405211904851026,
+      "return_loss": 0.030244465312681407,
+      "cost": 0.07300153526340504,
+      "violations": 0,
+      "max_internal_action_separation": 0.769566534827864,
+      "off_pair_coefficient_norm": 0.07567956006146705
+    },
+    "review": {
+      "loss": 0.08812955706916403,
+      "post_change": 0.07445167606521191,
+      "return_loss": 0.14193374234737124,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.07599148188453851
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951017,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.009995636496933538,
+      "post_change": 0.021349106423910094,
+      "return_loss": 0.01033262424886964,
+      "cost": 0.1289229028716494,
+      "violations": 0,
+      "max_internal_action_separation": 0.03882524094471912,
+      "off_pair_coefficient_norm": 0.0753679994287581
+    },
+    "review": {
+      "loss": 0.08812955706916403,
+      "post_change": 0.07445167606521191,
+      "return_loss": 0.14193374234737124,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.07599148188453851
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951017,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.021262474539049833,
+      "post_change": 0.027531233642150182,
+      "return_loss": 0.021741763516071034,
+      "cost": 0.0702217525274216,
+      "violations": 0,
+      "max_internal_action_separation": 0.7059844132034934,
+      "off_pair_coefficient_norm": 0.07368729325947525
+    },
+    "review": {
+      "loss": 0.08812955706916403,
+      "post_change": 0.07445167606521191,
+      "return_loss": 0.14193374234737124,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.07599148188453851
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951017,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.008023333268403045,
+      "post_change": 0.016676776517791616,
+      "return_loss": 0.006471497284867698,
+      "cost": 0.12295260281272093,
+      "violations": 0,
+      "max_internal_action_separation": 0.032675608584223303,
+      "off_pair_coefficient_norm": 0.07232452947685439
+    },
+    "review": {
+      "loss": 0.08812955706916403,
+      "post_change": 0.07445167606521191,
+      "return_loss": 0.14193374234737124,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.07599148188453851
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951018,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.02658427390210412,
+      "post_change": 0.04167532191389429,
+      "return_loss": 0.02500317696298718,
+      "cost": 0.07136491451823394,
+      "violations": 0,
+      "max_internal_action_separation": 0.7364071509117822,
+      "off_pair_coefficient_norm": 0.06320097293417481
+    },
+    "review": {
+      "loss": 0.10354447414683692,
+      "post_change": 0.09204681510068713,
+      "return_loss": 0.150621415424707,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06302293149476373
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951018,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.00793396378048814,
+      "post_change": 0.02438092288274006,
+      "return_loss": 0.013343594638275438,
+      "cost": 0.15720503148231305,
+      "violations": 0,
+      "max_internal_action_separation": 0.03520731631177909,
+      "off_pair_coefficient_norm": 0.06313733290947628
+    },
+    "review": {
+      "loss": 0.10354447414683692,
+      "post_change": 0.09204681510068713,
+      "return_loss": 0.150621415424707,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06302293149476373
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951018,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.03192575073776341,
+      "post_change": 0.04917466801166071,
+      "return_loss": 0.04472666248272115,
+      "cost": 0.07136491451823394,
+      "violations": 0,
+      "max_internal_action_separation": 0.767221922536391,
+      "off_pair_coefficient_norm": 0.05396591000294496
+    },
+    "review": {
+      "loss": 0.10354447414683692,
+      "post_change": 0.09204681510068713,
+      "return_loss": 0.150621415424707,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06302293149476373
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951018,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.00987084675234417,
+      "post_change": 0.03117166554800037,
+      "return_loss": 0.02086878986790142,
+      "cost": 0.16618781526814952,
+      "violations": 0,
+      "max_internal_action_separation": 0.057664618887489846,
+      "off_pair_coefficient_norm": 0.05003285120810434
+    },
+    "review": {
+      "loss": 0.10354447414683692,
+      "post_change": 0.09204681510068713,
+      "return_loss": 0.150621415424707,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06302293149476373
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951019,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.04040120096331636,
+      "post_change": 0.049455812789866944,
+      "return_loss": 0.044595407876799505,
+      "cost": 0.07653156041743692,
+      "violations": 0,
+      "max_internal_action_separation": 0.7177756061907811,
+      "off_pair_coefficient_norm": 0.06554743497027425
+    },
+    "review": {
+      "loss": 0.10790164835682976,
+      "post_change": 0.10038921675373876,
+      "return_loss": 0.14515805615838565,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999678295328528,
+      "off_pair_coefficient_norm": 0.06572258693182016
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951019,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.011991185425889986,
+      "post_change": 0.032283524588758904,
+      "return_loss": 0.01093929285810235,
+      "cost": 0.19597893142678377,
+      "violations": 0,
+      "max_internal_action_separation": 0.04947676875700985,
+      "off_pair_coefficient_norm": 0.06483276632443721
+    },
+    "review": {
+      "loss": 0.10790164835682976,
+      "post_change": 0.10038921675373876,
+      "return_loss": 0.14515805615838565,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999678295328528,
+      "off_pair_coefficient_norm": 0.06572258693182016
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951019,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.038052184463888555,
+      "post_change": 0.04714043959435819,
+      "return_loss": 0.04359698994166237,
+      "cost": 0.07653156041743692,
+      "violations": 0,
+      "max_internal_action_separation": 0.9919769467724315,
+      "off_pair_coefficient_norm": 0.06823454154824492
+    },
+    "review": {
+      "loss": 0.10790164835682976,
+      "post_change": 0.10038921675373876,
+      "return_loss": 0.14515805615838565,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999678295328528,
+      "off_pair_coefficient_norm": 0.06572258693182016
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951019,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.009710675421167806,
+      "post_change": 0.025385332387317324,
+      "return_loss": 0.007564884350096887,
+      "cost": 0.19053400248615548,
+      "violations": 0,
+      "max_internal_action_separation": 0.052837658416512584,
+      "off_pair_coefficient_norm": 0.07133890644977309
+    },
+    "review": {
+      "loss": 0.10790164835682976,
+      "post_change": 0.10038921675373876,
+      "return_loss": 0.14515805615838565,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999678295328528,
+      "off_pair_coefficient_norm": 0.06572258693182016
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951020,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.03129190315451502,
+      "post_change": 0.03991680079935561,
+      "return_loss": 0.06500035316837681,
+      "cost": 0.06862548523169394,
+      "violations": 0,
+      "max_internal_action_separation": 0.8960805819960548,
+      "off_pair_coefficient_norm": 0.0684629929053517
+    },
+    "review": {
+      "loss": 0.07877632652420284,
+      "post_change": 0.06249198837529663,
+      "return_loss": 0.1432943806706972,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.999985151484764,
+      "off_pair_coefficient_norm": 0.06850965563111236
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951020,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.009012521233635593,
+      "post_change": 0.02050818201427601,
+      "return_loss": 0.01599389465904111,
+      "cost": 0.15779297286697433,
+      "violations": 0,
+      "max_internal_action_separation": 0.08022531028820676,
+      "off_pair_coefficient_norm": 0.06843148941687896
+    },
+    "review": {
+      "loss": 0.07284928797842044,
+      "post_change": 0.052592984730391916,
+      "return_loss": 0.13633002698050342,
+      "cost": 0.01556410628904941,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999575173455485,
+      "off_pair_coefficient_norm": 0.06867125190938028
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951020,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.038190283048335695,
+      "post_change": 0.05138269429670431,
+      "return_loss": 0.08322409088717256,
+      "cost": 0.06862548523169394,
+      "violations": 0,
+      "max_internal_action_separation": 0.9911329812419946,
+      "off_pair_coefficient_norm": 0.05738550464729333
+    },
+    "review": {
+      "loss": 0.07877632652420284,
+      "post_change": 0.06249198837529663,
+      "return_loss": 0.1432943806706972,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.999985151484764,
+      "off_pair_coefficient_norm": 0.06850965563111236
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951020,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.012945135516345643,
+      "post_change": 0.027774039161453167,
+      "return_loss": 0.019824159607210783,
+      "cost": 0.138510013520621,
+      "violations": 0,
+      "max_internal_action_separation": 0.08330177266417194,
+      "off_pair_coefficient_norm": 0.0580132483680893
+    },
+    "review": {
+      "loss": 0.07284928797842044,
+      "post_change": 0.052592984730391916,
+      "return_loss": 0.13633002698050342,
+      "cost": 0.01556410628904941,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999575173455485,
+      "off_pair_coefficient_norm": 0.06867125190938028
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951021,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.046412060083869645,
+      "post_change": 0.06389809272376021,
+      "return_loss": 0.04461963134536503,
+      "cost": 0.07516438182486072,
+      "violations": 0,
+      "max_internal_action_separation": 0.7251881030849601,
+      "off_pair_coefficient_norm": 0.07338729760119389
+    },
+    "review": {
+      "loss": 0.11970906233398987,
+      "post_change": 0.11986965074114346,
+      "return_loss": 0.13234732902951937,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999880944260555,
+      "off_pair_coefficient_norm": 0.07402742553913393
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951021,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.02205351441624497,
+      "post_change": 0.03510348904110878,
+      "return_loss": 0.012285073408803115,
+      "cost": 0.16983301308776264,
+      "violations": 0,
+      "max_internal_action_separation": 0.09278184657468823,
+      "off_pair_coefficient_norm": 0.07341169557164842
+    },
+    "review": {
+      "loss": 0.11970906233398987,
+      "post_change": 0.11986965074114346,
+      "return_loss": 0.13234732902951937,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999880944260555,
+      "off_pair_coefficient_norm": 0.07402742553913393
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951021,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.04837661181289887,
+      "post_change": 0.06654089349953854,
+      "return_loss": 0.053319068459557035,
+      "cost": 0.07516438182486072,
+      "violations": 0,
+      "max_internal_action_separation": 0.9150656823376135,
+      "off_pair_coefficient_norm": 0.06862964754009479
+    },
+    "review": {
+      "loss": 0.11970906233398987,
+      "post_change": 0.11986965074114346,
+      "return_loss": 0.13234732902951937,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999880944260555,
+      "off_pair_coefficient_norm": 0.07402742553913393
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951021,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.023550142342304525,
+      "post_change": 0.0394571126731234,
+      "return_loss": 0.017982329157796084,
+      "cost": 0.17451176449312408,
+      "violations": 0,
+      "max_internal_action_separation": 0.1152771002361692,
+      "off_pair_coefficient_norm": 0.07605443825322744
+    },
+    "review": {
+      "loss": 0.11970906233398987,
+      "post_change": 0.11986965074114346,
+      "return_loss": 0.13234732902951937,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999880944260555,
+      "off_pair_coefficient_norm": 0.07402742553913393
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951022,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.027281159465490885,
+      "post_change": 0.03413836664459626,
+      "return_loss": 0.041353627313219433,
+      "cost": 0.07709038707771125,
+      "violations": 0,
+      "max_internal_action_separation": 0.9959747002374505,
+      "off_pair_coefficient_norm": 0.0688570116041933
+    },
+    "review": {
+      "loss": 0.08953129790130115,
+      "post_change": 0.08051003726927237,
+      "return_loss": 0.12891341759258498,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06905573680349797
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951022,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.0054466600571545605,
+      "post_change": 0.008444706686777537,
+      "return_loss": 0.006138388747289295,
+      "cost": 0.17464257892129276,
+      "violations": 0,
+      "max_internal_action_separation": 0.07860238898829949,
+      "off_pair_coefficient_norm": 0.06873468703330976
+    },
+    "review": {
+      "loss": 0.08953129790130115,
+      "post_change": 0.08051003726927237,
+      "return_loss": 0.12891341759258498,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06905573680349797
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951022,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.02699234679442504,
+      "post_change": 0.03452928510812361,
+      "return_loss": 0.038891776870391276,
+      "cost": 0.07709038707771125,
+      "violations": 0,
+      "max_internal_action_separation": 0.996630027400039,
+      "off_pair_coefficient_norm": 0.061210922928168
+    },
+    "review": {
+      "loss": 0.08953129790130115,
+      "post_change": 0.08051003726927237,
+      "return_loss": 0.12891341759258498,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06905573680349797
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951022,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.005431822512820171,
+      "post_change": 0.009365141938129004,
+      "return_loss": 0.005984910323534606,
+      "cost": 0.17552205308612703,
+      "violations": 0,
+      "max_internal_action_separation": 0.06018609376945486,
+      "off_pair_coefficient_norm": 0.060615800420310784
+    },
+    "review": {
+      "loss": 0.08953129790130115,
+      "post_change": 0.08051003726927237,
+      "return_loss": 0.12891341759258498,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06905573680349797
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951023,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.039888872927259594,
+      "post_change": 0.054974120313568846,
+      "return_loss": 0.03748881846815121,
+      "cost": 0.06496331662989817,
+      "violations": 0,
+      "max_internal_action_separation": 0.7837270669880231,
+      "off_pair_coefficient_norm": 0.0672370837904529
+    },
+    "review": {
+      "loss": 0.09319361022100832,
+      "post_change": 0.08024519485887203,
+      "return_loss": 0.1478110271617847,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06659957215375267
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951023,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.024001532961936054,
+      "post_change": 0.0403588381869261,
+      "return_loss": 0.010463478558261942,
+      "cost": 0.13152038154941684,
+      "violations": 0,
+      "max_internal_action_separation": 0.03203093514359523,
+      "off_pair_coefficient_norm": 0.06639511556124875
+    },
+    "review": {
+      "loss": 0.09319361022100832,
+      "post_change": 0.08024519485887203,
+      "return_loss": 0.1478110271617847,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06659957215375267
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951023,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.035135241613987435,
+      "post_change": 0.0484436047720565,
+      "return_loss": 0.03260456853984341,
+      "cost": 0.06891391231813758,
+      "violations": 0,
+      "max_internal_action_separation": 0.7590799699387554,
+      "off_pair_coefficient_norm": 0.06324262337854406
+    },
+    "review": {
+      "loss": 0.09319361022100832,
+      "post_change": 0.08024519485887203,
+      "return_loss": 0.1478110271617847,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06659957215375267
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951023,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.019599831520129722,
+      "post_change": 0.03398107737377793,
+      "return_loss": 0.007931734017994244,
+      "cost": 0.13554307298542498,
+      "violations": 0,
+      "max_internal_action_separation": 0.0270875739889207,
+      "off_pair_coefficient_norm": 0.06674050369842975
+    },
+    "review": {
+      "loss": 0.09319361022100832,
+      "post_change": 0.08024519485887203,
+      "return_loss": 0.1478110271617847,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999999989532545,
+      "off_pair_coefficient_norm": 0.06659957215375267
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951024,
+    "cell": [
+      "fixed",
+      0.6
+    ],
+    "base": {
+      "loss": 0.040429150237416396,
+      "post_change": 0.05116414584872397,
+      "return_loss": 0.056643694675407745,
+      "cost": 0.05973916618092293,
+      "violations": 0,
+      "max_internal_action_separation": 0.7605009549113553,
+      "off_pair_coefficient_norm": 0.0711757310880484
+    },
+    "review": {
+      "loss": 0.07772054827862494,
+      "post_change": 0.06467389273513431,
+      "return_loss": 0.1305091566014066,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999690244152668,
+      "off_pair_coefficient_norm": 0.07058527810639988
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951024,
+    "cell": [
+      "fixed",
+      2.0
+    ],
+    "base": {
+      "loss": 0.02047766446687899,
+      "post_change": 0.03631631358465325,
+      "return_loss": 0.01549499231057862,
+      "cost": 0.12590808313394006,
+      "violations": 0,
+      "max_internal_action_separation": 0.0651208328401891,
+      "off_pair_coefficient_norm": 0.07075588374090368
+    },
+    "review": {
+      "loss": 0.07444989007032486,
+      "post_change": 0.061872343616553103,
+      "return_loss": 0.1262314841714062,
+      "cost": 0.0218527383017704,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999695542291391,
+      "off_pair_coefficient_norm": 0.07054956200662085
+    },
+    "review_fraction": 0.75
+  },
+  {
+    "seed": 951024,
+    "cell": [
+      "change",
+      0.6
+    ],
+    "base": {
+      "loss": 0.035127990020529826,
+      "post_change": 0.044325732626331694,
+      "return_loss": 0.04506476618548908,
+      "cost": 0.061980852451186896,
+      "violations": 0,
+      "max_internal_action_separation": 0.7154817088647517,
+      "off_pair_coefficient_norm": 0.06877946304620128
+    },
+    "review": {
+      "loss": 0.07772054827862494,
+      "post_change": 0.06467389273513431,
+      "return_loss": 0.1305091566014066,
+      "cost": 0.0,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999690244152668,
+      "off_pair_coefficient_norm": 0.07058527810639988
+    },
+    "review_fraction": 1.0
+  },
+  {
+    "seed": 951024,
+    "cell": [
+      "change",
+      2.0
+    ],
+    "base": {
+      "loss": 0.01633973284068803,
+      "post_change": 0.0272579577698555,
+      "return_loss": 0.010295923436128328,
+      "cost": 0.12233146492196185,
+      "violations": 0,
+      "max_internal_action_separation": 0.0303570695942314,
+      "off_pair_coefficient_norm": 0.0711487971258076
+    },
+    "review": {
+      "loss": 0.07444989007032486,
+      "post_change": 0.061872343616553103,
+      "return_loss": 0.1262314841714062,
+      "cost": 0.0218527383017704,
+      "violations": 0,
+      "max_internal_action_separation": 0.9999695542291391,
+      "off_pair_coefficient_norm": 0.07054956200662085
+    },
+    "review_fraction": 0.75
+  }
+]

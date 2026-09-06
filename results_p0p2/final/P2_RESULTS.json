@@ -1,0 +1,48 @@
+{
+  "status": "bounded_specific_capabilities",
+  "seeds": 24,
+  "source_attribution_accuracy": 0.9652777777777778,
+  "ambiguous_source_abstention_rate": 1.0,
+  "normative_pass_count": 24,
+  "semantic_max_error": 0.0,
+  "learned_physical_signs_all_correct": true,
+  "coordination_loss_difference": {
+    "mean": -0.028032373196403153,
+    "low95": -0.030766463802726816,
+    "high95": -0.025125470738750603,
+    "upper_corrected": -0.025125470738750603
+  },
+  "coordination_violations": 0,
+  "monitor": {
+    "samples": 4608,
+    "brier": 0.044062197336171456,
+    "constant_development_base_brier": 0.22735433093363083,
+    "ece": 0.013206910618926043,
+    "reliability": [
+      {
+        "bin": 0,
+        "count": 2702,
+        "forecast": 0.004302813640529815,
+        "observed": 0.0
+      },
+      {
+        "bin": 6,
+        "count": 892,
+        "forecast": 0.607758620689655,
+        "observed": 0.6580717488789237
+      },
+      {
+        "bin": 9,
+        "count": 1014,
+        "forecast": 0.9957081545064379,
+        "observed": 1.0
+      }
+    ],
+    "calibration_acceptance": true,
+    "proposed_review_fraction": 0.5863715277777778,
+    "scope": "Forecast of this controller task-success event, conditional on fitted development bins; not self-awareness."
+  },
+  "review_fraction": 0.9231770833333334,
+  "review_minus_base_loss": 0.07329585741428912,
+  "scope": "Institutional rules, own/other candidate effects, typed tank vocabulary, limited autonomous resource coordination; not general ethics, human semantic grounding or consciousness."
+}

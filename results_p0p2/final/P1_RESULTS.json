@@ -1,0 +1,167 @@
+{
+  "seeds": 24,
+  "trials": 1056,
+  "transitions": 50688,
+  "calibration_transitions_per_trial": 48,
+  "status": "prospective_final",
+  "summary": {
+    "full": {
+      "loss": 0.0229830356003992,
+      "post_change": 0.04020025252150269,
+      "return_loss": 0.031773429979394745,
+      "cost": 0.124101542774168,
+      "violations": 0.0,
+      "max_internal_action_separation": 0.4537956246114738,
+      "off_pair_coefficient_norm": 0.06896897586849268
+    },
+    "diagonal_plan": {
+      "loss": 0.023435873730310766,
+      "post_change": 0.0408891588330729,
+      "return_loss": 0.032385089154585434,
+      "cost": 0.11846978422976788,
+      "violations": 0.0,
+      "max_internal_action_separation": 0.4529624164653941,
+      "off_pair_coefficient_norm": 0.06915551828760118
+    },
+    "myopic": {
+      "loss": 0.022947890932568493,
+      "post_change": 0.040112722695524065,
+      "return_loss": 0.03173253504183146,
+      "cost": 0.12615376504946374,
+      "violations": 0.0,
+      "max_internal_action_separation": 0.49079241916252886,
+      "off_pair_coefficient_norm": 0.06888229212018655
+    },
+    "no_priorities": {
+      "loss": 0.024476833068741672,
+      "post_change": 0.04178377563034835,
+      "return_loss": 0.03464654611342614,
+      "cost": 0.12437189532654003,
+      "violations": 0.0,
+      "max_internal_action_separation": 0.4425303521994097,
+      "off_pair_coefficient_norm": 0.06918650542096821
+    },
+    "no_memory": {
+      "loss": 0.03454738716015652,
+      "post_change": 0.05038821046613218,
+      "return_loss": 0.07803083621842401,
+      "cost": 0.11598376812186256,
+      "violations": 0.0,
+      "max_internal_action_separation": 0.2012802246186978,
+      "off_pair_coefficient_norm": 0.07034715175292243
+    },
+    "no_broadcast": {
+      "loss": 0.05491323567746862,
+      "post_change": 0.04802676357512958,
+      "return_loss": 0.06848134489395476,
+      "cost": 0.0898789821188614,
+      "violations": 0.0,
+      "max_internal_action_separation": 0.13211494926724862,
+      "off_pair_coefficient_norm": 0.0692203104704448
+    },
+    "generic_equivalent": {
+      "loss": 0.0229830356003992,
+      "post_change": 0.04020025252150269,
+      "return_loss": 0.031773429979394745,
+      "cost": 0.12410154277416802,
+      "violations": 0.0,
+      "max_internal_action_separation": 0.4537956246114738,
+      "off_pair_coefficient_norm": 0.0689689758684927
+    },
+    "no_internal": {
+      "loss": 0.02298236263940685,
+      "post_change": 0.040068686209523856,
+      "return_loss": 0.031797584910287675,
+      "cost": 0.11676531688634219,
+      "violations": 0.0,
+      "max_internal_action_separation": 0.2442504327995533,
+      "off_pair_coefficient_norm": 0.06868844613293061
+    },
+    "no_learning": {
+      "loss": 0.023676600699274967,
+      "post_change": 0.041542307242418995,
+      "return_loss": 0.03263120809742965,
+      "cost": 0.12136048750928204,
+      "violations": 0.0,
+      "max_internal_action_separation": 0.4839133240223992,
+      "off_pair_coefficient_norm": 0.0
+    },
+    "reactive": {
+      "loss": 0.024971631040666742,
+      "post_change": 0.04286170710216963,
+      "return_loss": 0.03528214548363406,
+      "cost": 0.11450347835713941,
+      "violations": 0.0,
+      "max_internal_action_separation": 0.45976003652067243,
+      "off_pair_coefficient_norm": 0.06894869433142481
+    },
+    "zero": {
+      "loss": 0.09944024121468074,
+      "post_change": 0.08921430216754357,
+      "return_loss": 0.14389089442447245,
+      "cost": 0.0,
+      "violations": 0.0,
+      "max_internal_action_separation": 0.9995495769599897,
+      "off_pair_coefficient_norm": 0.07101227182018263
+    }
+  },
+  "contrasts": {
+    "coupled_prediction": {
+      "mean": -0.00045283812991156735,
+      "low95": -0.0008900941682891123,
+      "high95": -0.00010101470709397408,
+      "upper_corrected": -5.913033873174052e-05,
+      "comparator": "diagonal_plan",
+      "metric": "loss",
+      "required_upper_below": -0.0002,
+      "passes": false
+    },
+    "priorities": {
+      "mean": -0.0014937974683424723,
+      "low95": -0.001880324695940568,
+      "high95": -0.001136925950987942,
+      "upper_corrected": -0.0010889148015123136,
+      "comparator": "no_priorities",
+      "metric": "loss",
+      "required_upper_below": -0.0002,
+      "passes": true
+    },
+    "retained_memory": {
+      "mean": -0.04625740623902927,
+      "low95": -0.04898199029976079,
+      "high95": -0.043400188619593466,
+      "upper_corrected": -0.042981422212569474,
+      "comparator": "no_memory",
+      "metric": "return_loss",
+      "required_upper_below": -0.0002,
+      "passes": true
+    },
+    "temporal_planning": {
+      "mean": 8.752982597862523e-05,
+      "low95": 3.8146646086087995e-05,
+      "high95": 0.00013770231973478172,
+      "upper_corrected": 0.00014522457969412528,
+      "comparator": "myopic",
+      "metric": "post_change",
+      "required_upper_below": -0.0002,
+      "passes": false
+    }
+  },
+  "claims": {
+    "coupled_prediction": false,
+    "priorities": true,
+    "retained_memory": true,
+    "temporal_planning": false
+  },
+  "valid": true,
+  "hard_violations": 0,
+  "generic_equivalent_max_action_difference": 1.7486012637846216e-15,
+  "negative_control": {
+    "mean": 0.07645720561428154,
+    "low95": 0.07085259549589641,
+    "high95": 0.08208216129244243,
+    "upper_corrected": 0.08284624862718422
+  },
+  "decision": "engineering_verified_with_partial_empirical_support",
+  "scope": "Conventional predictive-control realization of architectural functions; no unique polar advantage or consciousness inference."
+}
