@@ -1,0 +1,70 @@
+name: Integrated polar diagnosis development and freeze
+on:
+  push:
+    branches: [research/integrated-polar-p0-p2]
+    paths: ['.github/workflows/integrated-development.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  diagnose-develop-freeze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      OMP_NUM_THREADS: 1
+      OPENBLAS_NUM_THREADS: 1
+      MKL_NUM_THREADS: 1
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          pip install numpy==2.3.5 scipy==1.17.0 matplotlib==3.10.8 pandas==2.2.3
+          pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+      - name: Apply reviewed development corrections before any final data
+        run: |
+          python scripts/prepare_gap_development.py
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add integrated_polar/agent.py gap_resolution/tasks.py tests/test_integrated_polar.py
+          if ! git diff --cached --quiet; then
+            git commit -m 'test: correct saturated causal fixtures and honor obligations during review [skip ci]'
+            git push origin HEAD:research/integrated-polar-p0-p2
+          fi
+      - name: Verify all prior and new tests
+        run: |
+          set -o pipefail
+          python scripts/run_gap_tests.py 2>&1 | tee /tmp/p0p2-tests.txt
+      - name: P0 diagnosis then P1 development and probability calibration
+        run: python -m gap_resolution.run develop
+      - name: Preserve previous studies and publish freeze BEFORE final generation
+        run: |
+          git diff --exit-code cea382a7fd1486bc8403ee071c47432405ae57c2 -- polar study2 study3 network_tension.py results_study2 results_study3 results_corrected engine_v1_locked.py engine_v2_corrected.py
+          cp /tmp/p0p2-tests.txt docs/P0P2_TEST_LOG.txt
+          git add -f results_p0p2/development docs/P0P2_FREEZE.json docs/P0P2_TEST_REPORT.json docs/P0P2_TEST_LOG.txt
+          git commit -m 'research: publicly freeze P1-P2 after diagnosis and development before untouched final seeds [skip ci]'
+          git push origin HEAD:research/integrated-polar-p0-p2
+      - uses: actions/upload-artifact@v4
+        with:
+          name: p0p2-development-and-freeze
+          path: |
+            docs/P0P2_FREEZE.json
+            docs/P0P2_TEST_REPORT.json
+            docs/P0P2_TEST_LOG.txt
+            results_p0p2/development/P0_DIAGNOSIS.json
+            results_p0p2/development/P1_DEVELOPMENT.json
+            results_p0p2/development/MONITOR.json
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: p0p2-development-failure
+          path: |
+            docs/P0P2_TEST_REPORT.json
+            /tmp/p0p2-tests.txt
+            results_p0p2/development
+          retention-days: 14
