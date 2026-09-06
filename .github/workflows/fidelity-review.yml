@@ -1,0 +1,60 @@
+name: Architectural fidelity review package
+on:
+  push:
+    branches: [research/architecture-fidelity-review]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify that prior code, data and claims were not modified
+        run: |
+          python - <<'PY'
+          import subprocess
+          base='05caf7abef6fdcb769604539a22cdcd1cfd6b397'
+          changed=subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines()
+          unexpected=[p for p in changed if not p.startswith('review/') and p!='.github/workflows/fidelity-review.yml']
+          if unexpected:raise RuntimeError('Changes outside methodological review: '+repr(unexpected))
+          print('Prior scientific sources and results unchanged.')
+          PY
+      - name: Check the literal decision rule with artificial branch cases only
+        run: |
+          mkdir -p /tmp/fidelity-package
+          python - <<'PY'
+          import json,unittest
+          from pathlib import Path
+          suite=unittest.defaultTestLoader.discover('review',pattern='test_*.py',top_level_dir='.')
+          result=unittest.TextTestRunner(verbosity=2).run(suite)
+          report={'status':'passed' if result.wasSuccessful() else 'failed','tests':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'scope':'Artificial unit tests of decision boundaries only; no controller or empirical experiment was executed.'}
+          Path('/tmp/fidelity-package/RULE_TESTS.json').write_text(json.dumps(report,indent=2)+'\n')
+          if not result.wasSuccessful():raise SystemExit(1)
+          PY
+      - name: Extract canonical rule and package the proposed review
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import inspect,json,hashlib,subprocess,shutil
+          from review.decision_rule import decide
+          root=Path('/tmp/fidelity-package')
+          for p in Path('review').glob('*'):
+              if p.is_file():shutil.copy2(p,root/p.name)
+          (root/'REGLA_LITERAL.md').write_text('# Regla literal extraída del código\n\nNo es un resultado experimental.\n\n```python\n'+inspect.getsource(decide)+'```\n',encoding='utf-8')
+          commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          files={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in root.iterdir() if p.is_file()}
+          (root/'PACKAGE_PROVENANCE.json').write_text(json.dumps({'commit':commit,'status':'review_draft_no_new_empirical_results','files_sha256':files,'old_scientific_sources_preserved':True},indent=2)+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Polar_Dynamics_dictamen_fidelidad_y_protocolo
+          path: /tmp/fidelity-package
+          retention-days: 30
+          if-no-files-found: error
