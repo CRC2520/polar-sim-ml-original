@@ -1,0 +1,11 @@
+{
+  "status": "development_only_not_authorized_for_confirmatory_interpretation",
+  "reason": "The revised methodological review requires architectural fidelity and a single operational contrast before the broader iteration-2 experiment.",
+  "preliminary_protocol": "docs/ITERATION2_PROTOCOL.md",
+  "protocol_disposition": "superseded_as_next_confirmatory_design; retained as a dated development proposal",
+  "new_confirmatory_results_produced_in_this_revision": false,
+  "engineering_tests_are_not_empirical_confirmation": true,
+  "canonical_review_branch": "research/architecture-fidelity-review",
+  "frozen_previous_results": "Studies 1-3, active network panel, P1 and P2 remain unchanged",
+  "next_action": "Review fidelity table, independent interventions, source-admission contracts and preregistration draft; do not infer architectural validation from preliminary modules."
+}
