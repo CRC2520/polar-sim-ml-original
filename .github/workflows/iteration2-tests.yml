@@ -1,0 +1,35 @@
+name: Iteration 2 engineering checks
+on:
+  push:
+    branches: [research/iteration2-causal-regulation]
+    paths: ['iteration2/**','tests/test_iteration2.py','.github/workflows/iteration2-tests.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: 1
+      OPENBLAS_NUM_THREADS: 1
+      MKL_NUM_THREADS: 1
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          pip install numpy==2.3.5 scipy==1.17.0 matplotlib==3.10.8 pandas==2.2.3
+          pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+      - name: Run regression suite without touching prior reports
+        run: |
+          set -o pipefail
+          python -m unittest discover -s tests -v 2>&1 | tee /tmp/iteration2-tests.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: iteration2-tests
+          path: /tmp/iteration2-tests.log
+          retention-days: 14
