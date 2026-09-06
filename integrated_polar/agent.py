@@ -114,7 +114,7 @@ class IntegratedAgent:
         review=bool(confidence is not None and confidence<self.config.meta_threshold)
         if review:
             # This is abstention with an explicit potential performance cost, not guaranteed safe control.
-            u=np.zeros(self.m);prediction=rho*y+drift+self.model.predict(u)
+            u=np.zeros(self.m) if ethics['halt'] else lower.copy();prediction=rho*y+drift+self.model.predict(u)
             ethics['reasons'].append({'rule':'META-REVIEW','reason':'forecast success below declared threshold'})
         self.p=np.clip((1-self.config.state_rate)*self.p+self.config.state_rate*self.intention,0,1)
         token={'actor':self.config.actor,'sequence':self.step,'action_hash':digest(u.tolist())}

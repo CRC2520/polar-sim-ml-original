@@ -84,8 +84,8 @@ def compact_trace(trace):
     return jsonable(tr)
 
 
-def run_trial(seed,cell,mode,monitor=None,*,retain=True):
-    task=make_task(seed,cell);agent=IntegratedAgent(AgentConfig(tanks=N,horizon=H,mode=mode),monitor)
+def run_trial(seed,cell,mode,monitor=None,*,retain=True,review=False):
+    task=make_task(seed,cell);agent=IntegratedAgent(AgentConfig(tanks=N,horizon=H,mode=mode,meta_threshold=.55 if review else 0.),monitor)
     calibration=calibrate_model(agent,task);initial=agent.snapshot();state=np.full(N,.35);frames=[]
     for t in range(STEPS):
         obs,target,weight=observation(task,t,state)
@@ -98,7 +98,7 @@ def run_trial(seed,cell,mode,monitor=None,*,retain=True):
         frame={'t':t,'observation':jsonable(obs),'evaluation_target':target.tolist(),'evaluation_priority':weight.tolist(),
                'action':u.tolist(),'effect':y.tolist(),'valid_transition':valid.tolist(),'loss':loss,'cost':cost,'violation':violation,
                'pre_feedback_score':agent.trace['risk_score_before_feedback'],
-               'probability':agent.trace['success_probability_before_feedback'],'success':bool(loss<=.003)}
+               'probability':agent.trace['success_probability_before_feedback'],'success':bool(loss<=.003),'requested_review':agent.trace['requested_review']}
         if retain:frame['controller']=compact_trace(agent.trace)
         frames.append(frame);state=y
     losses=np.array([f['loss'] for f in frames]);switch=[i for start in (12,24,36) for i in range(start,start+4)]
@@ -106,5 +106,5 @@ def run_trial(seed,cell,mode,monitor=None,*,retain=True):
              'cost':float(np.mean([f['cost'] for f in frames])),'violations':sum(f['violation'] for f in frames),
              'max_internal_action_separation':float(np.max(np.abs(agent.p-agent.previous_action))),
              'off_pair_coefficient_norm':float(np.linalg.norm(np.where(__import__('integrated_polar.numerics',fromlist=['own_pair_mask']).own_pair_mask(N),0,agent.model.B)))}
-    return {'seed':seed,'cell':list(cell),'mode':mode,'calibration':calibration if retain else None,
+    return {'seed':seed,'cell':list(cell),'mode':mode,'review_policy':bool(review),'calibration':calibration if retain else None,
             'initial':initial if retain else None,'metrics':metrics,'frames':frames,'final':jsonable(agent.snapshot()) if retain else None}

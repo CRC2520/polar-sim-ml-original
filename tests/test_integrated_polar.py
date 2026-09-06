@@ -31,7 +31,7 @@ class IntegratedGapTests(unittest.TestCase):
         self.assertNotEqual(a.p[0],u[0])
     def test_G01_internal_state_is_causal_not_only_telemetry(self):
         a,b=self.agent(),self.agent();a.p[:]=[.8,0.]
-        ua,ub=a.act(obs(target=.5)),b.act(obs(target=.5))
+        ua,ub=a.act(obs(target=.36)),b.act(obs(target=.36))
         self.assertGreater(float(np.max(abs(ua-ub))),1e-5)
     def test_G02_opposite_deficits_are_not_merged(self):
         a,b=self.agent(),self.agent();a.act(obs(target=.6));b.act(obs(target=.1))
@@ -61,7 +61,7 @@ class IntegratedGapTests(unittest.TestCase):
         np.testing.assert_allclose(project(np.array([.8,.8]),np.ones(2),.6,weights=[9.,1.]),[.6,0],atol=1e-12)
     def test_G07_selective_content_cut_preserves_other_consumers(self):
         a,b=self.agent(),self.agent();b.workspace.cut.add('planner')
-        ua,ub=a.act(obs()),b.act(obs())
+        ua,ub=a.act(obs(target=.2)),b.act(obs(target=.2))
         self.assertGreater(np.max(abs(ua-ub)),.01)
         self.assertIsNotNone(b.trace['reporter_content']);self.assertIn('memory',b.trace['C']['delivered']);self.assertNotIn('planner',b.trace['C']['delivered'])
     def test_G07_content_changes_not_budget_only(self):
@@ -69,7 +69,7 @@ class IntegratedGapTests(unittest.TestCase):
         ua=a.act(obs(2,target=[.8,.2]));ub=b.act(obs(2,target=[.2,.8]))
         self.assertGreater(np.max(abs(ua-ub)),.1);self.assertEqual(a.trace['budget'],b.trace['budget'])
     def test_G08_cue_only_recall_erasure_and_gate_are_causal(self):
-        a=self.agent();consume(a,obs());b,c=deepcopy(a),deepcopy(a)
+        a=self.agent();consume(a,obs(target=.2));b,c=deepcopy(a),deepcopy(a)
         for m in (a,b,c):m.p.fill(0);m.goals.reset(None)
         b.erase_memory('A')
         ua=a.act(obs(event=False));ub=b.act(obs(event=False));uc=c.act(obs(event=False,memory_gate=False))
