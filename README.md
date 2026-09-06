@@ -168,3 +168,8 @@ not validated psychological measures or evidence of subjective experience.
 
 The original [LICENSE](LICENSE), CC BY-NC 4.0, remains in effect. The companion
 manuscript is an unpublished research draft and has not been peer reviewed.
+
+
+## Inter-polar network extension 0.1
+
+The original layered architecture remains the research object. See [the explicit network tension specification](docs/NETWORK_TENSION_SPEC.md) for the new directed W/K pathways, engineering tests, legacy phase audit and remaining empirical requirements. This extension is not a new confirmatory study and does not change the frozen Study 2 conclusion.
