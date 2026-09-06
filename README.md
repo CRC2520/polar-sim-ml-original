@@ -1,7 +1,9 @@
-# Polar Dynamics — corrected reference and contextual prototype
+# Polar Dynamics — contextual control research
 
-This research revision implements the ten priority corrections to the original
-Polar Dynamics proposal. It studies contextual control with independent poles,
+This repository supports one **unpublished research draft** in
+[POLAR_MODEL_CRC](https://github.com/CRC2520/POLAR_MODEL_CRC).
+Earlier manuscripts are development drafts retained through Git history, not
+separate publications. The research studies contextual control with independent poles,
 observable internal memory, resource coordination, and learned action effects.
 Dynamic balance means responding to changing demands while retaining access to
 both poles. It is not a requirement to make all units agree.
@@ -20,13 +22,48 @@ Start with [SPECIFICATION.md](SPECIFICATION.md), the normative version index.
 | Historical 2.0 | `engine_v1_locked.py`, `legacy/v2_0/` and original `results_*` | Preserved reference; known defects remain documented |
 | Corrected 2.0.1 | `engine_v2_corrected.py` and root experiment scripts | Repairs historical execution, state timing, measurements and traceability |
 | Contextual 2.1 | `polar/` | Explicit independent poles and functional mechanisms; a different state space |
+| Coupling study 2.2 | `study2/` | Learned action-effect couplings, dynamic state estimation and finite-horizon regulation |
 
 The original code is pinned at
 [3c0be12](https://github.com/CRC2520/polar-sim-ml-original/tree/3c0be12a874e7ad46f4da0e77af2329c19cc61e8).
 The original README is preserved in `legacy/v2_0/README.md`; original engine and
 result directories remain untouched. `PROVENANCE.json` records source identities.
-The companion [manuscript revision](https://github.com/CRC2520/POLAR_MODEL_CRC/tree/research/polar-v2.1-priority-corrections)
-contains the revised article and separately preserved original material.
+The companion repository contains one current article source and its compiled
+`main.pdf`. Code versions and recorded datasets are research instruments within
+that single evolving draft.
+
+## Current research questions
+
+The current causal hypothesis concerns **using learned off-diagonal action effects
+in planning**, not the names of poles. The primary planning lesion retains the
+same estimator and disables those effects only in the decision rule. Diagonal,
+mispaired, dense and coordinate-equivalent controls qualify the interpretation.
+Dynamic balance remains task-dependent and does not require consensus or a
+permanent midpoint.
+
+- [Prospective coupling protocol](docs/STUDY2_PROTOCOL.md).
+- [Coupling equations and implementation map](docs/STUDY2_CONTROLLER_SPEC.md).
+- [Diagnostic analysis of the first study](docs/STUDY1_DIAGNOSIS.md).
+- [Separate consciousness research protocol](docs/CONSCIOUSNESS_RESEARCH_PROTOCOL.md).
+
+The first study is now exploratory development evidence. Its original recorded
+outcomes are unchanged. Fresh final seeds in the coupling study are opened only
+after source/protocol freezing and a prospective GitHub registration commit.
+Registration is a public versioned record, not an independent endorsement or
+an OSF registration. Tasks are designed inside this project; external replication
+is a future milestone.
+
+The 1,920 final trials show a practical benefit from using learned interactions
+in planning versus the matched planning lesion (loss difference -0.0026998,
+95% CI [-0.0028286, -0.0025766]). The proposed grouping is nevertheless worse
+than shifted pairs with the same coefficient count and a larger dense estimator.
+The research does **not** establish an exclusive polar advantage.
+
+The frozen automatic classifier omitted the word **only** from one protocol
+clause. Its raw `pivot` label is retained for audit; the literal protocol yields
+**suspend_exclusive_polar_advantage_claim**. The separate
+[post-run adjudication](results_study2/adjudication.md) documents this discrepancy
+without changing statistics or frozen sources. Read it alongside the raw report.
 
 ## Reproduce
 
@@ -37,13 +74,40 @@ python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu -r 
 python -m unittest discover -s tests -v
 ```
 
+Study 2 uses NumPy and Matplotlib and records all raw observations, actions,
+feedback and mechanistic traces in individually hashed gzip records, transported
+inside TAR parts smaller than 6 MB. The regenerator verifies every archive and
+record without extracting it. Large derived `trial_summaries.json` files and
+redundant loose records are omitted from Git; regenerate them from the archives.
+
+Rebuild the new study's reports and repeat the independent pilot replay:
+
+```bash
+OPENBLAS_NUM_THREADS=1 python scripts/regenerate_study2.py results_study2/coupling/pilot/manifest.json
+OPENBLAS_NUM_THREADS=1 python scripts/regenerate_study2.py results_study2/coupling/final/manifest.json
+OPENBLAS_NUM_THREADS=1 python scripts/audit_study2_pilot_replay.py
+python scripts/run_functional_probes.py --regenerate
+python scripts/adjudicate_study2.py
+```
+
+Re-execute the already registered final study into a **new** directory:
+
+```bash
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 python scripts/run_study2.py --split final --out results_study2/replay_final --freeze docs/STUDY2_FREEZE.json --registration-sha fde8d0ac9b56b035a0a53c40c8cd5b79b2bc6b32
+```
+
+This reproduces existing evidence; its seeds are no longer unseen. It is not a
+new confirmatory study. Runtime measurements can differ across machines and
+loads even when numerical actions agree. Source/protocol mismatches fail
+explicitly rather than silently reinterpreting archived data.
+
 Run corrected reference experiments (8 conditions, 5 recorded seeds):
 
 ```bash
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python scripts/run_p0.py --out results_corrected/p0 --seeds 2025 2026 2027 2028 2029
 ```
 
-Run the frozen contextual benchmark (13 controllers, 2 task suites, 5 development
+Reproduce the first contextual benchmark (13 controllers, 2 task suites, 5 development
 and 30 held-out seeds, 96 transitions per run):
 
 ```bash
@@ -54,7 +118,8 @@ Use a different output directory to retain a prior run. `--smoke` creates a
 separately labelled diagnostic subset; it must not replace the full benchmark.
 The protocol is frozen internally before execution, not externally preregistered.
 Development and held-out data come from variants of the same two task families.
-No parameters are fitted to held-out scores.
+No parameters were fitted to those scores in the original execution. Subsequent
+diagnostic interventions reuse those data explicitly as exploratory evidence.
 
 ## Regenerate reports without running agents
 
@@ -86,6 +151,10 @@ Missing or censored recovery stays unavailable; it is never reported as zero.
 - Contextual results: `results_corrected/contextual/generated/results.md`,
   full tables, paired bootstrap intervals and figures in the same directory.
 - [Revision report](docs/REVISION_REPORT.md) links the actual verification evidence.
+- [Six-step research progress and decision](docs/RESEARCH_PROGRESS.md).
+- [Internal implementation review and public registration](docs/INTERNAL_REVIEW_STUDY2.md).
+- Study 2: [final results](results_study2/coupling/final/generated/results.md)
+  and [frozen protocol](docs/STUDY2_FREEZE.json).
 
 Signed-plus-intensity coordinates contain exactly the same information as two
 independent poles. Their comparison tests implementation equivalence. A matched
@@ -97,6 +166,5 @@ not validated psychological measures or evidence of subjective experience.
 
 ## License
 
-The original [LICENSE](LICENSE), CC BY-NC 4.0, remains in effect. Historical
-publication claims in the preserved README are not evidence that this revision
-has been peer reviewed.
+The original [LICENSE](LICENSE), CC BY-NC 4.0, remains in effect. The companion
+manuscript is an unpublished research draft and has not been peer reviewed.

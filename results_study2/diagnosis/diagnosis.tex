@@ -1,0 +1,21 @@
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{lrrr}
+\toprule
+Exploratory intervention & Recall regret & Difference & Passes \\
+\midrule
+Original dual pole & 0.012783 & +0.000000 & 28/30 \\
+Matched recurrent & 0.011477 & -0.001305 & 30/30 \\
+No capability model & 0.010688 & -0.002095 & 30/30 \\
+Reset capability at recall & 0.010689 & -0.002094 & 30/30 \\
+Reset gain only at recall & 0.010689 & -0.002094 & 30/30 \\
+Freeze capability during recall & 0.020983 & +0.008200 & 0/30 \\
+Reset and freeze capability & 0.010689 & -0.002094 & 30/30 \\
+Unit recall confidence & 0.003046 & -0.009737 & 30/30 \\
+Remove observation noise & 0.010689 & -0.002094 & 30/30 \\
+Gate weak-action updates & 0.010698 & -0.002085 & 30/30 \\
+\bottomrule
+\end{tabular}
+\caption{Exploratory paired diagnosis on the 30 previously observed Study 1 memory seeds. Difference is intervention minus original recall regret; lower is better. These interventions are diagnostic instruments, not prospectively validated improvements.}
+\label{tab:study1-diagnosis}
+\end{table}

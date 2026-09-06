@@ -1,0 +1,119 @@
+{
+  "schema": "polar-study2-manifest-1",
+  "split": "pilot",
+  "seeds": [
+    52001,
+    52002,
+    52003,
+    52004,
+    52005,
+    52006
+  ],
+  "protocol": {
+    "schema": "polar-study2-protocol-1.0",
+    "status": "design_before_pilot",
+    "scope": "Two new internally designed dynamic families: affine tracking and finite-capacity inventory with nonlinear stockouts/overflow; no external replication, consciousness test or universal polar claim.",
+    "hypothesis": "Using learned within-pair effects in a context-dependent action planner reduces dynamic tracking loss compared with disabling those effects in the same estimator, subject to failure, cost and retention guardrails.",
+    "families": [
+      "dynamic_tracking",
+      "cooperative_inventory"
+    ],
+    "regimes": [
+      "paired",
+      "diagonal",
+      "misaligned"
+    ],
+    "controllers": [
+      "paired",
+      "paired_lesion",
+      "diagonal",
+      "shuffled",
+      "dense",
+      "signed_intensity",
+      "zero",
+      "hold"
+    ],
+    "channels": 8,
+    "steps": 128,
+    "phase_length": 32,
+    "pilot_seeds": [
+      52001,
+      52002,
+      52003,
+      52004,
+      52005,
+      52006
+    ],
+    "mechanical_test_seeds": [
+      51999
+    ],
+    "final_seed_start": 62001,
+    "final_n_min": 40,
+    "final_n_max": 60,
+    "sample_size_rule": "ceil((1.96 * pilot_sd_of_paired_seed_mean_difference / 0.0015)^2), bounded to [40,60]; no model tuning and no optional stopping. If unbounded n exceeds 60, precision limitation is declared.",
+    "precision_halfwidth_target": 0.0015,
+    "primary_metric": "mean_tracking_loss",
+    "primary_contrast": [
+      "paired",
+      "paired_lesion"
+    ],
+    "primary_unit": "seed, averaging all six family-by-regime cells equally",
+    "loss_definition": "sum_i weights_i*(state_next_i-target_i)^2/sum_i weights_i; no reference-action oracle subtraction",
+    "minimum_practical_improvement": 0.002,
+    "dense_transfer_noninferiority_margin": 0.001,
+    "practical_threshold_rationale": "An a priori engineering threshold in squared state units, with channel scales around unit capacity; sqrt(0.002)=0.0447. It is not an empirical, biological or clinical threshold and will not be changed using pilot mean effects.",
+    "bootstrap_draws": 5000,
+    "bootstrap_seed": 2026090602,
+    "interval": "paired nonparametric seed bootstrap percentile 95%; secondary intervals descriptive and unadjusted",
+    "success_rule": {
+      "mean_tracking_loss_max": 0.06,
+      "hard_violations_max": 0,
+      "recovery_fraction_min": 0.6666666666666666
+    },
+    "recovery_rule": {
+      "tracking_loss_max": 0.025,
+      "sustained_steps": 3,
+      "censor_at": "next phase or trial end",
+      "missing_value": null
+    },
+    "return_rule": "Mean loss on final eight steps of return context minus final eight steps of initial context; positive indicates poorer reacquisition, not a proof of catastrophic forgetting.",
+    "guardrails": {
+      "failure_rate_noninferiority_margin": 0.05,
+      "action_cost_ratio_max": 1.15,
+      "return_loss_difference_max": 0.005,
+      "runtime_ratio_max": 2.5,
+      "hard_violations_max": 0,
+      "inventory_stockout_difference_max": 0.002,
+      "inventory_overflow_difference_max": 0.002
+    },
+    "guardrail_operands": "All compare paired with paired_lesion over equal-weight six cells per seed except inventory-only consequences (three regimes equally). Upper95CI failure-rate difference <=.05; upper95CI ratio of mean action costs <=1.15; upper95CI return_loss_change difference <=.005; observed summed act+learn walltime ratio <=2.5 (descriptive implementation guard, no FLOP claim); absolute paired hard violations=0. Inventory mean per-channel per-step stockout and overflow difference upper95CI each <=.002, an a priori engineering tolerance in flow units, approximately 17% of mean exogenous withdrawal. Passing tracking thresholds alone is not inventory consequence success.",
+    "inventory_metrics": "Mean stockout/net-withdrawal deficit and overflow, and fraction of censored state transitions, are reported separately; tracking family has null values, never zero. Known state bounds are supplied to all controllers; clipped transition rows are excluded from all RLS learners.",
+    "decision_rule": "Continue broader coupling study only if primary upper CI < -0.002, all guardrails pass, paired-minus-shuffled upper CI < 0, and paired-minus-dense upper CI <= 0.001 in combined diagonal+misaligned regimes. If only aligned paired regimes meet practical benefit, describe a conditional structural prior and pivot; otherwise suspend the exclusive polar-advantage claim. Any shortfall in pilot precision qualification is explicitly marked, never hidden.",
+    "negative_control_rule": "zero and hold must each fail at least one final cell; if either passes every cell, evaluator is insufficient and no positive decision is allowed",
+    "signed_equivalence_tolerance": 1e-09,
+    "tuning": "No tuning scheduled; pilot serves executable validation, runtime estimate and predeclared sample size. Any design correction after pilot is disclosed before freeze. Final data are never used for design changes.",
+    "freeze_rule": "Save protocol, source SHA256, pilot-derived sample size and UTC timestamp before first final environment generation. Final command requires exact source hashes and explicit reviewed freeze marker.",
+    "trace_rule": "Every environment and controller transition is stored at float64 JSON precision in deterministic gzip, transported in deterministic tar chunks smaller than 6MB with a logical member index. The manifest enumerates exact seeds/cells/controllers, member/archive bytes and SHA256. Summaries, inference, decision, figures and TeX derive only from these files."
+  },
+  "source_sha256": {
+    "docs/STUDY2_CONTROLLER_SPEC.md": "e7609013b1800d1b3836efd3cb9ef7781b0851877923714c498c3bfc8cc99f27",
+    "docs/STUDY2_PROTOCOL.md": "cd9fec5b2ea2e82e8d1d2126c2b20aad6dad2c67027da2cac08b047b42b878b2",
+    "docs/study2_protocol.json": "91826e084744b1d979743e026e1adefef9200522c4616d3a347d57253121ad1c",
+    "scripts/regenerate_study2.py": "76e4147360a4b0ed0e43a5d1c736292e079749fd6d13d2b2b972e911d40e265d",
+    "scripts/run_study2.py": "9f69b4f0ca91865c514a4d3006fed690f6750ca1e760aaa5d37ab7c29afa1206",
+    "study2/__init__.py": "16f986f03fb75f15247bfa83313730654b3fb71a11315bdd061f7682a84460d7",
+    "study2/controllers.py": "48ae5878a9d6acb1c47771cd2c99ab39ee7eaf82f14efd51ae2a171fd51c3823",
+    "study2/environments.py": "9b6b42d018c924b5d0df38223ede1c0c6baef5694326189a40c4f5608d56e727",
+    "study2/evaluation.py": "d98eead0873eeddf3df7e904bd7d12539d439a6324ef9fe619f16fcda6b2c7db",
+    "tests/test_study2_controller.py": "02385f23e4f081a4946aea4aac67971b54ec128d60202f5592eedaee83da3e77",
+    "tests/test_study2_evaluation.py": "a379dbbe9a54ba1edfaa45008ae8081af4a4ab5d786ece19e37be03d057bf55a"
+  },
+  "registration_sha": null,
+  "freeze": null,
+  "started_utc": "2026-09-06T02:17:41.419652+00:00",
+  "python": "3.12.13",
+  "numpy": "2.3.5",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "thread_policy": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 recommended and used for recorded runs"
+}

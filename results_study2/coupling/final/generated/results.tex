@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{lrrrr}
+\toprule
+Controller & Tracking loss & Passes & Action cost & Recovery \\
+\midrule
+paired & 0.007767 & 240/240 & 2.908 & 1.000 \\
+paired\_lesion & 0.010467 & 240/240 & 3.010 & 0.999 \\
+diagonal & 0.008768 & 240/240 & 2.948 & 1.000 \\
+shuffled & 0.007571 & 240/240 & 2.919 & 1.000 \\
+dense & 0.005776 & 240/240 & 2.848 & 1.000 \\
+signed\_intensity & 0.007767 & 240/240 & 2.908 & 1.000 \\
+zero & 0.138770 & 0/240 & 0.000 & 0.013 \\
+hold & 0.066705 & 0/240 & 2.332 & 0.128 \\
+\bottomrule
+\end{tabular}
+\caption{Study 2 final evaluation. Tracking passes use the frozen loss, recovery and constraint rule; inventory consequences are evaluated separately.}
+\label{tab:study2}
+\end{table}

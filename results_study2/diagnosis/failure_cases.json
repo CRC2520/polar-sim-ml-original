@@ -1,0 +1,62 @@
+[
+  {
+    "split": "heldout",
+    "task": "switching_memory",
+    "seed": 1012,
+    "controller": "dual_pole",
+    "tracking_rmse": 0.061689338539961135,
+    "mean_regret": 0.003802418830298074,
+    "mean_cost": 15.05855832856117,
+    "hard_violations": 0,
+    "mean_recovery_steps": 1.0,
+    "recovery_censored": 0,
+    "recovery_events": 5,
+    "recovery_fraction": 1.0,
+    "recall_regret": 0.015247023893153959,
+    "reacquisition_regret": 0.00011822673095988164,
+    "effect_discrimination": 0.5274391944413755,
+    "effect_target_correlation": 0.9783713214256733,
+    "mean_node_homogeneity": 0.9633200291772711,
+    "mean_temporal_action_cosine": 0.989354782413096,
+    "external_pass": false,
+    "failed_criteria": [
+      {
+        "metric": "recall_regret",
+        "value": 0.015247023893153959,
+        "threshold": 0.015,
+        "direction": "optional_max",
+        "excess": 0.0002470238931539595
+      }
+    ]
+  },
+  {
+    "split": "heldout",
+    "task": "switching_memory",
+    "seed": 1020,
+    "controller": "dual_pole",
+    "tracking_rmse": 0.05943824741361326,
+    "mean_regret": 0.0035299511555185446,
+    "mean_cost": 13.214302318454907,
+    "hard_violations": 0,
+    "mean_recovery_steps": 1.0,
+    "recovery_censored": 0,
+    "recovery_events": 5,
+    "recovery_fraction": 1.0,
+    "recall_regret": 0.015101448755286203,
+    "reacquisition_regret": 0.00010538812891606065,
+    "effect_discrimination": 0.5296527524727553,
+    "effect_target_correlation": 0.97998398062837,
+    "mean_node_homogeneity": 0.9631489764887263,
+    "mean_temporal_action_cosine": 0.9857938003247758,
+    "external_pass": false,
+    "failed_criteria": [
+      {
+        "metric": "recall_regret",
+        "value": 0.015101448755286203,
+        "threshold": 0.015,
+        "direction": "optional_max",
+        "excess": 0.00010144875528620388
+      }
+    ]
+  }
+]
