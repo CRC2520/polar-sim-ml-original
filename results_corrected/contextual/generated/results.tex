@@ -1,0 +1,48 @@
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{lrrrr}
+\hline
+Controller & Regret & RMSE & Recall regret & Pass rate \\
+\hline
+dual\_pole & 0.00401 & 0.10720 & 0.01278 & 0.96667 \\
+signed\_intensity & 0.00401 & 0.10720 & 0.01278 & 0.96667 \\
+recurrent & 0.00458 & 0.10880 & 0.01148 & 1.00000 \\
+no\_memory & 0.01707 & 0.16387 & 0.16241 & 0.50000 \\
+no\_workspace & 0.02210 & 0.15220 & 0.01278 & 0.46667 \\
+no\_self\_model & 0.00798 & 0.11618 & 0.01069 & 0.98333 \\
+memory\_erase & 0.01707 & 0.16387 & 0.16241 & 0.50000 \\
+memory\_shuffle & 0.01206 & 0.14413 & 0.10591 & 0.63333 \\
+workspace\_shuffle & 0.03150 & 0.17031 & 0.01281 & 0.46667 \\
+self\_model\_reset & 0.00430 & 0.10811 & 0.01278 & 0.96667 \\
+zero & 0.17410 & 0.42821 & 0.16672 & 0.00000 \\
+uniform & 0.08317 & 0.30437 & 0.08121 & 0.00000 \\
+disconnected & 0.10684 & 0.34124 & 0.10750 & 0.00000 \\
+\hline
+\end{tabular}
+\caption{Heldout synthetic tasks; each controller uses the same 30 paired seeds and 2 task suites. Pass rate is the fraction of seed--task runs satisfying every external criterion. NA denotes unavailable measurement.}
+\end{table}
+The prespecified paired difference in mean regret (dual-pole minus recurrent) is -0.00057, with a 95\% seed-bootstrap interval [-0.00070, -0.00043] and paired $d_z=-1.46261$. 
+The signed-intensity comparator is a coordinate-isomorphism control. The recurrent comparator changes the update rule while retaining auxiliary mechanisms; this does not identify an advantage caused uniquely by polarity. Other contrasts are exploratory, without multiplicity-adjusted significance claims. No result is a test of phenomenal consciousness.
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{lrrr}
+\hline
+Comparator & Difference & 95\% interval & Paired $d_z$ \\
+\hline
+signed\_intensity & -0.00000 & [-0.00000, 0.00000] & NA \\
+recurrent & -0.00057 & [-0.00070, -0.00043] & -1.46261 \\
+no\_memory & -0.01306 & [-0.01349, -0.01262] & -10.45104 \\
+no\_workspace & -0.01808 & [-0.01821, -0.01795] & -48.31897 \\
+no\_self\_model & -0.00396 & [-0.00404, -0.00388] & -16.51080 \\
+memory\_erase & -0.01306 & [-0.01349, -0.01262] & -10.45104 \\
+memory\_shuffle & -0.00804 & [-0.00976, -0.00616] & -1.56039 \\
+workspace\_shuffle & -0.02748 & [-0.02861, -0.02639] & -8.61105 \\
+self\_model\_reset & -0.00029 & [-0.00030, -0.00027] & -6.44910 \\
+zero & -0.17008 & [-0.17347, -0.16678] & -17.86644 \\
+uniform & -0.07916 & [-0.07936, -0.07896] & -135.96973 \\
+disconnected & -0.10282 & [-0.10536, -0.10035] & -14.59891 \\
+\hline
+\end{tabular}
+\caption{Paired mean-regret differences, dual-pole minus comparator. Negative favors dual-pole. Recurrent is the sole prespecified primary contrast; others are exploratory unadjusted intervals. NA $d_z$ indicates zero-variance paired differences.}
+\end{table}
+For the full controller, 0 of 300 phase changes are right censored for recovery; the fraction recovered is 1.00000. Conditional recovery duration must not be interpreted without this censoring rate.

@@ -1,0 +1,22 @@
+{
+  "Config": "P2 corrected baseline",
+  "HGI_final": 0.999874472618103,
+  "HGI_mean": 0.9991021752357483,
+  "INC_final": 0.9844580292701721,
+  "INC_mean": 0.9808564603328704,
+  "Continuous_modulation_pct": 100.0,
+  "Override_pct": 0.0,
+  "Override_effect_pct": 0.0,
+  "HGI_guard_pct": 0.0,
+  "INC_guard_pct": 10.0,
+  "Clipping_pct": 0.0,
+  "recovery": {
+    "steps": null,
+    "status": "not_applicable",
+    "tolerance_rms": 0.05,
+    "sustained_steps": 3,
+    "reference": "matched_unstimulated_control"
+  },
+  "Recovery": null,
+  "Recovery_status": "not_applicable"
+}

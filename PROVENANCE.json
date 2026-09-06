@@ -1,0 +1,10 @@
+{
+  "code_repository": "CRC2520/polar-sim-ml-original",
+  "original_code_commit": "3c0be12a874e7ad46f4da0e77af2329c19cc61e8",
+  "paper_repository": "CRC2520/POLAR_MODEL_CRC",
+  "original_paper_commit": "9e04b04594414dbbe58359aae732320bdac61b1b",
+  "original_engine_sha256": "35c7e3716f5d13cdf7b37e6c1a58fd4ae1708aa6aa0abd53aba259c31741cad6",
+  "corrected_engine_version": "2.0.1",
+  "contextual_model_version": "2.1",
+  "original_artifacts_policy": "Preserved in original result directories and pinned Git history; revised runs use separate paths."
+}

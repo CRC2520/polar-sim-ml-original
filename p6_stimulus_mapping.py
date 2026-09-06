@@ -1,66 +1,63 @@
-# p6_stimulus_mapping.py — P6: Stimulus Mapping (NLP) with CSV/fig/table
-import os, json, torch
-from engine_v1_locked import TensionEngine, EngineConfig, DEVICE
-from report_utils import save_timeseries, save_summary, plot_hgi_inc, latex_summary_table
+"""P6 signed keyword routing (not a validated natural-language understanding model)."""
+import re
+import unicodedata
+from dataclasses import asdict
 
-NODES = [
-    'Poder vs Vulnerabilidad', 'Placer vs Dolor', 'Integración vs Fragmentación',
-    'Control vs Rendición', 'Deseo vs Límite', 'Libertad vs Orden',
-    'Preservación vs Transformación', 'Reconocimiento vs Autenticidad'
-]
+import torch
+from engine_v2_corrected import TensionEngine, EngineConfig, DEVICE
+from report_utils import export_run
+
+POLARITY_POLES = (
+    ("Poder", "Vulnerabilidad"), ("Placer", "Dolor"), ("Integración", "Fragmentación"),
+    ("Control", "Rendición"), ("Deseo", "Límite"), ("Libertad", "Orden"),
+    ("Preservación", "Transformación"), ("Reconocimiento", "Autenticidad"),
+)
+NODES = [" vs ".join(pair) for pair in POLARITY_POLES]
+
+def _normalize(text):
+    return "".join(c for c in unicodedata.normalize("NFKD", text.casefold())
+                   if not unicodedata.combining(c))
+
+def polarity_evidence(text):
+    """Separate observed positive/negative keyword evidence for all eight types."""
+    normalized = _normalize(text)
+    evidence = []
+    for positive, negative in POLARITY_POLES:
+        evidence.append(tuple(bool(re.search(r"\b" + re.escape(_normalize(pole)) + r"\b", normalized))
+                              for pole in (positive, negative)))
+    if not any(any(pair) for pair in evidence):
+        raise ValueError("No recognized polarity pole; provide an explicit signed stimulus")
+    return evidence
 
 def stim_from_text(text, N, scale=0.5):
-    text_l = text.lower()
-    # naive keyword map (replicate current behavior)
-    idx = []
-    for i, name in enumerate(NODES):
-        key = name.lower()
-        if any(k.strip() in text_l for k in key.split(" vs ")):
-            idx.append(i)
-    if not idx:
-        h = abs(hash(text_l)) % len(NODES)
-        idx = [h]
-    stim = torch.zeros(N, device=DEVICE)
-    for i in idx:
-        stim[i::len(NODES)] = scale
-    return stim
+    if not isinstance(N, int) or N < 1 or not 0 < scale <= 1:
+        raise ValueError("N must be positive and 0 < scale <= 1")
+    evidence = polarity_evidence(text)
+    stimulus = torch.zeros(N, device=DEVICE)
+    for i, (positive, negative) in enumerate(evidence):
+        # Two observed poles have zero net signed input, not evidence of inactivity.
+        stimulus[i::len(POLARITY_POLES)] = scale * (int(positive) - int(negative))
+    return stimulus
 
-def main(prompt="Libertad vs Orden", out_dir="results_p6_stimulus",
-         steps=20, N=160, K=10, seed=2025, scale=0.5, stim_step=8):
-    os.makedirs(out_dir, exist_ok=True)
-    cfg = EngineConfig(N=N, K=K, steps=steps, seed=seed, stim_step=stim_step, stim_scale=scale, learn_M=False)
-    eng = TensionEngine(cfg, nodes=NODES)
-
+def main(prompt="Deseo", out_dir="results_corrected/p6_stimulus",
+         steps=20, N=160, K=10, seed=2025, scale=0.5, stim_step=8, plots=True):
+    if not 0 <= stim_step < steps:
+        raise ValueError("stim_step must address an executed zero-indexed step")
+    cfg = EngineConfig(N=N, K=K, steps=steps, seed=seed, stim_step=stim_step,
+                       stim_scale=scale, learn_M=False)
+    stimulus = stim_from_text(prompt, N, scale)
+    eng = TensionEngine(cfg, nodes=[NODES[i % len(NODES)] for i in range(N)])
     for t in range(steps):
-        stim = None
-        if t == stim_step:
-            stim = stim_from_text(prompt, eng.N, scale=scale)
-        A_next, flags = eng.step(stimulus=stim)
-        print(f"Step {t+1}: HGI={eng.ts['HGI'][-1]:.4f}, INC={eng.ts['INC'][-1]:.4f}, "
-              f"SAT={eng.ts['SAT'][-1]:.2f}, α={eng.ts['alpha'][-1]:.3f}, guards(H/I)={flags['hgi_guard']}/{flags['inc_guard']}")
-
-    ts = eng.ts
-    # simple estimates used for the paper table (you can compute true recovery in engine)
-    summary = {
-        "Config": f"P6 Stim “{prompt}”",
-        "HGI_final": float(ts["HGI"][-1]),
-        "INC_final": float(ts["INC"][-1]),
-        "HGI_mean": float(sum(ts["HGI"])/len(ts["HGI"])),
-        "INC_mean": float(sum(ts["INC"])/len(ts["INC"])),
-        "Interventions": ts.get("ethics_interventions_pct", 0.0),
-        "Recovery": ts.get("recovery_steps", "")
-    }
-
-    save_timeseries(out_dir, "p6_stimulus", ts)
-    save_summary(out_dir, "p6_stimulus", summary)
-    plot_hgi_inc(out_dir, "p6_stimulus", ts, f"P6: Stimulus Mapping — {prompt}")
-    latex_summary_table(
-        out_dir, "p6_stimulus",
-        caption="Stimulus mapping (NLP) impact on harmony/coherence.",
-        label="tab:p6_stimulus",
-        rows=[summary]
-    )
-    print("Artifacts written to:", out_dir)
+        eng.step(stimulus=stimulus if t == stim_step else None)
+    control = TensionEngine(cfg)
+    control.run(print_console=False)
+    metadata = {"experiment": "P6", "config": asdict(cfg), "seed": seed, "prompt": prompt,
+                "mapping": "explicit_signed_keyword_v1", "pole_evidence": polarity_evidence(prompt),
+                "step_indexing": "zero_based", "stim_step": stim_step, "human_step": stim_step + 1,
+                "polarity_types": len(POLARITY_POLES), "state_units": N,
+                "ambiguity": "Both pole keywords are recorded independently but cancel in legacy signed projection."}
+    return export_run(out_dir, "p6_stimulus", eng.ts, f"P6 signed input: {prompt}",
+                      metadata=metadata, control=control.ts, plots=plots)
 
 if __name__ == "__main__":
     main()
