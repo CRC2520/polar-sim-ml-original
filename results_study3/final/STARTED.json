@@ -1,0 +1,41 @@
+{
+  "started_utc": "2026-09-06T04:34:58.506544+00:00",
+  "registration": {
+    "commit": "e44f783e096aafa9822ce517994780d5a89c3ae0",
+    "published_commit_utc": "2026-09-06T04:25:09+00:00",
+    "verified_utc": "2026-09-06T04:34:58.506419+00:00",
+    "freeze_sha256": "9f8836bcefc83f3a618335577bba1795b7a6b964e0aaa769a628646b11ebe106"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "packages": [
+      "contourpy==1.3.3",
+      "cycler==0.12.1",
+      "filelock==3.32.3",
+      "fonttools==4.64.0",
+      "fsspec==2026.7.0",
+      "Jinja2==3.1.6",
+      "kiwisolver==1.5.1",
+      "MarkupSafe==3.0.3",
+      "matplotlib==3.10.8",
+      "mpmath==1.3.0",
+      "networkx==3.6.1",
+      "numpy==2.3.5",
+      "packaging==26.3",
+      "pandas==2.2.3",
+      "pillow==12.3.0",
+      "pyparsing==3.3.2",
+      "python-dateutil==2.9.0.post0",
+      "pytz==2026.3.post1",
+      "scipy==1.17.0",
+      "setuptools==78.1.0",
+      "six==1.17.0",
+      "sympy==1.14.0",
+      "torch==2.10.0+cpu",
+      "typing_extensions==4.16.0",
+      "tzdata==2026.3"
+    ]
+  }
+}

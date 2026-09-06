@@ -1,0 +1,16 @@
+{
+  "status": "all_5760_records_verified",
+  "checked_utc": "2026-09-06T04:39:09.790246+00:00",
+  "checks": [
+    "archive/record hashes",
+    "complete unique trial set",
+    "64 transitions",
+    "frozen configuration",
+    "exogenous observation replay",
+    "effect replay",
+    "outcome recalculation",
+    "equivalence",
+    "identical decision"
+  ],
+  "manifest_sha256": "04b22f6a99cb864f305c88af0c6a226db0affbebfa6185553788c25ee954cbc4"
+}

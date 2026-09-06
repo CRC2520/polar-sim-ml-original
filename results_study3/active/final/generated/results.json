@@ -1,0 +1,144 @@
+{
+  "status": "separately_registered_active_panel_not_replacement_for_primary",
+  "trials": 2880,
+  "seeds": 40,
+  "summary": {
+    "full": {
+      "loss": 0.011273842603620183,
+      "cost": 0.38947842142415057,
+      "post_switch_loss": 0.01836747174184406,
+      "return_loss": 0.004971666514410205,
+      "saturation": 0.03246256510416666,
+      "violations": 0.0,
+      "runtime_seconds": 0.019156096914599154
+    },
+    "no_K": {
+      "loss": 0.010378348584431946,
+      "cost": 0.40805241258037234,
+      "post_switch_loss": 0.016245696787562946,
+      "return_loss": 0.0039022760118232564,
+      "saturation": 0.03131917317708334,
+      "violations": 0.0,
+      "runtime_seconds": 0.0189313154437239
+    },
+    "retuned_zero": {
+      "loss": 0.010378348584431946,
+      "cost": 0.40805241258037234,
+      "post_switch_loss": 0.016245696787562946,
+      "return_loss": 0.0039022760118232564,
+      "saturation": 0.03131917317708334,
+      "violations": 0.0,
+      "runtime_seconds": 0.01882927694378414
+    },
+    "rewired": {
+      "loss": 0.011316721181275042,
+      "cost": 0.3894269262529634,
+      "post_switch_loss": 0.018405040790947118,
+      "return_loss": 0.004902455713019792,
+      "saturation": 0.03326009114583333,
+      "violations": 0.0,
+      "runtime_seconds": 0.018842256977081463
+    },
+    "reverse": {
+      "loss": 0.011320119949873506,
+      "cost": 0.3892377135254287,
+      "post_switch_loss": 0.01841817128850056,
+      "return_loss": 0.004956372644283731,
+      "saturation": 0.0332763671875,
+      "violations": 0.0,
+      "runtime_seconds": 0.018837788429181046
+    },
+    "generic_nonlinear": {
+      "loss": 0.013642144503925646,
+      "cost": 0.43095528086311613,
+      "post_switch_loss": 0.01931080314744052,
+      "return_loss": 0.006457686558661519,
+      "saturation": 0.03160807291666666,
+      "violations": 0.0,
+      "runtime_seconds": 0.017143571349996733
+    }
+  },
+  "contrasts": {
+    "tension": {
+      "mean": 0.000895494019188236,
+      "low95": 0.0008037557437768377,
+      "high95": 0.0009963430391428257,
+      "lower99_one_sided": 0.0007890229786418354,
+      "upper99_one_sided": 0.0010164559400492957,
+      "comparator": "no_K",
+      "required_upper_below": -0.001,
+      "passes": false
+    },
+    "network": {
+      "mean": 0.000895494019188236,
+      "low95": 0.0008037557437768377,
+      "high95": 0.0009963430391428257,
+      "lower99_one_sided": 0.0007890229786418354,
+      "upper99_one_sided": 0.0010164559400492957,
+      "comparator": "retuned_zero",
+      "required_upper_below": -0.001,
+      "passes": false
+    },
+    "topology_rewired": {
+      "mean": -4.2878577654860664e-05,
+      "low95": -0.00011848925282872722,
+      "high95": 2.9888173227820505e-05,
+      "lower99_one_sided": -0.00013339398351808052,
+      "upper99_one_sided": 4.1981560192103625e-05,
+      "comparator": "rewired",
+      "required_upper_below": -0.0005,
+      "passes": false
+    },
+    "topology_reverse": {
+      "mean": -4.627734625332502e-05,
+      "low95": -0.0001342900945901013,
+      "high95": 3.327087121911126e-05,
+      "lower99_one_sided": -0.00015086193925730146,
+      "upper99_one_sided": 4.684462881389722e-05,
+      "comparator": "reverse",
+      "required_upper_below": -0.0005,
+      "passes": false
+    },
+    "feature": {
+      "mean": -0.002368301900305466,
+      "low95": -0.0026905423998213112,
+      "high95": -0.0020463482510217697,
+      "lower99_one_sided": -0.002751525167297546,
+      "upper99_one_sided": -0.0019885931612261486,
+      "comparator": "generic_nonlinear",
+      "required_upper_below": -0.0005,
+      "passes": true
+    }
+  },
+  "claims": {
+    "tension": false,
+    "network": false,
+    "topology_rewired": false,
+    "topology_reverse": false,
+    "feature": true
+  },
+  "gates": {
+    "cost": true,
+    "post_switch": true,
+    "constraints": true
+  },
+  "cost_guardrail": {
+    "mean": -0.018573991156221797,
+    "low95": -0.019521564929417274,
+    "high95": -0.017655107199683082,
+    "lower99_one_sided": -0.019698043040272787,
+    "upper99_one_sided": -0.017486930809445363
+  },
+  "post_switch_guardrail": {
+    "mean": 0.002121774954281116,
+    "low95": 0.0018337202068892443,
+    "high95": 0.002467951267887857,
+    "lower99_one_sided": 0.0017842573843554462,
+    "upper99_one_sided": 0.002543532654307099
+  },
+  "hard_violations_full": 0,
+  "maximum_full_vs_noK_action_difference": 0.3880944262027918,
+  "decision": "no_confirmed_network_advantage",
+  "harm_flag": false,
+  "scope": "Best active K configuration within the original finite grid; same developmental dataset; new final seeds."
+}
