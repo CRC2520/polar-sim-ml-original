@@ -1,0 +1,69 @@
+name: Integrated polar registered final evaluation
+on:
+  push:
+    branches: [research/integrated-polar-p0-p2]
+    paths: ['.github/workflows/integrated-final.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  final-and-replay:
+    if: github.ref == 'refs/heads/research/integrated-polar-p0-p2'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      OMP_NUM_THREADS: 1
+      OPENBLAS_NUM_THREADS: 1
+      MKL_NUM_THREADS: 1
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical environment
+        run: |
+          pip install numpy==2.3.5 scipy==1.17.0 matplotlib==3.10.8 pandas==2.2.3
+          pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+      - name: Verify frozen tests and unchanged earlier studies
+        run: |
+          set -o pipefail
+          python scripts/run_gap_tests.py 2>&1 | tee /tmp/p0p2-final-tests.txt
+          git diff --exit-code cea382a7fd1486bc8403ee071c47432405ae57c2 -- polar study2 study3 network_tension.py results_study2 results_study3 results_corrected engine_v1_locked.py engine_v2_corrected.py
+      - name: Generate untouched final data after verifying the public registration
+        run: python -m gap_resolution.run final --registration-sha 34ce5268e614b49b8910a355d7de603689b7431e
+      - name: Regenerate outcomes and independently replay fixed controller cases
+        run: python -m gap_resolution.run regenerate
+      - name: Publish complete final evidence without changing frozen source
+        run: |
+          cp /tmp/p0p2-final-tests.txt docs/P0P2_FINAL_TEST_LOG.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f results_p0p2/final docs/P0P2_FINAL_TEST_LOG.txt docs/P0P2_TEST_REPORT.json
+          git commit -m 'research: publish registered integrated P1-P2 outcomes and verified complete traces [skip ci]'
+          git push origin HEAD:research/integrated-polar-p0-p2
+      - name: Package reports, code and manifests
+        run: |
+          mkdir -p /tmp/p0p2-delivery
+          cp results_p0p2/final/P1_RESULTS.json results_p0p2/final/P2_RESULTS.json results_p0p2/final/REGENERATION.json results_p0p2/final/STARTED.json results_p0p2/final/MANIFEST.json /tmp/p0p2-delivery/
+          cp results_p0p2/development/P0_DIAGNOSIS.json results_p0p2/development/P1_DEVELOPMENT.json /tmp/p0p2-delivery/
+          cp docs/P0P2_PROTOCOL.md docs/P0P2_FREEZE.json docs/P0P2_TEST_REPORT.json docs/P0P2_FINAL_TEST_LOG.txt /tmp/p0p2-delivery/
+          git rev-parse HEAD > /tmp/p0p2-delivery/RESULTS_COMMIT.txt
+          tar --exclude='__pycache__' -czf /tmp/p0p2-delivery/new-scientific-source.tar.gz integrated_polar gap_resolution tests/test_integrated_polar.py tests/test_gap_evaluation.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: integrated-polar-p0-p2-results
+          path: /tmp/p0p2-delivery
+          retention-days: 14
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: integrated-polar-final-failure-evidence
+          path: |
+            results_p0p2/final
+            /tmp/p0p2-final-tests.txt
+          retention-days: 14
+          if-no-files-found: warn
