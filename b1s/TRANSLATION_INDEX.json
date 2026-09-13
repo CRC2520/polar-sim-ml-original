@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "pairs": [],
+  "scope": "The technical handoff is English. The complete Spanish research plan is published in the companion manuscript repository and linked explicitly; it is not presented as a translation of the handoff file. Historical translations remain unchanged.",
+  "spanish_research_plan": {
+    "repository": "CRC2520/POLAR_MODEL_CRC",
+    "commit": "f954f1cfa96cbf92a9ae04e87301eb124d6ec73b",
+    "path": "b1s/translations/es/STRUCTURAL_DISCOVERY_PLAN.md"
+  }
+}
