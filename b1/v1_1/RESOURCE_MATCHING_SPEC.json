@@ -1,0 +1,285 @@
+{
+  "C4": {
+    "fixed_analytical_controller": true,
+    "padding_forbidden": true,
+    "planning_horizon": 1,
+    "raw_observations": "complete three cells",
+    "requested_search_slots": 1,
+    "search_opportunity_slots": 8
+  },
+  "C5": {
+    "allowance_multiplier": 2,
+    "claim_limit": "descriptive_capacity_frontier_not_resource_matched",
+    "communication_slots": 6
+  },
+  "P7_policy": "unchanged v1 SELECTED_CONFIG.json; C1 cfg01 reactive; no tuning, no new scientific sample",
+  "admissible_input_scope": "frozen finite task-generated schemas and canonical controller identifiers; arbitrary malformed observations outside scope fail validation",
+  "bounds": {
+    "P5": {
+      "C0": {
+        "expanded_logical_operations": 6476,
+        "legacy_operations": 228,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 207,
+        "raw_observation_scalars": 129,
+        "route_payload_scalars": 6,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 4004,
+        "total_controller_state_scalar_bound": 2255
+      },
+      "C1": {
+        "expanded_logical_operations": 6476,
+        "legacy_operations": 228,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 207,
+        "raw_observation_scalars": 129,
+        "route_payload_scalars": 6,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 4004,
+        "total_controller_state_scalar_bound": 2255
+      },
+      "C2": {
+        "expanded_logical_operations": 6476,
+        "legacy_operations": 228,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 207,
+        "raw_observation_scalars": 129,
+        "route_payload_scalars": 6,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 4004,
+        "total_controller_state_scalar_bound": 2255
+      },
+      "C3": {
+        "expanded_logical_operations": 6476,
+        "legacy_operations": 228,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 207,
+        "raw_observation_scalars": 129,
+        "route_payload_scalars": 6,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 4004,
+        "total_controller_state_scalar_bound": 2255
+      },
+      "C4": {
+        "expanded_logical_operations": 6476,
+        "legacy_operations": 228,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 207,
+        "raw_observation_scalars": 129,
+        "route_payload_scalars": 6,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 4004,
+        "total_controller_state_scalar_bound": 2255
+      },
+      "C5": {
+        "expanded_logical_operations": 7298,
+        "legacy_operations": 246,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 336,
+        "raw_observation_scalars": 129,
+        "route_payload_scalars": 6,
+        "route_slots": 6,
+        "temporary_workspace_scalar_proxy": 5324,
+        "total_controller_state_scalar_bound": 2384
+      }
+    },
+    "P6": {
+      "C0": {
+        "expanded_logical_operations": 61559,
+        "legacy_operations": 4119,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 3408,
+        "raw_observation_scalars": 3312,
+        "route_payload_scalars": 10,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 68000,
+        "total_controller_state_scalar_bound": 5456
+      },
+      "C1": {
+        "expanded_logical_operations": 61559,
+        "legacy_operations": 4119,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 3408,
+        "raw_observation_scalars": 3312,
+        "route_payload_scalars": 10,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 68000,
+        "total_controller_state_scalar_bound": 5456
+      },
+      "C2": {
+        "expanded_logical_operations": 61559,
+        "legacy_operations": 4119,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 3408,
+        "raw_observation_scalars": 3312,
+        "route_payload_scalars": 10,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 68000,
+        "total_controller_state_scalar_bound": 5456
+      },
+      "C3": {
+        "expanded_logical_operations": 61559,
+        "legacy_operations": 4119,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 3408,
+        "raw_observation_scalars": 3312,
+        "route_payload_scalars": 10,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 68000,
+        "total_controller_state_scalar_bound": 5456
+      },
+      "C4": {
+        "expanded_logical_operations": 61559,
+        "legacy_operations": 4119,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 3408,
+        "raw_observation_scalars": 3312,
+        "route_payload_scalars": 10,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 68000,
+        "total_controller_state_scalar_bound": 5456
+      },
+      "C5": {
+        "expanded_logical_operations": 75317,
+        "legacy_operations": 4149,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 6720,
+        "raw_observation_scalars": 3312,
+        "route_payload_scalars": 10,
+        "route_slots": 6,
+        "temporary_workspace_scalar_proxy": 94976,
+        "total_controller_state_scalar_bound": 8768
+      }
+    },
+    "P7": {
+      "C0": {
+        "expanded_logical_operations": 23492,
+        "legacy_operations": 1284,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 1206,
+        "raw_observation_scalars": 1110,
+        "route_payload_scalars": 10,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 23960,
+        "total_controller_state_scalar_bound": 3254
+      },
+      "C1": {
+        "expanded_logical_operations": 23492,
+        "legacy_operations": 1284,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 1206,
+        "raw_observation_scalars": 1110,
+        "route_payload_scalars": 10,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 23960,
+        "total_controller_state_scalar_bound": 3254
+      },
+      "C2": {
+        "expanded_logical_operations": 23492,
+        "legacy_operations": 1284,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 1206,
+        "raw_observation_scalars": 1110,
+        "route_payload_scalars": 10,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 23960,
+        "total_controller_state_scalar_bound": 3254
+      },
+      "C3": {
+        "expanded_logical_operations": 23492,
+        "legacy_operations": 1284,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 1206,
+        "raw_observation_scalars": 1110,
+        "route_payload_scalars": 10,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 23960,
+        "total_controller_state_scalar_bound": 3254
+      },
+      "C4": {
+        "expanded_logical_operations": 23492,
+        "legacy_operations": 1284,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 1206,
+        "raw_observation_scalars": 1110,
+        "route_payload_scalars": 10,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 23960,
+        "total_controller_state_scalar_bound": 3254
+      },
+      "C5": {
+        "expanded_logical_operations": 28442,
+        "legacy_operations": 1314,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 2316,
+        "raw_observation_scalars": 1110,
+        "route_payload_scalars": 10,
+        "route_slots": 6,
+        "temporary_workspace_scalar_proxy": 33320,
+        "total_controller_state_scalar_bound": 4364
+      }
+    }
+  },
+  "cap_rationale": "powers-of-two conservative headroom above finite source/schema bounds, never scores; no smallest-cap claim",
+  "classification": "resource_envelope_only_and_read_only_instrumentation",
+  "common_allowed_resource_envelope": {
+    "communication_slots": 3,
+    "decision_operations": 65536,
+    "expanded_logical_operations": 262144,
+    "hyperparameter_slots": 8,
+    "latency_seconds": null,
+    "learned_parameter_updates": 0,
+    "max_payload_scalar_slots": 10,
+    "memory_scalars": 16384,
+    "model_state_scalar_bound": 16384,
+    "planning_horizon": 1,
+    "temporary_workspace_scalar_proxy": 131072
+  },
+  "confirmatory": false,
+  "deterministic_accounting": {
+    "expanded": "legacy + 12*raw_scalars + 4*budgeted_state_scalars + 16*route_payload_scalars + 32*report_candidates + 512",
+    "legacy": "frozen _tick counter: scalar copies, record inspections, route payloads, policy primitives and sorting proxy",
+    "model": "finite rules and configuration; no neural matrices, planning tree, learned weights or optimization updates",
+    "physical_memory": "measured independently in bytes with tracemalloc and process RSS; no scalar-to-byte equivalence assumed",
+    "unit": "declared logical primitive/scalar-pass proxy; not CPU instructions or exact Python opcode count",
+    "workspace": "12*raw_scalars + 8*budgeted_state_scalars + 16*route_payload_scalars + 512; conservative scalar-pass workspace proxy, not measured bytes"
+  },
+  "development_only": true,
+  "dimensions": {
+    "P5_pending_deliveries": 1,
+    "P6_arriving_reports": 1,
+    "P6_candidates": 2,
+    "P6_feedback": 2,
+    "P6_pending_assays": 1,
+    "P6_reports": 32,
+    "P6_selectors": 32,
+    "P7_completion_events": 2,
+    "P7_instances": 2,
+    "P7_pending_deployments": 1,
+    "P7_rollbacks": 0,
+    "P7_snapshots": 32,
+    "cells": 3,
+    "demand_per_cell": 2,
+    "epochs": 32
+  },
+  "failure_policy": "bound breach or binding cap blocks certification; change envelope prospectively and repeat affected development only",
+  "host_claim_limit": "No claim of exact CPU/memory-byte equality or hard worst-case host latency; logical matched-opportunity claims only.",
+  "measurement_policy": "same serial process class; actual CPU, wall latency, traced allocation and RSS are secondary sampled host metrics, no forced equal use or hard real-time deadline",
+  "namespace": "PD-B1-D-v1.1-QA",
+  "old_caps": {
+    "decision_operations": 8192,
+    "memory_scalars": 4096
+  },
+  "reusable_as_final": false,
+  "source_hashes": {
+    "b1/SELECTED_CONFIG.json": "3d098d3d3a9c7d8cc1bbb7a6d17a878cdacf931c3b40700715c2157948243c99",
+    "b1/contracts/frozen_b0/PILOT_CONTRACTS_v1.json": "ca14f3895952e2553e1c8c7459cb3a066e4cce5db892de689c281750ef434b99",
+    "b1/controllers/c6.py": "aa22e46c8bb671eba8e6d22654a43843b2ed9b11e1870382673575f1ead4e980",
+    "b1/controllers/core.py": "30ab7335b62bbe12f80e15d62b852036a2b595b6a01a12ae9e362c7bcd8b6381",
+    "b1/tasks/core.py": "e728ad45d82c5a5eaa7d325e8c7e5a3173c18a4ce003226e2f5e7e86260f999e",
+    "b1/tasks/p5.py": "b28f3c8638ed0c25a26bfb2db393246c20e57c40a47f2d144e72ee317d23ea51",
+    "b1/tasks/p6.py": "919f2dacc42b82e435dc3239368f6184c8532fd8dc2a7107668401311f5b216b",
+    "b1/tasks/p7.py": "267083182aed132188fea1ef5bb4d5da197332fc3265fc25a2f098d0938517da"
+  },
+  "version": "B1-D-v1.1-resource-spec-1"
+}
