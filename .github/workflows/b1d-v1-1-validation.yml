@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install fixed parsers and statistical simulation dependency
-        run: python -m pip install PyYAML==6.0.3 numpy==2.3.5
+        run: python -m pip install PyYAML==6.0.3 numpy==2.3.5 scipy==1.17.0
       - name: Verify immutable B0, historical evidence and all B1-D v1 bytes
         run: |
           if [ -f b1/v1_1/B1D_V1_1_MANIFEST.json ]; then
