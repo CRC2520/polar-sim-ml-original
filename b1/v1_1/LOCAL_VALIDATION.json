@@ -1,0 +1,42 @@
+{
+  "B1E_executed": false,
+  "P5_archived_results_hashes_verified": 35,
+  "confirmatory": false,
+  "development_only": true,
+  "final_seeds_generated": false,
+  "integration_incidents": [
+    "An initial integrated test process imported the statistical generator before its concurrent documentation update and observed a JSON mismatch. The final fresh process verifies exact generator/JSON equality and all 47 tests pass.",
+    "The historical recovery test rejects added v1.1 Python files by its deliberately frozen exact-inventory gate. It remains unchanged and CI runs its 11 original tests in a detached checkout of the immutable v1 commit.",
+    "Follow-up adversarial retention review found same-count duplicate/malformed events could publish completion. The repaired exact-ID and shared-schema gate passes five new regressions; all 52 v1.1 tests pass in a fresh process. Archived schema QA validates 82176 historical plus 27648 P5 v1.1 events without model execution; measured incremental cost fits the existing declared CPU contingency."
+  ],
+  "new_test_groups": {
+    "P5": 7,
+    "exporter": 14,
+    "resources": 7,
+    "retention": 13,
+    "statistics": 11
+  },
+  "new_tests": {
+    "count": 52,
+    "seconds": 16.789,
+    "status": "PASS"
+  },
+  "original_tests": {
+    "count": 128,
+    "seconds": 11.024,
+    "status": "PASS"
+  },
+  "reusable_as_final": false,
+  "scope": "Integrated local tests and sparse artifact validation; complete Git-tree preservation is separately required in CI",
+  "statistical_smoke": {
+    "maximum_family_false_declaration_rate": 0.005,
+    "minimum_family_coverage": 0.99,
+    "model_executions": 0,
+    "replications_per_cell": 200,
+    "scenario_cells": 40,
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "v1_manifest_hashes_verified": 480,
+  "version": "1.1"
+}

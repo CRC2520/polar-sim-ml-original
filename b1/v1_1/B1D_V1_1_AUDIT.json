@@ -1,0 +1,136 @@
+{
+  "B1E_executed": false,
+  "CI_gate": "Final manifest must reference actual successful content validation; no CI success invented here",
+  "P5_archive_audit": {
+    "B1E_executed": false,
+    "C4_minimal_policy_implemented": true,
+    "C6_exact_checks": {
+      "actions": 3072,
+      "events": 3072,
+      "observations": 3072,
+      "states": 1024
+    },
+    "C6_status": "PASS",
+    "blocker_id": "B1-CONFLICT-P5-C4-REFILL-001",
+    "blocker_status": "RESOLVED",
+    "confirmatory": false,
+    "controller_failures": 0,
+    "development_only": true,
+    "disposition_published_code_commit": "5ce3ffe6fa493d525f0cc35571d6d2917e9aa1f8",
+    "disposition_published_document_commit": "691cabf75292acfb38a4a4bcefa6aae09532b4aa",
+    "episode_count": 288,
+    "event_count": 27648,
+    "final_seeds_generated": false,
+    "full_refill_witness_separate": true,
+    "guardrail_violations": 0,
+    "hashes_verified": 35,
+    "limitation": "Development engineering ceiling check, no positive utility or pairing evidence. C5 uses doubled resources and is descriptive. C2 secondary totals cover two cycles; per-cycle usage must be compared on equal denominators.",
+    "manifest_sha256": "bbebc5b146ba0582c6d4afdecc1927de4cf10e276ed28a9cc4513e57ef82cdae",
+    "outcome_based_policy_selection": false,
+    "physical_bound_pass": true,
+    "positive_pairing_specificity_eligible": false,
+    "positive_utility_eligible": false,
+    "prospective_disposition": true,
+    "qa_unit_tests_passed": 7,
+    "resource_cap_binding": false,
+    "resource_maxima": {
+      "C0": {
+        "expanded_logical_operations": 2806,
+        "legacy_operations": 198,
+        "persistent_budgeted_scalars": 137,
+        "raw_observation_scalars": 105,
+        "temporary_workspace_scalar_proxy": 3156,
+        "total_controller_state_scalars": 312
+      },
+      "C1": {
+        "expanded_logical_operations": 2803,
+        "legacy_operations": 195,
+        "persistent_budgeted_scalars": 137,
+        "raw_observation_scalars": 105,
+        "temporary_workspace_scalar_proxy": 3156,
+        "total_controller_state_scalars": 312
+      },
+      "C2": {
+        "expanded_logical_operations": 2803,
+        "legacy_operations": 195,
+        "persistent_budgeted_scalars": 137,
+        "raw_observation_scalars": 105,
+        "temporary_workspace_scalar_proxy": 3156,
+        "total_controller_state_scalars": 274
+      },
+      "C3": {
+        "expanded_logical_operations": 2803,
+        "legacy_operations": 195,
+        "persistent_budgeted_scalars": 137,
+        "raw_observation_scalars": 105,
+        "temporary_workspace_scalar_proxy": 3156,
+        "total_controller_state_scalars": 312
+      },
+      "C4": {
+        "expanded_logical_operations": 1931,
+        "legacy_operations": 75,
+        "persistent_budgeted_scalars": 21,
+        "raw_observation_scalars": 105,
+        "temporary_workspace_scalar_proxy": 1940,
+        "total_controller_state_scalars": 73
+      },
+      "C4_FULL_REFILL_CEILING_WITNESS": {
+        "expanded_logical_operations": 1886,
+        "legacy_operations": 30,
+        "persistent_budgeted_scalars": 21,
+        "raw_observation_scalars": 105,
+        "temporary_workspace_scalar_proxy": 1940,
+        "total_controller_state_scalars": 73
+      },
+      "C5": {
+        "expanded_logical_operations": 3529,
+        "legacy_operations": 213,
+        "persistent_budgeted_scalars": 242,
+        "raw_observation_scalars": 105,
+        "temporary_workspace_scalar_proxy": 4284,
+        "total_controller_state_scalars": 456
+      },
+      "C6": {
+        "expanded_logical_operations": 2803,
+        "legacy_operations": 195,
+        "persistent_budgeted_scalars": 137,
+        "raw_observation_scalars": 105,
+        "temporary_workspace_scalar_proxy": 3156,
+        "total_controller_state_scalars": 312
+      }
+    },
+    "results_sha256": "ab8d7e4e9715d48d32de1f64d4a0989105e330ef013b90c88581d3eba8b33bcd",
+    "reusable_as_final": false,
+    "source_artifact_hashes_match": true,
+    "source_commit": "d5343906e28bd16b71c42d24e6512bec11c64f07",
+    "source_publication_verified_by_root": true,
+    "status": "PASS",
+    "v1_results_preserved": true
+  },
+  "P5_new_development_episodes": 288,
+  "P5_remote_source_blobs_verified_before_execution": 54,
+  "P5_source_commit": "d5343906e28bd16b71c42d24e6512bec11c64f07",
+  "P5_source_freeze_precedes_benchmark": true,
+  "b0_changed": false,
+  "b1d_v1_changed": false,
+  "confirmatory": false,
+  "development_only": true,
+  "evidence_sha256": {
+    "B1E_RESOURCE_CERTIFICATE.json": "8206c4cf98b81766dc689823a692edffee7a260bbe16f9fd4045151875a9dc09",
+    "B1E_STATISTICAL_REDESIGN.json": "36755d636b0fe7661a763fcd4554e0fd37bef887a49a851f44807264d510e166",
+    "EXPORTER_V1_1_AUDIT.json": "a05b0da64bcccf5ffeb2faafea1f494fcaa8d36c8c05f448968cb8868cf1d5f0",
+    "RESOURCE_MATCHING_CERTIFICATE.json": "8f846263ea7deec623a6de9694845c5b1e6478306fa4b2bb9986f95c76be07a3",
+    "p5/P5_BENCHMARK_AUDIT.json": "2b557e7616ae6ed4e50657311c17c36115387ed431768f20a19f138c28e129fe",
+    "p5/P5_SOURCE_FREEZE.json": "ffc70d20e26f9e886e184905281a1348c300e59d785269cd6007c270727333c8",
+    "p5/results/RESULTS.json": "ab8d7e4e9715d48d32de1f64d4a0989105e330ef013b90c88581d3eba8b33bcd",
+    "statistics/SIMULATION_RESULTS.json": "8db0fcfe7184be24e53ed35ce29b870d749557b37e4471cc358afbe4da565724"
+  },
+  "final_seeds_generated": false,
+  "historical_code_changed": false,
+  "historical_results_changed": false,
+  "original_export_incident_preserved": true,
+  "original_exporter_tests_scope": "Run original exact-inventory tests in detached v1 checkout; future pipeline tests run at v1.1 HEAD",
+  "resource_axis_rows": 288,
+  "reusable_as_final": false,
+  "status": "PASS"
+}

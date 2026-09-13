@@ -1,0 +1,21 @@
+{
+  "version": "B1-D-v1.1-resumption-audit-1",
+  "recorded_utc": "2026-09-13T04:22:56.762848+00:00",
+  "v1_base_commit": "c27235deb1688c105bfe96597dfd233108307895",
+  "resumed_v1_1_remote_head": "d5343906e28bd16b71c42d24e6512bec11c64f07",
+  "v1_remote_head_unchanged": true,
+  "remote_history_preservation": "Every base Git blob and mode agrees with the resumed branch recursive tree",
+  "historical_remote_blobs_verified": 1254,
+  "local_historical_blobs_matching_remote": 481,
+  "base_ancestry": "Confirmed from authenticated commit parents/compare; CI performs full Git check",
+  "local_staging": "Recovered sparse files; not a full Git checkout",
+  "scientific_runs_repeated": false,
+  "P5_previous_benchmark_recovered": true,
+  "P7_v1_results_preserved": true,
+  "final_seeds_generated": false,
+  "B1E_executed": false,
+  "development_only": true,
+  "confirmatory": false,
+  "reusable_as_final": false,
+  "git_fetch_attempt": "Attempted read-only fetch of documentary v1.1 with --filter=blob:none --no-tags --depth=1 in a separate scratch repository; exit 128: terminal HTTPS credentials unavailable. Authenticated GitHub connector ref/commit/tree reads were used for remote verification."
+}

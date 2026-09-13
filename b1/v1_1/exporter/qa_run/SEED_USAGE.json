@@ -1,0 +1,414 @@
+{
+  "confirmatory": false,
+  "development_only": true,
+  "namespace": "PD-B1-D-v1.1-QA",
+  "reusable_as_final": false,
+  "reusable_for_B1E": false,
+  "usage": [
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P6",
+        "evaluation-development",
+        "0",
+        "cell/0/episode/utility/epoch/0/event/initial_mapping"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 11419817623720133394
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P6",
+        "evaluation-development",
+        "0",
+        "cell/0/episode/utility/epoch/0/event/change_schedule"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 1590199531957752576
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P6",
+        "evaluation-development",
+        "0",
+        "cell/0/episode/utility/epoch/0/event/transferability"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 1125088400508412337
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P6",
+        "evaluation-development",
+        "0",
+        "cell/1/episode/utility/epoch/0/event/initial_mapping"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 3745250765635296271
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P6",
+        "evaluation-development",
+        "0",
+        "cell/1/episode/utility/epoch/0/event/change_schedule"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 14025952307445648544
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P6",
+        "evaluation-development",
+        "0",
+        "cell/1/episode/utility/epoch/0/event/transferability"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 8364197552432647587
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P6",
+        "evaluation-development",
+        "0",
+        "cell/2/episode/utility/epoch/0/event/initial_mapping"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 13292629224661991493
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P6",
+        "evaluation-development",
+        "0",
+        "cell/2/episode/utility/epoch/0/event/change_schedule"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 2654934984004194877
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P6",
+        "evaluation-development",
+        "0",
+        "cell/2/episode/utility/epoch/0/event/transferability"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 12142546222549601227
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/0/episode/utility/epoch/0/event/initial_drift/0"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 15885062227403873392
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/0/episode/utility/epoch/0/event/initial_drift/1"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 18015885832301110756
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/0/episode/utility/epoch/0/event/migration_mode"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 14805809522700285729
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/0/episode/utility/epoch/0/event/version_schedule"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 8634813937895406110
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/0/episode/utility/epoch/8/event/drift_event"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 573965709388984288
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/0/episode/utility/epoch/24/event/drift_event"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 17276634020801834434
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/1/episode/utility/epoch/0/event/initial_drift/0"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 15297287874372064226
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/1/episode/utility/epoch/0/event/initial_drift/1"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 5089712710177018576
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/1/episode/utility/epoch/0/event/migration_mode"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 4095477445707965279
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/1/episode/utility/epoch/0/event/version_schedule"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 2283088180266642768
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/1/episode/utility/epoch/8/event/drift_event"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 14016542788790697420
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/1/episode/utility/epoch/24/event/drift_event"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 10217609895522391940
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/2/episode/utility/epoch/0/event/initial_drift/0"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 669739144728924267
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/2/episode/utility/epoch/0/event/initial_drift/1"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 13917773521426665033
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/2/episode/utility/epoch/0/event/migration_mode"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 134680537501171188
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/2/episode/utility/epoch/0/event/version_schedule"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 2805661948763404696
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/2/episode/utility/epoch/8/event/drift_event"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 1826438765766990104
+    },
+    {
+      "confirmatory": false,
+      "development_only": true,
+      "key": [
+        "PD-B1-D-v1.1-QA",
+        "c27235deb1688c105bfe96597dfd233108307895",
+        "P7",
+        "evaluation-development",
+        "0",
+        "cell/2/episode/utility/epoch/24/event/drift_event"
+      ],
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "seed": 12564756886296522175
+    }
+  ]
+}

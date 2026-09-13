@@ -1,0 +1,51 @@
+{
+  "B1E_executed": false,
+  "archive_unique_ID_counts": {
+    "P5_v1_1": 27648,
+    "historical": 82176
+  },
+  "confirmatory": false,
+  "development_only": true,
+  "existing_CPU_contingency_seconds": 144541.34947809274,
+  "final_seeds_generated": false,
+  "fits_existing_CPU_contingency": true,
+  "incremental_validation_seconds_projection": 14979.157487883866,
+  "measurement_script_sha256": "f34d320b1d125a0cea377aee3cb9b6bb2a5da5d76989d6fca0273243fb67e14b",
+  "projection_limit": "Sampled same-host incremental schema/ID cost, key derivation charged twice; not a worst-case runtime guarantee. Existing 1.5 planning contingency absorbs this measured increment; fixed N and numerical resource budget are unchanged.",
+  "remaining_CPU_contingency_after_measured_increment_seconds": 129562.19199020887,
+  "reusable_as_final": false,
+  "scientific_model_executions": 0,
+  "source_sha256": {
+    "b1/development_results/calibration/traces/INDEX.json": "0133673d24503d8e416abafe83a84b2e80363be0052e47f97af31f40ee05b68b",
+    "b1/v1_1/B1E_RESOURCE_CERTIFICATE.json": "8206c4cf98b81766dc689823a692edffee7a260bbe16f9fd4045151875a9dc09",
+    "b1/v1_1/p5/results/traces/INDEX.json": "4bd1f27d33f3f8de12798e975fe83fd2011bba4d3137e2309fb5f209069db8c9"
+  },
+  "status": "PASS",
+  "timing_summary": {
+    "P5_v1_1:P5": {
+      "bundles": 32,
+      "max_CPU_seconds_per_bundle": 0.04043729500000026,
+      "max_wall_seconds_per_bundle": 0.04044168499967782,
+      "total_wall_seconds": 1.1132029189902823
+    },
+    "historical:P5": {
+      "bundles": 32,
+      "max_CPU_seconds_per_bundle": 0.010013052999999772,
+      "max_wall_seconds_per_bundle": 0.01001779299986083,
+      "total_wall_seconds": 0.23620773401489714
+    },
+    "historical:P6": {
+      "bundles": 32,
+      "max_CPU_seconds_per_bundle": 0.10380833700000003,
+      "max_wall_seconds_per_bundle": 0.10387958499995875,
+      "total_wall_seconds": 1.9625655709969578
+    },
+    "historical:P7": {
+      "bundles": 32,
+      "max_CPU_seconds_per_bundle": 0.1079472930000005,
+      "max_wall_seconds_per_bundle": 0.1079687070014188,
+      "total_wall_seconds": 2.0997420839921688
+    }
+  },
+  "validator_sha256": "b81d2fc29b6a0e2e9d7910b9b6d85e233da06fb62bd5eb5a5126acf2fef2a3b5"
+}

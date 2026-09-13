@@ -1,0 +1,3427 @@
+{
+  "B1E_executed": false,
+  "N_v2": 138688,
+  "QA_revision": 2,
+  "confirmatory": false,
+  "design_sha256": "948ca697c5044cfb54a1e61be00aca32c290bcb40a63eba0d6276058c70a0d57",
+  "development_only": true,
+  "final_seeds_generated": false,
+  "interpretation": "Analytical coverage is distribution-free under declared iid bundle assumptions. Monte Carlo supports implementation checking only; zero observed errors do not prove zero error probability.",
+  "maximum_family_false_declaration_rate": 0.001,
+  "method_sha256": "ddf5ea99b2c4bd8a8aff1c46b03e629f9d34376fcab61fb4b8452f3aa0b250dc",
+  "minimum_family_coverage": 0.99835,
+  "mode": "full",
+  "model_executions": 0,
+  "namespace": "PD-B1-D-v1.1-QA",
+  "numpy_version": "2.3.5",
+  "repetitions_per_scenario": 20000,
+  "results": [
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 19996,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9994880004662163,
+          0.9999455041288672
+        ],
+        "rate": 0.9998
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "scenario": "zero_effect",
+      "support_points": [
+        -0.1,
+        0.1
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 19998,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9996388127969551,
+          0.9999878893066346
+        ],
+        "rate": 0.9999
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 1,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          1.2658895979755804e-06,
+          0.0002785503321745113
+        ],
+        "rate": 5e-05
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "practical_margin_boundary",
+      "support_points": [
+        -0.115625,
+        0.084375
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": -0.015625,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 19999,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9997214496678255,
+          0.9999987341104021
+        ],
+        "rate": 0.99995
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "equivalence_margin_boundary",
+      "support_points": [
+        -0.0921875,
+        0.1078125
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0078125,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "negative_equivalence_margin_boundary",
+      "support_points": [
+        -0.1078125,
+        0.0921875
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": -0.0078125,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 19997,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9995616995466063,
+          0.9999690653255547
+        ],
+        "rate": 0.99985
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "scenario": "favorable_effect",
+      "support_points": [
+        -0.13125,
+        0.06875
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": -0.03125,
+      "true_variance": 0.01
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 19998,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9996388127969551,
+          0.9999878893066346
+        ],
+        "rate": 0.9999
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "scenario": "adverse_effect",
+      "support_points": [
+        -0.06875,
+        0.13125
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.03125,
+      "true_variance": 0.01
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 19973,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9980364241257567,
+          0.9991101588723404
+        ],
+        "rate": 0.99865
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.1,
+        0.4,
+        0.4,
+        0.1
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "heavy_tail_bounded",
+      "support_points": [
+        -1.0,
+        -0.01,
+        0.01,
+        1.0
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0,
+      "true_variance": 0.20008
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.2,
+        0.6,
+        0.2
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "scenario": "discrete_distribution",
+      "support_points": [
+        -0.005208333333333333,
+        0,
+        0.005208333333333333
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 1.445602896647339e-20,
+      "true_variance": 1.0850694444444445e-05
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 19976,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9982150178771391,
+          0.9992309907716637
+        ],
+        "rate": 0.9988
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "scenario": "heterogeneous_variance",
+      "support_points": [
+        -0.5,
+        -0.02,
+        0.02,
+        0.5
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0,
+      "true_variance": 0.1252
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 4.0,
+      "delta": 0.5,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.25,
+      "family_coverage": {
+        "count": 19967,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9976835597057195,
+          0.9988639521428913
+        ],
+        "rate": 0.99835
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 20,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0006109296061736065,
+          0.0015439984673203263
+        ],
+        "rate": 0.001
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "context_range4_boundary",
+      "support_points": [
+        -1.0,
+        2.0
+      ],
+      "target_half_width": 0.125,
+      "true_mean": 0.5,
+      "true_variance": 2.25
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "scenario": "zero_effect",
+      "support_points": [
+        -0.1,
+        0.1
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 19999,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9997214496678255,
+          0.9999987341104021
+        ],
+        "rate": 0.99995
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 1,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          1.2658895979755804e-06,
+          0.0002785503321745113
+        ],
+        "rate": 5e-05
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "practical_margin_boundary",
+      "support_points": [
+        -0.115625,
+        0.084375
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": -0.015625,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "equivalence_margin_boundary",
+      "support_points": [
+        -0.0921875,
+        0.1078125
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0078125,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "negative_equivalence_margin_boundary",
+      "support_points": [
+        -0.1078125,
+        0.0921875
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": -0.0078125,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "scenario": "favorable_effect",
+      "support_points": [
+        -0.13125,
+        0.06875
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": -0.03125,
+      "true_variance": 0.01
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "scenario": "adverse_effect",
+      "support_points": [
+        -0.06875,
+        0.13125
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.03125,
+      "true_variance": 0.01
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 19995,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9994166806510874,
+          0.9999188208571973
+        ],
+        "rate": 0.99975
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.1,
+        0.4,
+        0.4,
+        0.1
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "heavy_tail_bounded",
+      "support_points": [
+        -1.0,
+        -0.01,
+        0.01,
+        1.0
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0,
+      "true_variance": 0.20008
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.2,
+        0.6,
+        0.2
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "scenario": "discrete_distribution",
+      "support_points": [
+        -0.005208333333333333,
+        0,
+        0.005208333333333333
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 1.445602896647339e-20,
+      "true_variance": 1.0850694444444445e-05
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "scenario": "heterogeneous_variance",
+      "support_points": [
+        -0.5,
+        -0.02,
+        0.02,
+        0.5
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0,
+      "true_variance": 0.1252
+    },
+    {
+      "N": 138688,
+      "all_nine_precise": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "declared_support_range": 4.0,
+      "delta": 0.5,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.25,
+      "family_coverage": {
+        "count": 19998,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9996388127969551,
+          0.9999878893066346
+        ],
+        "rate": 0.9999
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 1,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          1.2658895979755804e-06,
+          0.0002785503321745113
+        ],
+        "rate": 5e-05
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "context_range4_boundary",
+      "support_points": [
+        -1.0,
+        2.0
+      ],
+      "target_half_width": 0.125,
+      "true_mean": 0.5,
+      "true_variance": 2.25
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "zero_effect",
+      "support_points": [
+        -0.1,
+        0.1
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "practical_margin_boundary",
+      "support_points": [
+        -0.115625,
+        0.084375
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": -0.015625,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "equivalence_margin_boundary",
+      "support_points": [
+        -0.0921875,
+        0.1078125
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0078125,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "negative_equivalence_margin_boundary",
+      "support_points": [
+        -0.1078125,
+        0.0921875
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": -0.0078125,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "favorable_effect",
+      "support_points": [
+        -0.13125,
+        0.06875
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": -0.03125,
+      "true_variance": 0.01
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "adverse_effect",
+      "support_points": [
+        -0.06875,
+        0.13125
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.03125,
+      "true_variance": 0.01
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.1,
+        0.4,
+        0.4,
+        0.1
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "heavy_tail_bounded",
+      "support_points": [
+        -1.0,
+        -0.01,
+        0.01,
+        1.0
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0,
+      "true_variance": 0.20008
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.2,
+        0.6,
+        0.2
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "discrete_distribution",
+      "support_points": [
+        -0.005208333333333333,
+        0,
+        0.005208333333333333
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 1.445602896647339e-20,
+      "true_variance": 1.0850694444444445e-05
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "heterogeneous_variance",
+      "support_points": [
+        -0.5,
+        -0.02,
+        0.02,
+        0.5
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0,
+      "true_variance": 0.1252
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 4.0,
+      "delta": 0.5,
+      "dependence": "independent_coordinates",
+      "epsilon": 0.25,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "context_range4_boundary",
+      "support_points": [
+        -1.0,
+        2.0
+      ],
+      "target_half_width": 0.125,
+      "true_mean": 0.5,
+      "true_variance": 2.25
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "zero_effect",
+      "support_points": [
+        -0.1,
+        0.1
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "practical_margin_boundary",
+      "support_points": [
+        -0.115625,
+        0.084375
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": -0.015625,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "equivalence_margin_boundary",
+      "support_points": [
+        -0.0921875,
+        0.1078125
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0078125,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "negative_equivalence_margin_boundary",
+      "support_points": [
+        -0.1078125,
+        0.0921875
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": -0.0078125,
+      "true_variance": 0.010000000000000002
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "favorable_effect",
+      "support_points": [
+        -0.13125,
+        0.06875
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": -0.03125,
+      "true_variance": 0.01
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "adverse_effect",
+      "support_points": [
+        -0.06875,
+        0.13125
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.03125,
+      "true_variance": 0.01
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.1,
+        0.4,
+        0.4,
+        0.1
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "heavy_tail_bounded",
+      "support_points": [
+        -1.0,
+        -0.01,
+        0.01,
+        1.0
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0,
+      "true_variance": 0.20008
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.2,
+        0.6,
+        0.2
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "discrete_distribution",
+      "support_points": [
+        -0.005208333333333333,
+        0,
+        0.005208333333333333
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 1.445602896647339e-20,
+      "true_variance": 1.0850694444444445e-05
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 2.0,
+      "delta": 0.015625,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.0078125,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "heterogeneous_variance",
+      "support_points": [
+        -0.5,
+        -0.02,
+        0.02,
+        0.5
+      ],
+      "target_half_width": 0.00390625,
+      "true_mean": 0.0,
+      "true_variance": 0.1252
+    },
+    {
+      "N": 32,
+      "all_nine_precise": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "declared_support_range": 4.0,
+      "delta": 0.5,
+      "dependence": "perfectly_dependent_coordinates",
+      "epsilon": 0.25,
+      "family_coverage": {
+        "count": 20000,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.9998155730360381,
+          1.0
+        ],
+        "rate": 1.0
+      },
+      "family_false_equivalent": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_improved": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "family_false_worsened": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "limitation": "Synthetic coordinates probe arbitrary family dependence; they are not model outcomes or a simulated intervention experiment",
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "regression_check": {
+        "Bonferroni_QA_cutoff": 6.25e-05,
+        "exact_upper_tail_p_values": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "nominal_error": 0.05
+      },
+      "scalar_correct_classification_power": {
+        "count": 0,
+        "denominator": 20000,
+        "exact_binomial_95_interval": [
+          0.0,
+          0.0001844269639618992
+        ],
+        "rate": 0.0
+      },
+      "scenario": "context_range4_boundary",
+      "support_points": [
+        -1.0,
+        2.0
+      ],
+      "target_half_width": 0.125,
+      "true_mean": 0.5,
+      "true_variance": 2.25
+    }
+  ],
+  "reusable_as_final": false,
+  "scenario_cells": 40,
+  "schema_version": "1.1",
+  "simulator_sha256": "c8ecd2bbdba65c68c4070109c518b629a73abc3b1128094fb5818b5af28336a8",
+  "statistical_simulations_only": true,
+  "status": "PASS",
+  "substream": "statistical-method-validation"
+}

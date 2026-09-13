@@ -1,0 +1,116 @@
+{
+  "artifact_sha256": {
+    "AUDIT.json": "35f99000071196c677560876cc0e5cc7878f72a3a61221eb545723f3d6e2e7fe"
+  },
+  "audit": {
+    "complete_id_dimensions": [
+      "record_kind",
+      "pilot",
+      "bundle_index",
+      "comparator",
+      "context",
+      "route_status",
+      "cycle",
+      "replicate_id",
+      "epoch"
+    ],
+    "confirmatory": false,
+    "counts_as_experimental_evidence": false,
+    "coverage": {
+      "bundle_index": {
+        "0": 1536
+      },
+      "comparator": {
+        "C1": 960,
+        "C2": 384,
+        "C6": 192
+      },
+      "context": {
+        "kappa1": 384,
+        "kappa2": 384,
+        "ordinary": 768
+      },
+      "cycle": {
+        "1": 1344,
+        "2": 192
+      },
+      "epoch": {
+        "0": 48,
+        "1": 48,
+        "10": 48,
+        "11": 48,
+        "12": 48,
+        "13": 48,
+        "14": 48,
+        "15": 48,
+        "16": 48,
+        "17": 48,
+        "18": 48,
+        "19": 48,
+        "2": 48,
+        "20": 48,
+        "21": 48,
+        "22": 48,
+        "23": 48,
+        "24": 48,
+        "25": 48,
+        "26": 48,
+        "27": 48,
+        "28": 48,
+        "29": 48,
+        "3": 48,
+        "30": 48,
+        "31": 48,
+        "4": 48,
+        "5": 48,
+        "6": 48,
+        "7": 48,
+        "8": 48,
+        "9": 48
+      },
+      "pilot": {
+        "P6": 768,
+        "P7": 768
+      },
+      "record_kind": {
+        "qa_trial": 1536
+      },
+      "replicate_id": {
+        "0": 512,
+        "1": 512,
+        "2": 512
+      },
+      "route_status": {
+        "bypassed": 384,
+        "intact": 1152
+      }
+    },
+    "coverage_pass": true,
+    "development_only": true,
+    "expected_plan_sha256": "e935e90906fbe92e43d51f3c8f19122ea5690f465e8642584fa8a2b1fba2df32",
+    "expected_records": 1536,
+    "guardrails": {
+      "executed_infeasible_actions": 0,
+      "invalid_concurrent_writes": 0,
+      "physical_state_violations": 0,
+      "unauthorized_executions": 0,
+      "undeclared_budget_overruns": 0
+    },
+    "index_sha256": "73088831cbe56cefd9765baa94b68a504fdb9d4662ac04458b39f89745a989a2",
+    "namespace": "PD-B1-D-v1.1-QA",
+    "qa_only": true,
+    "reusable_as_final": false,
+    "reusable_for_B1E": false,
+    "status": "PASS",
+    "validated_records": 1536,
+    "version": "b1d-exporter-1.1"
+  },
+  "confirmatory": false,
+  "development_only": true,
+  "manifest_self_hash": "MANIFEST.sha256; no self-reference",
+  "publication": "all validations completed before atomic directory rename",
+  "reusable_as_final": false,
+  "reusable_for_B1E": false,
+  "source": "development QA",
+  "version": "b1d-exporter-1.1"
+}
