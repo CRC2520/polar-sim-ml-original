@@ -104,19 +104,18 @@ jobs:
         run: |
           python - <<'PY'
           import json,pathlib,hashlib,os
-          from b1s.v1_1.design import screening_registry,canonical_hash
+          from b1s.v1_1.design import screening_registry
+          from b1s.v1_1.analysis import canonical_hash
+          f=json.loads(pathlib.Path('frozen/qa/DEVELOPMENT_FREEZE.json').read_text())
+          assert f['source_commit']==os.environ['GITHUB_SHA']
+          assert f['registry_sha256']==canonical_hash(screening_registry())
+          for name,h in f['source_hashes'].items():assert hashlib.sha256((pathlib.Path('b1s/v1_1')/name).read_bytes()).hexdigest()==h,name
+          for name,h in f['shared_source_hashes'].items():assert hashlib.sha256((pathlib.Path('b1s/execution')/name).read_bytes()).hexdigest()==h,name
           PY
       - name: Execute assigned development fits
         env:
           SHARD: ${{ matrix.shard }}
         run: |
-          python - <<'PY'
-          import json,pathlib,hashlib,os
-          f=json.loads(pathlib.Path('frozen/qa/DEVELOPMENT_FREEZE.json').read_text())
-          assert f['source_commit']==os.environ['GITHUB_SHA']
-          for name,h in f['source_hashes'].items():assert hashlib.sha256((pathlib.Path('b1s/v1_1')/name).read_bytes()).hexdigest()==h,name
-          for name,h in f['shared_source_hashes'].items():assert hashlib.sha256((pathlib.Path('b1s/execution')/name).read_bytes()).hexdigest()==h,name
-          PY
           mkdir -p screen
           python -m b1s.v1_1.train screen --shard "$SHARD" --shards 24 --out screen 2>&1 | tee "screen/SHARD_${SHARD}_LOG.txt"
       - uses: actions/upload-artifact@v4
