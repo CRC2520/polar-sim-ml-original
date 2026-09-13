@@ -2,11 +2,11 @@
 
 **Version 1.0.0 · 13 September 2026 · B1S_DESIGN**
 
-[Spanish edition](translations/es/IMPLEMENTATION_HANDOFF.md)
+[Complete research plan in Spanish](https://github.com/CRC2520/POLAR_MODEL_CRC/blob/f954f1cfa96cbf92a9ae04e87301eb124d6ec73b/b1s/translations/es/STRUCTURAL_DISCOVERY_PLAN.md). This technical handoff is in English; the link is to the complementary research plan, not a translation of this file.
 
 ## H0. Authority and current action
 
-The author has requested a prospective structural-discovery pivot before B1-E. The canonical [research plan](https://github.com/CRC2520/POLAR_MODEL_CRC/blob/4566e8535c06fe3b473882657c5be98392e60c0f/b1s/STRUCTURAL_DISCOVERY_PLAN.md) and [domain admission record](https://github.com/CRC2520/POLAR_MODEL_CRC/blob/4566e8535c06fe3b473882657c5be98392e60c0f/b1s/DOMAIN_ADMISSION.json) govern this handoff. The shared `TRANSITION.json` records ON_HOLD_PENDING_STRUCTURAL_DISCOVERY for B1-E v2. Its archived N=138688 and previous readiness fields are not edited.
+The author has requested a prospective structural-discovery pivot before B1-E. The canonical [research plan](https://github.com/CRC2520/POLAR_MODEL_CRC/blob/f954f1cfa96cbf92a9ae04e87301eb124d6ec73b/b1s/STRUCTURAL_DISCOVERY_PLAN.md) and [domain admission record](https://github.com/CRC2520/POLAR_MODEL_CRC/blob/f954f1cfa96cbf92a9ae04e87301eb124d6ec73b/b1s/DOMAIN_ADMISSION.json) govern this handoff. The shared `TRANSITION.json` records ON_HOLD_PENDING_STRUCTURAL_DISCOVERY for B1-E v2. Its archived N=138688 and previous readiness fields are not edited.
 
 This release implements no learner, task, controller, experiment or seed generator. It adds documentation and static checks only. Before scientific implementation, the domain and operator admission requirements below must be resolved in a separate authorized change. Existing `b1/`, B0 contracts, historical experimental code, traces and manifests remain byte-identical.
 
