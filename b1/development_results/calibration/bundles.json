@@ -1,0 +1,3170 @@
+[
+  {
+    "bundle_index": 32,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 32,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 32,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 1,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 1,
+          "24": 0
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 33,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 33,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 33,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": null,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": null,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 34,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 34,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 34,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 1,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": null,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 35,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 35,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 35,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 0,
+          "24": 0
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 1,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 36,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 36,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 36,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": null,
+          "24": 0
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 1,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 1,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 37,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 37,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 37,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 0,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": null,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 1,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 38,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 38,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 38,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": null,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 0,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": null,
+          "24": 0
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 39,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 39,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 39,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 0,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 40,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 40,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 40,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": null,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": null,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 41,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 41,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 41,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 1,
+          "24": 0
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 1,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 1,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 42,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 42,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 42,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 1,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": null,
+          "24": 0
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 43,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 43,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 43,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": null,
+          "24": 0
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": null,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 1,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 44,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 44,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 44,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": null,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": null,
+          "24": 0
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 45,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 45,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 45,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 1,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": null,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 46,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 46,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 46,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 0,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": null,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": null,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 47,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 47,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 47,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 1,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 0,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 48,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 48,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 48,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": null,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": null,
+          "24": 0
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": null,
+          "24": 0
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 49,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 49,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 49,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 1,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": null,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": null,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 50,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 50,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 50,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 0,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 0,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 51,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 51,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 51,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": null,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 1,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 1,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 52,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 52,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 52,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 1,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 0,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": null,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 53,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 53,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 53,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 1,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 1,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 1,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 54,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 54,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 54,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 1,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 55,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 55,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 55,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 0,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": null,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 1,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 56,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 56,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 56,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 0,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": null,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 57,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 57,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 57,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 1,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": null,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 1,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 58,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 58,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 58,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 1,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": null,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 59,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 59,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 59,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 1,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 1,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 0,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 60,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 60,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 60,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": null,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 0,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 61,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 61,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 61,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": null,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 0,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          0,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 62,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 0
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 62,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": null,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": null,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 62,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 0,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": 0,
+          "24": null
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 63,
+    "cells": [
+      {
+        "cell_id": 0,
+        "initial_reserve": 0
+      },
+      {
+        "cell_id": 1,
+        "initial_reserve": 8
+      },
+      {
+        "cell_id": 2,
+        "initial_reserve": 8
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P5",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 63,
+    "cells": [
+      {
+        "cell_id": 0,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": true
+      },
+      {
+        "cell_id": 1,
+        "flip_epoch": 16,
+        "initial_mapping": "q0",
+        "transfer_eligible": false
+      },
+      {
+        "cell_id": 2,
+        "flip_epoch": 16,
+        "initial_mapping": "q1",
+        "transfer_eligible": false
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P6",
+    "reusable_as_final": false,
+    "role": "calibration"
+  },
+  {
+    "bundle_index": 63,
+    "cells": [
+      {
+        "cell_id": 0,
+        "drift_events": {
+          "8": 1,
+          "24": 1
+        },
+        "initial_drifts": [
+          1,
+          0
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": null
+      },
+      {
+        "cell_id": 1,
+        "drift_events": {
+          "8": 1,
+          "24": 0
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "replacement",
+        "version_switch_epoch": 16
+      },
+      {
+        "cell_id": 2,
+        "drift_events": {
+          "8": null,
+          "24": 1
+        },
+        "initial_drifts": [
+          0,
+          1
+        ],
+        "mode": "state_preserving",
+        "version_switch_epoch": 16
+      }
+    ],
+    "confirmatory": false,
+    "development_only": true,
+    "pilot": "P7",
+    "reusable_as_final": false,
+    "role": "calibration"
+  }
+]
