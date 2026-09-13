@@ -1,0 +1,1038 @@
+{
+  "B1E_executed": false,
+  "QA_report_sha256": "c14e7339ec95e1276d9ea49849fe156dbca462118e5abdc0cc4dad312594e8d4",
+  "final_seeds_generated": false,
+  "plan": {
+    "B1E_executed": false,
+    "H_CAT": "NOT_EVALUABLE",
+    "H_TRANSFER": "NOT_EVALUATED",
+    "algebraic_atol": 2e-07,
+    "base_code_commit": "91bb5bde3b8244252ce43cfed6b0d041639ad265",
+    "budget_basis": "Capped initial development campaign, fixed before observing learning outcomes. 32768=64 PPO rollouts. Three independent initializations estimate gross between-training variability only. Runtime preflight measured installation and native stepping, not model utility. This budget does not establish convergence or benchmark competence.",
+    "causal_episodes_per_replicate": 8,
+    "causal_policy": "At fixed prefix length 8 on a separate development-causal seed, replay exact native action prefix in new worlds. Compare intact, matched sham, each active edge bypass, and two-edge factorial if available. The intervention occurs once; subsequent actions use the intact policy on each resulting observation. Early termination before the prefix is retained as unavailable, not replaced.",
+    "causal_prefix_cycles": 8,
+    "competence_diagnostic": "Report generic PPO and SAC separately: mean heldout loss improvement over the no-action witness greater than engineering margin and mean additional package displacement at least one native length unit. Descriptive diagnostic, not optimality certification. Lack of competence blocks any broad superiority claim, not reporting of local route effects.",
+    "confirmatory": false,
+    "development_only": true,
+    "equivalence_margin": 2.1666666666666665,
+    "expected_fit_count": 381,
+    "expected_training_native_steps": 12484608,
+    "final_seeds_generated": false,
+    "generic_search": {
+      "candidate_count_per_family": 42,
+      "discount_factors": [
+        0.9,
+        0.95,
+        0.97,
+        0.98,
+        0.99,
+        0.995
+      ],
+      "learning_rates": [
+        0.0001,
+        0.0002,
+        0.0003,
+        0.0005,
+        0.0007,
+        0.001,
+        0.002
+      ],
+      "selection": "mean development selection loss over all 3 training replicates; exact ties by configuration id"
+    },
+    "heldout_episodes_per_replicate": 24,
+    "independent_training_replicates": 3,
+    "inference": "Development-only paired means by independent training replicate. Episode pairs within one trained policy are not independent training replications. Descriptive paired t intervals with df=2 are explicitly exploratory, distribution-dependent and not multiplicity-corrected confirmatory claims. All contrasts retained; no H_CAT p-value.",
+    "margin_basis": "Prospective engineering reference: 130/30 native reward units for one native simulation length unit of package progress at forward_reward=1, with other native reward terms held equal. It is not a clinical/economic preference or a universal meaningful threshold.",
+    "max_minutes_per_shard": 90,
+    "max_parallel_shards": 12,
+    "missing_run_policy": "Any missing, duplicate, invalid or failed fit blocks aggregate selection; retain incident and all successful fits, never replace seeds or fill missing outcomes. A reproducible transport rerun requires a separately logged attempt and identical source; no such rerun is automatic.",
+    "policy_or_task_retuning_after_selection": false,
+    "ppo": {
+      "adam_eps": 1e-05,
+      "clip": 0.2,
+      "entropy_coef": 0.0,
+      "epochs": 4,
+      "gae_lambda": 0.95,
+      "gamma": 0.99,
+      "lr": 0.0003,
+      "max_grad_norm": 0.5,
+      "minibatch": 128,
+      "rollout_steps": 512,
+      "value_coef": 0.5
+    },
+    "practical_margin": 4.333333333333333,
+    "readiness_rule": "S7 reports completion and limitations independently of effect direction. B1-E remains on hold until a separate review and final protocol; a positive development outcome cannot authorize final execution.",
+    "replay_atol": 0.0,
+    "retention": "All fit configurations, episode identities/returns, optimizer curves, checkpoints and hashes; full selection/heldout/causal evaluation traces compressed; full raw training observation sequences are not retained. Reproduction starts from pinned source/runtime and recorded training seeds; no guarantee of cross-hardware bitwise training identity.",
+    "retries_of_scientific_fits": 0,
+    "route_action_numeric_tolerance": 2e-07,
+    "sac": {
+      "activation": "ReLU",
+      "batch_size": 128,
+      "entropy_coefficient": "auto",
+      "gradient_steps": 1,
+      "hidden_sizes": [
+        64,
+        64
+      ],
+      "learning_starts": 1024,
+      "replay_capacity": 32768,
+      "tau": 0.005,
+      "train_freq": 8
+    },
+    "search_opportunity": "42 candidates for sparse supports and 42 configurations each for generic PPO and SAC, each with 3 fits and 32768 native steps. Dense is a separate fixed 3-fit baseline. Different search spaces and algorithms are explicitly NOT capacity-equivalent.",
+    "selection_episodes_per_replicate": 12,
+    "shards": 18,
+    "source_contract_git_blob": "221b9712d60a2f8ef6630b3a2cce240cf2acca5c",
+    "source_contract_path": "b1s/admission/DOMAIN_CONTRACT.json",
+    "source_document_commit": "45447fdb9d7a90e666b53f1b15548c8889687a6b",
+    "sparse_search_count": 42,
+    "status": "PROSPECTIVE_DEVELOPMENT_PLAN",
+    "support_selection": "mean development selection loss across all replicates; exact ties: edge count then lexicographic mask",
+    "trained_support_count": 43,
+    "training_steps_per_fit": 32768,
+    "version": "B1S-MW-D-1.0.0"
+  },
+  "plan_sha256": "1be9fbbcef4eb530124f1e29021308b976601da63a436a97b934dd149bae2654",
+  "preservation": {
+    "bad": [],
+    "base": "91bb5bde3b8244252ce43cfed6b0d041639ad265",
+    "preserved_git_objects_and_modes": 1404,
+    "status": "PASS"
+  },
+  "registry": [
+    {
+      "gamma": 0.99,
+      "id": "graph-000000",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "000000"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-000001",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "000001"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-000010",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "000010"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-000011",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "000011"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-000100",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "000100"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-000101",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "000101"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-000110",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "000110"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-000111",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "000111"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-001000",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "001000"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-001001",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "001001"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-001010",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "001010"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-001011",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "001011"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-001100",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "001100"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-001101",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "001101"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-001110",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "001110"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-010000",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "010000"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-010001",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "010001"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-010010",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "010010"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-010011",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "010011"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-010100",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "010100"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-010101",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "010101"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-010110",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "010110"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-011000",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "011000"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-011001",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "011001"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-011010",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "011010"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-011100",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "011100"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-100000",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "100000"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-100001",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "100001"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-100010",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "100010"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-100011",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "100011"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-100100",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "100100"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-100101",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "100101"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-100110",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "100110"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-101000",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "101000"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-101001",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "101001"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-101010",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "101010"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-101100",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "101100"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-110000",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "110000"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-110001",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "110001"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-110010",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "110010"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-110100",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "110100"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-111000",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "111000"
+    },
+    {
+      "gamma": 0.99,
+      "id": "graph-111111",
+      "kind": "graph",
+      "lr": 0.0003,
+      "mask": "111111"
+    },
+    {
+      "gamma": 0.9,
+      "id": "ppo-00",
+      "kind": "ppo",
+      "lr": 0.0001,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "ppo-01",
+      "kind": "ppo",
+      "lr": 0.0001,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "ppo-02",
+      "kind": "ppo",
+      "lr": 0.0001,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "ppo-03",
+      "kind": "ppo",
+      "lr": 0.0001,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "ppo-04",
+      "kind": "ppo",
+      "lr": 0.0001,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "ppo-05",
+      "kind": "ppo",
+      "lr": 0.0001,
+      "mask": null
+    },
+    {
+      "gamma": 0.9,
+      "id": "ppo-06",
+      "kind": "ppo",
+      "lr": 0.0002,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "ppo-07",
+      "kind": "ppo",
+      "lr": 0.0002,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "ppo-08",
+      "kind": "ppo",
+      "lr": 0.0002,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "ppo-09",
+      "kind": "ppo",
+      "lr": 0.0002,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "ppo-10",
+      "kind": "ppo",
+      "lr": 0.0002,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "ppo-11",
+      "kind": "ppo",
+      "lr": 0.0002,
+      "mask": null
+    },
+    {
+      "gamma": 0.9,
+      "id": "ppo-12",
+      "kind": "ppo",
+      "lr": 0.0003,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "ppo-13",
+      "kind": "ppo",
+      "lr": 0.0003,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "ppo-14",
+      "kind": "ppo",
+      "lr": 0.0003,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "ppo-15",
+      "kind": "ppo",
+      "lr": 0.0003,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "ppo-16",
+      "kind": "ppo",
+      "lr": 0.0003,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "ppo-17",
+      "kind": "ppo",
+      "lr": 0.0003,
+      "mask": null
+    },
+    {
+      "gamma": 0.9,
+      "id": "ppo-18",
+      "kind": "ppo",
+      "lr": 0.0005,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "ppo-19",
+      "kind": "ppo",
+      "lr": 0.0005,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "ppo-20",
+      "kind": "ppo",
+      "lr": 0.0005,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "ppo-21",
+      "kind": "ppo",
+      "lr": 0.0005,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "ppo-22",
+      "kind": "ppo",
+      "lr": 0.0005,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "ppo-23",
+      "kind": "ppo",
+      "lr": 0.0005,
+      "mask": null
+    },
+    {
+      "gamma": 0.9,
+      "id": "ppo-24",
+      "kind": "ppo",
+      "lr": 0.0007,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "ppo-25",
+      "kind": "ppo",
+      "lr": 0.0007,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "ppo-26",
+      "kind": "ppo",
+      "lr": 0.0007,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "ppo-27",
+      "kind": "ppo",
+      "lr": 0.0007,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "ppo-28",
+      "kind": "ppo",
+      "lr": 0.0007,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "ppo-29",
+      "kind": "ppo",
+      "lr": 0.0007,
+      "mask": null
+    },
+    {
+      "gamma": 0.9,
+      "id": "ppo-30",
+      "kind": "ppo",
+      "lr": 0.001,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "ppo-31",
+      "kind": "ppo",
+      "lr": 0.001,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "ppo-32",
+      "kind": "ppo",
+      "lr": 0.001,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "ppo-33",
+      "kind": "ppo",
+      "lr": 0.001,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "ppo-34",
+      "kind": "ppo",
+      "lr": 0.001,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "ppo-35",
+      "kind": "ppo",
+      "lr": 0.001,
+      "mask": null
+    },
+    {
+      "gamma": 0.9,
+      "id": "ppo-36",
+      "kind": "ppo",
+      "lr": 0.002,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "ppo-37",
+      "kind": "ppo",
+      "lr": 0.002,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "ppo-38",
+      "kind": "ppo",
+      "lr": 0.002,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "ppo-39",
+      "kind": "ppo",
+      "lr": 0.002,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "ppo-40",
+      "kind": "ppo",
+      "lr": 0.002,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "ppo-41",
+      "kind": "ppo",
+      "lr": 0.002,
+      "mask": null
+    },
+    {
+      "gamma": 0.9,
+      "id": "sac-00",
+      "kind": "sac",
+      "lr": 0.0001,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "sac-01",
+      "kind": "sac",
+      "lr": 0.0001,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "sac-02",
+      "kind": "sac",
+      "lr": 0.0001,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "sac-03",
+      "kind": "sac",
+      "lr": 0.0001,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "sac-04",
+      "kind": "sac",
+      "lr": 0.0001,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "sac-05",
+      "kind": "sac",
+      "lr": 0.0001,
+      "mask": null
+    },
+    {
+      "gamma": 0.9,
+      "id": "sac-06",
+      "kind": "sac",
+      "lr": 0.0002,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "sac-07",
+      "kind": "sac",
+      "lr": 0.0002,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "sac-08",
+      "kind": "sac",
+      "lr": 0.0002,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "sac-09",
+      "kind": "sac",
+      "lr": 0.0002,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "sac-10",
+      "kind": "sac",
+      "lr": 0.0002,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "sac-11",
+      "kind": "sac",
+      "lr": 0.0002,
+      "mask": null
+    },
+    {
+      "gamma": 0.9,
+      "id": "sac-12",
+      "kind": "sac",
+      "lr": 0.0003,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "sac-13",
+      "kind": "sac",
+      "lr": 0.0003,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "sac-14",
+      "kind": "sac",
+      "lr": 0.0003,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "sac-15",
+      "kind": "sac",
+      "lr": 0.0003,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "sac-16",
+      "kind": "sac",
+      "lr": 0.0003,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "sac-17",
+      "kind": "sac",
+      "lr": 0.0003,
+      "mask": null
+    },
+    {
+      "gamma": 0.9,
+      "id": "sac-18",
+      "kind": "sac",
+      "lr": 0.0005,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "sac-19",
+      "kind": "sac",
+      "lr": 0.0005,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "sac-20",
+      "kind": "sac",
+      "lr": 0.0005,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "sac-21",
+      "kind": "sac",
+      "lr": 0.0005,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "sac-22",
+      "kind": "sac",
+      "lr": 0.0005,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "sac-23",
+      "kind": "sac",
+      "lr": 0.0005,
+      "mask": null
+    },
+    {
+      "gamma": 0.9,
+      "id": "sac-24",
+      "kind": "sac",
+      "lr": 0.0007,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "sac-25",
+      "kind": "sac",
+      "lr": 0.0007,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "sac-26",
+      "kind": "sac",
+      "lr": 0.0007,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "sac-27",
+      "kind": "sac",
+      "lr": 0.0007,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "sac-28",
+      "kind": "sac",
+      "lr": 0.0007,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "sac-29",
+      "kind": "sac",
+      "lr": 0.0007,
+      "mask": null
+    },
+    {
+      "gamma": 0.9,
+      "id": "sac-30",
+      "kind": "sac",
+      "lr": 0.001,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "sac-31",
+      "kind": "sac",
+      "lr": 0.001,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "sac-32",
+      "kind": "sac",
+      "lr": 0.001,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "sac-33",
+      "kind": "sac",
+      "lr": 0.001,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "sac-34",
+      "kind": "sac",
+      "lr": 0.001,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "sac-35",
+      "kind": "sac",
+      "lr": 0.001,
+      "mask": null
+    },
+    {
+      "gamma": 0.9,
+      "id": "sac-36",
+      "kind": "sac",
+      "lr": 0.002,
+      "mask": null
+    },
+    {
+      "gamma": 0.95,
+      "id": "sac-37",
+      "kind": "sac",
+      "lr": 0.002,
+      "mask": null
+    },
+    {
+      "gamma": 0.97,
+      "id": "sac-38",
+      "kind": "sac",
+      "lr": 0.002,
+      "mask": null
+    },
+    {
+      "gamma": 0.98,
+      "id": "sac-39",
+      "kind": "sac",
+      "lr": 0.002,
+      "mask": null
+    },
+    {
+      "gamma": 0.99,
+      "id": "sac-40",
+      "kind": "sac",
+      "lr": 0.002,
+      "mask": null
+    },
+    {
+      "gamma": 0.995,
+      "id": "sac-41",
+      "kind": "sac",
+      "lr": 0.002,
+      "mask": null
+    }
+  ],
+  "runtime": {
+    "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+    "python": "3.11.16",
+    "sources": {
+      "sisl/multiwalker/multiwalker.py": {
+        "blob": "8edf250d1dec03d4ae2ee56c9e2dff5fe50e875c",
+        "sha256": "480d81f415ae4fef2fb93cf93a4d2859f2af0012fc5f16f9109d78fb4dfceb68"
+      },
+      "sisl/multiwalker/multiwalker_base.py": {
+        "blob": "476b3950cc1146e53338ec4bf48b9291b6143a84",
+        "sha256": "5e5ec639fa71295daf991ab762e9adf45f95b72d6848911e3b8ea98ae1dd3f7e"
+      },
+      "sisl/multiwalker_v9.py": {
+        "blob": "555eee6a7f37d5bb908152f6680a6d7ffe882f91",
+        "sha256": "1137bf70127d136b5590d634a7457576cbcc54eeeff695c1341b1c8ad1271d97"
+      }
+    },
+    "torch_threads": 1,
+    "upstream_commit": "e62d6bcdc6e0c28fa19c08545a63dc8370393495",
+    "versions": {
+      "box2d-py": "2.3.5",
+      "gymnasium": "0.29.1",
+      "numpy": "1.26.4",
+      "pettingzoo": "1.24.3",
+      "pygame": "2.5.2",
+      "stable-baselines3": "2.3.2",
+      "torch": "2.2.2+cpu"
+    }
+  },
+  "source_commit": "e7fab2dc8076a3605565524939a09dc0e677a2e5",
+  "source_hashes": {
+    "CONTRACT_PROJECTION.json": "0734cfc2cfe44b4fa1d45f2e0f2028a6acb42847442bbeb7f098ebce4939cf29",
+    "PLAN.json": "1be9fbbcef4eb530124f1e29021308b976601da63a436a97b934dd149bae2654",
+    "analysis.py": "a187866c34bc1ff84b78819724c557961d889b9e927f1508087b80a5b6ab9e69",
+    "conformance.py": "296fc6ad1f46aac1714c78e785fbe387889f002d9623de14484f7c7783b11750",
+    "core.py": "459255a4e4797c8ea03fd6187c70802dcdc152bfce48d0f2405d2f88b7fe0a59",
+    "finalize.py": "1d41fef3d8642adced76943a04f5839ae23264d6ee6a11f238c07c68d824c374",
+    "instrument.py": "8ce0c1b2fca29d6bc39c35393bb4bff1c97d0cd4254838bb2483c41f551347df",
+    "requirements.txt": "26d33ad281ff87732e748eddb45ae8f3aa4e1fced20f4627aa7b5ef4719768ce",
+    "train.py": "336222bbd9fc8802b245d2b471a3ba68da0d35017c66e269d91f1c2e1080fddf"
+  },
+  "status": "FROZEN_FOR_DEVELOPMENT_ONLY",
+  "utc_before_training": "2026-09-13T13:30:02Z"
+}

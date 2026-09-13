@@ -1,0 +1,153 @@
+{
+  "decision_boundaries": "PASS",
+  "dose_cases": [
+    {
+      "dose": 0.0,
+      "motor_setpoints": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "reward": -0.01373531607290109,
+      "terminal": false
+    },
+    {
+      "dose": 0.25,
+      "motor_setpoints": [
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0,
+        20.0
+      ],
+      "reward": -0.0578001451989015,
+      "terminal": false
+    },
+    {
+      "dose": 0.5,
+      "motor_setpoints": [
+        40.0,
+        40.0,
+        40.0,
+        40.0,
+        40.0,
+        40.0,
+        40.0,
+        40.0,
+        40.0,
+        40.0,
+        40.0,
+        40.0
+      ],
+      "reward": -0.10691425142188866,
+      "terminal": false
+    },
+    {
+      "dose": 0.75,
+      "motor_setpoints": [
+        60.0,
+        60.0,
+        60.0,
+        60.0,
+        60.0,
+        60.0,
+        60.0,
+        60.0,
+        60.0,
+        60.0,
+        60.0,
+        60.0
+      ],
+      "reward": -0.10645595068732898,
+      "terminal": false
+    },
+    {
+      "dose": 1.0,
+      "motor_setpoints": [
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0,
+        80.0
+      ],
+      "reward": -0.10674308054149151,
+      "terminal": false
+    }
+  ],
+  "maximum_four_regimes": "PASS",
+  "permutations": [
+    {
+      "keeps_ordered_chain": true,
+      "sigma": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "keeps_ordered_chain": false,
+      "sigma": [
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      "keeps_ordered_chain": false,
+      "sigma": [
+        1,
+        0,
+        2
+      ]
+    },
+    {
+      "keeps_ordered_chain": false,
+      "sigma": [
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "keeps_ordered_chain": false,
+      "sigma": [
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "keeps_ordered_chain": false,
+      "sigma": [
+        2,
+        1,
+        0
+      ]
+    }
+  ],
+  "ppo_ratio_gradient": "PASS",
+  "status": "PASS"
+}
