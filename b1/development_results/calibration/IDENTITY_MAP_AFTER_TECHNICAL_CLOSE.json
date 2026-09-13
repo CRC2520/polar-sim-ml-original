@@ -1,0 +1,202 @@
+{
+  "confirmatory": false,
+  "created_utc": "2026-09-13T02:24:56.067166+00:00",
+  "development_only": true,
+  "identities": {
+    "arm-0d097c71fbd82a08": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C0",
+      "config_id": "cfg01",
+      "cycle": 1,
+      "pilot": "P6"
+    },
+    "arm-14858f101ffdaff0": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C6",
+      "config_id": "cfg01",
+      "cycle": 1,
+      "pilot": "P7"
+    },
+    "arm-1640dc12d4fb4d7d": {
+      "acute_context": "kappa1",
+      "acute_lesion": true,
+      "comparator": "C1",
+      "config_id": "cfg01",
+      "cycle": 1,
+      "pilot": "P7"
+    },
+    "arm-179f17c9c2599f3b": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C3",
+      "config_id": "cfg01",
+      "cycle": 1,
+      "pilot": "P7"
+    },
+    "arm-214db3921fcfeeb0": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C4",
+      "config_id": "fixed",
+      "cycle": 1,
+      "pilot": "P6"
+    },
+    "arm-31b2ebb536d7b8a9": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C5",
+      "config_id": "cfg00",
+      "cycle": 1,
+      "pilot": "P6"
+    },
+    "arm-53b6de3fd0fe68e2": {
+      "acute_context": "kappa1",
+      "acute_lesion": false,
+      "comparator": "C1",
+      "config_id": "cfg01",
+      "cycle": 1,
+      "pilot": "P7"
+    },
+    "arm-542f4da82f68cef9": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C6",
+      "config_id": "cfg00",
+      "cycle": 1,
+      "pilot": "P6"
+    },
+    "arm-5cdea612403b51d4": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C0",
+      "config_id": "cfg01",
+      "cycle": 1,
+      "pilot": "P7"
+    },
+    "arm-63a44169d5cca99b": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C1",
+      "config_id": "cfg00",
+      "cycle": 1,
+      "pilot": "P6"
+    },
+    "arm-704fc3e688bd64e8": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C2",
+      "config_id": "cfg00",
+      "cycle": 2,
+      "pilot": "P6"
+    },
+    "arm-83de598217d8dcce": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C1",
+      "config_id": "cfg01",
+      "cycle": 1,
+      "pilot": "P7"
+    },
+    "arm-86a09a072bfcb71e": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C2",
+      "config_id": "cfg00",
+      "cycle": 1,
+      "pilot": "P6"
+    },
+    "arm-89e8a59d3f51d60b": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C5",
+      "config_id": "cfg01",
+      "cycle": 1,
+      "pilot": "P7"
+    },
+    "arm-98408bbf16e00086": {
+      "acute_context": "kappa2",
+      "acute_lesion": false,
+      "comparator": "C1",
+      "config_id": "cfg01",
+      "cycle": 1,
+      "pilot": "P7"
+    },
+    "arm-a948cf3ac47de676": {
+      "acute_context": "kappa1",
+      "acute_lesion": true,
+      "comparator": "C1",
+      "config_id": "cfg00",
+      "cycle": 1,
+      "pilot": "P6"
+    },
+    "arm-ada5b9eaa7301803": {
+      "acute_context": "kappa2",
+      "acute_lesion": false,
+      "comparator": "C1",
+      "config_id": "cfg00",
+      "cycle": 1,
+      "pilot": "P6"
+    },
+    "arm-ae5b850e427d45e9": {
+      "acute_context": "kappa1",
+      "acute_lesion": false,
+      "comparator": "C1",
+      "config_id": "cfg00",
+      "cycle": 1,
+      "pilot": "P6"
+    },
+    "arm-c28478b4e401b1cc": {
+      "acute_context": "kappa2",
+      "acute_lesion": true,
+      "comparator": "C1",
+      "config_id": "cfg00",
+      "cycle": 1,
+      "pilot": "P6"
+    },
+    "arm-c6c0bdfdd16bcf03": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C2",
+      "config_id": "cfg00",
+      "cycle": 1,
+      "pilot": "P7"
+    },
+    "arm-e2da443bb8089893": {
+      "acute_context": "kappa2",
+      "acute_lesion": true,
+      "comparator": "C1",
+      "config_id": "cfg01",
+      "cycle": 1,
+      "pilot": "P7"
+    },
+    "arm-e891d86abe2373c5": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C2",
+      "config_id": "cfg00",
+      "cycle": 2,
+      "pilot": "P7"
+    },
+    "arm-ee2b839043d57681": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C3",
+      "config_id": "cfg00",
+      "cycle": 1,
+      "pilot": "P6"
+    },
+    "arm-fce4f99044b62ddd": {
+      "acute_context": null,
+      "acute_lesion": false,
+      "comparator": "C4",
+      "config_id": "fixed",
+      "cycle": 1,
+      "pilot": "P7"
+    }
+  },
+  "reusable_as_final": false,
+  "technical_close_sha256": "83ea3bd43716cef3593ebb2e09079469af29f4882fddcdb130d7b796b7722260",
+  "use_policy": "Export only after technical closure; no retuning"
+}

@@ -1,0 +1,43 @@
+{
+  "source_repository": "CRC2520/POLAR_MODEL_CRC",
+  "source_commit": "c6ba1e836b6c96636ca29be7913c9c5ab9facc62",
+  "frozen_content_commit": "b4796d881ee2581367fc8dd7396521dac30d827a",
+  "canonical_narrative_source_commit": "a824ff83a18e0690a6290e9091ac58b0e6b73611",
+  "import_policy": "Exact bytes verified against unchanged B0_FREEZE; never resolve contradictory prose silently",
+  "artifacts": [
+    {
+      "source_path": "b0/B0_FREEZE.json",
+      "local_path": "b1/contracts/frozen_b0/B0_FREEZE.json",
+      "sha256": "7d9abe376401ca53c8e8f9f519b75c6bb227dfc49749059bb72eb24050978cc1"
+    },
+    {
+      "source_path": "b0/PILOT_CONTRACTS_v1.json",
+      "local_path": "b1/contracts/frozen_b0/PILOT_CONTRACTS_v1.json",
+      "sha256": "ca14f3895952e2553e1c8c7459cb3a066e4cce5db892de689c281750ef434b99"
+    },
+    {
+      "source_path": "b0/CONSTRUCT_DICTIONARY_v1.yaml",
+      "local_path": "b1/contracts/frozen_b0/CONSTRUCT_DICTIONARY_v1.yaml",
+      "sha256": "316b6d5d0c8cb3922d9547aad0679f492953bcc4d9a29637478c07527adf885a"
+    },
+    {
+      "source_path": "b0/B1_PROTOCOL_DRAFT_v1.md",
+      "local_path": "b1/contracts/frozen_b0/B1_PROTOCOL_DRAFT_v1.md",
+      "sha256": "2d2fc53edaf013b1145bd21ef360e75590f9ebebb987260a0e6c04e356adf951"
+    },
+    {
+      "source_path": "b0/B1_DECISION_RULES_v1.yaml",
+      "local_path": "b1/contracts/frozen_b0/B1_DECISION_RULES_v1.yaml",
+      "sha256": "e7bad61724314d4739318a12890daed4520cbbfb8e07acfe99d7f87a1a11d6ee"
+    },
+    {
+      "source_path": "b0/PD_OPERATIONAL_FOUNDATIONS_v3.0.md",
+      "local_path": "b1/contracts/frozen_b0/PD_OPERATIONAL_FOUNDATIONS_v3.0.md",
+      "sha256": "4f93731672c91699dd852ac27a77e2e5832698ef456b3ffaef7a16e7165a02cb"
+    }
+  ],
+  "unresolved_contract_conflicts": [
+    "B1-CONFLICT-P5-C4-REFILL-001"
+  ],
+  "historical_realization_source_commit": "c958049743f989b5c1f8866018ea48b60bae9ed7"
+}

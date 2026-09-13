@@ -1,0 +1,15 @@
+requirement,source,implementation,evidence,disposition
+immutable B0 imports,B1 user prompt,b1/contracts/loader.py,b1/B1D_CONTRACT_IMPORT.json,implemented_hash_checked
+instrument before comparisons,B1 user prompt,b1/run.py:instrument,b1/INSTRUMENT_GATE.json,PASS
+activation/admission/execution/effect,B1 user prompt,b1/tasks/core.py,b1/development_results/calibration/traces/INDEX.json,logged_separately
+P5 unique conventional comparator,B1 user prompt,b1/controllers/core.py,b1/B1D_AUDIT.json,BLOCKED_source_conflict
+P6 expected bound,B1 user prompt,b1/tests/test_tasks.py,b1/B1D_AUDIT.json,finite_law_test
+P7 distinct versioned writes,B1 user prompt,b1/tasks/p7.py,b1/development_results/instrumentation/unit-tests.txt,instrument_tested
+C6 exact conjugacy,B1 user prompt,b1/controllers/c6.py,b1/CALIBRATION_TECHNICAL.json,PASS
+six invariant axes,B1 user prompt,b1/controllers/invariants.py,b1/B1D_INVARIANT_MATRIX.csv,BLOCKED_resource_certificate
+guardrails from actual execution facts,B1 user prompt,b1/tasks/core.py:audit_execution,b1/CALIBRATION_TECHNICAL.json,computed_not_assumed
+separate tuning and calibration,B1 user prompt,b1/seeds/policy.py,b1/TUNING_FREEZE.json,content_verified_order
+machine readable evaluator,B1 user prompt,b1/evaluation/decision.py,b1/B1D_RESULTS.json,development_only_no_confirmatory_verdict
+prospective precision,B1 user prompt,b1/evaluation/precision.py,b1/B1E_RESOURCE_PROJECTION.json,N_unchanged_no_final_collection
+historical preservation,B1 user prompt,b1/validate_b1.py,b1/manifests/HISTORICAL_BASELINE.json,full_git_CI_required
+future confirmatory gate,B1 user prompt,b1/run.py,b1/B1D_AUDIT.json,BLOCKED_no_final_seed_or_runner

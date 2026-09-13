@@ -1,0 +1,50 @@
+pilot,item,value,source_path,source_pointer,development_only,confirmatory
+P5,instrument_status,"""PASS""",b1/B1D_AUDIT.json,/pilot_status/P5/instrument_status,True,False
+P5,mechanism_development_status,"""imposed_task_law_reproduced""",b1/B1D_AUDIT.json,/pilot_status/P5/mechanism_development_status,True,False
+P5,comparator_status,"""blocked_canonical_C4_conflict""",b1/B1D_AUDIT.json,/pilot_status/P5/comparator_status,True,False
+P5,utility_eligibility,false,b1/B1D_AUDIT.json,/pilot_status/P5/utility_eligibility,True,False
+P5,pairing_eligibility,false,b1/B1D_AUDIT.json,/pilot_status/P5/pairing_eligibility,True,False
+P5,no_O3_O4_promotion,true,b1/B1D_AUDIT.json,/pilot_status/P5/no_O3_O4_promotion,True,False
+P5,conventional_optimum_reproduced,true,b1/B1D_AUDIT.json,/pilot_status/P5/conventional_optimum_reproduced,True,False
+P5,ceiling_status,"""both_explicitly_unselected_witnesses_reproduce_bound""",b1/B1D_AUDIT.json,/pilot_status/P5/ceiling_status,True,False
+P5,unique_frozen_C4_implementation_selected,false,b1/B1D_AUDIT.json,/pilot_status/P5/unique_frozen_C4_implementation_selected,True,False
+P6,instrument_status,"""PASS""",b1/B1D_AUDIT.json,/pilot_status/P6/instrument_status,True,False
+P6,mechanism_development_status,"""imposed_task_law_reproduced""",b1/B1D_AUDIT.json,/pilot_status/P6/mechanism_development_status,True,False
+P6,comparator_status,"""functional_with_uncertified_resource_matching""",b1/B1D_AUDIT.json,/pilot_status/P6/comparator_status,True,False
+P6,utility_eligibility,false,b1/B1D_AUDIT.json,/pilot_status/P6/utility_eligibility,True,False
+P6,pairing_eligibility,false,b1/B1D_AUDIT.json,/pilot_status/P6/pairing_eligibility,True,False
+P6,no_O3_O4_promotion,true,b1/B1D_AUDIT.json,/pilot_status/P6/no_O3_O4_promotion,True,False
+P6,expected_bound_reproduced,true,b1/B1D_AUDIT.json,/pilot_status/P6/expected_bound_reproduced,True,False
+P6,expected_optimal_primary_loss,0.03125,b1/B1D_AUDIT.json,/pilot_status/P6/expected_optimal_primary_loss,True,False
+P6,bound_evidence,"""Exhaustive initial-mapping/flip finite-law instrument test; not closeness of a sampled mean""",b1/B1D_AUDIT.json,/pilot_status/P6/bound_evidence,True,False
+P6,per_bundle_bound_claim,false,b1/B1D_AUDIT.json,/pilot_status/P6/per_bundle_bound_claim,True,False
+P7,instrument_status,"""PASS""",b1/B1D_AUDIT.json,/pilot_status/P7/instrument_status,True,False
+P7,mechanism_development_status,"""imposed_task_law_reproduced""",b1/B1D_AUDIT.json,/pilot_status/P7/mechanism_development_status,True,False
+P7,comparator_status,"""functional_with_uncertified_resource_matching""",b1/B1D_AUDIT.json,/pilot_status/P7/comparator_status,True,False
+P7,utility_eligibility,true,b1/B1D_AUDIT.json,/pilot_status/P7/utility_eligibility,True,False
+P7,pairing_eligibility,true,b1/B1D_AUDIT.json,/pilot_status/P7/pairing_eligibility,True,False
+P7,no_O3_O4_promotion,true,b1/B1D_AUDIT.json,/pilot_status/P7/no_O3_O4_promotion,True,False
+P6,development_loss.C0.cycle1.None.False,"{""mean"": 0.0302734375, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P6,development_loss.C1.cycle1.kappa1.False,"{""mean"": 0.0302734375, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P6,development_loss.C1.cycle1.kappa1.True,"{""mean"": 0.0302734375, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P6,development_loss.C1.cycle1.kappa2.False,"{""mean"": 0.0302734375, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P6,development_loss.C1.cycle1.kappa2.True,"{""mean"": 0.0302734375, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P6,development_loss.C1.cycle1.None.False,"{""mean"": 0.0302734375, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P6,development_loss.C2.cycle1.None.False,"{""mean"": 0.0302734375, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P6,development_loss.C2.cycle2.None.False,"{""mean"": 0.0302734375, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P6,development_loss.C3.cycle1.None.False,"{""mean"": 0.0302734375, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P6,development_loss.C4.cycle1.None.False,"{""mean"": 0.0302734375, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P6,development_loss.C5.cycle1.None.False,"{""mean"": 0.0302734375, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P6,development_loss.C6.cycle1.None.False,"{""mean"": 0.0302734375, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P7,development_loss.C0.cycle1.None.False,"{""mean"": 0.06266276041666667, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P7,development_loss.C1.cycle1.kappa1.False,"{""mean"": 0.06266276041666667, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P7,development_loss.C1.cycle1.kappa1.True,"{""mean"": 0.06266276041666667, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P7,development_loss.C1.cycle1.kappa2.False,"{""mean"": 0.06266276041666667, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P7,development_loss.C1.cycle1.kappa2.True,"{""mean"": 0.06266276041666667, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P7,development_loss.C1.cycle1.None.False,"{""mean"": 0.06266276041666667, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P7,development_loss.C2.cycle1.None.False,"{""mean"": 0.06266276041666667, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P7,development_loss.C2.cycle2.None.False,"{""mean"": 0.06266276041666667, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P7,development_loss.C3.cycle1.None.False,"{""mean"": 0.06266276041666667, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P7,development_loss.C4.cycle1.None.False,"{""mean"": 0.06266276041666667, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P7,development_loss.C5.cycle1.None.False,"{""mean"": 0.06266276041666667, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False
+P7,development_loss.C6.cycle1.None.False,"{""mean"": 0.06266276041666667, ""N"": 32}",b1/B1D_RESULTS.json,/calibration_summaries,True,False

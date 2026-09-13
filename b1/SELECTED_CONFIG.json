@@ -1,0 +1,28 @@
+{
+  "C2": "Mean of both fixed cycles; neither cycle selected",
+  "C6": "Exact image of selected C1",
+  "configurations": {
+    "P6": {
+      "C0": "cfg01",
+      "C1": "cfg00",
+      "C2": "cfg00",
+      "C3": "cfg00",
+      "C4": "fixed",
+      "C5": "cfg00",
+      "C6": "cfg00"
+    },
+    "P7": {
+      "C0": "cfg01",
+      "C1": "cfg01",
+      "C2": "cfg00",
+      "C3": "cfg01",
+      "C4": "fixed",
+      "C5": "cfg01",
+      "C6": "cfg01"
+    }
+  },
+  "confirmatory": false,
+  "development_only": true,
+  "reusable_as_final": false,
+  "selected_from": "all 32 tuning bundles and every registered configuration, including failed attempts"
+}

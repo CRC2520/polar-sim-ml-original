@@ -1,0 +1,58 @@
+name: B1 development instrument and preservation validation
+
+on:
+  push:
+    branches: [research/b1-development-calibration-20260912]
+    paths: ['b1/**', '.github/workflows/b1-development-validation.yml']
+  pull_request:
+    branches: [research/program-a-b-reconstruction]
+    paths: ['b1/**', '.github/workflows/b1-development-validation.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  b1-development-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONHASHSEED: '0'
+      B1_EXPERIMENT_CLASS: development_only
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned structural parser
+        run: python -m pip install PyYAML==6.0.3
+      - name: Verify immutable source, frozen imports and B1 manifests
+        run: |
+          if [ -f b1/B1D_MANIFEST.json ]; then
+            python b1/validate_b1.py --repo-root .
+          else
+            python b1/validate_b1.py --repo-root . --pre-freeze
+          fi
+      - name: Unit, property, task-law, C6, guardrail and seed-separation tests
+        run: python -m unittest discover -s b1/tests -v
+      - name: Read-only recovery provenance and corruption checks
+        run: |
+          python -m unittest discover -s b1/postprocessing/tests -v
+          python -m b1.postprocessing.export_recovery --verify-only
+      - name: Explicit development bundle 0 smoke only
+        run: python -m b1.run smoke --output "$RUNNER_TEMP/b1-development-smoke"
+      - name: Verify preservation again after instrument checks
+        run: |
+          if [ -f b1/B1D_MANIFEST.json ]; then
+            python b1/validate_b1.py --repo-root .
+          else
+            python b1/validate_b1.py --repo-root . --pre-freeze
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: b1-development-smoke
+          path: ${{ runner.temp }}/b1-development-smoke
+          retention-days: 14
+          if-no-files-found: warn

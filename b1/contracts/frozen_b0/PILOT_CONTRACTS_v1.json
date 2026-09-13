@@ -1,0 +1,1080 @@
+{
+  "classification": "new_prospective_specification",
+  "historical_realization_correspondence": "sin_contraparte_ejecutada",
+  "new_experiments_run": false,
+  "pilots": [
+    {
+      "evidence_status": "O2",
+      "fields": [
+        {
+          "name": "stable_identifier",
+          "number": 1,
+          "value": "P5; stable poles P5-A and P5-B; Gamma-P5; operational specification O2; no new implementation or causal/generalization evidence."
+        },
+        {
+          "name": "historical_label",
+          "number": 2,
+          "value": "Deseo / Límite (Desire / Limit); historical interpretive label only."
+        },
+        {
+          "name": "operational_pole_A",
+          "number": 3,
+          "value": "Productive consumption."
+        },
+        {
+          "name": "operational_pole_B",
+          "number": 4,
+          "value": "Reserve replenishment."
+        },
+        {
+          "name": "functional_definition_A",
+          "number": 5,
+          "value": "Initiate service operations that consume one reserve unit each and complete one demanded job if admitted and executed."
+        },
+        {
+          "name": "functional_definition_B",
+          "number": 6,
+          "value": "Initiate a costly replenishment operation that delivers one reserve unit per executed recharge unit at the start of the next epoch."
+        },
+        {
+          "name": "internal_activation_A",
+          "number": 7,
+          "value": "a_P5A=q_P5A/2, internally admitted production initiation slots per epoch; tilde_a_P5A is the requested intensity."
+        },
+        {
+          "name": "internal_activation_B",
+          "number": 8,
+          "value": "a_P5B=q_P5B/2, internally admitted replenishment initiation slots per epoch; tilde_a_P5B is the requested intensity."
+        },
+        {
+          "name": "technical_unit_A",
+          "number": 9,
+          "value": "One service initiation slot per synthetic epoch; one executed service consumes one reserve unit."
+        },
+        {
+          "name": "technical_unit_B",
+          "number": 10,
+          "value": "One replenishment initiation slot per synthetic epoch; one successful delivery adds one reserve unit, subject to the capacity cap."
+        },
+        {
+          "name": "normalization_A",
+          "number": 11,
+          "value": "D_A=2 service slots/epoch, an engineering capacity. q_A=floor(2*tilde_a_A) after internal authorization; a_A=q_A/2. The denominator is fixed before B1-D; external stock rejection does not redefine a_A."
+        },
+        {
+          "name": "normalization_B",
+          "number": 12,
+          "value": "D_B=2 replenishment slots/epoch, an engineering capacity. q_B=floor(2*tilde_a_B) after internal authorization; a_B=q_B/2. Future delivery and overflow are outcomes, not the numerator."
+        },
+        {
+          "name": "meaning_of_zero",
+          "number": 13,
+          "value": "a_A=0 and/or a_B=0 means no new corresponding initiation request in that epoch; earlier recharge deliveries and any retained queue state continue."
+        },
+        {
+          "name": "meaning_of_one",
+          "number": 14,
+          "value": "a_A=1 admits two internal service slots; a_B=1 admits two internal recharge slots. Neither guarantees two completed jobs or two retained reserve units."
+        },
+        {
+          "name": "requested_admitted_executed_effect",
+          "number": 15,
+          "value": "Log tilde_a, a, requested dose d_req, physically admitted dose d_adm, new starts u, continuing recharge w, next-epoch delivery, discarded overflow, stock change and service completion separately. No outcome-derived reconstruction of activation."
+        },
+        {
+          "name": "observable_A",
+          "number": 16,
+          "value": "Timestamped requested/admitted service slots; stock withdrawn; job IDs accepted/completed/missed; pre/post reserve."
+        },
+        {
+          "name": "observable_B",
+          "number": 17,
+          "value": "Timestamped requested/admitted recharge slots; replenishment tokens consumed; scheduled delivery epoch; delivered and overflow units."
+        },
+        {
+          "name": "action_A",
+          "number": 18,
+          "value": "Consume min(d_req_A, current reserve, current demand, production capacity) reserve units to serve the matching number of jobs."
+        },
+        {
+          "name": "action_B",
+          "number": 19,
+          "value": "Spend up to two replenishment tokens to enqueue the same number of one-epoch delayed reserve deliveries; no prohibition or projection is itself called replenishment."
+        },
+        {
+          "name": "environmental_effect_A",
+          "number": 20,
+          "value": "Reserve decreases by executed service units; demanded service may be completed. Zero net stock change does not imply no service."
+        },
+        {
+          "name": "environmental_effect_B",
+          "number": 21,
+          "value": "Reserve delivery increases next-epoch available stock up to capacity eight; excess is explicitly discarded and reported. Token expenditure is incurred even if later overflow occurs."
+        },
+        {
+          "name": "resources_consumed",
+          "number": 22,
+          "value": "Distinct ledgers: reserve units, two replenishment tokens/epoch, two production slots/epoch, two recharge slots/epoch, decision compute and memory. Parallel physical production/recharge lanes; no hidden shared capacity cost in v1."
+        },
+        {
+          "name": "candidate_gamma",
+          "number": 23,
+          "value": "Gamma-P5: delayed B->A enabling through reserve availability, antagonistic A/B stock-flow signs, and conditional neutrality of extra recharge for next-epoch service when reserve already suffices. This is not a matrix or a constraint operator."
+        },
+        {
+          "name": "gamma_direction",
+          "number": 24,
+          "value": "B_t -> reserve at t+1 -> feasible/executed A_{t+1}; the balance also records A_t -> reduced reserve. These directions are distinct from optional internal planning messages."
+        },
+        {
+          "name": "gamma_context",
+          "number": 25,
+          "value": "Diagnostic kappa1: pre-intervention reserve zero; kappa2: reserve eight. In both, source intervention occurs at t=0, current service dose zero, next demand and attempted service dose two, no other deliveries or leakage. B capacity/tokens and horizon are identical."
+        },
+        {
+          "name": "permitted_mediators",
+          "number": 26,
+          "value": "Physical stock and pending-delivery queue only for the substrate contrast; optional explicit pending-delivery message for the planning realization. No hidden forecast, changed constraint or privileged stock oracle."
+        },
+        {
+          "name": "nonapplication_conditions",
+          "number": 27,
+          "value": "No claim of immediate B_t effect on A_t; no enabling prediction without a delivery before the receiver deadline; no prediction of extra service when reserve already supplies all demand; no transfer to a different resource law without a new contract."
+        },
+        {
+          "name": "state_00",
+          "number": 28,
+          "value": "No new production or recharge starts; existing stock and pending deliveries persist. This may be useful or useless depending on demand."
+        },
+        {
+          "name": "state_10",
+          "number": 29,
+          "value": "Production requested at two and recharge at zero; feasible external production still requires reserve and demand."
+        },
+        {
+          "name": "state_01",
+          "number": 30,
+          "value": "Recharge requested at two and production at zero; reserve changes only on scheduled delivery; no service is thereby completed."
+        },
+        {
+          "name": "state_11",
+          "number": 31,
+          "value": "Both internal doses maximal; separate lanes permit new service and recharge in one epoch when service stock is sufficient. Net stock at a boundary may be unchanged while both flows are nonzero; current zero stock can still block A."
+        },
+        {
+          "name": "principal_causal_intervention",
+          "number": 32,
+          "value": "Matched state-clone substrate intervention do(new recharge units=2) versus do(new recharge units=0), with two tokens consumed in both via a declared dissipative sham. Hold attempted A_{t+1}=2, demand=2 and all laws fixed. Compare next service and stock mediator in kappa1 versus kappa2. This is an operation intervention, not a route-only lesion; sham intentionally changes physical reserve input."
+        },
+        {
+          "name": "principal_falsifier",
+          "number": 33,
+          "value": "If valid implementation traces do not show two additional next-epoch service units in kappa1 and zero in kappa2 under the exact deterministic diagnostic, the declared transition/instrument contract fails. In stochastic extensions use locked intervals/margins. Passing the imposed law is not evidence that nominated pairing is useful."
+        },
+        {
+          "name": "unpaired_comparator",
+          "number": 34,
+          "value": "C0 same inventory operations, pending-delivery records and observations, no required pair route; it may compute the balance itself."
+        },
+        {
+          "name": "shuffled_comparator",
+          "number": 35,
+          "value": "C2 pending-delivery messages cyclically reassigned among three inventory cells, preserving source IDs, width, timing and raw records."
+        },
+        {
+          "name": "generic_structure_comparator",
+          "number": 36,
+          "value": "C3 generic graph over six inventory channels with matching edge/message budget; C4 conventional finite-horizon inventory controller."
+        },
+        {
+          "name": "information_invariants",
+          "number": 37,
+          "value": "Same reserve, demand, pending delivery, forecast horizon and all cell records available; no route arm receives hidden future demand."
+        },
+        {
+          "name": "resource_invariants",
+          "number": 38,
+          "value": "Same stock capacities, starting inventories, replenishment tokens, physical slots, losses, latencies and budgets; sham token expenditure only in its explicitly labeled substrate contrast."
+        },
+        {
+          "name": "memory_invariants",
+          "number": 39,
+          "value": "Same inventory history, delivery queue records, retained-state precision and memory envelope; route lesion preserves these records."
+        },
+        {
+          "name": "training_invariants",
+          "number": 40,
+          "value": "Same development instances and tuning/training envelope; frozen parameters in acute route lesion; separately trained C0-C3 for organization usefulness."
+        },
+        {
+          "name": "decision_compute_invariants",
+          "number": 41,
+          "value": "Same budget and planning horizon; compute pending-delivery feature in both intact and bypass arms and gate only its routing use."
+        },
+        {
+          "name": "action_feasibility_invariants",
+          "number": 42,
+          "value": "Same dose alphabet {0,1,2}, demand matching, nonnegative stock, capacity cap, delivery order and final feasibility adapter. Turning off pairing never removes conservation or allows borrowing future reserve."
+        },
+        {
+          "name": "candidate_primary_external_outcome",
+          "number": 43,
+          "value": "L_P5=total demanded jobs not completed / 192 over three cells, two jobs/cell/epoch and 32 epochs; smaller is better. This v1 task is an engineering and ceiling negative control: max completed service per cell is64 for initial reserve8 or62 for initial reserve0. A conventional refill policy attains this bound by construction, so positive superiority against that controller is unavailable; equivalence and implementation checks remain meaningful. Resource cost is secondary."
+        },
+        {
+          "name": "secondary_outcomes",
+          "number": 44,
+          "value": "Recharge token use, unused/overflow reserve, stockout epochs, recovery delay, service latency and resource feasibility rejections, all with native units."
+        },
+        {
+          "name": "guardrails",
+          "number": 45,
+          "value": "No negative stock, reserve at most eight, no service without required reserve, no more than two starts per physical lane/epoch and no token overdraft; operational implementation violations invalidate that contrast, controller-request violations remain counted failures."
+        },
+        {
+          "name": "required_generalization_scope",
+          "number": 46,
+          "value": "A separately implemented resource task with different replenishment dynamics and disturbances, preserving identifiable consumption and replenishment and declared unit conversion; within-generator changes alone are not O4."
+        },
+        {
+          "name": "permitted_favorable_conclusion",
+          "number": 47,
+          "value": "Only local fulfillment of the stock-mediated contract, correct ceiling accounting, or practical equivalence/worsening within this task and guardrails. No positive primary-utility or pairing-superiority claim against the ceiling-attaining C4 is eligible in v1. A future nondegenerate utility task requires a separately versioned prospective design before evaluation."
+        },
+        {
+          "name": "prohibited_favorable_conclusion",
+          "number": 48,
+          "value": "No felt desire, moral self-restraint, universal balancing law, intrinsic motivation, consciousness, ASI/AGI, universal safety, or advantage due solely to two-channel coordinates."
+        },
+        {
+          "name": "condition_to_abandon_pairing",
+          "number": 49,
+          "value": "The present v1 ceiling task already supplies no structural opportunity for a positive primary-utility advantage over C4. Do not require nominated pairing for optimal service in this task. If matched C0/C3 are equivalent or better under locked guardrail/equivalence rules, retain useful consumption/replenishment processes without claiming distinctive necessity. No hypothesis may be rescued by modifying task difficulty after final data."
+        },
+        {
+          "name": "condition_to_reformulate_gamma",
+          "number": 50,
+          "value": "Reformulate Gamma if timing, reserve mediation or context reversal cannot reproduce the predeclared contrast under a valid implementation, or a new domain changes replenishment physics; do not change Gamma after final data to relabel an unfavorable result."
+        }
+      ],
+      "gamma": {
+        "application_conditions": [
+          "Fixed next demand2",
+          "At most one-epoch delivery delay",
+          "No unrecorded withdrawals or additions"
+        ],
+        "context": {
+          "common": "At t=0 A is fixed off; B experimental dose 2 vs sham0; at t=1 pending delivery matures before attempted service2. All other recharge and service starts are zero until the measurement.",
+          "kappa1": "r_0=0",
+          "kappa2": "r_0=8"
+        },
+        "direction": "B_t -> pending reserve -> A_{t+1}",
+        "elements": [
+          "P5-B",
+          "P5-A"
+        ],
+        "falsification_conditions": [
+          "Receiver trace violates the declared balance or diagnostic effect after implementation is verified",
+          "Broader utility hypothesis fails its independent preregistered margin/guardrail criterion"
+        ],
+        "id": "Gamma-P5",
+        "intervention": "Recharge source dose two versus zero; equal token burn by sham; exact states cloned.",
+        "mediators": [
+          "pending-delivery queue",
+          "reserve r_1"
+        ],
+        "prediction": {
+          "kappa1": 1,
+          "kappa2": 0,
+          "meaning": "Difference in Y_mech between source intervention and sham, imposed by this prospective synthetic transition.",
+          "moderation_difference": 1
+        },
+        "receptor_observable": "Y_mech=completed service at t=1 / 2",
+        "routing_realization": {
+          "normalization": "forecast units / 2; timestamp and source ID are typed metadata",
+          "recipient": "A planning adapter",
+          "reference_adapter": "Plan requested A dose for next epoch as min(2, predicted available reserve, known next demand); prediction uses observed reserve, current admitted/executed withdrawals and queued delivery. It is a conventional one-step inventory calculation, not a novel learning mechanism.",
+          "route_only_intervention": "Compute message in both arms; bypass masks only pair-specific feature use while every raw delivery record remains readable. Parameters, time, stock physics and final feasibility remain fixed. A receptor may reconstruct the same information; therefore no universal lesion sign is asserted.",
+          "schema": [
+            "source_cell_id",
+            "scheduled_delivery_epoch",
+            "delivered_unit_forecast"
+          ],
+          "source": "B delivery record",
+          "status": "Prospective implementation recipe; causal usefulness and pairing necessity untested"
+        }
+      },
+      "id": "P5",
+      "implementation_status": "not_implemented",
+      "operational_name": "Productive consumption / reserve replenishment",
+      "task_contract": {
+        "constants": {
+          "production_capacity_per_epoch": 2,
+          "replenishment_capacity_per_epoch": 2,
+          "replenishment_delay_epochs": 1,
+          "replenishment_tokens_per_epoch": 2,
+          "reserve_capacity": 8,
+          "reserve_leakage": 0
+        },
+        "contexts_for_main_task": "Each utility bundle independently draws initial reserve for each of three cells from {0,8} with probability1/2 each, with empty pending queue and demand2 every epoch. This finite distribution is fixed prospectively and cannot be tuned by observed controller advantage. Contexts may coincide by chance; never discard homogeneous bundles. This deliberately simple inventory baseline is allowed to yield no pairing advantage.",
+        "conventional_comparator": "C4 conventional inventory policy: serve min(2,current reserve) jobs; if a next epoch remains, request enough recharge up to2 to make next available reserve at least2, otherwise request0. Same one-future-epoch lookahead, raw demand and physical resources as matched arms. It attains64 completed jobs from reserve8 and62 from reserve0; these are analytic task bounds, not measured results. This pilot is a ceiling negative control for superiority.",
+        "hidden_state": "None in deterministic v1; later disturbances need a new frozen specification.",
+        "id": "B1-P5-inventory-v1",
+        "state": [
+          "integer reserve r in [0,8]",
+          "pending deliveries keyed by due epoch",
+          "service demand and completion ledger"
+        ],
+        "transition": "At epoch start incorporate pending deliveries: r=min(8,r+due), record overflow=max(0,r+due-8) using the previous r. Then execute productive dose min(request,2,r,demand), subtract it. Queue each executed refill for start of next epoch. Initial pending queue empty. Jobs not served in their arrival epoch are missed, not silently rolled over."
+      }
+    },
+    {
+      "evidence_status": "O2",
+      "fields": [
+        {
+          "name": "stable_identifier",
+          "number": 1,
+          "value": "P6; stable poles P6-A and P6-B; Gamma-P6; operational specification O2; no new implementation or causal/generalization evidence."
+        },
+        {
+          "name": "historical_label",
+          "number": 2,
+          "value": "Libertad / Orden (Freedom / Order); historical interpretive label only."
+        },
+        {
+          "name": "operational_pole_A",
+          "number": 3,
+          "value": "Isolated alternative assay."
+        },
+        {
+          "name": "operational_pole_B",
+          "number": 4,
+          "value": "Routine execution."
+        },
+        {
+          "name": "functional_definition_A",
+          "number": 5,
+          "value": "Initiate a one-candidate assay inside an isolated sandbox, yielding a timestamped binary report about the candidate under the sandbox's declared mapping."
+        },
+        {
+          "name": "functional_definition_B",
+          "number": 6,
+          "value": "Initiate a productive job using the currently authorized routine ID; doing so does not itself explore, alter routine code or deploy a new software configuration."
+        },
+        {
+          "name": "internal_activation_A",
+          "number": 7,
+          "value": "a_P6A=q_P6A with D_A=1 new assay slot/epoch; request tilde_a_P6A separate."
+        },
+        {
+          "name": "internal_activation_B",
+          "number": 8,
+          "value": "a_P6B=q_P6B/2 with D_B=2 new routine-execution slots/epoch; request tilde_a_P6B separate."
+        },
+        {
+          "name": "technical_unit_A",
+          "number": 9,
+          "value": "One isolated candidate assay initiation per epoch."
+        },
+        {
+          "name": "technical_unit_B",
+          "number": 10,
+          "value": "One production routine execution initiation per epoch."
+        },
+        {
+          "name": "normalization_A",
+          "number": 11,
+          "value": "D_A=1 fixed sandbox slot/epoch; a_A=floor(tilde_a_A) after internal permission admission. Valid intermediate requests round down and are logged; final doses are {0,1}. No assay quality or diversity enters the denominator."
+        },
+        {
+          "name": "normalization_B",
+          "number": 12,
+          "value": "D_B=2 fixed production slots/epoch; a_B=floor(2*tilde_a_B)/2 after internal permission admission. Actual correct jobs are a separate external outcome."
+        },
+        {
+          "name": "meaning_of_zero",
+          "number": 13,
+          "value": "Zero initiates no new assay or routine, respectively. Existing reports, retained routine identity and reports already in flight are not removed."
+        },
+        {
+          "name": "meaning_of_one",
+          "number": 14,
+          "value": "One admits one assay slot or two routine slots, respectively. It does not imply useful information, novelty, correctness or permission to deploy software."
+        },
+        {
+          "name": "requested_admitted_executed_effect",
+          "number": 15,
+          "value": "Log requested/admitted activation, candidate/routine ID, external authorization, new starts, ongoing assay, report arrival, conventional selector update, executed routine and live service correctness as distinct fields."
+        },
+        {
+          "name": "observable_A",
+          "number": 16,
+          "value": "Candidate ID and sandbox context, assay starts/completions, binary report with validity/source/time and assay resource use."
+        },
+        {
+          "name": "observable_B",
+          "number": 17,
+          "value": "Current authorized routine ID, production starts, job IDs, correctness and completion time; version identity remains explicit."
+        },
+        {
+          "name": "action_A",
+          "number": 18,
+          "value": "Test one of two authorized immutable routines q0/q1 on a sandbox copy. Tests cannot directly serve a live job or mutate production state."
+        },
+        {
+          "name": "action_B",
+          "number": 19,
+          "value": "Run the currently selected immutable routine q0/q1 on up to two live jobs."
+        },
+        {
+          "name": "environmental_effect_A",
+          "number": 20,
+          "value": "Produce a report at the next epoch boundary. Information can later affect a selector through Gamma; no direct production service or software deployment is caused by an assay."
+        },
+        {
+          "name": "environmental_effect_B",
+          "number": 21,
+          "value": "Complete a live job correctly iff executed routine equals the latent live task mapping; wrong routine consumes the slot and yields a failed service job."
+        },
+        {
+          "name": "resources_consumed",
+          "number": 22,
+          "value": "One sandbox slot/epoch, two independent production slots/epoch, one assay token/epoch, fixed report storage and decision compute. No hidden production cost of a sandbox slot in v1; assay use is still reported as a secondary cost."
+        },
+        {
+          "name": "candidate_gamma",
+          "number": 23,
+          "value": "Gamma-P6: A report can enable later correct B routine selection through an explicit conventional authorized selector when the sandbox is transfer-eligible; conditionally neutral when reports are nontransferable. It is not an identity between exploration and deployment."
+        },
+        {
+          "name": "gamma_direction",
+          "number": 24,
+          "value": "A_t -> report at t+1 -> authorized selector state q_current -> B_{t+1}; source acquisition, mediation and productive execution remain distinct."
+        },
+        {
+          "name": "gamma_context",
+          "number": 25,
+          "value": "kappa1: sandbox mapping matches the live mapping and report is marked transfer-eligible. kappa2: sandbox always returns zero and is explicitly nontransferable. Diagnostic live correct routine is q1 and current routine q0 in both."
+        },
+        {
+          "name": "permitted_mediators",
+          "number": 26,
+          "value": "Report record plus an external-to-the-two-poles authorized conventional routine selector. The selector may choose only q0/q1, requires the common adoption permission, updates only at an epoch boundary and logs report provenance. It is not a third hidden pole or P7 deployment."
+        },
+        {
+          "name": "nonapplication_conditions",
+          "number": 27,
+          "value": "No prediction when adoption permission is absent, report arrives after the receiver deadline, candidate is unauthorized or report is nontransferable. Tests alone cannot change production, grant permissions or create new routines."
+        },
+        {
+          "name": "state_00",
+          "number": 28,
+          "value": "No new test or productive routine starts; previous reports and selected routine persist. This is not absence of memory or capability."
+        },
+        {
+          "name": "state_10",
+          "number": 29,
+          "value": "One assay starts, no new productive jobs; information arrives later and may be useless."
+        },
+        {
+          "name": "state_01",
+          "number": 30,
+          "value": "Two routine starts, no new assay; prior selection and reports remain available."
+        },
+        {
+          "name": "state_11",
+          "number": 31,
+          "value": "One isolated assay plus two productive routine starts in separate lanes; the assay cannot affect same-epoch service and does not guarantee future improvement."
+        },
+        {
+          "name": "principal_causal_intervention",
+          "number": 32,
+          "value": "At t=0 test q1 versus same-cost sham assay producing a marked noninformative zero report. At t=1 compare authorized q1 selection and correct service for two fixed B requests; current routine q0, live correct q1 and permissions fixed. Repeat kappa1 and kappa2. This information-generating source intervention is distinct from a matched-information route lesion."
+        },
+        {
+          "name": "principal_falsifier",
+          "number": 33,
+          "value": "A valid trace that permits an isolated test to deploy software, change current service before report arrival or change routine without the declared mediator violates the contract. For the specified diagnostic, the treatment-sham correct-service difference must be two under kappa1 and zero under kappa2; this imposed check is not empirical proof of useful pairing."
+        },
+        {
+          "name": "unpaired_comparator",
+          "number": 34,
+          "value": "C0 same assays, routines and complete raw reports, with no mandatory assay-to-routine pair route; ordinary policy can use the same information."
+        },
+        {
+          "name": "shuffled_comparator",
+          "number": 35,
+          "value": "C2 assay message recipient permuted cyclically across three independent task cells; reports retain source ID and all original raw records remain accessible."
+        },
+        {
+          "name": "generic_structure_comparator",
+          "number": 36,
+          "value": "C3 generic graph with matched message budget; C4 a conventional finite-action contextual selector using the same reports and permissions."
+        },
+        {
+          "name": "information_invariants",
+          "number": 37,
+          "value": "Same candidate catalogue, raw reports, report age/validity, context and live correctness feedback for all matched arms. Hidden live mapping is evaluator truth only."
+        },
+        {
+          "name": "resource_invariants",
+          "number": 38,
+          "value": "Same independent sandbox/service lanes, assay tokens, report latency, service demand and permissions; information-generating sham is labeled separately from organizational comparators."
+        },
+        {
+          "name": "memory_invariants",
+          "number": 39,
+          "value": "Same report retention, current-routine state, buffer size/precision and source history. Bypass cannot erase evidence from memory."
+        },
+        {
+          "name": "training_invariants",
+          "number": 40,
+          "value": "Same candidate identities, development records, tuning budget and update schedule. Assay candidates are chosen by the policy fixed before evaluation; no outcome-selected test budget."
+        },
+        {
+          "name": "decision_compute_invariants",
+          "number": 41,
+          "value": "Same candidate-selection and routine-selection compute envelope, message width, planner horizon and number of calls."
+        },
+        {
+          "name": "action_feasibility_invariants",
+          "number": 42,
+          "value": "All arms have the same two authorized routines, assay operations, selector permission and final service capacity; C0 is never denied adoption while C1 receives it."
+        },
+        {
+          "name": "candidate_primary_external_outcome",
+          "number": 43,
+          "value": "L_P6=live jobs completed incorrectly or not completed / 192 over three cells, two demanded jobs/cell/epoch, 32 epochs; smaller is better. With two mutually exclusive correct routines and complete binary live correctness feedback, one executed routine reveals the current correct routine. A contemporaneous sandbox report adds no conditional information when both arrive together. Under the fixed independent uniform initial mapping and probability1/2 flip at epoch16, conventional last-feedback C4 attains Bayes-optimal expected loss1/32: one expected wrong job per cell at epoch0 and one at epoch16, out of64. Positive expected primary-utility/pairing superiority is unavailable in this v1 family. This expectation bound is not a per-trajectory bound: a realized bundle may favor another policy by chance."
+        },
+        {
+          "name": "secondary_outcomes",
+          "number": 44,
+          "value": "Assay count, report reuse, post-change adaptation delay, misselection rate, ordinary regret relative to evaluator-known best routine, and sandbox cost. Oracle regret is an evaluation metric, not controller input."
+        },
+        {
+          "name": "guardrails",
+          "number": 45,
+          "value": "No sandbox production writes, no unauthorized routine selection, no use of report before arrival, at most one assay and two service starts/epoch, and no hidden access to live mapping."
+        },
+        {
+          "name": "required_generalization_scope",
+          "number": 46,
+          "value": "A separately built candidate/task family with different change process, assay fidelity and reuse structure; preserving distinction between isolated evaluation and actual routine service."
+        },
+        {
+          "name": "permitted_favorable_conclusion",
+          "number": 47,
+          "value": "Only bounded implementation/local mediation in the forced diagnostic where production is held off, and equivalence, worsening or correct expected-bound accounting in the full-feedback utility family. The forced diagnostic cannot establish incremental assay-information utility in v1. Under the fixed distribution C4 already attains expected loss1/32, so positive expected primary utility or pairing superiority is ineligible; individual sampled bundles may still favor either policy by chance. A future nonredundant utility task requires a new prospective specification."
+        },
+        {
+          "name": "prohibited_favorable_conclusion",
+          "number": 48,
+          "value": "No subjective freedom, free will, general creativity, intrinsic motivation, autonomous goal formation, consciousness, universal exploration advantage or retrospective claim that S1 implemented this assay."
+        },
+        {
+          "name": "condition_to_abandon_pairing",
+          "number": 49,
+          "value": "Do not require the nominated assay/routine pairing to obtain current-mapping information in this v1 full-feedback family: that information is already recoverable from routine outcomes. If matched alternatives are equivalent/better with sufficient precision under the preregistered interval rule, retain distinct useful processes without pairing-necessity claims. A forced no-feedback diagnostic cannot overturn this redundancy result."
+        },
+        {
+          "name": "condition_to_reformulate_gamma",
+          "number": 50,
+          "value": "Reformulate Gamma if report transferability, latency or selector mediation does not identify the proposed pathway; separate assay acquisition from deployment if an implementation conflates them. Do not post hoc redefine exploration as arbitrary parameter variation."
+        }
+      ],
+      "gamma": {
+        "application_conditions": [
+          "Report arrives before service selection",
+          "Adoption permission true",
+          "Candidate already authorized",
+          "In the fixed diagnostic/reference selector only, a transfer-eligible positive report triggers selection; organizational comparators retain the same authorized selector API and may also use the equally available raw correctness feedback."
+        ],
+        "context": {
+          "common": "Diagnostic current routine=q0; latent live correct routine=q1; test q1; adoption authorized; no live service at t=0; two fixed service attempts at t=1.",
+          "kappa1": "transfer_eligible=true; sandbox correctness equals current live correctness",
+          "kappa2": "transfer_eligible=false; sandbox report value=0 for all candidates"
+        },
+        "direction": "A_t -> report -> conventional authorized selector -> B_{t+1}",
+        "elements": [
+          "P6-A",
+          "P6-B"
+        ],
+        "falsification_conditions": [
+          "No predicted effect with validated transport and selector in kappa1",
+          "Change of routine without authorized mediator",
+          "Any claim of pairing specificity inferred from source information acquisition alone"
+        ],
+        "id": "Gamma-P6",
+        "intervention": "One q1 assay versus a same-cost noninformative sham; raw test information differs, so this is an explicitly scoped source intervention, never the matched-information pairing contrast.",
+        "mediators": [
+          "arriving report",
+          "authorized routine selector"
+        ],
+        "prediction": {
+          "kappa1": 1,
+          "kappa2": 0,
+          "meaning": "Treatment-sham effect under the exact declared synthetic diagnostic and fixed conventional selector.",
+          "moderation_difference": 1
+        },
+        "receptor_observable": "Y_mech=correct live jobs at t=1 / 2; also record selected routine ID",
+        "routing_realization": {
+          "recipient": "Conventional routine-selector adapter used before B",
+          "reference_adapter": "At start of t+1 retain current routine unless an arriving report has transfer_eligible=true and value=1. If so select that candidate from the already authorized catalogue. If multiple positive reports arrive use lexicographic candidate ID, then earliest assay epoch. Nontransferable/zero reports cannot trigger selection. This conventional selector is explicitly outside both poles.",
+          "route_only_intervention": "Compute message in both arms; mask only its nominated adapter input while retaining full raw report memory. The same conventional selector API, candidate catalogue and permissions remain available to all comparator policies. No universal route-lesion sign is assumed for a controller that can reconstruct the report.",
+          "schema": [
+            "source_cell_id",
+            "candidate_id",
+            "report_value",
+            "transfer_eligible",
+            "report_epoch"
+          ],
+          "source": "A assay report",
+          "status": "Prospective recipe; no implemented or validated assay-selector pair"
+        }
+      },
+      "id": "P6",
+      "implementation_status": "not_implemented",
+      "operational_name": "Isolated alternative assay / routine execution",
+      "task_contract": {
+        "constants": {
+          "assay_capacity_per_epoch": 1,
+          "assay_tokens_per_epoch": 1,
+          "report_delay_epochs": 1,
+          "routine_capacity_per_epoch": 2,
+          "routine_catalogue": [
+            "q0",
+            "q1"
+          ]
+        },
+        "contexts_for_main_task": "Each cell begins with q_current=q0 and empty report queue. For each cell independently, a utility bundle draws latent initial correct routine uniformly from {q0,q1}, change schedule uniformly from {none,flip at start epoch16}, and sandbox context uniformly from {matched,nontransferable}; all factors and cells are independent. This finite distribution is fixed now and cannot be selected by observed controller advantage. Controller sees context and past correctness feedback, not latent mapping or a privileged future-change flag. The schedule support is public; a sampled realization is not. Diagnostic fixed-q1 snapshots are separate from these utility episodes.",
+        "conventional_comparator": "C4 conventional full-feedback selector: after any executed routine q in the preceding epoch, select q if its live correctness is1, otherwise select the other authorized routine. This recovers that epoch's latent mapping. With no live feedback, use the newest transfer-eligible positive report if present; otherwise retain q_current, initiallyq0. Simultaneous consistent live outcomes use lowest job ID; conflicting outcomes violate the deterministic task contract. Request two service slots each epoch and no assays when ordinary live feedback is available. A change at the next boundary can stale both prior live feedback and contemporaneous assay equally; neither comparator receives advance change information. The forced no-live-feedback diagnostic uses its separately fixed report mediator.",
+        "hidden_state": "Live correct routine and realized future change schedule; evaluator only.",
+        "id": "B1-P6-isolated-assay-v1",
+        "separation_from_P7": "Choosing an already installed immutable routine ID is a permitted decision, not deploying or modifying versioned configuration. No P7 operation is inferred.",
+        "state": [
+          "current authorized routine",
+          "report queue with due epoch",
+          "live mapping available only to evaluator",
+          "sandbox transferability flag available to controller"
+        ],
+        "transition": "Assays end with a report delivered at the next epoch start. In matched context report=1 iff tested routine equals the live mapping at assay time; otherwise0. In nontransferable context report=0. The report records its age; a later live change may invalidate an older report. Each service start succeeds iff current routine equals the live mapping at execution. Service failures do not become successful merely because an assay completed."
+      }
+    },
+    {
+      "id": "P7",
+      "operational_name": "Current-version drift repair / authorized configuration deployment",
+      "evidence_status": "O2",
+      "implementation_status": "not_implemented",
+      "fields": [
+        {
+          "number": 1,
+          "name": "stable_identifier",
+          "value": "P7; stable poles P7-A and P7-B; Gamma-P7; operational specification O2; no new implementation or causal/generalization evidence."
+        },
+        {
+          "number": 2,
+          "name": "historical_label",
+          "value": "Preservación / Transformación (Preservation / Transformation); historical interpretive label only."
+        },
+        {
+          "number": 3,
+          "name": "operational_pole_A",
+          "value": "Current-version drift repair."
+        },
+        {
+          "number": 4,
+          "name": "operational_pole_B",
+          "value": "Authorized configuration deployment."
+        },
+        {
+          "number": 5,
+          "name": "functional_definition_A",
+          "value": "Initiate a write operation restoring a drifted instance to its currently assigned target version, without changing that target version."
+        },
+        {
+          "number": 6,
+          "name": "functional_definition_B",
+          "value": "Initiate an authorized migration to an already approved different target version on an eligible instance; explicitly change its target version on completion."
+        },
+        {
+          "number": 7,
+          "name": "internal_activation_A",
+          "value": "a_P7A=q_P7A with fixed nominal repair capacity D_A=1 initiation/epoch."
+        },
+        {
+          "number": 8,
+          "name": "internal_activation_B",
+          "value": "a_P7B=q_P7B with fixed nominal deployment capacity D_B=1 initiation/epoch."
+        },
+        {
+          "number": 9,
+          "name": "technical_unit_A",
+          "value": "One instance repair initiation per epoch."
+        },
+        {
+          "number": 10,
+          "name": "technical_unit_B",
+          "value": "One instance deployment initiation per epoch."
+        },
+        {
+          "number": 11,
+          "name": "normalization_A",
+          "value": "D_A=1 maintenance operation/epoch; q_A=floor(tilde_a_A) after internal admission, a_A=q_A. Repairs completed, drift magnitude and service correctness are separate observables."
+        },
+        {
+          "number": 12,
+          "name": "normalization_B",
+          "value": "D_B=1 migration operation/epoch; q_B=floor(tilde_a_B) after internal admission, a_B=q_B. Deployment success or version quality cannot define the dose."
+        },
+        {
+          "number": 13,
+          "name": "meaning_of_zero",
+          "value": "Zero starts no new repair or deployment on that channel; previously locked writes continue, installed versions persist and external drift can still occur."
+        },
+        {
+          "number": 14,
+          "name": "meaning_of_one",
+          "value": "One admits a nominal new operation slot, with target ID recorded. Final execution may be rejected by authorization, drift precondition, healthy-target no-op or same-instance exclusion."
+        },
+        {
+          "number": 15,
+          "name": "requested_admitted_executed_effect",
+          "value": "Log normalized request/admission, selected instance and version, external eligibility, actual write start, continuing write, completion/rollback record, resulting target/drift and service separately."
+        },
+        {
+          "number": 16,
+          "name": "observable_A",
+          "value": "Instance ID, target version before/after, observed drift bit, repair request/start/completion, lock and post-repair state."
+        },
+        {
+          "number": 17,
+          "name": "observable_B",
+          "value": "Instance ID, source/target version, migration mode, permission, request/start/completion, interruption, rejection reason and post-deployment state."
+        },
+        {
+          "number": 18,
+          "name": "action_A",
+          "value": "Acquire the instance write lock for the current epoch; if drifted and authorized, restore drift bit to zero at epoch end while retaining target version."
+        },
+        {
+          "number": 19,
+          "name": "action_B",
+          "value": "Acquire an eligible instance write lock for one epoch; complete migration at next epoch start, change target to approved candidate version and set drift zero according to the declared migration mode."
+        },
+        {
+          "number": 20,
+          "name": "environmental_effect_A",
+          "value": "A healthy current-version instance is restored, possibly improving service while consuming a maintenance window. Repair does not implement a new target version."
+        },
+        {
+          "number": 21,
+          "name": "environmental_effect_B",
+          "value": "Installed target and subsequent service capability change; deployment occupies an outage window and may be ineligible. New version is not assumed better for every task."
+        },
+        {
+          "number": 22,
+          "name": "resources_consumed",
+          "value": "One repair slot/epoch, one deployment slot/epoch, one exclusive write lock per instance, two service instances per cell, service time lost during writes, one immutable rollback snapshot per active migration, decision compute and memory."
+        },
+        {
+          "number": 23,
+          "name": "candidate_gamma",
+          "value": "Gamma-P7: A can enable later B when a state-preserving migration requires a clean source. In replacement mode B resets drift itself and prior A is neutral for deployment eligibility. Same-instance concurrent writes are incompatible; distributed activity on different instances is permitted."
+        },
+        {
+          "number": 24,
+          "name": "gamma_direction",
+          "value": "A_t -> clean-source state -> eligible/successful B_{t+1}; cross-instance concurrency and same-instance exclusivity are separate feasibility facts, not universal complementarity."
+        },
+        {
+          "number": 25,
+          "name": "gamma_context",
+          "value": "kappa1 mode=state_preserving, requiring drift=0 before deployment. kappa2 mode=replacement, allowing either drift bit and clearing it. Same diagnostic target starts at version0, drift1, approved candidate1; permissions and locks identical."
+        },
+        {
+          "number": 26,
+          "name": "permitted_mediators",
+          "value": "Observed clean-source state and logged repair completion, mediated through the same eligibility adapter for every controller; optional internal repair-completion message. No changed authorization or removed lock."
+        },
+        {
+          "number": 27,
+          "name": "nonapplication_conditions",
+          "value": "No enabling claim for an already clean source or replacement migration; no simultaneous incompatible writes on one instance; no deployment without approved candidate or permission; no global resilience claim for arbitrary dependencies."
+        },
+        {
+          "number": 28,
+          "name": "state_00",
+          "value": "No new maintenance/migration; versions and existing locks persist and external drift remains possible."
+        },
+        {
+          "number": 29,
+          "name": "state_10",
+          "value": "One repair request, no deployment request; restoration changes drift but retains version."
+        },
+        {
+          "number": 30,
+          "name": "state_01",
+          "value": "One deployment request, no repair request; source must satisfy the same mode-specific preconditions."
+        },
+        {
+          "number": 31,
+          "name": "state_11",
+          "value": "One repair and one deployment may execute on different eligible instances. If both target the same instance, common repair-priority arbitration starts repair and rejects deployment with write_conflict; full internal coactivation does not imply joint external execution."
+        },
+        {
+          "number": 32,
+          "name": "principal_causal_intervention",
+          "value": "On a cloned version0/drift1 target at t=0, actual repair versus equal-time locked sham that leaves drift unchanged. Attempt the same approved deployment at t=1; count completion at startt2. Compare state-preserving kappa1 against replacement kappa2, preserving all mode-specific permissions and constraints."
+        },
+        {
+          "number": 33,
+          "name": "principal_falsifier",
+          "value": "If repair changes target version, deployment bypasses its mode precondition, concurrent writes execute on the same object, or the deterministic diagnostic lacks one additional completed deployment in kappa1 and zero in kappa2, the declared implementation contract fails. This is not evidence of general pairing usefulness."
+        },
+        {
+          "number": 34,
+          "name": "unpaired_comparator",
+          "value": "C0 same repair/deployment repertoire, health observations, eligibility rules and approved versions, no mandatory pair route."
+        },
+        {
+          "number": 35,
+          "name": "shuffled_comparator",
+          "value": "C2 repair-completion messages cyclically assigned among three cells while retaining source cell and instance IDs and all raw events."
+        },
+        {
+          "number": 36,
+          "name": "generic_structure_comparator",
+          "value": "C3 generic event-dependency graph with equal edge/message budget; C4 conventional maintenance/deployment state machine with the same eligibility and version catalogue."
+        },
+        {
+          "number": 37,
+          "name": "information_invariants",
+          "value": "Same drift, target version, approved candidate, migration mode, lock state, completion events and required service version visible; no candidate-quality oracle."
+        },
+        {
+          "number": 38,
+          "name": "resource_invariants",
+          "value": "Same write slots, per-instance locks, outage accounting, service capacity, completion delay and rollback storage; sham occupies identical lock/time in the substrate intervention."
+        },
+        {
+          "number": 39,
+          "name": "memory_invariants",
+          "value": "Same version history, current state, pending-operation state, rollback records and event memory; message bypass preserves raw completion events."
+        },
+        {
+          "number": 40,
+          "name": "training_invariants",
+          "value": "Same development cases and tuning envelope; freeze weights for acute route intervention; independently train organizational alternatives under the matched envelope."
+        },
+        {
+          "number": 41,
+          "name": "decision_compute_invariants",
+          "value": "Same event-processing calls, planning horizon, decision deadline, instruction allowance and message width."
+        },
+        {
+          "number": 42,
+          "name": "action_feasibility_invariants",
+          "value": "Same target-selection repertoire, mode-dependent clean-source precondition, authorization and arbitration, whether Gamma is present or bypassed. Restrictions are never disabled to make a pairing look necessary."
+        },
+        {
+          "number": 43,
+          "name": "candidate_primary_external_outcome",
+          "value": "L_P7=required service jobs not correctly completed / 192; one demanded job per each of two instances/cell/epoch for three cells and32 epochs. A job succeeds only when the instance is available, nondrifted and at the required version."
+        },
+        {
+          "number": 44,
+          "name": "secondary_outcomes",
+          "value": "Residual drift, obsolete-version service, maintenance outage epochs, failed/rejected deployment attempts, restoration delay, version oscillation and rollback events with native units."
+        },
+        {
+          "number": 45,
+          "name": "guardrails",
+          "value": "No concurrent writes per instance, no unauthorized target version, no target-version change by repair, no unlogged rollback, no exceeding one start/channel/epoch and no service counted while its instance is locked."
+        },
+        {
+          "number": 46,
+          "name": "required_generalization_scope",
+          "value": "A separately implemented versioned service with different drift/recovery mechanisms and dependency structure, preserving literal distinction between restore-current-target and change-target operations."
+        },
+        {
+          "number": 47,
+          "name": "permitted_favorable_conclusion",
+          "value": "Only local distinction and causal mediation of repair versus migration and, separately, practical benefit of a declared coordinating policy within guardrails; generic maintenance may explain all useful effects."
+        },
+        {
+          "number": 48,
+          "name": "prohibited_favorable_conclusion",
+          "value": "No survival instinct, preference for existence, self-preserving consciousness, general autonomy, moral agency, global stability, universal software safety or intrinsic value of transformation."
+        },
+        {
+          "number": 49,
+          "name": "condition_to_abandon_pairing",
+          "value": "Abandon mandatory P7 pairing if a conventional/generic matched manager is equivalent or better under locked practical criteria, or if repair and deployment cannot be distinguished as separate operations on logged target state."
+        },
+        {
+          "number": 50,
+          "name": "condition_to_reformulate_gamma",
+          "value": "Reformulate Gamma when actual migration no longer requires a clean source, repair and deployment operate on the same indistinguishable target transformation, or the declared context fails to moderate the pathway. Preserve unfavorable results and write a new prospective version."
+        }
+      ],
+      "gamma": {
+        "id": "Gamma-P7",
+        "elements": [
+          "P7-A",
+          "P7-B"
+        ],
+        "direction": "A_t -> clean source -> eligible B_{t+1} -> completion at t+2",
+        "context": {
+          "kappa1": "mode=state_preserving; deployment requires observed drift0",
+          "kappa2": "mode=replacement; deployment accepts drift0 or1 and clears drift",
+          "common": "Diagnostic instance0 starts target_version0, drift1, unlocked; candidate_version1 approved; repair/sham at t0, deployment attempt at t1, completion measured startt2. Other instance held inactive; no exogenous drift during diagnostic."
+        },
+        "intervention": "Repair source versus equal-time locked sham; both obey the same final eligibility adapter.",
+        "mediators": [
+          "source drift state",
+          "mode-specific eligibility"
+        ],
+        "receptor_observable": "Y_mech=successful deployment completion by startt2, normalized by one deployment slot",
+        "prediction": {
+          "kappa1": 1,
+          "kappa2": 0,
+          "moderation_difference": 1,
+          "meaning": "Treatment-sham effect in the declared deterministic diagnostic; not proof of an indispensable nominated controller relation."
+        },
+        "application_conditions": [
+          "Approved candidate different from current target",
+          "Valid write authorization",
+          "No overlapping continuing write",
+          "No intervening exogenous drift between repair and deployment"
+        ],
+        "falsification_conditions": [
+          "Violation of target/version distinction or common feasibility",
+          "Failure of predeclared mediated diagnostic after instrument validation",
+          "Independent practical pairing benefit ruled out by locked comparison criteria"
+        ],
+        "routing_realization": {
+          "source": "A repair completion event",
+          "recipient": "B eligibility/planning adapter",
+          "schema": [
+            "source_cell_id",
+            "instance_id",
+            "target_version",
+            "post_repair_drift",
+            "completion_epoch"
+          ],
+          "reference_adapter": "For each unlocked instance: if target equals required version and drift1, request repair; if target equals required version and drift0, request neither maintenance operation. If target differs from an approved required version, request deployment when mode is replacement or source drift0, otherwise request prerequisite repair. Do not request deployment of an unapproved version. From each operation's eligible targets select lowest instance ID, at most one start/channel/epoch. The per-instance rules yield one operation type per instance; different instances can use both channels concurrently. Never override the common final eligibility adapter. This is an ordinary version-aware maintenance state machine.",
+          "route_only_intervention": "Compute message and apply identical locks/eligibility in both arms; mask only nominated message use, retaining all raw repair records and current state. Generic policies may reconstruct readiness from those records; no universal lesion sign follows.",
+          "status": "Prospective recipe, without execution or evidence of pairing necessity"
+        }
+      },
+      "task_contract": {
+        "id": "B1-P7-versioned-service-v1",
+        "constants": {
+          "instances_per_cell": 2,
+          "repair_capacity_per_epoch": 1,
+          "deployment_capacity_per_epoch": 1,
+          "service_capacity_per_instance_epoch": 1,
+          "repair_completion": "end of initiation epoch",
+          "deployment_completion": "start of following epoch",
+          "target_versions": [
+            0,
+            1
+          ],
+          "drift_values": [
+            0,
+            1
+          ]
+        },
+        "state": [
+          "per-instance target version and drift bit",
+          "write lock and continuing operation",
+          "required service version",
+          "approved candidate list",
+          "event and rollback records"
+        ],
+        "transition": "Repair requires drift1 and authorization, holds a lock for the whole epoch, then restores drift0 without changing target. Deployment requires a different approved target, no lock, and mode-specific source condition; it holds the lock for one epoch and completes next epoch start. Same-instance simultaneous repair/deploy requests give repair priority and deployment rejection, identical for all arms. Different-instance repair/deploy may proceed concurrently. Service is one job/instance/epoch iff unlocked, drift0 and target equals required service version. A missed job is not silently queued.",
+        "contexts_for_main_task": "Both instances start target version0, unlocked, with no pending writes. For each cell independently, utility bundles draw each initial drift bit uniformly from {0,1}, mode uniformly from {state_preserving,replacement}, and required-version schedule uniformly from {version0 throughout,version0 epochs0-15 then version1 epochs16-31}. At each of starts8 and24 independently draw drift event uniformly from {none,instance0,instance1}; a selected instance is set to drift1 after due completions and before observation. All factors and cells are independent. This finite distribution is fixed now and cannot be tuned from controller results. Current required version is visible; sampled future schedule/events are hidden until their declared observation point.",
+        "conventional_comparator": "C4 ordinary version-aware state machine stated in Gamma routing_realization.reference_adapter, with deterministic lowest-instance-ID tie break and the same final safety/eligibility adapter.",
+        "rollback": "v1 deterministic migration has no random failure and performs no automatic rollback. Snapshot logging is retained. Extensions with failure/rollback require a new pre-evaluation contract; zero observed rollback here would not establish robustness.",
+        "hidden_state": "Realized future drift events and future required-version schedule beyond the common declared lookahead."
+      }
+    }
+  ],
+  "shared_contract": {
+    "activation": {
+      "capacities_source": "Fixed engineering contract below; no observed best outcome or final comparison can set the denominator.",
+      "noninteger_costs": "Not introduced in this baseline; task variants needing heterogeneous jobs must define a weighted work unit before calibration, with a version change.",
+      "notation": {
+        "continuing_operation": "w_i",
+        "executed_operation": "u_i",
+        "external_admitted_dose": "d_adm_i",
+        "external_requested_dose": "d_req_i",
+        "internally_admitted": "a_i",
+        "requested": "tilde_a_i"
+      },
+      "one": "The internal admission stage accepts the full nominal new-operation budget. The external feasibility adapter may still reduce executed dose.",
+      "range": "requested real scalar [0,1]; a_i lies on the actuator's dose grid in [0,1]",
+      "rule": "Reject nonfinite or out-of-range requests and log invalid_request; never silently clip. For a valid request and fixed integer nominal capacity D_i, authorize q_i=floor(D_i*tilde_a_i) new operation slots, subject only to the fixed internal permission rule; a_i=q_i/D_i. If permission is absent set q_i=0 with reason. Decode d_req_i=a_i*D_i. This is internal admitted operational dose; success or environmental effect never enters the numerator.",
+      "saturation": "Exactly 1 is nominal saturation. Additional requested demand is logged as unmet request and never renormalizes D_i.",
+      "zero": "No new operation is initiated by this channel in this epoch. Prior operations, retained memory and delayed effects persist and are recorded separately."
+    },
+    "calibration_references": {
+      "code_and_controller_adapters": "Implement the documented task and match all six axes in B1-D; freeze code, adapter, parameters, seeds and preregistration before B1-E.",
+      "minimum_practical_effect_and_equivalence": "B1_PROTOCOL_DRAFT_v1.md; development-only engineering service-quantum rule, locked before B1-E",
+      "sample_size_and_multiplicity": "B1_PROTOCOL_DRAFT_v1.md and B1_DECISION_RULES_v1.yaml; closed prospective procedure, no final outcomes"
+    },
+    "clock": {
+      "episode_horizon": 32,
+      "per_cell_service_demand": 2,
+      "phase_order": [
+        "Receive matured operations from earlier epochs and immutable external context.",
+        "Record state and complete raw observations.",
+        "Process reports into retained memory and, for P6 only, the explicitly authorized conventional routine selector.",
+        "Controller requests normalized new-operation doses and target IDs.",
+        "Internally admit/quantize doses; retain requested and admitted records separately.",
+        "Decode requests, apply the common external feasibility adapter and start feasible operations.",
+        "Execute current service; record continuing work, completion events and external effects.",
+        "Advance epoch; no action can depend on an observation not yet available."
+      ],
+      "primary_loss_denominator": 192,
+      "replicated_cells": 3,
+      "unit": "synthetic epoch"
+    },
+    "comparator_contract": {
+      "C0": "Same channels and raw information with no obligatory pair-specific route; a controller may derive any useful relation itself.",
+      "C1": "Nominated source/receptor route with the typed schema recorded per pilot.",
+      "C2": "Three replicated cells; cyclically permute the source-message recipient cell, preserving direction, message count, feature width and in/out degree. Keep every raw cell record available and preserve source IDs. Clockwise and counterclockwise cycles are predeclared, never selected by performance.",
+      "C3": "Generic directed graph with the same edge count, feature width and degree envelope on the replicated channels; graph selection uses development data only with the same search budget.",
+      "C4": "Pilot-specific conventional controller specified below, with the same raw information and feasibility.",
+      "C5": "Descriptive larger-capacity arm for each pilot: exactly twice the development-frozen memory allowance and decision-compute allowance, with unchanged information, physical resources, permissions and planning horizon. This intentionally unmatched capacity contrast cannot establish pairing specificity.",
+      "C6": "Exact invertible d=a_A-a_B, q=a_A+a_B with inverse a_A=(q+d)/2,a_B=(q-d)/2 and |d|<=q<=2-|d|, together with the transformed pilot-specific discrete dose-grid constraints on both inverse activations. The diamond is only the enclosing continuous domain; no continuous relaxation adds admissible states. Same actuator requests, constraints, initial state and random streams. This is an algebraic implementation control, never a competitor expected to lose."
+    },
+    "failure_policy": "Keep task and controller failures in the preregistered accounting; never exclude unfavorable results because a requested operation was infeasible. Distinguish invalid specification, invalid implementation, expected physical rejection, controller failure and infrastructure interruption. Jointly changing relation and raw information/feasibility/compute is joint_manipulation.",
+    "invariants": {
+      "decision_compute": "Same declared decision instruction/time budget, message width and adapter calls in C0-C3; bypass computes the full message and masks only its use. Unused budget is accounted for, not reallocated silently. Larger-capacity C5 is explicitly unmatched.",
+      "feasibility": "Identical action alphabets, instance eligibility, authorization, nominal capacities, physical dynamics, continuation handling and final restriction adapter. No intervention on Gamma changes any of these in an organizational contrast.",
+      "information": "For organizational C0-C3 contrasts, identical raw per-cell observations, report records, context labels, action history and forecast availability; all three cells' raw records remain accessible. A nominated message is a deterministic feature, not privileged new data. Hidden task truth is available only to the evaluator.",
+      "learning_training": "Same development records, development namespace, hyperparameter search allowance, update opportunities, initialization policy and permitted learning rule in matched arms. Acute lesions freeze learned parameters; independently trained variants use the same training envelope.",
+      "memory": "Same raw event retention, buffer length, precision, initialization, read/write budget and reset schedule. Removing a nominated route does not erase shared raw records or continuing-operation state.",
+      "response_planning": "Same episode horizon32, planning horizon of one future epoch, one decision opportunity per epoch, declared delivery/update delays, action rate, lookahead information and interrupt/replan permissions. C5 keeps this planning horizon unchanged."
+    },
+    "scope": "B0 specifies synthetic tasks and interventions; it does not run them. All numerical task constants below are declared prospective engineering choices, not measurements or fitted values. Constructed transition laws support implementation checks only; their imposed consequences are not independent empirical confirmation of a natural polarity or of pairing usefulness.",
+    "status": "O2 specifications only; no O3 or O4; implementation_status=not_implemented",
+    "symbols": {
+      "C_t": "internally integrated content made only from available observations",
+      "E_t": "permissions, precedence and admissibility rules",
+      "R_t": "typed internal relation/routing representation, not reserve or W",
+      "U_t": "retained memory, not action set",
+      "c_t": "externally available context",
+      "g_t": "externally defined objective and priority record",
+      "kappa_t": "ordered pair (c_t,C_t)",
+      "mathcal_P_adm": "internally admissible activation region",
+      "mathcal_P_t": "external restriction operator",
+      "mathcal_U_t": "external feasible action set",
+      "reserve": "r_t"
+    }
+  },
+  "source_commit": "a824ff83a18e0690a6290e9091ac58b0e6b73611",
+  "source_file": "Polar_Dynamics_Investigacion_Original_Borrador.md",
+  "version": "1.0"
+}

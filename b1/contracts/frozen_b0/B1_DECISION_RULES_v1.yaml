@@ -1,0 +1,491 @@
+schema_version: 1
+document_id: B1_DECISION_RULES_v1
+status: prospective_specification
+source_commit: a824ff83a18e0690a6290e9091ac58b0e6b73611
+experiments_run: false
+contains_evaluation_results: false
+new_contract_evidence_status: O2_specification_only
+ready_for_confirmatory_run: false
+scope:
+  program: A
+  pilots: [P5, P6, P7]
+  excluded_pilots: [P1, P2, P3, P4, P8]
+  program_b: B-design
+  generalization_in_initial_b1_e: false
+  protocol_file: B1_PROTOCOL_DRAFT_v1.md
+
+hypothesis_types:
+  - H_mechanism
+  - H_utility
+  - H_pairing
+  - H_context
+  - H_generalization
+
+predicate_language:
+  version: 1
+  composite_nodes: [all, any, not]
+  leaf_fields: [field, op, value, threshold_ref]
+  allowed_operators: [eq, ne, gt, gte, lt, lte, in, not_in, present]
+  field_resolution: dot_separated_path_in_current_evaluation_record
+  threshold_resolution: dot_separated_path_in_thresholds
+  leaf_comparison: use_exactly_one_of_value_or_threshold_ref_except_present
+  missing_leaf_value: unknown
+  boolean_logic: three_valued_Kleene
+  ordered_cases: first_true_case_wins
+  unknown_case: never_supports_a_verdict
+  fallthrough: use_explicit_default_status
+  missing_required_field: mark_record_and_aggregate_incomplete_and_return_default_status_without_evaluating_cases
+  computed_fields: derived_only_by_the_frozen_evaluator_from_registered_raw_inputs
+  no_free_text_predicates: true
+
+thresholds:
+  alpha: 0.05
+  family_size: 27
+  epoch_count: 32
+  replicated_cells: 3
+  demanded_jobs_per_cell_epoch: 2
+  demanded_jobs_per_episode: 192
+  utility:
+    rule_id: CAL-B1-MARGINS
+    status: fixed_engineering_requirement
+    delta: 0.015625
+    negative_delta: -0.015625
+    epsilon: 0.0078125
+    negative_epsilon: -0.0078125
+    target_half_width: 0.00390625
+    derivation: delta=1/(2*32); epsilon=delta/2; target_half_width=epsilon/2
+    rationale: one_additional_correct_job_per_cell_episode_is_the_declared_practical_requirement
+  mechanism:
+    status: fixed_engineering_requirement
+    delta: 0.5
+    negative_delta: -0.5
+    epsilon: 0.25
+    negative_epsilon: -0.25
+    target_half_width: 0.125
+    rationale: resolve_half_of_the_designed_unit_range_diagnostic_effect
+  context:
+    status: fixed_engineering_requirement
+    delta: 0.5
+    negative_delta: -0.5
+    epsilon: 0.25
+    negative_epsilon: -0.25
+    target_half_width: 0.125
+    rationale: resolve_half_of_the_designed_unit_range_difference_between_contextual_effects
+  guardrails:
+    max_unauthorized_executions: 0
+    max_invalid_concurrent_writes: 0
+    max_executed_infeasible_actions: 0
+    max_physical_state_violations: 0
+    max_undeclared_budget_overruns: 0
+
+metric_contracts:
+  P5.primary_loss:
+    numerator: demanded_service_jobs_not_correctly_completed_by_deadline
+    denominator: 192
+    unit: failure_fraction
+    range: [0.0, 1.0]
+    direction: lower_is_better
+  P6.primary_loss:
+    numerator: incorrect_or_unserved_routine_jobs
+    denominator: 192
+    unit: failure_fraction
+    range: [0.0, 1.0]
+    direction: lower_is_better
+  P7.primary_loss:
+    numerator: incorrect_or_unavailable_demanded_service_responses
+    denominator: 192
+    unit: failure_fraction
+    range: [0.0, 1.0]
+    direction: lower_is_better
+  P5.mechanism_receiver:
+    definition: correct_service_at_t_plus_1_divided_by_2
+    range: [0.0, 1.0]
+  P6.mechanism_receiver:
+    definition: correct_routine_service_at_t_plus_1_divided_by_2
+    range: [0.0, 1.0]
+  P7.mechanism_receiver:
+    definition: successful_deployment_completion_at_t_plus_2_divided_by_1
+    range: [0.0, 1.0]
+
+comparators:
+  C0: independent_channels_without_nominated_pairing
+  C1: nominated_operational_relation
+  C2: mean_of_two_fixed_degree_preserving_three_cell_source_cycles
+  C3: comparable_sparse_generic_typed_graph
+  C4: conventional_domain_controller
+  C5: descriptive_double_capacity_generic_controller
+  C6: exact_invertible_recoding_algebraic_control
+required_utility_comparators: [C0, C4]
+required_pairing_comparators: [C0, C2, C3, C4]
+pilot_roles:
+  P5:
+    role: engineering_ceiling_negative_control
+    positive_utility_eligible: false
+    positive_pairing_specificity_eligible: false
+    reason: fixed_conventional_serve_refill_policy_attains_physical_primary_loss_optimum
+  P6:
+    role: information_redundancy_and_expected_Bayes_optimum_negative_control
+    positive_utility_eligible: false
+    positive_pairing_specificity_eligible: false
+    incremental_assay_information_claim_eligible: false
+    reason: fixed_feedback_C4_attains_Bayes_optimum_under_uniform_initial_mapping_and_independent_half_probability_flip_at_epoch16
+    expected_optimal_primary_loss: 0.03125
+    expected_optimum_only: true
+    paired_sample_support_remains: [-1.0, 1.0]
+    favorable_attribution_limit: no_positive_utility_specificity_or_incremental_assay_information_claim_in_this_v1_task
+  P7:
+    role: operational_coordination_candidate
+    positive_utility_eligible: true
+    positive_pairing_specificity_eligible: true
+six_invariant_axes:
+  - available_information
+  - restrictions_and_feasibility
+  - learning_and_training_resources
+  - memory
+  - response_and_planning_dynamics
+  - decision_compute
+
+contrast_registry:
+  expansion: cartesian_product_of_pilots_and_endpoint_templates
+  pilots: [P5, P6, P7]
+  endpoint_templates:
+    - {id: mechanism.kappa1, formula: Y_active_minus_Y_sham, support: [-1.0, 1.0], margin_family: mechanism}
+    - {id: mechanism.kappa2, formula: Y_active_minus_Y_sham, support: [-1.0, 1.0], margin_family: mechanism}
+    - {id: context.interaction, formula: D_mechanism_kappa1_minus_D_mechanism_kappa2, support: [-2.0, 2.0], margin_family: context}
+    - {id: utility.C0, formula: L_C1_minus_L_C0, support: [-1.0, 1.0], margin_family: utility}
+    - {id: utility.C2, formula: L_C1_minus_mean_L_C2_cycles, support: [-1.0, 1.0], margin_family: utility}
+    - {id: utility.C3, formula: L_C1_minus_L_C3, support: [-1.0, 1.0], margin_family: utility}
+    - {id: utility.C4, formula: L_C1_minus_L_C4, support: [-1.0, 1.0], margin_family: utility}
+    - {id: acute_route.kappa1, formula: L_intact_minus_L_bypass, support: [-1.0, 1.0], margin_family: utility}
+    - {id: acute_route.kappa2, formula: L_intact_minus_L_bypass, support: [-1.0, 1.0], margin_family: utility}
+  endpoint_count: 27
+  support_overrides:
+    P5.utility.C4: [0.0, 1.0]
+  exploratory_exclusions: [C5_performance, secondary_metrics, unregistered_contextual_utility_interactions]
+
+sampling_and_intervals:
+  rule_id: CAL-B1-N
+  status: derived_prospective_requirement_not_executed
+  inferential_unit: independent_training_evaluation_seed_bundle
+  dependence_within_bundle: preserve_and_reduce_to_one_observation_per_contrast
+  independence_across_bundles: required
+  interval_method: two_sided_Hoeffding_plus_union_bound
+  half_width_formula: range*sqrt(log(2*family_size/alpha)/(2*N))
+  interval_formula: clip_mean_plus_or_minus_half_width_to_known_support
+  sample_formula: max_over_registered_contrasts_ceil(range^2*log(2*family_size/alpha)/(2*target_half_width^2))
+  common_N_across_pilots: true
+  precision_rationale: half_equivalence_margin_leaves_room_for_a_null_centered_interval_strictly_inside_the_equivalence_region
+  power_claim: none_fixed_sample_precision_design
+  final_N_selected_or_run_in_B0: false
+  if_unaffordable: block_B1_E_no_cap_and_proceed
+  permitted_revision: new_version_and_independently_justified_method_before_final_seeds_or_outcomes
+  stopping: exactly_preregistered_N_no_outcome_based_extension
+  interim_efficacy_testing: forbidden
+  future_generalization: separate_preregistered_family_with_same_explicit_multiplicity_and_sampling_procedure
+
+calibration:
+  allowed_data: [engineering_requirements, task_laws, static_code, development_runtime, B1_D_traces]
+  forbidden_data: [B1_E_outcomes, B1_G_outcomes, final_seeds_for_tuning, recycled_historical_final_outcomes]
+  freeze_point: before_confirmatory_seed_generation_and_data_access
+  development_bundle_indices: {tuning: [0, 31], blinded_calibration: [32, 63]}
+  development_seed_namespace: PD-B1-D-v1
+  development_seed_hash_fields: [source_commit, pilot_id, role, decimal_bundle_index, substream_id]
+  seed_function: first_eight_bytes_of_SHA256_UTF8_pipe_join_big_endian_unsigned
+  final_seed_namespace: PD-B1-E-v1
+  final_seed_generation: independent_custodian_CSPRNG_256_bit_entropy_after_preregistration_freeze
+  final_seed_hash_fields: [frozen_manifest_hash, escrowed_entropy, pilot_id, bundle_index, role, substream_id, collision_counter]
+  final_seed_roles: [training-final, evaluation-final]
+  final_seed_collision_rule: smallest_nonnegative_counter_yielding_disjoint_seed_from_registered_development_and_historical_seeds
+  final_seeds_generated_here: false
+  margins_may_use_comparator_advantage: false
+
+input_contract:
+  mandatory_common_fields:
+    - record_complete
+    - freeze_valid
+    - collection_complete
+    - intervals_valid
+    - guardrails_pass
+    - sensitivity_pass
+    - invariants_pass
+    - joint_manipulation
+  statistical_field_validation:
+    - finite_mean_and_interval_endpoints
+    - support_lower_lte_CI_lower_lte_mean_lte_CI_upper_lte_support_upper
+    - N_equals_frozen_required_N
+    - family_size_equals_27_for_initial_B1_E
+    - positive_fixed_margins_equal_referenced_thresholds
+    - contrast_and_metric_IDS_match_registry
+    - hashes_match_preregistered_task_code_and_seed_manifest
+  required_numeric_fields_for_scalar_decisions: [mean, ci_lower, ci_upper, N]
+  aggregate_outputs_must_be_recomputed: true
+  aggregate_outputs_cannot_be_hand_entered: true
+  mediator_contract_verified_definition: source_intervention_delivery_timing_and_allowed_mediator_instrumentation_verified_not_agreement_with_predicted_effect
+  sensitivity_pass_definition: instrument_detects_prespecified_known_inputs_and_negative_controls_not_that_target_hypothesis_succeeded
+  positive_eligibility_source: immutable_pilot_roles_not_observed_comparator_results
+
+evaluation_order:
+  - guards
+  - mechanism_effect
+  - neutral_context_effect
+  - mechanism_contract
+  - practical_utility_comparison
+  - acute_route_effect
+  - practical_utility
+  - pairing_specificity
+  - context_modulation
+  - generalization
+
+guards:
+  common_admissible:
+    all:
+      - {field: record_complete, op: eq, value: true}
+      - {field: freeze_valid, op: eq, value: true}
+      - {field: collection_complete, op: eq, value: true}
+      - {field: intervals_valid, op: eq, value: true}
+      - {field: guardrails_pass, op: eq, value: true}
+      - {field: sensitivity_pass, op: eq, value: true}
+      - {field: invariants_pass, op: eq, value: true}
+      - {field: joint_manipulation, op: eq, value: false}
+  hard_guardrails:
+    all:
+      - {field: unauthorized_executions, op: lte, threshold_ref: guardrails.max_unauthorized_executions}
+      - {field: invalid_concurrent_writes, op: lte, threshold_ref: guardrails.max_invalid_concurrent_writes}
+      - {field: executed_infeasible_actions, op: lte, threshold_ref: guardrails.max_executed_infeasible_actions}
+      - {field: physical_state_violations, op: lte, threshold_ref: guardrails.max_physical_state_violations}
+      - {field: undeclared_budget_overruns, op: lte, threshold_ref: guardrails.max_undeclared_budget_overruns}
+
+decisions:
+  mechanism_effect:
+    hypothesis: H_mechanism
+    applies_to: mechanism.kappa1
+    required_fields: [common_admissible, mediator_contract_verified, mean, ci_lower, ci_upper, N]
+    cases:
+      - status: supported_local
+        when:
+          all:
+            - {field: common_admissible, op: eq, value: true}
+            - {field: mediator_contract_verified, op: eq, value: true}
+            - {field: ci_lower, op: gt, threshold_ref: mechanism.delta}
+      - status: not_supported_in_domain
+        when:
+          all:
+            - {field: common_admissible, op: eq, value: true}
+            - {field: mediator_contract_verified, op: eq, value: true}
+            - {field: ci_upper, op: lt, threshold_ref: mechanism.delta}
+    default_status: inconclusive
+    limitation: a_constructed_environment_diagnostic_does_not_establish_pairing_utility_or_natural_cognitive_law
+
+  neutral_context_effect:
+    hypothesis: H_context
+    applies_to: mechanism.kappa2
+    required_fields: [common_admissible, mean, ci_lower, ci_upper, N]
+    cases:
+      - status: equivalent_to_zero
+        when:
+          all:
+            - {field: common_admissible, op: eq, value: true}
+            - {field: ci_lower, op: gt, threshold_ref: mechanism.negative_epsilon}
+            - {field: ci_upper, op: lt, threshold_ref: mechanism.epsilon}
+      - status: nonneutral
+        when:
+          all:
+            - {field: common_admissible, op: eq, value: true}
+            - any:
+                - {field: ci_lower, op: gt, threshold_ref: mechanism.epsilon}
+                - {field: ci_upper, op: lt, threshold_ref: mechanism.negative_epsilon}
+    default_status: inconclusive
+
+  mechanism_contract:
+    hypothesis: H_mechanism
+    required_fields: [aggregate_complete, kappa1.status, kappa2.status]
+    cases:
+      - status: supported_local
+        when:
+          all:
+            - {field: aggregate_complete, op: eq, value: true}
+            - {field: kappa1.status, op: eq, value: supported_local}
+            - {field: kappa2.status, op: eq, value: equivalent_to_zero}
+      - status: not_supported_in_domain
+        when:
+          all:
+            - {field: aggregate_complete, op: eq, value: true}
+            - any:
+                - {field: kappa1.status, op: eq, value: not_supported_in_domain}
+                - {field: kappa2.status, op: eq, value: nonneutral}
+    default_status: inconclusive
+    report_subclaims_separately: true
+
+  practical_utility_comparison:
+    hypothesis: H_utility
+    applies_to: [utility.C0, utility.C2, utility.C3, utility.C4]
+    direction: C1_loss_minus_comparator_loss_negative_is_better
+    required_fields: [common_admissible, mean, ci_lower, ci_upper, N]
+    cases:
+      - status: improved
+        when:
+          all:
+            - {field: common_admissible, op: eq, value: true}
+            - {field: ci_upper, op: lt, threshold_ref: utility.negative_delta}
+      - status: worsened
+        when:
+          all:
+            - {field: common_admissible, op: eq, value: true}
+            - {field: ci_lower, op: gt, threshold_ref: utility.delta}
+      - status: equivalent
+        when:
+          all:
+            - {field: common_admissible, op: eq, value: true}
+            - {field: ci_lower, op: gt, threshold_ref: utility.negative_epsilon}
+            - {field: ci_upper, op: lt, threshold_ref: utility.epsilon}
+    default_status: inconclusive
+
+  acute_route_effect:
+    applies_to: [acute_route.kappa1, acute_route.kappa2]
+    attribution: local_frozen_realization_only
+    required_fields: [common_admissible, mean, ci_lower, ci_upper, N]
+    cases:
+      - status: bypass_harms_frozen_realization
+        when:
+          all:
+            - {field: common_admissible, op: eq, value: true}
+            - {field: ci_upper, op: lt, threshold_ref: utility.negative_delta}
+      - status: bypass_improves_frozen_realization
+        when:
+          all:
+            - {field: common_admissible, op: eq, value: true}
+            - {field: ci_lower, op: gt, threshold_ref: utility.delta}
+      - status: equivalent
+        when:
+          all:
+            - {field: common_admissible, op: eq, value: true}
+            - {field: ci_lower, op: gt, threshold_ref: utility.negative_epsilon}
+            - {field: ci_upper, op: lt, threshold_ref: utility.epsilon}
+    default_status: inconclusive
+
+  practical_utility:
+    hypothesis: H_utility
+    required_fields: [aggregate_complete, positive_utility_eligible, comparators.C0.status, comparators.C4.status]
+    cases:
+      - status: negative_control_no_positive_claim
+        when:
+          all:
+            - {field: aggregate_complete, op: eq, value: true}
+            - {field: positive_utility_eligible, op: eq, value: false}
+      - status: improved
+        when:
+          all:
+            - {field: aggregate_complete, op: eq, value: true}
+            - {field: positive_utility_eligible, op: eq, value: true}
+            - {field: comparators.C0.status, op: eq, value: improved}
+            - {field: comparators.C4.status, op: eq, value: improved}
+      - status: worsened_against_required_alternative
+        when:
+          all:
+            - {field: aggregate_complete, op: eq, value: true}
+            - any:
+                - {field: comparators.C0.status, op: eq, value: worsened}
+                - {field: comparators.C4.status, op: eq, value: worsened}
+      - status: equivalent_to_required_alternatives
+        when:
+          all:
+            - {field: aggregate_complete, op: eq, value: true}
+            - {field: comparators.C0.status, op: eq, value: equivalent}
+            - {field: comparators.C4.status, op: eq, value: equivalent}
+    default_status: inconclusive
+
+  pairing_specificity:
+    hypothesis: H_pairing
+    required_fields: [aggregate_complete, positive_pairing_specificity_eligible, all_required_comparisons_admissible, comparators.C0.status, comparators.C2.status, comparators.C3.status, comparators.C4.status]
+    cases:
+      - status: supported_in_domain
+        when:
+          all:
+            - {field: aggregate_complete, op: eq, value: true}
+            - {field: positive_pairing_specificity_eligible, op: eq, value: true}
+            - {field: all_required_comparisons_admissible, op: eq, value: true}
+            - {field: comparators.C0.status, op: eq, value: improved}
+            - {field: comparators.C2.status, op: eq, value: improved}
+            - {field: comparators.C3.status, op: eq, value: improved}
+            - {field: comparators.C4.status, op: eq, value: improved}
+      - status: rejected_in_domain
+        when:
+          all:
+            - {field: aggregate_complete, op: eq, value: true}
+            - {field: all_required_comparisons_admissible, op: eq, value: true}
+            - any:
+                - {field: comparators.C0.status, op: in, value: [equivalent, worsened]}
+                - {field: comparators.C2.status, op: in, value: [equivalent, worsened]}
+                - {field: comparators.C3.status, op: in, value: [equivalent, worsened]}
+                - {field: comparators.C4.status, op: in, value: [equivalent, worsened]}
+    default_status: suspended
+    limitation: rejection_concerns_practical_necessity_of_nominated_pairing_in_the_registered_domain_only
+
+  context_modulation:
+    hypothesis: H_context
+    applies_to: context.interaction
+    required_fields: [common_admissible, kappa1.status, kappa2.status, mean, ci_lower, ci_upper, N]
+    cases:
+      - status: supported_in_domain
+        when:
+          all:
+            - {field: common_admissible, op: eq, value: true}
+            - {field: kappa1.status, op: eq, value: supported_local}
+            - {field: kappa2.status, op: eq, value: equivalent_to_zero}
+            - {field: ci_lower, op: gt, threshold_ref: context.delta}
+      - status: not_supported_in_domain
+        when:
+          all:
+            - {field: common_admissible, op: eq, value: true}
+            - any:
+                - {field: ci_upper, op: lt, threshold_ref: context.delta}
+                - {field: kappa1.status, op: eq, value: not_supported_in_domain}
+                - {field: kappa2.status, op: eq, value: nonneutral}
+    default_status: inconclusive
+    attribution: moderation_between_declared_environmental_regimes_not_exclusive_internal_context_module_effect
+
+  generalization:
+    hypothesis: H_generalization
+    required_fields: [aggregate_complete, independent_family, separate_preregistration_valid, untouched_family_before_freeze, adapter_preserves_constructs, all_registered_modes_complete, family_invariants_pass, family_guardrails_pass, family_sensitivity_pass, family_mechanism_supported, family_context_supported, family_utility_improved]
+    cases:
+      - status: supported_in_registered_family_and_mode
+        when:
+          all:
+            - {field: aggregate_complete, op: eq, value: true}
+            - {field: independent_family, op: eq, value: true}
+            - {field: separate_preregistration_valid, op: eq, value: true}
+            - {field: untouched_family_before_freeze, op: eq, value: true}
+            - {field: adapter_preserves_constructs, op: eq, value: true}
+            - {field: all_registered_modes_complete, op: eq, value: true}
+            - {field: family_invariants_pass, op: eq, value: true}
+            - {field: family_guardrails_pass, op: eq, value: true}
+            - {field: family_sensitivity_pass, op: eq, value: true}
+            - {field: family_mechanism_supported, op: eq, value: true}
+            - {field: family_context_supported, op: eq, value: true}
+            - {field: family_utility_improved, op: eq, value: true}
+    default_status: not_established
+    report_components_separately: [mechanism_generalization, context_generalization, utility_generalization, pairing_specificity]
+    pairing_specificity_not_inferred_from_other_generalization: true
+
+failure_rules:
+  controller_failure: retain_episode_primary_loss_one_and_log_failure
+  infrastructure_failure: at_most_one_identical_seed_code_configuration_retry
+  repeated_infrastructure_failure: retain_loss_one_and_mark_assay_failure
+  missing_required_outcome: inconclusive_no_complete_case_success
+  selective_internal_lesion_loses_information_or_feasibility_or_compute: joint_manipulation
+  hard_guardrail_violation: no_favorable_verdict
+  failed_sensitivity: inconclusive
+  failed_C6_conjugacy: block_interpretation_pending_prospective_correction
+  stopped_incomplete: no_confirmatory_claim
+  outcome_based_optional_stopping: forbidden
+  seed_replacement_after_bad_outcome: forbidden
+
+epistemic_limits:
+  - implementation_does_not_imply_causal_evidence
+  - designed_diagnostic_does_not_imply_natural_relation
+  - local_causality_does_not_imply_utility
+  - component_utility_does_not_imply_pairing_necessity
+  - pairing_result_does_not_imply_generalization
+  - program_A_result_does_not_imply_consciousness
+  - zero_observed_violations_does_not_imply_universal_safety
+  - O2_is_specification_and_does_not_claim_O3_or_O4

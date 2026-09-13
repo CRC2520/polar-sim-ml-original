@@ -1,0 +1,714 @@
+{
+  "C2_cycle_policy": "Both fixed cycles retained; selection averages both cycles equally",
+  "C4_search": "One frozen conventional policy, not eight fabricated search trials",
+  "C6_search": "None: exact image of selected C1 configuration",
+  "P5": {
+    "architecture_status": "BLOCKED",
+    "conflict_id": "B1-CONFLICT-P5-C4-REFILL-001",
+    "permitted_partial_checks": [
+      "task_law_diagnostics",
+      "json_minimal_refill_witness",
+      "protocol_full_refill_witness"
+    ]
+  },
+  "architecture_pilots": [
+    "P6",
+    "P7"
+  ],
+  "calibration": {
+    "acute_contexts": [
+      "kappa1",
+      "kappa2"
+    ],
+    "acute_intervention": "C1 intact versus nominated-route bypass, complete 32-epoch episode",
+    "c6_equivalence": "Exact event trace hash and rational loss, tolerance zero",
+    "diagnostic_endpoint_policy": "Record newly executed clone outcomes for each actual bundle; deterministic imposed-law instrument checks are not independent empirical validation",
+    "diagnostic_replicates_per_bundle": 3,
+    "diagnostics": "Fresh source/sham state clones for every pilot and every tuning/calibration bundle, separate from architecture episodes",
+    "export_unblinding": "Only after immutable technical-calibration close",
+    "identities_masked": true,
+    "opaque_identifier": "SHA256(tuning_freeze_hash|arm_description)[:16]",
+    "technical_summary_contains_comparator_losses": false
+  },
+  "calibration_bundles": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63
+  ],
+  "canonical_source_commit": "a824ff83a18e0690a6290e9091ac58b0e6b73611",
+  "configurations": {
+    "C0": [
+      {
+        "config_id": "cfg00",
+        "generic_sources": [
+          0,
+          1,
+          2
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "on_demand",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg01",
+        "generic_sources": [
+          1,
+          2,
+          0
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "on_demand",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg02",
+        "generic_sources": [
+          2,
+          0,
+          1
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "proactive",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg03",
+        "generic_sources": [
+          1,
+          0,
+          2
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "proactive",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg04",
+        "generic_sources": [
+          2,
+          1,
+          0
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "on_demand",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg05",
+        "generic_sources": [
+          0,
+          2,
+          1
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "on_demand",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg06",
+        "generic_sources": [
+          0,
+          1,
+          2
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "proactive",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg07",
+        "generic_sources": [
+          2,
+          0,
+          1
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "proactive",
+        "tie_break": "highest"
+      }
+    ],
+    "C1": [
+      {
+        "config_id": "cfg00",
+        "generic_sources": [
+          0,
+          1,
+          2
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "on_demand",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg01",
+        "generic_sources": [
+          1,
+          2,
+          0
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "on_demand",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg02",
+        "generic_sources": [
+          2,
+          0,
+          1
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "proactive",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg03",
+        "generic_sources": [
+          1,
+          0,
+          2
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "proactive",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg04",
+        "generic_sources": [
+          2,
+          1,
+          0
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "on_demand",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg05",
+        "generic_sources": [
+          0,
+          2,
+          1
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "on_demand",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg06",
+        "generic_sources": [
+          0,
+          1,
+          2
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "proactive",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg07",
+        "generic_sources": [
+          2,
+          0,
+          1
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "proactive",
+        "tie_break": "highest"
+      }
+    ],
+    "C2": [
+      {
+        "config_id": "cfg00",
+        "generic_sources": [
+          0,
+          1,
+          2
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "on_demand",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg01",
+        "generic_sources": [
+          1,
+          2,
+          0
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "on_demand",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg02",
+        "generic_sources": [
+          2,
+          0,
+          1
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "proactive",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg03",
+        "generic_sources": [
+          1,
+          0,
+          2
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "proactive",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg04",
+        "generic_sources": [
+          2,
+          1,
+          0
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "on_demand",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg05",
+        "generic_sources": [
+          0,
+          2,
+          1
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "on_demand",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg06",
+        "generic_sources": [
+          0,
+          1,
+          2
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "proactive",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg07",
+        "generic_sources": [
+          2,
+          0,
+          1
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "proactive",
+        "tie_break": "highest"
+      }
+    ],
+    "C3": [
+      {
+        "config_id": "cfg00",
+        "generic_sources": [
+          0,
+          1,
+          2
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "on_demand",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg01",
+        "generic_sources": [
+          1,
+          2,
+          0
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "on_demand",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg02",
+        "generic_sources": [
+          2,
+          0,
+          1
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "proactive",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg03",
+        "generic_sources": [
+          1,
+          0,
+          2
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "proactive",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg04",
+        "generic_sources": [
+          2,
+          1,
+          0
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "on_demand",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg05",
+        "generic_sources": [
+          0,
+          2,
+          1
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "on_demand",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg06",
+        "generic_sources": [
+          0,
+          1,
+          2
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "proactive",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg07",
+        "generic_sources": [
+          2,
+          0,
+          1
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "proactive",
+        "tie_break": "highest"
+      }
+    ],
+    "C4": [
+      {
+        "config_id": "fixed",
+        "generic_sources": [
+          0,
+          1,
+          2
+        ],
+        "receiver_policy": "conventional",
+        "source_schedule": "frozen",
+        "tie_break": "lowest"
+      }
+    ],
+    "C5": [
+      {
+        "config_id": "cfg00",
+        "generic_sources": [
+          0,
+          1,
+          2
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "on_demand",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg01",
+        "generic_sources": [
+          1,
+          2,
+          0
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "on_demand",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg02",
+        "generic_sources": [
+          2,
+          0,
+          1
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "proactive",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg03",
+        "generic_sources": [
+          1,
+          0,
+          2
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "proactive",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg04",
+        "generic_sources": [
+          2,
+          1,
+          0
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "on_demand",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg05",
+        "generic_sources": [
+          0,
+          2,
+          1
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "on_demand",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg06",
+        "generic_sources": [
+          0,
+          1,
+          2
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "proactive",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg07",
+        "generic_sources": [
+          2,
+          0,
+          1
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "proactive",
+        "tie_break": "highest"
+      }
+    ]
+  },
+  "confirmatory": false,
+  "development_only": true,
+  "failure_policy": "Retain all attempts; genuine controller failures have primary loss 1. Escaping instrument exceptions, incomplete guardrails or executed physical violations stop the stage and cannot enter configuration selection.",
+  "implementation_choices": {
+    "C0": "no nominated input; complete raw records and conventional reconstruction allowed",
+    "C1": "same-cell typed route plus complete raw records",
+    "C2": "run both fixed cycles separately and average BOTH losses, never pick a cycle",
+    "C3": "three generic typed edges; eight frozen slots include identity connectivity",
+    "C4": {
+      "P5": {
+        "conflict_id": "B1-CONFLICT-P5-C4-REFILL-001",
+        "status": "blocked"
+      },
+      "P6": "fixed last-live-feedback selector with report fallback",
+      "P7": "fixed version-aware maintenance state machine, lowest-ID ties"
+    },
+    "C5": "six typed slots and exactly twice C3 memory/decision allowance; descriptive",
+    "C6": "exact rational conjugacy; same configuration, no independent optimization",
+    "configs": [
+      {
+        "config_id": "cfg00",
+        "generic_sources": [
+          0,
+          1,
+          2
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "on_demand",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg01",
+        "generic_sources": [
+          1,
+          2,
+          0
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "on_demand",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg02",
+        "generic_sources": [
+          2,
+          0,
+          1
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "proactive",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg03",
+        "generic_sources": [
+          1,
+          0,
+          2
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "proactive",
+        "tie_break": "lowest"
+      },
+      {
+        "config_id": "cfg04",
+        "generic_sources": [
+          2,
+          1,
+          0
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "on_demand",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg05",
+        "generic_sources": [
+          0,
+          2,
+          1
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "on_demand",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg06",
+        "generic_sources": [
+          0,
+          1,
+          2
+        ],
+        "receiver_policy": "domain_aware",
+        "source_schedule": "proactive",
+        "tie_break": "highest"
+      },
+      {
+        "config_id": "cfg07",
+        "generic_sources": [
+          2,
+          0,
+          1
+        ],
+        "receiver_policy": "reactive",
+        "source_schedule": "proactive",
+        "tie_break": "highest"
+      }
+    ],
+    "limits": {
+      "decision_operations": 8192,
+      "latency_seconds": null,
+      "memory_scalars": 4096,
+      "planning_horizon": 1
+    },
+    "resource_status": "provisional caps; smallest common cap and latency certification pending",
+    "resource_unit": "instrumented scalar-copy/read, record-inspection, route-slot and decision primitive; not CPU instructions",
+    "search_slots": {
+      "C0": 8,
+      "C1": 8,
+      "C2": 8,
+      "C3": 8,
+      "C4": 1,
+      "C5": 8
+    },
+    "selection": "mean primary tuning loss; then useful operations; then config_id",
+    "training": "finite configuration selection; no hidden optimization or task fitting",
+    "version": "b1-controller-family-v1"
+  },
+  "resources": {
+    "C5_multiplier": 2,
+    "latency_formula": "2 * maximum observed tuning decision time; reporting only pending worst-input certificate",
+    "limits": {
+      "decision_operations": 8192,
+      "latency_seconds": null,
+      "memory_scalars": 4096,
+      "planning_horizon": 1
+    },
+    "planning_horizon": 1,
+    "status": "provisional_not_smallest_cap_certified"
+  },
+  "reusable_as_final": false,
+  "selected_configuration_rule": [
+    "mean_bundle_primary_loss",
+    "mean_useful_operations",
+    "config_id"
+  ],
+  "tuning_bundles": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "version": "B1-D-v1"
+}

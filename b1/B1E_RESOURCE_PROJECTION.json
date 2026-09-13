@@ -1,0 +1,308 @@
+{
+  "available_resources": {
+    "cgroup_cpu_quota": 8.0,
+    "disk_free_bytes": 30847897600,
+    "disk_total_bytes": 33770192896,
+    "future_budget_authorized": false,
+    "future_cpu_time_budget": null,
+    "logical_cpu_count": 9,
+    "measured_utc": "2026-09-13T02:35:04.143669+00:00"
+  },
+  "budget_compatible": false,
+  "compressed_trace_bytes_partial_schedule": 373568924236.125,
+  "confirmatory": false,
+  "development_only": true,
+  "full_protocol_resources_certified": false,
+  "infeasible_action": "Block B1-E; never reduce N and proceed",
+  "limits": "Linear extrapolation of this host's measured wall time and gzip bytes; not a hardware-independent bound, CPU reservation or complete protocol certification",
+  "observed_block_bundles": 32,
+  "observed_disk_insufficient_for_partial_schedule": true,
+  "precision_plan": {
+    "B1E_executed": false,
+    "B1E_required_N": 915501,
+    "alpha": 0.05,
+    "endpoint_count": 27,
+    "family_size": 27,
+    "feasibility": "requires_development_only_resource_assessment",
+    "final_seeds_generated": false,
+    "infeasible_action": "block_B1_E_no_cap_and_proceed",
+    "method": "two_sided_Hoeffding_plus_union_bound",
+    "per_endpoint": {
+      "P5.acute_route.kappa1": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P5.acute_route.kappa2": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P5.context.interaction": {
+        "margin_family": "context",
+        "range": 4.0,
+        "required_N": 3577,
+        "support": [
+          -2.0,
+          2.0
+        ],
+        "target_half_width": 0.125
+      },
+      "P5.mechanism.kappa1": {
+        "margin_family": "mechanism",
+        "range": 2.0,
+        "required_N": 895,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.125
+      },
+      "P5.mechanism.kappa2": {
+        "margin_family": "mechanism",
+        "range": 2.0,
+        "required_N": 895,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.125
+      },
+      "P5.utility.C0": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P5.utility.C2": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P5.utility.C3": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P5.utility.C4": {
+        "margin_family": "utility",
+        "range": 1.0,
+        "required_N": 228876,
+        "support": [
+          0.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P6.acute_route.kappa1": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P6.acute_route.kappa2": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P6.context.interaction": {
+        "margin_family": "context",
+        "range": 4.0,
+        "required_N": 3577,
+        "support": [
+          -2.0,
+          2.0
+        ],
+        "target_half_width": 0.125
+      },
+      "P6.mechanism.kappa1": {
+        "margin_family": "mechanism",
+        "range": 2.0,
+        "required_N": 895,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.125
+      },
+      "P6.mechanism.kappa2": {
+        "margin_family": "mechanism",
+        "range": 2.0,
+        "required_N": 895,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.125
+      },
+      "P6.utility.C0": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P6.utility.C2": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P6.utility.C3": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P6.utility.C4": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P7.acute_route.kappa1": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P7.acute_route.kappa2": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P7.context.interaction": {
+        "margin_family": "context",
+        "range": 4.0,
+        "required_N": 3577,
+        "support": [
+          -2.0,
+          2.0
+        ],
+        "target_half_width": 0.125
+      },
+      "P7.mechanism.kappa1": {
+        "margin_family": "mechanism",
+        "range": 2.0,
+        "required_N": 895,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.125
+      },
+      "P7.mechanism.kappa2": {
+        "margin_family": "mechanism",
+        "range": 2.0,
+        "required_N": 895,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.125
+      },
+      "P7.utility.C0": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P7.utility.C2": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P7.utility.C3": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      },
+      "P7.utility.C4": {
+        "margin_family": "utility",
+        "range": 2.0,
+        "required_N": 915501,
+        "support": [
+          -1.0,
+          1.0
+        ],
+        "target_half_width": 0.00390625
+      }
+    },
+    "power_claim": "none_fixed_sample_precision_design"
+  },
+  "projected_N": 915501,
+  "projection_basis": "Observed P6/P7 12-arm episode schedule plus P5 two task-law witnesses and fresh source diagnostics for every pilot/bundle; does not supply missing P5 architecture runs",
+  "reusable_as_final": false,
+  "serial_wall_seconds_partial_schedule": 2211378.882718262
+}
