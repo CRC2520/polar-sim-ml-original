@@ -1,0 +1,22 @@
+{
+  "confirmatory": false,
+  "development_only": true,
+  "new_experiments": 0,
+  "new_seeds": 0,
+  "output_sha256": {
+    "B1D_REGISTRY_EVALUATION.json": "1d4af351fcbc034b5d4d0a511535297dc9a4362da218d6048036175d2e5c4524",
+    "B1D_RESULTS.json": "05444144a0d4c48abb758a765138d29d998786b552a560568e9dc09d611c9647",
+    "B1D_RESULTS.md": "e680ecf430a9142e8d3d72426659ca6399b9bbfb652752dd380e70b3cf4edd36",
+    "B1E_RESOURCE_PROJECTION.json": "29264a08ab7559b2212dff599a2fc2bbd530849173ab3f59d24ab8b0ddaa0197",
+    "postprocessing/EXPORT_RECOVERY_INCIDENT.json": "5af3c5cc3826e6bb39adcdb98418f4ba11acd0ddd39f8816e34eb17f473fa231",
+    "postprocessing/EXPORT_RECOVERY_INCIDENT.md": "f31442569a360430a02b180bea592c43fb6ba95a5c0c186d451e109109f24a30",
+    "postprocessing/bundle_diagnostics.recovered.jsonl": "df2d124434fdfa332c520983262355d224bdfa4392c0d698e1109f54321ee124"
+  },
+  "reusable_as_final": false,
+  "source_sha256": {
+    "postprocessing/__init__.py": "8e2134a723813513fddad4bed6f4bfc6b097d3ac6d79d7925f82df3cc1839a72",
+    "postprocessing/export_recovery.py": "d355b4503377713bc062feccc33e17049665b8755702accbd7be08bd136257e9",
+    "postprocessing/tests/test_export_recovery.py": "b7a16c1ecf5f9b62d9a5ed94b5fe8817423567347f0626d0901419b01ad37aac"
+  },
+  "version": "closed-trace-reporting-recovery-v1"
+}

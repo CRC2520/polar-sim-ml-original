@@ -1,0 +1,319 @@
+{
+  "archive_totals_verified": {
+    "compressed_bytes": 13057556,
+    "raw_bytes": 930941446,
+    "records": 82176,
+    "shards": 83
+  },
+  "cause": "Original summary JSONL has 42 rows through bundle 45; immutable gzip archive contains all 96 bundles through 63. Why the original stream retained only 42 rows is not established.",
+  "confirmatory": false,
+  "derived_sidecar": {
+    "path": "postprocessing/bundle_diagnostics.recovered.jsonl",
+    "sha256": "df2d124434fdfa332c520983262355d224bdfa4392c0d698e1109f54321ee124"
+  },
+  "development_only": true,
+  "evaluator": {
+    "evaluation/decision.py": "0f5281fa82b53ffbc45a2e6b42d4cd3497fc848d16188f11051dfcaec2328272",
+    "evaluation/precision.py": "e5b8d1d84a34cf00d3f1000d32dc7797cf62cf4b6fab2af6dc0b085950c08986",
+    "run.py": "b1615323dccc3e1e542a3e36c4050d352277b65d8edfdfcdb29308d4bea5bede"
+  },
+  "fixture": {
+    "path": "development_results/calibration/mechanism_diagnostics.json",
+    "sha256": "bec8838f551fd68c36eb826527dc19245657efe2d1f1c31c5afb2428a36bef41"
+  },
+  "frozen_artifacts_changed": false,
+  "input_verification": {
+    "experimental_freeze_modified": false,
+    "frozen_snapshots": [
+      {
+        "artifacts_verified": 39,
+        "manifest": "PRE_TUNING_FREEZE.json",
+        "sha256": "88b48e21583125f851e2b3f2dbffc82fb0b6aff0302dc4bc2d5121a7bdcf081d"
+      },
+      {
+        "artifacts_verified": 2,
+        "manifest": "INSTRUMENT_GATE.json",
+        "sha256": "260b781a1fa78f7bff7089c79f809655d33f541e9c735484a105d1775591860d"
+      },
+      {
+        "artifacts_verified": 360,
+        "manifest": "TUNING_FREEZE.json",
+        "sha256": "449630c9c57e9e52f95bf5e3ed4e73f59a90ec6805a9e5401ae7010b580b424d"
+      },
+      {
+        "artifacts_verified": 91,
+        "manifest": "CALIBRATION_TECHNICAL.json",
+        "sha256": "83ea3bd43716cef3593ebb2e09079469af29f4882fddcdb130d7b796b7722260"
+      }
+    ],
+    "identity_disclosure_sha256": "fc9e380d8056726ddd23b4a93124e97767925087a60f32f69a3ff1ad18aa8adf",
+    "original_inventory_gate_satisfied_by_reporting_additions": false,
+    "postclosure_reporting_python_additions": {
+      "postprocessing/__init__.py": "8e2134a723813513fddad4bed6f4bfc6b097d3ac6d79d7925f82df3cc1839a72",
+      "postprocessing/export_recovery.py": "d355b4503377713bc062feccc33e17049665b8755702accbd7be08bd136257e9",
+      "postprocessing/tests/test_export_recovery.py": "b7a16c1ecf5f9b62d9a5ed94b5fe8817423567347f0626d0901419b01ad37aac"
+    }
+  },
+  "limitations": [
+    "Reporting inventory was added after calibration closure and was never part of the experimental freeze.",
+    "Legacy run.export remains failed and its original inventory gate is not satisfied by the additions.",
+    "Derived records recover a redundant representation of archived observations, not a calibration rerun or new evidence.",
+    "Deterministic imposed-law diagnostic repeats are not independent empirical confirmation.",
+    "P5 architecture comparison and resource certificates remain blocked; no B1-E authorization."
+  ],
+  "new_experiments": 0,
+  "new_seeds": 0,
+  "original_export_exit_code": 2,
+  "original_export_invocation": "python -B -m b1.run export && python -B -m b1.evaluation.reporting && python -B -m b1.validate_b1 --help",
+  "original_export_repaired_or_declared_successful": false,
+  "original_export_status": "FAILED_RETAINED_UNCHANGED",
+  "original_export_tool_output": {
+    "confirmatory": false,
+    "development_only": true,
+    "error": "StageError: Missing or duplicated actual calibration bundle diagnostics",
+    "reusable_as_final": false,
+    "stage": "export",
+    "status": "BLOCKED"
+  },
+  "original_export_transcript_provenance": "Root agent supplied exact exec_command tool stdout and exit code; no on-disk transcript existed; following shell && commands did not run",
+  "recorded_utc": "2026-09-13T02:35:04.072224+00:00",
+  "reporting_changes": "Standalone adaptation of frozen run.export reporting formulas; corrected diagnostics input path, explicit incident provenance, no change to evaluator or thresholds",
+  "retuning": false,
+  "reusable_as_final": false,
+  "scientific_code_changed_by_postprocessor": false,
+  "source_input": {
+    "path": "development_results/calibration/bundle_diagnostics.jsonl",
+    "sha256": "49683927fc8774f355f8cf1a3afa8f975cd21245857591ca4eb6599a5dfa9de1"
+  },
+  "status": "DERIVED_REPORTING_SIDECAR_RECOVERED",
+  "technical_close_sha256": "83ea3bd43716cef3593ebb2e09079469af29f4882fddcdb130d7b796b7722260",
+  "validation": {
+    "archive_diagnostic_events_verified": 2304,
+    "derived_row_keys": [
+      [
+        "P5",
+        46
+      ],
+      [
+        "P6",
+        46
+      ],
+      [
+        "P7",
+        46
+      ],
+      [
+        "P5",
+        47
+      ],
+      [
+        "P6",
+        47
+      ],
+      [
+        "P7",
+        47
+      ],
+      [
+        "P5",
+        48
+      ],
+      [
+        "P6",
+        48
+      ],
+      [
+        "P7",
+        48
+      ],
+      [
+        "P5",
+        49
+      ],
+      [
+        "P6",
+        49
+      ],
+      [
+        "P7",
+        49
+      ],
+      [
+        "P5",
+        50
+      ],
+      [
+        "P6",
+        50
+      ],
+      [
+        "P7",
+        50
+      ],
+      [
+        "P5",
+        51
+      ],
+      [
+        "P6",
+        51
+      ],
+      [
+        "P7",
+        51
+      ],
+      [
+        "P5",
+        52
+      ],
+      [
+        "P6",
+        52
+      ],
+      [
+        "P7",
+        52
+      ],
+      [
+        "P5",
+        53
+      ],
+      [
+        "P6",
+        53
+      ],
+      [
+        "P7",
+        53
+      ],
+      [
+        "P5",
+        54
+      ],
+      [
+        "P6",
+        54
+      ],
+      [
+        "P7",
+        54
+      ],
+      [
+        "P5",
+        55
+      ],
+      [
+        "P6",
+        55
+      ],
+      [
+        "P7",
+        55
+      ],
+      [
+        "P5",
+        56
+      ],
+      [
+        "P6",
+        56
+      ],
+      [
+        "P7",
+        56
+      ],
+      [
+        "P5",
+        57
+      ],
+      [
+        "P6",
+        57
+      ],
+      [
+        "P7",
+        57
+      ],
+      [
+        "P5",
+        58
+      ],
+      [
+        "P6",
+        58
+      ],
+      [
+        "P7",
+        58
+      ],
+      [
+        "P5",
+        59
+      ],
+      [
+        "P6",
+        59
+      ],
+      [
+        "P7",
+        59
+      ],
+      [
+        "P5",
+        60
+      ],
+      [
+        "P6",
+        60
+      ],
+      [
+        "P7",
+        60
+      ],
+      [
+        "P5",
+        61
+      ],
+      [
+        "P6",
+        61
+      ],
+      [
+        "P7",
+        61
+      ],
+      [
+        "P5",
+        62
+      ],
+      [
+        "P6",
+        62
+      ],
+      [
+        "P7",
+        62
+      ],
+      [
+        "P5",
+        63
+      ],
+      [
+        "P6",
+        63
+      ],
+      [
+        "P7",
+        63
+      ]
+    ],
+    "executed_new_clone_worlds_semantics": "Original execution metadata preserved; this postprocessor executed zero worlds",
+    "fixture_metadata_use_condition": "Exact canonical equality of every archived event in every replica/context/arm before metadata reuse",
+    "new_diagnostic_executions": 0,
+    "new_independent_observations": 0,
+    "original_rows_byte_identical": 42,
+    "recovered_derived_rows": 54,
+    "total_diagnostic_bundle_rows": 96
+  },
+  "version": "closed-trace-reporting-recovery-v1"
+}
