@@ -1,0 +1,33 @@
+{
+  "B1E": "ON_HOLD_PENDING_STRUCTURAL_DISCOVERY_REVIEW",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "all_generic_competence_diagnostics_pass": false,
+  "confirmatory_support": false,
+  "final_seeds_generated": false,
+  "limitations": [
+    "Capped 32768-step fits, not demonstrated convergence",
+    "Only3 independent training initializations; intervals are exploratory",
+    "One third-party domain is not transfer",
+    "Common global observations allow graph-route compensation",
+    "No catalogue map",
+    "Different model classes and update ratios; no broad equal-capacity superiority claim"
+  ],
+  "next_decision": "Review instrument, development effects and baseline competence before specifying any new confirmatory protocol; a positive result is not automatic authorization",
+  "no_retuning_after_selection": true,
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "route_use_identified_in_inspected_snapshots": true,
+  "selected_support": "100000",
+  "stages": {
+    "S1": "EXECUTED",
+    "S2": "EXECUTED",
+    "S3": "EXECUTED",
+    "S4": "EXECUTED",
+    "S5": "EXECUTED",
+    "S6": "EXECUTED",
+    "S7": "EXECUTED"
+  },
+  "status": "B1S_DEVELOPMENT_COMPLETE_WITH_LIMITATIONS"
+}

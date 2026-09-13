@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "source_repository": "CRC2520/POLAR_MODEL_CRC",
+  "source_commit": "45447fdb9d7a90e666b53f1b15548c8889687a6b",
+  "source_git_blob": "221b9712d60a2f8ef6630b3a2cce240cf2acca5c",
+  "source_scope": "Exact field equality with original verified separately by document CI",
+  "routing_actor_parameters": 2288,
+  "generic_PPO_actor_parameters": 10968,
+  "routing_linear_MACs_per_decision": 7488,
+  "generic_PPO_linear_MACs_per_decision": 10816,
+  "MAC_scope": "Linear-layer multiply-accumulates only; excludes nonlinearities, masking, allocations, optimizer and host overhead",
+  "all_graph_masks_compute_all_messages": true,
+  "same_information_not_equal_capacity": true,
+  "training_run": false,
+  "B1E_executed": false
+}

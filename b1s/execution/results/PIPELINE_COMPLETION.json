@@ -1,0 +1,7 @@
+{
+  "B1E_executed": false,
+  "all_scientific_stages_executed_without_exception": true,
+  "freeze_sha256": "f5cc774871672608734279cfea9a4328218c0602a05243c3c54cf263bf9a5330",
+  "scope": "A successful publication can contain B1S_BLOCKED; inspect B1S_DECISION, not only CI color",
+  "source_commit": "e7fab2dc8076a3605565524939a09dc0e677a2e5"
+}
