@@ -1,0 +1,16 @@
+{
+  "artifact_sha256": {
+    "development_results/instrumentation/mechanism_diagnostics.json": "bec8838f551fd68c36eb826527dc19245657efe2d1f1c31c5afb2428a36bef41",
+    "development_results/instrumentation/unit-tests.txt": "54d1a2440af0f91274250ffbb53ee37b98130d4b63287438b7eb06573d9db365"
+  },
+  "closed_utc": "2026-09-13T01:48:57.937026+00:00",
+  "confirmatory": false,
+  "development_only": true,
+  "pre_tuning_freeze_sha256": "88b48e21583125f851e2b3f2dbffc82fb0b6aff0302dc4bc2d5121a7bdcf081d",
+  "reusable_as_final": false,
+  "scope": "Instrument and implementation checks; no pairing-utility inference",
+  "stage": "instrumentation",
+  "status": "PASS",
+  "task_law_diagnostics_pass": true,
+  "unit_tests_exit_code": 0
+}

@@ -1,0 +1,37 @@
+{
+  "B1E_execution_supported": false,
+  "bundle_indices": {
+    "blinded_calibration": [
+      32,
+      63
+    ],
+    "tuning": [
+      0,
+      31
+    ]
+  },
+  "calibration_open": false,
+  "confirmatory": false,
+  "development_only": true,
+  "final_seed_generation_supported": false,
+  "final_seeds_generated": false,
+  "hash_fields": [
+    "source_commit",
+    "pilot_id",
+    "role",
+    "decimal_bundle_index",
+    "substream_id"
+  ],
+  "historical_exclusion_registry_sha256": "2a131d01d7ecdba53dd978f92ecb579cb0cb84cee3a36f98a57fb2b1d90edb48",
+  "namespace": "PD-B1-D-v1",
+  "reusable_as_final": false,
+  "roles": [
+    "training",
+    "tuning",
+    "calibration",
+    "evaluation-development"
+  ],
+  "seed_function": "first_eight_bytes_of_SHA256_UTF8_pipe_join_big_endian_unsigned",
+  "source_commit": "a824ff83a18e0690a6290e9091ac58b0e6b73611",
+  "usage_count": 0
+}
