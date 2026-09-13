@@ -1,0 +1,22 @@
+{
+  "kind": "code",
+  "base_commit": "b861e732e5f5a667d50cf96023d1b4ebcbfc7125",
+  "files": [
+    {
+      "path": "README.md",
+      "base_blob_sha": "2fe71506a93ed2f2a5171de665b68b48c3782ef3",
+      "edits": [
+        {
+          "id": "CURRENT_PRIORITY",
+          "old": "# Polar Dynamics — contextual control research\n\n",
+          "new": "# Polar Dynamics — functional relations and structural discovery\n\n## Current priority: B1-S, before B1-E\n\n**B1-E v2: ON_HOLD_PENDING_STRUCTURAL_DISCOVERY.** This is a new program-level decision, not a modification of B0 or the B1-D v1/v1.1 freezes. B1-D v1.1 remains technically B1D_COMPLETE; its null development findings and causal-admissibility limits remain unchanged.\n\nThe new question separates useful learned organization (H_REL), independently mapped catalogue correspondence (H_CAT) and transfer (H_TRANSFER). Learning physical effects is not learning organizational routing, and a useful generic graph is not automatically polar.\n\nThis branch contains **B1S_DESIGN only**: no new learner, task, controller, experiment or seed. Native-domain admission and selective interventions must be specified before implementation. Read the [implementation handoff](b1s/IMPLEMENTATION_HANDOFF.md), its [Spanish edition](b1s/translations/es/IMPLEMENTATION_HANDOFF.md), the [program decision](b1s/TRANSITION.json), and the [publication audit](b1s/PUBLICATION.json). Scientific code and archived data remain unchanged.\n\nThe following sections preserve earlier study descriptions and reproduction commands; they are not commands to run B1-S or release the B1-E hold.\n\n"
+        },
+        {
+          "id": "LABEL_OLD_QUESTION",
+          "old": "## Current research questions\n\nThe current causal hypothesis concerns",
+          "new": "## Historical Study 2 research question\n\nThe causal hypothesis of that study concerns"
+        }
+      ]
+    }
+  ]
+}
