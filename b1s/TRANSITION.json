@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "decision_id": "PD-B1S-TRANSITION-20260913",
+  "version": "1.0.0",
+  "decision_date_utc": "2026-09-13",
+  "authority": "Author-requested prospective research pivot; not an experimental result",
+  "status": "B1S_DESIGN",
+  "scope": "Documentation, research specification, manuscript editing, Spanish translation and static validation only",
+  "bases": {
+    "document": {"repository": "CRC2520/POLAR_MODEL_CRC", "commit": "23dd1765564db4392ecfa80800f28208f93c4823"},
+    "code": {"repository": "CRC2520/polar-sim-ml-original", "commit": "b861e732e5f5a667d50cf96023d1b4ebcbfc7125"}
+  },
+  "branch": "research/b1s-structural-discovery-20260913",
+  "historical_statuses_preserved": {
+    "B0": "B0_COMPLETE",
+    "B1D_v1": "B1D_BLOCKED",
+    "B1D_v1_1": "B1D_COMPLETE",
+    "B1D_v1_1_ready_for_b1e_freeze": true,
+    "B1D_v1_1_ready_for_b1e_confirmatory_run": false,
+    "Study2": "suspend_exclusive_polar_advantage_claim",
+    "Study3": "no_confirmed_network_advantage",
+    "P1": "engineering_verified_with_partial_empirical_support"
+  },
+  "effective_program_decision": {
+    "B1E_v2": "ON_HOLD_PENDING_STRUCTURAL_DISCOVERY",
+    "historical_B1E_v2_N": 138688,
+    "historical_N_is_not_B1S_sample_size": true,
+    "ready_for_b1e_freeze_now": false,
+    "ready_for_b1e_confirmatory_run_now": false,
+    "not_a_retroactive_change_to_freezes": true,
+    "resume_requires": ["explicit_author_decision", "scientific_informativeness_review", "protocol_and_source_freeze", "preregistration", "independent_final_seed_custody", "resource_authorization"]
+  },
+  "structural_target": {
+    "object": "Support S of a declared functional message-routing operator; not the physical effect matrix B_hat",
+    "first_stage": "Static directed support with declared typed nodes and fixed message-family contract",
+    "contextual_modulation": "Deferred separate hypothesis; no arbitrary context-dependent graph in the first study",
+    "historical_catalogue": "Secondary correspondence hypothesis conditional on a documented native mapping; not a privileged truth",
+    "any_graph_is_polar": false,
+    "physical_signs_define_polarity": false,
+    "higher_order_relations": "Possible future alternative, not retrospectively renamed polar pairs"
+  },
+  "readiness": {
+    "ready_for_domain_review": true,
+    "domain_selected": false,
+    "native_node_map_complete": false,
+    "catalogue_map_complete": false,
+    "ready_for_b1s_implementation": false,
+    "ready_for_b1s_experiments": false,
+    "ready_for_b1s_confirmation": false,
+    "blockers": ["native_domain_and_node_contract", "symmetry_and_information_leakage_audit", "predeclared_message_operator_and_support_search", "matched_trained_comparators", "selective_causal_interventions", "development_validation_and_final_data_separation", "external_metrics_margins_and_resource_budget"]
+  },
+  "protected_scope": ["b0/**", "b1/**", "generated/**", "results_*/**", "legacy/**", "historical_experimental_code", "historical_manuscript_TeX_and_PDF", "historical_translation_branch"],
+  "new_experiments_run": false,
+  "training_run": false,
+  "new_seeds_generated": false,
+  "final_seeds_generated": false,
+  "B1E_executed": false,
+  "scientific_code_modified": false,
+  "Program_B": "B-design; separate from this engineering pivot",
+  "evidence_level": "New prospective specification; no new causal, utility or generalization evidence"
+}

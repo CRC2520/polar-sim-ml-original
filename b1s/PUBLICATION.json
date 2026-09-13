@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "status": "B1S_DESIGN_PUBLISHED",
+  "kind": "code",
+  "source_base_commit": "b861e732e5f5a667d50cf96023d1b4ebcbfc7125",
+  "content_commit_before_generated_editorial_commit": "7aa4876d7beb51320e857b1a29d62337fba9d8e9",
+  "commit_semantics": "The enclosing publication commit is identified by Git, not self-hashed here.",
+  "historical_git_objects_and_modes_preserved": 1395,
+  "editorial_changes": [
+    {
+      "path": "README.md",
+      "before_sha256": "efce0efc8e7ab91f99c2f5ff6063db3b69fdc00943547ecf64859df1cb91e84b",
+      "after_sha256": "0dfa2b8756c28c358b205af70be2116b9483ff113a8a2ba86cc92c0a4271918f",
+      "edit_ids": [
+        "CURRENT_PRIORITY",
+        "LABEL_OLD_QUESTION"
+      ]
+    }
+  ],
+  "artifact_sha256": {
+    "b1s/EDITORIAL_PATCH.json": "dae477752d59ec1361991c74b0679db988c9b37b4f3980074ad65293c70df565",
+    "b1s/IMPLEMENTATION_HANDOFF.md": "be931870aeddc3b29bcff7cd5c7b520e5c0c272380c350aee66b2ac15ad618bc",
+    "b1s/TRANSITION.json": "19d4938fca94a7bae4a2a7e26204c9b4a97cdd7d3b0a164b0d209689b17ce5f3",
+    "b1s/TRANSLATION_INDEX.json": "e141f67e5a4e041c88e8e355fc4e2129ba11c62a5896c36abc767cf89261b8a4",
+    "b1s/TRANSLATION_PAIRS.json": "c481b7db1d40c0d962941e288508cc7ee66e6ee8222f4f0e94b03e8ebcdb32bf",
+    "b1s/publish.py": "1a5d4a0e266bc9dc4ca080d3db35879c6f29116947d3a006f39c91e6cbb89303",
+    "README.md": "0dfa2b8756c28c358b205af70be2116b9483ff113a8a2ba86cc92c0a4271918f",
+    ".github/workflows/b1s-documentary-pivot.yml": "b577e7c97605f46d54675bd43a34c761b38a02106f6ead2b467f0a0ad3711d27"
+  },
+  "new_experiments_run": false,
+  "final_seeds_generated": false,
+  "B1E_executed": false,
+  "scientific_code_modified": false,
+  "historical_results_changed": false,
+  "B1E_v2": "ON_HOLD_PENDING_STRUCTURAL_DISCOVERY",
+  "validation_scope": "Static JSON, exact README edits and historical Git objects/modes; no scientific experiment replay."
+}

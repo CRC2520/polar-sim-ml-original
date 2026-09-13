@@ -1,0 +1,58 @@
+name: B1-S code-repository documentary pivot
+on:
+  push:
+    branches: [research/b1s-structural-discovery-20260913]
+    paths: ['b1s/**', 'README.md', '.github/workflows/b1s-documentary-pivot.yml']
+  pull_request:
+    branches: [research/b1d-v1.1-blocker-resolution-20260912]
+    paths: ['b1s/**', 'README.md', '.github/workflows/b1s-documentary-pivot.yml']
+permissions:
+  contents: read
+concurrency:
+  group: b1s-code-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  publish-and-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Test static validator
+        run: python -B b1s/publish.py --self-test
+      - name: Apply authorized README edits and seal documentary audit
+        if: github.event_name == 'push' && github.ref == 'refs/heads/research/b1s-structural-discovery-20260913'
+        run: |
+          if python -B b1s/publish.py --kind code; then
+            echo 'Existing publication is current.'
+          else
+            python -B b1s/publish.py --kind code --prepare
+          fi
+      - name: Verify new decision and preserved scientific tree
+        run: python -B b1s/publish.py --kind code
+      - name: Publish only generated navigation and audit
+        if: github.event_name == 'push' && github.ref == 'refs/heads/research/b1s-structural-discovery-20260913'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md b1s/TRANSLATION_INDEX.json b1s/PUBLICATION.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'docs(b1s): publish hold decision and preservation audit'
+            git push origin HEAD:research/b1s-structural-discovery-20260913
+          fi
+      - name: Produce review diff
+        run: git diff b861e732e5f5a667d50cf96023d1b4ebcbfc7125 HEAD -- README.md > /tmp/B1S_code_readme.patch
+      - uses: actions/upload-artifact@v4
+        with:
+          name: B1S_code_repository_handoff
+          path: |
+            b1s/
+            README.md
+            /tmp/B1S_code_readme.patch
+          retention-days: 14
+          if-no-files-found: error

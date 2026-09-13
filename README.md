@@ -1,4 +1,14 @@
-# Polar Dynamics — contextual control research
+# Polar Dynamics — functional relations and structural discovery
+
+## Current priority: B1-S, before B1-E
+
+**B1-E v2: ON_HOLD_PENDING_STRUCTURAL_DISCOVERY.** This is a new program-level decision, not a modification of B0 or the B1-D v1/v1.1 freezes. B1-D v1.1 remains technically B1D_COMPLETE; its null development findings and causal-admissibility limits remain unchanged.
+
+The new question separates useful learned organization (H_REL), independently mapped catalogue correspondence (H_CAT) and transfer (H_TRANSFER). Learning physical effects is not learning organizational routing, and a useful generic graph is not automatically polar.
+
+This branch contains **B1S_DESIGN only**: no new learner, task, controller, experiment or seed. Native-domain admission and selective interventions must be specified before implementation. Read the [implementation handoff](b1s/IMPLEMENTATION_HANDOFF.md), the [complete research plan in Spanish](https://github.com/CRC2520/POLAR_MODEL_CRC/blob/f954f1cfa96cbf92a9ae04e87301eb124d6ec73b/b1s/translations/es/STRUCTURAL_DISCOVERY_PLAN.md), the [program decision](b1s/TRANSITION.json), and the [publication audit](b1s/PUBLICATION.json). Scientific code and archived data remain unchanged.
+
+The following sections preserve earlier study descriptions and reproduction commands; they are not commands to run B1-S or release the B1-E hold.
 
 This repository supports one **unpublished research draft** in
 [POLAR_MODEL_CRC](https://github.com/CRC2520/POLAR_MODEL_CRC).
@@ -32,9 +42,9 @@ The companion repository contains one current article source and its compiled
 `main.pdf`. Code versions and recorded datasets are research instruments within
 that single evolving draft.
 
-## Current research questions
+## Historical Study 2 research question
 
-The current causal hypothesis concerns **using learned off-diagonal action effects
+The causal hypothesis of that study concerns **using learned off-diagonal action effects
 in planning**, not the names of poles. The primary planning lesion retains the
 same estimator and disables those effects only in the decision rule. Diagonal,
 mispaired, dense and coordinate-equivalent controls qualify the interpretation.
