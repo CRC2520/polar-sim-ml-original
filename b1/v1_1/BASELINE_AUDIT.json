@@ -1,0 +1,34 @@
+{
+  "version": "1.1",
+  "recorded_utc": "2026-09-13T03:47:26.618Z",
+  "B1D_V1_DOCUMENT_COMMIT": "d8926e834256d559bb1855fce429cf4753ce5c9e",
+  "B1D_V1_CODE_COMMIT": "c27235deb1688c105bfe96597dfd233108307895",
+  "branch": "research/b1d-v1.1-blocker-resolution-20260912",
+  "remote_verification": "Authenticated GitHub ref, commit and recursive-tree reads. Both actual HEADs equal expected pins, hence ancestry holds with zero advances. This sparse staging has no local Git checkout; no git-fetch execution is claimed.",
+  "code": {
+    "local_untracked": [],
+    "manifest_checks": 480,
+    "remote_blob_matches": 481,
+    "remote_total": 1254
+  },
+  "document": {
+    "local_untracked": [],
+    "manifest_checks": 46,
+    "remote_blob_matches": 71,
+    "remote_total": 6743
+  },
+  "b0_publication_commit": "c6ba1e836b6c96636ca29be7913c9c5ab9facc62",
+  "b0_freeze_sha256": "7d9abe376401ca53c8e8f9f519b75c6bb227dfc49749059bb72eb24050978cc1",
+  "v1_code_manifest_sha256": "e5de2f406cf34ea5ce122443890ac9344e4df68206edd267dd1ff7eaadb7dc2b",
+  "v1_document_freeze_sha256": "e5494377608d5fae6133244091fe87bf6a8205dee2159f94d3950a1e723f8691",
+  "allowed_new_paths": [
+    "b1/v1_1/**",
+    ".github/workflows/b1d-v1-1-validation.yml"
+  ],
+  "historical_files_modifiable": false,
+  "final_seeds_generated": false,
+  "B1E_executed": false,
+  "development_only": true,
+  "confirmatory": false,
+  "reusable_as_final": false
+}

@@ -1,0 +1,79 @@
+{
+  "C4_v1_1": {
+    "id": "C4",
+    "policy_id": "P5-C4-minimal-next-demand-v1.1",
+    "replenish": "If a next epoch remains, min(2,max(0,2-(current reserve-service))); otherwise 0.",
+    "serve": "min(2,current reserve,current demand)",
+    "terminal_recharge": false
+  },
+  "authority_rule": "Use the more detailed machine-readable operational comparator contract, compatible with unchanged physical law and external objective. Authority is chosen by contract semantics, never comparative outcomes.",
+  "b0_changed": false,
+  "b1d_v1_changed": false,
+  "blocker_id": "B1-CONFLICT-P5-C4-REFILL-001",
+  "confirmatory": false,
+  "conflict": {
+    "machine_readable": "minimal next-demand replenishment, no unnecessary terminal refill",
+    "prose_protocol": "always request service and replenishment"
+  },
+  "development_only": true,
+  "documentary_compatibility_audit": {
+    "ceiling_basis": "analytic frozen task law, not new comparator outcomes",
+    "constant_demand_per_epoch": 2,
+    "costs_remain_secondary": true,
+    "delay_epochs": 1,
+    "horizon_epochs": 32,
+    "independent_action_lanes": true,
+    "initial_reserve_values": [
+      0,
+      8
+    ],
+    "minimal_policy_physically_feasible": true,
+    "objective_unchanged": "missed demanded jobs / 192",
+    "physical_primary_ceiling_per_cell": {
+      "0": 62,
+      "8": 64
+    },
+    "production_capacity": 2,
+    "replenishment_capacity": 2,
+    "reserve_capacity": 8
+  },
+  "justification": [
+    "Operational semantics specifies each action and terminal behavior; prospective authority follows that granularity.",
+    "Avoiding unnecessary terminal recharge and extra stock is operationally efficient; secondary costs do not alter primary loss.",
+    "No v1.1 comparator outcomes existed at disposition authoring; no performance-selected policy."
+  ],
+  "pilot": "P5",
+  "positive_pairing_specificity_eligible": false,
+  "positive_utility_eligible": false,
+  "protocol_version": "B1-P5-comparison-v1.1",
+  "resolution_type": "prospective_protocol_disposition",
+  "retroactive_correction": false,
+  "reusable_as_final": false,
+  "separate_witness": {
+    "id": "C4_FULL_REFILL_CEILING_WITNESS",
+    "including_terminal_epoch": true,
+    "matched_C4": false,
+    "positive_claim_eligible": false,
+    "replenishment_request": 2,
+    "service_request": 2
+  },
+  "sources_preserved": {
+    "B1_PROTOCOL_DRAFT_v1.md": {
+      "commit": "b4796d881ee2581367fc8dd7396521dac30d827a",
+      "local_verified_copy": "b1/contracts/frozen_b0/B1_PROTOCOL_DRAFT_v1.md",
+      "path": "b0/B1_PROTOCOL_DRAFT_v1.md",
+      "repository": "CRC2520/POLAR_MODEL_CRC",
+      "sha256": "2d2fc53edaf013b1145bd21ef360e75590f9ebebb987260a0e6c04e356adf951"
+    },
+    "PILOT_CONTRACTS_v1.json": {
+      "commit": "b4796d881ee2581367fc8dd7396521dac30d827a",
+      "local_verified_copy": "b1/contracts/frozen_b0/PILOT_CONTRACTS_v1.json",
+      "path": "b0/PILOT_CONTRACTS_v1.json",
+      "repository": "CRC2520/POLAR_MODEL_CRC",
+      "sha256": "ca14f3895952e2553e1c8c7459cb3a066e4cce5db892de689c281750ef434b99"
+    }
+  },
+  "status": "SPECIFIED_PENDING_PROSPECTIVE_PUBLICATION_AND_BENCHMARK",
+  "task_version_preserved": "B1-P5-inventory-v1",
+  "version": "1.1"
+}
