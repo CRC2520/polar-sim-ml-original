@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "source_repository": "CRC2520/POLAR_MODEL_CRC",
+  "source_commit": "45447fdb9d7a90e666b53f1b15548c8889687a6b",
+  "source_path": "b1s/admission/DOMAIN_CONTRACT.json",
+  "source_git_blob": "221b9712d60a2f8ef6630b3a2cce240cf2acca5c",
+  "scope": "Typed projection of exercised fields, not a claim of byte-identical copying of the complete source. Document CI must compare every pointer to the pinned original.",
+  "pointers": {
+    "/domain/environment": "multiwalker_v9",
+    "/domain/kwargs": {"n_walkers":3,"position_noise":0.001,"angle_noise":0.001,"forward_reward":1.0,"terminate_reward":-100.0,"fall_reward":-10.0,"shared_reward":true,"terminate_on_fall":true,"remove_on_fall":true,"terrain_length":200,"max_cycles":500,"render_mode":null},
+    "/domain/nodes": ["walker_0","walker_1","walker_2"],
+    "/domain/observation_shape_per_agent": [31],
+    "/domain/action_shape_per_agent": [4],
+    "/domain/action_bounds": [-1.0,1.0],
+    "/domain/native_step_seconds": 0.02,
+    "/domain/native_motor_decoder/speed_magnitudes": [4,6,4,6],
+    "/domain/native_motor_decoder/maximum_motor_torque": 80,
+    "/observation_contract/dimension": 93,
+    "/observation_contract/available_to_all_arms_and_nodes": true,
+    "/operator/edge_order": [[0,1],[0,2],[1,0],[1,2],[2,0],[2,1]],
+    "/operator/aggregation_denominator": 2,
+    "/operator/message_rounds": 1,
+    "/operator/shapes": {"E":[16,96],"b_E":[16],"A":[8,32],"b_A":[8],"B":[16,24],"b_B":[16],"D":[4,16],"b_D":[4],"training_log_std":[4]},
+    "/operator/weights_shared_across_nodes_and_edges": true,
+    "/support_discovery/candidate_count": 42,
+    "/support_discovery/allowed_support_sizes": [0,1,2,3],
+    "/hypotheses/H_CAT/status": "NOT_EVALUABLE",
+    "/hypotheses/H_TRANSFER/status": "NOT_EVALUATED"
+  }
+}
