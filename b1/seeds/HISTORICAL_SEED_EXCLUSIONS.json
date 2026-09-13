@@ -1,0 +1,1116 @@
+{
+  "source_repository": "CRC2520/polar-sim-ml-original",
+  "source_commit": "c958049743f989b5c1f8866018ea48b60bae9ed7",
+  "scope": "Recorded Study1/contextual/P0/P1/P2/Study2/Study3 seed registries; additionally excludes their recorded development and bootstrap seeds. Numeric seed-start fields are conservative exclusions, not generated ranges.",
+  "seeds": [
+    0,
+    101,
+    102,
+    103,
+    104,
+    105,
+    1001,
+    1002,
+    1003,
+    1004,
+    1005,
+    1006,
+    1007,
+    1008,
+    1009,
+    1010,
+    1011,
+    1012,
+    1013,
+    1014,
+    1015,
+    1016,
+    1017,
+    1018,
+    1019,
+    1020,
+    1021,
+    1022,
+    1023,
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    2025,
+    2026,
+    2027,
+    2028,
+    2029,
+    2030,
+    2031,
+    51999,
+    52001,
+    52002,
+    52003,
+    52004,
+    52005,
+    52006,
+    62001,
+    62002,
+    62003,
+    62004,
+    62005,
+    62006,
+    62007,
+    62008,
+    62009,
+    62010,
+    62011,
+    62012,
+    62013,
+    62014,
+    62015,
+    62016,
+    62017,
+    62018,
+    62019,
+    62020,
+    62021,
+    62022,
+    62023,
+    62024,
+    62025,
+    62026,
+    62027,
+    62028,
+    62029,
+    62030,
+    62031,
+    62032,
+    62033,
+    62034,
+    62035,
+    62036,
+    62037,
+    62038,
+    62039,
+    62040,
+    801001,
+    801002,
+    801003,
+    801004,
+    801005,
+    801006,
+    901001,
+    901002,
+    901003,
+    901004,
+    901005,
+    901006,
+    901007,
+    901008,
+    901009,
+    901010,
+    901011,
+    901012,
+    901013,
+    901014,
+    901015,
+    901016,
+    901017,
+    901018,
+    901019,
+    901020,
+    901021,
+    901022,
+    901023,
+    901024,
+    901025,
+    901026,
+    901027,
+    901028,
+    901029,
+    901030,
+    901031,
+    901032,
+    901033,
+    901034,
+    901035,
+    901036,
+    901037,
+    901038,
+    901039,
+    901040,
+    902001,
+    902002,
+    902003,
+    902004,
+    902005,
+    902006,
+    902007,
+    902008,
+    902009,
+    902010,
+    902011,
+    902012,
+    902013,
+    902014,
+    902015,
+    902016,
+    902017,
+    902018,
+    902019,
+    902020,
+    902021,
+    902022,
+    902023,
+    902024,
+    902025,
+    902026,
+    902027,
+    902028,
+    902029,
+    902030,
+    902031,
+    902032,
+    902033,
+    902034,
+    902035,
+    902036,
+    902037,
+    902038,
+    902039,
+    902040,
+    931001,
+    931002,
+    931003,
+    931004,
+    931005,
+    931006,
+    931007,
+    931008,
+    931009,
+    931010,
+    931011,
+    931012,
+    931013,
+    931014,
+    931015,
+    931016,
+    931017,
+    931018,
+    931019,
+    931020,
+    931021,
+    931022,
+    931023,
+    931024,
+    951001,
+    951002,
+    951003,
+    951004,
+    951005,
+    951006,
+    951007,
+    951008,
+    951009,
+    951010,
+    951011,
+    951012,
+    951013,
+    951014,
+    951015,
+    951016,
+    951017,
+    951018,
+    951019,
+    951020,
+    951021,
+    951022,
+    951023,
+    951024,
+    20260906,
+    2026090602
+  ],
+  "sources": [
+    {
+      "source_path": "results_p0p2/final/STARTED.json",
+      "git_blob": "c6a7ab0ecaedc6c0c288de5320e7c50e079db839",
+      "sha256": "f7d6e44c6acf003924ab37de0e3588892fcf81ea2197c1470b5423ac97e530ef",
+      "seed_fields": []
+    },
+    {
+      "source_path": "results_study2/coupling/final/RUN_STARTED.json",
+      "git_blob": "c98154f01d2a626715e00c22ff7290107ede8c41",
+      "sha256": "6aeb8c40950eedaea48a159b47a0442b3325fb5bb632138d4ddfa4df98dbb2b3",
+      "seed_fields": [
+        {
+          "path": "/seeds",
+          "value": [
+            62001,
+            62002,
+            62003,
+            62004,
+            62005,
+            62006,
+            62007,
+            62008,
+            62009,
+            62010,
+            62011,
+            62012,
+            62013,
+            62014,
+            62015,
+            62016,
+            62017,
+            62018,
+            62019,
+            62020,
+            62021,
+            62022,
+            62023,
+            62024,
+            62025,
+            62026,
+            62027,
+            62028,
+            62029,
+            62030,
+            62031,
+            62032,
+            62033,
+            62034,
+            62035,
+            62036,
+            62037,
+            62038,
+            62039,
+            62040
+          ]
+        },
+        {
+          "path": "/protocol/pilot_seeds",
+          "value": [
+            52001,
+            52002,
+            52003,
+            52004,
+            52005,
+            52006
+          ]
+        },
+        {
+          "path": "/protocol/mechanical_test_seeds",
+          "value": [
+            51999
+          ]
+        },
+        {
+          "path": "/protocol/final_seed_start",
+          "value": 62001
+        },
+        {
+          "path": "/protocol/bootstrap_seed",
+          "value": 2026090602
+        },
+        {
+          "path": "/freeze/sample_size/pilot_seeds",
+          "value": [
+            52001,
+            52002,
+            52003,
+            52004,
+            52005,
+            52006
+          ]
+        },
+        {
+          "path": "/freeze/sample_size/final_seeds",
+          "value": [
+            62001,
+            62002,
+            62003,
+            62004,
+            62005,
+            62006,
+            62007,
+            62008,
+            62009,
+            62010,
+            62011,
+            62012,
+            62013,
+            62014,
+            62015,
+            62016,
+            62017,
+            62018,
+            62019,
+            62020,
+            62021,
+            62022,
+            62023,
+            62024,
+            62025,
+            62026,
+            62027,
+            62028,
+            62029,
+            62030,
+            62031,
+            62032,
+            62033,
+            62034,
+            62035,
+            62036,
+            62037,
+            62038,
+            62039,
+            62040
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "results_study3/active/final/STARTED.json",
+      "git_blob": "edd52734d24b8f9c22e2b2c29635f638d9ff39e7",
+      "sha256": "3a983cff5bc4353802dbbdbafc09cf909f5e3ce7c390db6cce68a3b876137a02",
+      "seed_fields": []
+    },
+    {
+      "source_path": "results_study3/final/STARTED.json",
+      "git_blob": "4f81d0c65662c111596072cd9b7d5597535b0b71",
+      "sha256": "37bd3955d0f9122024953824277d5fc139f3934683c7e6e0d6417dbf0a10e232",
+      "seed_fields": []
+    },
+    {
+      "source_path": "docs/P0P2_FREEZE.json",
+      "git_blob": "7fde862cf7f4dd06a5c82ca2de6383ffcded95ee",
+      "sha256": "9e70bd0134a200499db04e395b4e167bc6439373d76dbb29ea330edb0ad90c0e",
+      "seed_fields": [
+        {
+          "path": "/final_seeds",
+          "value": [
+            931001,
+            931002,
+            931003,
+            931004,
+            931005,
+            931006,
+            931007,
+            931008,
+            931009,
+            931010,
+            931011,
+            931012,
+            931013,
+            931014,
+            931015,
+            931016,
+            931017,
+            931018,
+            931019,
+            931020,
+            931021,
+            931022,
+            931023,
+            931024
+          ]
+        },
+        {
+          "path": "/capability_seeds",
+          "value": [
+            951001,
+            951002,
+            951003,
+            951004,
+            951005,
+            951006,
+            951007,
+            951008,
+            951009,
+            951010,
+            951011,
+            951012,
+            951013,
+            951014,
+            951015,
+            951016,
+            951017,
+            951018,
+            951019,
+            951020,
+            951021,
+            951022,
+            951023,
+            951024
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "docs/STUDY2_FREEZE.json",
+      "git_blob": "ef3c3c94fb1d1c7ed2f28bb5b2f9a7a500c3ba3b",
+      "sha256": "239142e457209ecdfa48d8a1a6da5e2f3073f7f34b293019d8054a22c5c32dd4",
+      "seed_fields": [
+        {
+          "path": "/sample_size/pilot_seeds",
+          "value": [
+            52001,
+            52002,
+            52003,
+            52004,
+            52005,
+            52006
+          ]
+        },
+        {
+          "path": "/sample_size/final_seeds",
+          "value": [
+            62001,
+            62002,
+            62003,
+            62004,
+            62005,
+            62006,
+            62007,
+            62008,
+            62009,
+            62010,
+            62011,
+            62012,
+            62013,
+            62014,
+            62015,
+            62016,
+            62017,
+            62018,
+            62019,
+            62020,
+            62021,
+            62022,
+            62023,
+            62024,
+            62025,
+            62026,
+            62027,
+            62028,
+            62029,
+            62030,
+            62031,
+            62032,
+            62033,
+            62034,
+            62035,
+            62036,
+            62037,
+            62038,
+            62039,
+            62040
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "docs/STUDY3_FREEZE.json",
+      "git_blob": "58af375dff73ada72a8ef4c0033327dd6d330647",
+      "sha256": "9f8836bcefc83f3a618335577bba1795b7a6b964e0aaa769a628646b11ebe106",
+      "seed_fields": [
+        {
+          "path": "/development_seeds",
+          "value": [
+            801001,
+            801002,
+            801003,
+            801004,
+            801005,
+            801006
+          ]
+        },
+        {
+          "path": "/final_seeds",
+          "value": [
+            901001,
+            901002,
+            901003,
+            901004,
+            901005,
+            901006,
+            901007,
+            901008,
+            901009,
+            901010,
+            901011,
+            901012,
+            901013,
+            901014,
+            901015,
+            901016,
+            901017,
+            901018,
+            901019,
+            901020,
+            901021,
+            901022,
+            901023,
+            901024,
+            901025,
+            901026,
+            901027,
+            901028,
+            901029,
+            901030,
+            901031,
+            901032,
+            901033,
+            901034,
+            901035,
+            901036,
+            901037,
+            901038,
+            901039,
+            901040
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "docs/STUDY3_ACTIVE_FREEZE.json",
+      "git_blob": "0d75d69f9c973afde8436cdf6426394116ca9981",
+      "sha256": "e4c47a18d1f3c3488b78b971f9706f5e22dcd283a202e73ae9591ae07162d0e5",
+      "seed_fields": [
+        {
+          "path": "/final_seeds",
+          "value": [
+            902001,
+            902002,
+            902003,
+            902004,
+            902005,
+            902006,
+            902007,
+            902008,
+            902009,
+            902010,
+            902011,
+            902012,
+            902013,
+            902014,
+            902015,
+            902016,
+            902017,
+            902018,
+            902019,
+            902020,
+            902021,
+            902022,
+            902023,
+            902024,
+            902025,
+            902026,
+            902027,
+            902028,
+            902029,
+            902030,
+            902031,
+            902032,
+            902033,
+            902034,
+            902035,
+            902036,
+            902037,
+            902038,
+            902039,
+            902040
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "results_corrected/p0/index.json",
+      "git_blob": "83e23142df860d3e04c35c224458a47b7d07dfd0",
+      "sha256": "87db606615af6c923c1384985e7988e3da8581e1e0a2d07a9612d3c3b85239c6",
+      "seed_fields": [
+        {
+          "path": "/seeds",
+          "value": [
+            2025,
+            2026,
+            2027,
+            2028,
+            2029
+          ]
+        },
+        {
+          "path": "/scenarios/0/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/0/config/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/1/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/1/config/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/2/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/2/config/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/3/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/3/config/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/4/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/4/config/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/5/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/5/config/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/5/config/agent_seeds",
+          "value": [
+            2025,
+            2026,
+            2027
+          ]
+        },
+        {
+          "path": "/scenarios/6/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/6/config/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/6/protocol/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/7/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/7/config/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/7/protocol/seed",
+          "value": 2025
+        },
+        {
+          "path": "/scenarios/8/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/8/config/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/9/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/9/config/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/10/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/10/config/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/11/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/11/config/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/12/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/12/config/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/13/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/13/config/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/13/config/agent_seeds",
+          "value": [
+            2026,
+            2027,
+            2028
+          ]
+        },
+        {
+          "path": "/scenarios/14/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/14/config/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/14/protocol/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/15/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/15/config/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/15/protocol/seed",
+          "value": 2026
+        },
+        {
+          "path": "/scenarios/16/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/16/config/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/17/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/17/config/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/18/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/18/config/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/19/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/19/config/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/20/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/20/config/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/21/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/21/config/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/21/config/agent_seeds",
+          "value": [
+            2027,
+            2028,
+            2029
+          ]
+        },
+        {
+          "path": "/scenarios/22/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/22/config/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/22/protocol/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/23/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/23/config/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/23/protocol/seed",
+          "value": 2027
+        },
+        {
+          "path": "/scenarios/24/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/24/config/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/25/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/25/config/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/26/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/26/config/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/27/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/27/config/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/28/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/28/config/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/29/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/29/config/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/29/config/agent_seeds",
+          "value": [
+            2028,
+            2029,
+            2030
+          ]
+        },
+        {
+          "path": "/scenarios/30/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/30/config/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/30/protocol/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/31/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/31/config/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/31/protocol/seed",
+          "value": 2028
+        },
+        {
+          "path": "/scenarios/32/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/32/config/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/33/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/33/config/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/34/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/34/config/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/35/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/35/config/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/36/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/36/config/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/37/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/37/config/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/37/config/agent_seeds",
+          "value": [
+            2029,
+            2030,
+            2031
+          ]
+        },
+        {
+          "path": "/scenarios/38/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/38/config/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/38/protocol/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/39/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/39/config/seed",
+          "value": 2029
+        },
+        {
+          "path": "/scenarios/39/protocol/seed",
+          "value": 2029
+        }
+      ]
+    },
+    {
+      "source_path": "results_corrected/contextual/manifest.json",
+      "git_blob": "78cf0af2a742f9ec028f1f0db7b76c2bc53fd232",
+      "sha256": "2c30852efe35232a30b7c9ed5884a8fe37bafc8edfe7afd8f63ed50c78b660a3",
+      "seed_fields": [
+        {
+          "path": "/model_config/seed",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "source_path": "docs/evaluation_protocol.json",
+      "git_blob": "ff704cc8c3289fbb09c4691b246a03c1ddda3148",
+      "sha256": "21ca01d0de32c1c0294da6d4025470e93a8da0cd943e07d2c3832f2860608426",
+      "seed_fields": [
+        {
+          "path": "/development_seeds",
+          "value": [
+            101,
+            102,
+            103,
+            104,
+            105
+          ]
+        },
+        {
+          "path": "/heldout_seeds",
+          "value": [
+            1001,
+            1002,
+            1003,
+            1004,
+            1005,
+            1006,
+            1007,
+            1008,
+            1009,
+            1010,
+            1011,
+            1012,
+            1013,
+            1014,
+            1015,
+            1016,
+            1017,
+            1018,
+            1019,
+            1020,
+            1021,
+            1022,
+            1023,
+            1024,
+            1025,
+            1026,
+            1027,
+            1028,
+            1029,
+            1030
+          ]
+        },
+        {
+          "path": "/bootstrap_seed",
+          "value": 20260906
+        }
+      ]
+    }
+  ],
+  "historical_evidence_used_for_tuning": false,
+  "new_final_seeds_generated": false,
+  "B1E_seeds_generated": false
+}
