@@ -1,0 +1,4273 @@
+{
+  "P7_archived_input_replay": {
+    "C1_selected": "cfg01",
+    "action_digest_sha256": "9238e98027ab34563589b322c6b111261ebf8bdf536b8a09ab3f5d1b20cfd1c9",
+    "action_memory_parameter_equality": true,
+    "acute_selected_reactive_action_equality_decisions": 64,
+    "archived_bundle_count": 32,
+    "archived_bundle_file_sha256": "dba6b9f53e365f037d82c4b11c3a1bd7ccc198903158ecee901cdddf3295f14c",
+    "confirmatory": false,
+    "decisions": 7168,
+    "development_only": true,
+    "episodes": 224,
+    "namespace": "PD-B1-D-v1.1-QA",
+    "purpose": "QA replay of archived inputs, not new scientific observations",
+    "reusable_as_final": false,
+    "scientific_rerun_required": false,
+    "selected_config_file_sha256": "3d098d3d3a9c7d8cc1bbb7a6d17a878cdacf931c3b40700715c2157948243c99",
+    "selected_configurations": {
+      "C0": "cfg01",
+      "C1": "cfg01",
+      "C2": "cfg00",
+      "C3": "cfg01",
+      "C4": "fixed",
+      "C5": "cfg01",
+      "C6": "cfg01"
+    },
+    "source_namespace": "PD-B1-D-v1",
+    "status": "PASS"
+  },
+  "acute_route_claim_limit": "Selected P7 cfg01 is reactive and bypass action effect remains zero; preserving resources does not establish route dependence",
+  "axes": [
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B normalized requests",
+      "allowed": "A/B normalized requests",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": "A/B normalized requests",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 161,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": 207,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 6,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 1
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": 1,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 0,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": 0,
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 0
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": {
+        "cycles": 1,
+        "slots": 1
+      },
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 3220,
+        "legacy_operations": 228
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": {
+        "expanded_logical_operations": 6476,
+        "legacy_operations": 228
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 336,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": 2255,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 161,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": 207,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3636,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": 4004,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.0005492820018844213,
+        "samples": 773
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0005504379999999864,
+        "samples": 773,
+        "total_CPU_seconds": 0.094123879999999
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 11,
+        "max_traced_peak_increment_bytes": 4592
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C0",
+      "pilot": "P5",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B normalized requests",
+      "allowed": "A/B normalized requests",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": "A/B normalized requests",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 161,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": 207,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 6,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 1
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": 1,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 0,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": 0,
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 0
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": {
+        "cycles": 1,
+        "slots": 1
+      },
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 3214,
+        "legacy_operations": 222
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": {
+        "expanded_logical_operations": 6476,
+        "legacy_operations": 228
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 336,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": 2255,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 161,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": 207,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3636,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": 4004,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.002888601000449853,
+        "samples": 773
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0028901830000001016,
+        "samples": 773,
+        "total_CPU_seconds": 0.09611667599999685
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 11,
+        "max_traced_peak_increment_bytes": 4592
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C1",
+      "pilot": "P5",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B normalized requests",
+      "allowed": "A/B normalized requests",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": "A/B normalized requests",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 161,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": 207,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 6,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 1
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": 1,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 0,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": 0,
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 2,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 0
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": {
+        "cycles": 2,
+        "slots": 1
+      },
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 3214,
+        "legacy_operations": 222
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": {
+        "expanded_logical_operations": 6476,
+        "legacy_operations": 228
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 298,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": 2255,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 161,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": 207,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3636,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": 4004,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.0028512050012068357,
+        "samples": 1546
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0028530979999996653,
+        "samples": 1546,
+        "total_CPU_seconds": 0.18470074999999886
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 22,
+        "max_traced_peak_increment_bytes": 4560
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C2",
+      "pilot": "P5",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B normalized requests",
+      "allowed": "A/B normalized requests",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": "A/B normalized requests",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 161,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": 207,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 6,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 1
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": 1,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 0,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": 0,
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 0
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": {
+        "cycles": 1,
+        "slots": 1
+      },
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 3214,
+        "legacy_operations": 222
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": {
+        "expanded_logical_operations": 6476,
+        "legacy_operations": 228
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 336,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": 2255,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 161,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": 207,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3636,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": 4004,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.0004291440018278081,
+        "samples": 773
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0004300189999999482,
+        "samples": 773,
+        "total_CPU_seconds": 0.0902513940000027
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 11,
+        "max_traced_peak_increment_bytes": 4592
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C3",
+      "pilot": "P5",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B normalized requests",
+      "allowed": "A/B normalized requests",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": "A/B normalized requests",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 21,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": 207,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 0,
+        "slots": 0
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": "C4 may reconstruct from raw information without dummy messages",
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": {
+        "slots": 0
+      },
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 1
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": 1,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 0,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": 0,
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 0
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": {
+        "cycles": 1,
+        "slots": 1
+      },
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 2219,
+        "legacy_operations": 75
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": {
+        "expanded_logical_operations": 6476,
+        "legacy_operations": 228
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 73,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": 2255,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 21,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": 207,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 2228,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": 4004,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 3.6444002034841105e-05,
+        "samples": 94
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 3.6444000000024346e-05,
+        "samples": 94,
+        "total_CPU_seconds": 0.0017060669999970912
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 4,
+        "max_traced_peak_increment_bytes": 1688
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C4",
+      "pilot": "P5",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B normalized requests",
+      "allowed": "A/B normalized requests",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": "A/B normalized requests",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 290,
+      "allowed": 32768,
+      "axis": "memory_capacity",
+      "claim_limit": "C5 is descriptive only",
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": 336,
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 6,
+        "slots": 6
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 6
+      },
+      "axis": "message_width",
+      "claim_limit": "C5 wider route is declared, no matched superiority claim",
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": {
+        "slots": 6
+      },
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 1
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": 1,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 0,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": 0,
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 0
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": {
+        "cycles": 1,
+        "slots": 1
+      },
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 4036,
+        "legacy_operations": 240
+      },
+      "allowed": {
+        "expanded_logical_operations": 524288,
+        "legacy_operations": 131072
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions; C5 descriptive",
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": {
+        "expanded_logical_operations": 7298,
+        "legacy_operations": 246
+      },
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": 504,
+      "allowed": 32768,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": 2384,
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": 290,
+      "allowed": 32768,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": 336,
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": 4956,
+      "allowed": 262144,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": 5324,
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.0003807030007010326,
+        "samples": 773
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0003811660000003769,
+        "samples": 773,
+        "total_CPU_seconds": 0.10930745299999733
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 11,
+        "max_traced_peak_increment_bytes": 5328
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C5",
+      "pilot": "P5",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B plus authorized routine and assay candidate",
+      "allowed": "A/B plus authorized routine and assay candidate",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": "A/B plus authorized routine and assay candidate",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 3362,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": 3408,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 0
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": 0,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 32,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": 32,
+      "status": "exact_match"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 8
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": {
+        "cycles": 1,
+        "slots": 8
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 60700,
+        "legacy_operations": 3444
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": {
+        "expanded_logical_operations": 61559,
+        "legacy_operations": 4119
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3510,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": 5456,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3362,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": 3408,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 67632,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": 68000,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.0018047390003630426,
+        "samples": 773
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0018053319999999928,
+        "samples": 773,
+        "total_CPU_seconds": 0.44283747799999595
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 11,
+        "max_traced_peak_increment_bytes": 76120
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C0",
+      "pilot": "P6",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B plus authorized routine and assay candidate",
+      "allowed": "A/B plus authorized routine and assay candidate",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": "A/B plus authorized routine and assay candidate",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 3362,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": 3408,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 0
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": 0,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 32,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": 32,
+      "status": "exact_match"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 8
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": {
+        "cycles": 1,
+        "slots": 8
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 60691,
+        "legacy_operations": 3435
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": {
+        "expanded_logical_operations": 61559,
+        "legacy_operations": 4119
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3510,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": 5456,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3362,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": 3408,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 67632,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": 68000,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.002779358997941017,
+        "samples": 773
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0027775359999999694,
+        "samples": 773,
+        "total_CPU_seconds": 0.44614471800001176
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 11,
+        "max_traced_peak_increment_bytes": 72280
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C1",
+      "pilot": "P6",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B plus authorized routine and assay candidate",
+      "allowed": "A/B plus authorized routine and assay candidate",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": "A/B plus authorized routine and assay candidate",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 3362,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": 3408,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 0
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": 0,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 32,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": 32,
+      "status": "exact_match"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 2,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 8
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": {
+        "cycles": 2,
+        "slots": 8
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 60691,
+        "legacy_operations": 3435
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": {
+        "expanded_logical_operations": 61559,
+        "legacy_operations": 4119
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3510,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": 5456,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3362,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": 3408,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 67632,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": 68000,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.009276234999560984,
+        "samples": 1546
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.009309938999999545,
+        "samples": 1546,
+        "total_CPU_seconds": 0.8829798039999552
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 22,
+        "max_traced_peak_increment_bytes": 72280
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C2",
+      "pilot": "P6",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B plus authorized routine and assay candidate",
+      "allowed": "A/B plus authorized routine and assay candidate",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": "A/B plus authorized routine and assay candidate",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 3362,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": 3408,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 0
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": 0,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 32,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": 32,
+      "status": "exact_match"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 8
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": {
+        "cycles": 1,
+        "slots": 8
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 60691,
+        "legacy_operations": 3435
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": {
+        "expanded_logical_operations": 61559,
+        "legacy_operations": 4119
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3510,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": 5456,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3362,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": 3408,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 67632,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": 68000,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.002008149000175763,
+        "samples": 773
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0020083140000011213,
+        "samples": 773,
+        "total_CPU_seconds": 0.43685755000002047
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 11,
+        "max_traced_peak_increment_bytes": 72280
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C3",
+      "pilot": "P6",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B plus authorized routine and assay candidate",
+      "allowed": "A/B plus authorized routine and assay candidate",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": "A/B plus authorized routine and assay candidate",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 3362,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": 3408,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 0
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": 0,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 0,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": 0,
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 1
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": {
+        "cycles": 1,
+        "slots": 1
+      },
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 60691,
+        "legacy_operations": 3435
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": {
+        "expanded_logical_operations": 61559,
+        "legacy_operations": 4119
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3510,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": 5456,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 3362,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": 3408,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 67632,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": 68000,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.0012408450020302553,
+        "samples": 94
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0012405629999996393,
+        "samples": 94,
+        "total_CPU_seconds": 0.03609753199999588
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 4,
+        "max_traced_peak_increment_bytes": 72280
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C4",
+      "pilot": "P6",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B plus authorized routine and assay candidate",
+      "allowed": "A/B plus authorized routine and assay candidate",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": "A/B plus authorized routine and assay candidate",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 6674,
+      "allowed": 32768,
+      "axis": "memory_capacity",
+      "claim_limit": "C5 is descriptive only",
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": 6720,
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 10,
+        "slots": 6
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 6
+      },
+      "axis": "message_width",
+      "claim_limit": "C5 wider route is declared, no matched superiority claim",
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": {
+        "slots": 6
+      },
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 0
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": 0,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 32,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": 32,
+      "status": "exact_match"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 8
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": {
+        "cycles": 1,
+        "slots": 8
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 74449,
+        "legacy_operations": 3465
+      },
+      "allowed": {
+        "expanded_logical_operations": 524288,
+        "legacy_operations": 131072
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions; C5 descriptive",
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": {
+        "expanded_logical_operations": 75317,
+        "legacy_operations": 4149
+      },
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": 6873,
+      "allowed": 32768,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": 8768,
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": 6674,
+      "allowed": 32768,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": 6720,
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": 94608,
+      "allowed": 262144,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": 94976,
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.0021752450011263136,
+        "samples": 773
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0021795369999999537,
+        "samples": 773,
+        "total_CPU_seconds": 0.5419606819999956
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 11,
+        "max_traced_peak_increment_bytes": 72280
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C5",
+      "pilot": "P6",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B plus instance IDs and approved target version",
+      "allowed": "A/B plus instance IDs and approved target version",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": "A/B plus instance IDs and approved target version",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 1148,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": 1206,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 0
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": 0,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 32,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": 32,
+      "status": "exact_match"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 8
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": {
+        "cycles": 1,
+        "slots": 8
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 20167,
+        "legacy_operations": 1263
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": {
+        "expanded_logical_operations": 23492,
+        "legacy_operations": 1284
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 1339,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": 3254,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 1148,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": 1206,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 23496,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": 23960,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.001809335000871215,
+        "samples": 773
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.001810830000000152,
+        "samples": 773,
+        "total_CPU_seconds": 0.14857690499994547
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 11,
+        "max_traced_peak_increment_bytes": 30944
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C0",
+      "pilot": "P7",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B plus instance IDs and approved target version",
+      "allowed": "A/B plus instance IDs and approved target version",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": "A/B plus instance IDs and approved target version",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 1148,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": 1206,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 0
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": 0,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 32,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": 32,
+      "status": "exact_match"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 8
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": {
+        "cycles": 1,
+        "slots": 8
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 20158,
+        "legacy_operations": 1254
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": {
+        "expanded_logical_operations": 23492,
+        "legacy_operations": 1284
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 1339,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": 3254,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 1148,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": 1206,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 23496,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": 23960,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.002340638999157818,
+        "samples": 773
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0023427100000006362,
+        "samples": 773,
+        "total_CPU_seconds": 0.15739821399999698
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 11,
+        "max_traced_peak_increment_bytes": 23984
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C1",
+      "pilot": "P7",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B plus instance IDs and approved target version",
+      "allowed": "A/B plus instance IDs and approved target version",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": "A/B plus instance IDs and approved target version",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 1148,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": 1206,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 0
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": 0,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 32,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": 32,
+      "status": "exact_match"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 2,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 8
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": {
+        "cycles": 2,
+        "slots": 8
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 20149,
+        "legacy_operations": 1245
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": {
+        "expanded_logical_operations": 23492,
+        "legacy_operations": 1284
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 1303,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": 3254,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 1148,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": 1206,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 23496,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": 23960,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.0023350219998974353,
+        "samples": 1546
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.002337231999998579,
+        "samples": 1546,
+        "total_CPU_seconds": 0.3049931109999875
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 22,
+        "max_traced_peak_increment_bytes": 23984
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C2",
+      "pilot": "P7",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B plus instance IDs and approved target version",
+      "allowed": "A/B plus instance IDs and approved target version",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": "A/B plus instance IDs and approved target version",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 1148,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": 1206,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 0
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": 0,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 32,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": 32,
+      "status": "exact_match"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 8
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": {
+        "cycles": 1,
+        "slots": 8
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 20158,
+        "legacy_operations": 1254
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": {
+        "expanded_logical_operations": 23492,
+        "legacy_operations": 1284
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 1339,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": 3254,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 1148,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": 1206,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 23496,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": 23960,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.0005656770008499734,
+        "samples": 773
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0005656000000016093,
+        "samples": 773,
+        "total_CPU_seconds": 0.14464702500015392
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 11,
+        "max_traced_peak_increment_bytes": 23984
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C3",
+      "pilot": "P7",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B plus instance IDs and approved target version",
+      "allowed": "A/B plus instance IDs and approved target version",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": "A/B plus instance IDs and approved target version",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 1148,
+      "allowed": 16384,
+      "axis": "memory_capacity",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": 1206,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 3
+      },
+      "axis": "message_width",
+      "claim_limit": null,
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": {
+        "slots": 3
+      },
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 0
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": 0,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 0,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": 0,
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 1
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": {
+        "cycles": 1,
+        "slots": 1
+      },
+      "status": "lower_actual_usage"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 20158,
+        "legacy_operations": 1254
+      },
+      "allowed": {
+        "expanded_logical_operations": 262144,
+        "legacy_operations": 65536
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions",
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": {
+        "expanded_logical_operations": 23492,
+        "legacy_operations": 1284
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 1339,
+      "allowed": 16384,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": 3254,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 1148,
+      "allowed": 16384,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": 1206,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 23496,
+      "allowed": 131072,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": 23960,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.0005121879985381383,
+        "samples": 94
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0005120810000036613,
+        "samples": 94,
+        "total_CPU_seconds": 0.017963004000023375
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 4,
+        "max_traced_peak_increment_bytes": 23984
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C4",
+      "pilot": "P7",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": "complete public observations of three cells, public context and task histories; no hidden future",
+      "allowed": "complete public observations of three cells, public context and task histories; no hidden future",
+      "axis": "available_information",
+      "claim_limit": null,
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": "complete public observations of three cells, public context and task histories; no hidden future",
+      "status": "exact_match"
+    },
+    {
+      "actual": "A/B plus instance IDs and approved target version",
+      "allowed": "A/B plus instance IDs and approved target version",
+      "axis": "action_space",
+      "claim_limit": null,
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": "A/B plus instance IDs and approved target version",
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "guardrail_violations": 0
+      },
+      "allowed": "frozen common task physical/authorization gate",
+      "axis": "restrictions_feasibility",
+      "claim_limit": null,
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": "same permissions and physical budgets",
+      "status": "exact_match"
+    },
+    {
+      "actual": 2258,
+      "allowed": 32768,
+      "axis": "memory_capacity",
+      "claim_limit": "C5 is descriptive only",
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": 2316,
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "payload_scalar_slots": 10,
+        "slots": 6
+      },
+      "allowed": {
+        "max_payload_scalar_slots": 10,
+        "slots": 6
+      },
+      "axis": "message_width",
+      "claim_limit": "C5 wider route is declared, no matched superiority claim",
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": {
+        "slots": 6
+      },
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "declared_horizon_cap": 1,
+        "max_implemented_future_epochs": 0
+      },
+      "allowed": 1,
+      "axis": "planning_horizon",
+      "claim_limit": "P5 next-demand planning may look one epoch ahead; P6/P7 act on current available records. No search tree or truncated conventional plan",
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": 0,
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": 32,
+      "allowed": {
+        "bundles_per_pilot": 32,
+        "v1_tuning_bundle_file_sha256": "17a6c79f54a585f1520e8282264a9f137bc539e51089926741455716821e903b"
+      },
+      "axis": "training_data",
+      "claim_limit": "No new tuning; P5 prospective cfg00 and fixed C4 chosen from contract, not outcomes; original v1 data remain archival",
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": 32,
+      "status": "exact_match"
+    },
+    {
+      "actual": 0,
+      "allowed": 0,
+      "axis": "training_updates",
+      "claim_limit": "Finite configuration selection is separately recorded, no learned weights",
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": 0,
+      "status": "exact_match"
+    },
+    {
+      "actual": {
+        "cycles": 1,
+        "v1_1_scientific_tuning_slots": 0,
+        "v1_slots": 8
+      },
+      "allowed": {
+        "configuration_slots": 8,
+        "cycle_evaluations_per_slot_per_bundle_max": 2
+      },
+      "axis": "hyperparameter_search_budget",
+      "claim_limit": "C2 retains both cycles; C4 one analytical rule. Maximum opportunity matched prospectively; actual total training compute is not claimed equal.",
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": {
+        "cycles": 1,
+        "slots": 8
+      },
+      "status": "common_upper_bound"
+    },
+    {
+      "actual": {
+        "expanded_logical_operations": 25108,
+        "legacy_operations": 1284
+      },
+      "allowed": {
+        "expanded_logical_operations": 524288,
+        "legacy_operations": 131072
+      },
+      "axis": "decision_operation_budget",
+      "claim_limit": "Declared deterministic proxies, not exact CPU instructions; C5 descriptive",
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": {
+        "expanded_logical_operations": 28442,
+        "legacy_operations": 1314
+      },
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": 2500,
+      "allowed": 32768,
+      "axis": "model_state_size",
+      "claim_limit": "Scalar/key slots include stored report and configuration; immutable Python class/runtime bytes measured separately",
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": 4364,
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": 2258,
+      "allowed": 32768,
+      "axis": "persistent_state",
+      "claim_limit": "Episode reset; C5 retains two raw snapshots; C0-C4 at most one, C4 may use less",
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": 2316,
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": 32856,
+      "allowed": 262144,
+      "axis": "temporary_workspace",
+      "claim_limit": "Conservative declared buffer-pass proxy, not a proven CPython byte allocation bound; allocation samples in memory_usage",
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": 33320,
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_wall_seconds": 0.0025021299989020918,
+        "samples": 773
+      },
+      "allowed": "no hard decision deadline; same host process class",
+      "axis": "latency",
+      "claim_limit": "No hard real-time or equal-latency claim; wall-clock is secondary and does not truncate policy",
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": "canonical untruncated algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "max_CPU_seconds": 0.0025027370000003657,
+        "samples": 773,
+        "total_CPU_seconds": 0.21515727200004875
+      },
+      "allowed": "one serial controller invocation on same host class",
+      "axis": "CPU_usage",
+      "claim_limit": "Host-specific sampled CPU; no exact actual-compute equality claim",
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": "canonical finite algorithm",
+      "status": "unmatched_but_quantified"
+    },
+    {
+      "actual": {
+        "allocation_samples": 11,
+        "max_traced_peak_increment_bytes": 23984
+      },
+      "allowed": "same process class; no per-controller OS limit",
+      "axis": "memory_usage",
+      "claim_limit": "tracemalloc covers Python allocations during act; RSS is shared whole QA process; no per-arm RSS or worst-case CPython-byte equality claim",
+      "comparator": "C5",
+      "pilot": "P7",
+      "requested": "canonical finite controller allocation",
+      "status": "unmatched_but_quantified"
+    }
+  ],
+  "axis_rows": 288,
+  "blocker_id": "B1-RESOURCE-CERTIFICATE-PENDING",
+  "blocker_status": "RESOLVED",
+  "confirmatory": false,
+  "development_only": true,
+  "frozen_sources_unchanged": true,
+  "host": {
+    "QA_process_peak_RSS_bytes": 21233664,
+    "QA_total_wall_seconds": 46.472899835000135,
+    "RSS_scope": "whole shared QA process high-water mark, not per-comparator allocation",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "python": "3.12.14"
+  },
+  "invariant_claim_scope": "equal maximum declared logical opportunity, task information, actions, physical restrictions and horizon; all actual-use and host-axis differences explicitly quantified",
+  "invariants_pass": {
+    "P5": {
+      "C0": true,
+      "C1": true,
+      "C2": true,
+      "C3": true,
+      "C4": true,
+      "C5": false
+    },
+    "P6": {
+      "C0": true,
+      "C1": true,
+      "C2": true,
+      "C3": true,
+      "C4": true,
+      "C5": false
+    },
+    "P7": {
+      "C0": true,
+      "C1": true,
+      "C2": true,
+      "C3": true,
+      "C4": true,
+      "C5": false
+    }
+  },
+  "limitations": [
+    "No smallest-cap or hardware instruction certificate",
+    "No exact actual CPU or byte allocation equality; host metrics secondary",
+    "Finite frozen task schema only; longer horizons/new task schemas require a new bound",
+    "C5 remains descriptive capacity frontier",
+    "P7 null v1 results are unchanged and not relabeled as new science"
+  ],
+  "measured": {
+    "P5/C0": {
+      "allocation_samples": 11,
+      "decisions": 784,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0005504379999999864,
+      "max_traced_peak_increment_bytes": 4592,
+      "max_wall_seconds": 0.0005492820018844213,
+      "maximum": {
+        "expanded_logical_operations": 3220,
+        "legacy_operations": 228,
+        "persistent_budgeted_scalars": 161,
+        "raw_observation_scalars": 129,
+        "temporary_workspace_scalar_proxy": 3636,
+        "total_controller_state_scalars": 336
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 773,
+      "total_CPU_seconds": 0.094123879999999,
+      "total_wall_seconds": 0.09426514503502403
+    },
+    "P5/C1": {
+      "allocation_samples": 11,
+      "decisions": 784,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0028901830000001016,
+      "max_traced_peak_increment_bytes": 4592,
+      "max_wall_seconds": 0.002888601000449853,
+      "maximum": {
+        "expanded_logical_operations": 3214,
+        "legacy_operations": 222,
+        "persistent_budgeted_scalars": 161,
+        "raw_observation_scalars": 129,
+        "temporary_workspace_scalar_proxy": 3636,
+        "total_controller_state_scalars": 336
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 773,
+      "total_CPU_seconds": 0.09611667599999685,
+      "total_wall_seconds": 0.09661570899334038
+    },
+    "P5/C2": {
+      "allocation_samples": 22,
+      "decisions": 1568,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0028530979999996653,
+      "max_traced_peak_increment_bytes": 4560,
+      "max_wall_seconds": 0.0028512050012068357,
+      "maximum": {
+        "expanded_logical_operations": 3214,
+        "legacy_operations": 222,
+        "persistent_budgeted_scalars": 161,
+        "raw_observation_scalars": 129,
+        "temporary_workspace_scalar_proxy": 3636,
+        "total_controller_state_scalars": 298
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 1546,
+      "total_CPU_seconds": 0.18470074999999886,
+      "total_wall_seconds": 0.1850168230739655
+    },
+    "P5/C3": {
+      "allocation_samples": 11,
+      "decisions": 784,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0004300189999999482,
+      "max_traced_peak_increment_bytes": 4592,
+      "max_wall_seconds": 0.0004291440018278081,
+      "maximum": {
+        "expanded_logical_operations": 3214,
+        "legacy_operations": 222,
+        "persistent_budgeted_scalars": 161,
+        "raw_observation_scalars": 129,
+        "temporary_workspace_scalar_proxy": 3636,
+        "total_controller_state_scalars": 336
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 773,
+      "total_CPU_seconds": 0.0902513940000027,
+      "total_wall_seconds": 0.09037236804215354
+    },
+    "P5/C4": {
+      "allocation_samples": 4,
+      "decisions": 98,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 3.6444000000024346e-05,
+      "max_traced_peak_increment_bytes": 1688,
+      "max_wall_seconds": 3.6444002034841105e-05,
+      "maximum": {
+        "expanded_logical_operations": 2219,
+        "legacy_operations": 75,
+        "persistent_budgeted_scalars": 21,
+        "raw_observation_scalars": 129,
+        "temporary_workspace_scalar_proxy": 2228,
+        "total_controller_state_scalars": 73
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 94,
+      "total_CPU_seconds": 0.0017060669999970912,
+      "total_wall_seconds": 0.0017361379905196372
+    },
+    "P5/C5": {
+      "allocation_samples": 11,
+      "decisions": 784,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0003811660000003769,
+      "max_traced_peak_increment_bytes": 5328,
+      "max_wall_seconds": 0.0003807030007010326,
+      "maximum": {
+        "expanded_logical_operations": 4036,
+        "legacy_operations": 240,
+        "persistent_budgeted_scalars": 290,
+        "raw_observation_scalars": 129,
+        "temporary_workspace_scalar_proxy": 4956,
+        "total_controller_state_scalars": 504
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 773,
+      "total_CPU_seconds": 0.10930745299999733,
+      "total_wall_seconds": 0.10941770297358744
+    },
+    "P6/C0": {
+      "allocation_samples": 11,
+      "decisions": 784,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0018053319999999928,
+      "max_traced_peak_increment_bytes": 76120,
+      "max_wall_seconds": 0.0018047390003630426,
+      "maximum": {
+        "expanded_logical_operations": 60700,
+        "legacy_operations": 3444,
+        "persistent_budgeted_scalars": 3362,
+        "raw_observation_scalars": 3312,
+        "temporary_workspace_scalar_proxy": 67632,
+        "total_controller_state_scalars": 3510
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 773,
+      "total_CPU_seconds": 0.44283747799999595,
+      "total_wall_seconds": 0.44340304901561467
+    },
+    "P6/C1": {
+      "allocation_samples": 11,
+      "decisions": 784,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0027775359999999694,
+      "max_traced_peak_increment_bytes": 72280,
+      "max_wall_seconds": 0.002779358997941017,
+      "maximum": {
+        "expanded_logical_operations": 60691,
+        "legacy_operations": 3435,
+        "persistent_budgeted_scalars": 3362,
+        "raw_observation_scalars": 3312,
+        "temporary_workspace_scalar_proxy": 67632,
+        "total_controller_state_scalars": 3510
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 773,
+      "total_CPU_seconds": 0.44614471800001176,
+      "total_wall_seconds": 0.4466906960042252
+    },
+    "P6/C2": {
+      "allocation_samples": 22,
+      "decisions": 1568,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.009309938999999545,
+      "max_traced_peak_increment_bytes": 72280,
+      "max_wall_seconds": 0.009276234999560984,
+      "maximum": {
+        "expanded_logical_operations": 60691,
+        "legacy_operations": 3435,
+        "persistent_budgeted_scalars": 3362,
+        "raw_observation_scalars": 3312,
+        "temporary_workspace_scalar_proxy": 67632,
+        "total_controller_state_scalars": 3510
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 1546,
+      "total_CPU_seconds": 0.8829798039999552,
+      "total_wall_seconds": 0.8839548289979575
+    },
+    "P6/C3": {
+      "allocation_samples": 11,
+      "decisions": 784,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0020083140000011213,
+      "max_traced_peak_increment_bytes": 72280,
+      "max_wall_seconds": 0.002008149000175763,
+      "maximum": {
+        "expanded_logical_operations": 60691,
+        "legacy_operations": 3435,
+        "persistent_budgeted_scalars": 3362,
+        "raw_observation_scalars": 3312,
+        "temporary_workspace_scalar_proxy": 67632,
+        "total_controller_state_scalars": 3510
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 773,
+      "total_CPU_seconds": 0.43685755000002047,
+      "total_wall_seconds": 0.43740136196356616
+    },
+    "P6/C4": {
+      "allocation_samples": 4,
+      "decisions": 98,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0012405629999996393,
+      "max_traced_peak_increment_bytes": 72280,
+      "max_wall_seconds": 0.0012408450020302553,
+      "maximum": {
+        "expanded_logical_operations": 60691,
+        "legacy_operations": 3435,
+        "persistent_budgeted_scalars": 3362,
+        "raw_observation_scalars": 3312,
+        "temporary_workspace_scalar_proxy": 67632,
+        "total_controller_state_scalars": 3510
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 94,
+      "total_CPU_seconds": 0.03609753199999588,
+      "total_wall_seconds": 0.036144505993433995
+    },
+    "P6/C5": {
+      "allocation_samples": 11,
+      "decisions": 784,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0021795369999999537,
+      "max_traced_peak_increment_bytes": 72280,
+      "max_wall_seconds": 0.0021752450011263136,
+      "maximum": {
+        "expanded_logical_operations": 74449,
+        "legacy_operations": 3465,
+        "persistent_budgeted_scalars": 6674,
+        "raw_observation_scalars": 3312,
+        "temporary_workspace_scalar_proxy": 94608,
+        "total_controller_state_scalars": 6873
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 773,
+      "total_CPU_seconds": 0.5419606819999956,
+      "total_wall_seconds": 0.5426177300105337
+    },
+    "P7/C0": {
+      "allocation_samples": 11,
+      "decisions": 784,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.001810830000000152,
+      "max_traced_peak_increment_bytes": 30944,
+      "max_wall_seconds": 0.001809335000871215,
+      "maximum": {
+        "expanded_logical_operations": 20167,
+        "legacy_operations": 1263,
+        "persistent_budgeted_scalars": 1148,
+        "raw_observation_scalars": 1110,
+        "temporary_workspace_scalar_proxy": 23496,
+        "total_controller_state_scalars": 1339
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 773,
+      "total_CPU_seconds": 0.14857690499994547,
+      "total_wall_seconds": 0.14887338001426542
+    },
+    "P7/C1": {
+      "allocation_samples": 11,
+      "decisions": 784,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0023427100000006362,
+      "max_traced_peak_increment_bytes": 23984,
+      "max_wall_seconds": 0.002340638999157818,
+      "maximum": {
+        "expanded_logical_operations": 20158,
+        "legacy_operations": 1254,
+        "persistent_budgeted_scalars": 1148,
+        "raw_observation_scalars": 1110,
+        "temporary_workspace_scalar_proxy": 23496,
+        "total_controller_state_scalars": 1339
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 773,
+      "total_CPU_seconds": 0.15739821399999698,
+      "total_wall_seconds": 0.1578286159929121
+    },
+    "P7/C2": {
+      "allocation_samples": 22,
+      "decisions": 1568,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.002337231999998579,
+      "max_traced_peak_increment_bytes": 23984,
+      "max_wall_seconds": 0.0023350219998974353,
+      "maximum": {
+        "expanded_logical_operations": 20149,
+        "legacy_operations": 1245,
+        "persistent_budgeted_scalars": 1148,
+        "raw_observation_scalars": 1110,
+        "temporary_workspace_scalar_proxy": 23496,
+        "total_controller_state_scalars": 1303
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 1546,
+      "total_CPU_seconds": 0.3049931109999875,
+      "total_wall_seconds": 0.30562959099188447
+    },
+    "P7/C3": {
+      "allocation_samples": 11,
+      "decisions": 784,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0005656000000016093,
+      "max_traced_peak_increment_bytes": 23984,
+      "max_wall_seconds": 0.0005656770008499734,
+      "maximum": {
+        "expanded_logical_operations": 20158,
+        "legacy_operations": 1254,
+        "persistent_budgeted_scalars": 1148,
+        "raw_observation_scalars": 1110,
+        "temporary_workspace_scalar_proxy": 23496,
+        "total_controller_state_scalars": 1339
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 773,
+      "total_CPU_seconds": 0.14464702500015392,
+      "total_wall_seconds": 0.14488287899803254
+    },
+    "P7/C4": {
+      "allocation_samples": 4,
+      "decisions": 98,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0005120810000036613,
+      "max_traced_peak_increment_bytes": 23984,
+      "max_wall_seconds": 0.0005121879985381383,
+      "maximum": {
+        "expanded_logical_operations": 20158,
+        "legacy_operations": 1254,
+        "persistent_budgeted_scalars": 1148,
+        "raw_observation_scalars": 1110,
+        "temporary_workspace_scalar_proxy": 23496,
+        "total_controller_state_scalars": 1339
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 94,
+      "total_CPU_seconds": 0.017963004000023375,
+      "total_wall_seconds": 0.01799337402189849
+    },
+    "P7/C5": {
+      "allocation_samples": 11,
+      "decisions": 784,
+      "guardrail_violations": 0,
+      "max_CPU_seconds": 0.0025027370000003657,
+      "max_traced_peak_increment_bytes": 23984,
+      "max_wall_seconds": 0.0025021299989020918,
+      "maximum": {
+        "expanded_logical_operations": 25108,
+        "legacy_operations": 1284,
+        "persistent_budgeted_scalars": 2258,
+        "raw_observation_scalars": 1110,
+        "temporary_workspace_scalar_proxy": 32856,
+        "total_controller_state_scalars": 2500
+      },
+      "old_vs_new_action_and_memory_equal": true,
+      "resource_cap_binding": false,
+      "timed_decisions": 773,
+      "total_CPU_seconds": 0.21515727200004875,
+      "total_wall_seconds": 0.21561075795034412
+    }
+  },
+  "namespace": "PD-B1-D-v1.1-QA",
+  "old_caps_also_exceed_static_bounds": true,
+  "old_vs_new_action_and_memory_equal": true,
+  "p5_adapter_sha256": "77fb5404f6ca9362aad43dfd0e9247e16115845bbbb1d061e748ce0219ac5dd7",
+  "required_axes": [
+    "available_information",
+    "action_space",
+    "restrictions_feasibility",
+    "memory_capacity",
+    "message_width",
+    "planning_horizon",
+    "training_data",
+    "training_updates",
+    "hyperparameter_search_budget",
+    "decision_operation_budget",
+    "model_state_size",
+    "persistent_state",
+    "temporary_workspace",
+    "latency",
+    "CPU_usage",
+    "memory_usage"
+  ],
+  "resource_cap_binding": false,
+  "reusable_as_final": false,
+  "source_hashes_after": {
+    "b1/SELECTED_CONFIG.json": "3d098d3d3a9c7d8cc1bbb7a6d17a878cdacf931c3b40700715c2157948243c99",
+    "b1/contracts/frozen_b0/PILOT_CONTRACTS_v1.json": "ca14f3895952e2553e1c8c7459cb3a066e4cce5db892de689c281750ef434b99",
+    "b1/controllers/c6.py": "aa22e46c8bb671eba8e6d22654a43843b2ed9b11e1870382673575f1ead4e980",
+    "b1/controllers/core.py": "30ab7335b62bbe12f80e15d62b852036a2b595b6a01a12ae9e362c7bcd8b6381",
+    "b1/tasks/core.py": "e728ad45d82c5a5eaa7d325e8c7e5a3173c18a4ce003226e2f5e7e86260f999e",
+    "b1/tasks/p5.py": "b28f3c8638ed0c25a26bfb2db393246c20e57c40a47f2d144e72ee317d23ea51",
+    "b1/tasks/p6.py": "919f2dacc42b82e435dc3239368f6184c8532fd8dc2a7107668401311f5b216b",
+    "b1/tasks/p7.py": "267083182aed132188fea1ef5bb4d5da197332fc3265fc25a2f098d0938517da"
+  },
+  "source_hashes_before": {
+    "b1/SELECTED_CONFIG.json": "3d098d3d3a9c7d8cc1bbb7a6d17a878cdacf931c3b40700715c2157948243c99",
+    "b1/contracts/frozen_b0/PILOT_CONTRACTS_v1.json": "ca14f3895952e2553e1c8c7459cb3a066e4cce5db892de689c281750ef434b99",
+    "b1/controllers/c6.py": "aa22e46c8bb671eba8e6d22654a43843b2ed9b11e1870382673575f1ead4e980",
+    "b1/controllers/core.py": "30ab7335b62bbe12f80e15d62b852036a2b595b6a01a12ae9e362c7bcd8b6381",
+    "b1/tasks/core.py": "e728ad45d82c5a5eaa7d325e8c7e5a3173c18a4ce003226e2f5e7e86260f999e",
+    "b1/tasks/p5.py": "b28f3c8638ed0c25a26bfb2db393246c20e57c40a47f2d144e72ee317d23ea51",
+    "b1/tasks/p6.py": "919f2dacc42b82e435dc3239368f6184c8532fd8dc2a7107668401311f5b216b",
+    "b1/tasks/p7.py": "267083182aed132188fea1ef5bb4d5da197332fc3265fc25a2f098d0938517da"
+  },
+  "source_sham_claim_limit": "Existing joint_manipulation=true remains; no selective Gamma verdict from a source/sham contrast",
+  "spec_sha256": "da21d046af7ece6e1f0bce70a3879a1df53cdb4ea030578943907f12cf31d7de",
+  "static_bounds": {
+    "P5": {
+      "C0_C4": {
+        "expanded_logical_operations": 6476,
+        "legacy_operations": 228,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 207,
+        "raw_observation_scalars": 129,
+        "route_payload_scalars": 6,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 4004,
+        "total_controller_state_scalar_bound": 2255
+      },
+      "C5": {
+        "expanded_logical_operations": 7298,
+        "legacy_operations": 246,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 336,
+        "raw_observation_scalars": 129,
+        "route_payload_scalars": 6,
+        "route_slots": 6,
+        "temporary_workspace_scalar_proxy": 5324,
+        "total_controller_state_scalar_bound": 2384
+      }
+    },
+    "P6": {
+      "C0_C4": {
+        "expanded_logical_operations": 61559,
+        "legacy_operations": 4119,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 3408,
+        "raw_observation_scalars": 3312,
+        "route_payload_scalars": 10,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 68000,
+        "total_controller_state_scalar_bound": 5456
+      },
+      "C5": {
+        "expanded_logical_operations": 75317,
+        "legacy_operations": 4149,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 6720,
+        "raw_observation_scalars": 3312,
+        "route_payload_scalars": 10,
+        "route_slots": 6,
+        "temporary_workspace_scalar_proxy": 94976,
+        "total_controller_state_scalar_bound": 8768
+      }
+    },
+    "P7": {
+      "C0_C4": {
+        "expanded_logical_operations": 23492,
+        "legacy_operations": 1284,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 1206,
+        "raw_observation_scalars": 1110,
+        "route_payload_scalars": 10,
+        "route_slots": 3,
+        "temporary_workspace_scalar_proxy": 23960,
+        "total_controller_state_scalar_bound": 3254
+      },
+      "C5": {
+        "expanded_logical_operations": 28442,
+        "legacy_operations": 1314,
+        "parameter_scalars": 64,
+        "persistent_budgeted_scalars": 2316,
+        "raw_observation_scalars": 1110,
+        "route_payload_scalars": 10,
+        "route_slots": 6,
+        "temporary_workspace_scalar_proxy": 33320,
+        "total_controller_state_scalar_bound": 4364
+      }
+    }
+  },
+  "status": "CERTIFIED_WITH_EXPLICIT_SCOPE",
+  "stress_action_digest_sha256": "ca9ef24ab93e39d101cb95c8d361911b585564934144879878df12b0f9aca63b",
+  "version": "B1-D-v1.1-resource-certificate-1"
+}

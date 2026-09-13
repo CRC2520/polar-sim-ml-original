@@ -1,0 +1,753 @@
+{
+  "B1E_executed": false,
+  "N_v1": 915501,
+  "N_v2": 138688,
+  "P5": {
+    "B1E_executed": false,
+    "C4_policy": "minimal-next-demand-v1.1",
+    "C4_terminal_refill_total": 0,
+    "C6_exact_checks": {
+      "actions": 3072,
+      "events": 3072,
+      "observations": 3072,
+      "states": 1024
+    },
+    "C6_status": "PASS",
+    "all_episodes_attain_physical_ceiling": true,
+    "bundle_count": 32,
+    "confirmatory": false,
+    "controller_failures": 0,
+    "development_only": true,
+    "episode_count": 288,
+    "event_count": 27648,
+    "final_seeds_generated": false,
+    "finished_utc": "2026-09-13T03:59:34.933308+00:00",
+    "freeze_sha256": "ffc70d20e26f9e886e184905281a1348c300e59d785269cd6007c270727333c8",
+    "full_refill_witness_separate": true,
+    "full_witness_terminal_refill_total": 192,
+    "guardrail_violations": 0,
+    "interpretation": "Ceiling negative control. Equality is descriptive and provides no positive pairing or utility evidence.",
+    "mean_losses": {
+      "C0": 0.014322916666666666,
+      "C1": 0.014322916666666666,
+      "C2": 0.014322916666666666,
+      "C3": 0.014322916666666666,
+      "C4": 0.014322916666666666,
+      "C4_FULL_REFILL_CEILING_WITNESS": 0.014322916666666666,
+      "C5": 0.014322916666666666,
+      "C6": 0.014322916666666666
+    },
+    "namespace": "PD-B1-D-v1.1",
+    "paired_contrasts": {
+      "C1-C0": {
+        "all_bundles_zero": true,
+        "differences_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "mean": 0.0,
+        "n": 32
+      },
+      "C1-C2": {
+        "all_bundles_zero": true,
+        "differences_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "mean": 0.0,
+        "n": 32
+      },
+      "C1-C3": {
+        "all_bundles_zero": true,
+        "differences_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "mean": 0.0,
+        "n": 32
+      },
+      "C1-C4": {
+        "all_bundles_zero": true,
+        "differences_exact": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "mean": 0.0,
+        "n": 32
+      }
+    },
+    "physical_bound_pass": true,
+    "positive_pairing_specificity_eligible": false,
+    "positive_utility_eligible": false,
+    "resource_cap_binding": false,
+    "reusable_as_final": false,
+    "secondary_replenishment_totals": {
+      "C0": 5640,
+      "C1": 5640,
+      "C2": 11280,
+      "C3": 5640,
+      "C4": 5640,
+      "C4_FULL_REFILL_CEILING_WITNESS": 6144,
+      "C5": 5640,
+      "C6": 5640
+    },
+    "seed_uses": 96,
+    "source_commit": "d5343906e28bd16b71c42d24e6512bec11c64f07",
+    "started_utc": "2026-09-13T03:58:33.972375+00:00",
+    "status": "PASS",
+    "trace_compressed_bytes": 1644280,
+    "trace_raw_bytes": 109406052,
+    "v1_results_combined": false,
+    "version": "P5-B1D-v1.1",
+    "wall_seconds": 60.96095204300218
+  },
+  "P6": {
+    "bound": "1/32",
+    "instrument": "PASS",
+    "positive_pairing_specificity_eligible": false,
+    "positive_utility_eligible": false,
+    "role": "negative_control",
+    "scientific_rerun": false,
+    "source": "immutable B1-D v1"
+  },
+  "P7": {
+    "instrument": "PASS",
+    "resource_QA_replay_decisions": 7168,
+    "retuning": false,
+    "scientific_rerun": false,
+    "selected_C1_configuration": "cfg01",
+    "selected_policy": "reactive",
+    "v1_acute_route_effect": 0,
+    "v1_paired_differences": "C1-C0/C2/C3/C4=0 descriptively",
+    "v1_results_preserved": true
+  },
+  "blockers": [
+    {
+      "affected_artifacts": "P5_C4_DISPOSITION.json;P5_PROTOCOL_V1_1.json;p5/",
+      "affected_scientific_runs": "New P5 v1.1 development only",
+      "blocker_id": "B1-CONFLICT-P5-C4-REFILL-001",
+      "remaining_limitations": "P5 remains ceiling negative control; no positive utility or pairing eligibility",
+      "rerun_required": true,
+      "resolution": "Authorized prospective minimal-next-demand disposition; full-refill ceiling witness kept separately",
+      "resolution_type": "prospective_protocol_disposition;comparator_behavior_change",
+      "root_cause": "Conflicting B0 machine-readable and prose C4 refill rules",
+      "v1_1_status": "RESOLVED",
+      "v1_status": "STILL_BLOCKED",
+      "verification": "Published source d5343906e28bd16b71c42d24e6512bec11c64f07;32 bundles;288 episodes;exact C6 and archive verification PASS"
+    },
+    {
+      "affected_artifacts": "RESOURCE_MATCHING_SPEC.json;RESOURCE_MATCHING_CERTIFICATE.json;resources/",
+      "affected_scientific_runs": "QA stress and replay only; selected P7 scientific data unchanged",
+      "blocker_id": "B1-RESOURCE-CERTIFICATE-PENDING",
+      "remaining_limitations": "Host CPU, latency and byte allocation are sampled;C5 descriptive;no exact actual-use equality claim",
+      "rerun_required": false,
+      "resolution": "Common logical opportunity certified for finite tasks; actual use and host axes quantified",
+      "resolution_type": "resource_envelope_only;instrumentation_only",
+      "root_cause": "Provisional logical caps and incomplete computational fairness certificate",
+      "v1_1_status": "RESOLVED",
+      "v1_status": "STILL_BLOCKED",
+      "verification": "288 axis rows;C0-C4 scoped invariants PASS;no binding cap;P7 action/memory equality"
+    },
+    {
+      "affected_artifacts": "exporter/;EXPORTER_ROOT_CAUSE.json;EXPORTER_V1_1_AUDIT.json",
+      "affected_scientific_runs": "Historical archive representation and QA only;no new scientific observations",
+      "blocker_id": "B1D-ORIGINAL-EXPORT-PROVENANCE-INCIDENT",
+      "remaining_limitations": "Historical original export remains failed;root cause remains undetermined",
+      "rerun_required": false,
+      "resolution": "RESOLVED_FOR_FUTURE_PIPELINE",
+      "resolution_type": "exporter_only",
+      "root_cause": "undetermined;technical closure omitted diagnostic completeness gate",
+      "v1_1_status": "RESOLVED",
+      "v1_status": "STILL_BLOCKED",
+      "verification": "96/96 rows;42 original+54 sidecar byte-identical;82176 events;corruption and end-to-end QA PASS"
+    },
+    {
+      "affected_artifacts": "B1E_STATISTICAL_REDESIGN.json;B1E_RESOURCE_CERTIFICATE.json;TRACE_RETENTION_POLICY.json",
+      "affected_scientific_runs": "Synthetic statistical method simulations and archived replay only",
+      "blocker_id": "B1E-RESOURCE-INFEASIBLE-CURRENT-DISK",
+      "remaining_limitations": "Estimated feasibility is not resource reservation or a worst-case runtime/compression guarantee",
+      "rerun_required": false,
+      "resolution": "Prospective fixed-N v2 candidate and tiered complete causal retention fit measured host estimate",
+      "resolution_type": "statistical_design_only;instrumentation_only",
+      "root_cause": "v1 distribution-free 27-endpoint precision and full-trace resource projection",
+      "v1_1_status": "RESOLVED",
+      "v1_status": "STILL_BLOCKED",
+      "verification": "N=138688;simultaneous interval validation PASS;all-failure disk estimate 26890207232 bytes"
+    }
+  ],
+  "completion_decision": "Final B1D status is recorded in B1D_V1_1_MANIFEST.json after CI",
+  "confirmatory": false,
+  "development_only": true,
+  "disk_after": {
+    "P5_estimation_proxy": "P6 observed maximum full trace times 13/12, because v1 P5 had no architecture runs; 32 engineering bundles only",
+    "P7_audit_subset_bundles": 136,
+    "P7_full_bundle_allocated_bytes": 118784,
+    "P7_level_A_max_measured_bytes": 2991,
+    "P7_level_B_max_measured_bytes": 78879,
+    "P7_level_C_full_max_measured_bytes": 106455,
+    "P7_normal_bundle_allocated_bytes": 98304,
+    "all_failures_observed_max_projection_fits": true,
+    "all_failures_precontingency_bytes": 16495149056,
+    "all_failures_remaining_margin_bytes": 3944497152,
+    "all_failures_scenario": "All 138688 P7 bundles and all 64 engineering bundles retain full C. Full C directly supplies B, so no duplicate B storage. Model failures are not assumed rare.",
+    "all_failures_total_bytes": 26890207232,
+    "available_free_bytes": 30834704384,
+    "contingency_factor": 1.5,
+    "engineering_pilots_full_trace_bytes": 21233664,
+    "filesystem_block_bytes": 4096,
+    "level_A_per_bundle_allowance_bytes": 8192,
+    "limits": "Observed maxima times 1.5 are a conservative planning envelope, not a theorem bounding every future trace or compression ratio. Unanticipated trace size or reduced disk triggers the technical storage gate; completed evidence is never dropped.",
+    "manifest_per_bundle_allowance_bytes": 4096,
+    "staging_and_system_reserve_bytes": 2147483648,
+    "typical_fits": true,
+    "typical_precontingency_bytes": 13657604096,
+    "typical_total_bytes": 22633889792,
+    "unconditional_worst_case_bound": false,
+    "units": "bytes; decimal GB reported only as bytes/1e9"
+  },
+  "disk_before_bytes": 373568924236.125,
+  "epistemic_contract": "Implementation, instrument, causality, utility, pairing, generalization and consciousness relevance are separate. Program B remains B-design.",
+  "estimated_feasible": true,
+  "exporter_status": "RESOLVED_FOR_FUTURE_PIPELINE",
+  "final_seeds_generated": false,
+  "joint_manipulation": true,
+  "positive_aggregate_claim_limit": "Current joint source/sham fixtures fail the frozen source-causal admissibility guard; all four positive aggregate gates remain closed even if scalar comparisons improve. This guard and reactive P7 are not altered.",
+  "preserves_v1_results": true,
+  "ready_for_b1e_confirmatory_run": false,
+  "resource_feasibility": "estimated_feasible_on_observed_host_with_declared_contingencies_and_fail_closed_capacity_gate",
+  "resource_matching_status": "CERTIFIED_WITH_EXPLICIT_SCOPE",
+  "results_combined_across_versions": false,
+  "reusable_as_final": false,
+  "runtime_after": {
+    "CPU_hours_planning_budget": 120.45112456507728,
+    "CPU_seconds_planning_budget": 433624.04843427823,
+    "P7_original_12_episode_seconds_per_bundle": 0.7010421704683836,
+    "all_pilot_retention_conversion_seconds_charged_per_P7_bundle": 1.3126279986250324,
+    "contingency_factor": 1.5,
+    "diagnostic_and_runner_residual_seconds_per_bundle": 0.06931162753141962,
+    "effective_parallel_speedup": 3,
+    "engineering_seconds": 198.1195458802752,
+    "parallel_efficiency_assumption": 0.75,
+    "runtime_guarantee": false,
+    "scope": "Linear same-host estimate from archived runtime and measured retention conversion; 4 single-thread workers, 75% parallel efficiency, no assumed algorithmic speedup. Final CPU allocation must be authorized.",
+    "serial_seconds_precontingency": 289082.6989561855,
+    "wall_hours_planning_budget": 40.15037485502576,
+    "wall_seconds_planning_budget": 144541.34947809274,
+    "worker_processes": 4
+  },
+  "runtime_before_serial_hours": 614.271911866,
+  "simulation": {
+    "maximum_family_false_declaration_rate": 0.001,
+    "minimum_family_coverage": 0.99835,
+    "replications_per_cell": 20000,
+    "scenario_cells": 40,
+    "status": "PASS"
+  },
+  "statistical_design_version": "B1-E-protocol-v2-candidate",
+  "status": "PASS",
+  "version": "1.1"
+}

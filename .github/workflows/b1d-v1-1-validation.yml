@@ -1,0 +1,55 @@
+name: B1-D v1.1 blocker resolution validation
+
+on:
+  push:
+    branches: [research/b1d-v1.1-blocker-resolution-20260912]
+    paths: ['b1/v1_1/**', '.github/workflows/b1d-v1-1-validation.yml']
+  pull_request:
+    branches: [research/b1-development-calibration-20260912]
+    paths: ['b1/v1_1/**', '.github/workflows/b1d-v1-1-validation.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  scientific-engineering-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PYTHONHASHSEED: '0'
+      PYTHONDONTWRITEBYTECODE: '1'
+      B1_EXPERIMENT_CLASS: development_only
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install fixed parsers and statistical simulation dependency
+        run: python -m pip install PyYAML==6.0.3 numpy==2.3.5
+      - name: Verify immutable B0, historical evidence and all B1-D v1 bytes
+        run: |
+          if [ -f b1/v1_1/B1D_V1_1_MANIFEST.json ]; then
+            python -B b1/v1_1/validate.py --kind code
+          else
+            python -B b1/v1_1/validate.py --kind code --pre-freeze
+          fi
+      - name: Existing B1 instrument, controller, C6 and provenance tests
+        run: python -B -m unittest discover -s b1/tests -v
+      - name: Materialize immutable v1 for its exact-inventory recovery gate
+        run: git worktree add --detach "$RUNNER_TEMP/b1-v1-baseline" c27235deb1688c105bfe96597dfd233108307895
+      - name: Existing export recovery tests against their frozen source inventory
+        working-directory: ${{ runner.temp }}/b1-v1-baseline
+        run: python -B -m unittest discover -s b1/postprocessing/tests -v
+      - name: Export corruption, archive replay, QA, P5 and resource tests
+        run: python -B -m unittest discover -s b1/v1_1 -t . -p 'test_*.py' -v
+      - name: Synthetic statistical method smoke only
+        run: python -B -m b1.v1_1.statistics.simulate --smoke --output "$RUNNER_TEMP/statistical-smoke.json"
+      - name: Verify preservation after QA and simulations
+        run: |
+          if [ -f b1/v1_1/B1D_V1_1_MANIFEST.json ]; then
+            python -B b1/v1_1/validate.py --kind code
+          else
+            python -B b1/v1_1/validate.py --kind code --pre-freeze
+          fi

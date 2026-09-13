@@ -1,0 +1,156 @@
+{
+  "B1E_executed": false,
+  "CPU_and_wall_time": {
+    "CPU_hours_planning_budget": 120.45112456507728,
+    "CPU_seconds_planning_budget": 433624.04843427823,
+    "P7_original_12_episode_seconds_per_bundle": 0.7010421704683836,
+    "all_pilot_retention_conversion_seconds_charged_per_P7_bundle": 1.3126279986250324,
+    "contingency_factor": 1.5,
+    "diagnostic_and_runner_residual_seconds_per_bundle": 0.06931162753141962,
+    "effective_parallel_speedup": 3,
+    "engineering_seconds": 198.1195458802752,
+    "parallel_efficiency_assumption": 0.75,
+    "runtime_guarantee": false,
+    "scope": "Linear same-host estimate from archived runtime and measured retention conversion; 4 single-thread workers, 75% parallel efficiency, no assumed algorithmic speedup. Final CPU allocation must be authorized.",
+    "serial_seconds_precontingency": 289082.6989561855,
+    "wall_hours_planning_budget": 40.15037485502576,
+    "wall_seconds_planning_budget": 144541.34947809274,
+    "worker_processes": 4
+  },
+  "N": 138688,
+  "N_meaning": "Independent paired P7 bundles; no confirmatory bundles have been generated or executed",
+  "N_v1": 915501,
+  "available_infrastructure": {
+    "cgroup_cpu_quota": 8.0,
+    "disk_free_bytes": 30834704384,
+    "future_CPU_time_budget_authorized": false,
+    "future_resources_reserved": false,
+    "future_storage_allocation_authorized": false,
+    "logical_cpu_count": 9,
+    "measured_utc": "2026-09-13T04:01:11.693064+00:00",
+    "memory_bytes": 21474836480,
+    "same_host_assumed": true
+  },
+  "confirmatory": false,
+  "development_only": true,
+  "disk": {
+    "P5_estimation_proxy": "P6 observed maximum full trace times 13/12, because v1 P5 had no architecture runs; 32 engineering bundles only",
+    "P7_audit_subset_bundles": 136,
+    "P7_full_bundle_allocated_bytes": 118784,
+    "P7_level_A_max_measured_bytes": 2991,
+    "P7_level_B_max_measured_bytes": 78879,
+    "P7_level_C_full_max_measured_bytes": 106455,
+    "P7_normal_bundle_allocated_bytes": 98304,
+    "all_failures_observed_max_projection_fits": true,
+    "all_failures_precontingency_bytes": 16495149056,
+    "all_failures_remaining_margin_bytes": 3944497152,
+    "all_failures_scenario": "All 138688 P7 bundles and all 64 engineering bundles retain full C. Full C directly supplies B, so no duplicate B storage. Model failures are not assumed rare.",
+    "all_failures_total_bytes": 26890207232,
+    "available_free_bytes": 30834704384,
+    "contingency_factor": 1.5,
+    "engineering_pilots_full_trace_bytes": 21233664,
+    "filesystem_block_bytes": 4096,
+    "level_A_per_bundle_allowance_bytes": 8192,
+    "limits": "Observed maxima times 1.5 are a conservative planning envelope, not a theorem bounding every future trace or compression ratio. Unanticipated trace size or reduced disk triggers the technical storage gate; completed evidence is never dropped.",
+    "manifest_per_bundle_allowance_bytes": 4096,
+    "staging_and_system_reserve_bytes": 2147483648,
+    "typical_fits": true,
+    "typical_precontingency_bytes": 13657604096,
+    "typical_total_bytes": 22633889792,
+    "unconditional_worst_case_bound": false,
+    "units": "bytes; decimal GB reported only as bytes/1e9"
+  },
+  "episode_schedule": {
+    "P5": "Same 12 arms plus C4_FULL_REFILL_CEILING_WITNESS",
+    "P7_and_P6": [
+      "C0",
+      "C1",
+      "C2_cycle1",
+      "C2_cycle2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C1_kappa1_intact",
+      "C1_kappa1_lesion",
+      "C1_kappa2_intact",
+      "C1_kappa2_lesion"
+    ],
+    "P7_records_per_bundle": 1176,
+    "cells_per_episode": 3,
+    "epochs_per_episode": 32,
+    "source_diagnostic_events_per_pilot_bundle": 24
+  },
+  "feasibility_kind": "estimated_feasible_on_observed_host_with_declared_contingencies_and_fail_closed_capacity_gate",
+  "feasible": true,
+  "final_seeds_generated": false,
+  "future_schedule": {
+    "C5": "Descriptive double-capacity comparator, not an additional confirmatory endpoint",
+    "C6": "Algebraic state/event/behavior check, not an additional statistical endpoint",
+    "P5": {
+      "bundles": 32,
+      "episodes_per_bundle": 13,
+      "extra_episode": "C4_FULL_REFILL_CEILING_WITNESS",
+      "source_diagnostic_events_per_bundle": 24
+    },
+    "P6": {
+      "bundles": 32,
+      "episodes_per_bundle": 12,
+      "source_diagnostic_events_per_bundle": 24
+    },
+    "P7": {
+      "acute_episodes": [
+        "kappa1.intact",
+        "kappa1.bypass",
+        "kappa2.intact",
+        "kappa2.bypass"
+      ],
+      "bundles": 138688,
+      "episodes_per_bundle": 12,
+      "ordinary_episodes": [
+        "C0",
+        "C1",
+        "C2.cycle1",
+        "C2.cycle2",
+        "C3",
+        "C4",
+        "C5",
+        "C6"
+      ],
+      "source_diagnostic_events_per_bundle": 24
+    },
+    "engineering_schedule_rationale": "Retain the frozen32-bundle development block as prospective engineering replication of a32-epoch task; it supplies no powered population superiority claim. All18 P5/P6 endpoint summaries remain explicit descriptive checks."
+  },
+  "historical_results_modified": false,
+  "measurement_sources": {
+    "B1E_STATISTICAL_REDESIGN.json": "36755d636b0fe7661a763fcd4554e0fd37bef887a49a851f44807264d510e166",
+    "RESOURCE_MATCHING_CERTIFICATE.json": "8f846263ea7deec623a6de9694845c5b1e6478306fa4b2bb9986f95c76be07a3",
+    "TRACE_RETENTION_POLICY.json": "342bd1a34e631d6a33c1b7c5dcb45226cff20994a81504b7cf5c3bc1f7819988",
+    "retention/MEASUREMENTS.json": "c7377c01033590a885133fafd3d22a32b41ad20ddfd7350f966e2e6b2e9ccade"
+  },
+  "memory": {
+    "cgroup_limit_bytes": 21474836480,
+    "coordinator_allowance_bytes": 1073741824,
+    "estimated_fit": true,
+    "limits": "Measured conversion peaked below 512 MiB; 3 GiB aggregate planning allowance is not a portable worst-case heap bound",
+    "per_worker_allowance_bytes": 536870912,
+    "retention_measurement_peak_RSS_bytes": 188510208,
+    "total_allowance_bytes": 3221225472,
+    "worker_processes": 4
+  },
+  "pilots": {
+    "P5": "32 engineering negative-control bundles",
+    "P6": "32 engineering negative-control bundles",
+    "P7": "confirmatory-eligible primary family"
+  },
+  "ready_for_b1e_confirmatory_run": false,
+  "remaining_run_gates": [
+    "preregistration",
+    "final_code_and_config_freeze",
+    "independent_seed_custody",
+    "resource_authorization"
+  ],
+  "reusable_as_final": false,
+  "unconditional_completion_guaranteed": false,
+  "version": "B1-E-v2-prospective-resource-certificate-1"
+}

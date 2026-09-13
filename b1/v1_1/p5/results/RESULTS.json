@@ -1,0 +1,603 @@
+{
+  "B1E_executed": false,
+  "C4_policy": "minimal-next-demand-v1.1",
+  "C4_terminal_refill_total": 0,
+  "C6_exact_checks": {
+    "actions": 3072,
+    "events": 3072,
+    "observations": 3072,
+    "states": 1024
+  },
+  "C6_status": "PASS",
+  "all_episodes_attain_physical_ceiling": true,
+  "bundle_count": 32,
+  "confirmatory": false,
+  "controller_failures": 0,
+  "development_only": true,
+  "episode_count": 288,
+  "event_count": 27648,
+  "final_seeds_generated": false,
+  "finished_utc": "2026-09-13T03:59:34.933308+00:00",
+  "freeze_sha256": "ffc70d20e26f9e886e184905281a1348c300e59d785269cd6007c270727333c8",
+  "full_refill_witness_separate": true,
+  "full_witness_terminal_refill_total": 192,
+  "guardrail_violations": 0,
+  "interpretation": "Ceiling negative control. Equality is descriptive and provides no positive pairing or utility evidence.",
+  "mean_losses": {
+    "C0": 0.014322916666666666,
+    "C1": 0.014322916666666666,
+    "C2": 0.014322916666666666,
+    "C3": 0.014322916666666666,
+    "C4": 0.014322916666666666,
+    "C4_FULL_REFILL_CEILING_WITNESS": 0.014322916666666666,
+    "C5": 0.014322916666666666,
+    "C6": 0.014322916666666666
+  },
+  "namespace": "PD-B1-D-v1.1",
+  "paired_contrasts": {
+    "C1-C0": {
+      "all_bundles_zero": true,
+      "differences_exact": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "mean": 0.0,
+      "n": 32
+    },
+    "C1-C2": {
+      "all_bundles_zero": true,
+      "differences_exact": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "mean": 0.0,
+      "n": 32
+    },
+    "C1-C3": {
+      "all_bundles_zero": true,
+      "differences_exact": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "mean": 0.0,
+      "n": 32
+    },
+    "C1-C4": {
+      "all_bundles_zero": true,
+      "differences_exact": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "mean": 0.0,
+      "n": 32
+    }
+  },
+  "physical_bound_pass": true,
+  "positive_pairing_specificity_eligible": false,
+  "positive_utility_eligible": false,
+  "resource_cap_binding": false,
+  "reusable_as_final": false,
+  "secondary_replenishment_totals": {
+    "C0": 5640,
+    "C1": 5640,
+    "C2": 11280,
+    "C3": 5640,
+    "C4": 5640,
+    "C4_FULL_REFILL_CEILING_WITNESS": 6144,
+    "C5": 5640,
+    "C6": 5640
+  },
+  "seed_uses": 96,
+  "source_commit": "d5343906e28bd16b71c42d24e6512bec11c64f07",
+  "started_utc": "2026-09-13T03:58:33.972375+00:00",
+  "status": "PASS",
+  "trace_compressed_bytes": 1644280,
+  "trace_raw_bytes": 109406052,
+  "v1_results_combined": false,
+  "version": "P5-B1D-v1.1",
+  "wall_seconds": 60.96095204300218
+}

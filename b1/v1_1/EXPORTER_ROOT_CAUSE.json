@@ -1,0 +1,114 @@
+{
+  "authenticated_archive_replay": {
+    "diagnostic_events": 2304,
+    "diagnostic_rows": 96,
+    "events": 82176,
+    "original_rows_equal": 42,
+    "prior_derived_rows_equal": 54
+  },
+  "confirmatory": false,
+  "development_only": true,
+  "historical_append_only_replay": {
+    "byte_identical": true,
+    "method": "extract only append_row AST; serialize retained96rows to temporary file; close and compare",
+    "rows": 96,
+    "scientific_task_executions": 0,
+    "seeds_generated": 0
+  },
+  "historical_failure_retroactively_fixed": false,
+  "investigated_hypotheses": [
+    {
+      "evidence": "The retained prefix contains unique (pilot,bundle) IDs; historical run_bundle_diagnostics appends once per complete bundle and does not group an in-memory table.",
+      "finding": "not_reproduced",
+      "hypothesis": "incomplete_grouping_key"
+    },
+    {
+      "evidence": "The canonical calibration stream opens with mode x and append_row only writes to that stream. Later filesystem overwrite or partial copy is not covered by retained execution telemetry.",
+      "finding": "not_established",
+      "hypothesis": "overwrite"
+    },
+    {
+      "evidence": "No deduplication step exists between run_bundle_diagnostics and its stream; 42 retained IDs are all unique.",
+      "finding": "not_reproduced",
+      "hypothesis": "deduplication"
+    },
+    {
+      "evidence": "Diagnostic rows are task-law source/sham bundles, with cycle not applicable. Architecture C2 cycles1/2 are independently present in full archive coverage.",
+      "finding": "not_consistent_with_prefix",
+      "hypothesis": "cycle_omission"
+    },
+    {
+      "evidence": "Every retained diagnostic bundle contains both kappa1 and kappa2; 2,304 archived diagnostics cover all 96 bundles and both contexts.",
+      "finding": "not_consistent_with_prefix",
+      "hypothesis": "context_omission"
+    },
+    {
+      "evidence": "The diagnostic stream contains joint source/sham laws, not route-only trials. Intact and bypassed architecture schedules are independently complete in the authenticated archive.",
+      "finding": "not_consistent_with_prefix",
+      "hypothesis": "route_bypass_omission"
+    },
+    {
+      "evidence": "Historical append_row flushes after every row; replaying the 96 retained rows through its extracted unchanged function retains 96 rows exactly. There is no fsync durability record.",
+      "finding": "not_reproduced",
+      "hypothesis": "premature_flush"
+    },
+    {
+      "evidence": "Exceptions inside calibration propagate after finally archives traces. Successful technical closure requires reaching code after the with/finally blocks. The historical closure omits a diagnostic-row completeness assertion.",
+      "finding": "not_established",
+      "hypothesis": "exception_handling"
+    },
+    {
+      "evidence": "The original exporter reads the 42 row JSONL directly; new authenticated replay consumes all 83 shards and 82,176 records. Partial redundant-summary copying remains possible but unproven.",
+      "finding": "not_reproduced",
+      "hypothesis": "partial_shard_ingestion"
+    },
+    {
+      "evidence": "The 42 rows form the exact bundle 32–45 prefix in pilot order P5,P6,P7. New exporter validates ID sets and rejects duplicates independently of input order.",
+      "finding": "not_reproduced",
+      "hypothesis": "ordering"
+    },
+    {
+      "evidence": "The original exporter parses every nonfiltered JSONL line before checking 96 expected IDs. The new archive parser inspects every record kind; none are filtered out before coverage checks.",
+      "finding": "not_reproduced",
+      "hypothesis": "filtered_records"
+    },
+    {
+      "evidence": "The summary stream context manager exits before technical closure snapshots. A complete newline-terminated prefix is retained. No file-operation log or crash/fsync telemetry establishes why later rows are absent.",
+      "finding": "not_established",
+      "hypothesis": "file_finalization"
+    }
+  ],
+  "known_control_gap": "Historical technical calibration closure does not assert diagnostic summary count/IDs before snapshot; the old exporter correctly rejects the incomplete summary.",
+  "original_complete_newline_framing": true,
+  "original_expected_rows": 96,
+  "original_export_status": "FAILED_RETAINED_UNCHANGED",
+  "original_is_exact_42_row_prefix": true,
+  "original_retained_rows": 42,
+  "original_unique_ids": 42,
+  "preservation": {
+    "all_unchanged": true,
+    "artifact_count": 480,
+    "code_commit": "c27235deb1688c105bfe96597dfd233108307895",
+    "manifest_sha256": "e5de2f406cf34ea5ce122443890ac9344e4df68206edd267dd1ff7eaadb7dc2b"
+  },
+  "recorded_utc": "2026-09-13T03:59:28.363106+00:00",
+  "remaining_limitations": [
+    "No retained filesystem or process telemetry establishes the original truncation cause.",
+    "The original failure remains immutable provenance.",
+    "Historical recovery and QA are not new experimental evidence.",
+    "Joint source/sham observations cannot be interpreted as selective Gamma lesions."
+  ],
+  "resolution_scope": "RESOLVED_FOR_FUTURE_PIPELINE",
+  "reusable_as_final": false,
+  "reusable_for_B1E": false,
+  "root_cause": "undetermined",
+  "root_cause_reproduced": false,
+  "source_sha256": {
+    "b1/CALIBRATION_TECHNICAL.json": "83ea3bd43716cef3593ebb2e09079469af29f4882fddcdb130d7b796b7722260",
+    "b1/development_results/calibration/bundle_diagnostics.jsonl": "49683927fc8774f355f8cf1a3afa8f975cd21245857591ca4eb6599a5dfa9de1",
+    "b1/evaluation/runner.py": "59c33f6005d7098513943bcdd9471b56ce7cf27ddf1524797f35f3308ae79fb3",
+    "b1/postprocessing/bundle_diagnostics.recovered.jsonl": "df2d124434fdfa332c520983262355d224bdfa4392c0d698e1109f54321ee124",
+    "b1/run.py": "b1615323dccc3e1e542a3e36c4050d352277b65d8edfdfcdb29308d4bea5bede"
+  },
+  "version": "1.1"
+}

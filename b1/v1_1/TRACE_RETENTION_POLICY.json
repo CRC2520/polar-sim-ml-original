@@ -1,0 +1,78 @@
+{
+  "confirmatory": false,
+  "development_only": true,
+  "failure_policy": {
+    "expected_record_counts_fixed_before_collection": true,
+    "failed_audit": "Retain full C plus A and FAILED_MANIFEST.json with complete=false, raise error",
+    "hash_manifest": "Every finalized A/B/C artifact has SHA256 and size; completion manifest published last",
+    "missing_or_malformed_audit": "Preserve staged evidence, reject completion; no MANIFEST.json",
+    "outcome_based_N_extension_allowed": false,
+    "partial_sample_confirmatory_interpretation_allowed": false,
+    "statistical_early_stopping_allowed": false,
+    "storage_check": "Before each next bundle, reserve its declared full-trace staging allowance; technical exhaustion closes collection as incomplete, preserves completed rows and staged evidence"
+  },
+  "implementation_scope": "Pure retention component accepts development/QA records only; no final seed generator or B1-E execution entrypoint",
+  "level_A": {
+    "coverage": "every bundle",
+    "fields": [
+      "seed_usage",
+      "source_commit",
+      "config_sha256",
+      "task_sha256",
+      "comparator_identity",
+      "scalar_outcomes",
+      "guardrails",
+      "invariant_audit",
+      "trace_identity"
+    ],
+    "format": "independent_gzip_JSON_bundle",
+    "metadata_deduplication": "Shared fixed versions may be referenced by their committed SHA256; bundle-specific seeds and scalar outcomes are explicit"
+  },
+  "level_B": {
+    "coverage": "every causal record",
+    "external_fields_preserved": [
+      "requested",
+      "admitted",
+      "executed",
+      "environmental_effect",
+      "mediator_state_before",
+      "mediator_state_after",
+      "route",
+      "context"
+    ],
+    "fields": "Complete original task event, complete identity/context and integrated-content fields, route slots and consumed payloads, route masks, planning horizon and resource counters",
+    "format": "independent_gzip_JSONL_pilot_bundle",
+    "omitted_fields": [
+      "verbose_internal_memory",
+      "unrelated_controller_reporting_metadata"
+    ],
+    "when_C_full_exists": "B is directly available by deterministic field projection from C; do not store a duplicate B file"
+  },
+  "level_C": {
+    "P7_subset_count": 136,
+    "additional_full_bundle_triggers": [
+      "any_controller_failure",
+      "any_guardrail_violation",
+      "any_failed_invariant_audit"
+    ],
+    "audit_subset_rule": "bundle_index % 1024 == 0, indices start at zero, fixed independently of outcomes",
+    "deterministic_diagnostics": "All source/sham/context diagnostic records retained fully in every bundle, even outside audit subset",
+    "late_failure": "Spool all full records until bundle audit; a final audit failure retains the entire bundle"
+  },
+  "replay": {
+    "cross_platform_universal_bitwise_claim": false,
+    "fallback": "Required causal evidence is stored directly at B or C; no reconstruction of omitted internal memories is required for causal audit",
+    "new_scientific_realizations": 0,
+    "nondeterministic_exclusions": [
+      "wall_time",
+      "decision_latency"
+    ],
+    "required_for_feasibility": false,
+    "source_namespace": "PD-B1-D-v1",
+    "verification": "24 archived P6/P7 bundle 32 episodes, all 12 arms per pilot; exact scientific event SHA256, loss, guardrail, operation and memory agreement"
+  },
+  "reusable_as_final": false,
+  "selection_before_outcomes": true,
+  "status": "DEVELOPMENT_QA_IMPLEMENTED_FUTURE_PROTOCOL_DRAFT",
+  "version": "B1-E-v2-prospective-retention-1"
+}

@@ -1,0 +1,19 @@
+test_changed_route_cycle_context_are_rejected (b1.v1_1.exporter.test_exporter.CorruptionTests.test_changed_route_cycle_context_are_rejected) ... ok
+test_corrupt_shard_hash_is_fail_closed (b1.v1_1.exporter.test_exporter.CorruptionTests.test_corrupt_shard_hash_is_fail_closed) ... ok
+test_diagnostic_cycle_context_arm_recovery_is_exact (b1.v1_1.exporter.test_exporter.CorruptionTests.test_diagnostic_cycle_context_arm_recovery_is_exact) ... ok
+test_duplicate_complete_id_is_fail_closed (b1.v1_1.exporter.test_exporter.CorruptionTests.test_duplicate_complete_id_is_fail_closed) ... ok
+test_each_missing_key_dimension_is_fail_closed (b1.v1_1.exporter.test_exporter.CorruptionTests.test_each_missing_key_dimension_is_fail_closed) ... ok
+test_final_namespace_rejected (b1.v1_1.exporter.test_exporter.CorruptionTests.test_final_namespace_rejected) ... ok
+test_invalid_last_record_does_not_publish_prefix (b1.v1_1.exporter.test_exporter.CorruptionTests.test_invalid_last_record_does_not_publish_prefix) ... ok
+test_missing_causal_field_is_fail_closed (b1.v1_1.exporter.test_exporter.CorruptionTests.test_missing_causal_field_is_fail_closed) ... ok
+test_missing_row_even_rehashed_archive_is_fail_closed (b1.v1_1.exporter.test_exporter.CorruptionTests.test_missing_row_even_rehashed_archive_is_fail_closed) ... ok
+test_missing_shard_is_fail_closed (b1.v1_1.exporter.test_exporter.CorruptionTests.test_missing_shard_is_fail_closed) ... ok
+test_nested_state_and_channel_corruption_preserving_ids_fails (b1.v1_1.exporter.test_exporter.CorruptionTests.test_nested_state_and_channel_corruption_preserving_ids_fails) ... ok
+test_record_order_is_irrelevant_and_manifest_hash_verifies (b1.v1_1.exporter.test_exporter.CorruptionTests.test_record_order_is_irrelevant_and_manifest_hash_verifies) ... ok
+test_archive_replay_96_and_all_event_dimensions (b1.v1_1.exporter.test_exporter.EndToEndTests.test_archive_replay_96_and_all_event_dimensions) ... ok
+test_new_namespace_task_trace_shard_export_audit (b1.v1_1.exporter.test_exporter.EndToEndTests.test_new_namespace_task_trace_shard_export_audit) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 15.435s
+
+OK

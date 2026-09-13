@@ -1,0 +1,28 @@
+{
+  "C1_selected": "cfg01",
+  "action_digest_sha256": "9238e98027ab34563589b322c6b111261ebf8bdf536b8a09ab3f5d1b20cfd1c9",
+  "action_memory_parameter_equality": true,
+  "acute_selected_reactive_action_equality_decisions": 64,
+  "archived_bundle_count": 32,
+  "archived_bundle_file_sha256": "dba6b9f53e365f037d82c4b11c3a1bd7ccc198903158ecee901cdddf3295f14c",
+  "confirmatory": false,
+  "decisions": 7168,
+  "development_only": true,
+  "episodes": 224,
+  "namespace": "PD-B1-D-v1.1-QA",
+  "purpose": "QA replay of archived inputs, not new scientific observations",
+  "reusable_as_final": false,
+  "scientific_rerun_required": false,
+  "selected_config_file_sha256": "3d098d3d3a9c7d8cc1bbb7a6d17a878cdacf931c3b40700715c2157948243c99",
+  "selected_configurations": {
+    "C0": "cfg01",
+    "C1": "cfg01",
+    "C2": "cfg00",
+    "C3": "cfg01",
+    "C4": "fixed",
+    "C5": "cfg01",
+    "C6": "cfg01"
+  },
+  "source_namespace": "PD-B1-D-v1",
+  "status": "PASS"
+}

@@ -1,0 +1,212 @@
+{
+  "B1E_executed": false,
+  "confirmatory": false,
+  "development_only": true,
+  "final_seeds_generated": false,
+  "findings_resolved": [
+    {
+      "id": "REVIEW-RESOURCE-PROOF",
+      "problem": "Initial proxy coefficients and residual model-state slack lacked auditable derivation; total state was not asserted.",
+      "resolution": "Finite source/schema derivation added; expanded/workspace units explicitly defined as approximations; total state checked against static and common bounds.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "REVIEW-EXPORT-SCHEMA",
+      "problem": "Count/identity completeness alone did not validate nested state and effect mediator schemas.",
+      "resolution": "Nested state/channel/effect checks and rehashed same-count corruption cases added.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "REVIEW-RETENTION-AUDIT",
+      "problem": "Truthy failed invariant audit could discard a mandatory full trace and publish completion.",
+      "resolution": "Strict PASS/FAIL checks; failed audit retains full evidence and FAILED_MANIFEST, raises, and never publishes completed MANIFEST.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "REVIEW-RETENTION-FAILURE-NAMES",
+      "problem": "P5 plural controller_failures could bypass summary exception retention.",
+      "resolution": "Plural controller failures and resource/instrument/audit failures now force full retention.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "REVIEW-STATISTICAL-SCOPE",
+      "problem": "Initial simulations omitted negative equivalence boundary and context range4 scaling; planning guarantee needed explicit qualification.",
+      "resolution": "Revision2 retains revision1, adds both tests and nominal-error regression gate; documents95% conditional and90% joint planning guarantee.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "REVIEW-RETENTION-COMPLETE-IDENTITY",
+      "problem": "Count-only retention accepted duplicated events, conflicting event identities, invalid development flags and missing causal-route report fields, while publishing complete=true.",
+      "resolution": "Predeclared exact ID plan is copied and hashed before records; shared exporter schema and historical identity adapter validate events; route report is required under each frozen adapter schema; duplicates, unexpected IDs and malformed records permanently prevent completion and remain staged.",
+      "status": "RESOLVED"
+    }
+  ],
+  "independent_checks": {
+    "P5_archive": {
+      "C4_terminal_refill": 0,
+      "C6_exact_actions": 3072,
+      "C6_exact_events": 3072,
+      "C6_exact_states": 1024,
+      "all_episodes_attain_physical_ceiling": true,
+      "bundles": 32,
+      "episodes": 288,
+      "events": 27648,
+      "four_comparator_contrasts_all_zero": true,
+      "full_witness_terminal_refill": 192,
+      "hashes_verified": 35,
+      "source_commit": "d5343906e28bd16b71c42d24e6512bec11c64f07",
+      "status": "PASS"
+    },
+    "finite_resource_bound_property": {
+      "bound_counterexamples": 0,
+      "comparators": [
+        "C0",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "configurations": "all canonical entries; default C2 cycle in this independent check, both cycles in owner certificate",
+      "decisions": 369,
+      "input": "simultaneous maximum-schema observations, three repeated calls",
+      "pilots": [
+        "P5",
+        "P6",
+        "P7"
+      ],
+      "scientific_evidence": false
+    },
+    "resource_projection": {
+      "all_failures_bytes": 26890207232,
+      "authorized_for_final_run": false,
+      "feasible_with_stated_scope": true,
+      "parallel_efficiency_assumption": 0.75,
+      "reserved": false,
+      "snapshot_free_bytes": 30835900416,
+      "unconditional_completion_guaranteed": false,
+      "wall_hours_assumption": 40.15037485502576,
+      "workers": 4
+    },
+    "retention": {
+      "archived_schema_ID_validation": {
+        "B1E_executed": false,
+        "archive_unique_ID_counts": {
+          "P5_v1_1": 27648,
+          "historical": 82176
+        },
+        "confirmatory": false,
+        "development_only": true,
+        "existing_CPU_contingency_seconds": 144541.34947809274,
+        "final_seeds_generated": false,
+        "fits_existing_CPU_contingency": true,
+        "incremental_validation_seconds_projection": 14979.157487883866,
+        "measurement_script_sha256": "f34d320b1d125a0cea377aee3cb9b6bb2a5da5d76989d6fca0273243fb67e14b",
+        "projection_limit": "Sampled same-host incremental schema/ID cost, key derivation charged twice; not a worst-case runtime guarantee. Existing 1.5 planning contingency absorbs this measured increment; fixed N and numerical resource budget are unchanged.",
+        "remaining_CPU_contingency_after_measured_increment_seconds": 129562.19199020887,
+        "reusable_as_final": false,
+        "scientific_model_executions": 0,
+        "source_sha256": {
+          "b1/development_results/calibration/traces/INDEX.json": "0133673d24503d8e416abafe83a84b2e80363be0052e47f97af31f40ee05b68b",
+          "b1/v1_1/B1E_RESOURCE_CERTIFICATE.json": "8206c4cf98b81766dc689823a692edffee7a260bbe16f9fd4045151875a9dc09",
+          "b1/v1_1/p5/results/traces/INDEX.json": "4bd1f27d33f3f8de12798e975fe83fd2011bba4d3137e2309fb5f209069db8c9"
+        },
+        "status": "PASS",
+        "timing_summary": {
+          "P5_v1_1:P5": {
+            "bundles": 32,
+            "max_CPU_seconds_per_bundle": 0.04043729500000026,
+            "max_wall_seconds_per_bundle": 0.04044168499967782,
+            "total_wall_seconds": 1.1132029189902823
+          },
+          "historical:P5": {
+            "bundles": 32,
+            "max_CPU_seconds_per_bundle": 0.010013052999999772,
+            "max_wall_seconds_per_bundle": 0.01001779299986083,
+            "total_wall_seconds": 0.23620773401489714
+          },
+          "historical:P6": {
+            "bundles": 32,
+            "max_CPU_seconds_per_bundle": 0.10380833700000003,
+            "max_wall_seconds_per_bundle": 0.10387958499995875,
+            "total_wall_seconds": 1.9625655709969578
+          },
+          "historical:P7": {
+            "bundles": 32,
+            "max_CPU_seconds_per_bundle": 0.1079472930000005,
+            "max_wall_seconds_per_bundle": 0.1079687070014188,
+            "total_wall_seconds": 2.0997420839921688
+          }
+        },
+        "validator_sha256": "b81d2fc29b6a0e2e9d7910b9b6d85e233da06fb62bd5eb5a5126acf2fef2a3b5"
+      },
+      "complete_ID_plan_and_coverage_enforced": true,
+      "failed_invariant_preserves_full_C": true,
+      "frozen_P5_C4_no_route_schema_preserved": true,
+      "full_C_supplies_lossless_B_projection": true,
+      "independent_tests_passed_at_review": 13,
+      "invalid_record_permanently_rejects_completion": true,
+      "later_plural_failure_regression": "independently passed as eighth test",
+      "malformed_audit_rejects_completion": true
+    },
+    "statistics": {
+      "N_v1": 915501,
+      "N_v2": 138688,
+      "archived_P7_trials": 384,
+      "bundles": 32,
+      "conditional_precision_lower_bound": 0.95,
+      "independent_half_width_at_N": 0.0039062395446212454,
+      "independent_half_width_at_N_minus_one": 0.003906254618612961,
+      "inferential_family_coverage_lower_bound": 0.95,
+      "joint_development_and_future_precision_lower_bound": 0.9,
+      "nonzero_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "paired_endpoints": 6,
+      "q": 0.13895552166407366,
+      "unit_tests_passed": 11,
+      "worst_case_second_moment_fallback_N": 878007
+    }
+  },
+  "nonblocking_scientific_limitations": [
+    "P7 selected C1 remains cfg01/reactive; zero development route dependence is not repaired or relabeled.",
+    "Current source/sham joint_manipulation=true fails frozen common_admissible. Under the proposed hierarchy ALL aggregate positive mechanism, utility, pairing and context gates remain closed, even if an individual future scalar difference is favorable. Scalar negative/equivalence reporting remains available.",
+    "Logical opportunity matching is not equal actual CPU, instruction count, worst-case byte memory or hard latency; those host axes remain quantified with explicit claim limits. C5 remains unmatched and descriptive.",
+    "Original exporter truncation cause remains undetermined and original failure unchanged; closure concerns the future fail-closed development pipeline.",
+    "Resource figures are empirical planning projections with contingency and storage gating. A future capacity shortfall stops collection as incomplete; no seed replacement, adaptive N extension or silent trace deletion.",
+    "All statistical guarantees require independent identically distributed future bundles with the same frozen P7 task/policy law; high variance can cause inconclusive precision without changing N.",
+    "No utility, pairing, generalization or consciousness claim follows from engineering completion."
+  ],
+  "open_essential_method_blockers": [],
+  "ready_for_b1e_confirmatory_run": false,
+  "reusable_as_final": false,
+  "reviewed_source_sha256": {
+    "b1/v1_1/exporter/core.py": "81297925455dc9fadb9439b15b0677ac1740ca6860dc77a386831b32148632bc",
+    "b1/v1_1/p5/benchmark.py": "d5d2dfc0bdfb4e6c75c97ab2c3c08af8e43c5c694c6a789bcffd1d79806a7b53",
+    "b1/v1_1/p5/controllers.py": "77fb5404f6ca9362aad43dfd0e9247e16115845bbbb1d061e748ce0219ac5dd7",
+    "b1/v1_1/p5/results/RESULTS.json": "ab8d7e4e9715d48d32de1f64d4a0989105e330ef013b90c88581d3eba8b33bcd",
+    "b1/v1_1/resources/ACCOUNTING_DERIVATION.md": "454342304db93d4cb57a9855047ce9cb71aa2c03598fae946adc91e7b917320b",
+    "b1/v1_1/resources/accounting.py": "5517eca74564f9069bf1766bfc53d25b8442b09b42da3cac49ab55dcc68a52fb",
+    "b1/v1_1/retention/VALIDATION_QA.json": "618d87081b2ac8857aa821b7c6bcfcc6e5e8e5ba5accdf1ca47a3bc2bcc82561",
+    "b1/v1_1/retention/audit_validation.py": "f34d320b1d125a0cea377aee3cb9b6bb2a5da5d76989d6fca0273243fb67e14b",
+    "b1/v1_1/retention/policy.py": "65ad80585032b6d8f07edace83e1a902791bd9d7db6b029d0dc7104ae11dacc9",
+    "b1/v1_1/retention/test_retention.py": "5878a20ab904a09b34df5cbb7449f547569a3b3c97d4d9cfc2941dbff142169d",
+    "b1/v1_1/retention/validation.py": "b81d2fc29b6a0e2e9d7910b9b6d85e233da06fb62bd5eb5a5126acf2fef2a3b5",
+    "b1/v1_1/retention/writer.py": "e5ed47e826db36c9d8d5343e6df86306319574d31c58c8e56a6ac7cd019ceda4",
+    "b1/v1_1/statistics/method.py": "ddf5ea99b2c4bd8a8aff1c46b03e629f9d34376fcab61fb4b8452f3aa0b250dc"
+  },
+  "reviewer_scope": "Independent source, arithmetic, archive and fail-closed review; no scientific experiments or GitHub mutations by reviewer",
+  "separate_release_checks_required": [
+    "Full Git ancestry and immutable baseline tree validation",
+    "Prospective P5 source publication and source-commit blob equality",
+    "Cross-artifact completion and readiness guards",
+    "Final code/document CI and manifest validation"
+  ],
+  "status": "PASS_WITH_EXPLICIT_SCOPE",
+  "version": "B1-D-v1.1-adversarial-review-2"
+}

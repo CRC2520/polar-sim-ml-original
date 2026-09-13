@@ -1,0 +1,7 @@
+change,classification,scientific_rerun_required,scope
+P5 C4 disposition and new comparison,comparator_behavior_change,True,P5 v1.1 only
+Fail-closed exporter,exporter_only,False,archive replay plus QA
+Common resource envelope,resource_envelope_only,False,action-preserving QA replay
+Resource accounting and retention,instrumentation_only,False,read-only measurement and QA
+Fixed N and interval design,statistical_design_only,False,synthetic statistical simulations
+Reports and Spanish translation,documentary_only,False,pinned evidence only

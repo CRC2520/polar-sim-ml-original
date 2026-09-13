@@ -1,0 +1,322 @@
+{
+  "B1E_executed": false,
+  "N_v1": 915501,
+  "N_v2": 138688,
+  "P7_interval_endpoints": [
+    "mechanism.kappa1",
+    "mechanism.kappa2",
+    "context.interaction",
+    "utility.C0",
+    "utility.C2",
+    "utility.C3",
+    "utility.C4",
+    "acute_route.kappa1",
+    "acute_route.kappa2"
+  ],
+  "alpha": 0.05,
+  "assumptions": [
+    "Independent identically distributed seed bundles after all task/controller/config freezes",
+    "Within-bundle dependence is retained; one scalar paired difference per endpoint per bundle",
+    "Known bounded support; no missing-outcome deletion, seed replacement, or outcome-based stopping",
+    "Finite fixed endpoint family; arbitrary dependence across its endpoints is allowed"
+  ],
+  "candidate_comparison": [
+    {
+      "decision": "SELECTED",
+      "method": "A fixed-sample empirical Bernstein",
+      "reason": "Finite-sample bounded-mean validity; adapts interval width to paired variance without treating development variance as known"
+    },
+    {
+      "decision": "NOT_SELECTED",
+      "method": "B paired Student-t/normal CI",
+      "reason": "Exact t requires Gaussian iid differences; bounded/discrete/rare-tail laws do not supply this. CLT is asymptotic, with no uniform finite-N guarantee here"
+    },
+    {
+      "decision": "NOT_SELECTED_AS_GENERAL_MEAN_METHOD",
+      "method": "C paired permutation/randomization",
+      "reason": "Shared seeds do not establish sign exchangeability or a randomized treatment allocation; sharp-null randomization inference cannot silently test the heterogeneous weak mean/margin null"
+    },
+    {
+      "decision": "SELECTED_ONLY_FOR_PLANNING_NONZERO_INDICATOR",
+      "method": "D exact/binomial-type",
+      "reason": "192 jobs within a bundle are dependent, so loss fraction is not Binomial(192,p). Exact zero-event binomial inference across32 independent bundles validly bounds nonzero probability, not individual job success"
+    },
+    {
+      "decision": "EQUIVALENCE_BY_SIMULTANEOUS_CI_CONTAINMENT",
+      "method": "E equivalence/noninferiority",
+      "reason": "Preserve epsilon=1/128 and both strict boundaries; failure to reject zero is never equivalence. Noninferiority alone cannot establish positive utility or pairing necessity"
+    },
+    {
+      "decision": "SIMULTANEOUS_INTERVALS_PLUS_FIXED_GATEKEEPING",
+      "method": "F hierarchical multiple testing",
+      "reason": "Holm/closed testing/fixed-sequence recycling can be valid with specified elementary hypotheses; selected Bonferroni intervals also protect negative/equivalence classifications after a failed positive gate. No dependence assumptions across endpoints"
+    }
+  ],
+  "change_type": "statistical_design_only",
+  "confirmatory": false,
+  "development_only": true,
+  "eligibility_provenance": [
+    {
+      "commit": "c27235deb1688c105bfe96597dfd233108307895",
+      "path": "b1/contracts/frozen_b0/B1_DECISION_RULES_v1.yaml",
+      "repository": "CRC2520/polar-sim-ml-original",
+      "sha256": "e7bad61724314d4739318a12890daed4520cbbfb8e07acfe99d7f87a1a11d6ee"
+    },
+    {
+      "commit": "c27235deb1688c105bfe96597dfd233108307895",
+      "path": "b1/contracts/frozen_b0/B1_PROTOCOL_DRAFT_v1.md",
+      "repository": "CRC2520/polar-sim-ml-original",
+      "sha256": "2d2fc53edaf013b1145bd21ef360e75590f9ebebb987260a0e6c04e356adf951"
+    }
+  ],
+  "endpoint_roles": {
+    "P5": {
+      "endpoints_retained": 9,
+      "future_bundle_count": 32,
+      "population_confirmatory_claims": false,
+      "positive_pairing_specificity_eligible": false,
+      "positive_utility_eligible": false,
+      "role": "engineering_ceiling_negative_control"
+    },
+    "P6": {
+      "endpoints_retained": 9,
+      "future_bundle_count": 32,
+      "population_confirmatory_claims": false,
+      "positive_pairing_specificity_eligible": false,
+      "positive_utility_eligible": false,
+      "role": "information_redundancy_expected_Bayes_optimum_negative_control"
+    },
+    "P7": {
+      "H_context_eligible": true,
+      "H_mechanism_eligible": true,
+      "H_pairing_eligible": true,
+      "H_utility_eligible": true,
+      "eligibility_does_not_override_causal_admissibility": true,
+      "endpoints_retained": 9,
+      "future_bundle_count": 138688,
+      "role": "operational_coordination_candidate"
+    }
+  },
+  "final_seeds_generated": false,
+  "future_schedule": {
+    "C5": "Descriptive double-capacity comparator, not an additional confirmatory endpoint",
+    "C6": "Algebraic state/event/behavior check, not an additional statistical endpoint",
+    "P5": {
+      "bundles": 32,
+      "episodes_per_bundle": 13,
+      "extra_episode": "C4_FULL_REFILL_CEILING_WITNESS",
+      "source_diagnostic_events_per_bundle": 24
+    },
+    "P6": {
+      "bundles": 32,
+      "episodes_per_bundle": 12,
+      "source_diagnostic_events_per_bundle": 24
+    },
+    "P7": {
+      "acute_episodes": [
+        "kappa1.intact",
+        "kappa1.bypass",
+        "kappa2.intact",
+        "kappa2.bypass"
+      ],
+      "bundles": 138688,
+      "episodes_per_bundle": 12,
+      "ordinary_episodes": [
+        "C0",
+        "C1",
+        "C2.cycle1",
+        "C2.cycle2",
+        "C3",
+        "C4",
+        "C5",
+        "C6"
+      ],
+      "source_diagnostic_events_per_bundle": 24
+    },
+    "engineering_schedule_rationale": "Retain the frozen32-bundle development block as prospective engineering replication of a32-epoch task; it supplies no powered population superiority claim. All18 P5/P6 endpoint summaries remain explicit descriptive checks."
+  },
+  "gatekeeping": {
+    "FWER_proof": "Each two-sided interval misses with probability<=alpha/9; union gives any miss<=alpha. Every false scalar declaration implies its interval missed the true mean. Composite all-of requirements and gate restrictions cannot enlarge that event.",
+    "all_data_collected_before_testing": true,
+    "current_joint_fixture_consequence": "With the current joint source/sham fixtures, source_causal_admissible=false. Therefore this hierarchy cannot issue any aggregate positive H_mechanism, H_utility, H_pairing, or H_context claim, regardless of scalar outcome signs. This is an explicit scientific claim limitation, not a technical defect to remove by retuning. Correct outputs remain not_supported/inconclusive as applicable; scalar improved/equivalent/worsened/inconclusive reports remain separate. A future causal redesign would require a separate prospective protocol and cannot silently relax the frozen guard.",
+    "fixed_sequence_alpha_recycling": false,
+    "joint_manipulation": "Source/sham remains joint_manipulation=true; frozen causal guards apply. No source/sham result can establish Gamma-selective necessity. Acute route endpoints are separate and cannot rescue failed utility or pairing gates.",
+    "negative_and_equivalence_reporting": "Preserved regardless of positive gate progression; distinguish corrected scalar verdict from gated aggregate positive claim",
+    "order": [
+      "instrument_and_admissible_mechanism",
+      "practical_utility",
+      "pairing_specificity",
+      "context_moderation"
+    ],
+    "pairing_requires": [
+      "C0 improved",
+      "C2 improved",
+      "C3 improved",
+      "C4 improved"
+    ],
+    "reason": "Simultaneous intervals protect improved/equivalent/worsened assertions even when positive gates fail. Gates only restrict favorable claims; no hidden alpha transfer or optional sampling.",
+    "utility_requires": [
+      "C0 improved",
+      "C4 improved"
+    ]
+  },
+  "immutable_v1_method": "two-sided Hoeffding plus union bound over27 endpoints",
+  "interval_family_size": 9,
+  "interval_formula": "h=sqrt(2*s_unbiased_squared*log(4*9/0.05)/N)+7*R*log(4*9/0.05)/(3*(N-1));CI=clip(mean+/-h,known_support)",
+  "margin_contract": {
+    "all_endpoint_supports_preserved": true,
+    "changed": false,
+    "context": {
+      "delta": 0.5,
+      "epsilon": 0.25,
+      "target_half_width": 0.125
+    },
+    "mechanism": {
+      "delta": 0.5,
+      "epsilon": 0.25,
+      "target_half_width": 0.125
+    },
+    "utility": {
+      "delta": 0.015625,
+      "epsilon": 0.0078125,
+      "target_half_width": 0.00390625
+    }
+  },
+  "planning": {
+    "development_audit": {
+      "B1E_executed": false,
+      "C2_cycles": "equal mean of two cycles before one bundle contrast",
+      "bundle_indices": [
+        32,
+        63
+      ],
+      "confirmatory": false,
+      "development_only": true,
+      "endpoints": [
+        "C1_minus_C0",
+        "C1_minus_C2",
+        "C1_minus_C3",
+        "C1_minus_C4",
+        "acute_route.kappa1",
+        "acute_route.kappa2"
+      ],
+      "exact_rational_reduction": true,
+      "final_seeds_generated": false,
+      "independent_bundle_count": 32,
+      "matches_v1_report": true,
+      "nonzero_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "pilot": "P7",
+      "reusable_as_final": false,
+      "source_artifacts": [
+        {
+          "commit": "c27235deb1688c105bfe96597dfd233108307895",
+          "path": "b1/B1D_RESULTS.json",
+          "repository": "CRC2520/polar-sim-ml-original",
+          "sha256": "05444144a0d4c48abb758a765138d29d998786b552a560568e9dc09d611c9647"
+        },
+        {
+          "commit": "c27235deb1688c105bfe96597dfd233108307895",
+          "path": "b1/development_results/calibration/masked_trials.jsonl",
+          "repository": "CRC2520/polar-sim-ml-original",
+          "sha256": "b4b87b66d17eed8bb6603e4fcd946072c583419ed812e0122e6b339a5ff0683e"
+        },
+        {
+          "commit": "c27235deb1688c105bfe96597dfd233108307895",
+          "path": "b1/development_results/calibration/IDENTITY_MAP_AFTER_TECHNICAL_CLOSE.json",
+          "repository": "CRC2520/polar-sim-ml-original",
+          "sha256": "fc9e380d8056726ddd23b4a93124e97767925087a60f32f69a3ff1ad18aa8adf"
+        },
+        {
+          "commit": "c27235deb1688c105bfe96597dfd233108307895",
+          "path": "b1/SELECTED_CONFIG.json",
+          "repository": "CRC2520/polar-sim-ml-original",
+          "sha256": "3d098d3d3a9c7d8cc1bbb7a6d17a878cdacf931c3b40700715c2157948243c99"
+        },
+        {
+          "commit": "c27235deb1688c105bfe96597dfd233108307895",
+          "path": "b1/TUNING_LEDGER.json",
+          "repository": "CRC2520/polar-sim-ml-original",
+          "sha256": "dca66cfcf4fb6b8bbb08613ee787a2f03a7284c8df9fd549d38d46785ca5152a"
+        },
+        {
+          "commit": "c27235deb1688c105bfe96597dfd233108307895",
+          "path": "b1/CALIBRATION_TECHNICAL.json",
+          "repository": "CRC2520/polar-sim-ml-original",
+          "sha256": "83ea3bd43716cef3593ebb2e09079469af29f4882fddcdb130d7b796b7722260"
+        }
+      ],
+      "trial_count": 384
+    },
+    "development_family_bound_failure_probability": 0.05,
+    "final_CI_uses_planning_bound_or_floor": false,
+    "future_precision_family_failure_probability_conditional_on_second_moment_bound": 0.05,
+    "future_variance_bound_formula": "s^2<=N/(N-1)*min(1,q+sqrt(log(6/0.05)/(2*N)))",
+    "no_outcome_based_extension": true,
+    "planned_half_width_at_N": 0.0039062395446212454,
+    "planned_half_width_at_N_minus_one": 0.003906254618612961,
+    "planned_variance_upper_at_N": 0.14311106135429483,
+    "power_target": "Precision design, not uniform power guarantee. Conditional on planning moment bounds, all six narrow-margin CIs meet h<=epsilon/2 with probability>=0.95. Joint CI coverage>=0.95 gives classification probability>=0.90 when true means have >2h separation from decision boundary (and analogous strict equivalence interior).",
+    "precision_if_distribution_shifts": "Not guaranteed; sample variance remains in CI; precision failure is inconclusive, never extend or lower margins",
+    "sample_selection_rule": "Smallest integer N>=2 meeting all preserved target half-widths under declared planning event; exact binary search, no cap",
+    "second_moment_bound": 0.13895552166407366,
+    "transport_condition": "Same P7 task, selected policies and bundle law; resource-envelope certification must verify unchanged actions/outputs. Any behavior change voids this planning derivation before final freeze.",
+    "unconditional_design_and_future_precision_lower_bound": 0.9,
+    "uses_only_development_data": true,
+    "variance_floor": 0.015625,
+    "variance_is_not_known": true,
+    "worst_case_second_moment_fallback_N": 878007,
+    "zero_event_bound_formula": "q=max(1/64,1-(0.05/6)^(1/32));E[D^2]<=Pr(D!=0)"
+  },
+  "ready_for_b1e_confirmatory_run": false,
+  "remaining_requirements": [
+    "Complete resource and immutability certificates",
+    "External preregistration",
+    "Final code/config/retention freeze",
+    "Independent final seed custody",
+    "Explicit resource and execution authorization"
+  ],
+  "reusable_as_final": false,
+  "schema_version": "1.1",
+  "selected_method": "fixed-sample two-sided empirical Bernstein on paired bundle means; simultaneous9-endpoint Bonferroni coverage plus fixed positive gatekeeping",
+  "simulation": {
+    "maximum_family_false_declaration_rate": 0.001,
+    "minimum_family_coverage": 0.99835,
+    "model_executions": 0,
+    "path": "b1/v1_1/statistics/SIMULATION_RESULTS.json",
+    "repetitions_per_scenario": 20000,
+    "scenario_cells": 40,
+    "sha256": "8db0fcfe7184be24e53ed35ce29b870d749557b37e4471cc358afbe4da565724",
+    "statistical_validation_is_model_evidence": false
+  },
+  "sources": [
+    {
+      "id": "MP2009",
+      "title": "Maurer and Pontil, Empirical Bernstein Bounds and Sample Variance Penalization, Theorem4",
+      "url": "https://arxiv.org/pdf/0907.3740"
+    },
+    {
+      "id": "EM2007",
+      "title": "Edwards and Madsen, Constructing multiple test procedures for partially ordered hypothesis sets",
+      "url": "https://doi.org/10.1002/sim.2905"
+    },
+    {
+      "id": "S1987",
+      "title": "Schuirmann, A comparison of the two one-sided tests procedure and the power approach",
+      "url": "https://doi.org/10.1007/BF01068419"
+    },
+    {
+      "id": "CR2013",
+      "title": "Chung and Romano, Exact and asymptotically robust permutation tests",
+      "url": "https://arxiv.org/abs/1304.5939"
+    }
+  ],
+  "statistical_design_version": "B1-E-protocol-v2-candidate",
+  "status": "PROSPECTIVE_METHOD_VALIDATED"
+}

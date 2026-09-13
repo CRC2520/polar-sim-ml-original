@@ -1,0 +1,9 @@
+{
+  "confirmatory": false,
+  "development_only": true,
+  "freeze_sha256": "ffc70d20e26f9e886e184905281a1348c300e59d785269cd6007c270727333c8",
+  "namespace": "PD-B1-D-v1.1",
+  "reusable_as_final": false,
+  "source_commit": "d5343906e28bd16b71c42d24e6512bec11c64f07",
+  "started_utc": "2026-09-13T03:58:33.972375+00:00"
+}

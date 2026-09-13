@@ -1,0 +1,369 @@
+{
+  "B1E_executed": false,
+  "QA": {
+    "C6_checks": [
+      {
+        "C6_event_trace_equal_exactly": true,
+        "C6_loss_equal_exactly": true,
+        "pilot": "P6"
+      },
+      {
+        "C6_event_trace_equal_exactly": true,
+        "C6_loss_equal_exactly": true,
+        "pilot": "P7"
+      }
+    ],
+    "controller_failures": 0,
+    "counts_as_experimental_evidence": false,
+    "current_exporter_revalidation_of_retained_QA": {
+      "complete_id_dimensions": [
+        "record_kind",
+        "pilot",
+        "bundle_index",
+        "comparator",
+        "context",
+        "route_status",
+        "cycle",
+        "replicate_id",
+        "epoch"
+      ],
+      "confirmatory": false,
+      "counts_as_confirmatory_evidence": false,
+      "coverage": {
+        "bundle_index": {
+          "0": 1536
+        },
+        "comparator": {
+          "C1": 960,
+          "C2": 384,
+          "C6": 192
+        },
+        "context": {
+          "kappa1": 384,
+          "kappa2": 384,
+          "ordinary": 768
+        },
+        "cycle": {
+          "1": 1344,
+          "2": 192
+        },
+        "epoch": {
+          "0": 48,
+          "1": 48,
+          "10": 48,
+          "11": 48,
+          "12": 48,
+          "13": 48,
+          "14": 48,
+          "15": 48,
+          "16": 48,
+          "17": 48,
+          "18": 48,
+          "19": 48,
+          "2": 48,
+          "20": 48,
+          "21": 48,
+          "22": 48,
+          "23": 48,
+          "24": 48,
+          "25": 48,
+          "26": 48,
+          "27": 48,
+          "28": 48,
+          "29": 48,
+          "3": 48,
+          "30": 48,
+          "31": 48,
+          "4": 48,
+          "5": 48,
+          "6": 48,
+          "7": 48,
+          "8": 48,
+          "9": 48
+        },
+        "pilot": {
+          "P6": 768,
+          "P7": 768
+        },
+        "record_kind": {
+          "qa_trial": 1536
+        },
+        "replicate_id": {
+          "0": 512,
+          "1": 512,
+          "2": 512
+        },
+        "route_status": {
+          "bypassed": 384,
+          "intact": 1152
+        }
+      },
+      "coverage_pass": true,
+      "development_only": true,
+      "expected_plan_sha256": "e935e90906fbe92e43d51f3c8f19122ea5690f465e8642584fa8a2b1fba2df32",
+      "expected_records": 1536,
+      "guardrails": {
+        "executed_infeasible_actions": 0,
+        "invalid_concurrent_writes": 0,
+        "physical_state_violations": 0,
+        "unauthorized_executions": 0,
+        "undeclared_budget_overruns": 0
+      },
+      "index_sha256": "73088831cbe56cefd9765baa94b68a504fdb9d4662ac04458b39f89745a989a2",
+      "namespace": "PD-B1-D-v1.1-QA",
+      "new_independent_observations_from_export": 0,
+      "qa_only": true,
+      "reusable_as_final": false,
+      "reusable_for_B1E": false,
+      "status": "PASS",
+      "validated_records": 1536,
+      "version": "b1d-exporter-1.1"
+    },
+    "guardrail_violations": 0,
+    "namespace": "PD-B1-D-v1.1-QA",
+    "pipeline": [
+      "task",
+      "trace",
+      "shard",
+      "export",
+      "audit"
+    ],
+    "trace_records": 1536,
+    "trial_count": 16
+  },
+  "archive_replay": {
+    "archive_diagnostic_events": 2304,
+    "complete_id_dimensions": [
+      "record_kind",
+      "pilot",
+      "bundle_index",
+      "comparator",
+      "context",
+      "route_status",
+      "cycle",
+      "replicate_id",
+      "epoch"
+    ],
+    "confirmatory": false,
+    "coverage": {
+      "bundle_index": {
+        "32": 2568,
+        "33": 2568,
+        "34": 2568,
+        "35": 2568,
+        "36": 2568,
+        "37": 2568,
+        "38": 2568,
+        "39": 2568,
+        "40": 2568,
+        "41": 2568,
+        "42": 2568,
+        "43": 2568,
+        "44": 2568,
+        "45": 2568,
+        "46": 2568,
+        "47": 2568,
+        "48": 2568,
+        "49": 2568,
+        "50": 2568,
+        "51": 2568,
+        "52": 2568,
+        "53": 2568,
+        "54": 2568,
+        "55": 2568,
+        "56": 2568,
+        "57": 2568,
+        "58": 2568,
+        "59": 2568,
+        "60": 2568,
+        "61": 2568,
+        "62": 2568,
+        "63": 2568
+      },
+      "comparator": {
+        "C0": 6144,
+        "C1": 30720,
+        "C2": 12288,
+        "C3": 6144,
+        "C4": 6144,
+        "C5": 6144,
+        "C6": 6144,
+        "json_minimal_refill_witness": 3072,
+        "protocol_full_refill_witness": 3072,
+        "sham": 1152,
+        "source": 1152
+      },
+      "context": {
+        "kappa1": 13440,
+        "kappa2": 13440,
+        "ordinary": 55296
+      },
+      "cycle": {
+        "0": 8448,
+        "1": 67584,
+        "2": 6144
+      },
+      "epoch": {
+        "0": 3648,
+        "1": 3648,
+        "10": 2496,
+        "11": 2496,
+        "12": 2496,
+        "13": 2496,
+        "14": 2496,
+        "15": 2496,
+        "16": 2496,
+        "17": 2496,
+        "18": 2496,
+        "19": 2496,
+        "2": 2496,
+        "20": 2496,
+        "21": 2496,
+        "22": 2496,
+        "23": 2496,
+        "24": 2496,
+        "25": 2496,
+        "26": 2496,
+        "27": 2496,
+        "28": 2496,
+        "29": 2496,
+        "3": 2496,
+        "30": 2496,
+        "31": 2496,
+        "4": 2496,
+        "5": 2496,
+        "6": 2496,
+        "7": 2496,
+        "8": 2496,
+        "9": 2496
+      },
+      "pilot": {
+        "P5": 6912,
+        "P6": 37632,
+        "P7": 37632
+      },
+      "record_kind": {
+        "diagnostic": 2304,
+        "trial": 73728,
+        "witness": 6144
+      },
+      "replicate_id": {
+        "0": 27392,
+        "1": 27392,
+        "2": 27392
+      },
+      "route_status": {
+        "bypassed": 12288,
+        "intact": 61440,
+        "joint_source_not_selective": 2304,
+        "not_applicable": 6144
+      }
+    },
+    "coverage_pass": true,
+    "development_only": true,
+    "diagnostic_rows_expected": 96,
+    "diagnostic_rows_exported": 96,
+    "expected_records": 82176,
+    "guardrails": {
+      "executed_infeasible_actions": 0,
+      "invalid_concurrent_writes": 0,
+      "physical_state_violations": 0,
+      "unauthorized_executions": 0,
+      "undeclared_budget_overruns": 0
+    },
+    "historical_provenance": {
+      "all_unchanged": true,
+      "artifact_count": 480,
+      "code_commit": "c27235deb1688c105bfe96597dfd233108307895",
+      "manifest_sha256": "e5de2f406cf34ea5ce122443890ac9344e4df68206edd267dd1ff7eaadb7dc2b"
+    },
+    "index_sha256": "0133673d24503d8e416abafe83a84b2e80363be0052e47f97af31f40ee05b68b",
+    "inference_scope": "archived v1 representation only; imposed-law diagnostics; joint source/sham",
+    "new_independent_observations": 0,
+    "new_scientific_runs": 0,
+    "new_seeds": 0,
+    "original_export_status": "FAILED_RETAINED_UNCHANGED",
+    "original_rows_byte_identical": 42,
+    "previously_derived_rows_byte_identical": 54,
+    "prior_sidecar_byte_identical": true,
+    "reusable_as_final": false,
+    "reusable_for_B1E": false,
+    "status": "PASS",
+    "validated_records": 82176,
+    "version": "b1d-exporter-1.1"
+  },
+  "blocker_disposition": "RESOLVED_FOR_FUTURE_PIPELINE",
+  "blocker_id": "B1D-ORIGINAL-EXPORT-PROVENANCE-INCIDENT",
+  "change_classification": "exporter_only",
+  "confirmatory": false,
+  "development_only": true,
+  "evidence_sha256": {
+    "b1/v1_1/EXPORTER_ROOT_CAUSE.json": "6617bd9e75e2ddc88ab4cc3042cefbf95d3ea70509a234a49c9c889bb68c3a58",
+    "b1/v1_1/EXPORTER_ROOT_CAUSE.md": "3af71ca461e363efa0a3e2b7e68feadb66f6b52667cd89215e0a8f2e1dce2765",
+    "b1/v1_1/exporter/TEST_RESULTS.txt": "025901d687b630fad848daf7b5bb96c8f0359c1dad2d4ae852385289858e9110",
+    "b1/v1_1/exporter/archive_replay/MANIFEST.json": "517c8ef654a08cd53bba5a80cf760519c6cd5523e6b337efb29fd01a6c17fbc5",
+    "b1/v1_1/exporter/archive_replay/bundle_diagnostics.jsonl": "df2d124434fdfa332c520983262355d224bdfa4392c0d698e1109f54321ee124",
+    "b1/v1_1/exporter/qa_run/EXPECTED_PLAN.json": "e935e90906fbe92e43d51f3c8f19122ea5690f465e8642584fa8a2b1fba2df32",
+    "b1/v1_1/exporter/qa_run/QA_AUDIT.json": "594689a965a3a284f8390ccfa083fe70ac1007624bf41f926540454e73e47dbc",
+    "b1/v1_1/exporter/qa_run/traces/INDEX.json": "73088831cbe56cefd9765baa94b68a504fdb9d4662ac04458b39f89745a989a2"
+  },
+  "final_seeds_generated": false,
+  "historical_preservation": {
+    "all_unchanged": true,
+    "artifact_count": 480,
+    "code_commit": "c27235deb1688c105bfe96597dfd233108307895",
+    "manifest_sha256": "e5de2f406cf34ea5ce122443890ac9344e4df68206edd267dd1ff7eaadb7dc2b"
+  },
+  "implementation_sha256": {
+    "b1/v1_1/exporter/__init__.py": "0b3ced0af4b827c255ad72e714c1d89be8c943e5fa861125ea03ad460448c5c4",
+    "b1/v1_1/exporter/audit.py": "353fa83b6661d479feaab200e12961d7809958eff6027f776d89187918322f34",
+    "b1/v1_1/exporter/core.py": "81297925455dc9fadb9439b15b0677ac1740ca6860dc77a386831b32148632bc",
+    "b1/v1_1/exporter/investigate.py": "ce1320e1161c8e41da05e59ea0f4d0e8050bf03c5a5b848302518f25018d6fae",
+    "b1/v1_1/exporter/qa.py": "308e507b92d5618286e597022c21b647d77129adf8ea09928f965f83f8891f2e",
+    "b1/v1_1/exporter/test_exporter.py": "792f750e29060c4d860ef0de6f28083d9308e8a8b838a911e49a126c956f234d"
+  },
+  "matrix_status": "RESOLVED",
+  "new_scientific_runs_by_exporter": 0,
+  "original_export_status": "FAILED_RETAINED_UNCHANGED",
+  "ready_for_b1e_confirmatory_run": false,
+  "recorded_utc": "2026-09-13T03:59:28.756178+00:00",
+  "remaining_limitations": [
+    "No retained filesystem or process telemetry establishes the original truncation cause.",
+    "The original failure remains immutable provenance.",
+    "Historical recovery and QA are not new experimental evidence.",
+    "Joint source/sham observations cannot be interpreted as selective Gamma lesions."
+  ],
+  "reusable_as_final": false,
+  "reusable_for_B1E": false,
+  "root_cause": "undetermined",
+  "root_cause_hypotheses_investigated": 12,
+  "scientific_rerun_required": false,
+  "scope": "new pipeline only; original failed export and root-cause uncertainty remain immutable provenance",
+  "status": "PASS",
+  "tests": {
+    "command": "python -B -m unittest b1.v1_1.exporter.test_exporter -v",
+    "corruptions": [
+      "missing shard",
+      "missing row with rehashed archive",
+      "all nine missing key dimensions",
+      "duplicate complete ID",
+      "changed route/cycle/context",
+      "corrupted shard hash",
+      "missing causal field",
+      "missing state mediator",
+      "malformed channel container",
+      "negative dose",
+      "malformed effect",
+      "missing effect mediator",
+      "wrong namespace",
+      "invalid final row prevents prefix publication"
+    ],
+    "count": 14,
+    "manifest_hash_verified": true,
+    "order_independence": true,
+    "preexisting_export_not_overwritten": true,
+    "seconds": 15.435,
+    "status": "PASS"
+  },
+  "version": "1.1"
+}
