@@ -1,0 +1,78 @@
+name: B1-S pinned runtime preflight
+on:
+  push:
+    branches: [research/b1s-full-development-20260913]
+    paths: ['.github/workflows/b1s-runtime-preflight.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  runtime:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    env:
+      SDL_VIDEODRIVER: dummy
+      SDL_AUDIODRIVER: dummy
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned runtime
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install 'torch==2.2.2' --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install 'numpy==1.26.4' 'gymnasium==0.29.1' 'pettingzoo==1.24.3' 'box2d-py==2.3.5' 'pygame==2.5.2' 'stable-baselines3==2.3.2'
+      - name: Check native API and installation, without learning
+        run: |
+          mkdir -p preflight
+          python - <<'PY'
+          import hashlib, importlib.metadata as im, json, pathlib, platform, subprocess, time
+          import numpy as np
+          import torch
+          import pettingzoo
+          from pettingzoo.sisl import multiwalker_v9
+          p=pathlib.Path(pettingzoo.__file__).parent
+          expected={'sisl/multiwalker_v9.py':'555eee6a7f37d5bb908152f6680a6d7ffe882f91','sisl/multiwalker/multiwalker.py':'8edf250d1dec03d4ae2ee56c9e2dff5fe50e875c','sisl/multiwalker/multiwalker_base.py':'476b3950cc1146e53338ec4bf48b9291b6143a84'}
+          source={}
+          for rel, blob in expected.items():
+              b=(p/rel).read_bytes()
+              actual=hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
+              source[rel]={'expected_blob':blob,'installed_blob':actual,'sha256':hashlib.sha256(b).hexdigest()}
+              assert actual==blob, (rel,actual,blob)
+          env=multiwalker_v9.parallel_env(render_mode=None)
+          obs,info=env.reset(seed=172901)
+          assert list(obs)==['walker_0','walker_1','walker_2']
+          assert all(v.shape==(31,) for v in obs.values())
+          t=time.perf_counter(); resets=0
+          for k in range(512):
+              obs,reward,term,trunc,info=env.step({a:np.zeros(4,dtype=np.float32) for a in env.agents})
+              assert all(np.isfinite(r) for r in reward.values())
+              if not env.agents:
+                  resets+=1
+                  obs,info=env.reset(seed=172901+resets)
+          elapsed=time.perf_counter()-t
+          env.close()
+          torch.set_num_threads(1)
+          report={'status':'PASS','scope':'instrument installation and timing only; no learning, discovery or final data','commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'upstream_commit':'e62d6bcdc6e0c28fa19c08545a63dc8370393495','versions':{x:im.version(x) for x in ['torch','numpy','gymnasium','pettingzoo','box2d-py','pygame','stable-baselines3']},'python':platform.python_version(),'source':source,'native_steps':512,'elapsed_seconds':elapsed,'seconds_per_native_step_including_resets':elapsed/512,'QA_seed_start':172901,'QA_only':True,'resets':resets,'training_run':False,'B1E_executed':False}
+          pathlib.Path('preflight/RUNTIME_PREFLIGHT.json').write_text(json.dumps(report,indent=2)+'\n')
+          print(json.dumps(report,indent=2))
+          PY
+          python -m pip freeze --all > preflight/ENVIRONMENT_LOCK.txt
+          lscpu > preflight/CPU.txt
+          df -h > preflight/DISK.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: b1s-runtime-preflight
+          path: preflight/
+          retention-days: 30
+          if-no-files-found: warn
