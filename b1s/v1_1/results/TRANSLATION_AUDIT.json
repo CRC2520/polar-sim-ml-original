@@ -1,0 +1,7 @@
+{
+  "english_sha256": "6ba765907567ead8611a3fce19d2c10197cfdd3ab9f108fb0ddf1ea1c86a3b68",
+  "numbers_and_identifiers": "Common source dictionaries; same formatting expressions; technical JSON keys unchanged",
+  "scope": "Renderer provenance, not independent automated semantic certification",
+  "spanish_sha256": "220ae3b31bc45309beecf3dac3365aa1f24fde5e35f959ce78fab0765e1a1d60",
+  "status": "RENDERED_FROM_COMMON_JSON"
+}

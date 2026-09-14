@@ -1,0 +1,11 @@
+[
+  {
+    "actor_loss": -0.020303349068854004,
+    "approx_kl": 0.004624823399353772,
+    "completed_episodes": 5,
+    "elapsed_seconds": 0.530017541999996,
+    "native_steps": 512,
+    "optimizer_updates": 16,
+    "value_loss": 892.5789642333984
+  }
+]

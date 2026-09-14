@@ -1,0 +1,5596 @@
+{
+  "B1E_executed": false,
+  "QA_sha256": "3d5c781b3af692d1604ac1d01b821006a8c52ca5a6b5a62c4a6bdcac9afc12d2",
+  "QA_training_is_not_scientific_campaign": true,
+  "final_seeds_generated": false,
+  "optimizer_QA_sha256": "5b61f61485158459715d83a5a9472c5a9683c10469e2eb664f4b084ace55f9ca",
+  "plan": {
+    "B1E_executed": false,
+    "base_code_commit": "29feb9f66eb5192616b75581ba6c947ea863c950",
+    "base_document_commit": "c99d4e755d29dc823fa74312e39972b0ea2e8121",
+    "budget_basis": "Prospective engineering caps: four times prior screening duration, twice prior discovery initializations, sixteen times prior duration for calibrated baselines and competitive refits. Not a convergence guarantee. Full optimizer registry and resource preflight must be fixed before training.",
+    "calibration_checkpoints": [
+      32768,
+      131072,
+      262144,
+      524288
+    ],
+    "calibration_selection_episodes": 20,
+    "calibration_steps": 524288,
+    "catalogue_mapping": "NOT_EVALUABLE",
+    "causal_episodes": 8,
+    "causal_prefix_cycles": 8,
+    "competence": "Preserve the existing conjunction of reward improvement and additional package displacement; evaluate separately from graph performance.",
+    "competitive_episodes": 32,
+    "competitive_refits": "Use independent new training initializations after freezing support and baseline configurations. Same 524288-step environmental exposure; disclose algorithmic, memory, parameter and update differences.",
+    "competitive_steps": 524288,
+    "confirmatory": false,
+    "development_only": true,
+    "discovery_selection_episodes": 16,
+    "discovery_steps": 131072,
+    "final_seeds_generated": false,
+    "historical_files_may_change": false,
+    "independent_calibration_replicates": 3,
+    "independent_competitive_replicates": 6,
+    "independent_discovery_replicates": 6,
+    "namespace": "PD-B1S-D-MW-v1.1",
+    "physics_reward_and_node_semantics_may_change": false,
+    "ready_for_b1e_confirmatory_run": false,
+    "selection": "Development validation only; preserve every attempted configuration; no optional extension or replacement of failed seeds.",
+    "status": "PROSPECTIVE_DEVELOPMENT_ONLY",
+    "structural_stability": "Report support selections, edge frequencies, Wilson intervals, pairwise Jaccard and conditional-edge-count null expectations. No claim of population stability from six runs alone.",
+    "transfer": "NOT_EVALUATED",
+    "version": "B1S-MW-D-1.1.0"
+  },
+  "registry": [
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000000-r0",
+      "kind": "graph",
+      "mask": "000000",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000000-r1",
+      "kind": "graph",
+      "mask": "000000",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000000-r2",
+      "kind": "graph",
+      "mask": "000000",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000000-r3",
+      "kind": "graph",
+      "mask": "000000",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000000-r4",
+      "kind": "graph",
+      "mask": "000000",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000000-r5",
+      "kind": "graph",
+      "mask": "000000",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000001-r0",
+      "kind": "graph",
+      "mask": "000001",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000001-r1",
+      "kind": "graph",
+      "mask": "000001",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000001-r2",
+      "kind": "graph",
+      "mask": "000001",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000001-r3",
+      "kind": "graph",
+      "mask": "000001",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000001-r4",
+      "kind": "graph",
+      "mask": "000001",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000001-r5",
+      "kind": "graph",
+      "mask": "000001",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000010-r0",
+      "kind": "graph",
+      "mask": "000010",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000010-r1",
+      "kind": "graph",
+      "mask": "000010",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000010-r2",
+      "kind": "graph",
+      "mask": "000010",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000010-r3",
+      "kind": "graph",
+      "mask": "000010",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000010-r4",
+      "kind": "graph",
+      "mask": "000010",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000010-r5",
+      "kind": "graph",
+      "mask": "000010",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000011-r0",
+      "kind": "graph",
+      "mask": "000011",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000011-r1",
+      "kind": "graph",
+      "mask": "000011",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000011-r2",
+      "kind": "graph",
+      "mask": "000011",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000011-r3",
+      "kind": "graph",
+      "mask": "000011",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000011-r4",
+      "kind": "graph",
+      "mask": "000011",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000011-r5",
+      "kind": "graph",
+      "mask": "000011",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000100-r0",
+      "kind": "graph",
+      "mask": "000100",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000100-r1",
+      "kind": "graph",
+      "mask": "000100",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000100-r2",
+      "kind": "graph",
+      "mask": "000100",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000100-r3",
+      "kind": "graph",
+      "mask": "000100",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000100-r4",
+      "kind": "graph",
+      "mask": "000100",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000100-r5",
+      "kind": "graph",
+      "mask": "000100",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000101-r0",
+      "kind": "graph",
+      "mask": "000101",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000101-r1",
+      "kind": "graph",
+      "mask": "000101",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000101-r2",
+      "kind": "graph",
+      "mask": "000101",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000101-r3",
+      "kind": "graph",
+      "mask": "000101",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000101-r4",
+      "kind": "graph",
+      "mask": "000101",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000101-r5",
+      "kind": "graph",
+      "mask": "000101",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000110-r0",
+      "kind": "graph",
+      "mask": "000110",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000110-r1",
+      "kind": "graph",
+      "mask": "000110",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000110-r2",
+      "kind": "graph",
+      "mask": "000110",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000110-r3",
+      "kind": "graph",
+      "mask": "000110",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000110-r4",
+      "kind": "graph",
+      "mask": "000110",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000110-r5",
+      "kind": "graph",
+      "mask": "000110",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000111-r0",
+      "kind": "graph",
+      "mask": "000111",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000111-r1",
+      "kind": "graph",
+      "mask": "000111",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000111-r2",
+      "kind": "graph",
+      "mask": "000111",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000111-r3",
+      "kind": "graph",
+      "mask": "000111",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000111-r4",
+      "kind": "graph",
+      "mask": "000111",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-000111-r5",
+      "kind": "graph",
+      "mask": "000111",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001000-r0",
+      "kind": "graph",
+      "mask": "001000",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001000-r1",
+      "kind": "graph",
+      "mask": "001000",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001000-r2",
+      "kind": "graph",
+      "mask": "001000",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001000-r3",
+      "kind": "graph",
+      "mask": "001000",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001000-r4",
+      "kind": "graph",
+      "mask": "001000",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001000-r5",
+      "kind": "graph",
+      "mask": "001000",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001001-r0",
+      "kind": "graph",
+      "mask": "001001",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001001-r1",
+      "kind": "graph",
+      "mask": "001001",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001001-r2",
+      "kind": "graph",
+      "mask": "001001",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001001-r3",
+      "kind": "graph",
+      "mask": "001001",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001001-r4",
+      "kind": "graph",
+      "mask": "001001",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001001-r5",
+      "kind": "graph",
+      "mask": "001001",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001010-r0",
+      "kind": "graph",
+      "mask": "001010",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001010-r1",
+      "kind": "graph",
+      "mask": "001010",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001010-r2",
+      "kind": "graph",
+      "mask": "001010",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001010-r3",
+      "kind": "graph",
+      "mask": "001010",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001010-r4",
+      "kind": "graph",
+      "mask": "001010",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001010-r5",
+      "kind": "graph",
+      "mask": "001010",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001011-r0",
+      "kind": "graph",
+      "mask": "001011",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001011-r1",
+      "kind": "graph",
+      "mask": "001011",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001011-r2",
+      "kind": "graph",
+      "mask": "001011",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001011-r3",
+      "kind": "graph",
+      "mask": "001011",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001011-r4",
+      "kind": "graph",
+      "mask": "001011",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001011-r5",
+      "kind": "graph",
+      "mask": "001011",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001100-r0",
+      "kind": "graph",
+      "mask": "001100",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001100-r1",
+      "kind": "graph",
+      "mask": "001100",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001100-r2",
+      "kind": "graph",
+      "mask": "001100",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001100-r3",
+      "kind": "graph",
+      "mask": "001100",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001100-r4",
+      "kind": "graph",
+      "mask": "001100",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001100-r5",
+      "kind": "graph",
+      "mask": "001100",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001101-r0",
+      "kind": "graph",
+      "mask": "001101",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001101-r1",
+      "kind": "graph",
+      "mask": "001101",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001101-r2",
+      "kind": "graph",
+      "mask": "001101",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001101-r3",
+      "kind": "graph",
+      "mask": "001101",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001101-r4",
+      "kind": "graph",
+      "mask": "001101",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001101-r5",
+      "kind": "graph",
+      "mask": "001101",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001110-r0",
+      "kind": "graph",
+      "mask": "001110",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001110-r1",
+      "kind": "graph",
+      "mask": "001110",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001110-r2",
+      "kind": "graph",
+      "mask": "001110",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001110-r3",
+      "kind": "graph",
+      "mask": "001110",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001110-r4",
+      "kind": "graph",
+      "mask": "001110",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-001110-r5",
+      "kind": "graph",
+      "mask": "001110",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010000-r0",
+      "kind": "graph",
+      "mask": "010000",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010000-r1",
+      "kind": "graph",
+      "mask": "010000",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010000-r2",
+      "kind": "graph",
+      "mask": "010000",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010000-r3",
+      "kind": "graph",
+      "mask": "010000",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010000-r4",
+      "kind": "graph",
+      "mask": "010000",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010000-r5",
+      "kind": "graph",
+      "mask": "010000",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010001-r0",
+      "kind": "graph",
+      "mask": "010001",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010001-r1",
+      "kind": "graph",
+      "mask": "010001",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010001-r2",
+      "kind": "graph",
+      "mask": "010001",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010001-r3",
+      "kind": "graph",
+      "mask": "010001",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010001-r4",
+      "kind": "graph",
+      "mask": "010001",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010001-r5",
+      "kind": "graph",
+      "mask": "010001",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010010-r0",
+      "kind": "graph",
+      "mask": "010010",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010010-r1",
+      "kind": "graph",
+      "mask": "010010",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010010-r2",
+      "kind": "graph",
+      "mask": "010010",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010010-r3",
+      "kind": "graph",
+      "mask": "010010",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010010-r4",
+      "kind": "graph",
+      "mask": "010010",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010010-r5",
+      "kind": "graph",
+      "mask": "010010",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010011-r0",
+      "kind": "graph",
+      "mask": "010011",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010011-r1",
+      "kind": "graph",
+      "mask": "010011",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010011-r2",
+      "kind": "graph",
+      "mask": "010011",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010011-r3",
+      "kind": "graph",
+      "mask": "010011",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010011-r4",
+      "kind": "graph",
+      "mask": "010011",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010011-r5",
+      "kind": "graph",
+      "mask": "010011",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010100-r0",
+      "kind": "graph",
+      "mask": "010100",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010100-r1",
+      "kind": "graph",
+      "mask": "010100",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010100-r2",
+      "kind": "graph",
+      "mask": "010100",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010100-r3",
+      "kind": "graph",
+      "mask": "010100",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010100-r4",
+      "kind": "graph",
+      "mask": "010100",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010100-r5",
+      "kind": "graph",
+      "mask": "010100",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010101-r0",
+      "kind": "graph",
+      "mask": "010101",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010101-r1",
+      "kind": "graph",
+      "mask": "010101",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010101-r2",
+      "kind": "graph",
+      "mask": "010101",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010101-r3",
+      "kind": "graph",
+      "mask": "010101",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010101-r4",
+      "kind": "graph",
+      "mask": "010101",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010101-r5",
+      "kind": "graph",
+      "mask": "010101",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010110-r0",
+      "kind": "graph",
+      "mask": "010110",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010110-r1",
+      "kind": "graph",
+      "mask": "010110",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010110-r2",
+      "kind": "graph",
+      "mask": "010110",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010110-r3",
+      "kind": "graph",
+      "mask": "010110",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010110-r4",
+      "kind": "graph",
+      "mask": "010110",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-010110-r5",
+      "kind": "graph",
+      "mask": "010110",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011000-r0",
+      "kind": "graph",
+      "mask": "011000",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011000-r1",
+      "kind": "graph",
+      "mask": "011000",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011000-r2",
+      "kind": "graph",
+      "mask": "011000",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011000-r3",
+      "kind": "graph",
+      "mask": "011000",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011000-r4",
+      "kind": "graph",
+      "mask": "011000",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011000-r5",
+      "kind": "graph",
+      "mask": "011000",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011001-r0",
+      "kind": "graph",
+      "mask": "011001",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011001-r1",
+      "kind": "graph",
+      "mask": "011001",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011001-r2",
+      "kind": "graph",
+      "mask": "011001",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011001-r3",
+      "kind": "graph",
+      "mask": "011001",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011001-r4",
+      "kind": "graph",
+      "mask": "011001",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011001-r5",
+      "kind": "graph",
+      "mask": "011001",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011010-r0",
+      "kind": "graph",
+      "mask": "011010",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011010-r1",
+      "kind": "graph",
+      "mask": "011010",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011010-r2",
+      "kind": "graph",
+      "mask": "011010",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011010-r3",
+      "kind": "graph",
+      "mask": "011010",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011010-r4",
+      "kind": "graph",
+      "mask": "011010",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011010-r5",
+      "kind": "graph",
+      "mask": "011010",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011100-r0",
+      "kind": "graph",
+      "mask": "011100",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011100-r1",
+      "kind": "graph",
+      "mask": "011100",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011100-r2",
+      "kind": "graph",
+      "mask": "011100",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011100-r3",
+      "kind": "graph",
+      "mask": "011100",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011100-r4",
+      "kind": "graph",
+      "mask": "011100",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-011100-r5",
+      "kind": "graph",
+      "mask": "011100",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100000-r0",
+      "kind": "graph",
+      "mask": "100000",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100000-r1",
+      "kind": "graph",
+      "mask": "100000",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100000-r2",
+      "kind": "graph",
+      "mask": "100000",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100000-r3",
+      "kind": "graph",
+      "mask": "100000",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100000-r4",
+      "kind": "graph",
+      "mask": "100000",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100000-r5",
+      "kind": "graph",
+      "mask": "100000",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100001-r0",
+      "kind": "graph",
+      "mask": "100001",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100001-r1",
+      "kind": "graph",
+      "mask": "100001",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100001-r2",
+      "kind": "graph",
+      "mask": "100001",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100001-r3",
+      "kind": "graph",
+      "mask": "100001",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100001-r4",
+      "kind": "graph",
+      "mask": "100001",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100001-r5",
+      "kind": "graph",
+      "mask": "100001",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100010-r0",
+      "kind": "graph",
+      "mask": "100010",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100010-r1",
+      "kind": "graph",
+      "mask": "100010",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100010-r2",
+      "kind": "graph",
+      "mask": "100010",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100010-r3",
+      "kind": "graph",
+      "mask": "100010",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100010-r4",
+      "kind": "graph",
+      "mask": "100010",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100010-r5",
+      "kind": "graph",
+      "mask": "100010",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100011-r0",
+      "kind": "graph",
+      "mask": "100011",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100011-r1",
+      "kind": "graph",
+      "mask": "100011",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100011-r2",
+      "kind": "graph",
+      "mask": "100011",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100011-r3",
+      "kind": "graph",
+      "mask": "100011",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100011-r4",
+      "kind": "graph",
+      "mask": "100011",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100011-r5",
+      "kind": "graph",
+      "mask": "100011",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100100-r0",
+      "kind": "graph",
+      "mask": "100100",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100100-r1",
+      "kind": "graph",
+      "mask": "100100",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100100-r2",
+      "kind": "graph",
+      "mask": "100100",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100100-r3",
+      "kind": "graph",
+      "mask": "100100",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100100-r4",
+      "kind": "graph",
+      "mask": "100100",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100100-r5",
+      "kind": "graph",
+      "mask": "100100",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100101-r0",
+      "kind": "graph",
+      "mask": "100101",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100101-r1",
+      "kind": "graph",
+      "mask": "100101",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100101-r2",
+      "kind": "graph",
+      "mask": "100101",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100101-r3",
+      "kind": "graph",
+      "mask": "100101",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100101-r4",
+      "kind": "graph",
+      "mask": "100101",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100101-r5",
+      "kind": "graph",
+      "mask": "100101",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100110-r0",
+      "kind": "graph",
+      "mask": "100110",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100110-r1",
+      "kind": "graph",
+      "mask": "100110",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100110-r2",
+      "kind": "graph",
+      "mask": "100110",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100110-r3",
+      "kind": "graph",
+      "mask": "100110",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100110-r4",
+      "kind": "graph",
+      "mask": "100110",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-100110-r5",
+      "kind": "graph",
+      "mask": "100110",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101000-r0",
+      "kind": "graph",
+      "mask": "101000",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101000-r1",
+      "kind": "graph",
+      "mask": "101000",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101000-r2",
+      "kind": "graph",
+      "mask": "101000",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101000-r3",
+      "kind": "graph",
+      "mask": "101000",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101000-r4",
+      "kind": "graph",
+      "mask": "101000",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101000-r5",
+      "kind": "graph",
+      "mask": "101000",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101001-r0",
+      "kind": "graph",
+      "mask": "101001",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101001-r1",
+      "kind": "graph",
+      "mask": "101001",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101001-r2",
+      "kind": "graph",
+      "mask": "101001",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101001-r3",
+      "kind": "graph",
+      "mask": "101001",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101001-r4",
+      "kind": "graph",
+      "mask": "101001",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101001-r5",
+      "kind": "graph",
+      "mask": "101001",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101010-r0",
+      "kind": "graph",
+      "mask": "101010",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101010-r1",
+      "kind": "graph",
+      "mask": "101010",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101010-r2",
+      "kind": "graph",
+      "mask": "101010",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101010-r3",
+      "kind": "graph",
+      "mask": "101010",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101010-r4",
+      "kind": "graph",
+      "mask": "101010",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101010-r5",
+      "kind": "graph",
+      "mask": "101010",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101100-r0",
+      "kind": "graph",
+      "mask": "101100",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101100-r1",
+      "kind": "graph",
+      "mask": "101100",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101100-r2",
+      "kind": "graph",
+      "mask": "101100",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101100-r3",
+      "kind": "graph",
+      "mask": "101100",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101100-r4",
+      "kind": "graph",
+      "mask": "101100",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-101100-r5",
+      "kind": "graph",
+      "mask": "101100",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110000-r0",
+      "kind": "graph",
+      "mask": "110000",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110000-r1",
+      "kind": "graph",
+      "mask": "110000",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110000-r2",
+      "kind": "graph",
+      "mask": "110000",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110000-r3",
+      "kind": "graph",
+      "mask": "110000",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110000-r4",
+      "kind": "graph",
+      "mask": "110000",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110000-r5",
+      "kind": "graph",
+      "mask": "110000",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110001-r0",
+      "kind": "graph",
+      "mask": "110001",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110001-r1",
+      "kind": "graph",
+      "mask": "110001",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110001-r2",
+      "kind": "graph",
+      "mask": "110001",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110001-r3",
+      "kind": "graph",
+      "mask": "110001",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110001-r4",
+      "kind": "graph",
+      "mask": "110001",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110001-r5",
+      "kind": "graph",
+      "mask": "110001",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110010-r0",
+      "kind": "graph",
+      "mask": "110010",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110010-r1",
+      "kind": "graph",
+      "mask": "110010",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110010-r2",
+      "kind": "graph",
+      "mask": "110010",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110010-r3",
+      "kind": "graph",
+      "mask": "110010",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110010-r4",
+      "kind": "graph",
+      "mask": "110010",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110010-r5",
+      "kind": "graph",
+      "mask": "110010",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110100-r0",
+      "kind": "graph",
+      "mask": "110100",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110100-r1",
+      "kind": "graph",
+      "mask": "110100",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110100-r2",
+      "kind": "graph",
+      "mask": "110100",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110100-r3",
+      "kind": "graph",
+      "mask": "110100",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110100-r4",
+      "kind": "graph",
+      "mask": "110100",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-110100-r5",
+      "kind": "graph",
+      "mask": "110100",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-111000-r0",
+      "kind": "graph",
+      "mask": "111000",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-111000-r1",
+      "kind": "graph",
+      "mask": "111000",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-111000-r2",
+      "kind": "graph",
+      "mask": "111000",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-111000-r3",
+      "kind": "graph",
+      "mask": "111000",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-111000-r4",
+      "kind": "graph",
+      "mask": "111000",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-111000-r5",
+      "kind": "graph",
+      "mask": "111000",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-111111-r0",
+      "kind": "graph",
+      "mask": "111111",
+      "phase": "discovery",
+      "rep": 0,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-111111-r1",
+      "kind": "graph",
+      "mask": "111111",
+      "phase": "discovery",
+      "rep": 1,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-111111-r2",
+      "kind": "graph",
+      "mask": "111111",
+      "phase": "discovery",
+      "rep": 2,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-111111-r3",
+      "kind": "graph",
+      "mask": "111111",
+      "phase": "discovery",
+      "rep": 3,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-111111-r4",
+      "kind": "graph",
+      "mask": "111111",
+      "phase": "discovery",
+      "rep": 4,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "discovery-111111-r5",
+      "kind": "graph",
+      "mask": "111111",
+      "phase": "discovery",
+      "rep": 5,
+      "steps": 131072
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.98,
+        "id": "ppo-v1selected",
+        "lr": 0.0005,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "calibration-ppo-v1selected-r0",
+      "kind": "ppo",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 0,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.98,
+        "id": "ppo-v1selected",
+        "lr": 0.0005,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "calibration-ppo-v1selected-r1",
+      "kind": "ppo",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 1,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 4,
+        "gae_lambda": 0.95,
+        "gamma": 0.98,
+        "id": "ppo-v1selected",
+        "lr": 0.0005,
+        "max_grad_norm": 0.5,
+        "minibatch": 128,
+        "rollout_steps": 512,
+        "value_coef": 0.5
+      },
+      "id": "calibration-ppo-v1selected-r2",
+      "kind": "ppo",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 2,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 10,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "id": "ppo-standard",
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 64,
+        "rollout_steps": 2048,
+        "value_coef": 0.5
+      },
+      "id": "calibration-ppo-standard-r0",
+      "kind": "ppo",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 0,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 10,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "id": "ppo-standard",
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 64,
+        "rollout_steps": 2048,
+        "value_coef": 0.5
+      },
+      "id": "calibration-ppo-standard-r1",
+      "kind": "ppo",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 1,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 10,
+        "gae_lambda": 0.95,
+        "gamma": 0.99,
+        "id": "ppo-standard",
+        "lr": 0.0003,
+        "max_grad_norm": 0.5,
+        "minibatch": 64,
+        "rollout_steps": 2048,
+        "value_coef": 0.5
+      },
+      "id": "calibration-ppo-standard-r2",
+      "kind": "ppo",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 2,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 10,
+        "gae_lambda": 0.95,
+        "gamma": 0.995,
+        "id": "ppo-conservative",
+        "lr": 0.0001,
+        "max_grad_norm": 0.5,
+        "minibatch": 64,
+        "rollout_steps": 2048,
+        "value_coef": 0.5
+      },
+      "id": "calibration-ppo-conservative-r0",
+      "kind": "ppo",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 0,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 10,
+        "gae_lambda": 0.95,
+        "gamma": 0.995,
+        "id": "ppo-conservative",
+        "lr": 0.0001,
+        "max_grad_norm": 0.5,
+        "minibatch": 64,
+        "rollout_steps": 2048,
+        "value_coef": 0.5
+      },
+      "id": "calibration-ppo-conservative-r1",
+      "kind": "ppo",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 1,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "adam_eps": 1e-05,
+        "clip": 0.2,
+        "epochs": 10,
+        "gae_lambda": 0.95,
+        "gamma": 0.995,
+        "id": "ppo-conservative",
+        "lr": 0.0001,
+        "max_grad_norm": 0.5,
+        "minibatch": 64,
+        "rollout_steps": 2048,
+        "value_coef": 0.5
+      },
+      "id": "calibration-ppo-conservative-r2",
+      "kind": "ppo",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 2,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "batch_size": 128,
+        "gamma": 0.95,
+        "gradient_steps": 1,
+        "id": "sac-v1selected",
+        "learning_starts": 1024,
+        "lr": 0.002,
+        "train_freq": 8
+      },
+      "id": "calibration-sac-v1selected-r0",
+      "kind": "sac",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 0,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "batch_size": 128,
+        "gamma": 0.95,
+        "gradient_steps": 1,
+        "id": "sac-v1selected",
+        "learning_starts": 1024,
+        "lr": 0.002,
+        "train_freq": 8
+      },
+      "id": "calibration-sac-v1selected-r1",
+      "kind": "sac",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 1,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "batch_size": 128,
+        "gamma": 0.95,
+        "gradient_steps": 1,
+        "id": "sac-v1selected",
+        "learning_starts": 1024,
+        "lr": 0.002,
+        "train_freq": 8
+      },
+      "id": "calibration-sac-v1selected-r2",
+      "kind": "sac",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 2,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "batch_size": 256,
+        "gamma": 0.99,
+        "gradient_steps": 1,
+        "id": "sac-standard",
+        "learning_starts": 10000,
+        "lr": 0.0003,
+        "train_freq": 1
+      },
+      "id": "calibration-sac-standard-r0",
+      "kind": "sac",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 0,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "batch_size": 256,
+        "gamma": 0.99,
+        "gradient_steps": 1,
+        "id": "sac-standard",
+        "learning_starts": 10000,
+        "lr": 0.0003,
+        "train_freq": 1
+      },
+      "id": "calibration-sac-standard-r1",
+      "kind": "sac",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 1,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "batch_size": 256,
+        "gamma": 0.99,
+        "gradient_steps": 1,
+        "id": "sac-standard",
+        "learning_starts": 10000,
+        "lr": 0.0003,
+        "train_freq": 1
+      },
+      "id": "calibration-sac-standard-r2",
+      "kind": "sac",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 2,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "batch_size": 256,
+        "gamma": 0.995,
+        "gradient_steps": 1,
+        "id": "sac-conservative",
+        "learning_starts": 10000,
+        "lr": 0.0001,
+        "train_freq": 1
+      },
+      "id": "calibration-sac-conservative-r0",
+      "kind": "sac",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 0,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "batch_size": 256,
+        "gamma": 0.995,
+        "gradient_steps": 1,
+        "id": "sac-conservative",
+        "learning_starts": 10000,
+        "lr": 0.0001,
+        "train_freq": 1
+      },
+      "id": "calibration-sac-conservative-r1",
+      "kind": "sac",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 1,
+      "steps": 524288
+    },
+    {
+      "hp": {
+        "batch_size": 256,
+        "gamma": 0.995,
+        "gradient_steps": 1,
+        "id": "sac-conservative",
+        "learning_starts": 10000,
+        "lr": 0.0001,
+        "train_freq": 1
+      },
+      "id": "calibration-sac-conservative-r2",
+      "kind": "sac",
+      "mask": null,
+      "phase": "calibration",
+      "rep": 2,
+      "steps": 524288
+    }
+  ],
+  "registry_sha256": "a9397287c1b888f7802c8b1c76d4a56801d1394375ab4ae76deebb5f9560edad",
+  "runtime": {
+    "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+    "python": "3.11.16",
+    "sources": {
+      "sisl/multiwalker/multiwalker.py": {
+        "blob": "8edf250d1dec03d4ae2ee56c9e2dff5fe50e875c",
+        "sha256": "480d81f415ae4fef2fb93cf93a4d2859f2af0012fc5f16f9109d78fb4dfceb68"
+      },
+      "sisl/multiwalker/multiwalker_base.py": {
+        "blob": "476b3950cc1146e53338ec4bf48b9291b6143a84",
+        "sha256": "5e5ec639fa71295daf991ab762e9adf45f95b72d6848911e3b8ea98ae1dd3f7e"
+      },
+      "sisl/multiwalker_v9.py": {
+        "blob": "555eee6a7f37d5bb908152f6680a6d7ffe882f91",
+        "sha256": "1137bf70127d136b5590d634a7457576cbcc54eeeff695c1341b1c8ad1271d97"
+      }
+    },
+    "torch_threads": 1,
+    "upstream_commit": "e62d6bcdc6e0c28fa19c08545a63dc8370393495",
+    "versions": {
+      "box2d-py": "2.3.5",
+      "gymnasium": "0.29.1",
+      "numpy": "1.26.4",
+      "pettingzoo": "1.24.3",
+      "pygame": "2.5.2",
+      "stable-baselines3": "2.3.2",
+      "torch": "2.2.2+cpu"
+    }
+  },
+  "shared_source_hashes": {
+    "core.py": "459255a4e4797c8ea03fd6187c70802dcdc152bfce48d0f2405d2f88b7fe0a59",
+    "instrument.py": "8ce0c1b2fca29d6bc39c35393bb4bff1c97d0cd4254838bb2483c41f551347df",
+    "requirements.txt": "26d33ad281ff87732e748eddb45ae8f3aa4e1fced20f4627aa7b5ef4719768ce"
+  },
+  "source_commit": "50c4e08cf3d69c998ce95b8da1e1647a09b31339",
+  "source_hashes": {
+    "PLAN.json": "5885e136001bfc024540fd458703f4c2b38fa7a1fc7eb46650f197bea9554af0",
+    "PROTOCOL.md": "3b0e6d226db9e47a7530221a828c45811da1975b3d9af156142e3a2668ca6047",
+    "analysis.py": "51efe05713cba6b55dbafd890afeb98b994e345b46764b28790d91b94013f240",
+    "checks.py": "dab53b2554276fea54c9c1f80a4892077a873a439e9b936173846bef79172e51",
+    "design.py": "347ff1bd367d3dc6b4928a7160fef095291c4338bea3a96a23bf86f94d2ce418",
+    "publish.py": "e526ba19e7ca9db380a3c5092fb0430951787318753611b62d47a96053e8d7ea",
+    "train.py": "d950be85f59d06b4cdb42497d8ff77796a0b5ba91113a148ba4faebcb93db415"
+  },
+  "status": "FROZEN_FOR_DEVELOPMENT_ONLY",
+  "utc_before_training": "2026-09-13T16:00:31Z"
+}

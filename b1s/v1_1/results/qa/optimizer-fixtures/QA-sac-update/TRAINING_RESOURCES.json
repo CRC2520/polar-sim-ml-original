@@ -1,0 +1,16 @@
+{
+  "environment_steps": 512,
+  "final_actor_digest": "cb4e77be46562751d42dfc05be345e716ca8bdd20ef3e24915d0c22c380c96cf",
+  "initial_actor_digest": "9689a820e1dd2726afdc3ac9c143f44df57da73edf65c8175569abc618e2873e",
+  "optimizer_updates": 112,
+  "parameters_actor": 11736,
+  "parameters_critic": 22018,
+  "peak_rss_kib": 341592,
+  "raw_observation_normalization": false,
+  "replay_archived": false,
+  "replay_capacity": 512,
+  "replay_entries": 512,
+  "sampling_parallelism": 1,
+  "target_critic_parameters": 22018,
+  "training_seconds": 1.2338218920000372
+}

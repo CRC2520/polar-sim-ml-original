@@ -1,0 +1,255 @@
+{
+  "fixtures": [
+    {
+      "id": "QA-graph-update",
+      "native_steps": 512,
+      "resources": {
+        "environment_steps": 512,
+        "final_actor_digest": "858940eb62d95a3c663922834e8025e380dce9bf7787c78c6e2dc61e6e8f48f3",
+        "initial_actor_digest": "4b7890f73bb9d9c1895c9dc80b66b5c606fec0f5949c440620c776c7066f313b",
+        "optimizer_updates": 16,
+        "parameters_actor": 2288,
+        "parameters_critic": 10241,
+        "peak_rss_kib": 283468,
+        "raw_observation_normalization": false,
+        "rollout_is_total_transitions": 512,
+        "sampling_parallelism": 8,
+        "trainable_temporal_actor_memory": false,
+        "training_seconds": 0.5811226730000385
+      },
+      "scope": "QA optimizer execution, not discovery/competence data",
+      "status": "PASS"
+    },
+    {
+      "id": "QA-generic-update",
+      "native_steps": 512,
+      "resources": {
+        "environment_steps": 512,
+        "final_actor_digest": "4e2bd7c8324045d68ec180217d8de430a70b1f4fffaedfa5a338aa0cc6a3a90b",
+        "initial_actor_digest": "331f3d6041796fedf2b1e5f988e11d552df5c15006532b4ae714d55e8c561129",
+        "optimizer_updates": 16,
+        "parameters_actor": 10968,
+        "parameters_critic": 10241,
+        "peak_rss_kib": 287180,
+        "raw_observation_normalization": false,
+        "rollout_is_total_transitions": 512,
+        "sampling_parallelism": 8,
+        "trainable_temporal_actor_memory": false,
+        "training_seconds": 0.5327024610000421
+      },
+      "scope": "QA optimizer execution, not discovery/competence data",
+      "status": "PASS"
+    },
+    {
+      "id": "QA-sac-update",
+      "native_steps": 512,
+      "resources": {
+        "environment_steps": 512,
+        "final_actor_digest": "cb4e77be46562751d42dfc05be345e716ca8bdd20ef3e24915d0c22c380c96cf",
+        "initial_actor_digest": "9689a820e1dd2726afdc3ac9c143f44df57da73edf65c8175569abc618e2873e",
+        "optimizer_updates": 112,
+        "parameters_actor": 11736,
+        "parameters_critic": 22018,
+        "peak_rss_kib": 341592,
+        "raw_observation_normalization": false,
+        "replay_archived": false,
+        "replay_capacity": 512,
+        "replay_entries": 512,
+        "sampling_parallelism": 1,
+        "target_critic_parameters": 22018,
+        "training_seconds": 1.2338218920000372
+      },
+      "scope": "QA optimizer execution, not discovery/competence data",
+      "status": "PASS"
+    }
+  ],
+  "scientific_data": false,
+  "seeds": [
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 6298806095987901040
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 1996782062555460155
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 8288430856748733357
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 1092494689666375279
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 476349896108210579
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 6269435445396359493
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 5227898795153808633
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 2356778314493468506
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 1004121053439777271
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 4543088079697191239
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 737208451297050284
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 3345095254428043493
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 7359316700095530756
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 5514420858325053934
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 4740251510447041531
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 6579859887080908130
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 8827823000346383533
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 1606193266293603849
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 6592392779170911436
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 1416935096340623506
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 2421909896341173680
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 2167333732510132752
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 780069881537069357
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 7028166906750227494
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 8445713639945638288
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 8450563017509601282
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 8365228478238461371
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 9139536842733132440
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 565764039227064197
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 2366749549418373338
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 8239445331104249780
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 8551342061625062564
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 2919859562092630378
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 509947025279895181
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 3221875978562504238
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 4336655116839382723
+    },
+    {
+      "actual_split": "qa",
+      "requested_split": "qa-train",
+      "seed": 8203202315759480866
+    }
+  ],
+  "status": "PASS"
+}

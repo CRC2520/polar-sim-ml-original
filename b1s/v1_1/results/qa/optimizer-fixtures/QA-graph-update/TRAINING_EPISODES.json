@@ -1,0 +1,52 @@
+[
+  {
+    "cycles": 58,
+    "displacement": 0.2751178741455078,
+    "episode": 0,
+    "fallen_count": 1,
+    "native_steps": 461,
+    "return_value": -104.07684733346105,
+    "seed": 6269435445396359493,
+    "slot": 4
+  },
+  {
+    "cycles": 59,
+    "displacement": 0.5905189514160156,
+    "episode": 0,
+    "fallen_count": 1,
+    "native_steps": 467,
+    "return_value": -103.01557214061418,
+    "seed": 1092494689666375279,
+    "slot": 2
+  },
+  {
+    "cycles": 60,
+    "displacement": 0.30963134765625,
+    "episode": 0,
+    "fallen_count": 1,
+    "native_steps": 476,
+    "return_value": -103.07161340365808,
+    "seed": 476349896108210579,
+    "slot": 3
+  },
+  {
+    "cycles": 61,
+    "displacement": -0.6675930023193359,
+    "episode": 0,
+    "fallen_count": 1,
+    "native_steps": 487,
+    "return_value": -109.70008713006973,
+    "seed": 2356778314493468506,
+    "slot": 6
+  },
+  {
+    "cycles": 61,
+    "displacement": 0.8224430084228516,
+    "episode": 0,
+    "fallen_count": 1,
+    "native_steps": 488,
+    "return_value": -100.8884472126762,
+    "seed": 1004121053439777271,
+    "slot": 7
+  }
+]

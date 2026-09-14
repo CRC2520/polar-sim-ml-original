@@ -1,0 +1,14 @@
+{
+  "environment_steps": 512,
+  "final_actor_digest": "4e2bd7c8324045d68ec180217d8de430a70b1f4fffaedfa5a338aa0cc6a3a90b",
+  "initial_actor_digest": "331f3d6041796fedf2b1e5f988e11d552df5c15006532b4ae714d55e8c561129",
+  "optimizer_updates": 16,
+  "parameters_actor": 10968,
+  "parameters_critic": 10241,
+  "peak_rss_kib": 287180,
+  "raw_observation_normalization": false,
+  "rollout_is_total_transitions": 512,
+  "sampling_parallelism": 8,
+  "trainable_temporal_actor_memory": false,
+  "training_seconds": 0.5327024610000421
+}
