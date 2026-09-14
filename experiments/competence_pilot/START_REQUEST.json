@@ -1,0 +1,19 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "authorize_competence_pilot": true,
+  "code_commit": "4be59cf82499e2012fd4e2d1b925dbbff641f658",
+  "final_seeds_generated": false,
+  "namespace": "CP-NB-1.0.0-20260914",
+  "plan_sha256": "a19eb1c3793255cdf746eb19ab51578b21b36407ed6579f855a697ec998d633e",
+  "protocol_sha256": "e59cf6e0925a1fc946e9c6d136906b006876df4c51f872eeee432b4ba076f599",
+  "qa_artifact_id": 10369934700,
+  "qa_artifact_sha256": "d5db39ea94a4a435c3f7a581dede9627b23bb846191802b29b8903c36c2358ce",
+  "qa_run_id": 34900232567,
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "workflow_sha256": "ab72586b2f012fa9927d57cd12d51a988d1d6cf007814557fb7a20aa1aa0ec1a"
+}
