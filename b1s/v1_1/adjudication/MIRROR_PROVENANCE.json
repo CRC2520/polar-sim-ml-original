@@ -1,0 +1,67 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "adjudication_rerun": false,
+  "adjudication_status": "ADJUDICATION_COMPLETE",
+  "destination_branch": "research/b1s-v1.1-stability-baselines-20260913",
+  "destination_repository": "CRC2520/polar-sim-ml-original",
+  "files": [
+    {
+      "bytes": 19995,
+      "destination_path": "b1s/v1_1/adjudication/ADJUDICATION.json",
+      "git_blob_sha": "c23e1cbed5430856bd642eabbaff75f4884e8f9b",
+      "sha256": "83640750aa2bae26e60a6e7770d534316c0a1fe24837b132d7c11e57bb33f4ba",
+      "source_path": "b1s/v1_1/adjudication/ADJUDICATION.json"
+    },
+    {
+      "bytes": 3698,
+      "destination_path": "b1s/v1_1/adjudication/ADJUDICATION.md",
+      "git_blob_sha": "59e1c2c31a9c58f89b5eefc68af87f0a7b142a19",
+      "sha256": "91f1cb1efb4e504904722e2d562d1dd80bb7f303a9c208e8c5b4a4994a18e84b",
+      "source_path": "b1s/v1_1/adjudication/ADJUDICATION.md"
+    },
+    {
+      "bytes": 731,
+      "destination_path": "b1s/v1_1/adjudication/ADJUDICATION_MANIFEST.json",
+      "git_blob_sha": "b941da34e99414d688ab9a13baed7148b72d08d6",
+      "sha256": "f47d82edf160d44664dde63fda658e00dc0b5d0433082766f592ca8995a1aba7",
+      "source_path": "b1s/v1_1/adjudication/ADJUDICATION_MANIFEST.json"
+    },
+    {
+      "bytes": 3944,
+      "destination_path": "b1s/v1_1/adjudication/translations/es/ADJUDICATION.md",
+      "git_blob_sha": "05a6cc5b85adaa1fbd60d7947c34ff9ce181bdd9",
+      "sha256": "953b3909908644bb8f9e133039358b4d578490096a24f4c0d987101668181643",
+      "source_path": "b1s/v1_1/adjudication/translations/es/ADJUDICATION.md"
+    }
+  ],
+  "final_seeds_generated": false,
+  "freeze_sha256": "9a61e714e78b9c2235dfc6dfe4093be0f5b66a9fa3ae4b15ef967a12f354d7c8",
+  "new_experiments_run": false,
+  "note": "verified_copies_commit contains the four verified copies before addition of this provenance file; this file does not claim its own commit SHA.",
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "results_modified": false,
+  "schema": "b1s-v1.1-adjudication-mirror-v1",
+  "scientific_publication_commit": "de35a0995d96ff548772fa56c3620466495add72",
+  "scientific_source_commit": "50c4e08cf3d69c998ce95b8da1e1647a09b31339",
+  "scientific_status": "B1S_V1_1_DEVELOPMENT_COMPLETE_WITH_LIMITATIONS",
+  "source_commit": "6625fb6dfbd9505115017d51eb6d534add9fc35b",
+  "source_repository": "CRC2520/POLAR_MODEL_CRC",
+  "status": "VERIFIED_IDENTICAL_GIT_OBJECTS",
+  "verification": {
+    "compare_against_scientific_publication": "Four additions under b1s/v1_1/adjudication only; no existing file modified or deleted.",
+    "imported_entries_verified": 44,
+    "method": "SHA-256 and Git blob IDs recomputed from complete original documentary artifact bytes; source and destination blob IDs read through the GitHub connector at immutable commits and matched for all four files.",
+    "original_adjudication_manifest_sha256": "PASS",
+    "original_freeze_receipt_sha256": "PASS",
+    "scope": "Documentary copy verification through content-addressed Git objects, not independent training replication or an independent raw-HTTP rehash of destination files.",
+    "source_and_destination_git_blob_identity": "PASS",
+    "source_artifact_id": 10330029112,
+    "source_artifact_zip_sha256": "42504ec6a08c9bdb3cf75fd8d89fb2af2e8502396ae7baf917f7acfa1ba6eeb7"
+  },
+  "verified_copies_commit": "69ac107b5d94ed584c1be00a0b68fd2cdb02eb62"
+}
