@@ -1,0 +1,49 @@
+{
+  "B1E": "ON_HOLD_PENDING_REVIEW",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "baseline_scope": "Competence is assessed independently; no superiority inference against an incompetent baseline",
+  "causal_external_difference_by_rep": [
+    0.010807979408127777,
+    0.0,
+    0.0,
+    -20.710789252480016,
+    0.0,
+    0.0
+  ],
+  "confirmatory": false,
+  "development_only": true,
+  "final_seeds_generated": false,
+  "generic_competence_diagnostics_pass": false,
+  "identity_control_roles": [],
+  "limitations": [
+    "Six discovery and six fresh competitive initializations: limited precision",
+    "Longer finite budgets do not establish convergence",
+    "PPO uses eight synchronous native streams; SAC uses one, with update and memory differences disclosed",
+    "Different hypothesis search spaces and model sizes; not universal equal capacity",
+    "Finite-panel action agreement is not global equivalence",
+    "Neither catalogue correspondence nor independent-family transfer is evaluated"
+  ],
+  "no_v1_results_replaced": true,
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_scientific_review": true,
+  "route_use_identified": true,
+  "selected_support": "000001",
+  "source_commit": "50c4e08cf3d69c998ce95b8da1e1647a09b31339",
+  "stability_diagnostic_pass": false,
+  "stages": {
+    "QA": "EXECUTED",
+    "baseline_calibration": "EXECUTED",
+    "causal": "EXECUTED",
+    "decision": "EXECUTED",
+    "fresh_competition": "EXECUTED",
+    "functional_probes": "EXECUTED",
+    "screening": "EXECUTED",
+    "selection_freeze": "EXECUTED",
+    "stability": "EXECUTED"
+  },
+  "status": "B1S_V1_1_DEVELOPMENT_COMPLETE_WITH_LIMITATIONS",
+  "unfavorable_findings_are_not_technical_failures": true
+}
