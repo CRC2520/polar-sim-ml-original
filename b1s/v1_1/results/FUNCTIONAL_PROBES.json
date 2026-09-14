@@ -1,0 +1,772 @@
+{
+  "replicates": [
+    {
+      "observations": 512,
+      "pairs": [
+        {
+          "a": "S-M0",
+          "b": "S-M2-fixed",
+          "max_abs": 0.9959125518798828,
+          "mean_abs": 0.20809192955493927,
+          "rms": 0.26715704798698425,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M3",
+          "max_abs": 1.5107073783874512,
+          "mean_abs": 0.4780532419681549,
+          "rms": 0.6224083304405212,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M4",
+          "max_abs": 1.5856976509094238,
+          "mean_abs": 0.7702495455741882,
+          "rms": 0.8698331117630005,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M5",
+          "max_abs": 1.8514500856399536,
+          "mean_abs": 0.8335793614387512,
+          "rms": 0.9839270710945129,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M6",
+          "max_abs": 1.9100315570831299,
+          "mean_abs": 0.7517679333686829,
+          "rms": 0.9262968301773071,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M3",
+          "max_abs": 1.40507173538208,
+          "mean_abs": 0.347646027803421,
+          "rms": 0.4441452920436859,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M4",
+          "max_abs": 1.5330724716186523,
+          "mean_abs": 0.8757902979850769,
+          "rms": 0.9819896817207336,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M5",
+          "max_abs": 1.7572263479232788,
+          "mean_abs": 0.8331575393676758,
+          "rms": 0.9645146131515503,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M6",
+          "max_abs": 1.8217897415161133,
+          "mean_abs": 0.7151123881340027,
+          "rms": 0.8736609816551208,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M4",
+          "max_abs": 1.7476342916488647,
+          "mean_abs": 1.1711399555206299,
+          "rms": 1.337450385093689,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M5",
+          "max_abs": 1.8527336120605469,
+          "mean_abs": 1.1272023916244507,
+          "rms": 1.2202807664871216,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M6",
+          "max_abs": 1.8729801177978516,
+          "mean_abs": 0.7146963477134705,
+          "rms": 0.967420220375061,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M4",
+          "b": "S-M5",
+          "max_abs": 1.705113410949707,
+          "mean_abs": 0.6473715305328369,
+          "rms": 0.7894482016563416,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M4",
+          "b": "S-M6",
+          "max_abs": 1.9439809322357178,
+          "mean_abs": 0.9940373301506042,
+          "rms": 1.192165493965149,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M5",
+          "b": "S-M6",
+          "max_abs": 1.9571952819824219,
+          "mean_abs": 0.8423104286193848,
+          "rms": 1.0171453952789307,
+          "within_predeclared_probe_margins": false
+        }
+      ],
+      "panel_sha256": "827edf4ba68af8f15fd7c9f9468a64012bcc826196e530963745a374875102d2",
+      "rep": 0,
+      "scope": "Finite common reachable observation panel only. Neither a policy-equivalence theorem nor a population equivalence test."
+    },
+    {
+      "observations": 512,
+      "pairs": [
+        {
+          "a": "S-M0",
+          "b": "S-M2-fixed",
+          "max_abs": 1.4800515174865723,
+          "mean_abs": 0.7929844856262207,
+          "rms": 0.8931986689567566,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M3",
+          "max_abs": 1.7827298641204834,
+          "mean_abs": 0.8628489375114441,
+          "rms": 1.044586181640625,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M4",
+          "max_abs": 1.3577358722686768,
+          "mean_abs": 0.36768054962158203,
+          "rms": 0.4655609130859375,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M5",
+          "max_abs": 1.811694622039795,
+          "mean_abs": 0.8632126450538635,
+          "rms": 0.991474449634552,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M6",
+          "max_abs": 1.8679943084716797,
+          "mean_abs": 1.03633451461792,
+          "rms": 1.2244694232940674,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M3",
+          "max_abs": 1.0874202251434326,
+          "mean_abs": 0.3351839482784271,
+          "rms": 0.4080185294151306,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M4",
+          "max_abs": 1.4898762702941895,
+          "mean_abs": 0.7041232585906982,
+          "rms": 0.8298399448394775,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M5",
+          "max_abs": 1.829601764678955,
+          "mean_abs": 0.37914881110191345,
+          "rms": 0.47953084111213684,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M6",
+          "max_abs": 1.941449522972107,
+          "mean_abs": 0.8026621341705322,
+          "rms": 0.9302886724472046,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M4",
+          "max_abs": 1.7605375051498413,
+          "mean_abs": 0.8328084945678711,
+          "rms": 0.9811524152755737,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M5",
+          "max_abs": 1.6507741212844849,
+          "mean_abs": 0.4214561879634857,
+          "rms": 0.5336911678314209,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M6",
+          "max_abs": 1.907304048538208,
+          "mean_abs": 0.7954444289207458,
+          "rms": 0.9853510856628418,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M4",
+          "b": "S-M5",
+          "max_abs": 1.7048182487487793,
+          "mean_abs": 0.7261624336242676,
+          "rms": 0.861433207988739,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M4",
+          "b": "S-M6",
+          "max_abs": 1.8633811473846436,
+          "mean_abs": 0.9130678176879883,
+          "rms": 1.0583621263504028,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M5",
+          "b": "S-M6",
+          "max_abs": 1.9806255102157593,
+          "mean_abs": 0.8422143459320068,
+          "rms": 0.9914491176605225,
+          "within_predeclared_probe_margins": false
+        }
+      ],
+      "panel_sha256": "1e074a60fc5bbe5bc37ab0fb91fcc055bb917ca1ffd105f580211b4c5808dd40",
+      "rep": 1,
+      "scope": "Finite common reachable observation panel only. Neither a policy-equivalence theorem nor a population equivalence test."
+    },
+    {
+      "observations": 499,
+      "pairs": [
+        {
+          "a": "S-M0",
+          "b": "S-M2-fixed",
+          "max_abs": 1.1222074031829834,
+          "mean_abs": 0.3212703764438629,
+          "rms": 0.4165038466453552,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M3",
+          "max_abs": 1.1723653078079224,
+          "mean_abs": 0.3687659800052643,
+          "rms": 0.449328750371933,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M4",
+          "max_abs": 1.3467859029769897,
+          "mean_abs": 0.5366691946983337,
+          "rms": 0.6332257390022278,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M5",
+          "max_abs": 1.6889305114746094,
+          "mean_abs": 0.5092067718505859,
+          "rms": 0.6595948934555054,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M6",
+          "max_abs": 1.6847983598709106,
+          "mean_abs": 0.7286543846130371,
+          "rms": 0.8522970080375671,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M3",
+          "max_abs": 0.887347936630249,
+          "mean_abs": 0.2089962363243103,
+          "rms": 0.27953895926475525,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M4",
+          "max_abs": 1.4019691944122314,
+          "mean_abs": 0.3987036943435669,
+          "rms": 0.4682166278362274,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M5",
+          "max_abs": 1.8077325820922852,
+          "mean_abs": 0.6615540385246277,
+          "rms": 0.806666910648346,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M6",
+          "max_abs": 1.8543627262115479,
+          "mean_abs": 0.7740668654441833,
+          "rms": 0.9293814897537231,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M4",
+          "max_abs": 1.242196798324585,
+          "mean_abs": 0.2839316725730896,
+          "rms": 0.4004048705101013,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M5",
+          "max_abs": 1.790858507156372,
+          "mean_abs": 0.6989654898643494,
+          "rms": 0.8645578622817993,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M6",
+          "max_abs": 1.8557324409484863,
+          "mean_abs": 0.7772809863090515,
+          "rms": 0.9718194007873535,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M4",
+          "b": "S-M5",
+          "max_abs": 1.8988691568374634,
+          "mean_abs": 0.8122368454933167,
+          "rms": 0.9786176681518555,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M4",
+          "b": "S-M6",
+          "max_abs": 1.9405810832977295,
+          "mean_abs": 0.7623394727706909,
+          "rms": 0.9883931875228882,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M5",
+          "b": "S-M6",
+          "max_abs": 1.9781041145324707,
+          "mean_abs": 0.9058802723884583,
+          "rms": 1.0505056381225586,
+          "within_predeclared_probe_margins": false
+        }
+      ],
+      "panel_sha256": "6ac3401cc1cdd3e5e1d4ea36b10f830670ad78eb4657cf810697dae5845d6e59",
+      "rep": 2,
+      "scope": "Finite common reachable observation panel only. Neither a policy-equivalence theorem nor a population equivalence test."
+    },
+    {
+      "observations": 512,
+      "pairs": [
+        {
+          "a": "S-M0",
+          "b": "S-M2-fixed",
+          "max_abs": 1.5691927671432495,
+          "mean_abs": 0.8698498606681824,
+          "rms": 0.9990994930267334,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M3",
+          "max_abs": 1.6781084537506104,
+          "mean_abs": 0.41922250390052795,
+          "rms": 0.537484347820282,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M4",
+          "max_abs": 1.3010685443878174,
+          "mean_abs": 0.22879338264465332,
+          "rms": 0.2985498607158661,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M5",
+          "max_abs": 1.6587481498718262,
+          "mean_abs": 0.44043979048728943,
+          "rms": 0.579535186290741,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M6",
+          "max_abs": 1.869678258895874,
+          "mean_abs": 0.8790833353996277,
+          "rms": 1.0318973064422607,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M3",
+          "max_abs": 1.7854032516479492,
+          "mean_abs": 0.8606337904930115,
+          "rms": 0.9708291888237,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M4",
+          "max_abs": 1.6508522033691406,
+          "mean_abs": 0.9095339775085449,
+          "rms": 1.0124897956848145,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M5",
+          "max_abs": 1.7164288759231567,
+          "mean_abs": 0.8065685629844666,
+          "rms": 0.9308778643608093,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M6",
+          "max_abs": 1.8570462465286255,
+          "mean_abs": 0.8246733546257019,
+          "rms": 0.9869791269302368,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M4",
+          "max_abs": 1.4841456413269043,
+          "mean_abs": 0.276761919260025,
+          "rms": 0.3548707365989685,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M5",
+          "max_abs": 1.9402978420257568,
+          "mean_abs": 0.5651845932006836,
+          "rms": 0.7463647127151489,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M6",
+          "max_abs": 1.9922051429748535,
+          "mean_abs": 0.8949861526489258,
+          "rms": 1.07534658908844,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M4",
+          "b": "S-M5",
+          "max_abs": 1.8238496780395508,
+          "mean_abs": 0.48069730401039124,
+          "rms": 0.633886992931366,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M4",
+          "b": "S-M6",
+          "max_abs": 1.9089641571044922,
+          "mean_abs": 0.8858224749565125,
+          "rms": 1.0499622821807861,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M5",
+          "b": "S-M6",
+          "max_abs": 1.95021653175354,
+          "mean_abs": 0.8861956596374512,
+          "rms": 1.0273354053497314,
+          "within_predeclared_probe_margins": false
+        }
+      ],
+      "panel_sha256": "e7410e1c479d6bf9e36390b62aa197921c9499a49b89ce035337e4ee9943ed06",
+      "rep": 3,
+      "scope": "Finite common reachable observation panel only. Neither a policy-equivalence theorem nor a population equivalence test."
+    },
+    {
+      "observations": 512,
+      "pairs": [
+        {
+          "a": "S-M0",
+          "b": "S-M2-fixed",
+          "max_abs": 1.5875582695007324,
+          "mean_abs": 1.0810027122497559,
+          "rms": 1.152410864830017,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M3",
+          "max_abs": 1.7707504034042358,
+          "mean_abs": 1.3642168045043945,
+          "rms": 1.3924829959869385,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M4",
+          "max_abs": 1.7093135118484497,
+          "mean_abs": 1.0923253297805786,
+          "rms": 1.1816836595535278,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M5",
+          "max_abs": 1.5734988451004028,
+          "mean_abs": 0.4802670478820801,
+          "rms": 0.6325158476829529,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M6",
+          "max_abs": 1.893864393234253,
+          "mean_abs": 0.9617605209350586,
+          "rms": 1.1510602235794067,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M3",
+          "max_abs": 1.5986214876174927,
+          "mean_abs": 0.3625722825527191,
+          "rms": 0.517452597618103,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M4",
+          "max_abs": 1.4202919006347656,
+          "mean_abs": 0.3132847249507904,
+          "rms": 0.45126044750213623,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M5",
+          "max_abs": 1.6873829364776611,
+          "mean_abs": 0.7400093078613281,
+          "rms": 0.8547191619873047,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M6",
+          "max_abs": 1.8961050510406494,
+          "mean_abs": 0.7535479664802551,
+          "rms": 0.9212249517440796,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M4",
+          "max_abs": 1.7473660707473755,
+          "mean_abs": 0.39834585785865784,
+          "rms": 0.6325535178184509,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M5",
+          "max_abs": 1.8251001834869385,
+          "mean_abs": 0.9404804706573486,
+          "rms": 1.0564591884613037,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M6",
+          "max_abs": 1.9503486156463623,
+          "mean_abs": 0.8248762488365173,
+          "rms": 1.0519318580627441,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M4",
+          "b": "S-M5",
+          "max_abs": 1.7358405590057373,
+          "mean_abs": 0.7947818636894226,
+          "rms": 0.9163456559181213,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M4",
+          "b": "S-M6",
+          "max_abs": 1.9595062732696533,
+          "mean_abs": 0.7733356356620789,
+          "rms": 0.9759993553161621,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M5",
+          "b": "S-M6",
+          "max_abs": 1.9271160364151,
+          "mean_abs": 0.8262385725975037,
+          "rms": 0.9758553504943848,
+          "within_predeclared_probe_margins": false
+        }
+      ],
+      "panel_sha256": "07ee126b4cbe737b49c79790703e2229aef51e4e8f3ef87ab48f52e701a3395c",
+      "rep": 4,
+      "scope": "Finite common reachable observation panel only. Neither a policy-equivalence theorem nor a population equivalence test."
+    },
+    {
+      "observations": 512,
+      "pairs": [
+        {
+          "a": "S-M0",
+          "b": "S-M2-fixed",
+          "max_abs": 1.742049217224121,
+          "mean_abs": 1.0464516878128052,
+          "rms": 1.1354191303253174,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M3",
+          "max_abs": 0.9219626784324646,
+          "mean_abs": 0.17418861389160156,
+          "rms": 0.24507755041122437,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M4",
+          "max_abs": 1.1701585054397583,
+          "mean_abs": 0.16650816798210144,
+          "rms": 0.23783540725708008,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M5",
+          "max_abs": 1.8785459995269775,
+          "mean_abs": 0.6988930106163025,
+          "rms": 0.8576904535293579,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M0",
+          "b": "S-M6",
+          "max_abs": 1.9169132709503174,
+          "mean_abs": 0.7840543389320374,
+          "rms": 1.0006746053695679,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M3",
+          "max_abs": 1.6714084148406982,
+          "mean_abs": 1.0245076417922974,
+          "rms": 1.1074117422103882,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M4",
+          "max_abs": 1.5966012477874756,
+          "mean_abs": 0.9856196045875549,
+          "rms": 1.0572588443756104,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M5",
+          "max_abs": 1.7870091199874878,
+          "mean_abs": 0.7309330105781555,
+          "rms": 0.8657174110412598,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M2-fixed",
+          "b": "S-M6",
+          "max_abs": 1.9247255325317383,
+          "mean_abs": 0.9764851927757263,
+          "rms": 1.1361737251281738,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M4",
+          "max_abs": 1.1840729713439941,
+          "mean_abs": 0.15386831760406494,
+          "rms": 0.21810854971408844,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M5",
+          "max_abs": 1.8973205089569092,
+          "mean_abs": 0.7109128832817078,
+          "rms": 0.8863707780838013,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M3",
+          "b": "S-M6",
+          "max_abs": 1.9656457901000977,
+          "mean_abs": 0.8015223145484924,
+          "rms": 1.0173414945602417,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M4",
+          "b": "S-M5",
+          "max_abs": 1.9307392835617065,
+          "mean_abs": 0.6889374852180481,
+          "rms": 0.8493451476097107,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M4",
+          "b": "S-M6",
+          "max_abs": 1.9635381698608398,
+          "mean_abs": 0.7857134938240051,
+          "rms": 0.9795376062393188,
+          "within_predeclared_probe_margins": false
+        },
+        {
+          "a": "S-M5",
+          "b": "S-M6",
+          "max_abs": 1.9686105251312256,
+          "mean_abs": 0.7140569686889648,
+          "rms": 0.8987067937850952,
+          "within_predeclared_probe_margins": false
+        }
+      ],
+      "panel_sha256": "a8973f98e41fcb728b8f13da6458fd33c2e499bcd548f68ea36416c65fae84f0",
+      "rep": 5,
+      "scope": "Finite common reachable observation panel only. Neither a policy-equivalence theorem nor a population equivalence test."
+    }
+  ]
+}

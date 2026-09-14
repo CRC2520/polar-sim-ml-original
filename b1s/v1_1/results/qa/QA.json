@@ -1,0 +1,50 @@
+{
+  "design": {
+    "development_only": true,
+    "full_planned_steps": 62128128,
+    "future_competitive_fits": 36,
+    "future_competitive_steps": 18874368,
+    "screening_fits": 276,
+    "screening_steps": 43253760,
+    "status": "PASS"
+  },
+  "history": {
+    "base_commit": "29feb9f66eb5192616b75581ba6c947ea863c950",
+    "changed": [],
+    "preserved_objects_and_modes": 1625,
+    "status": "PASS"
+  },
+  "instrument_status": "PASS",
+  "native_physical_prefix": "PASS on QA states",
+  "runtime": {
+    "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+    "python": "3.11.16",
+    "sources": {
+      "sisl/multiwalker/multiwalker.py": {
+        "blob": "8edf250d1dec03d4ae2ee56c9e2dff5fe50e875c",
+        "sha256": "480d81f415ae4fef2fb93cf93a4d2859f2af0012fc5f16f9109d78fb4dfceb68"
+      },
+      "sisl/multiwalker/multiwalker_base.py": {
+        "blob": "476b3950cc1146e53338ec4bf48b9291b6143a84",
+        "sha256": "5e5ec639fa71295daf991ab762e9adf45f95b72d6848911e3b8ea98ae1dd3f7e"
+      },
+      "sisl/multiwalker_v9.py": {
+        "blob": "555eee6a7f37d5bb908152f6680a6d7ffe882f91",
+        "sha256": "1137bf70127d136b5590d634a7457576cbcc54eeeff695c1341b1c8ad1271d97"
+      }
+    },
+    "torch_threads": 1,
+    "upstream_commit": "e62d6bcdc6e0c28fa19c08545a63dc8370393495",
+    "versions": {
+      "box2d-py": "2.3.5",
+      "gymnasium": "0.29.1",
+      "numpy": "1.26.4",
+      "pettingzoo": "1.24.3",
+      "pygame": "2.5.2",
+      "stable-baselines3": "2.3.2",
+      "torch": "2.2.2+cpu"
+    }
+  },
+  "status": "PASS",
+  "vector_gae": "PASS"
+}

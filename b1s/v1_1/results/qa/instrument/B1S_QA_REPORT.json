@@ -1,0 +1,216 @@
+{
+  "B1E_executed": false,
+  "C6": "PASS algebraic routing; native 16-channel catalogue mapping NOT_APPLICABLE",
+  "core": {
+    "B1E_executed": false,
+    "density_jacobian": "PASS",
+    "gradient_paths": "PASS",
+    "mask_count": 42,
+    "mathematical_coordinate_identity": "PASS; not a catalogue realization",
+    "max_algebraic_error": 0.0,
+    "route_cases": 258,
+    "status": "PASS"
+  },
+  "failures": [],
+  "final_seeds_generated": false,
+  "four_regimes": [
+    {
+      "observation_sha": "f61711e5a05322cadaec6bc4d36d6e09e6125721daed51edeb37621ce34bf449",
+      "regime": [
+        0.0,
+        0.0
+      ],
+      "reward": -0.013730136367181936,
+      "seed": 3040966160,
+      "terminal": false
+    },
+    {
+      "observation_sha": "861f9b0b26859d6c0a2aba62a96e4faf6125d2ddb3ac5446dad6fae45e37fcf6",
+      "regime": [
+        0.5,
+        0.0
+      ],
+      "reward": -0.04024395175899068,
+      "seed": 1490926455,
+      "terminal": false
+    },
+    {
+      "observation_sha": "72f8d72f9d50494944631f36d9ccdf2918d53e133234616b6e098a785c5f7427",
+      "regime": [
+        0.0,
+        0.5
+      ],
+      "reward": -0.04024710273370147,
+      "seed": 1021327691,
+      "terminal": false
+    },
+    {
+      "observation_sha": "53e861dbe73358a0d4c7238660cc8316d257d1a84e8a353f66794ab83fa48fc9",
+      "regime": [
+        0.5,
+        0.5
+      ],
+      "reward": -0.06675953782784443,
+      "seed": 1076861932,
+      "terminal": false
+    }
+  ],
+  "instrument_implemented": true,
+  "prefix_replay": "EXACT on retained QA prefixes",
+  "reachable_snapshot_sensitivity": "PASS",
+  "replay": [
+    {
+      "action_change": 0.0012903549941256642,
+      "state_sha": "20ac12b844a67b153b31a0cf7aec1696bf4c351e9430f6beb349bd308d401b57",
+      "t": 0
+    },
+    {
+      "action_change": 0.0013497350737452507,
+      "state_sha": "c3a20210b7ffb0109c0b34f71a8fe3a4e586b4456651d63942b5e24f2bdf3004",
+      "t": 1
+    },
+    {
+      "action_change": 0.0024298997595906258,
+      "state_sha": "d08633540dcf41734216566fc6f8a7f776a9d7b1425b370ecf4853372eb9bc36",
+      "t": 2
+    },
+    {
+      "action_change": 0.0021619279868900776,
+      "state_sha": "adb722a65bc33520c7348f60e3ac6ca45159053b259801d78533232ab173806f",
+      "t": 3
+    },
+    {
+      "action_change": 0.0028871705289930105,
+      "state_sha": "12c8645b8cb21b28ba6c7e69a1c491b4dfeeb3927931492c2ae475e86a7da5f1",
+      "t": 4
+    },
+    {
+      "action_change": 0.0032870618160814047,
+      "state_sha": "7a2a860081c45664ab4419ed8f0b1ed4d976db2e8d71a26fdf2d3269dc13c3ff",
+      "t": 5
+    },
+    {
+      "action_change": 0.0017070919275283813,
+      "state_sha": "6d8b3683002fcf2dbace2f35ae66b5ae8ba8f311841a26c928e424855261bc3c",
+      "t": 6
+    },
+    {
+      "action_change": 0.0016451393021270633,
+      "state_sha": "ded36c7f4262ad2074cc1444a16208aa8719f249dedec6e7f487f9cd0d50da4c",
+      "t": 7
+    },
+    {
+      "action_change": 0.0026509882882237434,
+      "state_sha": "c15c50d3ea350f544ff98f9b472ffeecedb8df95672f605edde898ef5f242131",
+      "t": 8
+    },
+    {
+      "action_change": 0.0035287372302263975,
+      "state_sha": "a1a83451197fa7568102f376dbdb07e5c975be4848822296b3f53fd0ade33ab3",
+      "t": 9
+    },
+    {
+      "action_change": 0.004182672128081322,
+      "state_sha": "a2d0898cf3709b6a77f27381aec9856bcba766a221afa686ca45954b496f8525",
+      "t": 10
+    },
+    {
+      "action_change": 0.004820686765015125,
+      "state_sha": "b6d4a8ed4ee6241271f8d3ea436e80c56f98bda99082a4aed832fe96ae63a5f0",
+      "t": 11
+    },
+    {
+      "action_change": 0.003675171174108982,
+      "state_sha": "ed7f4fc55a8891b45e16cd4274c62d16875703ea6af3213931f60d9b58e49ec8",
+      "t": 12
+    },
+    {
+      "action_change": 0.0037094331346452236,
+      "state_sha": "f1f7c54755809675b4e7eb541d3bc1e6f218c481ca1c39cefe707c9b59c29742",
+      "t": 13
+    },
+    {
+      "action_change": 0.0036622104234993458,
+      "state_sha": "49bec46b68ca5fcc7898e8f3a291978f17589195ff851c4d083c2e83ad73d199",
+      "t": 14
+    },
+    {
+      "action_change": 0.0024809343740344048,
+      "state_sha": "fe7be528073014afa875d266d55b6a1187933b78050340c05ed56018f1729d60",
+      "t": 15
+    },
+    {
+      "action_change": 0.0029062775429338217,
+      "state_sha": "c8e6c241f1c1f12d5d86f7e9f09ff533a6a8fadd2347ece97163bce3ecb807ac",
+      "t": 16
+    },
+    {
+      "action_change": 0.003126392373815179,
+      "state_sha": "daf90c6d501ba11bc4b0eed456c61e68149aafa30eec80117d98b6645925031c",
+      "t": 17
+    },
+    {
+      "action_change": 0.003017501439899206,
+      "state_sha": "918aee777ce760eb83d862041f6e25772e27559e8a9e03627bdda873008b3d7e",
+      "t": 18
+    },
+    {
+      "action_change": 0.0031781785655766726,
+      "state_sha": "94f93769d8e813c395368e144fb11050f6ae3375b1fbf4947b1f7a528cf0e2a4",
+      "t": 19
+    },
+    {
+      "action_change": 0.0034898961894214153,
+      "state_sha": "4f43397d22588b596657d13216dd8d2032ade7a8ef81aec8bc403bed7eb56ce4",
+      "t": 20
+    },
+    {
+      "action_change": 0.0035313647240400314,
+      "state_sha": "13a8ea03a10aef033d84b5d9d0bbc992f6db5ff59cd42df806dc203b593cc1b9",
+      "t": 21
+    },
+    {
+      "action_change": 0.0038351938128471375,
+      "state_sha": "848731c0f1b4a7a6e2d5eae69ede9814087dd7587f2537456c670dc6c35db532",
+      "t": 22
+    },
+    {
+      "action_change": 0.003766192588955164,
+      "state_sha": "97fd4582919a1015a36c9537c17df321d485706a47134158012cf398fad256a7",
+      "t": 23
+    }
+  ],
+  "runtime": {
+    "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+    "python": "3.11.16",
+    "sources": {
+      "sisl/multiwalker/multiwalker.py": {
+        "blob": "8edf250d1dec03d4ae2ee56c9e2dff5fe50e875c",
+        "sha256": "480d81f415ae4fef2fb93cf93a4d2859f2af0012fc5f16f9109d78fb4dfceb68"
+      },
+      "sisl/multiwalker/multiwalker_base.py": {
+        "blob": "476b3950cc1146e53338ec4bf48b9291b6143a84",
+        "sha256": "5e5ec639fa71295daf991ab762e9adf45f95b72d6848911e3b8ea98ae1dd3f7e"
+      },
+      "sisl/multiwalker_v9.py": {
+        "blob": "555eee6a7f37d5bb908152f6680a6d7ffe882f91",
+        "sha256": "1137bf70127d136b5590d634a7457576cbcc54eeeff695c1341b1c8ad1271d97"
+      }
+    },
+    "torch_threads": 1,
+    "upstream_commit": "e62d6bcdc6e0c28fa19c08545a63dc8370393495",
+    "versions": {
+      "box2d-py": "2.3.5",
+      "gymnasium": "0.29.1",
+      "numpy": "1.26.4",
+      "pettingzoo": "1.24.3",
+      "pygame": "2.5.2",
+      "stable-baselines3": "2.3.2",
+      "torch": "2.2.2+cpu"
+    }
+  },
+  "scope": "QA only; no training or final evidence",
+  "seconds_per_actor_plus_native_step": 0.001404820042968602,
+  "status": "PASS",
+  "training_run": false
+}

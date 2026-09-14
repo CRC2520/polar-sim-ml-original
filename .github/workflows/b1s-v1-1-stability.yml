@@ -1,0 +1,311 @@
+name: B1-S v1.1 stability and comparator competence
+on:
+  push:
+    branches: [research/b1s-v1.1-stability-baselines-20260913]
+    paths: ['.github/workflows/b1s-v1-1-stability.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: b1s-v1-1-development
+  cancel-in-progress: false
+env:
+  SDL_VIDEODRIVER: dummy
+  SDL_AUDIODRIVER: dummy
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  preflight:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /b1s/v1_1/
+            /b1s/execution/*.py
+            /b1s/execution/*.json
+            /b1s/execution/requirements.txt
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install preserved scientific runtime
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y swig
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - name: Validate instrument and new learner fixtures, then freeze
+        run: |
+          mkdir -p qa
+          python -m compileall -q b1s/v1_1
+          python -m b1s.v1_1.checks --out qa 2>&1 | tee qa/QA_LOG.txt
+          python -m pip freeze --all > qa/ENVIRONMENT_LOCK.txt
+          lscpu > qa/CPU.txt
+          df -h > qa/DISK.txt
+          python - <<'PY'
+          import json,pathlib
+          f=json.loads(pathlib.Path('qa/DEVELOPMENT_FREEZE.json').read_text())
+          assert f['status']=='FROZEN_FOR_DEVELOPMENT_ONLY'
+          assert f['final_seeds_generated'] is False and f['B1E_executed'] is False
+          assert len(f['registry'])==276
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: b1s11-qa-freeze
+          path: |
+            qa/
+            b1s/v1_1/*.py
+            b1s/v1_1/PLAN.json
+            b1s/v1_1/PROTOCOL.md
+          retention-days: 90
+          if-no-files-found: error
+  screening:
+    needs: preflight
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        shard: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /b1s/v1_1/
+            /b1s/execution/*.py
+            /b1s/execution/*.json
+            /b1s/execution/requirements.txt
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install same runtime
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y swig
+          python -m pip install -r b1s/execution/requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1s11-qa-freeze
+          path: frozen
+      - name: Verify frozen source and planned registry
+        run: |
+          python - <<'PY'
+          import json,pathlib,hashlib,os
+          from b1s.v1_1.design import screening_registry
+          from b1s.v1_1.analysis import canonical_hash
+          f=json.loads(pathlib.Path('frozen/qa/DEVELOPMENT_FREEZE.json').read_text())
+          assert f['source_commit']==os.environ['GITHUB_SHA']
+          assert f['registry_sha256']==canonical_hash(screening_registry())
+          for name,h in f['source_hashes'].items():assert hashlib.sha256((pathlib.Path('b1s/v1_1')/name).read_bytes()).hexdigest()==h,name
+          for name,h in f['shared_source_hashes'].items():assert hashlib.sha256((pathlib.Path('b1s/execution')/name).read_bytes()).hexdigest()==h,name
+          PY
+      - name: Execute assigned development fits
+        env:
+          SHARD: ${{ matrix.shard }}
+        run: |
+          mkdir -p screen
+          python -m b1s.v1_1.train screen --shard "$SHARD" --shards 24 --out screen 2>&1 | tee "screen/SHARD_${SHARD}_LOG.txt"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: b1s11-screen-${{ matrix.shard }}
+          path: screen/
+          retention-days: 90
+          if-no-files-found: warn
+  selection:
+    needs: [preflight,screening]
+    if: always() && needs.preflight.result == 'success'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    outputs:
+      selected: ${{ steps.select.outcome }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /b1s/v1_1/
+            /b1s/execution/*.py
+            /b1s/execution/*.json
+            /b1s/execution/requirements.txt
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install runtime
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y swig
+          python -m pip install -r b1s/execution/requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1s11-qa-freeze
+          path: frozen
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: b1s11-screen-*
+          merge-multiple: true
+          path: screen
+      - name: Audit all fits and select before fresh competitive training
+        id: select
+        continue-on-error: true
+        run: |
+          mkdir -p selected screen
+          python -m b1s.v1_1.analysis select --fits screen --qa frozen/qa --out selected 2>&1 | tee selected/SELECTION_LOG.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: b1s11-selection
+          path: selected/
+          retention-days: 90
+          if-no-files-found: error
+      - name: Surface incomplete screening after retaining evidence
+        if: steps.select.outcome != 'success'
+        run: exit 1
+  competitive:
+    needs: selection
+    if: needs.selection.outputs.selected == 'success'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        shard: [0,1,2,3,4,5,6,7,8,9,10,11]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /b1s/v1_1/
+            /b1s/execution/*.py
+            /b1s/execution/*.json
+            /b1s/execution/requirements.txt
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install runtime
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y swig
+          python -m pip install -r b1s/execution/requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1s11-selection
+          path: selected
+      - name: Independent competitive refits
+        env:
+          SHARD: ${{ matrix.shard }}
+        run: |
+          mkdir -p competitive
+          python -m b1s.v1_1.train competitive --selection selected/SELECTION_FREEZE.json --shard "$SHARD" --shards 12 --out competitive 2>&1 | tee "competitive/SHARD_${SHARD}_LOG.txt"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: b1s11-competitive-${{ matrix.shard }}
+          path: competitive/
+          retention-days: 90
+          if-no-files-found: warn
+  publish:
+    needs: [preflight,screening,selection,competitive]
+    if: always() && needs.preflight.result == 'success'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /b1s/v1_1/
+            /b1s/execution/*.py
+            /b1s/execution/*.json
+            /b1s/execution/requirements.txt
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install runtime
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y swig
+          python -m pip install -r b1s/execution/requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1s11-qa-freeze
+          path: frozen
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: b1s11-screen-*
+          merge-multiple: true
+          path: screen
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: b1s11-selection
+          path: selected
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: b1s11-competitive-*
+          merge-multiple: true
+          path: competitive
+      - name: Evaluate, retain incidents and render English and Spanish reports
+        id: finalize
+        run: |
+          mkdir -p screen selected competitive
+          python -m b1s.v1_1.publish --qa frozen/qa --selection selected --screen screen --fits competitive --out b1s/v1_1/results 2>&1 | tee B1S11_FINALIZATION_LOG.txt
+      - name: Verify output and historical preservation
+        run: |
+          python - <<'PY'
+          import json,pathlib,hashlib
+          from b1s.v1_1.design import preservation
+          root=pathlib.Path('b1s/v1_1/results');f=json.loads((root/'FREEZE.json').read_text())
+          for rel,h in f['files'].items():assert hashlib.sha256((root/rel).read_bytes()).hexdigest()==h,rel
+          assert f['B1E_executed'] is False and f['final_seeds_generated'] is False
+          print(preservation())
+          print((root/'DECISION.json').read_text())
+          PY
+      - name: Publish only new campaign evidence
+        run: |
+          git fetch origin research/b1s-v1.1-stability-baselines-20260913
+          test "$(git rev-parse origin/research/b1s-v1.1-stability-baselines-20260913)" = "$GITHUB_SHA"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f b1s/v1_1/results
+          git commit -m 'exp(b1s11): publish retained development results and Spanish completion report'
+          git push origin HEAD:research/b1s-v1.1-stability-baselines-20260913
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: B1S-v1-1-results-English-Spanish
+          path: |
+            b1s/v1_1/results/
+            B1S11_FINALIZATION_LOG.txt
+          retention-days: 90
+          if-no-files-found: warn
+      - name: Distinguish publication from scientific completion
+        if: steps.finalize.outputs.scientific_success != 'true'
+        run: exit 1

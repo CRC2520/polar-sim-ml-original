@@ -1,0 +1,100 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "adjudication_rerun": false,
+  "ci_policy": "Documentation-only commits marked [skip ci]; no workflow edited, disabled or dispatched. No CI success claimed for skipped checks.",
+  "documentary_source_commit": "6625fb6dfbd9505115017d51eb6d534add9fc35b",
+  "files": {
+    "REVIEW_ES.md": {
+      "bytes": 21308,
+      "git_blob_sha": "641d2bfd54957ef9a7259730c055971b11c6793e",
+      "sha256": "0d087faa9a0bbe73bdb5bb2ca6fbcac588ef0c8c446f33c1edb951a6a19324bd"
+    },
+    "REVIEW_METRICS.json": {
+      "bytes": 12604,
+      "git_blob_sha": "f5241112c7828938c8eea86a8e31492e7d9cb8e3",
+      "sha256": "c36275bfcaf6e561ad512cb68f5c08448ab9144274bb9684ec6d4a1bf9202cf1"
+    },
+    "review_archive.py": {
+      "bytes": 17947,
+      "git_blob_sha": "6d1c0d9e35d3d621b8574db08308dc5a0e49c666",
+      "sha256": "2cd08b0060c246c50fa69a5e56d5647f31ff6058e2ddebe50b33374187cde4ad"
+    }
+  },
+  "final_seeds_generated": false,
+  "freeze_sha256": "9a61e714e78b9c2235dfc6dfe4093be0f5b66a9fa3ae4b15ef967a12f354d7c8",
+  "historical_results_changed": false,
+  "input_sha256": {
+    "IMPORT_PROVENANCE.json": "340246d5318f165daf534a1b8f6c4419fc4d4a4cfac8702a1ec342022a6f3377",
+    "PLAN.json": "5885e136001bfc024540fd458703f4c2b38fa7a1fc7eb46650f197bea9554af0",
+    "PROTOCOL.md": "3b0e6d226db9e47a7530221a828c45811da1975b3d9af156142e3a2668ca6047",
+    "adjudication/ADJUDICATION.json": "83640750aa2bae26e60a6e7770d534316c0a1fe24837b132d7c11e57bb33f4ba",
+    "results/BASELINE_CALIBRATION.json": "760ac2a45371d6a8d686ca2618c869666121146bb867676a6de5429417303095",
+    "results/CAUSAL_RESULTS.json": "f403ad940bd3f00072b8e23cbe22392ca23e2a7a7e0826f2d1f3fa8f7e7b99fb",
+    "results/COMPETITIVE_RESULTS.json": "45cb66a32358674170f352bec94240786d026563ea14f2b4c5171c805b1157a6",
+    "results/DISCOVERY_RESULTS.json": "dc9b523605247feb6058f615da4c64fc8057446bd2c847f49487e917fcd4a9e7",
+    "results/FREEZE.json": "9a61e714e78b9c2235dfc6dfe4093be0f5b66a9fa3ae4b15ef967a12f354d7c8",
+    "results/FUNCTIONAL_PROBES.json": "b4f7b6672aef78170c1806c8a580935209b8164c4344e6e6fed0d5eb8a8ea6c3",
+    "results/PUBLICATION_RECEIPT.json": "d1dcc1ad1945194f5cec2566cb2457b4769f132f26fdcf378b17b27828cabd10",
+    "results/RESOURCE_AUDIT.json": "01e9b57fe7e9e3770700129d7380cb5cab4d5f286a06b6ae0ce9d1e16d76aa42",
+    "results/SELECTION_FREEZE.json": "54bbe3148e097c86e54df79e3d752397e03a07bf5e04b3b01661d8485ae6ff88",
+    "results/STABILITY.json": "e0751fd674911c02e7279885d87decf315f023f9d8147b2e6944ceaa3ed04d25"
+  },
+  "integrity": {
+    "binary_files_not_read_here": 561,
+    "freeze_sha256": "9a61e714e78b9c2235dfc6dfe4093be0f5b66a9fa3ae4b15ef967a12f354d7c8",
+    "frozen_text_files_verified": 39,
+    "imported_entries_verified": 44,
+    "status": "PASS",
+    "zip_sha256": "42504ec6a08c9bdb3cf75fd8d89fb2af2e8502396ae7baf917f7acfa1ba6eeb7"
+  },
+  "new_experiments_run": false,
+  "policy_evaluations_executed": false,
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "review_checks": {
+    "checks": {
+      "below_displacement_rejected": true,
+      "causal_all_local_changes_above_archived_threshold": true,
+      "causal_zero_nonzero_inventory": true,
+      "displacement_component_all_six_fail": true,
+      "duplicate_json_rejected": true,
+      "empty_jaccard": true,
+      "idempotent_same_metrics_bytes": true,
+      "inclusive_displacement_boundary": true,
+      "loo_does_not_mutate_selected": true,
+      "loss_component_all_six_pass": true,
+      "nonfinite_json_rejected": true,
+      "prior_layout_numerics_agree_within_1e_9": true,
+      "selected_global_not_individual_winner": true,
+      "strict_loss_boundary": true,
+      "unchanged_archive_after_calculations": true,
+      "witness_gain_is_zero": true,
+      "zip_identity": true
+    },
+    "checks_passed": 17,
+    "checks_total": 17,
+    "scope": "Final review helper, integrity and arithmetic; no original scientific module executed.",
+    "status": "PASS"
+  },
+  "schema": "b1s11-retrospective-manifest-v1",
+  "scientific_publication_commit": "de35a0995d96ff548772fa56c3620466495add72",
+  "scientific_source_commit": "50c4e08cf3d69c998ce95b8da1e1647a09b31339",
+  "scope": "Post-development descriptive analysis of archived text and snapshots; not a new experiment or adjudication.",
+  "self_hash_note": "This manifest does not contain its own hash or commit; obtain them from its immutable Git commit.",
+  "source_artifact_id": 10330029112,
+  "source_artifact_run_id": 34798275181,
+  "source_repository": "CRC2520/polar-sim-ml-original",
+  "source_zip_sha256": "42504ec6a08c9bdb3cf75fd8d89fb2af2e8502396ae7baf917f7acfa1ba6eeb7",
+  "static_code_blobs": {
+    "b1s/execution/core.py": "816df170fcf0ed1cca98a0238cd0b4ce684faaa4",
+    "b1s/execution/instrument.py": "d95c6f1afd12270d6ddde22720f5bf50148dd8fa",
+    "b1s/v1_1/analysis.py": "2d028e210c0398fe0d290c9a1b1d509d19720aa1",
+    "b1s/v1_1/train.py": "cbec21edf69731865a9844a5a8c7e17f255114fd"
+  },
+  "status": "RETROSPECTIVE_REVIEW_COMPLETE",
+  "training_executed": false
+}
