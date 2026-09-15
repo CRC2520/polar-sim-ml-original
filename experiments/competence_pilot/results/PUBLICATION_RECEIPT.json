@@ -1,0 +1,25 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "binary_retention_days": 90,
+  "files": {
+    "ARTIFACT_INVENTORY.json": "9a9a21628e7df288a5580ae0ac7908be937de85c0f57a5545b2afca144b83e25",
+    "COMPLETION_REPORT_ES.md": "7077bee95212b40eda67cac22b00d0687910ae295d350524edf832d6a72aff95",
+    "EPISODES.json": "1170943508c8fede1094b5e4c75ead9d000bbfb75c32af796371774ed8f5f5dc",
+    "RESULTS_MANIFEST.json": "2ab3612590747552ed192569543239d6a26f07fe2176727a4158cbca5faa98ad",
+    "SUMMARY.json": "2c0c646b655229a72c7013824b1693b0a059e8b9e9359b5d963688333db06acb"
+  },
+  "final_seeds_generated": false,
+  "freeze_publication_commit": "49561f17a0663eb2586dc9033c46bd87eec1698e",
+  "freeze_sha256": "d5d7068d3b55019bdabd1b59b581d52339bcc3e2e79cd32bfd6b5a1891d98e10",
+  "note": "Obtain the immutable publication commit from Git; this receipt cannot contain its own commit SHA.",
+  "pilot_status": "PILOT_COMPLETE_FOR_REVIEW",
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "source_commit": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+  "status": "PILOT_EVIDENCE_PREPARED_FOR_PUBLICATION",
+  "workflow_run_id": "34900541283"
+}

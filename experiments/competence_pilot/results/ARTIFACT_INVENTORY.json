@@ -1,0 +1,547 @@
+[
+  {
+    "artifacts": [
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10380276345/zip",
+        "created_at": "2026-09-15T03:47:32Z",
+        "digest": "sha256:ef1d990902093690fd29f203b44ca3d0382bae979e88c420826500bb1be9c723",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10380276345,
+        "name": "cpnb-fit-SAC-standardized-r2",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM4MDI3NjM0NQ==",
+        "size_in_bytes": 27169303,
+        "updated_at": "2026-09-15T03:47:32Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10380276345",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10377781402/zip",
+        "created_at": "2026-09-15T02:00:30Z",
+        "digest": "sha256:28b7dab360e372c1f9aec9a26dd032a8287d55531d1d310c26fb19f844c351eb",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10377781402,
+        "name": "cpnb-fit-SAC-standardized-r1",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3Nzc4MTQwMg==",
+        "size_in_bytes": 31087957,
+        "updated_at": "2026-09-15T02:00:30Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10377781402",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10377206558/zip",
+        "created_at": "2026-09-15T01:41:10Z",
+        "digest": "sha256:c5a843dc5b5a51bba23f4eea5b23e0d4aedb03a85028b37df5e503c0b2de14bf",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10377206558,
+        "name": "cpnb-fit-SAC-raw-r2",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3NzIwNjU1OA==",
+        "size_in_bytes": 25042893,
+        "updated_at": "2026-09-15T01:41:10Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10377206558",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10376978093/zip",
+        "created_at": "2026-09-15T01:32:15Z",
+        "digest": "sha256:3d676465247355faa36cb4b9444f09c0e1da6be40e8c2bc7bbc88264ad1e8f51",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10376978093,
+        "name": "cpnb-fit-SAC-raw-r1",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3Njk3ODA5Mw==",
+        "size_in_bytes": 28031962,
+        "updated_at": "2026-09-15T01:32:15Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10376978093",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10376343449/zip",
+        "created_at": "2026-09-15T01:38:26Z",
+        "digest": "sha256:aaa0dd8817ab48bb4acac200889013f5ee2fdb5ea09aae992cd24efd82b238e4",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10376343449,
+        "name": "cpnb-fit-SAC-standardized-r0",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3NjM0MzQ0OQ==",
+        "size_in_bytes": 29277152,
+        "updated_at": "2026-09-15T01:38:26Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10376343449",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10375618448/zip",
+        "created_at": "2026-09-15T00:44:54Z",
+        "digest": "sha256:d7b6214305e58cf507429fd25ac37e882cd1831aa82349767ad1c01bba6d16d2",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10375618448,
+        "name": "cpnb-fit-SAC-raw-r0",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3NTYxODQ0OA==",
+        "size_in_bytes": 31338095,
+        "updated_at": "2026-09-15T00:44:54Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10375618448",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10373750748/zip",
+        "created_at": "2026-09-14T23:17:12Z",
+        "digest": "sha256:5bf592a8bbd8563c3bcd47d2d41b4cd074ffc831363ce9cdcd44320b241889bb",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10373750748,
+        "name": "cpnb-fit-PPO-standardized-r0",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3Mzc1MDc0OA==",
+        "size_in_bytes": 35117143,
+        "updated_at": "2026-09-14T23:17:12Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10373750748",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10373490477/zip",
+        "created_at": "2026-09-14T23:03:28Z",
+        "digest": "sha256:a3c9f541448a85bbc4fc1de03458f7781feafce18796fade404c20661090cc44",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10373490477,
+        "name": "cpnb-fit-PPO-raw-r2",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MzQ5MDQ3Nw==",
+        "size_in_bytes": 32375657,
+        "updated_at": "2026-09-14T23:03:28Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10373490477",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10373348929/zip",
+        "created_at": "2026-09-14T23:27:11Z",
+        "digest": "sha256:b5e2581c2a8da1ccf10fe09ef4b8fce72047fb0ba553f66b23fca04ba4fb4c66",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10373348929,
+        "name": "cpnb-fit-PPO-standardized-r2",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MzM0ODkyOQ==",
+        "size_in_bytes": 33994592,
+        "updated_at": "2026-09-14T23:27:11Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10373348929",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10373273893/zip",
+        "created_at": "2026-09-14T23:26:27Z",
+        "digest": "sha256:e614a1460a27f284893c7c56070a8fa6891389199944837d1a34c7f842332c5d",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10373273893,
+        "name": "cpnb-fit-PPO-standardized-r1",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MzI3Mzg5Mw==",
+        "size_in_bytes": 30198001,
+        "updated_at": "2026-09-14T23:26:27Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10373273893",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372971002/zip",
+        "created_at": "2026-09-14T23:04:44Z",
+        "digest": "sha256:9502cba5303453a9498cc8f08d072eaedff1c9e466a8fbbce287b99d14c49ae8",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10372971002,
+        "name": "cpnb-fit-PPO-raw-r1",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3Mjk3MTAwMg==",
+        "size_in_bytes": 34886754,
+        "updated_at": "2026-09-14T23:04:44Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372971002",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372930436/zip",
+        "created_at": "2026-09-14T22:50:50Z",
+        "digest": "sha256:b8ab676d74a6826a7ac169ea1237c514c7fadf3cddcdf35717a988f75cc21e0d",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10372930436,
+        "name": "cpnb-fit-GD-standardized-r1",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MjkzMDQzNg==",
+        "size_in_bytes": 29146554,
+        "updated_at": "2026-09-14T22:50:50Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372930436",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372688084/zip",
+        "created_at": "2026-09-14T23:02:23Z",
+        "digest": "sha256:c4fde046d4ed912a1ed7b03a5319a9b01c3e11729dcf8ee2aebde1feafd5fe2b",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10372688084,
+        "name": "cpnb-fit-PPO-raw-r0",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MjY4ODA4NA==",
+        "size_in_bytes": 34314836,
+        "updated_at": "2026-09-14T23:02:23Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372688084",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372632418/zip",
+        "created_at": "2026-09-14T22:41:03Z",
+        "digest": "sha256:f74b028b8e2ea3db99f217cf23f0e9183ab4a4eca32d668eb6f1dcf175095dc9",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10372632418,
+        "name": "cpnb-fit-GD-raw-r2",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MjYzMjQxOA==",
+        "size_in_bytes": 31643804,
+        "updated_at": "2026-09-14T22:41:03Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372632418",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372621965/zip",
+        "created_at": "2026-09-14T22:38:17Z",
+        "digest": "sha256:ba39483a01900b8fe992d7a067b2a4ea818c3d7124490219b8609f4f3711b8aa",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10372621965,
+        "name": "cpnb-fit-GD-standardized-r0",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MjYyMTk2NQ==",
+        "size_in_bytes": 28379344,
+        "updated_at": "2026-09-14T22:38:17Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372621965",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372589203/zip",
+        "created_at": "2026-09-14T22:53:13Z",
+        "digest": "sha256:9f7ebece24870c4ad43a1d5e99d3c59e911ecee73eb6af76899fd0585ac4c2e2",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10372589203,
+        "name": "cpnb-fit-GD-standardized-r2",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MjU4OTIwMw==",
+        "size_in_bytes": 26737147,
+        "updated_at": "2026-09-14T22:53:13Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372589203",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372550080/zip",
+        "created_at": "2026-09-14T22:23:30Z",
+        "digest": "sha256:13442333df771c5827c5deec1082f1731caaa4b87434abc661e9663d1f3d7079",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10372550080,
+        "name": "cpnb-fit-GD-raw-r0",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MjU1MDA4MA==",
+        "size_in_bytes": 25936594,
+        "updated_at": "2026-09-14T22:23:30Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372550080",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372431490/zip",
+        "created_at": "2026-09-14T22:32:00Z",
+        "digest": "sha256:4c515e4abd7246ffe5a2eb309b21b1d19e62ef2108eacce40568f389b5f19ea0",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10372431490,
+        "name": "cpnb-fit-GD-raw-r1",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MjQzMTQ5MA==",
+        "size_in_bytes": 31100144,
+        "updated_at": "2026-09-14T22:32:00Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372431490",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372091904/zip",
+        "created_at": "2026-09-14T22:29:53Z",
+        "digest": "sha256:52d819bcb21c4a92b4e956b39865d6037661d5013ecab15866e32d72ce2efe42",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10372091904,
+        "name": "cpnb-fit-G0-standardized-r2",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MjA5MTkwNA==",
+        "size_in_bytes": 30213459,
+        "updated_at": "2026-09-14T22:29:53Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10372091904",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10371610522/zip",
+        "created_at": "2026-09-14T22:11:07Z",
+        "digest": "sha256:0c8af664cefc901949c5c16a19589db2c265fd2ed2d0533faa1a3d1af0809c9c",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10371610522,
+        "name": "cpnb-fit-G0-standardized-r0",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MTYxMDUyMg==",
+        "size_in_bytes": 31167235,
+        "updated_at": "2026-09-14T22:11:07Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10371610522",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10371605134/zip",
+        "created_at": "2026-09-14T22:08:34Z",
+        "digest": "sha256:b8335f6fcf7548466e78c994c3c5a75e31d0fb03d3f4ac27c75b8cbd5bf5e7eb",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10371605134,
+        "name": "cpnb-fit-G0-raw-r1",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MTYwNTEzNA==",
+        "size_in_bytes": 29929122,
+        "updated_at": "2026-09-14T22:08:34Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10371605134",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10371541528/zip",
+        "created_at": "2026-09-14T22:21:12Z",
+        "digest": "sha256:0201e35397051121b16938c5a361a88d4371a31aefabb724c3b81129db07c61e",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10371541528,
+        "name": "cpnb-fit-G0-standardized-r1",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MTU0MTUyOA==",
+        "size_in_bytes": 29976440,
+        "updated_at": "2026-09-14T22:21:12Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10371541528",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10371511758/zip",
+        "created_at": "2026-09-14T22:10:53Z",
+        "digest": "sha256:30836cbbd1f03bb4d576680a3c389081a568c76e5e88c428b55fd16346ee182e",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10371511758,
+        "name": "cpnb-fit-G0-raw-r0",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MTUxMTc1OA==",
+        "size_in_bytes": 28139417,
+        "updated_at": "2026-09-14T22:10:53Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10371511758",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10371145480/zip",
+        "created_at": "2026-09-14T21:49:30Z",
+        "digest": "sha256:0271249b862ff9b458e528fa753c8c464f6a286a26bb268f45117e68ec02224f",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10371145480,
+        "name": "cpnb-preflight-diagnostics",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MTE0NTQ4MA==",
+        "size_in_bytes": 79216060,
+        "updated_at": "2026-09-14T21:49:30Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10371145480",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10370797080/zip",
+        "created_at": "2026-09-14T21:49:25Z",
+        "digest": "sha256:dbebedbfa045c8e77225e48cf23554f0e6db93c4e0720b34f24f979dbceeb4e5",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10370797080,
+        "name": "cpnb-freeze",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MDc5NzA4MA==",
+        "size_in_bytes": 79214906,
+        "updated_at": "2026-09-14T21:49:25Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10370797080",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10370444397/zip",
+        "created_at": "2026-09-14T22:10:17Z",
+        "digest": "sha256:9ac940ebef3eef9f9e6691b87a473de6cc872cfd0e0682d4b64b3f5616d0e7be",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10370444397,
+        "name": "cpnb-fit-G0-raw-r2",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MDQ0NDM5Nw==",
+        "size_in_bytes": 31982954,
+        "updated_at": "2026-09-14T22:10:17Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10370444397",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      },
+      {
+        "archive_download_url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10370109434/zip",
+        "created_at": "2026-09-14T21:46:25Z",
+        "digest": "sha256:729813defbf5ac731a9d2a283029d3b8486a4e82e392f8e401a10e64c2e4496f",
+        "expired": false,
+        "expires_at": "2026-12-13T21:45:20Z",
+        "id": 10370109434,
+        "name": "cpnb-qa",
+        "node_id": "MDg6QXJ0aWZhY3QxMDM3MDEwOTQzNA==",
+        "size_in_bytes": 2606,
+        "updated_at": "2026-09-14T21:46:25Z",
+        "url": "https://api.github.com/repos/CRC2520/polar-sim-ml-original/actions/artifacts/10370109434",
+        "workflow_run": {
+          "head_branch": "research/competence-normalization-budget-20260914",
+          "head_repository_id": 1036495551,
+          "head_sha": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+          "id": 34900541283,
+          "repository_id": 1036495551
+        }
+      }
+    ],
+    "total_count": 27
+  }
+]
