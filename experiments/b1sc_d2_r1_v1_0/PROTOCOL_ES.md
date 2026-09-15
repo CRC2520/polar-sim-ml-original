@@ -1,38 +1,36 @@
-# B1-SC-D2-R1 v1.0 — Freeze binario de inicialización
+# B1-SC-D2-R1 v1.0 — Inicialización binaria congelada
 
-**Estado: INIT_FREEZE_GENERATION_ONLY — NO SCIENTIFIC EXECUTION.**
+**Estado: INIT_BYTES_FROZEN_QA_PENDING — NO SCIENTIFIC EXECUTION.**
 
-Esta rama corrige prospectivamente el problema de reproducibilidad observado en el run técnico D2 #2 sin modificar retrospectivamente B1-SC-D2 v1.0 ni sus resultados.
+Esta rama corrige prospectivamente el problema de reproducibilidad observado en B1-SC-D2 run técnico #2 sin modificar retrospectivamente D2 ni sus resultados.
 
-## Objetivo
+## Problema aislado
 
-Eliminar la dependencia de `torch.manual_seed()` + `nn.init.orthogonal_()` para garantizar el emparejamiento ON/OFF entre runners distintos.
+D2 run `34980494295` completó 16/16 fits, pero la agregación detectó `Paired initialization mismatch`: usar la misma `initial_seed` no garantizó pesos bit-a-bit iguales entre runners independientes cuando `RoutingActor` y `Value` se inicializaron mediante `torch.manual_seed()` + `nn.init.orthogonal_()`.
 
-Para cada bloque `b=0..7` se generará una sola vez un snapshot binario canónico que contiene el estado inicial completo de:
+## Corrección D2-R1
 
-- `RoutingActor("100110")`;
-- `Value()`.
+Se generaron una sola vez ocho estados iniciales canónicos —uno por bloque— bajo Python 3.11.16, torch 2.2.2+cpu y numpy 1.26.4. El run de generación QA es `35007729637`; su artefacto canónico es `10412775720`, `b1sc-d2-r1-init-candidates`, digest `sha256:0f3a2ac9fe3a29cbf2764257527735be000e487db1462dc3c555ef4bb34580a4`.
 
-Los dos tratamientos futuros del mismo bloque (`S6-ON` y `S6-OFF-TRAIN`) deberán cargar exactamente el mismo archivo antes del primer paso de optimización.
+Cada estado contiene el `state_dict` completo de `RoutingActor("100110")` y `Value()` en un formato binario canónico. `INIT_FREEZE.json` fija para cada bloque:
 
-## Reglas congeladas
+- SHA-256 de los bytes del bloque;
+- `actor_digest`;
+- `critic_digest`;
+- seed fuente solo como linaje.
 
-1. Ocho snapshots, uno por bloque.
-2. El snapshot se genera una sola vez bajo el runtime preservado de D2: Python 3.11.16, torch 2.2.2+cpu, numpy 1.26.4.
-3. La semilla fuente de cada bloque es la `initial_seed` ya definida por el registro D2; la generación del snapshot no constituye evidencia científica.
-4. El formato binario es propio y determinista: cabecera JSON canónica + bytes `float32`/enteros contiguos de todos los tensores, en orden lexicográfico.
-5. Cada snapshot queda identificado por SHA-256 de archivo, `actor_digest` y `critic_digest`.
-6. El entrenamiento futuro no puede reconstruir pesos desde la seed: debe cargar los bytes congelados y fallar si el SHA-256 no coincide.
-7. ON y OFF del mismo bloque deben verificar igualdad exacta de `actor_digest`, `critic_digest` e `initial_state_sha256` antes del primer `env.step`.
-8. La identidad de tratamiento no participa en la elección del snapshot.
-9. Los snapshots D2-R1 no se interpretan como los pesos históricos exactos usados en D2 run 1; son un nuevo freeze prospectivo para reproducibilidad técnica.
-10. No existe `START_REQUEST.json`, no hay autorización de entrenamiento científico y B1-E permanece sin cambios.
+## Contrato obligatorio para un futuro runner R1
 
-## Linaje
+1. Descargar exclusivamente el artefacto canónico fijado arriba.
+2. Verificar el SHA-256 interno del bloque antes de cargarlo.
+3. Construir actor/critic y sobrescribir **todos** sus tensores con los bytes congelados.
+4. Verificar `actor_digest` y `critic_digest` después de la carga.
+5. Tanto `S6-ON` como `S6-OFF-TRAIN` del mismo bloque deben consumir exactamente el mismo bloque binario.
+6. Está prohibido reconstruir el estado inicial científico desde `torch.manual_seed()` o volver a ejecutar `orthogonal_()` como fuente de pesos.
+7. La condición ON/OFF no participa en la selección del snapshot.
+8. La QA usa dos runners independientes (ON y OFF) y exige igualdad exacta por bloque de SHA, actor, critic y forward digest.
 
-- B1-SC-D2 run primario: `34980477849` — `ONLINE_DEPENDENCE_ONLY_SUPPORTED`.
-- B1-SC-D2 run técnico #2: `34980494295` — 16/16 fits completados pero agregación bloqueada por `Paired initialization mismatch`.
-- Base de esta rama: `3b65403c309d4fe3ef01be4c1fd2693c48f02702`, estado de execution-readiness D2 previo al `START_REQUEST`.
+Los snapshots D2-R1 son un nuevo freeze prospectivo; **no se afirma que sean los pesos históricos exactos de D2 run 1**.
 
 ## Frontera
 
@@ -44,4 +42,6 @@ Los dos tratamientos futuros del mismo bloque (`S6-ON` y `S6-OFF-TRAIN`) deberá
 
 `B1E_executed=false`
 
-`final_seeds_generated=false`
+`H_CAT=NOT_EVALUABLE`
+
+`H_TRANSFER=NOT_EVALUATED`

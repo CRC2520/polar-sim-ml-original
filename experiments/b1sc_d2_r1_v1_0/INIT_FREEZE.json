@@ -1,0 +1,21 @@
+{
+  "schema":"B1-SC-D2-R1-INIT-FREEZE-1.0.0-20260915",
+  "status":"INIT_BYTES_FROZEN_QA_PENDING",
+  "canonical_artifact":{"run_id":35007729637,"artifact_id":10412775720,"name":"b1sc-d2-r1-init-candidates","bundle_sha256":"0f3a2ac9fe3a29cbf2764257527735be000e487db1462dc3c555ef4bb34580a4","runtime":{"python":"3.11.16","torch":"2.2.2+cpu","numpy":"1.26.4"}},
+  "bundle_sha256":"0f3a2ac9fe3a29cbf2764257527735be000e487db1462dc3c555ef4bb34580a4",
+  "blocks":[
+    {"block":0,"file":"block-0.bin","sha256":"a471b2b5d20cf864ee0879f7fe6fb53415426c09a0bd65802d234ac60d202d32","source_seed":4161169282,"actor_digest":"ea02685344317d1e00fd0290c13abcf55a78fa2f08909f515e6d05651df47711","critic_digest":"b15e5999f4346b55322819299a61c3326fa8732cde42cf0fd24ed3f56bcd9bc8"},
+    {"block":1,"file":"block-1.bin","sha256":"439fe672217d525486f6881da595d824fb5ab1502d49d0fdc014ef71a30df126","source_seed":2579599277,"actor_digest":"a9e152008982a5e01ce99df8a601d6ab3cc6f4e908cafdb54ee9abb24c0a2a43","critic_digest":"dfc7b72c074abde36cee1142ea13fad729c7dc37495afdb4b523c152f8a52cf6"},
+    {"block":2,"file":"block-2.bin","sha256":"24f836ab3f128e649da6caf7736ce6d8293996a548418e0c378149a391d0d16c","source_seed":659522447,"actor_digest":"25c2a5ccafc10ad87763e4b505426698277aa2246d04452ff6f16ae0a42b7b1b","critic_digest":"05b68048e756d44a8e19d487ec51f5843c60eb803e227498aff8985a47526c3b"},
+    {"block":3,"file":"block-3.bin","sha256":"f37da57d6311e567e5e80105d64c1842b9f42bb49e020158fdcf41ec1a5523f1","source_seed":2837773704,"actor_digest":"04b89921a2f901fac0469e45537cde49ffbda50a5809110685bd1f653c102cce","critic_digest":"a737a6af9d4d567ad08a9faa8119898af81925d41e31a1edf69236eb82b1bcaa"},
+    {"block":4,"file":"block-4.bin","sha256":"f0c0f01eadaacef05fc44e30635de17a3cd6ff6cd1f3798c87900eaaca394ce4","source_seed":1599777989,"actor_digest":"0c5b1e0b955e3d776d318756a5ed73b0499687be1d57158ba3eab5bf5593ae1c","critic_digest":"3f80c65ade7fbf9971659ee3b1f4f2b1a7520dc800965fc5aa6cc1c18b46127a"},
+    {"block":5,"file":"block-5.bin","sha256":"b4f8a197e7ce3f2d8d9fec231a07dad0d84ee5d405a5f0dca6853d4b1abd6991","source_seed":2409863541,"actor_digest":"2fae1295c989d63fedcfc39d15ac6beb4135d78bf180a75643c19c27accec736","critic_digest":"e472f0b0b94fce890f1c034bb0780a503d5a4cb0a611e9f23197debc40eeb928"},
+    {"block":6,"file":"block-6.bin","sha256":"9fe0ab844887b2eb1f24e8dd00bc65e2921a7ecf7ac8b6de07ff0305af78679c","source_seed":404173535,"actor_digest":"e4cc62c8df0eba2be771abdcfb552a37aaf09b5e68052a9b6b332f07ce133105","critic_digest":"fd5cbb58a4a40381b7af9d0d23881f1706ccb2c3f69fe908be1372e24d511110"},
+    {"block":7,"file":"block-7.bin","sha256":"39334c149d5e4eb86733cc31a85788299836fb24c65d8d15aa27cedb459553c6","source_seed":549157461,"actor_digest":"f937424b76555a1e4d289f4535bc042f0cf6537cd301dafe8d93083115969d03","critic_digest":"4f0f7dba43823a5e263d6fcb313a81654512b1f26e36a94e986091bea9b98950"}
+  ],
+  "same_snapshot_for_on_off":true,
+  "seed_reconstruction_for_training_forbidden":true,
+  "does_not_rewrite_d2":true,
+  "scientific_execution":false,
+  "B1E_disposition":"ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION"
+}

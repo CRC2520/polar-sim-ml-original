@@ -1,0 +1,99 @@
+name: B1-SC-D2-R1 frozen initialization QA only
+'on':
+  push:
+    branches:
+      - research/b1sc-d2-r1-v1.0-byte-frozen-init-20260915
+    paths:
+      - experiments/b1sc_d2_r1_v1_0/**
+      - .github/workflows/b1sc-d2-r1-init-qa.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: b1sc-d2-r1-init-qa
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  probe:
+    name: Frozen-init probe ${{ matrix.condition }}
+    strategy:
+      fail-fast: false
+      matrix:
+        condition: [S6-ON, S6-OFF-TRAIN]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Prove no scientific execution authorization
+        run: |
+          set -euo pipefail
+          test ! -e experiments/b1sc_d2_r1_v1_0/START_REQUEST.json
+          echo 'D2-R1 FROZEN INITIALIZATION QA ONLY'
+      - name: Download canonical init bytes from immutable generation run
+        uses: actions/download-artifact@v4
+        with:
+          name: b1sc-d2-r1-init-candidates
+          path: /tmp/d2r1-canonical
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: CRC2520/polar-sim-ml-original
+          run-id: 35007729637
+      - name: Install preserved runtime
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - name: Load exact frozen bytes on independent runner
+        env:
+          D2R1_INIT_DIR: /tmp/d2r1-canonical
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/d2r1-probe
+          python -m experiments.b1sc_d2_r1_v1_0.probe --condition '${{ matrix.condition }}' --out /tmp/d2r1-probe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d2r1-init-probe-${{ matrix.condition }}
+          path: /tmp/d2r1-probe
+          retention-days: 90
+          if-no-files-found: error
+  aggregate:
+    name: Compare ON/OFF initialization across independent runners
+    needs: probe
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: d2r1-init-probe-*
+          path: /tmp/d2r1-probes
+      - name: Verify exact cross-runner equality for all eight blocks
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/d2r1-aggregate
+          python -m experiments.b1sc_d2_r1_v1_0.aggregate_probes --root /tmp/d2r1-probes --out /tmp/d2r1-aggregate
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d2r1-init-qa-status
+          path: /tmp/d2r1-aggregate
+          retention-days: 90
+          if-no-files-found: error
