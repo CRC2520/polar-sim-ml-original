@@ -1,0 +1,434 @@
+name: B1-SC v1.0 guarded scientific execution
+'on':
+  push:
+    branches:
+      - research/b1sc-v1.0-execution-readiness-20260915
+    paths:
+      - experiments/b1sc_v1_0/START_REQUEST.json
+
+permissions:
+  contents: read
+
+concurrency:
+  group: b1sc-v1-0-scientific-execution
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  SDL_VIDEODRIVER: dummy
+  SDL_AUDIODRIVER: dummy
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  authorize:
+    name: Authorize immutable B1-SC run attempt 1
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+      - name: Install authorization dependency
+        run: python -m pip install numpy==1.26.4
+      - name: authorize single execution
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/b1sc-authorize
+          python -m experiments.b1sc_v1_0.runner authorize --out /tmp/b1sc-authorize
+      - uses: actions/upload-artifact@v4
+        with:
+          name: b1sc-authorization
+          path: /tmp/b1sc-authorize
+          retention-days: 90
+          if-no-files-found: error
+
+  fit:
+    name: Fit ${{ matrix.role }} block ${{ matrix.block }}
+    needs: authorize
+    runs-on: ubuntu-22.04
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        role: [G0, GD, S1, S2, S3, S4, S5, S6, PPO]
+        block: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install preserved runtime
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - name: fit exactly one registered policy
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/b1sc-fit
+          python -m experiments.b1sc_v1_0.runner fit \
+            --role '${{ matrix.role }}' --block '${{ matrix.block }}' \
+            --out /tmp/b1sc-fit
+      - name: Retain fit or failure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: b1sc-fit-${{ matrix.role }}-b${{ matrix.block }}
+          path: /tmp/b1sc-fit/${{ matrix.role }}-b${{ matrix.block }}
+          retention-days: 90
+          if-no-files-found: error
+
+  admission:
+    name: Aggregate competence admission
+    needs: [authorize, fit]
+    if: ${{ always() && needs.authorize.result == 'success' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    outputs:
+      ready: ${{ steps.status.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install preserved runtime
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - name: Download retained fits
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: b1sc-fit-*
+          path: /tmp/b1sc-fits
+      - name: admission aggregate
+        id: aggregate
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/b1sc-admission
+          python -m experiments.b1sc_v1_0.runner admission \
+            --fits /tmp/b1sc-fits --out /tmp/b1sc-admission
+      - name: Retain admission evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: b1sc-admission
+          path: /tmp/b1sc-admission
+          retention-days: 90
+          if-no-files-found: error
+      - name: admission status
+        id: status
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, pathlib
+          p=pathlib.Path('/tmp/b1sc-admission/ADMISSION.json')
+          ok=p.is_file() and json.loads(p.read_text()).get('status')=='ADMISSION_COMPLETE'
+          print('ready=' + ('true' if ok else 'false'))
+          PY
+      - name: Block continuation on incomplete admission
+        if: ${{ steps.status.outputs.ready != 'true' }}
+        run: exit 1
+
+  primary:
+    name: Primary causal ${{ matrix.role }} block ${{ matrix.block }}
+    needs: admission
+    if: ${{ needs.admission.outputs.ready == 'true' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        role: [G0, GD, S1, S2, S3, S4, S5, S6]
+        block: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install preserved runtime
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1sc-fit-${{ matrix.role }}-b${{ matrix.block }}
+          path: /tmp/b1sc-fits/${{ matrix.role }}-b${{ matrix.block }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1sc-admission
+          path: /tmp/b1sc-admission
+      - name: primary causal intervention
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/b1sc-primary
+          python -m experiments.b1sc_v1_0.runner primary \
+            --role '${{ matrix.role }}' --block '${{ matrix.block }}' \
+            --fits /tmp/b1sc-fits \
+            --admission /tmp/b1sc-admission/ADMISSION.json \
+            --out /tmp/b1sc-primary
+      - name: Retain primary evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: b1sc-primary-${{ matrix.role }}-b${{ matrix.block }}
+          path: /tmp/b1sc-primary
+          retention-days: 90
+          if-no-files-found: error
+
+  primary_aggregate:
+    name: Aggregate primary causal gate
+    needs: [admission, primary]
+    if: ${{ always() && needs.admission.outputs.ready == 'true' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    outputs:
+      ready: ${{ steps.status.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+      - name: Install aggregate dependency
+        run: python -m pip install numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: b1sc-primary-*
+          path: /tmp/b1sc-primary-root
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1sc-admission
+          path: /tmp/b1sc-admission
+      - name: primary aggregate
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/b1sc-primary-aggregate
+          python -m experiments.b1sc_v1_0.runner primary-aggregate \
+            --primary-root /tmp/b1sc-primary-root \
+            --admission /tmp/b1sc-admission/ADMISSION.json \
+            --out /tmp/b1sc-primary-aggregate
+      - name: Retain primary aggregate
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: b1sc-primary-aggregate
+          path: /tmp/b1sc-primary-aggregate
+          retention-days: 90
+          if-no-files-found: error
+      - name: primary aggregate status
+        id: status
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, pathlib
+          p=pathlib.Path('/tmp/b1sc-primary-aggregate/PRIMARY_CAUSAL.json')
+          ok=p.is_file() and json.loads(p.read_text()).get('status')=='PRIMARY_CAUSAL_AGGREGATE_COMPLETE'
+          print('ready=' + ('true' if ok else 'false'))
+          PY
+      - name: Block continuation on incomplete primary aggregate
+        if: ${{ steps.status.outputs.ready != 'true' }}
+        run: exit 1
+
+  secondary:
+    name: Secondary localization ${{ matrix.role }} block ${{ matrix.block }}
+    needs: primary_aggregate
+    if: ${{ needs.primary_aggregate.outputs.ready == 'true' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        role: [G0, GD, S1, S2, S3, S4, S5, S6]
+        block: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install preserved runtime
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1sc-fit-${{ matrix.role }}-b${{ matrix.block }}
+          path: /tmp/b1sc-fits/${{ matrix.role }}-b${{ matrix.block }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1sc-primary-aggregate
+          path: /tmp/b1sc-primary-aggregate
+      - name: individual active-edge localization after primary gate
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/b1sc-secondary
+          python -m experiments.b1sc_v1_0.runner secondary \
+            --role '${{ matrix.role }}' --block '${{ matrix.block }}' \
+            --fits /tmp/b1sc-fits \
+            --primary /tmp/b1sc-primary-aggregate/PRIMARY_CAUSAL.json \
+            --out /tmp/b1sc-secondary
+      - name: Retain secondary evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: b1sc-secondary-${{ matrix.role }}-b${{ matrix.block }}
+          path: /tmp/b1sc-secondary
+          retention-days: 90
+          if-no-files-found: error
+
+  secondary_aggregate:
+    name: Aggregate secondary localization
+    needs: [primary_aggregate, secondary]
+    if: ${{ always() && needs.primary_aggregate.outputs.ready == 'true' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    outputs:
+      ready: ${{ steps.status.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+      - name: Install aggregate dependency
+        run: python -m pip install numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: b1sc-secondary-*
+          path: /tmp/b1sc-secondary-root
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1sc-primary-aggregate
+          path: /tmp/b1sc-primary-aggregate
+      - name: secondary aggregate
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/b1sc-secondary-aggregate
+          python -m experiments.b1sc_v1_0.runner secondary-aggregate \
+            --secondary-root /tmp/b1sc-secondary-root \
+            --primary /tmp/b1sc-primary-aggregate/PRIMARY_CAUSAL.json \
+            --out /tmp/b1sc-secondary-aggregate
+      - name: Retain secondary aggregate
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: b1sc-secondary-aggregate
+          path: /tmp/b1sc-secondary-aggregate
+          retention-days: 90
+          if-no-files-found: error
+      - name: secondary aggregate status
+        id: status
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, pathlib
+          p=pathlib.Path('/tmp/b1sc-secondary-aggregate/SECONDARY_CAUSAL.json')
+          ok=p.is_file() and json.loads(p.read_text()).get('status')=='SECONDARY_CAUSAL_AGGREGATE_COMPLETE'
+          print('ready=' + ('true' if ok else 'false'))
+          PY
+      - name: Block continuation on incomplete secondary aggregate
+        if: ${{ steps.status.outputs.ready != 'true' }}
+        run: exit 1
+
+  final:
+    name: Final B1-SC development adjudication artifact
+    needs: [admission, primary_aggregate, secondary_aggregate]
+    if: ${{ always() && needs.admission.outputs.ready == 'true' && needs.primary_aggregate.outputs.ready == 'true' && needs.secondary_aggregate.outputs.ready == 'true' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+      - name: Install aggregate dependency
+        run: python -m pip install numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1sc-admission
+          path: /tmp/b1sc-admission
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1sc-primary-aggregate
+          path: /tmp/b1sc-primary-aggregate
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1sc-secondary-aggregate
+          path: /tmp/b1sc-secondary-aggregate
+      - name: final classification without automatic B1-E progression
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/b1sc-final
+          python -m experiments.b1sc_v1_0.runner final \
+            --admission /tmp/b1sc-admission/ADMISSION.json \
+            --primary /tmp/b1sc-primary-aggregate/PRIMARY_CAUSAL.json \
+            --secondary /tmp/b1sc-secondary-aggregate/SECONDARY_CAUSAL.json \
+            --out /tmp/b1sc-final
+      - name: Retain final review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: b1sc-final-review
+          path: /tmp/b1sc-final
+          retention-days: 90
+          if-no-files-found: error
