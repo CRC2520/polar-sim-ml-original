@@ -1,0 +1,41 @@
+name: B1-SC-D2-R1 run2 repair non-workflow bindings
+'on':
+  push:
+    branches:
+      - research/b1sc-d2-r1-v1.0-run2-repair-20260915
+    paths:
+      - .github/workflows/b1sc-d2-r1-run2-repair-code.yml
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: '${{ github.sha }}'
+          fetch-depth: 0
+      - name: Bind non-workflow code to run2 repair branch
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          old='research/b1sc-d2-r1-v1.0-persistent-init-20260915'
+          new='research/b1sc-d2-r1-v1.0-run2-repair-20260915'
+          paths=[
+            Path('experiments/b1sc_d2_r1_v1_0/scientific_runner.py'),
+            Path('experiments/b1sc_d2_r1_v1_0/full_preflight.py'),
+            Path('experiments/b1sc_d2_r1_v1_0/full_pipeline_tests.py'),
+          ]
+          for p in paths:
+            s=p.read_text(encoding='utf-8')
+            if old not in s:
+              raise SystemExit(f'expected branch binding missing in {p}')
+            p.write_text(s.replace(old,new),encoding='utf-8')
+          PY
+      - name: Commit branch-binding repair
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experiments/b1sc_d2_r1_v1_0/scientific_runner.py experiments/b1sc_d2_r1_v1_0/full_preflight.py experiments/b1sc_d2_r1_v1_0/full_pipeline_tests.py
+          git commit -m 'fix(b1sc-d2-r1): bind run2 repair branch'
+          git push origin HEAD:research/b1sc-d2-r1-v1.0-run2-repair-20260915
