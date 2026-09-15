@@ -1,38 +1,37 @@
-name: B1-SC-D2-R1 guarded scientific fits
+name: B1-SC-D2-R1 guarded full scientific execution
 'on':
   push:
     branches:
-      - research/b1sc-d2-r1-v1.0-runner-readiness-20260915
+      - research/b1sc-d2-r1-v1.0-full-execution-readiness-20260915
     paths:
       - experiments/b1sc_d2_r1_v1_0/START_REQUEST.json
 permissions:
   contents: read
   actions: read
 concurrency:
-  group: b1sc-d2-r1-scientific
+  group: b1sc-d2-r1-full-scientific
   cancel-in-progress: false
 defaults:
   run:
     shell: bash
 env:
+  SDL_VIDEODRIVER: dummy
+  SDL_AUDIODRIVER: dummy
   OMP_NUM_THREADS: '1'
   OPENBLAS_NUM_THREADS: '1'
   MKL_NUM_THREADS: '1'
   PYTHONDONTWRITEBYTECODE: '1'
 jobs:
   authorize:
-    name: Authorize immutable D2-R1 scientific run
+    name: Authorize immutable D2-R1 full run
     runs-on: ubuntu-22.04
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }}
-          fetch-depth: 2
+        with: {ref: '${{ github.sha }}', fetch-depth: 2}
       - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11.16'
-      - name: Guard frozen runner authorization
+        with: {python-version: '3.11.16'}
+      - name: Guard full frozen authorization
         run: |
           python - <<'PY'
           from experiments.b1sc_d2_r1_v1_0.scientific_runner import scientific_guard
@@ -41,19 +40,17 @@ jobs:
   fit:
     name: Fit ${{ matrix.condition }} block ${{ matrix.block }}
     needs: authorize
+    runs-on: ubuntu-22.04
+    timeout-minutes: 240
     strategy:
       fail-fast: false
       max-parallel: 4
       matrix:
         condition: [S6-ON, S6-OFF-TRAIN]
         block: [0,1,2,3,4,5,6,7]
-    runs-on: ubuntu-22.04
-    timeout-minutes: 240
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.sha }}
-          fetch-depth: 2
+        with: {ref: '${{ github.sha }}', fetch-depth: 2}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11.16'
@@ -64,28 +61,192 @@ jobs:
         with:
           name: b1sc-d2-r1-init-candidates
           path: /tmp/d2r1-init
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
           repository: CRC2520/polar-sim-ml-original
           run-id: 35007729637
       - name: Install preserved runtime
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y swig
+          sudo apt-get update -qq && sudo apt-get install -y swig
           python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
           python -m pip install -r b1s/execution/requirements.txt
           python -m pip check
-      - name: Run one guarded D2-R1 fit
+      - name: Run one byte-gated scientific fit
         run: |
           rm -rf /tmp/d2r1-fit
-          python -m experiments.b1sc_d2_r1_v1_0.runner fit \
-            --condition '${{ matrix.condition }}' \
-            --block '${{ matrix.block }}' \
-            --init-dir /tmp/d2r1-init \
-            --out /tmp/d2r1-fit
+          python -m experiments.b1sc_d2_r1_v1_0.runner fit --condition '${{ matrix.condition }}' --block '${{ matrix.block }}' --init-dir /tmp/d2r1-init --out /tmp/d2r1-fit
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: d2r1-fit-${{ matrix.condition }}-b${{ matrix.block }}
           path: /tmp/d2r1-fit
+          retention-days: 90
+          if-no-files-found: error
+  training_aggregate:
+    name: Aggregate D2-R1 training effect
+    needs: [authorize, fit]
+    if: ${{ always() && needs.authorize.result == 'success' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    outputs:
+      ready: ${{ steps.status.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 2}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install preserved runtime
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: d2r1-fit-*
+          path: /tmp/d2r1-fits
+      - name: Aggregate H_TRAIN-D2-R1
+        continue-on-error: true
+        run: |
+          rm -rf /tmp/d2r1-training
+          python -m experiments.b1sc_d2_r1_v1_0.runner training-aggregate --fits /tmp/d2r1-fits --out /tmp/d2r1-training
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d2r1-training-aggregate
+          path: /tmp/d2r1-training
+          retention-days: 90
+          if-no-files-found: error
+      - name: Training aggregate status
+        id: status
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json,pathlib
+          p=pathlib.Path('/tmp/d2r1-training/TRAINING_EFFECT_R1.json')
+          ok=p.is_file() and json.loads(p.read_text()).get('status')=='D2_R1_TRAINING_EFFECT_COMPLETE'
+          print('ready=' + ('true' if ok else 'false'))
+          PY
+      - name: Block incomplete training aggregate
+        if: ${{ steps.status.outputs.ready != 'true' }}
+        run: exit 1
+  online:
+    name: Online dependence block ${{ matrix.block }}
+    needs: training_aggregate
+    if: ${{ needs.training_aggregate.outputs.ready == 'true' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        block: [0,1,2,3,4,5,6,7]
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 2}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install preserved runtime
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - uses: actions/download-artifact@v4
+        with:
+          name: d2r1-fit-S6-ON-b${{ matrix.block }}
+          path: /tmp/d2r1-fits/d2r1-fit-S6-ON-b${{ matrix.block }}
+      - name: Permanent lesion and 9-40 replication
+        run: |
+          rm -rf /tmp/d2r1-online
+          python -m experiments.b1sc_d2_r1_v1_0.runner online --block '${{ matrix.block }}' --fits /tmp/d2r1-fits --out /tmp/d2r1-online
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d2r1-online-b${{ matrix.block }}
+          path: /tmp/d2r1-online
+          retention-days: 90
+          if-no-files-found: error
+  online_aggregate:
+    name: Aggregate D2-R1 online gate
+    needs: [training_aggregate, online]
+    if: ${{ always() && needs.training_aggregate.outputs.ready == 'true' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    outputs:
+      ready: ${{ steps.status.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 2}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - name: Install aggregate dependency
+        run: python -m pip install numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: d2r1-online-*
+          path: /tmp/d2r1-online-root
+      - name: Aggregate H_ONLINE-D2-R1
+        continue-on-error: true
+        run: |
+          rm -rf /tmp/d2r1-online-aggregate
+          python -m experiments.b1sc_d2_r1_v1_0.runner online-aggregate --online-root /tmp/d2r1-online-root --out /tmp/d2r1-online-aggregate
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d2r1-online-aggregate
+          path: /tmp/d2r1-online-aggregate
+          retention-days: 90
+          if-no-files-found: error
+      - name: Online aggregate status
+        id: status
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json,pathlib
+          p=pathlib.Path('/tmp/d2r1-online-aggregate/ONLINE_EFFECT_R1.json')
+          ok=p.is_file() and json.loads(p.read_text()).get('status')=='D2_R1_ONLINE_EFFECT_COMPLETE'
+          print('ready=' + ('true' if ok else 'false'))
+          PY
+      - name: Block incomplete online aggregate
+        if: ${{ steps.status.outputs.ready != 'true' }}
+        run: exit 1
+  final:
+    name: Final D2-R1 mechanistic adjudication
+    needs: [training_aggregate, online_aggregate]
+    if: ${{ always() && needs.training_aggregate.outputs.ready == 'true' && needs.online_aggregate.outputs.ready == 'true' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 2}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - name: Install aggregate dependency
+        run: python -m pip install numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: d2r1-training-aggregate
+          path: /tmp/d2r1-training
+      - uses: actions/download-artifact@v4
+        with:
+          name: d2r1-online-aggregate
+          path: /tmp/d2r1-online-aggregate
+      - name: Final frozen adjudication
+        run: |
+          rm -rf /tmp/d2r1-final
+          python -m experiments.b1sc_d2_r1_v1_0.runner final --training /tmp/d2r1-training/TRAINING_EFFECT_R1.json --online /tmp/d2r1-online-aggregate/ONLINE_EFFECT_R1.json --out /tmp/d2r1-final
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d2r1-final-review
+          path: /tmp/d2r1-final
           retention-days: 90
           if-no-files-found: error
