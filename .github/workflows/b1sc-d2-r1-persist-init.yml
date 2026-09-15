@@ -1,0 +1,83 @@
+name: B1-SC-D2-R1 persist canonical initialization bytes
+'on':
+  push:
+    branches:
+      - research/b1sc-d2-r1-v1.0-persistent-init-20260915
+    paths:
+      - .github/workflows/b1sc-d2-r1-persist-init.yml
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: b1sc-d2-r1-persist-init
+  cancel-in-progress: false
+jobs:
+  persist:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - name: Download canonical artifact bytes
+        uses: actions/download-artifact@v4
+        with:
+          name: b1sc-d2-r1-init-candidates
+          path: /tmp/d2r1-init
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: CRC2520/polar-sim-ml-original
+          run-id: 35007729637
+      - name: Verify frozen SHA-256 values and persist exact bytes
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,json,shutil
+          src=Path('/tmp/d2r1-init')
+          dst=Path('experiments/b1sc_d2_r1_v1_0/frozen_init')
+          dst.mkdir(parents=True,exist_ok=True)
+          expected={
+            0:'a471b2b5d20cf864ee0879f7fe6fb53415426c09a0bd65802d234ac60d202d32',
+            1:'439fe672217d525486f6881da595d824fb5ab1502d49d0fdc014ef71a30df126',
+            2:'24f836ab3f128e649da6caf7736ce6d8293996a548418e0c378149a391d0d16c',
+            3:'f37da57d6311e567e5e80105d64c1842b9f42bb49e020158fdcf41ec1a5523f1',
+            4:'f0c0f01eadaacef05fc44e30635de17a3cd6ff6cd1f3798c87900eaaca394ce4',
+            5:'b4f8a197e7ce3f2d8d9fec231a07dad0d84ee5d405a5f0dca6853d4b1abd6991',
+            6:'9fe0ab844887b2eb1f24e8dd00bc65e2921a7ecf7ac8b6de07ff0305af78679c',
+            7:'39334c149d5e4eb86733cc31a85788299836fb24c65d8d15aa27cedb459553c6',
+          }
+          rows=[]
+          for b,h in expected.items():
+              p=src/f'block-{b}.bin'
+              raw=p.read_bytes(); got=hashlib.sha256(raw).hexdigest()
+              if got!=h: raise SystemExit(f'block {b} sha mismatch: {got}')
+              q=dst/p.name; q.write_bytes(raw)
+              if hashlib.sha256(q.read_bytes()).hexdigest()!=h: raise SystemExit(f'persisted block {b} mismatch')
+              rows.append({'block':b,'path':str(q),'sha256':h,'size':len(raw)})
+          manifest={
+            'schema':'B1-SC-D2-R1-PERSISTED-INIT-1.0.0-20260915',
+            'status':'BYTE_FOR_BYTE_COPY_OF_CANONICAL_ARTIFACT',
+            'canonical_generation_run_id':35007729637,
+            'canonical_artifact_id':10412775720,
+            'canonical_artifact_name':'b1sc-d2-r1-init-candidates',
+            'canonical_bundle_sha256':'0f3a2ac9fe3a29cbf2764257527735be000e487db1462dc3c555ef4bb34580a4',
+            'regenerated':False,
+            'blocks':rows,
+            'scientific_training_performed':False,
+            'scientific_evaluation_performed':False,
+          }
+          (dst/'PERSISTED_MANIFEST.json').write_text(json.dumps(manifest,indent=2,sort_keys=True)+'\n')
+          PY
+      - name: Commit persisted canonical bytes once
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experiments/b1sc_d2_r1_v1_0/frozen_init
+          if git diff --cached --quiet; then
+            echo 'No changes to persist.'
+            exit 0
+          fi
+          git commit -m 'science(b1sc-d2-r1): persist canonical frozen initialization bytes'
+          git push origin HEAD:research/b1sc-d2-r1-v1.0-persistent-init-20260915
