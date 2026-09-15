@@ -179,16 +179,23 @@ jobs:
     needs: [training_aggregate, online]
     if: ${{ always() && needs.training_aggregate.outputs.ready == 'true' }}
     runs-on: ubuntu-22.04
-    timeout-minutes: 45
+    timeout-minutes: 120
     outputs:
       ready: ${{ steps.status.outputs.ready }}
     steps:
       - uses: actions/checkout@v4
         with: {ref: '${{ github.sha }}', fetch-depth: 2}
       - uses: actions/setup-python@v5
-        with: {python-version: '3.11.16'}
-      - name: Install aggregate dependency
-        run: python -m pip install numpy==1.26.4
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install preserved runtime
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
       - uses: actions/download-artifact@v4
         continue-on-error: true
         with:
@@ -224,14 +231,21 @@ jobs:
     needs: [training_aggregate, online_aggregate]
     if: ${{ always() && needs.training_aggregate.outputs.ready == 'true' && needs.online_aggregate.outputs.ready == 'true' }}
     runs-on: ubuntu-22.04
-    timeout-minutes: 30
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
         with: {ref: '${{ github.sha }}', fetch-depth: 2}
       - uses: actions/setup-python@v5
-        with: {python-version: '3.11.16'}
-      - name: Install aggregate dependency
-        run: python -m pip install numpy==1.26.4
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install preserved runtime
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
       - uses: actions/download-artifact@v4
         with:
           name: d2r1-training-aggregate
