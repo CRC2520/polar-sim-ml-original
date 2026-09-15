@@ -1,0 +1,342 @@
+name: B1-SC-D2-R1 one-time permanent canonical initialization migration
+'on':
+  push:
+    branches:
+      - research/b1sc-d2-r1-v1.0-permanent-init-20260915
+    paths:
+      - .github/workflows/b1sc-d2-r1-permanentize.yml
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: b1sc-d2-r1-permanentize
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+env:
+  TARGET_BRANCH: research/b1sc-d2-r1-v1.0-permanent-init-20260915
+  PERM_DIR: experiments/b1sc_d2_r1_v1_0/frozen_init/permanent
+jobs:
+  permanentize:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/b1sc-d2-r1-v1.0-permanent-init-20260915
+          fetch-depth: 2
+      - name: Download canonical artifact bytes
+        uses: actions/download-artifact@v4
+        with:
+          name: b1sc-d2-r1-init-candidates
+          path: /tmp/d2r1-canonical
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+          repository: CRC2520/polar-sim-ml-original
+          run-id: 35007729637
+      - name: Verify, copy exact bytes, and bind pipeline to permanent storage
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,json,shutil
+
+          root=Path('.')
+          source=Path('/tmp/d2r1-canonical')
+          target=root/'experiments/b1sc_d2_r1_v1_0/frozen_init/permanent'
+          target.mkdir(parents=True,exist_ok=True)
+          expected={
+            0:'a471b2b5d20cf864ee0879f7fe6fb53415426c09a0bd65802d234ac60d202d32',
+            1:'439fe672217d525486f6881da595d824fb5ab1502d49d0fdc014ef71a30df126',
+            2:'24f836ab3f128e649da6caf7736ce6d8293996a548418e0c378149a391d0d16c',
+            3:'f37da57d6311e567e5e80105d64c1842b9f42bb49e020158fdcf41ec1a5523f1',
+            4:'f0c0f01eadaacef05fc44e30635de17a3cd6ff6cd1f3798c87900eaaca394ce4',
+            5:'b4f8a197e7ce3f2d8d9fec231a07dad0d84ee5d405a5f0dca6853d4b1abd6991',
+            6:'9fe0ab844887b2eb1f24e8dd00bc65e2921a7ecf7ac8b6de07ff0305af78679c',
+            7:'39334c149d5e4eb86733cc31a85788299836fb24c65d8d15aa27cedb459553c6',
+          }
+          files=[]
+          for block,want in expected.items():
+            matches=list(source.rglob(f'block-{block}.bin'))
+            if len(matches)!=1:
+              raise RuntimeError(f'block-{block}.bin resolution count={len(matches)}')
+            data=matches[0].read_bytes(); got=hashlib.sha256(data).hexdigest()
+            if got!=want: raise RuntimeError(f'block {block} canonical SHA mismatch: {got}')
+            dst=target/f'block-{block}.bin'; dst.write_bytes(data)
+            if hashlib.sha256(dst.read_bytes()).hexdigest()!=want: raise RuntimeError('post-copy mismatch')
+            files.append({'block':block,'path':str(dst.as_posix()),'sha256':want,'bytes':len(data)})
+          manifest={
+            'schema':'B1-SC-D2-R1-PERMANENT-INIT-1.0.0-20260915',
+            'status':'BYTE_IDENTICAL_CANONICAL_SNAPSHOTS_VERSIONED',
+            'source_run_id':35007729637,
+            'source_artifact_id':10412775720,
+            'source_artifact_name':'b1sc-d2-r1-init-candidates',
+            'source_bundle_sha256':'0f3a2ac9fe3a29cbf2764257527735be000e487db1462dc3c555ef4bb34580a4',
+            'regenerated':False,
+            'byte_identical_to_canonical_artifact':True,
+            'same_snapshot_for_on_off':True,
+            'files':files,
+            'B1E_executed':False,
+            'final_seeds_generated':False,
+          }
+          (target/'PERMANENT_INIT_MANIFEST.json').write_text(json.dumps(manifest,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+
+          new_branch='research/b1sc-d2-r1-v1.0-permanent-init-20260915'
+          old_branch='research/b1sc-d2-r1-v1.0-full-execution-readiness-20260915'
+          sr=root/'experiments/b1sc_d2_r1_v1_0/scientific_runner.py'
+          text=sr.read_text(encoding='utf-8')
+          text=text.replace(f'RUNNER_BRANCH = "{old_branch}"',f'RUNNER_BRANCH = "{new_branch}"')
+          text=text.replace('RUNNER_FREEZE = ROOT / "run" / "FULL_EXECUTION_FREEZE.json"','RUNNER_FREEZE = ROOT / "run" / "PERMANENT_EXECUTION_FREEZE.json"')
+          text=text.replace('D2_R1_FULL_EXECUTION_PIPELINE_QUALIFIED_NOT_AUTHORIZED','D2_R1_PERMANENT_INIT_PIPELINE_QUALIFIED_NOT_AUTHORIZED')
+          sr.write_text(text,encoding='utf-8')
+
+          tests=root/'experiments/b1sc_d2_r1_v1_0/full_pipeline_tests.py'
+          text=tests.read_text(encoding='utf-8').replace(old_branch,new_branch)
+          tests.write_text(text,encoding='utf-8')
+
+          wf=root/'.github/workflows/b1sc-d2-r1-v1-0-scientific.yml'
+          text=wf.read_text(encoding='utf-8').replace(old_branch,new_branch)
+          download="""      - name: Download canonical frozen initialization bytes\n        uses: actions/download-artifact@v4\n        with:\n          name: b1sc-d2-r1-init-candidates\n          path: /tmp/d2r1-init\n          github-token: '${{ secrets.GITHUB_TOKEN }}'\n          repository: CRC2520/polar-sim-ml-original\n          run-id: 35007729637\n"""
+          if download not in text: raise RuntimeError('scientific artifact-download block not found')
+          text=text.replace(download,'')
+          text=text.replace('--init-dir /tmp/d2r1-init','--init-dir experiments/b1sc_d2_r1_v1_0/frozen_init/permanent')
+          text=text.replace('name: B1-SC-D2-R1 guarded full scientific execution','name: B1-SC-D2-R1 guarded permanent-byte scientific execution')
+          wf.write_text(text,encoding='utf-8')
+
+          contract={
+            'schema':'B1-SC-D2-R1-PERMANENT-STORAGE-CONTRACT-1.0.0-20260915',
+            'status':'FROZEN_NOT_EXECUTED',
+            'branch':new_branch,
+            'permanent_directory':'experiments/b1sc_d2_r1_v1_0/frozen_init/permanent',
+            'manifest':'experiments/b1sc_d2_r1_v1_0/frozen_init/permanent/PERMANENT_INIT_MANIFEST.json',
+            'source_artifact_id':10412775720,
+            'source_bundle_sha256':'0f3a2ac9fe3a29cbf2764257527735be000e487db1462dc3c555ef4bb34580a4',
+            'regeneration_forbidden':True,
+            'scientific_pipeline_must_not_download_ephemeral_init_artifact':True,
+            'snapshot_consumption_mandatory':True,
+            'same_snapshot_for_on_off':True,
+            'B1E_disposition':'ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION',
+            'B1E_executed':False,
+          }
+          (root/'experiments/b1sc_d2_r1_v1_0/PERMANENT_STORAGE_CONTRACT.json').write_text(json.dumps(contract,indent=2,sort_keys=True)+'\n',encoding='utf-8')
+
+          qa=root/'experiments/b1sc_d2_r1_v1_0/permanent_init_qa.py'
+          qa.write_text(r'''"""Cross-runner QA for permanently versioned D2-R1 canonical snapshots."""
+          from __future__ import annotations
+          import argparse,hashlib,json,os
+          from pathlib import Path
+          from experiments.b1sc_d2_r1_v1_0 import scientific_runner as sr
+          ROOT=Path(__file__).resolve().parent
+          PERM=ROOT/'frozen_init'/'permanent'
+          MANIFEST=PERM/'PERMANENT_INIT_MANIFEST.json'
+          def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          def manifest(): return json.loads(MANIFEST.read_text(encoding='utf-8'))
+          def probe(condition,out):
+              os.environ['D2R1_INIT_DIR']=str(PERM); sr.runtime(); m=manifest(); rows=[]
+              for x in m['files']:
+                  b=int(x['block']); p=ROOT.parents[1]/x['path']; assert p.is_file() and sha(p)==x['sha256']
+                  q=sr.validate_and_load_frozen(condition,b)
+                  assert q.attestation.snapshot_sha256==x['sha256']
+                  rows.append({'block':b,'condition':condition,'snapshot_sha256':q.attestation.snapshot_sha256,'actor_digest':q.attestation.actor_digest,'critic_digest':q.attestation.critic_digest,'source_seed':q.attestation.source_seed})
+              payload={'status':'PASS','condition':condition,'blocks_verified':len(rows),'permanent_storage':True,'rows':rows,'scientific_training_performed':False,'scientific_evaluation_performed':False}
+              o=Path(out);o.mkdir(parents=True,exist_ok=True);(o/f'PROBE_{condition}.json').write_text(json.dumps(payload,indent=2,sort_keys=True)+'\n');return payload
+          def compare(on_file,off_file,out):
+              a=json.loads(Path(on_file).read_text());b=json.loads(Path(off_file).read_text()); assert len(a['rows'])==len(b['rows'])==8
+              for x,y in zip(a['rows'],b['rows']):
+                  assert x['block']==y['block'] and x['snapshot_sha256']==y['snapshot_sha256'] and x['actor_digest']==y['actor_digest'] and x['critic_digest']==y['critic_digest'] and x['source_seed']==y['source_seed']
+              payload={'status':'PASS','blocks_verified':8,'all_cross_runner_exact':True,'permanent_storage':True,'scientific_training_performed':False,'scientific_evaluation_performed':False}
+              o=Path(out);o.mkdir(parents=True,exist_ok=True);(o/'PERMANENT_CROSS_RUNNER_STATUS.json').write_text(json.dumps(payload,indent=2,sort_keys=True)+'\n');return payload
+          def main():
+              p=argparse.ArgumentParser();s=p.add_subparsers(dest='cmd',required=True)
+              q=s.add_parser('probe');q.add_argument('--condition',required=True,choices=('S6-ON','S6-OFF-TRAIN'));q.add_argument('--out',required=True)
+              c=s.add_parser('compare');c.add_argument('--on',required=True);c.add_argument('--off',required=True);c.add_argument('--out',required=True)
+              a=p.parse_args();print(json.dumps(probe(a.condition,a.out) if a.cmd=='probe' else compare(a.on,a.off,a.out),sort_keys=True))
+          if __name__=='__main__':main()
+          '''.replace('\n          ','\n').lstrip(),encoding='utf-8')
+
+          pre=root/'experiments/b1sc_d2_r1_v1_0/permanent_preflight.py'
+          pre.write_text(r'''"""Preflight for D2-R1 permanent canonical snapshot execution readiness."""
+          from __future__ import annotations
+          import argparse,hashlib,json
+          from pathlib import Path
+          ROOT=Path(__file__).resolve().parent; REPO=ROOT.parents[1]
+          BRANCH='research/b1sc-d2-r1-v1.0-permanent-init-20260915'
+          STATUS='D2_R1_PERMANENT_INIT_PIPELINE_QUALIFIED_NOT_AUTHORIZED'
+          MANIFEST=ROOT/'frozen_init'/'permanent'/'PERMANENT_INIT_MANIFEST.json'
+          TEXT_SOURCES=[
+            'experiments/b1sc_d2_r1_v1_0/INIT_FREEZE.json','experiments/b1sc_d2_r1_v1_0/FIT_REGISTRY.json','experiments/b1sc_d2_r1_v1_0/PIPELINE_CONTRACT.json','experiments/b1sc_d2_r1_v1_0/PERMANENT_STORAGE_CONTRACT.json','experiments/b1sc_d2_r1_v1_0/execution_contract.py','experiments/b1sc_d2_r1_v1_0/init_format.py','experiments/b1sc_d2_r1_v1_0/initialization.py','experiments/b1sc_d2_r1_v1_0/scientific_runner.py','experiments/b1sc_d2_r1_v1_0/full_execution.py','experiments/b1sc_d2_r1_v1_0/runner.py','experiments/b1sc_d2_r1_v1_0/runner_tests.py','experiments/b1sc_d2_r1_v1_0/full_pipeline_tests.py','experiments/b1sc_d2_r1_v1_0/permanent_init_qa.py','experiments/b1sc_d2_r1_v1_0/permanent_preflight.py','.github/workflows/b1sc-d2-r1-v1-0-scientific.yml','.github/workflows/b1sc-d2-r1-permanent-qa.yml']
+          def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+          def main():
+              p=argparse.ArgumentParser();p.add_argument('--out',required=True);p.add_argument('--source-commit',required=True);p.add_argument('--qa-run-id',required=True,type=int);a=p.parse_args()
+              assert not (ROOT/'START_REQUEST.json').exists();m=json.loads(MANIFEST.read_text());assert m['byte_identical_to_canonical_artifact'] and not m['regenerated'] and len(m['files'])==8
+              binary=[]
+              for x in m['files']:
+                  rel=x['path'];fp=REPO/rel;assert fp.is_file() and sha(fp)==x['sha256'];binary.append(rel)
+              for rel in TEXT_SOURCES:assert (REPO/rel).is_file(),rel
+              wf=(REPO/'.github/workflows/b1sc-d2-r1-v1-0-scientific.yml').read_text();assert BRANCH in wf and 'workflow_dispatch' not in wf and 'START_REQUEST.json' in wf and 'b1sc-d2-r1-init-candidates' not in wf and 'frozen_init/permanent' in wf
+              hashes={rel:sha(REPO/rel) for rel in TEXT_SOURCES+binary+[str(MANIFEST.relative_to(REPO)).replace('\\','/')]} 
+              freeze={'schema':'B1-SC-D2-R1-1.0.0-20260915','status':STATUS,'branch':BRANCH,'qualified_source_commit':a.source_commit,'qa_run_id':a.qa_run_id,'permanent_snapshot_storage':True,'permanent_manifest_sha256':sha(MANIFEST),'canonical_init_generation_run_id':35007729637,'canonical_init_artifact_id':10412775720,'canonical_init_bundle_sha256':'0f3a2ac9fe3a29cbf2764257527735be000e487db1462dc3c555ef4bb34580a4','planned_fits':16,'blocks':8,'native_steps_per_fit':1048576,'checkpoints':[262144,524288,786432,1048576],'diagnostic_episodes':32,'endpoint_episodes':64,'causal_episodes':64,'training_gate':'aggregate_and_at_least_6_of_8','online_gate':'aggregate_and_at_least_6_of_8_and_controls','window_9_40_secondary_only':True,'snapshot_consumption_mandatory':True,'same_snapshot_for_on_off':True,'seed_reconstruction_for_training_forbidden':True,'optimizer_requires_validated_init':True,'first_optimizer_step_requires_validated_init':True,'scientific_workflow_present':True,'scientific_training_performed':False,'scientific_evaluation_performed':False,'scientific_results_exist':False,'start_request_present':False,'does_not_rewrite_d2':True,'source_hashes':hashes,'B1E_disposition':'ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION','ready_for_b1e_protocol_design':False,'ready_for_b1e_freeze':False,'ready_for_b1e_confirmatory_run':False,'B1E_executed':False,'final_seeds_generated':False,'H_CAT':'NOT_EVALUABLE','H_TRANSFER':'NOT_EVALUATED'}
+              out=Path(a.out);out.mkdir(parents=True,exist_ok=True);(out/'PERMANENT_EXECUTION_FREEZE.json').write_text(json.dumps(freeze,indent=2,sort_keys=True)+'\n');(out/'PERMANENT_PREFLIGHT_STATUS.json').write_text(json.dumps(dict(freeze,status='PERMANENT_PREFLIGHT_PASS_NOT_EXECUTED'),indent=2,sort_keys=True)+'\n');print(json.dumps({'status':'PASS','binary_snapshots':8,'training_performed':False,'start_request_present':False},sort_keys=True))
+          if __name__=='__main__':main()
+          '''.replace('\n          ','\n').lstrip(),encoding='utf-8')
+
+          qawf=root/'.github/workflows/b1sc-d2-r1-permanent-qa.yml'
+          qawf.write_text(r'''name: B1-SC-D2-R1 permanent canonical bytes QA only
+          'on':
+            push:
+              branches:
+                - research/b1sc-d2-r1-v1.0-permanent-init-20260915
+              paths:
+                - experiments/b1sc_d2_r1_v1_0/frozen_init/permanent/**
+                - experiments/b1sc_d2_r1_v1_0/PERMANENT_STORAGE_CONTRACT.json
+                - experiments/b1sc_d2_r1_v1_0/scientific_runner.py
+                - experiments/b1sc_d2_r1_v1_0/full_execution.py
+                - experiments/b1sc_d2_r1_v1_0/runner.py
+                - experiments/b1sc_d2_r1_v1_0/full_pipeline_tests.py
+                - experiments/b1sc_d2_r1_v1_0/permanent_init_qa.py
+                - experiments/b1sc_d2_r1_v1_0/permanent_preflight.py
+                - .github/workflows/b1sc-d2-r1-v1-0-scientific.yml
+                - .github/workflows/b1sc-d2-r1-permanent-qa.yml
+          permissions:
+            contents: write
+            actions: read
+          concurrency:
+            group: b1sc-d2-r1-permanent-qa
+            cancel-in-progress: true
+          defaults:
+            run:
+              shell: bash
+          env:
+            SDL_VIDEODRIVER: dummy
+            SDL_AUDIODRIVER: dummy
+            OMP_NUM_THREADS: '1'
+            OPENBLAS_NUM_THREADS: '1'
+            MKL_NUM_THREADS: '1'
+            PYTHONDONTWRITEBYTECODE: '1'
+          jobs:
+            rules:
+              runs-on: ubuntu-22.04
+              steps:
+                - uses: actions/checkout@v4
+                  with: {ref: '${{ github.sha }}', fetch-depth: 2}
+                - uses: actions/setup-python@v5
+                  with: {python-version: '3.11.16', cache: pip, cache-dependency-path: b1s/execution/requirements.txt}
+                - run: |
+                    sudo apt-get update -qq && sudo apt-get install -y swig
+                    python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+                    python -m pip install -r b1s/execution/requirements.txt
+                - run: python -m experiments.b1sc_d2_r1_v1_0.runner_tests rules
+                - run: python -m experiments.b1sc_d2_r1_v1_0.full_pipeline_tests rules
+            probe_on:
+              runs-on: ubuntu-22.04
+              steps:
+                - uses: actions/checkout@v4
+                  with: {ref: '${{ github.sha }}', fetch-depth: 1}
+                - uses: actions/setup-python@v5
+                  with: {python-version: '3.11.16'}
+                - run: |
+                    sudo apt-get update -qq && sudo apt-get install -y swig
+                    python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+                    python -m pip install -r b1s/execution/requirements.txt
+                    python -m experiments.b1sc_d2_r1_v1_0.permanent_init_qa probe --condition S6-ON --out /tmp/probe-on
+                - uses: actions/upload-artifact@v4
+                  with: {name: d2r1-permanent-probe-on, path: /tmp/probe-on, retention-days: 90}
+            probe_off:
+              runs-on: ubuntu-22.04
+              steps:
+                - uses: actions/checkout@v4
+                  with: {ref: '${{ github.sha }}', fetch-depth: 1}
+                - uses: actions/setup-python@v5
+                  with: {python-version: '3.11.16'}
+                - run: |
+                    sudo apt-get update -qq && sudo apt-get install -y swig
+                    python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+                    python -m pip install -r b1s/execution/requirements.txt
+                    python -m experiments.b1sc_d2_r1_v1_0.permanent_init_qa probe --condition S6-OFF-TRAIN --out /tmp/probe-off
+                - uses: actions/upload-artifact@v4
+                  with: {name: d2r1-permanent-probe-off, path: /tmp/probe-off, retention-days: 90}
+            compare:
+              needs: [probe_on, probe_off]
+              runs-on: ubuntu-22.04
+              steps:
+                - uses: actions/checkout@v4
+                  with: {ref: '${{ github.sha }}', fetch-depth: 1}
+                - uses: actions/setup-python@v5
+                  with: {python-version: '3.11.16'}
+                - uses: actions/download-artifact@v4
+                  with: {name: d2r1-permanent-probe-on, path: /tmp/on}
+                - uses: actions/download-artifact@v4
+                  with: {name: d2r1-permanent-probe-off, path: /tmp/off}
+                - run: python -m experiments.b1sc_d2_r1_v1_0.permanent_init_qa compare --on /tmp/on/PROBE_S6-ON.json --off /tmp/off/PROBE_S6-OFF-TRAIN.json --out /tmp/compare
+                - uses: actions/upload-artifact@v4
+                  with: {name: d2r1-permanent-cross-runner, path: /tmp/compare, retention-days: 90}
+            runtime:
+              runs-on: ubuntu-22.04
+              steps:
+                - uses: actions/checkout@v4
+                  with: {ref: '${{ github.sha }}', fetch-depth: 2}
+                - uses: actions/setup-python@v5
+                  with: {python-version: '3.11.16'}
+                - name: Prove START_REQUEST absent
+                  run: test ! -e experiments/b1sc_d2_r1_v1_0/START_REQUEST.json
+                - run: |
+                    sudo apt-get update -qq && sudo apt-get install -y swig
+                    python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+                    python -m pip install -r b1s/execution/requirements.txt
+                    python -m experiments.b1sc_d2_r1_v1_0.runner_tests runtime --init-dir experiments/b1sc_d2_r1_v1_0/frozen_init/permanent --out /tmp/runtime
+                    python -m experiments.b1sc_d2_r1_v1_0.full_pipeline_tests runtime --out /tmp/full-tests
+                - uses: actions/upload-artifact@v4
+                  with:
+                    name: d2r1-permanent-runtime
+                    path: |
+                      /tmp/runtime
+                      /tmp/full-tests
+                    retention-days: 90
+            preflight:
+              needs: [rules, compare, runtime]
+              runs-on: ubuntu-22.04
+              steps:
+                - uses: actions/checkout@v4
+                  with: {ref: '${{ github.sha }}', fetch-depth: 2}
+                - uses: actions/setup-python@v5
+                  with: {python-version: '3.11.16'}
+                - run: python -m experiments.b1sc_d2_r1_v1_0.permanent_preflight --out /tmp/preflight --source-commit '${{ github.sha }}' --qa-run-id '${{ github.run_id }}'
+                - uses: actions/upload-artifact@v4
+                  with: {name: d2r1-permanent-preflight, path: /tmp/preflight, retention-days: 90}
+            publish:
+              needs: preflight
+              runs-on: ubuntu-22.04
+              steps:
+                - uses: actions/checkout@v4
+                  with:
+                    ref: research/b1sc-d2-r1-v1.0-permanent-init-20260915
+                    fetch-depth: 2
+                - uses: actions/download-artifact@v4
+                  with: {name: d2r1-permanent-preflight, path: /tmp/preflight}
+                - run: |
+                    set -euo pipefail
+                    mkdir -p experiments/b1sc_d2_r1_v1_0/run
+                    cp /tmp/preflight/PERMANENT_EXECUTION_FREEZE.json experiments/b1sc_d2_r1_v1_0/run/PERMANENT_EXECUTION_FREEZE.json
+                    cp /tmp/preflight/PERMANENT_PREFLIGHT_STATUS.json experiments/b1sc_d2_r1_v1_0/run/PERMANENT_PREFLIGHT_STATUS.json
+                    git config user.name 'github-actions[bot]'
+                    git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+                    git add experiments/b1sc_d2_r1_v1_0/run/PERMANENT_EXECUTION_FREEZE.json experiments/b1sc_d2_r1_v1_0/run/PERMANENT_PREFLIGHT_STATUS.json
+                    git commit -m 'chore(d2-r1): publish permanent-init qualification freeze'
+                    git push origin HEAD:research/b1sc-d2-r1-v1.0-permanent-init-20260915
+          '''.replace('\n          ','\n').lstrip(),encoding='utf-8')
+          PY
+      - name: Commit permanent canonical bytes and pipeline rebinding
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experiments/b1sc_d2_r1_v1_0/frozen_init/permanent \
+                  experiments/b1sc_d2_r1_v1_0/PERMANENT_STORAGE_CONTRACT.json \
+                  experiments/b1sc_d2_r1_v1_0/scientific_runner.py \
+                  experiments/b1sc_d2_r1_v1_0/full_pipeline_tests.py \
+                  experiments/b1sc_d2_r1_v1_0/permanent_init_qa.py \
+                  experiments/b1sc_d2_r1_v1_0/permanent_preflight.py \
+                  .github/workflows/b1sc-d2-r1-v1-0-scientific.yml \
+                  .github/workflows/b1sc-d2-r1-permanent-qa.yml
+          git commit -m 'chore(d2-r1): permanently version canonical init bytes and rebind pipeline'
+          git push origin HEAD:research/b1sc-d2-r1-v1.0-permanent-init-20260915
