@@ -2,7 +2,7 @@ name: B1-SC-D2-R1 full execution-readiness QA only
 'on':
   push:
     branches:
-      - research/b1sc-d2-r1-v1.0-full-execution-readiness-20260915
+      - research/b1sc-d2-r1-v1.0-persistent-init-20260915
     paths:
       - experiments/b1sc_d2_r1_v1_0/scientific_runner.py
       - experiments/b1sc_d2_r1_v1_0/full_execution.py
@@ -10,6 +10,9 @@ name: B1-SC-D2-R1 full execution-readiness QA only
       - experiments/b1sc_d2_r1_v1_0/runner_tests.py
       - experiments/b1sc_d2_r1_v1_0/full_pipeline_tests.py
       - experiments/b1sc_d2_r1_v1_0/full_preflight.py
+      - experiments/b1sc_d2_r1_v1_0/initialization.py
+      - experiments/b1sc_d2_r1_v1_0/frozen_init/PERSISTED_MANIFEST.json
+      - experiments/b1sc_d2_r1_v1_0/frozen_init/block-*.bin
       - .github/workflows/b1sc-d2-r1-v1-0-scientific.yml
       - .github/workflows/b1sc-d2-r1-full-qa.yml
 permissions:
@@ -51,7 +54,7 @@ jobs:
       - name: Qualify full pipeline rules
         run: python -m experiments.b1sc_d2_r1_v1_0.full_pipeline_tests rules
   runtime:
-    name: Technical microfit and synthetic gate QA
+    name: Repository-persisted microfit and synthetic gate QA
     runs-on: ubuntu-22.04
     timeout-minutes: 45
     steps:
@@ -64,24 +67,16 @@ jobs:
           cache-dependency-path: b1s/execution/requirements.txt
       - name: Prove scientific authorization is absent
         run: test ! -e experiments/b1sc_d2_r1_v1_0/START_REQUEST.json
-      - name: Download canonical frozen initialization bytes
-        uses: actions/download-artifact@v4
-        with:
-          name: b1sc-d2-r1-init-candidates
-          path: /tmp/d2r1-init
-          github-token: '${{ secrets.GITHUB_TOKEN }}'
-          repository: CRC2520/polar-sim-ml-original
-          run-id: 35007729637
       - name: Install preserved runtime
         run: |
           sudo apt-get update -qq && sudo apt-get install -y swig
           python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
           python -m pip install -r b1s/execution/requirements.txt
           python -m pip check
-      - name: Byte-gated QA microfits only
+      - name: Repository-persisted byte-gated QA microfits only
         run: |
           rm -rf /tmp/d2r1-runner-runtime
-          python -m experiments.b1sc_d2_r1_v1_0.runner_tests runtime --init-dir /tmp/d2r1-init --out /tmp/d2r1-runner-runtime
+          python -m experiments.b1sc_d2_r1_v1_0.runner_tests runtime --init-dir repository-persisted --out /tmp/d2r1-runner-runtime
       - name: Synthetic full-pipeline gate tests only
         run: |
           rm -rf /tmp/d2r1-full-tests
