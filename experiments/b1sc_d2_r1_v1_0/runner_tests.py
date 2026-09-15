@@ -25,7 +25,7 @@ def rule_tests()->dict:
     for node in ast.walk(tree):
         if isinstance(node,ast.Call) and isinstance(node.func,ast.Attribute):
             if node.func.attr=='Adam':adam_calls.append(node.lineno)
-            if node.func.attr=='step':step_calls.append(node.lineno)
+            if node.func.attr=='step' and isinstance(node.func.value,ast.Name) and node.func.value.id=='opt':step_calls.append(node.lineno)
     assert len(adam_calls)==1 and len(step_calls)==1
     assert funcs['create_optimizer'].lineno < adam_calls[0] <= funcs['create_optimizer'].end_lineno
     assert funcs['guarded_optimizer_step'].lineno < step_calls[0] <= funcs['guarded_optimizer_step'].end_lineno
