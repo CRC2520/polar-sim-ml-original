@@ -1,0 +1,15 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "errors": 0,
+  "failures": 0,
+  "final_seeds_generated": false,
+  "log": "test_01_rng_restored (experiments.competence_pilot.tests.RuntimeTests.test_01_rng_restored) ... ok\ntest_02_native_fixed_input_parity (experiments.competence_pilot.tests.RuntimeTests.test_02_native_fixed_input_parity) ... ok\ntest_03_actor_message_contract (experiments.competence_pilot.tests.RuntimeTests.test_03_actor_message_contract) ... ok\ntest_04_ppo_synthetic_post_update_checkpoints (experiments.competence_pilot.tests.RuntimeTests.test_04_ppo_synthetic_post_update_checkpoints) ... ok\ntest_05_sac_synthetic_post_update_checkpoints (experiments.competence_pilot.tests.RuntimeTests.test_05_sac_synthetic_post_update_checkpoints) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 6.869s\n\nOK\n",
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "status": "PASS",
+  "tests_run": 5
+}

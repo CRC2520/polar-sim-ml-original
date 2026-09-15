@@ -1,0 +1,22 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "binary_calibration_traces_retained_in": "cpnb-freeze artifact of this run",
+  "files": {
+    "DEVELOPMENT_FREEZE.json": "d5d7068d3b55019bdabd1b59b581d52339bcc3e2e79cd32bfd6b5a1891d98e10",
+    "NORMALIZATION_0.json": "ff577c96c56e61acd04cc05ecd59d12e5132e1b72c0fcf1eed4bf18b3cbc8e9d",
+    "NORMALIZATION_1.json": "5030c597a0808481abb7617a572e5d34c812d03dd2f22aa2e9b13f2582a17164",
+    "NORMALIZATION_2.json": "d3be60c655da3890a6aa53e97a50bf06686c73de3a373809fadab119bbfef39a",
+    "QA.json": "c11124d6511820859a4e27b54e6f4e5b9e7ccf7f810029fc9764cddbbc1479f8"
+  },
+  "final_seeds_generated": false,
+  "freeze_sha256": "d5d7068d3b55019bdabd1b59b581d52339bcc3e2e79cd32bfd6b5a1891d98e10",
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "source_commit": "e23ab660d734c423613cb4eecaffdc8e871b288e",
+  "status": "PRETRAINING_FREEZE_VERIFIED",
+  "workflow_run_id": "34900541283"
+}

@@ -1,0 +1,54 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "automatic_progression": false,
+  "budget_relation": "nested checkpoints in one uninterrupted fit",
+  "budgets": [
+    524288,
+    1048576
+  ],
+  "competence": {
+    "additional_displacement_at_least": 1,
+    "loss_improvement_strictly_greater_than": 4.333333333333333
+  },
+  "evaluation_episodes_per_checkpoint": 32,
+  "evaluation_native_step_cap": 816000,
+  "final_seeds_generated": false,
+  "fit_timeout_minutes": 180,
+  "fits": 24,
+  "independent_blocks": 3,
+  "input_modes": [
+    "raw",
+    "standardized"
+  ],
+  "interventions": false,
+  "max_parallel_fits": 4,
+  "new_hyperparameter_search": false,
+  "normalization": {
+    "clip": false,
+    "min_std": 0.01,
+    "online_updates": false,
+    "reward_normalization": false,
+    "samples_per_block": 32768,
+    "type": "fixed_per_block_shared_standardizer",
+    "uniform_action_steps": 16384,
+    "uses_evaluation_data": false,
+    "zero_action_steps": 16384
+  },
+  "normalization_native_steps": 98304,
+  "primary_loss": "negative_undiscounted_native_return",
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "roles": [
+    "G0",
+    "GD",
+    "PPO",
+    "SAC"
+  ],
+  "schema": "CP-NB-1.0.0-20260914",
+  "structural_search": false,
+  "train_native_steps": 25165824
+}

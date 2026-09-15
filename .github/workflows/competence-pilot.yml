@@ -1,0 +1,570 @@
+# CP-NB manual installation artifact; not yet executed in GitHub Actions.
+# Install ONLY in research/competence-normalization-budget-20260914.
+# Without START_REQUEST.json the sole running job is validate (QA fixtures only).
+# A future start request must pin code_commit, plan_sha256, protocol_sha256,
+# workflow_sha256, namespace, authorize_competence_pilot, qa_run_id and all
+# trial.BOUNDARY fields. Never create it before the independent initial QA passes.
+# No dispatch, schedules, historical workflow calls, force pushes or automatic retries.
+name: CP-NB competence pilot - guarded QA and execution
+'on':
+  push:
+    branches:
+    - research/competence-normalization-budget-20260914
+    paths:
+    - .github/workflows/competence-pilot.yml
+    - experiments/competence_pilot/PLAN.json
+    - experiments/competence_pilot/PROTOCOL_ES.md
+    - experiments/competence_pilot/trial.py
+    - experiments/competence_pilot/runner.py
+    - experiments/competence_pilot/tests.py
+    - experiments/competence_pilot/START_REQUEST.json
+permissions:
+  contents: read
+concurrency:
+  group: cpnb-competence-normalization-budget-20260914
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+env:
+  CPNB_BRANCH: research/competence-normalization-budget-20260914
+  SDL_VIDEODRIVER: dummy
+  SDL_AUDIODRIVER: dummy
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  validate:
+    name: Validate rules and runtime (QA only without START_REQUEST)
+    if: ${{ github.repository == 'CRC2520/polar-sim-ml-original' && github.ref == 'refs/heads/research/competence-normalization-budget-20260914'
+      }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      start: ${{ steps.qa.outputs.start }}
+      matrix: ${{ steps.qa.outputs.matrix }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.sha }}
+        fetch-depth: 0
+        sparse-checkout-cone-mode: false
+        sparse-checkout: |
+          /.github/workflows/competence-pilot.yml
+          /experiments/competence_pilot/*.py
+          /experiments/competence_pilot/*.json
+          /experiments/competence_pilot/*.md
+          /b1s/execution/*.py
+          /b1s/execution/requirements.txt
+    - uses: actions/setup-python@v5
+      with:
+        python-version: 3.11.16
+        cache: pip
+        cache-dependency-path: b1s/execution/requirements.txt
+    - name: Inspect source and explicit start request
+      run: |
+        python -B - <<'PY'
+        import json, os, re, subprocess
+        from pathlib import Path
+        from experiments.competence_pilot import trial as d
+        d.require(os.environ['GITHUB_REPOSITORY']==d.REPO, 'Wrong repository')
+        d.require(os.environ['GITHUB_REF']=='refs/heads/'+d.BRANCH, 'Wrong branch')
+        d.require(os.environ['GITHUB_EVENT_NAME']=='push', 'Only a scoped push is accepted')
+        d.require(os.environ['GITHUB_RUN_ATTEMPT']=='1', 'Reruns are not authorized')
+        d.require(d.git('rev-parse','HEAD')==os.environ['GITHUB_SHA'], 'Checkout mismatch')
+        d.require(d.read(d.ROOT/'PLAN.json')==d.plan(), 'Published plan does not match code')
+        history=d.preserve()
+        # Installation is limited to the already reviewed five pilot files plus this workflow.
+        expected={
+            'PLAN.json':'46b096e07f9b778075580130e21d85e4db7b9fe6',
+            'PROTOCOL_ES.md':'d55f14f7494d9c645ff7d02acdcb04406762c386',
+            'trial.py':'ee42df8de6b365017e99cf46f7c3d18816b972c1',
+            'runner.py':'e53bda36bcce9bb12ed5f3efb251cc635096caf5',
+            'tests.py':'21c6d378b473e3f5f025ebc729e2e5b88998b3a7'}
+        for name,blob in expected.items():
+            path=d.ROOT/name
+            d.require(d.git('hash-object','--no-filters',str(path))==blob,
+                      'Pilot source differs from reviewed version: '+name)
+        request_path=d.ROOT/'START_REQUEST.json'
+        present=request_path.exists()
+        if present:
+            request=d.execution_guard()
+            d.require(d.git('rev-parse','HEAD^')==request['code_commit'],
+                      'Start request must be the sole new commit after validated code')
+            d.require(re.fullmatch('[0-9a-f]{40}', request['code_commit']) is not None,
+                      'An immutable code commit is required')
+            d.require(d.sha('.github/workflows/competence-pilot.yml')==request['workflow_sha256'],
+                      'Workflow changed after QA')
+            for name,value in d.BOUNDARY.items():
+                d.require(request.get(name)==value, 'Boundary mismatch: '+name)
+            qa_id=str(request.get('qa_run_id',''))
+            d.require(qa_id.isdigit() and qa_id!=os.environ['GITHUB_RUN_ID'],
+                      'A separate successful initial QA run is required')
+            run=json.loads(subprocess.check_output([
+                'gh','api',f'repos/{d.REPO}/actions/runs/{qa_id}']))
+            d.require(run['status']=='completed' and run['conclusion']=='success'
+                      and run['head_sha']==request['code_commit'] and run['run_attempt']==1
+                      and run['head_branch']==d.BRANCH and run['event']=='push'
+                      and run['path']=='.github/workflows/competence-pilot.yml',
+                      'Referenced initial QA run is not an exact successful match')
+            # Do not silently replay an authorization after a previous published freeze.
+            parent_paths=d.git('ls-tree','-r','--name-only',request['code_commit']).splitlines()
+            d.require('experiments/competence_pilot/START_REQUEST.json' not in parent_paths, 'Start request was not newly added')
+            d.require('experiments/competence_pilot/run/DEVELOPMENT_FREEZE.json' not in parent_paths,
+                      'A pilot freeze already exists')
+        meta=dict(source_commit=os.environ['GITHUB_SHA'], start_request_present=present,
+                  historical_preservation=history, plan_sha256=d.sha(d.ROOT/'PLAN.json'),
+                  protocol_sha256=d.sha(d.ROOT/'PROTOCOL_ES.md'),
+                  workflow_sha256=d.sha('.github/workflows/competence-pilot.yml'),
+                  **d.BOUNDARY)
+        folder=Path(os.environ['RUNNER_TEMP'])/'cpnb-qa'
+        folder.mkdir(exist_ok=False)
+        d.write_new(folder/'METADATA.json',meta)
+        print('Scoped request inspection passed. Start request present:',present)
+        PY
+      env:
+        GH_TOKEN: ${{ github.token }}
+    - name: Install the preserved runtime
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y swig
+        python -m pip install -r b1s/execution/requirements.txt
+        python -m pip check
+    - name: Run 18 rule tests and 5 isolated runtime tests
+      run: |
+        python -B - <<'PY'
+        import json, os
+        from pathlib import Path
+        from experiments.competence_pilot import trial as d, tests
+        root=Path(os.environ['RUNNER_TEMP'])/'cpnb-qa'
+        unit=tests.unit_tests(); native=tests.runtime_tests()
+        d.require(unit['status']=='PASS' and unit['tests_run']==18, 'Rules did not pass 18 tests')
+        d.require(native['status']=='PASS' and native['tests_run']==5, 'Runtime did not pass 5 tests')
+        d.write_new(root/'RULE_TESTS.json',unit)
+        d.write_new(root/'RUNTIME_TESTS.json',native)
+        report=dict(status='QA_PASS_NOT_SCIENTIFIC_COMPETENCE',
+                    rules=18,runtime=5, **d.read(root/'METADATA.json'))
+        d.write_new(root/'VALIDATION.json',report)
+        with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+            f.write('start='+str(report['start_request_present']).lower()+'\n')
+            f.write('matrix='+json.dumps({'include':[dict(index=i,id=x['id'])
+                        for i,x in enumerate(d.registry())]},separators=(',',':'))+'\n')
+        with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+            f.write('## CP-NB QA\n\n```json\n'+json.dumps(report,indent=2)+'\n```\n')
+            if not report['start_request_present']:
+                f.write('INSTALLATION_QA_ONLY: no normalization calibration or empirical fit started.\n')
+        PY
+      id: qa
+    - name: Retain cpnb-qa
+      uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        name: cpnb-qa
+        path: ${{ runner.temp }}/cpnb-qa/
+        retention-days: 90
+        if-no-files-found: warn
+  preflight:
+    name: Calibrate inputs and publish the pre-training freeze
+    needs: validate
+    if: ${{ needs.validate.outputs.start == 'true' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      actions: read
+    outputs:
+      freeze_commit: ${{ steps.publish.outputs.commit }}
+      freeze_sha256: ${{ steps.freeze.outputs.sha256 }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.sha }}
+        fetch-depth: 0
+        sparse-checkout-cone-mode: false
+        sparse-checkout: |
+          /.github/workflows/competence-pilot.yml
+          /experiments/competence_pilot/*.py
+          /experiments/competence_pilot/*.json
+          /experiments/competence_pilot/*.md
+          /b1s/execution/*.py
+          /b1s/execution/requirements.txt
+    - uses: actions/setup-python@v5
+      with:
+        python-version: 3.11.16
+        cache: pip
+        cache-dependency-path: b1s/execution/requirements.txt
+    - name: Install the preserved runtime
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y swig
+        python -m pip install -r b1s/execution/requirements.txt
+        python -m pip check
+    - name: Require immutable start and exact remote HEAD
+      run: |
+        test "$GITHUB_RUN_ATTEMPT" = "1"
+        test "$(git ls-remote --exit-code origin "refs/heads/$CPNB_BRANCH" | cut -f1)" = "$GITHUB_SHA"
+        python -B - <<'PY'
+        from experiments.competence_pilot import trial as d
+        d.execution_guard(); d.preserve()
+        PY
+    - name: Create and verify the development freeze
+      run: |
+        python -B -m experiments.competence_pilot.runner preflight \
+          --out "$RUNNER_TEMP/cpnb-frozen" \
+          2>&1 | tee "$RUNNER_TEMP/cpnb-preflight.log"
+        python -B - <<'PY'
+        import os
+        from pathlib import Path
+        from experiments.competence_pilot.runner import verify_frozen
+        from experiments.competence_pilot import trial as d
+        root=Path(os.environ['RUNNER_TEMP'])/'cpnb-frozen'
+        freeze=verify_frozen(root)
+        d.require(freeze['status']=='DEVELOPMENT_FROZEN_FOR_AUTHORIZED_PILOT', 'Unexpected freeze status')
+        d.require(len(freeze['registry'])==24 and freeze['plan']['train_native_steps']==25165824,
+                  'Unexpected registered fit budget')
+        with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+            f.write('sha256='+d.sha(root/'DEVELOPMENT_FREEZE.json')+'\n')
+        PY
+      id: freeze
+    - uses: actions/upload-artifact@v4
+      with:
+        name: cpnb-freeze
+        path: ${{ runner.temp }}/cpnb-frozen/
+        retention-days: 90
+        if-no-files-found: error
+    - name: Publish only new freeze text before allowing any fit
+      run: |
+        python -B - <<'PY'
+        import os, subprocess
+        from pathlib import Path
+        from experiments.competence_pilot import trial as d
+        root=Path(os.environ['RUNNER_TEMP'])/'cpnb-frozen'
+        dest=Path('experiments/competence_pilot/run')
+        d.require(d.git('rev-parse','HEAD')==os.environ['GITHUB_SHA'], 'Unexpected publication checkout')
+        d.require(d.git('ls-remote','--exit-code','origin','refs/heads/'+d.BRANCH).split()[0]
+                  ==os.environ['GITHUB_SHA'], 'Concurrent branch change; stop, never force')
+        frozen_sha=d.sha(root/'DEVELOPMENT_FREEZE.json')
+        d.require(frozen_sha==os.environ['EXPECTED_FREEZE_SHA256'], 'Freeze hash mismatch')
+        names=['DEVELOPMENT_FREEZE.json','QA.json']+[f'NORMALIZATION_{i}.json' for i in range(3)]
+        staged=[]
+        for name in names:
+            path=dest/name
+            d.require(not path.exists(), 'Existing destination: '+str(path))
+            path.parent.mkdir(parents=True,exist_ok=True)
+            with path.open('xb') as f: f.write((root/name).read_bytes())
+            staged.append(str(path))
+        receipt=dest/'FREEZE_PUBLICATION_RECEIPT.json'
+        d.require(not receipt.exists(), 'Existing freeze receipt')
+        d.write_new(receipt,dict(status='PRETRAINING_FREEZE_VERIFIED',source_commit=os.environ['GITHUB_SHA'],
+                    freeze_sha256=frozen_sha,workflow_run_id=os.environ['GITHUB_RUN_ID'],
+                    files={name:d.sha(root/name) for name in names},
+                    binary_calibration_traces_retained_in='cpnb-freeze artifact of this run',
+                    **d.BOUNDARY))
+        staged.append(str(receipt))
+        subprocess.run(['git','add','--sparse','-f','--',*staged],check=True)
+        d.require(sorted(d.git('diff','--cached','--name-only').splitlines())==sorted(staged),
+                  'Unexpected staged changes')
+        subprocess.run(['git','config','user.name','github-actions[bot]'],check=True)
+        subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'],check=True)
+        subprocess.run(['git','commit','-m','chore(cpnb): publish verified development freeze before fits'],check=True)
+        commit=d.git('rev-parse','HEAD')
+        subprocess.run(['git','push','origin','HEAD:'+d.BRANCH],check=True)
+        d.require(d.git('ls-remote','--exit-code','origin','refs/heads/'+d.BRANCH).split()[0]==commit,
+                  'Freeze publication was not confirmed remotely')
+        remote_bytes=subprocess.check_output(['git','show',commit+':'+str(dest/'DEVELOPMENT_FREEZE.json')])
+        d.require(d.sha_bytes(remote_bytes)==frozen_sha, 'Published freeze blob mismatch')
+        with open(os.environ['GITHUB_OUTPUT'],'a') as f: f.write('commit='+commit+'\n')
+        with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+            f.write('## Pre-training freeze published\n\nCommit: `'+commit+'`\n\nSHA-256: `'+frozen_sha+'`\n')
+        PY
+      id: publish
+      env:
+        EXPECTED_FREEZE_SHA256: ${{ steps.freeze.outputs.sha256 }}
+    - name: Retain cpnb-preflight-diagnostics
+      uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        name: cpnb-preflight-diagnostics
+        path: |-
+          ${{ runner.temp }}/cpnb-preflight.log
+          ${{ runner.temp }}/cpnb-frozen/
+        retention-days: 90
+        if-no-files-found: warn
+  fit:
+    name: Fit ${{ matrix.id }}
+    needs:
+    - validate
+    - preflight
+    if: ${{ needs.validate.outputs.start == 'true' && needs.preflight.result == 'success' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 180
+    permissions:
+      contents: read
+      actions: read
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJSON(needs.validate.outputs.matrix) }}
+    env:
+      FREEZE_COMMIT: ${{ needs.preflight.outputs.freeze_commit }}
+      EXPECTED_FREEZE_SHA256: ${{ needs.preflight.outputs.freeze_sha256 }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.sha }}
+        fetch-depth: 0
+        sparse-checkout-cone-mode: false
+        sparse-checkout: |
+          /.github/workflows/competence-pilot.yml
+          /experiments/competence_pilot/*.py
+          /experiments/competence_pilot/*.json
+          /experiments/competence_pilot/*.md
+          /b1s/execution/*.py
+          /b1s/execution/requirements.txt
+    - uses: actions/setup-python@v5
+      with:
+        python-version: 3.11.16
+        cache: pip
+        cache-dependency-path: b1s/execution/requirements.txt
+    - name: Install the preserved runtime
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y swig
+        python -m pip install -r b1s/execution/requirements.txt
+        python -m pip check
+    - uses: actions/download-artifact@v4
+      with:
+        name: cpnb-freeze
+        path: ${{ runner.temp }}/cpnb-frozen
+    - name: Verify exact source, freeze and remote publication
+      run: |
+        test "$GITHUB_RUN_ATTEMPT" = "1"
+        test "$(git ls-remote --exit-code origin "refs/heads/$CPNB_BRANCH" | cut -f1)" = "$FREEZE_COMMIT"
+        git fetch --filter=blob:none --no-tags origin "$FREEZE_COMMIT"
+        python -B - <<'PY'
+        import os, subprocess
+        from pathlib import Path
+        from experiments.competence_pilot import trial as d
+        from experiments.competence_pilot.runner import verify_frozen
+        root=Path(os.environ['RUNNER_TEMP'])/'cpnb-frozen'
+        verify_frozen(root)
+        d.require(d.sha(root/'DEVELOPMENT_FREEZE.json')==os.environ['EXPECTED_FREEZE_SHA256'],
+                  'Downloaded freeze differs from preflight output')
+        remote=subprocess.check_output(['git','show',os.environ['FREEZE_COMMIT']+
+                                         ':experiments/competence_pilot/run/DEVELOPMENT_FREEZE.json'])
+        d.require(d.sha_bytes(remote)==os.environ['EXPECTED_FREEZE_SHA256'],
+                  'Remote publication does not contain the exact freeze')
+        PY
+    - name: Execute exactly one registered fit, without scientific retry
+      run: |
+        mkdir -p "$RUNNER_TEMP/cpnb-fits"
+        python -B -m experiments.competence_pilot.runner fit \
+          --index "$FIT_INDEX" --frozen "$RUNNER_TEMP/cpnb-frozen" \
+          --out "$RUNNER_TEMP/cpnb-fits" \
+          2>&1 | tee "$RUNNER_TEMP/cpnb-fits/FIT_LOG_${FIT_ID}.txt"
+      env:
+        FIT_INDEX: ${{ matrix.index }}
+        FIT_ID: ${{ matrix.id }}
+    - name: Retain cpnb-fit-${{ matrix.id }}
+      uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        name: cpnb-fit-${{ matrix.id }}
+        path: ${{ runner.temp }}/cpnb-fits/
+        retention-days: 90
+        if-no-files-found: warn
+  close:
+    name: Retain and publish complete or blocked pilot evidence
+    needs:
+    - validate
+    - preflight
+    - fit
+    if: ${{ always() && needs.validate.outputs.start == 'true' && needs.preflight.result == 'success' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      actions: read
+    env:
+      FREEZE_COMMIT: ${{ needs.preflight.outputs.freeze_commit }}
+      EXPECTED_FREEZE_SHA256: ${{ needs.preflight.outputs.freeze_sha256 }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.sha }}
+        fetch-depth: 0
+        sparse-checkout-cone-mode: false
+        sparse-checkout: |
+          /.github/workflows/competence-pilot.yml
+          /experiments/competence_pilot/*.py
+          /experiments/competence_pilot/*.json
+          /experiments/competence_pilot/*.md
+          /b1s/execution/*.py
+          /b1s/execution/requirements.txt
+    - uses: actions/setup-python@v5
+      with:
+        python-version: 3.11.16
+        cache: pip
+        cache-dependency-path: b1s/execution/requirements.txt
+    - name: Install the preserved runtime
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y swig
+        python -m pip install -r b1s/execution/requirements.txt
+        python -m pip check
+    - uses: actions/download-artifact@v4
+      with:
+        name: cpnb-freeze
+        path: ${{ runner.temp }}/cpnb-frozen
+    - name: Verify original source and published freeze
+      run: |
+        test "$GITHUB_RUN_ATTEMPT" = "1"
+        test "$(git ls-remote --exit-code origin "refs/heads/$CPNB_BRANCH" | cut -f1)" = "$FREEZE_COMMIT"
+        git fetch --filter=blob:none --no-tags origin "$FREEZE_COMMIT"
+        python -B - <<'PY'
+        import os, subprocess
+        from pathlib import Path
+        from experiments.competence_pilot import trial as d
+        from experiments.competence_pilot.runner import verify_frozen
+        root=Path(os.environ['RUNNER_TEMP'])/'cpnb-frozen'
+        verify_frozen(root)
+        d.require(d.sha(root/'DEVELOPMENT_FREEZE.json')==os.environ['EXPECTED_FREEZE_SHA256'],
+                  'Downloaded freeze differs from preflight output')
+        remote=subprocess.check_output(['git','show',os.environ['FREEZE_COMMIT']+
+                                         ':experiments/competence_pilot/run/DEVELOPMENT_FREEZE.json'])
+        d.require(d.sha_bytes(remote)==os.environ['EXPECTED_FREEZE_SHA256'],
+                  'Remote publication does not contain the exact freeze')
+        PY
+    - name: Download retained fits (missing fits stay missing)
+      id: download_fits
+      continue-on-error: true
+      uses: actions/download-artifact@v4
+      with:
+        pattern: cpnb-fit-*
+        merge-multiple: true
+        path: ${{ runner.temp }}/cpnb-fits
+    - name: Retain every page of artifact metadata
+      run: |
+        gh api --paginate --slurp \
+          "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?per_page=100" \
+          > "$RUNNER_TEMP/cpnb-artifacts.json"
+      env:
+        GH_TOKEN: ${{ github.token }}
+    - name: Aggregate once; retain missing data and incidents
+      run: |
+        python -B -m experiments.competence_pilot.runner aggregate \
+          --fits "$RUNNER_TEMP/cpnb-fits" --frozen "$RUNNER_TEMP/cpnb-frozen" \
+          --artifacts "$RUNNER_TEMP/cpnb-artifacts.json" --out "$RUNNER_TEMP/cpnb-summary" \
+          2>&1 | tee "$RUNNER_TEMP/cpnb-aggregate.log"
+      id: aggregate
+      continue-on-error: true
+    - name: Retain cpnb-results
+      uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        name: cpnb-results
+        path: ${{ runner.temp }}/cpnb-summary/
+        retention-days: 90
+        if-no-files-found: warn
+    - name: Publish new textual evidence, never replace historical files
+      run: |
+        python -B - <<'PY'
+        import json, os, re, subprocess
+        from pathlib import Path
+        from experiments.competence_pilot import trial as d
+        out=Path(os.environ['RUNNER_TEMP'])/'cpnb-summary'
+        out.mkdir(exist_ok=True)
+        frozen=Path(os.environ['RUNNER_TEMP'])/'cpnb-frozen'
+        inventory=Path(os.environ['RUNNER_TEMP'])/'cpnb-artifacts.json'
+        # Failures are published as failures, never as completed scientific cells.
+        ok=(os.environ['AGGREGATE_OUTCOME']=='success'
+            and (out/'SUMMARY.json').is_file() and (out/'RESULTS_MANIFEST.json').is_file()
+            and not (out/'BLOCKED.json').exists())
+        if ok:
+            summary=d.read(out/'SUMMARY.json');manifest=d.read(out/'RESULTS_MANIFEST.json')
+            d.require(summary['status']=='PILOT_COMPLETE_FOR_REVIEW','Unexpected aggregate status')
+            d.require(summary['source_commit']==os.environ['GITHUB_SHA'],'Aggregate source mismatch')
+            d.require(summary['freeze_sha256']==os.environ['EXPECTED_FREEZE_SHA256'],'Aggregate freeze mismatch')
+            d.require(len(summary['cells'])==16 and len(summary['fit_manifests'])==24,'Incomplete aggregate')
+            for key,value in d.BOUNDARY.items(): d.require(summary.get(key)==value,'Boundary mismatch: '+key)
+            for name,expected in manifest['files'].items():
+                d.require(re.fullmatch(r'[A-Za-z0-9_.-]+',name) is not None,'Unsafe manifest path')
+                d.require(d.sha(out/name)==expected,'Aggregate file hash mismatch: '+name)
+            for name,expected in manifest['auxiliary_artifact_files'].items():
+                d.require(re.fullmatch(r'[A-Za-z0-9_.-]+',name) is not None,'Unsafe auxiliary path')
+                d.require(d.sha(out/name)==expected,'Witness trace hash mismatch: '+name)
+            names=['SUMMARY.json','EPISODES.json','RESULTS_MANIFEST.json','COMPLETION_REPORT_ES.md']
+            status=summary['status']
+        else:
+            status='PILOT_BLOCKED_WITH_RETAINED_EVIDENCE'
+            if not (out/'BLOCKED.json').exists():
+                d.write_new(out/'BLOCKED.json',dict(status=status,source_commit=os.environ['GITHUB_SHA'],
+                    workflow_run_id=os.environ['GITHUB_RUN_ID'],aggregate_outcome=os.environ['AGGREGATE_OUTCOME'],
+                    fit_jobs_result=os.environ['FIT_RESULT'],missing_results_not_filled=True,**d.BOUNDARY))
+            names=['BLOCKED.json']
+        if inventory.exists():
+            d.write_new(out/'ARTIFACT_INVENTORY.json',d.read(inventory));names.append('ARTIFACT_INVENTORY.json')
+        d.require(d.git('ls-remote','--exit-code','origin','refs/heads/'+d.BRANCH).split()[0]
+                  ==os.environ['FREEZE_COMMIT'],'Concurrent branch change; keep artifacts and stop')
+        d.require(not d.git('status','--porcelain'),'Unexpected working-tree changes')
+        # Aggregation ran at the immutable scientific source; publication is its descendant.
+        subprocess.run(['git','checkout','--detach',os.environ['FREEZE_COMMIT']],check=True)
+        d.preserve()
+        dest=Path('experiments/competence_pilot/results');staged=[]
+        for name in names:
+            path=dest/name
+            d.require(not path.exists(),'Existing result destination: '+str(path))
+            d.require(subprocess.run(['git','cat-file','-e','HEAD:'+str(path)],
+                        stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode!=0,
+                      'Destination is already tracked: '+str(path))
+            path.parent.mkdir(parents=True,exist_ok=True)
+            with path.open('xb') as f: f.write((out/name).read_bytes())
+            staged.append(str(path))
+        receipt=dest/'PUBLICATION_RECEIPT.json'
+        d.require(not receipt.exists(),'Existing publication receipt')
+        d.write_new(receipt,dict(status='PILOT_EVIDENCE_PREPARED_FOR_PUBLICATION',pilot_status=status,
+                    source_commit=os.environ['GITHUB_SHA'],freeze_publication_commit=os.environ['FREEZE_COMMIT'],
+                    freeze_sha256=os.environ['EXPECTED_FREEZE_SHA256'],workflow_run_id=os.environ['GITHUB_RUN_ID'],
+                    files={name:d.sha(out/name) for name in names},binary_retention_days=90,
+                    note='Obtain the immutable publication commit from Git; this receipt cannot contain its own commit SHA.',
+                    **d.BOUNDARY))
+        staged.append(str(receipt))
+        subprocess.run(['git','add','--sparse','-f','--',*staged],check=True)
+        d.require(sorted(d.git('diff','--cached','--name-only').splitlines())==sorted(staged),'Unexpected staged changes')
+        subprocess.run(['git','config','user.name','github-actions[bot]'],check=True)
+        subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'],check=True)
+        subprocess.run(['git','commit','-m','chore(cpnb): publish pilot evidence without changing historical results'],check=True)
+        commit=d.git('rev-parse','HEAD')
+        subprocess.run(['git','push','origin','HEAD:'+d.BRANCH],check=True)
+        d.require(d.git('ls-remote','--exit-code','origin','refs/heads/'+d.BRANCH).split()[0]==commit,
+                  'Result publication was not confirmed remotely')
+        for path in staged:
+            raw=subprocess.check_output(['git','show',commit+':'+path])
+            d.require(d.sha_bytes(raw)==d.sha(path),'Published blob mismatch: '+path)
+        with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+            f.write('## CP-NB closure\n\nScientific status: `'+status+'`\n\nPublication commit: `'+commit+'`\n\nB1-E remains ON_HOLD.\n')
+        PY
+      env:
+        AGGREGATE_OUTCOME: ${{ steps.aggregate.outcome }}
+        FIT_RESULT: ${{ needs.fit.result }}
+    - name: Retain cpnb-close-diagnostics
+      uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        name: cpnb-close-diagnostics
+        path: |-
+          ${{ runner.temp }}/cpnb-aggregate.log
+          ${{ runner.temp }}/cpnb-artifacts.json
+        retention-days: 90
+        if-no-files-found: warn
+    - name: Do not label a blocked pilot as successful CI
+      run: |
+        test "$AGGREGATE_OUTCOME" = "success"
+        test "$FIT_RESULT" = "success"
+      env:
+        AGGREGATE_OUTCOME: ${{ steps.aggregate.outcome }}
+        FIT_RESULT: ${{ needs.fit.result }}
