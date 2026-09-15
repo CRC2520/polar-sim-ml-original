@@ -1,0 +1,137 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "branch": "research/b1sc-d2-v1.0-training-scaffold-20260915",
+  "design_commit": "c5d286743d613c09ef032317bebb10ae1871db00",
+  "design_contract": {
+    "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+    "B1E_executed": false,
+    "H_CAT": "NOT_EVALUABLE",
+    "H_TRANSFER": "NOT_EVALUATED",
+    "blocks": 8,
+    "conditions": [
+      "S6-ON",
+      "S6-OFF-TRAIN"
+    ],
+    "final_seeds_generated": false,
+    "fits": 16,
+    "protocol_sha256": "73ea60a28eb2cc90461ffcf15b9f6949e3f6d16b0e4fed95a17fcbb1c18c5d5e",
+    "ready_for_b1e_confirmatory_run": false,
+    "ready_for_b1e_freeze": false,
+    "ready_for_b1e_protocol_design": false,
+    "schema": "B1-SC-D2-1.0.0-20260915",
+    "status": "PASS"
+  },
+  "design_freeze_sha256": "2935180f85c5c003f3a352db7b2b5be200b5684eed93bacb689c5c533629ea29",
+  "execution_boundary": {
+    "evaluation_started": false,
+    "execution_authorized": false,
+    "results_exist": false,
+    "scientific_runner_present": false,
+    "scientific_workflow_present": false,
+    "start_request_exists": false,
+    "training_job_present_in_qa_workflow": false,
+    "training_started": false
+  },
+  "final_seeds_generated": false,
+  "historical_preservation": {
+    "added_paths": [
+      ".github/workflows/b1sc-d2-v1-0-qa.yml",
+      "experiments/b1sc_d2_v1_0/implementation.py",
+      "experiments/b1sc_d2_v1_0/preflight.py",
+      "experiments/b1sc_d2_v1_0/tests.py"
+    ],
+    "design_commit": "c5d286743d613c09ef032317bebb10ae1871db00",
+    "design_files_unchanged": true,
+    "status": "PASS"
+  },
+  "implementation_source_commit": "7278645e980b04317d7cc33a8c5ebd61b1604524",
+  "next_step_requires_explicit_execution_readiness_authorization": true,
+  "paired_seed_contract": {
+    "paired_blocks": 8,
+    "paired_seed_fields": [
+      "initial_seed",
+      "policy_sampling_seed",
+      "training_environment_seed_root",
+      "diagnostic_panel_seed",
+      "endpoint_panel_seed",
+      "causal_panel_seed"
+    ],
+    "status": "PASS"
+  },
+  "protocol_sha256": "73ea60a28eb2cc90461ffcf15b9f6949e3f6d16b0e4fed95a17fcbb1c18c5d5e",
+  "qa_hashes": {
+    "RULE_TESTS.json": "8e9403627c75a70907426a985e604d3e986517cd93fe1b448dd20b844b9fa116",
+    "RUNTIME_TESTS.json": "a6d4bd00edec602deaaf33cf9c7f6ae0d7a42187b6ff3432f0fdc00387945091",
+    "VALIDATION.json": "cf7b665b2acfddfaad3e208bacc2404af973cf0a38e546df327e107006861ce3"
+  },
+  "qa_scope": {
+    "E_B_D_gradient_equivalence": "TESTED",
+    "functional_equivalence_S6_OFF_vs_G0": "TESTED",
+    "inactive_edge_control": "TESTED",
+    "message_A_zero_functional_gradient_when_off": "TESTED",
+    "paired_ON_OFF_initialization": "TESTED",
+    "permanent_lesion_operator": "TESTED",
+    "scientific_evaluation": "NOT_PERFORMED",
+    "scientific_training": "NOT_PERFORMED"
+  },
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "registry_entries": 16,
+  "registry_sha256": "774fd39fc614c01e8863b4e8ce2a40fddc444265b720c3777fafc2b8905e3dba",
+  "repository": "CRC2520/polar-sim-ml-original",
+  "runtime": {
+    "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+    "python": "3.11.16",
+    "sources": {
+      "sisl/multiwalker/multiwalker.py": {
+        "blob": "8edf250d1dec03d4ae2ee56c9e2dff5fe50e875c",
+        "sha256": "480d81f415ae4fef2fb93cf93a4d2859f2af0012fc5f16f9109d78fb4dfceb68"
+      },
+      "sisl/multiwalker/multiwalker_base.py": {
+        "blob": "476b3950cc1146e53338ec4bf48b9291b6143a84",
+        "sha256": "5e5ec639fa71295daf991ab762e9adf45f95b72d6848911e3b8ea98ae1dd3f7e"
+      },
+      "sisl/multiwalker_v9.py": {
+        "blob": "555eee6a7f37d5bb908152f6680a6d7ffe882f91",
+        "sha256": "1137bf70127d136b5590d634a7457576cbcc54eeeff695c1341b1c8ad1271d97"
+      }
+    },
+    "torch_threads": 1,
+    "upstream_commit": "e62d6bcdc6e0c28fa19c08545a63dc8370393495",
+    "versions": {
+      "box2d-py": "2.3.5",
+      "gymnasium": "0.29.1",
+      "numpy": "1.26.4",
+      "pettingzoo": "1.24.3",
+      "pygame": "2.5.2",
+      "stable-baselines3": "2.3.2",
+      "torch": "2.2.2+cpu"
+    }
+  },
+  "schema": "B1-SC-D2-1.0.0-20260915",
+  "source_hashes": {
+    ".github/workflows/b1sc-d2-v1-0-qa.yml": "de344612e72b5e7ee17a5720c6ce2be77fed0892dc3f761cb480bf27cd92edbd",
+    "b1s/execution/core.py": "459255a4e4797c8ea03fd6187c70802dcdc152bfce48d0f2405d2f88b7fe0a59",
+    "b1s/execution/instrument.py": "8ce0c1b2fca29d6bc39c35393bb4bff1c97d0cd4254838bb2483c41f551347df",
+    "b1s/execution/requirements.txt": "26d33ad281ff87732e748eddb45ae8f3aa4e1fced20f4627aa7b5ef4719768ce",
+    "experiments/b1sc_d2_v1_0/DESIGN_FREEZE.json": "2935180f85c5c003f3a352db7b2b5be200b5684eed93bacb689c5c533629ea29",
+    "experiments/b1sc_d2_v1_0/PROTOCOL_ES.md": "73ea60a28eb2cc90461ffcf15b9f6949e3f6d16b0e4fed95a17fcbb1c18c5d5e",
+    "experiments/b1sc_d2_v1_0/implementation.py": "1c525e4e557f9f5ada6c4b4be6f76f1ab4363d481eb0eba722c4267a11cc2b0c",
+    "experiments/b1sc_d2_v1_0/preflight.py": "4d8d4e3321517437b440c530f2c0c0b8a682c7b79f2b145fb5bde4c106ae2629",
+    "experiments/b1sc_d2_v1_0/tests.py": "be08c5378a0017f43e6d73fad8cb8db05c1e2c7a2eb0ea139857bfc3470626ea"
+  },
+  "status": "D2_IMPLEMENTATION_QUALIFIED_NOT_EXECUTED",
+  "workflow_contract": {
+    "repository_write_permission": false,
+    "scientific_evaluation_job_present": false,
+    "status": "PASS",
+    "training_job_present": false,
+    "workflow_sha256": "de344612e72b5e7ee17a5720c6ce2be77fed0892dc3f761cb480bf27cd92edbd"
+  },
+  "workflow_run_attempt": 1,
+  "workflow_run_id": 34977378220
+}
