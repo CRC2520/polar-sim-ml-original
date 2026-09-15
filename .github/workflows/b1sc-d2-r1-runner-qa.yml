@@ -15,7 +15,7 @@ permissions:
   actions: read
 concurrency:
   group: b1sc-d2-r1-runner-qa
-  cancel-in-progress: false
+  cancel-in-progress: true
 defaults:
   run:
     shell: bash
