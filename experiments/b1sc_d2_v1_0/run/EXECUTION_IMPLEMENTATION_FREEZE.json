@@ -1,0 +1,185 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "authorization_request_required_fields": [
+    "schema",
+    "authorize_b1sc_d2_v1_0",
+    "authorized_run_attempt",
+    "authorization_base_commit",
+    "qualified_source_commit",
+    "execution_freeze_sha256",
+    "registry_sha256",
+    "design_freeze_sha256",
+    "implementation_freeze_sha256",
+    "workflow_sha256",
+    "B1E_executed",
+    "final_seeds_generated"
+  ],
+  "branch": "research/b1sc-d2-v1.0-execution-readiness-20260915",
+  "design_commit": "c5d286743d613c09ef032317bebb10ae1871db00",
+  "design_contract": {
+    "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+    "B1E_executed": false,
+    "H_CAT": "NOT_EVALUABLE",
+    "H_TRANSFER": "NOT_EVALUATED",
+    "blocks": 8,
+    "conditions": [
+      "S6-ON",
+      "S6-OFF-TRAIN"
+    ],
+    "final_seeds_generated": false,
+    "fits": 16,
+    "protocol_sha256": "73ea60a28eb2cc90461ffcf15b9f6949e3f6d16b0e4fed95a17fcbb1c18c5d5e",
+    "ready_for_b1e_confirmatory_run": false,
+    "ready_for_b1e_freeze": false,
+    "ready_for_b1e_protocol_design": false,
+    "schema": "B1-SC-D2-1.0.0-20260915",
+    "status": "PASS"
+  },
+  "design_freeze_sha256": "2935180f85c5c003f3a352db7b2b5be200b5684eed93bacb689c5c533629ea29",
+  "execution_boundary": {
+    "execution_authorized": false,
+    "qa_microfit_performed": true,
+    "qa_microfit_scientific_evidence": false,
+    "scientific_evaluation_started": false,
+    "scientific_results_exist": false,
+    "scientific_training_started": false,
+    "start_request_exists": false
+  },
+  "execution_workflow_contract": {
+    "automatic_retry": false,
+    "fits": 16,
+    "max_parallel_fits": 4,
+    "online_blocks": 8,
+    "repository_write_permission": false,
+    "sha256": "102f6eb950cf6fc53e411560a6adb6ccfdca3ae1b0b113c943a4981331e7ebb0",
+    "status": "PASS",
+    "trigger_only_start_request": true
+  },
+  "final_seeds_generated": false,
+  "historical_preservation": {
+    "added_paths": [
+      ".github/workflows/b1sc-d2-v1-0-execution-qa.yml",
+      ".github/workflows/b1sc-d2-v1-0-execution.yml",
+      "experiments/b1sc_d2_v1_0/execution.py",
+      "experiments/b1sc_d2_v1_0/execution_preflight.py",
+      "experiments/b1sc_d2_v1_0/execution_tests.py",
+      "experiments/b1sc_d2_v1_0/runner.py"
+    ],
+    "frozen_design_and_implementation_unchanged": true,
+    "qualified_implementation_commit": "8f6c46e37a6b4cf18b39f21d21b232b2339c7fe1",
+    "status": "PASS"
+  },
+  "implementation_freeze_sha256": "de998e00d30e8b8a1c090eee61ba190d1791ffce0ce82f5c860a300fee706a0f",
+  "next_step_requires_explicit_author_consent": true,
+  "paired_seed_contract": {
+    "paired_blocks": 8,
+    "paired_seed_fields": [
+      "initial_seed",
+      "policy_sampling_seed",
+      "training_environment_seed_root",
+      "diagnostic_panel_seed",
+      "endpoint_panel_seed",
+      "causal_panel_seed"
+    ],
+    "status": "PASS"
+  },
+  "pipeline": {
+    "H_ONLINE_D2": "intact vs permanent all-active lesion; aggregate + >=6/8 + controls",
+    "H_TRAIN_D2": "S6-ON vs S6-OFF-TRAIN; aggregate + >=6/8",
+    "blocks": 8,
+    "causal_episodes": 64,
+    "checkpoints": [
+      262144,
+      524288,
+      786432,
+      1048576
+    ],
+    "conditions": [
+      "S6-ON",
+      "S6-OFF-TRAIN"
+    ],
+    "diagnostic_episodes": 32,
+    "endpoint_episodes": 64,
+    "fits": 16,
+    "native_steps_per_fit": 1048576,
+    "replication_9_40": "secondary only",
+    "total_native_training_steps": 16777216
+  },
+  "protocol_sha256": "73ea60a28eb2cc90461ffcf15b9f6949e3f6d16b0e4fed95a17fcbb1c18c5d5e",
+  "qa_hashes": {
+    "RULE_TESTS.json": "08625e33a799dc9b2e59c47f46434706649c6d02c9d604ab37364d81b03d72ac",
+    "RUNTIME_TESTS.json": "8adbceaedd32a38dad3f9409cd859e94297c578dd72af35051274549ddb496cc",
+    "VALIDATION.json": "6ae57be08fc8300f66331cc155898e66bde29cb60e5a1b3da381aa36eede74e6"
+  },
+  "qa_workflow_contract": {
+    "repository_write_permission": false,
+    "scientific_evaluation_job": false,
+    "scientific_training_job": false,
+    "sha256": "1ff12c6f9bb0f1bd0618ca8707f9d79aaa50578f52c4d7cf24cd29484628c703",
+    "status": "PASS"
+  },
+  "qualified_implementation_commit": "8f6c46e37a6b4cf18b39f21d21b232b2339c7fe1",
+  "qualified_source_commit": "38b9bb9c1f1b8a6e4c158f966b6b6508d9d68d4c",
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "registry_entries": 16,
+  "registry_sha256": "774fd39fc614c01e8863b4e8ce2a40fddc444265b720c3777fafc2b8905e3dba",
+  "repository": "CRC2520/polar-sim-ml-original",
+  "runtime": {
+    "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+    "python": "3.11.16",
+    "sources": {
+      "sisl/multiwalker/multiwalker.py": {
+        "blob": "8edf250d1dec03d4ae2ee56c9e2dff5fe50e875c",
+        "sha256": "480d81f415ae4fef2fb93cf93a4d2859f2af0012fc5f16f9109d78fb4dfceb68"
+      },
+      "sisl/multiwalker/multiwalker_base.py": {
+        "blob": "476b3950cc1146e53338ec4bf48b9291b6143a84",
+        "sha256": "5e5ec639fa71295daf991ab762e9adf45f95b72d6848911e3b8ea98ae1dd3f7e"
+      },
+      "sisl/multiwalker_v9.py": {
+        "blob": "555eee6a7f37d5bb908152f6680a6d7ffe882f91",
+        "sha256": "1137bf70127d136b5590d634a7457576cbcc54eeeff695c1341b1c8ad1271d97"
+      }
+    },
+    "torch_threads": 1,
+    "upstream_commit": "e62d6bcdc6e0c28fa19c08545a63dc8370393495",
+    "versions": {
+      "box2d-py": "2.3.5",
+      "gymnasium": "0.29.1",
+      "numpy": "1.26.4",
+      "pettingzoo": "1.24.3",
+      "pygame": "2.5.2",
+      "stable-baselines3": "2.3.2",
+      "torch": "2.2.2+cpu"
+    }
+  },
+  "schema": "B1-SC-D2-1.0.0-20260915",
+  "scientific_evaluation_performed": false,
+  "scientific_training_performed": false,
+  "source_hashes": {
+    ".github/workflows/b1sc-d2-v1-0-execution-qa.yml": "1ff12c6f9bb0f1bd0618ca8707f9d79aaa50578f52c4d7cf24cd29484628c703",
+    ".github/workflows/b1sc-d2-v1-0-execution.yml": "102f6eb950cf6fc53e411560a6adb6ccfdca3ae1b0b113c943a4981331e7ebb0",
+    "b1s/execution/core.py": "459255a4e4797c8ea03fd6187c70802dcdc152bfce48d0f2405d2f88b7fe0a59",
+    "b1s/execution/instrument.py": "8ce0c1b2fca29d6bc39c35393bb4bff1c97d0cd4254838bb2483c41f551347df",
+    "b1s/execution/requirements.txt": "26d33ad281ff87732e748eddb45ae8f3aa4e1fced20f4627aa7b5ef4719768ce",
+    "experiments/b1sc_d2_v1_0/DESIGN_FREEZE.json": "2935180f85c5c003f3a352db7b2b5be200b5684eed93bacb689c5c533629ea29",
+    "experiments/b1sc_d2_v1_0/PROTOCOL_ES.md": "73ea60a28eb2cc90461ffcf15b9f6949e3f6d16b0e4fed95a17fcbb1c18c5d5e",
+    "experiments/b1sc_d2_v1_0/execution.py": "3c499e8dd7a30b481c40f5b4875b93c54a93c9c80ae0dbe52db6d6bc693d81bf",
+    "experiments/b1sc_d2_v1_0/execution_preflight.py": "624e85ff1716851ca7e257c3ac7773320f7dd40366d24cf16381ad6d95316b05",
+    "experiments/b1sc_d2_v1_0/execution_tests.py": "a4d658e0dc81e37917b615a04fc809f1a89ef563fc479ad9bf00a6cfdb4fee97",
+    "experiments/b1sc_d2_v1_0/implementation.py": "1c525e4e557f9f5ada6c4b4be6f76f1ab4363d481eb0eba722c4267a11cc2b0c",
+    "experiments/b1sc_d2_v1_0/preflight.py": "4d8d4e3321517437b440c530f2c0c0b8a682c7b79f2b145fb5bde4c106ae2629",
+    "experiments/b1sc_d2_v1_0/run/IMPLEMENTATION_FREEZE.json": "de998e00d30e8b8a1c090eee61ba190d1791ffce0ce82f5c860a300fee706a0f",
+    "experiments/b1sc_d2_v1_0/run/PREFLIGHT_STATUS.json": "34d085ee100773249d18f86c2225df0760c4420d0b5862239ff27efb0ae07232",
+    "experiments/b1sc_d2_v1_0/runner.py": "6a46375bd5b4a0ebeb17dee304d46851b70e5adcbbb283a6136b929bf086ac6b",
+    "experiments/b1sc_d2_v1_0/tests.py": "be08c5378a0017f43e6d73fad8cb8db05c1e2c7a2eb0ea139857bfc3470626ea"
+  },
+  "status": "D2_EXECUTION_PIPELINE_QUALIFIED_NOT_AUTHORIZED",
+  "workflow_run_attempt": 1,
+  "workflow_run_id": 34979441866
+}
