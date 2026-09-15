@@ -2,7 +2,7 @@ name: B1-SC-D2-R1 full execution-readiness QA only
 'on':
   push:
     branches:
-      - research/b1sc-d2-r1-v1.0-persistent-init-20260915
+      - research/b1sc-d2-r1-v1.0-run2-repair-20260915
     paths:
       - experiments/b1sc_d2_r1_v1_0/scientific_runner.py
       - experiments/b1sc_d2_r1_v1_0/full_execution.py
@@ -19,7 +19,7 @@ permissions:
   contents: read
   actions: read
 concurrency:
-  group: b1sc-d2-r1-full-readiness-qa
+  group: b1sc-d2-r1-run2-readiness-qa
   cancel-in-progress: true
 defaults:
   run:
