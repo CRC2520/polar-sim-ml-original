@@ -1,0 +1,314 @@
+{
+  "B1E_boundary": {
+    "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+    "B1E_executed": false,
+    "H_CAT": "NOT_EVALUABLE",
+    "H_TRANSFER": "NOT_EVALUATED",
+    "final_seeds_generated": false,
+    "ready_for_b1e_confirmatory_run": false,
+    "ready_for_b1e_freeze": false,
+    "ready_for_b1e_protocol_design": false
+  },
+  "adjudication": {
+    "NO_REPRODUCIBLE_S6_MECHANISM_UNDER_D2": {
+      "H_ONLINE_D2": false,
+      "H_TRAIN_D2": false
+    },
+    "ONLINE_DEPENDENCE_ONLY_SUPPORTED": {
+      "H_ONLINE_D2": true,
+      "H_TRAIN_D2": false
+    },
+    "TRAINING_AND_ONLINE_DEPENDENCE_SUPPORTED": {
+      "H_ONLINE_D2": true,
+      "H_TRAIN_D2": true
+    },
+    "TRAINING_SCAFFOLD_SUPPORTED": {
+      "H_ONLINE_D2": false,
+      "H_TRAIN_D2": true
+    },
+    "invalid_if_controls_integrity_pairing_or_completeness_fail": true,
+    "invalid_status": "INVALID_OR_INCONCLUSIVE_MECHANISTIC_ADJUDICATION",
+    "no_polar_specificity_claim": true
+  },
+  "analysis": {
+    "bootstrap_resamples": 10000,
+    "bootstrap_unit": "block",
+    "confidence_level": 0.95,
+    "episode_pseudoreplication_forbidden": true,
+    "primary_p_value_gate": false,
+    "primary_unit": "independent paired training block",
+    "replacement_seed_automatic": false,
+    "retain_adverse_results": true,
+    "retain_incomplete_or_failed_blocks": true
+  },
+  "base_commit": "2550c75336fb0af094bc02d2e99ddb680bd54933",
+  "branch": "research/b1sc-d2-v1.0-training-scaffold-20260915",
+  "checkpoint_diagnostics": {
+    "cannot_select_checkpoint": true,
+    "checkpoints_native_steps": [
+      262144,
+      524288,
+      786432,
+      1048576
+    ],
+    "descriptive_only": true,
+    "episodes_per_checkpoint_per_block_per_condition": 32,
+    "metrics": [
+      "loss",
+      "displacement",
+      "fall_fraction",
+      "cycles"
+    ],
+    "planned_episodes": 2048,
+    "split": "diagnostic"
+  },
+  "execution_boundary": {
+    "automatic_progression": false,
+    "evaluation_started": false,
+    "execution_authorized": false,
+    "results_exist": false,
+    "start_request_exists": false,
+    "training_started": false,
+    "workflow_installed": false
+  },
+  "lineage": {
+    "admission_artifact": {
+      "digest": "sha256:8a49fde7819a3a1a71de2401d925f812c9a90172cdb45476718886097b79fc0c",
+      "id": 10394834164,
+      "name": "b1sc-admission"
+    },
+    "motivating_evidence_scope": "B1-SC admission plus primary causal aggregate observed before D2 freeze",
+    "motivating_observations": {
+      "S6_competence_blocks": 8,
+      "S6_competence_total_blocks": 8,
+      "S6_mask": "100110",
+      "interpretation_boundary": "motivates D2 only; does not establish scaffold mechanism",
+      "primary_causal_passed_roles": []
+    },
+    "parent_authorization_commit": "5ae02be4a8d80485e41898a2c4e8b9c466959b76",
+    "parent_experiment": "B1-SC v1.0",
+    "parent_run_attempt": 1,
+    "parent_run_id": 34934384067,
+    "primary_aggregate_artifact": {
+      "digest": "sha256:3b367132c8ff1b3e03ce83c34f4e5183dc3e1a47ba98a2f6aea8261e6714e302",
+      "id": 10398070329,
+      "name": "b1sc-primary-aggregate"
+    },
+    "retrospective_change_forbidden": true
+  },
+  "note": "Canonical D2 design freeze only; implementation, QA workflow and scientific execution require later explicit authorization.",
+  "online_dependence_primary": {
+    "aggregate_required": true,
+    "conditions": [
+      "intact",
+      "permanent_all_active_lesion",
+      "sham",
+      "inactive_edge_control",
+      "window_9_40_all_active_lesion"
+    ],
+    "controls": {
+      "inactive_edge_control_index": 1,
+      "inactive_edge_control_pair": [
+        0,
+        2
+      ],
+      "numerical_tolerance": 1e-08,
+      "sham": "must match intact within frozen numerical tolerance"
+    },
+    "controls_must_pass": true,
+    "displacement_harm_definition": "D_intact - D_permanent_lesion",
+    "displacement_margin": 1.0,
+    "episodes_per_block": 64,
+    "hypothesis": "H_ONLINE-D2",
+    "loss_harm_definition": "L_permanent_lesion - L_intact",
+    "loss_margin_strict_gt": 4.333333333333333,
+    "minimum_blocks_with_practical_harm": 6,
+    "models": "S6-ON final models only",
+    "planned_condition_episodes": 2560,
+    "practical_harm_rule": "(loss_harm > 130/30 and displacement_harm >= -1) OR (displacement_harm > 1 and loss_harm >= -(130/30))",
+    "primary_intervention": {
+      "active_edge_indices": [
+        0,
+        3,
+        4
+      ],
+      "condition": "permanent_all_active_lesion",
+      "window_zero_based": [
+        0,
+        "terminal"
+      ]
+    },
+    "primary_unit": "independent training block",
+    "secondary_replication": {
+      "condition": "window_9_40_all_active_lesion",
+      "primary_gate": false,
+      "window_zero_based": [
+        9,
+        40
+      ]
+    },
+    "split": "causal",
+    "total_blocks": 8
+  },
+  "paired_randomization": {
+    "condition_excluded_from_paired_seed_identity": true,
+    "same_evaluation_panels_within_block": true,
+    "same_initial_parameters_within_block": true,
+    "same_policy_sampling_seed_within_block": true,
+    "same_training_environment_seed_streams_within_block": true
+  },
+  "protocol_sha256": "73ea60a28eb2cc90461ffcf15b9f6949e3f6d16b0e4fed95a17fcbb1c18c5d5e",
+  "qa_contract": {
+    "numerical_tolerance": 1e-08,
+    "requirements": [
+      "lambda=0 makes received route contribution exactly zero",
+      "S6-OFF-TRAIN forward equals RoutingActor(000000) under shared E/B/D weights and state",
+      "S6-OFF-TRAIN E/B/D gradients equal RoutingActor(000000) under matched loss",
+      "message network A receives no functional loss gradient when lambda=0",
+      "ON and OFF initial parameters are identical within block",
+      "permanent lesion alters only active S6 routes",
+      "inactive edge 0->2 lesion does not alter forward",
+      "seed namespaces are disjoint"
+    ],
+    "scientific_evidence": false
+  },
+  "question": "Does S6 act as a causal training scaffold, an online dependency, both, or neither under the frozen D2 contrasts?",
+  "repository": "CRC2520/polar-sim-ml-original",
+  "schema": "B1-SC-D2-1.0.0-20260915",
+  "seed_commitment": {
+    "B1E_final_seed_namespace_absent": true,
+    "allowed_splits": [
+      "training",
+      "diagnostic",
+      "endpoint",
+      "causal",
+      "sham",
+      "bootstrap",
+      "qa"
+    ],
+    "canonical_json": {
+      "encoding": "UTF-8",
+      "separators": [
+        ",",
+        ":"
+      ],
+      "sort_keys": true
+    },
+    "derivation": "uint32(first_8_bytes(SHA256(seed_root_sha256 || '|' || split || '|' || canonical_json(identity)))) mod 2^32",
+    "final_namespace_absent": true,
+    "paired_seed_identity_excludes_condition": true,
+    "seed_root_sha256": "ae302b8be2005f914c9e1998303f9508c64c600cd140dff324c5d600be034f4f"
+  },
+  "status": "DESIGN_FROZEN_NOT_EXECUTED",
+  "support": {
+    "active_edge_indices": [
+      0,
+      3,
+      4
+    ],
+    "active_edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ]
+    ],
+    "edge_order": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        1
+      ]
+    ],
+    "inactive_control_edge": [
+      0,
+      2
+    ],
+    "inactive_control_edge_index": 1,
+    "mask": "100110",
+    "new_mask_search": false,
+    "role": "S6"
+  },
+  "training": {
+    "algorithm_family": "PPO/RoutingActor frozen B1-SC profile",
+    "blocks": 8,
+    "checkpoint_selection": false,
+    "conditions": [
+      {
+        "endpoint_lambda_active_routes": 1.0,
+        "id": "S6-ON",
+        "lambda_train_active_routes": 1.0,
+        "mask": "100110"
+      },
+      {
+        "endpoint_lambda_active_routes": 0.0,
+        "id": "S6-OFF-TRAIN",
+        "lambda_train_active_routes": 0.0,
+        "mask": "100110"
+      }
+    ],
+    "early_stopping": false,
+    "fits": 16,
+    "hyperparameter_search": false,
+    "input_mode": "raw",
+    "native_steps_per_fit": 1048576,
+    "new_G0_fits": false,
+    "observation_normalization": false,
+    "paired_blocks": true,
+    "reuse_parent_weights": false,
+    "reward_normalization": false,
+    "shared_observation_dimensions": 93,
+    "total_native_training_steps": 16777216,
+    "train_from_scratch": true
+  },
+  "training_effect_primary": {
+    "aggregate_required": true,
+    "displacement_advantage_definition": "D_ON - D_OFF",
+    "displacement_margin": 1.0,
+    "endpoint_native_steps": 1048576,
+    "episodes_per_block_per_condition": 64,
+    "hypothesis": "H_TRAIN-D2",
+    "loss_advantage_definition": "L_OFF - L_ON",
+    "loss_margin_strict_gt": 4.333333333333333,
+    "minimum_blocks_with_practical_advantage": 6,
+    "no_action_witness": {
+      "additional_displacement_gte": 1.0,
+      "episodes_per_block": 64,
+      "loss_improvement_strict_gt": 4.333333333333333,
+      "not_a_primary_gate_for_H_TRAIN": true,
+      "planned_episodes": 512,
+      "secondary_competence_diagnostic": true
+    },
+    "planned_model_episodes": 1024,
+    "practical_advantage_rule": "(loss_advantage > 130/30 and displacement_advantage >= -1) OR (displacement_advantage > 1 and loss_advantage >= -(130/30))",
+    "primary_unit": "independent paired training block",
+    "split": "endpoint",
+    "total_blocks": 8
+  }
+}
