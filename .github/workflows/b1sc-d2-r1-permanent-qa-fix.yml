@@ -1,0 +1,47 @@
+name: B1-SC-D2-R1 one-time permanent QA comparator fix
+'on':
+  push:
+    branches:
+      - research/b1sc-d2-r1-v1.0-permanent-init-20260915
+    paths:
+      - .github/workflows/b1sc-d2-r1-permanent-qa-fix.yml
+permissions:
+  contents: write
+defaults:
+  run:
+    shell: bash
+jobs:
+  fix:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/b1sc-d2-r1-v1.0-permanent-init-20260915
+          fetch-depth: 2
+      - name: Require permanent migration to be present
+        run: |
+          test -f experiments/b1sc_d2_r1_v1_0/frozen_init/permanent/PERMANENT_INIT_MANIFEST.json
+          test -f .github/workflows/b1sc-d2-r1-permanent-qa.yml
+      - name: Make compare path independent of torch import
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('experiments/b1sc_d2_r1_v1_0/permanent_init_qa.py')
+          s=p.read_text(encoding='utf-8')
+          old='from experiments.b1sc_d2_r1_v1_0 import scientific_runner as sr\n'
+          if old in s:
+              s=s.replace(old,'')
+          marker="def probe(condition,out):\n"
+          repl="def probe(condition,out):\n    from experiments.b1sc_d2_r1_v1_0 import scientific_runner as sr\n"
+          if marker in s and repl not in s:
+              s=s.replace(marker,repl)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit QA-only fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experiments/b1sc_d2_r1_v1_0/permanent_init_qa.py
+          git commit -m 'test(d2-r1): isolate cross-runner digest comparison from runtime'
+          git push origin HEAD:research/b1sc-d2-r1-v1.0-permanent-init-20260915
