@@ -29,7 +29,7 @@ from experiments.b1sc_d2_r1_v1_0 import execution_contract as contract
 
 ROOT = Path(__file__).resolve().parent
 REPO_ROOT = d2.REPO_ROOT
-RUNNER_BRANCH = "research/b1sc-d2-r1-v1.0-persistent-init-20260915"
+RUNNER_BRANCH = "research/b1sc-d2-r1-v1.0-run2-repair-20260915"
 START_REQUEST = ROOT / "START_REQUEST.json"
 RUNNER_FREEZE = ROOT / "run" / "FULL_EXECUTION_FREEZE.json"
 SCIENTIFIC_WORKFLOW = ".github/workflows/b1sc-d2-r1-v1-0-scientific.yml"
