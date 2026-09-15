@@ -1,0 +1,26 @@
+{
+  "schema":"B1-SC-D2-R1-FIT-REGISTRY-1.0.0-20260915",
+  "status":"FROZEN_NOT_EXECUTED",
+  "conditions":["S6-ON","S6-OFF-TRAIN"],
+  "blocks":8,
+  "fits":16,
+  "construction":"cartesian_product(conditions,block_snapshots)",
+  "same_snapshot_for_on_off":true,
+  "seed_reconstruction_for_training_forbidden":true,
+  "canonical_generation_run_id":35007729637,
+  "canonical_artifact_id":10412775720,
+  "block_snapshots":[
+    [0,"block-0.bin","a471b2b5d20cf864ee0879f7fe6fb53415426c09a0bd65802d234ac60d202d32"],
+    [1,"block-1.bin","439fe672217d525486f6881da595d824fb5ab1502d49d0fdc014ef71a30df126"],
+    [2,"block-2.bin","24f836ab3f128e649da6caf7736ce6d8293996a548418e0c378149a391d0d16c"],
+    [3,"block-3.bin","f37da57d6311e567e5e80105d64c1842b9f42bb49e020158fdcf41ec1a5523f1"],
+    [4,"block-4.bin","f0c0f01eadaacef05fc44e30635de17a3cd6ff6cd1f3798c87900eaaca394ce4"],
+    [5,"block-5.bin","b4f8a197e7ce3f2d8d9fec231a07dad0d84ee5d405a5f0dca6853d4b1abd6991"],
+    [6,"block-6.bin","9fe0ab844887b2eb1f24e8dd00bc65e2921a7ecf7ac8b6de07ff0305af78679c"],
+    [7,"block-7.bin","39334c149d5e4eb86733cc31a85788299836fb24c65d8d15aa27cedb459553c6"]
+  ],
+  "scientific_training_authorized":false,
+  "scientific_evaluation_authorized":false,
+  "B1E_disposition":"ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed":false
+}
