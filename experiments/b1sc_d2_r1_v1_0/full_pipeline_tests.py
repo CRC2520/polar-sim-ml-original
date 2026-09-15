@@ -19,7 +19,7 @@ def rule_tests():
     assert 'max-parallel: 4' in wf and 'd2r1-final-review' in wf
     assert 'Install preserved runtime for authorization guard' in wf
     assert wf.index('Install preserved runtime for authorization guard') < wf.index('Guard full frozen authorization')
-    assert 'python -m pip install -r b1s/execution/requirements.txt' in wf
+    assert wf.count('python -m pip install -r b1s/execution/requirements.txt') >= 6
     assert not (ROOT/'START_REQUEST.json').exists()
     for step in d2.CHECKPOINTS:assert f'model-{{steps}}.pt' in src or 'model-{steps}.pt' in src
     assert 'model-final.pt' in src and 'DIAGNOSTIC_' in src and 'ENDPOINT.json' in src and 'COMPLETE.json' in src
