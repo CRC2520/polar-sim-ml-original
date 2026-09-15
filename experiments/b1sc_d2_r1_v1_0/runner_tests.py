@@ -6,6 +6,7 @@ from experiments.b1sc_d2_r1_v1_0 import scientific_runner as r
 from experiments.b1sc_d2_r1_v1_0 import execution_contract as contract
 
 ROOT=Path(__file__).resolve().parent
+# QA trigger marker: workflow existed before this no-op source change.
 
 
 def expect_fail(fn, contains:str):
