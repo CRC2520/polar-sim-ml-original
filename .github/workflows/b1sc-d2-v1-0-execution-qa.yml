@@ -1,0 +1,76 @@
+name: B1-SC-D2 v1.0 execution-readiness QA only
+'on':
+  push:
+    branches:
+      - research/b1sc-d2-v1.0-execution-readiness-20260915
+    paths:
+      - .github/workflows/b1sc-d2-v1-0-execution-qa.yml
+      - .github/workflows/b1sc-d2-v1-0-execution.yml
+      - experiments/b1sc_d2_v1_0/execution.py
+      - experiments/b1sc_d2_v1_0/runner.py
+      - experiments/b1sc_d2_v1_0/execution_tests.py
+      - experiments/b1sc_d2_v1_0/execution_preflight.py
+permissions:
+  contents: read
+concurrency:
+  group: b1sc-d2-v1-0-execution-readiness-qa
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+env:
+  SDL_VIDEODRIVER: dummy
+  SDL_AUDIODRIVER: dummy
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  execution_qa:
+    name: Qualify full D2 pipeline without scientific execution
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Prove D2 scientific execution is not authorized
+        run: |
+          set -euo pipefail
+          test ! -e experiments/b1sc_d2_v1_0/START_REQUEST.json
+          test ! -e experiments/b1sc_d2_v1_0/run/EXECUTION_IMPLEMENTATION_FREEZE.json
+          echo "B1-SC-D2 EXECUTION READINESS QA ONLY — NO SCIENTIFIC TRAINING"
+      - name: Install preserved runtime
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - name: Run D2 execution-readiness QA
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/b1sc-d2-execution-qa
+          python -m experiments.b1sc_d2_v1_0.execution_tests --out /tmp/b1sc-d2-execution-qa
+      - name: Run guarded D2 execution preflight
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/b1sc-d2-execution-preflight
+          python -m experiments.b1sc_d2_v1_0.execution_preflight --qa /tmp/b1sc-d2-execution-qa --out /tmp/b1sc-d2-execution-preflight
+      - name: Retain D2 execution QA/preflight evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: b1sc-d2-v1-0-execution-readiness-qa-preflight
+          path: |
+            /tmp/b1sc-d2-execution-qa
+            /tmp/b1sc-d2-execution-preflight
+          retention-days: 90
+          if-no-files-found: error
