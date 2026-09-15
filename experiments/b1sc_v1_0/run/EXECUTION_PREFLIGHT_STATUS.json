@@ -1,0 +1,17 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "execution_freeze_sha256": "0d917bf82b9c9ae33c64f28b9e84915a63448059bd996b18e047377d3f70bf9e",
+  "final_seeds_generated": false,
+  "next_step": "AUTHOR_REVIEW_AND_EXPLICIT_GO_NO_GO",
+  "qualified_source_commit": "fb6cae5d8c4fcdebc3288af1557bb0b97b4315d8",
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "scientific_evaluation_performed": false,
+  "start_request_present": false,
+  "status": "EXECUTION_PIPELINE_QUALIFIED_NOT_AUTHORIZED",
+  "training_performed": false
+}
