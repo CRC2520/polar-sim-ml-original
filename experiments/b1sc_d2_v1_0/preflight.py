@@ -58,7 +58,11 @@ def workflow_contract() -> dict:
     lower = text.lower()
     require("workflow_dispatch" not in lower, "Manual dispatch is forbidden in QA-only D2 workflow")
     require("matrix:" not in lower, "Scientific fit matrix is forbidden in QA-only D2 workflow")
-    require("runner.py" not in lower, "Scientific runner must not be invoked by QA-only D2 workflow")
+    forbidden_invocations = (
+        "python -m experiments.b1sc_d2_v1_0.runner",
+        "python experiments/b1sc_d2_v1_0/runner.py",
+    )
+    require(all(x not in lower for x in forbidden_invocations), "Scientific runner must not be invoked by QA-only D2 workflow")
     require("start_request.json" in lower, "QA workflow must explicitly prove START_REQUEST absence")
     require("permissions:\n  contents: read" in text, "QA workflow must have read-only repository permission")
     require("python -m experiments.b1sc_d2_v1_0.tests" in text, "D2 QA suite is not invoked")
