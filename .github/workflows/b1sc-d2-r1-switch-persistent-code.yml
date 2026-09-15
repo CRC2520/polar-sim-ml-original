@@ -1,0 +1,131 @@
+name: B1-SC-D2-R1 switch non-workflow code to repository-persisted initialization
+'on':
+  push:
+    branches:
+      - research/b1sc-d2-r1-v1.0-persistent-init-20260915
+    paths:
+      - .github/workflows/b1sc-d2-r1-switch-persistent-code.yml
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - name: Patch non-workflow code only
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import textwrap
+          root=Path('experiments/b1sc_d2_r1_v1_0')
+          old='research/b1sc-d2-r1-v1.0-full-execution-readiness-20260915'
+          new='research/b1sc-d2-r1-v1.0-persistent-init-20260915'
+          init='''"""Load D2-R1 initial modules exclusively from repository-versioned canonical bytes."""
+          from __future__ import annotations
+          import json
+          from pathlib import Path
+          import torch
+          from b1s.execution.core import RoutingActor, Value, model_digest
+          from experiments.b1sc_d2_v1_0 import implementation as d2
+          from experiments.b1sc_d2_r1_v1_0.init_format import load_into, sha256_file
+          ROOT=Path(__file__).resolve().parent
+          MANIFEST_PATH=ROOT/"INIT_FREEZE.json"
+          PERSISTED_ROOT=ROOT/"frozen_init"
+          PERSISTED_MANIFEST=PERSISTED_ROOT/"PERSISTED_MANIFEST.json"
+          CONDITIONS=("S6-ON","S6-OFF-TRAIN")
+          def manifest(): return json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+          def persisted_manifest(): return json.loads(PERSISTED_MANIFEST.read_text(encoding="utf-8"))
+          def entry(block:int):
+              b=int(block)
+              if not 0<=b<8: raise RuntimeError("Invalid D2-R1 block")
+              rows=[x for x in manifest()["blocks"] if x["block"]==b]; prows=[x for x in persisted_manifest()["blocks"] if x["block"]==b]
+              if len(rows)!=1 or len(prows)!=1: raise RuntimeError("Missing/duplicate frozen block")
+              e,p=rows[0],prows[0]
+              if p["sha256"]!=e["sha256"]: raise RuntimeError("Persisted/frozen SHA contract mismatch")
+              return e,p
+          def artifact_dir()->Path:
+              if not PERSISTED_ROOT.is_dir(): raise RuntimeError("Repository-persisted frozen init directory is missing")
+              return PERSISTED_ROOT
+          def build_initial_modules(condition:str,block:int):
+              if condition not in CONDITIONS: raise RuntimeError("Unknown D2-R1 condition")
+              e,pe=entry(block); p=artifact_dir()/f"block-{int(block)}.bin"
+              if not p.is_file() or p.stat().st_size!=int(pe["size"]) or sha256_file(p)!=e["sha256"]: raise RuntimeError("Frozen block byte hash mismatch")
+              with torch.random.fork_rng(devices=[]):
+                  torch.manual_seed(0); actor=RoutingActor(d2.S6_MASK); critic=Value()
+              header,actual=load_into(p,actor,critic,e["sha256"])
+              if int(header["block"])!=int(block) or int(header["source_seed"])!=int(e["source_seed"]): raise RuntimeError("Frozen snapshot header mismatch")
+              ad=model_digest(actor); cd=model_digest(critic)
+              if ad!=e["actor_digest"] or cd!=e["critic_digest"]: raise RuntimeError("Loaded parameter digest mismatch")
+              pm=persisted_manifest()
+              return actor,critic,dict(block=int(block),condition=condition,initial_state_sha256=actual,actor_digest=ad,critic_digest=cd,source_seed=int(e["source_seed"]),file=f"block-{int(block)}.bin",artifact_id=pm["canonical_artifact_id"],storage="repository-versioned",persisted_manifest_sha256=sha256_file(PERSISTED_MANIFEST))
+          '''
+          (root/'initialization.py').write_text(textwrap.dedent(init),encoding='utf-8')
+          for rel in ['scientific_runner.py','full_pipeline_tests.py']:
+              p=root/rel; p.write_text(p.read_text(encoding='utf-8').replace(old,new),encoding='utf-8')
+          tests='''"""Qualification tests for repository-persisted byte-frozen D2-R1 runner."""
+          from __future__ import annotations
+          import argparse,ast,dataclasses,json,os
+          from pathlib import Path
+          from experiments.b1sc_d2_r1_v1_0 import scientific_runner as r
+          from experiments.b1sc_d2_r1_v1_0 import initialization as init
+          ROOT=Path(__file__).resolve().parent
+          def expect_fail(fn,contains):
+              try: fn()
+              except Exception as e:
+                  assert contains in str(e),(contains,str(e)); return
+              raise AssertionError('expected failure')
+          def rule_tests():
+              src=(ROOT/'scientific_runner.py').read_text(); tree=ast.parse(src); funcs={n.name:n for n in tree.body if isinstance(n,ast.FunctionDef)}; adam=[]; steps=[]
+              for node in ast.walk(tree):
+                  if isinstance(node,ast.Call) and isinstance(node.func,ast.Attribute):
+                      if node.func.attr=='Adam': adam.append(node.lineno)
+                      if node.func.attr=='step' and isinstance(node.func.value,ast.Name) and node.func.value.id=='opt': steps.append(node.lineno)
+              assert len(adam)==1 and len(steps)==1
+              train=ast.get_source_segment(src,funcs['_train']); assert train.index('validate_and_load_frozen')<train.index('create_optimizer')<train.index('guarded_optimizer_step')
+              ins=(ROOT/'initialization.py').read_text(); assert 'D2R1_INIT_DIR' not in ins and 'PERSISTED_ROOT' in ins and 'repository-versioned' in ins
+              pm=init.persisted_manifest(); assert pm['status']=='BYTE_FOR_BYTE_COPY_OF_CANONICAL_ARTIFACT' and pm['regenerated'] is False and len(pm['blocks'])==8
+              assert not (ROOT/'START_REQUEST.json').exists()
+              return {'status':'PASS','rule_tests':10,'persistent_repository_bytes':True,'start_request_present':False}
+          def runtime_tests(_ignored,out_root):
+              r.runtime(); results=[]
+              def ok(name,fn): fn(); results.append(name)
+              on=r.validate_and_load_frozen('S6-ON',0); off=r.validate_and_load_frozen('S6-OFF-TRAIN',0)
+              ok('same_persisted_snapshot_on_off',lambda: (_ for _ in ()).throw(AssertionError()) if not(on.attestation.snapshot_sha256==off.attestation.snapshot_sha256 and on.attestation.actor_digest==off.attestation.actor_digest and on.attestation.critic_digest==off.attestation.critic_digest) else None)
+              def all_hashes():
+                  for b in range(8):
+                      e,p=init.entry(b); q=init.artifact_dir()/f'block-{b}.bin'; assert q.is_file() and init.sha256_file(q)==e['sha256']==p['sha256']
+              ok('all_8_repository_hashes_exact',all_hashes)
+              invalid=r.PreparedModules(on.actor,on.critic,dataclasses.replace(on.attestation,validated=False),list(on.audit)); ok('optimizer_rejects_unvalidated',lambda:expect_fail(lambda:r.create_optimizer(invalid),'validated frozen initialization'))
+              root=Path(out_root); root.mkdir(parents=True,exist_ok=True); a=r.qa_microfit('S6-ON',0,'repository-persisted',str(root/'on'),512); b=r.qa_microfit('S6-OFF-TRAIN',0,'repository-persisted',str(root/'off'),512)
+              ok('qa_not_scientific',lambda: (_ for _ in ()).throw(AssertionError()) if a['scientific_evidence'] or b['scientific_evidence'] else None)
+              ok('microfit_same_init',lambda: (_ for _ in ()).throw(AssertionError()) if a['initial_actor_digest']!=b['initial_actor_digest'] or a['initial_critic_digest']!=b['initial_critic_digest'] else None)
+              ok('first_step_after_validation',lambda: [(_ for _ in ()).throw(AssertionError()) for x in (a,b) if [e['event'] for e in x['initialization_audit']][:4]!=['validation_started','snapshot_validated','optimizer_created','optimizer_step']])
+              ok('off_message_path_frozen',lambda: (_ for _ in ()).throw(AssertionError()) if b['initial_message_A_digest']!=b['final_message_A_digest'] else None)
+              old={k:os.environ.get(k) for k in ('GITHUB_REPOSITORY','GITHUB_REF','GITHUB_RUN_ATTEMPT','GITHUB_RUN_NUMBER')}; os.environ['GITHUB_REPOSITORY']='CRC2520/polar-sim-ml-original'; os.environ['GITHUB_REF']='refs/heads/'+r.RUNNER_BRANCH; os.environ['GITHUB_RUN_ATTEMPT']='1'; os.environ['GITHUB_RUN_NUMBER']='1'; ok('guard_blocks_without_start',lambda:expect_fail(r.scientific_guard,'START_REQUEST.json is absent'))
+              for k,v in old.items(): os.environ.pop(k,None) if v is None else os.environ.__setitem__(k,v)
+              payload={'status':'PASS','runtime_tests':len(results),'tests':results,'persistent_repository_bytes':True,'qa_microfit_performed':True,'scientific_training_performed':False,'scientific_evaluation_performed':False}; (root/'RUNTIME_TESTS.json').write_text(json.dumps(payload,indent=2,sort_keys=True)+'\n'); return payload
+          def main():
+              p=argparse.ArgumentParser(); p.add_argument('mode',choices=('rules','runtime')); p.add_argument('--init-dir',default='repository-persisted'); p.add_argument('--out',default='/tmp/d2r1-tests'); a=p.parse_args(); print(json.dumps(rule_tests() if a.mode=='rules' else runtime_tests(a.init_dir,a.out),sort_keys=True))
+          if __name__=='__main__': main()
+          '''
+          (root/'runner_tests.py').write_text(textwrap.dedent(tests),encoding='utf-8')
+          p=root/'full_preflight.py'; s=p.read_text(encoding='utf-8').replace(old,new)
+          marker="'.github/workflows/b1sc-d2-r1-full-qa.yml',\n)"
+          extra="'.github/workflows/b1sc-d2-r1-full-qa.yml',\n'experiments/b1sc_d2_r1_v1_0/frozen_init/PERSISTED_MANIFEST.json',\n"+''.join([f"'experiments/b1sc_d2_r1_v1_0/frozen_init/block-{i}.bin',\n" for i in range(8)])+")"
+          if marker not in s: raise SystemExit('preflight source marker missing')
+          s=s.replace(marker,extra).replace("'snapshot_consumption_mandatory':True", "'snapshot_consumption_mandatory':True,'persistent_init_in_repository':True,'canonical_artifact_dependency_at_runtime':False")
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit code conversion only
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experiments/b1sc_d2_r1_v1_0
+          git commit -m 'science(b1sc-d2-r1): bind code to repository-persisted init bytes'
+          git push origin HEAD:research/b1sc-d2-r1-v1.0-persistent-init-20260915
