@@ -1,0 +1,157 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "authorization_request_required_fields": [
+    "schema",
+    "authorize_b1sc_v1_0",
+    "authorized_run_attempt",
+    "authorization_base_commit",
+    "qualified_source_commit",
+    "execution_freeze_sha256",
+    "registry_sha256",
+    "design_freeze_sha256",
+    "implementation_freeze_sha256",
+    "workflow_sha256",
+    "B1E_executed",
+    "final_seeds_generated"
+  ],
+  "branch": "research/b1sc-v1.0-execution-readiness-20260915",
+  "design_freeze_sha256": "fa8b91218d64442da0052e76d96b51a8673b38ae0bba0862409bcaedc526e13f",
+  "execution_authorized": false,
+  "execution_workflow_contract": {
+    "automatic_retry": false,
+    "max_parallel_fits": 4,
+    "repository_write_permission": false,
+    "sha256": "5767a47ea9803dec7951fc3a922ba44da79ac99a99f4f5dd82952bc5cbf515b5",
+    "status": "PASS",
+    "trigger_only_start_request": true
+  },
+  "final_seeds_generated": false,
+  "historical_preservation": {
+    "added_paths": [
+      ".github/workflows/b1sc-v1-0-execution-qa.yml",
+      ".github/workflows/b1sc-v1-0-execution.yml",
+      "experiments/b1sc_v1_0/execution.py",
+      "experiments/b1sc_v1_0/execution_preflight.py",
+      "experiments/b1sc_v1_0/execution_tests.py",
+      "experiments/b1sc_v1_0/runner.py"
+    ],
+    "parent_implementation_freeze_sha256": "3c5b34a5fb83054a5f6ab0989d74a4cde58ca38d35cc37cb55f05cbfbf231a10",
+    "qualified_base_commit": "5ea44a037bae663ec2885bf8b36d2595c08940c4",
+    "status": "PASS"
+  },
+  "implementation_freeze_sha256": "3c5b34a5fb83054a5f6ab0989d74a4cde58ca38d35cc37cb55f05cbfbf231a10",
+  "next_step_requires_explicit_author_consent": true,
+  "pipeline": {
+    "admission_episodes_per_block": 64,
+    "admission_minimum_blocks": 6,
+    "blocks": 8,
+    "causal_window": [
+      9,
+      40
+    ],
+    "fits": 72,
+    "input_mode": "raw",
+    "native_steps": 1048576,
+    "primary_causal": "all active routes",
+    "primary_utility_reference": "G0",
+    "roles": [
+      "G0",
+      "GD",
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "PPO"
+    ],
+    "secondary_causal": "individual active edges after primary gate",
+    "stages": [
+      "authorize",
+      "fit",
+      "admission",
+      "primary",
+      "primary-aggregate",
+      "secondary",
+      "secondary-aggregate",
+      "final"
+    ]
+  },
+  "protocol_sha256": "4991a1269458a81c71e0ebd327395fe6d3429dc7fb9f6eb967b13b1ddb03e6cc",
+  "qa_hashes": {
+    "RULE_TESTS.json": "eb39096f2cabec8ff8ef68ccf643bf460f52146ac9259216e6d8059ce8eaf434",
+    "RUNTIME_TESTS.json": "fb7633df86d6c8b5287826e01ae5865e69d9ec9f9a6f81e2cf785ca26d569431",
+    "VALIDATION.json": "2ff9b335324507ccccd68c55c7b8e3443b0ce77ba55d49905f0e3872adfbc368"
+  },
+  "qa_microfit_performed": true,
+  "qa_microfit_scientific_evidence": false,
+  "qa_workflow_contract": {
+    "scientific_training_job": false,
+    "sha256": "c7a4153f38a78d129f1c62204a8e0bbd188d6a9775fb3f6dd10c93051d0cc67f",
+    "status": "PASS"
+  },
+  "qualified_base_commit": "5ea44a037bae663ec2885bf8b36d2595c08940c4",
+  "qualified_source_commit": "fb6cae5d8c4fcdebc3288af1557bb0b97b4315d8",
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "registry_entries": 72,
+  "registry_sha256": "e291a72f07c76a779632fe3ad2f6c6112aaad9f66628b0400cea92170a569cbe",
+  "repository": "CRC2520/polar-sim-ml-original",
+  "results_exist": false,
+  "runtime": {
+    "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+    "python": "3.11.16",
+    "sources": {
+      "sisl/multiwalker/multiwalker.py": {
+        "blob": "8edf250d1dec03d4ae2ee56c9e2dff5fe50e875c",
+        "sha256": "480d81f415ae4fef2fb93cf93a4d2859f2af0012fc5f16f9109d78fb4dfceb68"
+      },
+      "sisl/multiwalker/multiwalker_base.py": {
+        "blob": "476b3950cc1146e53338ec4bf48b9291b6143a84",
+        "sha256": "5e5ec639fa71295daf991ab762e9adf45f95b72d6848911e3b8ea98ae1dd3f7e"
+      },
+      "sisl/multiwalker_v9.py": {
+        "blob": "555eee6a7f37d5bb908152f6680a6d7ffe882f91",
+        "sha256": "1137bf70127d136b5590d634a7457576cbcc54eeeff695c1341b1c8ad1271d97"
+      }
+    },
+    "torch_threads": 1,
+    "upstream_commit": "e62d6bcdc6e0c28fa19c08545a63dc8370393495",
+    "versions": {
+      "box2d-py": "2.3.5",
+      "gymnasium": "0.29.1",
+      "numpy": "1.26.4",
+      "pettingzoo": "1.24.3",
+      "pygame": "2.5.2",
+      "stable-baselines3": "2.3.2",
+      "torch": "2.2.2+cpu"
+    }
+  },
+  "schema": "B1-SC-1.0.0-20260914",
+  "scientific_evaluation_performed": false,
+  "source_hashes": {
+    ".github/workflows/b1sc-v1-0-execution-qa.yml": "c7a4153f38a78d129f1c62204a8e0bbd188d6a9775fb3f6dd10c93051d0cc67f",
+    ".github/workflows/b1sc-v1-0-execution.yml": "5767a47ea9803dec7951fc3a922ba44da79ac99a99f4f5dd82952bc5cbf515b5",
+    "b1s/execution/core.py": "459255a4e4797c8ea03fd6187c70802dcdc152bfce48d0f2405d2f88b7fe0a59",
+    "b1s/execution/instrument.py": "8ce0c1b2fca29d6bc39c35393bb4bff1c97d0cd4254838bb2483c41f551347df",
+    "b1s/execution/requirements.txt": "26d33ad281ff87732e748eddb45ae8f3aa4e1fced20f4627aa7b5ef4719768ce",
+    "experiments/b1sc_v1_0/DESIGN_FREEZE.json": "fa8b91218d64442da0052e76d96b51a8673b38ae0bba0862409bcaedc526e13f",
+    "experiments/b1sc_v1_0/PROTOCOL_ES.md": "4991a1269458a81c71e0ebd327395fe6d3429dc7fb9f6eb967b13b1ddb03e6cc",
+    "experiments/b1sc_v1_0/execution.py": "384c63e80b78cb0498cfe0a7e4651d19a7fece295c55274665de14d66658b182",
+    "experiments/b1sc_v1_0/execution_preflight.py": "4ee90705bb427bf22e5fdd2892db1bb2fbac80cb4af8c7797f21463f04407d7b",
+    "experiments/b1sc_v1_0/execution_tests.py": "56fc9fe07dd78bbe31df97cb51e30952b9c611f539ba8ee1b851af4b46e7500a",
+    "experiments/b1sc_v1_0/implementation.py": "3f631d5cdf00a695762e34dea39f8a14fbcdce64ca3c3e4786e68c07f08f2c20",
+    "experiments/b1sc_v1_0/preflight.py": "f76a23c213c8795294376039afa51ac407c2bfed7195c4b47a6c8b0b6486ae46",
+    "experiments/b1sc_v1_0/run/IMPLEMENTATION_FREEZE.json": "3c5b34a5fb83054a5f6ab0989d74a4cde58ca38d35cc37cb55f05cbfbf231a10",
+    "experiments/b1sc_v1_0/run/PREFLIGHT_STATUS.json": "81b2502497eab4ca47e4639c2cc8713e4a09319006bbc509d525195cf598fb18",
+    "experiments/b1sc_v1_0/runner.py": "247461c5dda74ca70902ec1ee8c52d0383b6e3be3912b5f9e2b15ca62d58e7f4",
+    "experiments/b1sc_v1_0/tests.py": "b71c0d5815c047ad9778d39cc1608edd87e925c929b7cceaa03faead74330cc4"
+  },
+  "start_request_exists": false,
+  "status": "EXECUTION_PIPELINE_QUALIFIED_NOT_AUTHORIZED",
+  "training_performed": false
+}
