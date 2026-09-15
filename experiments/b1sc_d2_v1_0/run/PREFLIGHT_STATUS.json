@@ -1,0 +1,18 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "final_seeds_generated": false,
+  "implementation_freeze_sha256": "de998e00d30e8b8a1c090eee61ba190d1791ffce0ce82f5c860a300fee706a0f",
+  "next_step": "AUTHOR_REVIEW_BEFORE_EXECUTION_PIPELINE_IMPLEMENTATION",
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "scientific_evaluation_performed": false,
+  "scientific_runner_present": false,
+  "scientific_training_performed": false,
+  "scientific_workflow_present": false,
+  "start_request_present": false,
+  "status": "D2_IMPLEMENTATION_QUALIFIED_NOT_EXECUTED"
+}
