@@ -17,13 +17,16 @@ def rule_tests():
     assert 'research/b1sc-d2-r1-v1.0-persistent-init-20260915' in wf
     for token in ('authorize:','fit:','training_aggregate:','online:','online_aggregate:','final:'):assert token in wf,token
     assert 'max-parallel: 4' in wf and 'd2r1-final-review' in wf
+    assert 'Install preserved runtime before authorization guard' in wf
+    assert wf.index('Install preserved runtime before authorization guard') < wf.index('Guard full frozen authorization')
+    assert "python -m pip install -r b1s/execution/requirements.txt" in wf
     assert not (ROOT/'START_REQUEST.json').exists()
     for step in d2.CHECKPOINTS:assert f'model-{{steps}}.pt' in src or 'model-{steps}.pt' in src
     assert 'model-final.pt' in src and 'DIAGNOSTIC_' in src and 'ENDPOINT.json' in src and 'COMPLETE.json' in src
     for fn in ('aggregate_training','online_block','aggregate_online','final_aggregate'):assert f'def {fn}' in pipe
     assert 'H_TRAIN_D2_R1' in pipe and 'H_ONLINE_D2_R1' in pipe and 'does_not_rewrite_d2=True' in pipe
     m=contract.manifest();assert len(m['blocks'])==8 and m['same_snapshot_for_on_off'] and m['seed_reconstruction_for_training_forbidden']
-    return {'status':'PASS','rule_tests':16,'scientific_training_performed':False,'scientific_evaluation_performed':False,'start_request_present':False}
+    return {'status':'PASS','rule_tests':19,'authorize_runtime_before_guard':True,'scientific_training_performed':False,'scientific_evaluation_performed':False,'start_request_present':False}
 
 
 def runtime_tests(out):
