@@ -14,7 +14,7 @@ def rule_tests():
     wf=WF.read_text(encoding='utf-8');src=(ROOT/'scientific_runner.py').read_text(encoding='utf-8');pipe=(ROOT/'full_execution.py').read_text(encoding='utf-8')
     assert 'workflow_dispatch' not in wf
     assert 'experiments/b1sc_d2_r1_v1_0/START_REQUEST.json' in wf
-    assert 'research/b1sc-d2-r1-v1.0-full-execution-readiness-20260915' in wf
+    assert 'research/b1sc-d2-r1-v1.0-persistent-init-20260915' in wf
     for token in ('authorize:','fit:','training_aggregate:','online:','online_aggregate:','final:'):assert token in wf,token
     assert 'max-parallel: 4' in wf and 'd2r1-final-review' in wf
     assert not (ROOT/'START_REQUEST.json').exists()
