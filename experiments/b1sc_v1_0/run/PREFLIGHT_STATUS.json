@@ -1,0 +1,16 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "evaluation_performed": false,
+  "final_seeds_generated": false,
+  "implementation_freeze_sha256": "3c5b34a5fb83054a5f6ab0989d74a4cde58ca38d35cc37cb55f05cbfbf231a10",
+  "next_step": "AUTHOR_REVIEW_BEFORE_ANY_EXECUTION",
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "start_request_present": false,
+  "status": "IMPLEMENTATION_QUALIFIED_NOT_EXECUTED",
+  "training_performed": false
+}
