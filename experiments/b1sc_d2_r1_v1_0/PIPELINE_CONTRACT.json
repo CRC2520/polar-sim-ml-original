@@ -1,0 +1,38 @@
+{
+  "schema": "B1-SC-D2-R1-PIPELINE-1.0.0-20260915",
+  "status": "PIPELINE_HANDOFF_FROZEN_NOT_SCIENTIFICALLY_EXECUTABLE",
+  "source_init_commit": "285fcf12ce4197455b27ad7ac0767e1e785af18b",
+  "canonical_init": {
+    "run_id": 35007729637,
+    "artifact_id": 10412775720,
+    "artifact_name": "b1sc-d2-r1-init-candidates",
+    "bundle_sha256": "0f3a2ac9fe3a29cbf2764257527735be000e487db1462dc3c555ef4bb34580a4"
+  },
+  "conditions": ["S6-ON", "S6-OFF-TRAIN"],
+  "blocks": 8,
+  "planned_fits": 16,
+  "required_prefit_sequence": [
+    "download_canonical_artifact",
+    "verify_block_sha256",
+    "load_all_actor_tensors",
+    "load_all_critic_tensors",
+    "verify_actor_digest",
+    "verify_critic_digest",
+    "verify_same_block_bytes_for_on_off",
+    "construct_optimizer_after_verified_load"
+  ],
+  "forbidden": [
+    "scientific_parameter_reconstruction_from_seed",
+    "condition_specific_snapshot_selection",
+    "optimizer_step_during_qualification",
+    "scientific_environment_step_during_qualification",
+    "START_REQUEST.json"
+  ],
+  "scientific_training_authorized": false,
+  "scientific_evaluation_authorized": false,
+  "does_not_rewrite_d2": true,
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED"
+}
