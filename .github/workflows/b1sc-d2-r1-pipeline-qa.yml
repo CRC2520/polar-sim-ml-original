@@ -1,0 +1,81 @@
+name: B1-SC-D2-R1 pipeline handoff QA only
+'on':
+  push:
+    branches: [research/b1sc-d2-r1-v1.0-execution-readiness-20260915]
+    paths:
+      - experiments/b1sc_d2_r1_v1_0/PIPELINE_CONTRACT.json
+      - experiments/b1sc_d2_r1_v1_0/FIT_REGISTRY.json
+      - experiments/b1sc_d2_r1_v1_0/execution_contract.py
+      - .github/workflows/b1sc-d2-r1-pipeline-qa.yml
+permissions:
+  contents: read
+  actions: read
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+jobs:
+  registry:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - name: Verify frozen 16-fit handoff registry
+        run: |
+          test ! -e experiments/b1sc_d2_r1_v1_0/START_REQUEST.json
+          python - <<'PY'
+          import json,pathlib
+          r=pathlib.Path('experiments/b1sc_d2_r1_v1_0')
+          c=json.loads((r/'PIPELINE_CONTRACT.json').read_text()); g=json.loads((r/'FIT_REGISTRY.json').read_text()); f=json.loads((r/'INIT_FREEZE.json').read_text())
+          assert c['scientific_training_authorized'] is False and c['scientific_evaluation_authorized'] is False
+          assert g['conditions']==['S6-ON','S6-OFF-TRAIN'] and g['blocks']==8 and g['fits']==16 and g['same_snapshot_for_on_off'] is True
+          frozen={x['block']:(x['file'],x['sha256']) for x in f['blocks']}
+          assert len(g['block_snapshots'])==8
+          for b,name,h in g['block_snapshots']: assert frozen[b]==(name,h)
+          rows=[(condition,b,h) for condition in g['conditions'] for b,_,h in g['block_snapshots']]
+          assert len(rows)==16 and all(next(x[2] for x in rows if x[0]=='S6-ON' and x[1]==b)==next(x[2] for x in rows if x[0]=='S6-OFF-TRAIN' and x[1]==b) for b in range(8))
+          pathlib.Path('/tmp/registry.json').write_text(json.dumps({'status':'PASS','fits':16,'same_snapshot_for_on_off':True,'scientific_training':False,'scientific_evaluation':False},indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with: {name: d2r1-pipeline-registry-qa, path: /tmp/registry.json, retention-days: 90}
+  probe:
+    strategy:
+      matrix: {condition: [S6-ON, S6-OFF-TRAIN]}
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - uses: actions/download-artifact@v4
+        with:
+          name: b1sc-d2-r1-init-candidates
+          path: /tmp/d2r1-canonical
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: CRC2520/polar-sim-ml-original
+          run-id: 35007729637
+      - run: |
+          sudo apt-get update -qq && sudo apt-get install -y swig
+          python -m pip install -r b1s/execution/requirements.txt
+      - env: {D2R1_INIT_DIR: /tmp/d2r1-canonical}
+        run: python -m experiments.b1sc_d2_r1_v1_0.probe --condition '${{ matrix.condition }}' --out /tmp/probe
+      - uses: actions/upload-artifact@v4
+        with: {name: 'd2r1-pipeline-probe-${{ matrix.condition }}', path: /tmp/probe, retention-days: 90}
+  aggregate:
+    needs: [registry, probe]
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: {pattern: 'd2r1-pipeline-probe-*', path: /tmp/probes}
+      - run: python -m experiments.b1sc_d2_r1_v1_0.aggregate_probes --root /tmp/probes --out /tmp/aggregate
+      - name: Publish pipeline qualification status
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('/tmp/aggregate/INIT_QA_STATUS.json'); q=json.loads(p.read_text()); assert q['all_cross_runner_exact'] is True and q['blocks_verified']==8
+          s={'status':'D2_R1_PIPELINE_HANDOFF_QUALIFIED_NOT_EXECUTED','planned_fits':16,'blocks_verified':8,'independent_condition_runners':2,'all_cross_runner_exact':True,'snapshot_consumption_mandatory':True,'scientific_training_performed':False,'scientific_evaluation_performed':False,'start_request_present':False,'B1E_disposition':'ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION'}
+          pathlib.Path('/tmp/aggregate/PIPELINE_QA_STATUS.json').write_text(json.dumps(s,indent=2)+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with: {name: d2r1-pipeline-handoff-qa, path: /tmp/aggregate, retention-days: 90}
