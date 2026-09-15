@@ -1,0 +1,61 @@
+{
+  "blocks": [
+    {
+      "block": 0,
+      "path": "experiments/b1sc_d2_r1_v1_0/frozen_init/block-0.bin",
+      "sha256": "a471b2b5d20cf864ee0879f7fe6fb53415426c09a0bd65802d234ac60d202d32",
+      "size": 51577
+    },
+    {
+      "block": 1,
+      "path": "experiments/b1sc_d2_r1_v1_0/frozen_init/block-1.bin",
+      "sha256": "439fe672217d525486f6881da595d824fb5ab1502d49d0fdc014ef71a30df126",
+      "size": 51577
+    },
+    {
+      "block": 2,
+      "path": "experiments/b1sc_d2_r1_v1_0/frozen_init/block-2.bin",
+      "sha256": "24f836ab3f128e649da6caf7736ce6d8293996a548418e0c378149a391d0d16c",
+      "size": 51576
+    },
+    {
+      "block": 3,
+      "path": "experiments/b1sc_d2_r1_v1_0/frozen_init/block-3.bin",
+      "sha256": "f37da57d6311e567e5e80105d64c1842b9f42bb49e020158fdcf41ec1a5523f1",
+      "size": 51577
+    },
+    {
+      "block": 4,
+      "path": "experiments/b1sc_d2_r1_v1_0/frozen_init/block-4.bin",
+      "sha256": "f0c0f01eadaacef05fc44e30635de17a3cd6ff6cd1f3798c87900eaaca394ce4",
+      "size": 51577
+    },
+    {
+      "block": 5,
+      "path": "experiments/b1sc_d2_r1_v1_0/frozen_init/block-5.bin",
+      "sha256": "b4f8a197e7ce3f2d8d9fec231a07dad0d84ee5d405a5f0dca6853d4b1abd6991",
+      "size": 51577
+    },
+    {
+      "block": 6,
+      "path": "experiments/b1sc_d2_r1_v1_0/frozen_init/block-6.bin",
+      "sha256": "9fe0ab844887b2eb1f24e8dd00bc65e2921a7ecf7ac8b6de07ff0305af78679c",
+      "size": 51576
+    },
+    {
+      "block": 7,
+      "path": "experiments/b1sc_d2_r1_v1_0/frozen_init/block-7.bin",
+      "sha256": "39334c149d5e4eb86733cc31a85788299836fb24c65d8d15aa27cedb459553c6",
+      "size": 51576
+    }
+  ],
+  "canonical_artifact_id": 10412775720,
+  "canonical_artifact_name": "b1sc-d2-r1-init-candidates",
+  "canonical_bundle_sha256": "0f3a2ac9fe3a29cbf2764257527735be000e487db1462dc3c555ef4bb34580a4",
+  "canonical_generation_run_id": 35007729637,
+  "regenerated": false,
+  "schema": "B1-SC-D2-R1-PERSISTED-INIT-1.0.0-20260915",
+  "scientific_evaluation_performed": false,
+  "scientific_training_performed": false,
+  "status": "BYTE_FOR_BYTE_COPY_OF_CANONICAL_ARTIFACT"
+}
