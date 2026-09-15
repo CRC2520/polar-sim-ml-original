@@ -39,8 +39,7 @@ def runtime_tests(_ignored,out_root):
     ok('off_message_path_frozen',lambda: (_ for _ in ()).throw(AssertionError()) if b['initial_message_A_digest']!=b['final_message_A_digest'] else None)
     old={k:os.environ.get(k) for k in ('GITHUB_REPOSITORY','GITHUB_REF','GITHUB_RUN_ATTEMPT','GITHUB_RUN_NUMBER')}; os.environ['GITHUB_REPOSITORY']='CRC2520/polar-sim-ml-original'; os.environ['GITHUB_REF']='refs/heads/'+r.RUNNER_BRANCH; os.environ['GITHUB_RUN_ATTEMPT']='1'; os.environ['GITHUB_RUN_NUMBER']='1'; ok('guard_blocks_without_start',lambda:expect_fail(r.scientific_guard,'START_REQUEST.json is absent'))
     for k,v in old.items(): os.environ.pop(k,None) if v is None else os.environ.__setitem__(k,v)
-    payload={'status':'PASS','runtime_tests':len(results),'tests':results,'persistent_repository_bytes':True,'qa_microfit_performed':True,'scientific_training_performed':False,'scientific_evaluation_performed':False}; (root/'RUNTIME_TESTS.json').write_text(json.dumps(payload,indent=2,sort_keys=True)+'
-'); return payload
+    payload={'status':'PASS','runtime_tests':len(results),'tests':results,'persistent_repository_bytes':True,'qa_microfit_performed':True,'scientific_training_performed':False,'scientific_evaluation_performed':False}; (root/'RUNTIME_TESTS.json').write_text(json.dumps(payload,indent=2,sort_keys=True)+'\n'); return payload
 def main():
     p=argparse.ArgumentParser(); p.add_argument('mode',choices=('rules','runtime')); p.add_argument('--init-dir',default='repository-persisted'); p.add_argument('--out',default='/tmp/d2r1-tests'); a=p.parse_args(); print(json.dumps(rule_tests() if a.mode=='rules' else runtime_tests(a.init_dir,a.out),sort_keys=True))
 if __name__=='__main__': main()
