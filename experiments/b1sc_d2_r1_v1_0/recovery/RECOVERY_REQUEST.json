@@ -1,0 +1,87 @@
+{
+  "schema": "B1-SC-D2-R1-RECOVERY-1.0.0-20260916",
+  "authorize_controlled_recovery": true,
+  "reason": "ONLINE_AGGREGATE_RUNTIME_DEPENDENCY_MISSING_TORCH",
+  "failed_job_id": 104639363919,
+  "source_run_id": 35037779136,
+  "source_run_number": 3,
+  "source_run_attempt": 1,
+  "source_run_head": "bcb73c0845b6396fa70091bdbfca130f48686b37",
+  "frozen_source_commit": "bcb73c0845b6396fa70091bdbfca130f48686b37",
+  "qualified_source_commit": "3bc2a11f662e1fab32a2405387cc3359013887f4",
+  "execution_freeze_sha256": "a8fe94ddd2ae6675ab4e42b0f50b9015730a1f674f60287c00ab529ba23237f7",
+  "aggregate_only": true,
+  "no_training_execution": true,
+  "no_online_evaluation_execution": true,
+  "no_seed_generation": true,
+  "no_evidence_replacement": true,
+  "training_artifact": {
+    "name": "d2r1-training-aggregate",
+    "id": 10426758149,
+    "digest": "sha256:e2e3fd14196ab8d6274b67b0f722cb9b97a50ff65c37e7b6421935cded9b6e4c"
+  },
+  "online_artifacts": [
+    {
+      "block": 0,
+      "name": "d2r1-online-b0",
+      "id": 10426553643,
+      "digest": "sha256:382d9bd42ef5ee64961ab40728ef6e1a1d613aa3b94a769b21c855281298f677"
+    },
+    {
+      "block": 1,
+      "name": "d2r1-online-b1",
+      "id": 10426679553,
+      "digest": "sha256:711ad4d8c06286ed3c5cb1e31dce2d74c4813f159bb241fcc3baf810d1d63505"
+    },
+    {
+      "block": 2,
+      "name": "d2r1-online-b2",
+      "id": 10427620202,
+      "digest": "sha256:05637b867e1b900245947f03a68b95e25039d2b574ef47ef18d8f9799942d3c0"
+    },
+    {
+      "block": 3,
+      "name": "d2r1-online-b3",
+      "id": 10426619754,
+      "digest": "sha256:3da8f918e3f0894cbd27098caa35bcefb9555de5dd172761acf4859f4e104e76"
+    },
+    {
+      "block": 4,
+      "name": "d2r1-online-b4",
+      "id": 10427426719,
+      "digest": "sha256:a59894457578e17009de6f45f6c995bbd7c76e1502edad57c022c91369d68db4"
+    },
+    {
+      "block": 5,
+      "name": "d2r1-online-b5",
+      "id": 10426799816,
+      "digest": "sha256:5194ea4929c21346f477bc84a774879294b2d55b86bbd52a0dfeab30708a5d20"
+    },
+    {
+      "block": 6,
+      "name": "d2r1-online-b6",
+      "id": 10426934081,
+      "digest": "sha256:6a5616f3dcee57dabcb2a70a4c9bb26a1fcb6bd0d0d58350fa4c38fa8f634e36"
+    },
+    {
+      "block": 7,
+      "name": "d2r1-online-b7",
+      "id": 10427890392,
+      "digest": "sha256:350a9f3e1f8675bf0b922c704fa4102d3f75035897a79863e10596831dac0fa5"
+    }
+  ],
+  "expected_outputs": [
+    "ONLINE_EFFECT_R1.json",
+    "SUMMARY_R1.json",
+    "RECOVERY_PROVENANCE.json"
+  ],
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "final_seeds_generated": false,
+  "ready_for_b1e_protocol_design": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_confirmatory_run": false,
+  "automatic_b1e_progression": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED"
+}
