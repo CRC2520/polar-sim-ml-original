@@ -1,0 +1,41 @@
+{
+  "B1E_executed": false,
+  "branch": "research/b1sc-d3-v1.0-runner-readiness-20260916",
+  "execution_authorized": false,
+  "final_seeds_generated": false,
+  "frozen_base_head": "8e55ac2e270de81f44aca2f4e3987eb4c864ffa8",
+  "frozen_metadata_git_blobs": {
+    "experiments/b1sc_d3_v1_0/DESIGN_FREEZE.json": "ab9c1aff7660be1e7f8f48df25aa13103c3938c4",
+    "experiments/b1sc_d3_v1_0/FIT_REGISTRY.json": "2994ef0395cf0e9e17dfa26011e5d03feb839b5c",
+    "experiments/b1sc_d3_v1_0/INIT_FREEZE.json": "5ec2d8ac7792a21561747b231b97902b535bfe12",
+    "experiments/b1sc_d3_v1_0/INIT_VERIFY_REQUEST.json": "24e9975719df4748adacf7baf09cee2063e0ff1a",
+    "experiments/b1sc_d3_v1_0/PERSIST_REQUEST.json": "18cea7959fa2a6e37d93fba99d1652bafddec229",
+    "experiments/b1sc_d3_v1_0/PROTOCOL_ES.md": "b6fb01654485df7bb71c84e16df9f7452a80e1c4",
+    "experiments/b1sc_d3_v1_0/generate_snapshots.py": "93a5c606b7ccfbf585803ec2c53cc104f1cc38dc",
+    "experiments/b1sc_d3_v1_0/implementation.py": "fa541f4690bf8a19b2e898172c22ad8e1e727eed",
+    "experiments/b1sc_d3_v1_0/init_format.py": "3ed18aa96fb1681ecfcc6f64a504e181e9b9d5d5"
+  },
+  "immutable_snapshots": [
+    {"block": 0, "bytes": 51519, "sha256": "30ad184c683b471eb198aeeaeb1a24b835cefd1f36f0090d7da074cb7b7a6756", "source_seed": 500584769},
+    {"block": 1, "bytes": 51520, "sha256": "07d69728675ec90a2aa024d85f4153939bccf5a62fc4414b8209874f03deb737", "source_seed": 1942996382},
+    {"block": 2, "bytes": 51520, "sha256": "096dc088d21180f972e48e6ed1870463244b5ee4d47392880b7f700084e85b7b", "source_seed": 3051758160},
+    {"block": 3, "bytes": 51520, "sha256": "2ae02b44def6e41e12f18e0672cd2afa2406c2a409fe3be3e33a99e8690dbf9d", "source_seed": 2038421252},
+    {"block": 4, "bytes": 51520, "sha256": "24eced5465c7ad649d5c9d47fe4407765c0e700e4a46b304e7b67b548112d849", "source_seed": 4289014941},
+    {"block": 5, "bytes": 51520, "sha256": "7c4b337ae420d6c20d7abc6ccd9ec04677cc07389c0414a12174cad9feb9a199", "source_seed": 3098980698},
+    {"block": 6, "bytes": 51520, "sha256": "7f0be21fe5f192a226a055bec8b734cef9ae8a5d59487d452ad5b9a481d01c91", "source_seed": 3340279315},
+    {"block": 7, "bytes": 51520, "sha256": "6cc4ed0b22c35988bde5a94fc5f6e571951d37a79f6ffb3fc7b8c268b40fadc1", "source_seed": 3982676336}
+  ],
+  "microfit_status": "D3_RUNNER_MICROFIT_QA_PASS_NOT_SCIENCE",
+  "next_required_action": "SEPARATE_IMMUTABLE_START_REQUEST_AUTHORIZATION",
+  "qa_run_attempt": 1,
+  "qa_run_id": "35057029187",
+  "repository": "CRC2520/polar-sim-ml-original",
+  "schema": "B1-SC-D3-RUNNER-PREFLIGHT-1.0.0-20260916",
+  "scientific_evaluation_performed": false,
+  "scientific_results_exist": false,
+  "scientific_training_performed": false,
+  "source_commit": "e05223aad09b75e075d6c4fac87565d95531779c",
+  "start_request_exists": false,
+  "static_contract_status": "D3_RUNNER_STATIC_CONTRACT_PASS",
+  "status": "D3_RUNNER_PREFLIGHT_QUALIFIED_NOT_AUTHORIZED"
+}
