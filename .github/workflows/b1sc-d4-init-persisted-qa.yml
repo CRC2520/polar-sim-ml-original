@@ -1,0 +1,113 @@
+name: B1-SC-D4 double persisted initialization verification
+'on':
+  push:
+    branches:
+      - research/b1sc-d4-v1.0-byte-frozen-init-20260916
+    paths:
+      - experiments/b1sc_d4_v1_0/INIT_FREEZE.json
+      - experiments/b1sc_d4_v1_0/frozen_init/**
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: b1sc-d4-persisted-init-qa
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  verify_a:
+    name: Persisted bytes verifier A load-and-digest
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - run: |
+          python -m pip install 'pip==24.0'
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu 'numpy==1.26.4' 'torch==2.2.2+cpu'
+      - run: |
+          python -m experiments.b1sc_d4_v1_0.verify_snapshot_set \
+            --root experiments/b1sc_d4_v1_0/frozen_init \
+            --manifest experiments/b1sc_d4_v1_0/INIT_FREEZE.json \
+            --out /tmp/d4-persisted-a
+      - uses: actions/upload-artifact@v4
+        with: {name: d4-init-persisted-verify-a, path: /tmp/d4-persisted-a, retention-days: 90}
+
+  verify_b:
+    name: Persisted bytes verifier B independent parser
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - run: python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu 'numpy==1.26.4' 'torch==2.2.2+cpu'
+      - run: |
+          python -m experiments.b1sc_d4_v1_0.verify_snapshot_set_independent \
+            --root experiments/b1sc_d4_v1_0/frozen_init \
+            --manifest experiments/b1sc_d4_v1_0/INIT_FREEZE.json \
+            --out /tmp/d4-persisted-b
+      - uses: actions/upload-artifact@v4
+        with: {name: d4-init-persisted-verify-b, path: /tmp/d4-persisted-b, retention-days: 90}
+
+  double_verification:
+    name: Require exact agreement of both independent persisted verifiers
+    needs: [verify_a, verify_b]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@v4
+        with: {name: d4-init-persisted-verify-a, path: /tmp/a}
+      - uses: actions/download-artifact@v4
+        with: {name: d4-init-persisted-verify-b, path: /tmp/b}
+      - name: Compare independent receipts
+        run: |
+          mkdir -p /tmp/double
+          python - <<'PY'
+          import json,pathlib,os
+          a=json.loads(pathlib.Path('/tmp/a/VERIFY_A.json').read_text())
+          b=json.loads(pathlib.Path('/tmp/b/VERIFY_B.json').read_text())
+          assert a['block_count']==12 and b['block_count']==12
+          ka=[(x['block'],x['sha256'],x['bytes'],x['source_seed'],x['actor_trainable_digest'],x['critic_trainable_digest']) for x in a['blocks']]
+          kb=[(x['block'],x['sha256'],x['bytes'],x['source_seed'],x['actor_trainable_digest'],x['critic_trainable_digest']) for x in b['blocks']]
+          assert ka==kb
+          out={
+            'schema':'B1-SC-D4-INIT-DOUBLE-VERIFY-1.0.0-20260916',
+            'status':'D4_PERSISTED_INITIALIZATION_DOUBLE_VERIFICATION_PASS',
+            'source_commit':os.environ['GITHUB_SHA'],
+            'workflow_run_id':int(os.environ['GITHUB_RUN_ID']),
+            'run_attempt':int(os.environ['GITHUB_RUN_ATTEMPT']),
+            'block_count':12,
+            'verifier_a':a['status'],
+            'verifier_b':b['status'],
+            'all_snapshot_hashes_and_trainable_digests_agree':True,
+            'scientific_training_performed':False,
+            'scientific_evaluation_performed':False,
+            'scientific_results_exist':False,
+            'runner_present':False,
+            'B1E_executed':False,
+            'final_seeds_generated':False
+          }
+          pathlib.Path('/tmp/double/DOUBLE_VERIFICATION.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(out,indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d4-init-double-verification
+          path: /tmp/double
+          retention-days: 90
+          if-no-files-found: error
