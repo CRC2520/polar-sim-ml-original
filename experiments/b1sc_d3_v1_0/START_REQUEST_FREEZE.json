@@ -1,0 +1,28 @@
+{
+  "B1E_executed": false,
+  "authorization_branch": "research/b1sc-d3-v1.0-start-authorized-20260916",
+  "final_seeds_generated": false,
+  "fit_count": 32,
+  "frozen": true,
+  "interpretation": "START_REQUEST is frozen post-QA; authorization exists, but no D3 fit has started.",
+  "permitted_post_qa_delta": [
+    "experiments/b1sc_d3_v1_0/START_REQUEST.json",
+    "experiments/b1sc_d3_v1_0/START_REQUEST_FREEZE.json"
+  ],
+  "qa_artifact_digest": "sha256:19c99fbf734d013517b81e02800c75c08303bd8fc74675bcceee882223cb1305",
+  "qa_artifact_id": 10463686320,
+  "qa_conclusion": "success",
+  "qa_run_attempt": 1,
+  "qa_run_id": 35136688478,
+  "qualified_runner_commit": "3423a33813de1b942d8c943813f6ad9514259ded",
+  "schema": "B1-SC-D3-START-FREEZE-1.0.0-20260916",
+  "scientific_evaluation_performed": false,
+  "scientific_fit_started": false,
+  "scientific_results_exist": false,
+  "scientific_training_performed": false,
+  "seed_reconstruction_used": false,
+  "snapshot_blocks": 8,
+  "start_request_commit": "e2b5c0c23864ed389d8acb48fda5cc4aac5e8c89",
+  "start_request_sha256": "60fec50c630f5dcae22c6a8bbe7c54ded153ca8b010df5d2ccbfab94bfe37da1",
+  "status": "D3_START_REQUEST_FROZEN_AUTHORIZED"
+}
