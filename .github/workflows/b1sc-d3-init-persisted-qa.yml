@@ -1,0 +1,88 @@
+name: B1-SC-D3 persisted initialization QA
+'on':
+  push:
+    branches:
+      - research/b1sc-d3-v1.0-byte-frozen-init-20260916
+    paths:
+      - experiments/b1sc_d3_v1_0/INIT_FREEZE.json
+      - experiments/b1sc_d3_v1_0/frozen_init/**
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: b1sc-d3-persisted-init-qa
+  cancel-in-progress: true
+defaults:
+  run:
+    shell: bash
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  verify_a:
+    name: Independent persisted initialization verification A
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 2}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - name: Install frozen init runtime
+        run: |
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu 'numpy==1.26.4' 'torch==2.2.2+cpu'
+          python -m pip check
+      - name: Load all eight snapshots into all four conditions independently
+        run: python -m experiments.b1sc_d3_v1_0.verify_persisted --label A --out /tmp/d3-verify-a
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d3-init-verify-a
+          path: /tmp/d3-verify-a
+          retention-days: 90
+          if-no-files-found: error
+  verify_b:
+    name: Independent persisted initialization verification B
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 2}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - name: Install frozen init runtime
+        run: |
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu 'numpy==1.26.4' 'torch==2.2.2+cpu'
+          python -m pip check
+      - name: Load all eight snapshots into all four conditions independently
+        run: python -m experiments.b1sc_d3_v1_0.verify_persisted --label B --out /tmp/d3-verify-b
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d3-init-verify-b
+          path: /tmp/d3-verify-b
+          retention-days: 90
+          if-no-files-found: error
+  compare:
+    name: Compare independent persisted verifiers
+    needs: [verify_a, verify_b]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@v4
+        with: {name: d3-init-verify-a, path: /tmp/a}
+      - uses: actions/download-artifact@v4
+        with: {name: d3-init-verify-b, path: /tmp/b}
+      - name: Require identical scientific content from both verifiers
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          a=json.loads(pathlib.Path('/tmp/a/VERIFY_A.json').read_text());b=json.loads(pathlib.Path('/tmp/b/VERIFY_B.json').read_text())
+          a.pop('verifier_label',None);b.pop('verifier_label',None)
+          assert a==b,(a,b)
+          assert a['block_count']==8 and a['conditions_per_block']==4
+          assert a['scientific_training_performed'] is False and a['scientific_evaluation_performed'] is False
+          print(json.dumps({'status':'D3_TWO_INDEPENDENT_PERSISTED_VERIFIERS_PASS','blocks':8,'conditions_per_block':4},sort_keys=True))
+          PY
