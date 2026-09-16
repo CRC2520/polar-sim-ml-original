@@ -1,0 +1,219 @@
+name: B1-SC-D2-R1 controlled aggregation recovery
+'on':
+  push:
+    branches:
+      - research/b1sc-d2-r1-v1.0-persistent-init-20260915
+    paths:
+      - experiments/b1sc_d2_r1_v1_0/recovery/RECOVERY_REQUEST.json
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: b1sc-d2-r1-controlled-recovery
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+env:
+  SDL_VIDEODRIVER: dummy
+  SDL_AUDIODRIVER: dummy
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+  SOURCE_RUN_ID: '35037779136'
+  FROZEN_SOURCE_COMMIT: bcb73c0845b6396fa70091bdbfca130f48686b37
+  FROZEN_BRANCH: research/b1sc-d2-r1-v1.0-persistent-init-20260915
+jobs:
+  recover:
+    name: Recover frozen online aggregate and final adjudication
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - name: Checkout recovery control
+        uses: actions/checkout@v4
+        with:
+          ref: '${{ github.sha }}'
+          fetch-depth: 1
+          path: recovery-control
+      - name: Checkout exact frozen scientific source
+        uses: actions/checkout@v4
+        with:
+          ref: bcb73c0845b6396fa70091bdbfca130f48686b37
+          fetch-depth: 2
+          path: frozen-source
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: frozen-source/b1s/execution/requirements.txt
+      - name: Install complete preserved runtime
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r frozen-source/b1s/execution/requirements.txt
+          python -m pip check
+      - name: Verify immutable recovery request and source lineage
+        run: |
+          python - <<'PY'
+          import json, pathlib, subprocess
+          req = json.loads(pathlib.Path('recovery-control/experiments/b1sc_d2_r1_v1_0/recovery/RECOVERY_REQUEST.json').read_text())
+          assert req['schema'] == 'B1-SC-D2-R1-RECOVERY-1.0.0-20260916'
+          assert req['authorize_controlled_recovery'] is True
+          assert req['source_run_id'] == 35037779136
+          assert req['source_run_number'] == 3 and req['source_run_attempt'] == 1
+          assert req['frozen_source_commit'] == 'bcb73c0845b6396fa70091bdbfca130f48686b37'
+          assert req['execution_freeze_sha256'] == 'a8fe94ddd2ae6675ab4e42b0f50b9015730a1f674f60287c00ab529ba23237f7'
+          assert req['no_training_execution'] is True
+          assert req['no_online_evaluation_execution'] is True
+          assert req['aggregate_only'] is True
+          head = subprocess.check_output(['git','-C','frozen-source','rev-parse','HEAD'], text=True).strip()
+          assert head == req['frozen_source_commit']
+          assert not pathlib.Path('frozen-source/experiments/b1sc_d2_r1_v1_0/recovery').exists()
+          print('RECOVERY_REQUEST_AND_SOURCE_PASS')
+          PY
+      - name: Verify exact source artifacts by GitHub metadata
+        env:
+          GH_TOKEN: '${{ github.token }}'
+        run: |
+          gh api "repos/CRC2520/polar-sim-ml-original/actions/runs/${SOURCE_RUN_ID}/artifacts?per_page=100" > /tmp/source-artifacts.json
+          python - <<'PY'
+          import json, pathlib
+          req=json.loads(pathlib.Path('recovery-control/experiments/b1sc_d2_r1_v1_0/recovery/RECOVERY_REQUEST.json').read_text())
+          api=json.loads(pathlib.Path('/tmp/source-artifacts.json').read_text())['artifacts']
+          got={a['name']:{'id':a['id'],'digest':a.get('digest'),'expired':a['expired']} for a in api}
+          expected={req['training_artifact']['name']:{'id':req['training_artifact']['id'],'digest':req['training_artifact']['digest']}}
+          expected.update({a['name']:{'id':a['id'],'digest':a['digest']} for a in req['online_artifacts']})
+          assert len(req['online_artifacts']) == 8
+          assert {a['block'] for a in req['online_artifacts']} == set(range(8))
+          for name,e in expected.items():
+              assert name in got, name
+              assert got[name]['id'] == e['id'], (name, got[name], e)
+              assert got[name]['digest'] == e['digest'], (name, got[name], e)
+              assert got[name]['expired'] is False, name
+          assert 'd2r1-online-aggregate' not in got
+          print('SOURCE_ARTIFACT_METADATA_PASS')
+          PY
+      - name: Download exactly eight completed online block artifacts
+        uses: actions/download-artifact@v4
+        with:
+          github-token: '${{ github.token }}'
+          repository: CRC2520/polar-sim-ml-original
+          run-id: '35037779136'
+          pattern: d2r1-online-b*
+          path: /tmp/d2r1-online-root
+      - name: Download frozen training aggregate
+        uses: actions/download-artifact@v4
+        with:
+          github-token: '${{ github.token }}'
+          repository: CRC2520/polar-sim-ml-original
+          run-id: '35037779136'
+          name: d2r1-training-aggregate
+          path: /tmp/d2r1-training
+      - name: Verify downloaded evidence set only
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          root=pathlib.Path('/tmp/d2r1-online-root')
+          dirs=sorted(p.name for p in root.iterdir() if p.is_dir())
+          expected=[f'd2r1-online-b{i}' for i in range(8)]
+          assert dirs == expected, (dirs, expected)
+          seen=[]
+          for i,name in enumerate(expected):
+              p=root/name/'ONLINE_BLOCK_R1.json'
+              assert p.is_file(), p
+              d=json.loads(p.read_text())
+              assert d['status']=='D2_R1_ONLINE_BLOCK_COMPLETE'
+              assert d['block']==i
+              seen.append(i)
+          t=pathlib.Path('/tmp/d2r1-training/TRAINING_EFFECT_R1.json')
+          assert t.is_file()
+          td=json.loads(t.read_text())
+          assert td['status']=='D2_R1_TRAINING_EFFECT_COMPLETE'
+          assert td['fits_verified']==16
+          print('DOWNLOADED_EVIDENCE_SET_PASS',seen)
+          PY
+      - name: Run frozen online aggregation only
+        working-directory: frozen-source
+        run: |
+          rm -rf /tmp/d2r1-online-recovered
+          env \
+            GITHUB_REPOSITORY=CRC2520/polar-sim-ml-original \
+            GITHUB_REF=refs/heads/research/b1sc-d2-r1-v1.0-persistent-init-20260915 \
+            GITHUB_RUN_ATTEMPT=1 \
+            GITHUB_RUN_NUMBER=3 \
+            GITHUB_SHA=bcb73c0845b6396fa70091bdbfca130f48686b37 \
+            python -m experiments.b1sc_d2_r1_v1_0.runner online-aggregate \
+              --online-root /tmp/d2r1-online-root \
+              --out /tmp/d2r1-online-recovered
+          test -f /tmp/d2r1-online-recovered/ONLINE_EFFECT_R1.json
+      - name: Run frozen final adjudication only
+        working-directory: frozen-source
+        run: |
+          rm -rf /tmp/d2r1-final-recovered
+          env \
+            GITHUB_REPOSITORY=CRC2520/polar-sim-ml-original \
+            GITHUB_REF=refs/heads/research/b1sc-d2-r1-v1.0-persistent-init-20260915 \
+            GITHUB_RUN_ATTEMPT=1 \
+            GITHUB_RUN_NUMBER=3 \
+            GITHUB_SHA=bcb73c0845b6396fa70091bdbfca130f48686b37 \
+            python -m experiments.b1sc_d2_r1_v1_0.runner final \
+              --training /tmp/d2r1-training/TRAINING_EFFECT_R1.json \
+              --online /tmp/d2r1-online-recovered/ONLINE_EFFECT_R1.json \
+              --out /tmp/d2r1-final-recovered
+          test -f /tmp/d2r1-final-recovered/SUMMARY_R1.json
+      - name: Build recovery provenance and verify no evidence regeneration
+        run: |
+          rm -rf /tmp/d2r1-controlled-recovery && mkdir -p /tmp/d2r1-controlled-recovery
+          cp /tmp/d2r1-online-recovered/ONLINE_EFFECT_R1.json /tmp/d2r1-controlled-recovery/
+          cp /tmp/d2r1-final-recovered/SUMMARY_R1.json /tmp/d2r1-controlled-recovery/
+          cp /tmp/d2r1-training/TRAINING_EFFECT_R1.json /tmp/d2r1-controlled-recovery/TRAINING_EFFECT_R1_SOURCE.json
+          cp recovery-control/experiments/b1sc_d2_r1_v1_0/recovery/RECOVERY_REQUEST.json /tmp/d2r1-controlled-recovery/
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          def sha(p):
+              h=hashlib.sha256();h.update(pathlib.Path(p).read_bytes());return h.hexdigest()
+          req=json.loads(pathlib.Path('/tmp/d2r1-controlled-recovery/RECOVERY_REQUEST.json').read_text())
+          online=[]
+          for i in range(8):
+              p=pathlib.Path(f'/tmp/d2r1-online-root/d2r1-online-b{i}/ONLINE_BLOCK_R1.json')
+              online.append({'block':i,'file_sha256':sha(p),'artifact_id':req['online_artifacts'][i]['id'],'artifact_digest':req['online_artifacts'][i]['digest']})
+          summary=json.loads(pathlib.Path('/tmp/d2r1-controlled-recovery/SUMMARY_R1.json').read_text())
+          provenance={
+            'schema':'B1-SC-D2-R1-RECOVERY-PROVENANCE-1.0.0-20260916',
+            'status':'CONTROLLED_AGGREGATION_RECOVERY_COMPLETE',
+            'source_run_id':35037779136,
+            'source_run_number':3,
+            'source_run_attempt':1,
+            'frozen_source_commit':'bcb73c0845b6396fa70091bdbfca130f48686b37',
+            'recovery_trigger_commit':os.environ['GITHUB_SHA'],
+            'recovery_run_id':int(os.environ['GITHUB_RUN_ID']),
+            'recovery_run_attempt':int(os.environ['GITHUB_RUN_ATTEMPT']),
+            'no_training_execution':True,
+            'no_online_evaluation_execution':True,
+            'aggregate_only':True,
+            'scientific_evidence_regenerated':False,
+            'training_artifact':req['training_artifact'],
+            'training_effect_source_sha256':sha('/tmp/d2r1-controlled-recovery/TRAINING_EFFECT_R1_SOURCE.json'),
+            'online_block_inputs':online,
+            'online_effect_r1_sha256':sha('/tmp/d2r1-controlled-recovery/ONLINE_EFFECT_R1.json'),
+            'summary_r1_sha256':sha('/tmp/d2r1-controlled-recovery/SUMMARY_R1.json'),
+            'H_TRAIN_D2_R1':summary['H_TRAIN_D2_R1'],
+            'H_ONLINE_D2_R1':summary['H_ONLINE_D2_R1'],
+            'mechanistic_adjudication':summary['mechanistic_adjudication'],
+            'integrity_pass':summary['integrity_pass'],
+            'B1E_executed':False,
+            'final_seeds_generated':False,
+            'automatic_b1e_progression':False
+          }
+          pathlib.Path('/tmp/d2r1-controlled-recovery/RECOVERY_PROVENANCE.json').write_text(json.dumps(provenance,indent=2,sort_keys=True)+'\n')
+          assert provenance['integrity_pass'] is True
+          print(json.dumps({k:provenance[k] for k in ('status','H_TRAIN_D2_R1','H_ONLINE_D2_R1','mechanistic_adjudication','integrity_pass')},sort_keys=True))
+          PY
+      - name: Publish controlled recovery bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: d2r1-controlled-recovery
+          path: /tmp/d2r1-controlled-recovery
+          retention-days: 90
+          if-no-files-found: error
