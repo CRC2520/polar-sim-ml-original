@@ -1,0 +1,21 @@
+{
+  "schema": "B1-SC-D4-INIT-BUILD-1.0.0-20260916",
+  "status": "D4_NON_SCIENTIFIC_IMPLEMENTATION_QA_AND_INIT_BUILD_REQUESTED",
+  "authorize_non_scientific_init_build": true,
+  "repository": "CRC2520/polar-sim-ml-original",
+  "branch": "research/b1sc-d4-v1.0-byte-frozen-init-20260916",
+  "design_commit": "9e70e8917cc0c20c9410f0318f48b95fbf0fdb9e",
+  "d3_closure_commit": "7842ef2933edf4800d59f06af79f0368cf03cd9d",
+  "implementation_base_commit": "4e28f9e00130bd1d270cfcc4aa96fdf9061bfab6",
+  "snapshots_required": 12,
+  "shared_conditions": ["LOCAL-S6-OFF", "LOCAL-S6-LATE", "LOCAL-S6-ALWAYS"],
+  "switch_after_completed_native_steps": 786432,
+  "scientific_training_authorized": false,
+  "scientific_evaluation_authorized": false,
+  "runner_authorized": false,
+  "start_request_exists": false,
+  "B1E_executed": false,
+  "final_seeds_generated": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED"
+}
