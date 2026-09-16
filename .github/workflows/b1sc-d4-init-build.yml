@@ -1,0 +1,210 @@
+name: B1-SC-D4 temporal-gate QA and canonical initialization build
+'on':
+  push:
+    branches:
+      - research/b1sc-d4-v1.0-byte-frozen-init-20260916
+    paths:
+      - experiments/b1sc_d4_v1_0/BUILD_REQUEST.json
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: b1sc-d4-init-build
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  implementation_qa:
+    name: D4 temporal gate anti-leakage and anti-switch QA
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - name: Install frozen minimal runtime
+        run: |
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu 'numpy==1.26.4' 'torch==2.2.2+cpu'
+          python -m pip check
+      - name: Validate BUILD_REQUEST and design-only boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('experiments/b1sc_d4_v1_0/BUILD_REQUEST.json')
+          r=json.loads(p.read_text())
+          assert r['schema']=='B1-SC-D4-INIT-BUILD-1.0.0-20260916'
+          assert r['authorize_non_scientific_init_build'] is True
+          assert r['design_commit']=='9e70e8917cc0c20c9410f0318f48b95fbf0fdb9e'
+          assert r['scientific_training_authorized'] is False
+          assert r['scientific_evaluation_authorized'] is False
+          assert r['runner_authorized'] is False
+          assert r['B1E_executed'] is False and r['final_seeds_generated'] is False
+          PY
+      - name: Run anti-leakage and anti-switch QA
+        run: |
+          rm -rf /tmp/d4-implementation-qa
+          python -m experiments.b1sc_d4_v1_0.qa --out /tmp/d4-implementation-qa
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d4-temporal-gate-qa
+          path: /tmp/d4-implementation-qa
+          retention-days: 90
+          if-no-files-found: error
+
+  generate:
+    name: Generate predesignated twelve canonical D4 snapshots
+    needs: implementation_qa
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    outputs:
+      artifact_id: '${{ steps.upload.outputs.artifact-id }}'
+      artifact_digest: '${{ steps.upload.outputs.artifact-digest }}'
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - name: Install frozen init runtime
+        run: |
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu 'numpy==1.26.4' 'torch==2.2.2+cpu'
+          python -m pip check
+      - name: Generate twelve trainable-only canonical bytes
+        run: python -m experiments.b1sc_d4_v1_0.generate_snapshots --out /tmp/d4-init-canonical
+      - id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: d4-init-canonical
+          path: /tmp/d4-init-canonical
+          retention-days: 90
+          if-no-files-found: error
+
+  candidate_verify_a:
+    name: Candidate snapshot verifier A
+    needs: generate
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - run: |
+          python -m pip install 'pip==24.0'
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu 'numpy==1.26.4' 'torch==2.2.2+cpu'
+      - uses: actions/download-artifact@v4
+        with: {name: d4-init-canonical, path: /tmp/canonical}
+      - run: python -m experiments.b1sc_d4_v1_0.verify_snapshot_set --root /tmp/canonical --out /tmp/verify-a
+      - uses: actions/upload-artifact@v4
+        with: {name: d4-init-candidate-verify-a, path: /tmp/verify-a, retention-days: 90}
+
+  candidate_verify_b:
+    name: Candidate snapshot verifier B independent parser
+    needs: generate
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - run: python -m pip install 'numpy==1.26.4' 'torch==2.2.2+cpu' --extra-index-url https://download.pytorch.org/whl/cpu
+      - uses: actions/download-artifact@v4
+        with: {name: d4-init-canonical, path: /tmp/canonical}
+      - run: python -m experiments.b1sc_d4_v1_0.verify_snapshot_set_independent --root /tmp/canonical --out /tmp/verify-b
+      - uses: actions/upload-artifact@v4
+        with: {name: d4-init-candidate-verify-b, path: /tmp/verify-b, retention-days: 90}
+
+  persist:
+    name: Persist exact predesignated canonical D4 bytes
+    needs: [generate, candidate_verify_a, candidate_verify_b]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: '${{ github.sha }}'
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with: {name: d4-init-canonical, path: /tmp/canonical}
+      - name: Freeze exact candidate bytes and provenance
+        env:
+          ARTIFACT_ID: '${{ needs.generate.outputs.artifact_id }}'
+          ARTIFACT_DIGEST: '${{ needs.generate.outputs.artifact_digest }}'
+        run: |
+          python - <<'PY'
+          import json,os,pathlib,hashlib,shutil
+          root=pathlib.Path('experiments/b1sc_d4_v1_0')
+          man=json.loads(pathlib.Path('/tmp/canonical/CANDIDATE_MANIFEST.json').read_text())
+          assert len(man['blocks'])==12
+          dst=root/'frozen_init'
+          assert not dst.exists()
+          dst.mkdir()
+          rows=[]
+          for row in sorted(man['blocks'],key=lambda x:int(x['block'])):
+              i=int(row['block']);src=pathlib.Path('/tmp/canonical')/f'block-{i}.bin'
+              data=src.read_bytes();sha=hashlib.sha256(data).hexdigest()
+              assert sha==row['sha256']
+              shutil.copyfile(src,dst/src.name)
+              assert hashlib.sha256((dst/src.name).read_bytes()).hexdigest()==sha
+              rows.append(row)
+          freeze={
+            'schema':'B1-SC-D4-INIT-FREEZE-1.0.0-20260916',
+            'status':'D4_FROZEN_INITIALIZATION_PERSISTED_PENDING_DOUBLE_VERIFICATION',
+            'design_commit':'9e70e8917cc0c20c9410f0318f48b95fbf0fdb9e',
+            'build_request_commit':os.environ['GITHUB_SHA'],
+            'branch':'research/b1sc-d4-v1.0-byte-frozen-init-20260916',
+            'canonical_generation':{
+              'workflow_run_id':int(os.environ['GITHUB_RUN_ID']),
+              'workflow_run_number':int(os.environ['GITHUB_RUN_NUMBER']),
+              'attempt':int(os.environ['GITHUB_RUN_ATTEMPT']),
+              'head_commit':os.environ['GITHUB_SHA'],
+              'artifact_name':'d4-init-canonical',
+              'artifact_id':int(os.environ['ARTIFACT_ID']),
+              'artifact_digest':os.environ['ARTIFACT_DIGEST'],
+              'canonical_role':'single_predesignated_generation_after_temporal_gate_QA'
+            },
+            'snapshot_contract':man['snapshot_contract'],
+            'blocks':rows,
+            'candidate_verification':{'verifier_a':'PASS','verifier_b_independent_parser':'PASS'},
+            'scientific_training_performed':False,
+            'scientific_evaluation_performed':False,
+            'scientific_results_exist':False,
+            'runner_present':False,
+            'runner_authorized':False,
+            'execution_authorized':False,
+            'B1E_disposition':'ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION',
+            'B1E_executed':False,
+            'final_seeds_generated':False,
+            'H_CAT':'NOT_EVALUABLE',
+            'H_TRANSFER':'NOT_EVALUATED'
+          }
+          (root/'INIT_FREEZE.json').write_text(json.dumps(freeze,indent=2,sort_keys=True)+'\n')
+          PY
+      - name: Commit only twelve snapshots and INIT_FREEZE
+        run: |
+          git config user.name 'CRC2520'
+          git config user.email 'crc1612@gmail.com'
+          git add experiments/b1sc_d4_v1_0/INIT_FREEZE.json experiments/b1sc_d4_v1_0/frozen_init/block-*.bin
+          python - <<'PY'
+          import subprocess
+          names=subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines()
+          expected=['experiments/b1sc_d4_v1_0/INIT_FREEZE.json']+[f'experiments/b1sc_d4_v1_0/frozen_init/block-{i}.bin' for i in range(12)]
+          assert sorted(names)==sorted(expected),(names,expected)
+          PY
+          git commit -m 'freeze(d4): persist twelve canonical trainable initialization snapshots'
+          git push origin HEAD:research/b1sc-d4-v1.0-byte-frozen-init-20260916
