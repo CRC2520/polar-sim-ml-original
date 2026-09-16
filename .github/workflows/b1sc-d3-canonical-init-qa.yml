@@ -1,0 +1,105 @@
+name: B1-SC-D3 canonical initialization qualification
+'on':
+  push:
+    branches:
+      - research/b1sc-d3-v1.0-information-partitioning-design-20260916
+    paths:
+      - experiments/b1sc_d3_v1_0/init_snapshot.py
+      - .github/workflows/b1sc-d3-canonical-init-qa.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: b1sc-d3-canonical-init-qa
+  cancel-in-progress: true
+defaults:
+  run:
+    shell: bash
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+jobs:
+  independent_generation:
+    name: Independent initialization ${{ matrix.replica }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        replica: [A, B]
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - name: Install deterministic initialization runtime
+        run: |
+          python -m pip install 'numpy==1.26.4' --index-url https://pypi.org/simple
+          python -m pip install 'torch==2.2.2+cpu' --extra-index-url https://download.pytorch.org/whl/cpu
+      - name: Generate eight canonical candidate snapshots
+        run: |
+          rm -rf /tmp/d3-init-${{ matrix.replica }}
+          python -m experiments.b1sc_d3_v1_0.init_snapshot generate --out /tmp/d3-init-${{ matrix.replica }}
+          python -m experiments.b1sc_d3_v1_0.init_snapshot verify --root /tmp/d3-init-${{ matrix.replica }} > /tmp/d3-init-${{ matrix.replica }}/VERIFY.json
+          (cd /tmp/d3-init-${{ matrix.replica }} && sha256sum block-*.bin | sort -k2 > SHA256SUMS.txt)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d3-init-${{ matrix.replica }}
+          path: /tmp/d3-init-${{ matrix.replica }}
+          retention-days: 90
+          if-no-files-found: error
+  compare:
+    name: Cross-run byte identity qualification
+    needs: independent_generation
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: d3-init-A
+          path: /tmp/A
+      - uses: actions/download-artifact@v4
+        with:
+          name: d3-init-B
+          path: /tmp/B
+      - name: Require exact byte identity across independent initializations
+        run: |
+          cmp /tmp/A/SHA256SUMS.txt /tmp/B/SHA256SUMS.txt
+          cmp /tmp/A/MANIFEST.json /tmp/B/MANIFEST.json
+          for b in 0 1 2 3 4 5 6 7; do cmp "/tmp/A/block-${b}.bin" "/tmp/B/block-${b}.bin"; done
+          python - <<'PY'
+          import json,pathlib
+          a=json.loads(pathlib.Path('/tmp/A/VERIFY.json').read_text())
+          b=json.loads(pathlib.Path('/tmp/B/VERIFY.json').read_text())
+          assert a['status']=='D3_CANONICAL_INIT_SET_PASS'
+          assert b['status']=='D3_CANONICAL_INIT_SET_PASS'
+          assert a['blocks_verified']==8 and b['blocks_verified']==8
+          assert a['shared_across_four_conditions'] and b['shared_across_four_conditions']
+          print('D3_CANONICAL_INITIALIZATION_TWO_INDEPENDENT_RUNNERS_PASS')
+          PY
+      - name: Build qualification receipt
+        run: |
+          python - <<'PY'
+          import json,pathlib,hashlib
+          rows=[]
+          for b in range(8):
+              p=pathlib.Path(f'/tmp/A/block-{b}.bin')
+              rows.append({'block':b,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size})
+          out={'schema':'B1-SC-D3-CANONICAL-INIT-QUALIFICATION-1.0.0-20260916',
+               'status':'D3_CANONICAL_INITIALIZATION_QUALIFIED_NOT_SCIENTIFIC',
+               'independent_generations':['A','B'],'blocks':rows,
+               'byte_identity_across_independent_generations':True,
+               'shared_across_four_conditions':True,
+               'scientific_training_performed':False,'scientific_evaluation_performed':False,
+               'B1E_executed':False,'final_seeds_generated':False,
+               'H_CAT':'NOT_EVALUABLE','H_TRANSFER':'NOT_EVALUATED'}
+          pathlib.Path('/tmp/A/QUALIFICATION.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d3-canonical-init-qualified
+          path: /tmp/A
+          retention-days: 90
+          if-no-files-found: error
