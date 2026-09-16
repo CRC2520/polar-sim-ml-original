@@ -77,11 +77,62 @@ jobs:
           assert m['microfit']['scientific_training_performed'] is False
           print('D3_RUNNER_GATE_QA_PASS')
           PY
+      - name: Emit post-QA authorization candidate metadata
+        env:
+          QA_RUN_ID: ${{ github.run_id }}
+          QA_RUN_ATTEMPT: ${{ github.run_attempt }}
+          QA_HEAD_COMMIT: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          root=pathlib.Path('.')
+          exp=root/'experiments/b1sc_d3_v1_0'
+          def h(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+          critical=[
+            'experiments/b1sc_d3_v1_0/runner.py',
+            'experiments/b1sc_d3_v1_0/execution_preflight.py',
+            'experiments/b1sc_d3_v1_0/microfit_qa.py',
+            'experiments/b1sc_d3_v1_0/init_format.py',
+            'experiments/b1sc_d3_v1_0/implementation.py',
+            'b1s/execution/core.py',
+            'b1s/execution/instrument.py',
+            'b1s/execution/requirements.txt',
+          ]
+          freeze=json.loads((exp/'INIT_FREEZE.json').read_text())
+          registry=json.loads((exp/'FIT_REGISTRY.json').read_text())
+          candidate={
+            'schema':'B1-SC-D3-START-AUTHORITY-CANDIDATE-1.0.0-20260916',
+            'status':'CANDIDATE_EMITTED_AFTER_ALL_QA_ASSERTIONS',
+            'qualified_runner_commit':os.environ['QA_HEAD_COMMIT'],
+            'qa':{
+              'workflow':'B1-SC-D3 runner + microfit + execution preflight QA',
+              'run_id':int(os.environ['QA_RUN_ID']),
+              'run_attempt':int(os.environ['QA_RUN_ATTEMPT']),
+              'head_commit':os.environ['QA_HEAD_COMMIT'],
+              'expected_conclusion':'success',
+            },
+            'design_sha256':h(exp/'DESIGN_FREEZE.json'),
+            'init_freeze_sha256':h(exp/'INIT_FREEZE.json'),
+            'fit_registry_sha256':h(exp/'FIT_REGISTRY.json'),
+            'protocol_sha256':h(exp/'PROTOCOL_ES.md'),
+            'critical_source_sha256':{p:h(root/p) for p in critical},
+            'snapshot_sha256s':{str(r['block']):r['sha256'] for r in freeze['blocks']},
+            'fit_ids':[r['id'] for r in registry],
+            'fit_count':len(registry),
+            'native_steps_per_fit':1048576,
+            'scientific_training_performed':False,
+            'scientific_evaluation_performed':False,
+            'B1E_executed':False,
+          }
+          pathlib.Path('/tmp/d3-start-authority-candidate.json').write_text(json.dumps(candidate,indent=2,sort_keys=True)+'\n')
+          print(json.dumps({'status':candidate['status'],'qualified_runner_commit':candidate['qualified_runner_commit'],'fit_count':candidate['fit_count']},sort_keys=True))
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: d3-runner-preflight-qa
           path: |
             /tmp/d3-execution-preflight.json
             /tmp/d3-microfit-qa.json
+            /tmp/d3-start-authority-candidate.json
           retention-days: 90
           if-no-files-found: error
