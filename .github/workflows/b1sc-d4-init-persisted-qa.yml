@@ -32,24 +32,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: {ref: '${{ github.sha }}', fetch-depth: 0}
-      - name: Verify request lineage and immutable snapshot parent
+      - name: Verify request lineage and immutable snapshot bytes
         run: |
           python - <<'PY'
           import json,subprocess
           from pathlib import Path
           req=json.loads(Path('experiments/b1sc_d4_v1_0/INIT_VERIFY_REQUEST.json').read_text())
+          persisted=req['persisted_snapshot_commit']
           assert req['schema']=='B1-SC-D4-INIT-VERIFY-REQUEST-1.0.0-20260916'
           assert req['authorize_persisted_double_verification'] is True
-          assert req['persisted_snapshot_commit']=='ab8a80f7f44bee6a2b44d5671440e99fba05d36c'
+          assert persisted=='ab8a80f7f44bee6a2b44d5671440e99fba05d36c'
           assert req['snapshot_count']==12
           assert req['scientific_training_authorized'] is False
           assert req['scientific_evaluation_authorized'] is False
           assert req['runner_authorized'] is False
           assert req['B1E_executed'] is False and req['final_seeds_generated'] is False
+          subprocess.check_call(['git','merge-base','--is-ancestor',persisted,'HEAD'])
           parent=subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip()
-          assert parent=='ab8a80f7f44bee6a2b44d5671440e99fba05d36c'
           names=subprocess.check_output(['git','diff','--name-only',parent,'HEAD'],text=True).splitlines()
           assert names==['experiments/b1sc_d4_v1_0/INIT_VERIFY_REQUEST.json'],names
+          paths=['experiments/b1sc_d4_v1_0/INIT_FREEZE.json']+[f'experiments/b1sc_d4_v1_0/frozen_init/block-{i}.bin' for i in range(12)]
+          for path in paths:
+              at_persisted=subprocess.check_output(['git','rev-parse',f'{persisted}:{path}'],text=True).strip()
+              at_head=subprocess.check_output(['git','rev-parse',f'HEAD:{path}'],text=True).strip()
+              assert at_head==at_persisted,(path,at_head,at_persisted)
           PY
 
   verify_a:
