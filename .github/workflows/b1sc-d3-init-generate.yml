@@ -1,0 +1,91 @@
+name: B1-SC-D3 dual independent initialization generation
+'on':
+  push:
+    branches:
+      - research/b1sc-d3-v1.0-byte-frozen-init-20260916
+    paths:
+      - experiments/b1sc_d3_v1_0/init_format.py
+      - experiments/b1sc_d3_v1_0/generate_snapshots.py
+      - experiments/b1sc_d3_v1_0/verify_generation.py
+      - .github/workflows/b1sc-d3-init-generate.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: b1sc-d3-init-generation
+  cancel-in-progress: true
+defaults:
+  run:
+    shell: bash
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  generate_a:
+    name: Independent initialization generation A
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 2}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - name: Install frozen init runtime
+        run: |
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu 'numpy==1.26.4' 'torch==2.2.2+cpu'
+          python -m pip check
+      - name: Generate eight trainable-only candidates independently
+        run: python -m experiments.b1sc_d3_v1_0.generate_snapshots --out /tmp/d3-init-a
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d3-init-generation-a
+          path: /tmp/d3-init-a
+          retention-days: 90
+          if-no-files-found: error
+  generate_b:
+    name: Independent initialization generation B
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 2}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - name: Install frozen init runtime
+        run: |
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu 'numpy==1.26.4' 'torch==2.2.2+cpu'
+          python -m pip check
+      - name: Generate eight trainable-only candidates independently
+        run: python -m experiments.b1sc_d3_v1_0.generate_snapshots --out /tmp/d3-init-b
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d3-init-generation-b
+          path: /tmp/d3-init-b
+          retention-days: 90
+          if-no-files-found: error
+  compare:
+    name: Byte-exact comparison and canonical publication
+    needs: [generate_a, generate_b]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 2}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - uses: actions/download-artifact@v4
+        with: {name: d3-init-generation-a, path: /tmp/a}
+      - uses: actions/download-artifact@v4
+        with: {name: d3-init-generation-b, path: /tmp/b}
+      - name: Require byte-identical independently generated snapshots
+        run: python -m experiments.b1sc_d3_v1_0.verify_generation --a /tmp/a --b /tmp/b --out /tmp/canonical
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d3-init-canonical
+          path: /tmp/canonical
+          retention-days: 90
+          if-no-files-found: error
