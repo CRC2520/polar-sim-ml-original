@@ -1,0 +1,133 @@
+{
+  "B1E_boundary": {
+    "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+    "B1E_executed": false,
+    "H_CAT": "NOT_EVALUABLE",
+    "H_TRANSFER": "NOT_EVALUATED",
+    "final_seeds_generated": false,
+    "ready_for_b1e_confirmatory_run": false,
+    "ready_for_b1e_freeze": false,
+    "ready_for_b1e_protocol_design": false
+  },
+  "authorization_basis": "POST_QA_ONLY",
+  "authorized": true,
+  "critical_source_sha256": {
+    "b1s/execution/core.py": "459255a4e4797c8ea03fd6187c70802dcdc152bfce48d0f2405d2f88b7fe0a59",
+    "b1s/execution/instrument.py": "8ce0c1b2fca29d6bc39c35393bb4bff1c97d0cd4254838bb2483c41f551347df",
+    "b1s/execution/requirements.txt": "26d33ad281ff87732e748eddb45ae8f3aa4e1fced20f4627aa7b5ef4719768ce",
+    "experiments/b1sc_d3_v1_0/execution_preflight.py": "a6081c894658710f91f2200155d5484d56c369a84a7e2c8bac286e7f8a53ab0d",
+    "experiments/b1sc_d3_v1_0/implementation.py": "04af9e1185dedc8c308b94d7d23d451e8f96e2fab0e5f030beea344d1c79398f",
+    "experiments/b1sc_d3_v1_0/init_format.py": "6798c1938bf460408dd30547f091ead0d4ca8460df53effd444e0a8446b02f74",
+    "experiments/b1sc_d3_v1_0/microfit_qa.py": "c0f9a4ce1ffdcd321ca95857d1798e94c929543a6342643c3b03c6c60f3ed435",
+    "experiments/b1sc_d3_v1_0/runner.py": "e5dae41c6d3c113cf996ca8f971ddce3806984aab107e22c15df2ee66c019466"
+  },
+  "design_sha256": "0888e5eeac0a1196324db72c0ea78d3c003ab4f7ac6d8eb48350c84727ec0419",
+  "execution_contract": {
+    "all_eight_snapshots_revalidated_before_authorization_use": true,
+    "first_training_step_requires_snapshot_permit": true,
+    "full_preflight_required_at_runtime": true,
+    "optimizer_requires_snapshot_permit": true,
+    "post_qa_source_delta_limited_to_authorization_files": true,
+    "start_request_freeze_required": true
+  },
+  "fit_registry_sha256": "8b2b30e8c9a58ae621dec258f139c44868f8166bf8ff5883ca986e5608ec42f7",
+  "init_freeze_sha256": "bcddc57b1890ddc28c27abb82cbea7cfaa20be3c48f59265e09580fb7411b78f",
+  "microfit_qa_receipt": {
+    "first_step_after_preflight": true,
+    "optimizer_factory_calls_on_corruption": 0,
+    "scientific_training_performed": false,
+    "single_byte_corruption_rejected": true,
+    "snapshot_validated_before_optimizer": true,
+    "status": "D3_MICROFIT_EXECUTION_GATE_QA_PASS",
+    "training_steps_on_corruption": 0
+  },
+  "preflight_receipt": {
+    "blocks_validated": 8,
+    "optimizer_created": false,
+    "seed_reconstruction_used": false,
+    "status": "D3_EXECUTION_PREFLIGHT_PASS_NOT_AUTHORIZATION",
+    "training_step_performed": false
+  },
+  "protocol_sha256": "4ac9c85c3964115094e6d3b4f5005773407c8cb58cb74ca56a0ff6f9f116cc75",
+  "qa": {
+    "artifact_digest": "sha256:19c99fbf734d013517b81e02800c75c08303bd8fc74675bcceee882223cb1305",
+    "artifact_id": 10463686320,
+    "artifact_name": "d3-runner-preflight-qa",
+    "conclusion": "success",
+    "head_commit": "3423a33813de1b942d8c943813f6ad9514259ded",
+    "run_attempt": 1,
+    "run_id": 35136688478,
+    "workflow": "B1-SC-D3 runner + microfit + execution preflight QA"
+  },
+  "qualified_runner_commit": "3423a33813de1b942d8c943813f6ad9514259ded",
+  "schema": "B1-SC-D3-START-REQUEST-1.0.0-20260916",
+  "scope": {
+    "allow_b1e": false,
+    "allow_final_seeds": false,
+    "allow_seed_reconstruction": false,
+    "blocks": 8,
+    "conditions": [
+      "GLOBAL-G0",
+      "GLOBAL-S6",
+      "LOCAL-G0",
+      "LOCAL-S6"
+    ],
+    "fit_count": 32,
+    "fit_ids": [
+      "GLOBAL-G0-b0",
+      "GLOBAL-G0-b1",
+      "GLOBAL-G0-b2",
+      "GLOBAL-G0-b3",
+      "GLOBAL-G0-b4",
+      "GLOBAL-G0-b5",
+      "GLOBAL-G0-b6",
+      "GLOBAL-G0-b7",
+      "GLOBAL-S6-b0",
+      "GLOBAL-S6-b1",
+      "GLOBAL-S6-b2",
+      "GLOBAL-S6-b3",
+      "GLOBAL-S6-b4",
+      "GLOBAL-S6-b5",
+      "GLOBAL-S6-b6",
+      "GLOBAL-S6-b7",
+      "LOCAL-G0-b0",
+      "LOCAL-G0-b1",
+      "LOCAL-G0-b2",
+      "LOCAL-G0-b3",
+      "LOCAL-G0-b4",
+      "LOCAL-G0-b5",
+      "LOCAL-G0-b6",
+      "LOCAL-G0-b7",
+      "LOCAL-S6-b0",
+      "LOCAL-S6-b1",
+      "LOCAL-S6-b2",
+      "LOCAL-S6-b3",
+      "LOCAL-S6-b4",
+      "LOCAL-S6-b5",
+      "LOCAL-S6-b6",
+      "LOCAL-S6-b7"
+    ],
+    "native_steps_per_fit": 1048576,
+    "phase": "B1-SC-D3-v1.0",
+    "purpose": "D3_SCIENTIFIC_DEVELOPMENT_EXECUTION_ONLY",
+    "retries_of_scientific_fits": 0,
+    "total_native_training_steps": 33554432
+  },
+  "snapshot_sha256s": {
+    "0": "30ad184c683b471eb198aeeaeb1a24b835cefd1f36f0090d7da074cb7b7a6756",
+    "1": "07d69728675ec90a2aa024d85f4153939bccf5a62fc4414b8209874f03deb737",
+    "2": "096dc088d21180f972e48e6ed1870463244b5ee4d47392880b7f700084e85b7b",
+    "3": "2ae02b44def6e41e12f18e0672cd2afa2406c2a409fe3be3e33a99e8690dbf9d",
+    "4": "24eced5465c7ad649d5c9d47fe4407765c0e700e4a46b304e7b67b548112d849",
+    "5": "7c4b337ae420d6c20d7abc6ccd9ec04677cc07389c0414a12174cad9feb9a199",
+    "6": "7f0be21fe5f192a226a055bec8b734cef9ae8a5d59487d452ad5b9a481d01c91",
+    "7": "6cc4ed0b22c35988bde5a94fc5f6e571951d37a79f6ffb3fc7b8c268b40fadc1"
+  },
+  "state_at_authorization": {
+    "fit_started": false,
+    "scientific_evaluation_performed": false,
+    "scientific_results_exist": false,
+    "scientific_training_performed": false
+  },
+  "status": "D3_SCIENTIFIC_EXECUTION_AUTHORIZED"
+}
