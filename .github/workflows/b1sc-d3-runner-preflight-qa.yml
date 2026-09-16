@@ -1,0 +1,85 @@
+name: B1-SC-D3 runner + microfit + execution preflight QA
+'on':
+  push:
+    branches:
+      - research/b1sc-d3-v1.0-runner-preflight-20260916
+    paths:
+      - experiments/b1sc_d3_v1_0/execution_preflight.py
+      - experiments/b1sc_d3_v1_0/microfit_qa.py
+      - experiments/b1sc_d3_v1_0/runner.py
+      - experiments/b1sc_d3_v1_0/INIT_FREEZE.json
+      - experiments/b1sc_d3_v1_0/frozen_init/**
+      - tests/test_b1sc_d3_runner_preflight.py
+      - .github/workflows/b1sc-d3-runner-preflight-qa.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: b1sc-d3-runner-preflight-qa
+  cancel-in-progress: true
+defaults:
+  run:
+    shell: bash
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  gate:
+    name: Eight-byte snapshot gate + bounded microfit
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+      - name: Install frozen D3 QA runtime
+        run: |
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu 'numpy==1.26.4' 'torch==2.2.2+cpu' 'pytest==8.3.5'
+          python -m pip check
+      - name: Prove scientific authorization remains absent
+        run: test ! -e experiments/b1sc_d3_v1_0/START_REQUEST.json
+      - name: Compile D3 runner surfaces
+        run: |
+          python -m py_compile \
+            experiments/b1sc_d3_v1_0/execution_preflight.py \
+            experiments/b1sc_d3_v1_0/microfit_qa.py \
+            experiments/b1sc_d3_v1_0/runner.py
+      - name: Validate all eight immutable snapshots without optimizer creation
+        run: python -m experiments.b1sc_d3_v1_0.execution_preflight > /tmp/d3-execution-preflight.json
+      - name: Run corruption gate and bounded deterministic microfit QA
+        run: python -m experiments.b1sc_d3_v1_0.microfit_qa --block 0 --condition LOCAL-S6 > /tmp/d3-microfit-qa.json
+      - name: Run focused invariant tests
+        run: pytest -q tests/test_b1sc_d3_runner_preflight.py
+      - name: Assert QA receipts are explicitly non-scientific
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/d3-execution-preflight.json'))
+          m=json.load(open('/tmp/d3-microfit-qa.json'))
+          assert p['blocks_validated']==8
+          assert p['optimizer_created'] is False
+          assert p['training_step_performed'] is False
+          assert p['scientific_training_performed'] is False
+          assert m['corruption_gate']['optimizer_factory_calls']==0
+          assert m['corruption_gate']['training_steps']==0
+          assert m['microfit']['snapshot_validated_before_optimizer'] is True
+          assert m['microfit']['first_step_after_preflight'] is True
+          assert m['microfit']['scientific_training_performed'] is False
+          print('D3_RUNNER_GATE_QA_PASS')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d3-runner-preflight-qa
+          path: |
+            /tmp/d3-execution-preflight.json
+            /tmp/d3-microfit-qa.json
+          retention-days: 90
+          if-no-files-found: error
