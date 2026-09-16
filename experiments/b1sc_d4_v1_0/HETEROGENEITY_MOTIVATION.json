@@ -1,0 +1,83 @@
+{
+  "all_d3_local_s6_blocks_included": true,
+  "anti_selection_rule": "D3 block identity is forbidden from D4 inclusion, exclusion, stratification, weighting, warm-start, seed identity, snapshot selection, or replacement. D4 uses fresh blocks and fresh byte-frozen initializations.",
+  "d3_adjudication": "NO_REPRODUCIBLE_PARTITION_INDUCED_S6_NECESSITY",
+  "d3_blocks": [
+    {
+      "competent": false,
+      "d3_block": 0,
+      "endpoint": {"displacement": 0.9353046864271164,"loss": -0.6537882670416645},
+      "late_quarter_displacement_change": -1.0247198939323425,
+      "permanent_lesion_practical_harm": false,
+      "s6_diagnostic_1048576": {"displacement": 0.8989293873310089,"loss": -3.7477368736320678},
+      "s6_diagnostic_786432": {"displacement": 1.9236492812633514,"loss": 47.95462309142684}
+    },
+    {
+      "competent": false,
+      "d3_block": 1,
+      "endpoint": {"displacement": 2.6966965943574905,"loss": 9.551956391893935},
+      "late_quarter_displacement_change": 2.3056454956531525,
+      "permanent_lesion_practical_harm": false,
+      "s6_diagnostic_1048576": {"displacement": 2.591349959373474,"loss": 8.306664958799502},
+      "s6_diagnostic_786432": {"displacement": 0.28570446372032166,"loss": 5.563916025680861}
+    },
+    {
+      "competent": false,
+      "d3_block": 2,
+      "endpoint": {"displacement": 0.4990726709365845,"loss": -2.062576076865523},
+      "late_quarter_displacement_change": -0.028481215238571167,
+      "permanent_lesion_practical_harm": false,
+      "s6_diagnostic_1048576": {"displacement": 0.498381108045578,"loss": -2.0534639006060216},
+      "s6_diagnostic_786432": {"displacement": 0.5268623232841492,"loss": -2.1721019116933626}
+    },
+    {
+      "competent": false,
+      "d3_block": 3,
+      "endpoint": {"displacement": 0.21853049099445343,"loss": 0.815232343536993},
+      "late_quarter_displacement_change": -0.44398465752601624,
+      "permanent_lesion_practical_harm": false,
+      "s6_diagnostic_1048576": {"displacement": 0.2881878912448883,"loss": 5.288044304399594},
+      "s6_diagnostic_786432": {"displacement": 0.7321725487709045,"loss": 3.329709785109649}
+    },
+    {
+      "competent": false,
+      "d3_block": 4,
+      "endpoint": {"displacement": 1.1156620532274246,"loss": -4.56908440936873},
+      "late_quarter_displacement_change": 0.48765408992767334,
+      "permanent_lesion_practical_harm": false,
+      "s6_diagnostic_1048576": {"displacement": 1.1312949359416962,"loss": -4.644538379002672},
+      "s6_diagnostic_786432": {"displacement": 0.6436408460140228,"loss": -2.480383244853629}
+    },
+    {
+      "competent": false,
+      "d3_block": 5,
+      "endpoint": {"displacement": 1.6556634157896042,"loss": 42.327029883661154},
+      "late_quarter_displacement_change": 1.0518692135810852,
+      "permanent_lesion_practical_harm": true,
+      "s6_diagnostic_1048576": {"displacement": 1.5864091515541077,"loss": 47.43666074973832},
+      "s6_diagnostic_786432": {"displacement": 0.5345399379730225,"loss": -2.0183838448962557}
+    },
+    {
+      "competent": true,
+      "d3_block": 6,
+      "endpoint": {"displacement": 6.221073299646378,"loss": -2.89505933175716},
+      "late_quarter_displacement_change": 5.649799317121506,
+      "permanent_lesion_practical_harm": true,
+      "s6_diagnostic_1048576": {"displacement": 6.692496865987778,"loss": -19.250205829146577},
+      "s6_diagnostic_786432": {"displacement": 1.042697548866272,"loss": -1.1306885419423103}
+    },
+    {
+      "competent": true,
+      "d3_block": 7,
+      "endpoint": {"displacement": 10.739901810884476,"loss": -30.116987090600553},
+      "late_quarter_displacement_change": 8.838596940040588,
+      "permanent_lesion_practical_harm": true,
+      "s6_diagnostic_1048576": {"displacement": 9.935175985097885,"loss": -20.0626503345508},
+      "s6_diagnostic_786432": {"displacement": 1.0965790450572968,"loss": -4.415321520442373}
+    }
+  ],
+  "d3_closure_commit": "7842ef2933edf4800d59f06af79f0368cf03cd9d",
+  "observation": "Only D3 blocks 6 and 7 met the frozen LOCAL-S6 competence gate, and both showed their largest positive displacement transition after the pre-existing 786432-step checkpoint. This is hypothesis-generating only.",
+  "schema": "B1-SC-D4-MOTIVATION-1.0.0-20260916",
+  "status": "RETROSPECTIVE_D3_DESCRIPTION_NOT_A_D4_GATE"
+}
