@@ -1,0 +1,74 @@
+{
+  "design_commit": "53bd59db47c6f0eac123e8777dd99b47e34f4051",
+  "execution_boundary": {
+    "B1E_executed": false,
+    "authorized_run_attempt": 1,
+    "execution_authorized": false,
+    "final_seeds_generated": false,
+    "scientific_evaluation_performed": false,
+    "scientific_results_exist": false,
+    "scientific_run_requires_new_start_request_commit": true,
+    "scientific_training_performed": false,
+    "start_request_exists": false
+  },
+  "frozen_base_head": "8e55ac2e270de81f44aca2f4e3987eb4c864ffa8",
+  "frozen_metadata_git_blobs": {
+    "experiments/b1sc_d3_v1_0/DESIGN_FREEZE.json": "ab9c1aff7660be1e7f8f48df25aa13103c3938c4",
+    "experiments/b1sc_d3_v1_0/FIT_REGISTRY.json": "2994ef0395cf0e9e17dfa26011e5d03feb839b5c",
+    "experiments/b1sc_d3_v1_0/INIT_FREEZE.json": "5ec2d8ac7792a21561747b231b97902b535bfe12",
+    "experiments/b1sc_d3_v1_0/INIT_VERIFY_REQUEST.json": "24e9975719df4748adacf7baf09cee2063e0ff1a",
+    "experiments/b1sc_d3_v1_0/PERSIST_REQUEST.json": "18cea7959fa2a6e37d93fba99d1652bafddec229",
+    "experiments/b1sc_d3_v1_0/PROTOCOL_ES.md": "b6fb01654485df7bb71c84e16df9f7452a80e1c4",
+    "experiments/b1sc_d3_v1_0/generate_snapshots.py": "93a5c606b7ccfbf585803ec2c53cc104f1cc38dc",
+    "experiments/b1sc_d3_v1_0/implementation.py": "fa541f4690bf8a19b2e898172c22ad8e1e727eed",
+    "experiments/b1sc_d3_v1_0/init_format.py": "3ed18aa96fb1681ecfcc6f64a504e181e9b9d5d5"
+  },
+  "immutable_snapshot_blobs": [
+    {"block": 0, "bytes": 51519, "git_blob": "dc5123aa2f01acf262dd916485a15d6793a6334a", "sha256": "30ad184c683b471eb198aeeaeb1a24b835cefd1f36f0090d7da074cb7b7a6756"},
+    {"block": 1, "bytes": 51520, "git_blob": "729a4238be1025fc01543781653d06cfcef36f8b", "sha256": "07d69728675ec90a2aa024d85f4153939bccf5a62fc4414b8209874f03deb737"},
+    {"block": 2, "bytes": 51520, "git_blob": "e913ed0a733030d94d1b8aa03042fd078473137a", "sha256": "096dc088d21180f972e48e6ed1870463244b5ee4d47392880b7f700084e85b7b"},
+    {"block": 3, "bytes": 51520, "git_blob": "8959ae00095cab3b4ffa714cf8ab4079d2fc41a4", "sha256": "2ae02b44def6e41e12f18e0672cd2afa2406c2a409fe3be3e33a99e8690dbf9d"},
+    {"block": 4, "bytes": 51520, "git_blob": "767cea937a765a98f5de65e59b186863eef594fb", "sha256": "24eced5465c7ad649d5c9d47fe4407765c0e700e4a46b304e7b67b548112d849"},
+    {"block": 5, "bytes": 51520, "git_blob": "09179908583f11c380da5d95ce25a4ec3e23c308", "sha256": "7c4b337ae420d6c20d7abc6ccd9ec04677cc07389c0414a12174cad9feb9a199"},
+    {"block": 6, "bytes": 51520, "git_blob": "61bf156ea568cab21a3788ed9d11022f293c3ae1", "sha256": "7f0be21fe5f192a226a055bec8b734cef9ae8a5d59487d452ad5b9a481d01c91"},
+    {"block": 7, "bytes": 51520, "git_blob": "f02e1c75b8231f66e5fecf2a5a2acecb722fb696", "sha256": "6cc4ed0b22c35988bde5a94fc5f6e571951d37a79f6ffb3fc7b8c268b40fadc1"}
+  ],
+  "qa_contract": {
+    "independent_jobs": ["static_contract", "microfit"],
+    "microfit_block": 0,
+    "microfit_conditions": ["GLOBAL-G0", "GLOBAL-S6", "LOCAL-G0", "LOCAL-S6"],
+    "microfit_namespace": "qa",
+    "microfit_native_steps_per_condition": 512,
+    "preflight_requires_both": true,
+    "qa_is_scientific_evidence": false
+  },
+  "repository": "CRC2520/polar-sim-ml-original",
+  "runner_branch": "research/b1sc-d3-v1.0-runner-readiness-20260916",
+  "schema": "B1-SC-D3-RUNNER-CONTRACT-1.0.0-20260916",
+  "scientific_fit_contract": {
+    "blocks": 8,
+    "causal_episodes_per_regime": 64,
+    "causal_models": ["LOCAL-S6"],
+    "causal_regimes": ["intact", "sham", "inactive_edge_control", "permanent_all_active_lesion"],
+    "checkpoints": [262144, 524288, 786432, 1048576],
+    "conditions": ["GLOBAL-G0", "GLOBAL-S6", "LOCAL-G0", "LOCAL-S6"],
+    "diagnostic_episodes": 32,
+    "endpoint_episodes": 64,
+    "fits": 32,
+    "native_steps_per_fit": 1048576
+  },
+  "snapshot_contract": {
+    "one_snapshot_per_block": true,
+    "seed_reconstruction_at_scientific_runtime_forbidden": true,
+    "shared_byte_for_byte_across_four_conditions": true,
+    "support_buffer_included": false,
+    "trainable_only": true
+  },
+  "status": "D3_RUNNER_CONTRACT_FROZEN_NOT_AUTHORIZED",
+  "training_profile": {
+    "algorithm": "PPO",
+    "authority": "experiments/b1sc_d2_v1_0/execution.py::HP and N_ENVS",
+    "hp": {"adam_eps": 1e-05, "clip": 0.2, "epochs": 4, "gae_lambda": 0.95, "gamma": 0.99, "lr": 0.0003, "max_grad_norm": 0.5, "minibatch": 128, "rollout_steps": 512, "value_coef": 0.5},
+    "n_envs": 8
+  }
+}
