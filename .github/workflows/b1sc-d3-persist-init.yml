@@ -1,0 +1,92 @@
+name: B1-SC-D3 persist qualified canonical initialization
+'on':
+  push:
+    branches:
+      - research/b1sc-d3-v1.0-information-partitioning-design-20260916
+    paths:
+      - experiments/b1sc_d3_v1_0/PERSIST_INIT_REQUEST.json
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: b1sc-d3-persist-qualified-init
+  cancel-in-progress: false
+jobs:
+  persist:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: '${{ github.sha }}'
+          fetch-depth: 2
+      - name: Verify immutable persistence request
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          r=json.loads(pathlib.Path('experiments/b1sc_d3_v1_0/PERSIST_INIT_REQUEST.json').read_text())
+          assert r['schema']=='B1-SC-D3-PERSIST-INIT-1.0.0-20260916'
+          assert r['authorize_persistence'] is True
+          assert r['qualification_run_id']==35126827282
+          assert r['qualification_artifact_id']==10459702781
+          assert r['qualification_artifact_digest']=='sha256:7b5d6cef0e1fce07278bd3841a9d369165030b69f38c0787005f7bfe936d89cb'
+          assert r['scientific_training_authorized'] is False
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: d3-canonical-init-qualified
+          path: /tmp/d3-qualified
+          repository: CRC2520/polar-sim-ml-original
+          run-id: 35126827282
+          github-token: '${{ github.token }}'
+      - name: Verify exact qualified bytes
+        run: |
+          cd /tmp/d3-qualified
+          echo '8eddafb40b214b70055b74e9a6590b2ddb097b4a676979fada8f53dad326fb55  block-0.bin' | sha256sum -c -
+          echo '98ca2661c7030c5b50ed5fbcd156e0363397e397f820e05e92a63b080ed1bad9  block-1.bin' | sha256sum -c -
+          echo '722c59107ad1232f667201123c8d6b091751cd5a1fb857ce6d67b62f57c6e9d3  block-2.bin' | sha256sum -c -
+          echo '0f7daf84bee3e8f7faa343fa48f6f7dc49d1a19446c4dc9757e45333cb76ef9d  block-3.bin' | sha256sum -c -
+          echo '6d7d4a77134ad04432416a7b4ab8b79407ba862506c104eaa4be37da78428e7f  block-4.bin' | sha256sum -c -
+          echo '6e77e5706ccf2936af7a72e4ab74c1cb7eed0f9d1c4e0134f73cab38dc148fc7  block-5.bin' | sha256sum -c -
+          echo 'a53da96c6f85d3061a3065549370f91a0125dcefa15694ab26e09be0b94aae0e  block-6.bin' | sha256sum -c -
+          echo '6964ec459910548c9d5857f1c6e183519ca5943a446d5fc48cefef014c95eb04  block-7.bin' | sha256sum -c -
+          python - <<'PY'
+          import json,pathlib
+          q=json.loads(pathlib.Path('QUALIFICATION.json').read_text())
+          assert q['status']=='D3_CANONICAL_INITIALIZATION_QUALIFIED_NOT_SCIENTIFIC'
+          assert q['byte_identity_across_independent_generations'] is True
+          assert q['shared_across_four_conditions'] is True
+          assert len(q['blocks'])==8
+          PY
+      - name: Copy byte-for-byte into repository and write provenance
+        run: |
+          test ! -e experiments/b1sc_d3_v1_0/frozen_init
+          mkdir -p experiments/b1sc_d3_v1_0/frozen_init
+          cp /tmp/d3-qualified/block-*.bin experiments/b1sc_d3_v1_0/frozen_init/
+          cp /tmp/d3-qualified/MANIFEST.json experiments/b1sc_d3_v1_0/frozen_init/GENERATION_MANIFEST.json
+          cp /tmp/d3-qualified/QUALIFICATION.json experiments/b1sc_d3_v1_0/frozen_init/QUALIFICATION.json
+          python - <<'PY'
+          import json,pathlib,hashlib
+          root=pathlib.Path('experiments/b1sc_d3_v1_0/frozen_init')
+          blocks=[]
+          for b in range(8):
+              p=root/f'block-{b}.bin'
+              blocks.append({'block':b,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size})
+          m={'schema':'B1-SC-D3-PERSISTED-INIT-1.0.0-20260916','status':'BYTE_FOR_BYTE_COPY_OF_QUALIFIED_D3_INITIALIZATION',
+             'qualification_run_id':35126827282,'qualification_artifact_id':10459702781,
+             'qualification_artifact_digest':'sha256:7b5d6cef0e1fce07278bd3841a9d369165030b69f38c0787005f7bfe936d89cb',
+             'regenerated':False,'blocks':blocks,'shared_across_four_conditions':True,
+             'scientific_training_performed':False,'scientific_evaluation_performed':False,
+             'B1E_disposition':'ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION','B1E_executed':False,
+             'final_seeds_generated':False,'H_CAT':'NOT_EVALUABLE','H_TRANSFER':'NOT_EVALUATED'}
+          (root/'PERSISTED_MANIFEST.json').write_text(json.dumps(m,indent=2,sort_keys=True)+'\n')
+          PY
+      - name: Commit only canonical snapshots and manifests
+        run: |
+          git config user.name 'Carlos R.'
+          git config user.email 'crc1612@gmail.com'
+          git add experiments/b1sc_d3_v1_0/frozen_init/
+          test -n "$(git status --porcelain experiments/b1sc_d3_v1_0/frozen_init/)"
+          git diff --cached --name-only | grep -Ev '^experiments/b1sc_d3_v1_0/frozen_init/(block-[0-7]\.bin|GENERATION_MANIFEST\.json|QUALIFICATION\.json|PERSISTED_MANIFEST\.json)$' && exit 1 || true
+          git commit -m 'freeze(d3): persist eight qualified canonical trainable snapshots'
+          git push origin HEAD:research/b1sc-d3-v1.0-information-partitioning-design-20260916
