@@ -1,0 +1,100 @@
+{
+  "schema": "B1-SC-D4-RUNNER-CONTRACT-1.0.0-20260916",
+  "status": "D4_RUNNER_CONTRACT_FROZEN_NOT_AUTHORIZED",
+  "repository": "CRC2520/polar-sim-ml-original",
+  "runner_branch": "research/b1sc-d4-v1.0-runner-readiness-20260916",
+  "frozen_base_head": "255c520d626440dd20b8b0d626530b6aa9e09f90",
+  "design_commit": "9e70e8917cc0c20c9410f0318f48b95fbf0fdb9e",
+  "initialization_authority": {
+    "persistence_commit": "ab8a80f7f44bee6a2b44d5671440e99fba05d36c",
+    "double_verified_receipt_commit": "255c520d626440dd20b8b0d626530b6aa9e09f90",
+    "init_verify_receipt_git_blob": "e9b2a713772c3049609a5db3f23e7a054bd46332",
+    "double_verification_run_id": 35074145229,
+    "double_verification_artifact_id": 10436504988,
+    "double_verification_artifact_digest": "sha256:7834b9d4150f4d4976082bcb8d52b62ed8105f799e1fe6d26bdb84aabb9f56be",
+    "double_verification_receipt_sha256": "126a09e9b0ae20472df74eca4dffba27075b5f17a3c2252fb2fbd7d22bb33f3e"
+  },
+  "frozen_paths": [
+    "experiments/b1sc_d4_v1_0/DESIGN_FREEZE.json",
+    "experiments/b1sc_d4_v1_0/HETEROGENEITY_MOTIVATION.json",
+    "experiments/b1sc_d4_v1_0/PROTOCOL_ES.md",
+    "experiments/b1sc_d4_v1_0/implementation.py",
+    "experiments/b1sc_d4_v1_0/qa.py",
+    "experiments/b1sc_d4_v1_0/init_format.py",
+    "experiments/b1sc_d4_v1_0/generate_snapshots.py",
+    "experiments/b1sc_d4_v1_0/verify_snapshot_set.py",
+    "experiments/b1sc_d4_v1_0/verify_snapshot_set_independent.py",
+    "experiments/b1sc_d4_v1_0/BUILD_REQUEST.json",
+    "experiments/b1sc_d4_v1_0/INIT_FREEZE.json",
+    "experiments/b1sc_d4_v1_0/VERIFY_REQUEST.json",
+    "experiments/b1sc_d4_v1_0/INIT_VERIFY_RECEIPT.json"
+  ],
+  "immutable_snapshots": [
+    {"block":0,"bytes":51584,"sha256":"cb0431aff2d54aad63acced23524ea0092dde789b1511cef0c78aca1e47dc6dc"},
+    {"block":1,"bytes":51584,"sha256":"82be59782d9d817a18959dd6950eed6c16a8981fd362eaa7e1c11956c3349af4"},
+    {"block":2,"bytes":51584,"sha256":"b59beb5e1e5f241d93e4a5cc4fcdd26c036989df11238eb67a2f7040e4a18871"},
+    {"block":3,"bytes":51583,"sha256":"89693e76e375b708d15505146b1350b4a9fd664aa2999afc0835f11f49eccc9c"},
+    {"block":4,"bytes":51584,"sha256":"858499a679cc143632fab388a23ec036479fc8af7fdf9df636aeec56ce2433ad"},
+    {"block":5,"bytes":51584,"sha256":"c059bf7ec2169d7ceb1f834808298776a4176ed5374fceef611b428f578a3d59"},
+    {"block":6,"bytes":51584,"sha256":"2491bb4bd1059d37a0d3e155e5d11f9caebd0f03fcded878b5d14ee1cad3d130"},
+    {"block":7,"bytes":51584,"sha256":"15b493900d93dcef844bffe622b50c961a67762770698983bd109c798f394f88"},
+    {"block":8,"bytes":51584,"sha256":"8771fa86fde3edf7a8a4c1fac565fc563ce74f01ca2cd54f1f6f6fd979010514"},
+    {"block":9,"bytes":51584,"sha256":"c193a05da6cfa22fb496e230662e5b29cc55c78f25ace68c881b0f130a62b829"},
+    {"block":10,"bytes":51585,"sha256":"934905e39eacf74f4e4d3504558d0167afe97f18183ab3b617427a6c46be893a"},
+    {"block":11,"bytes":51585,"sha256":"7b5c72dbd38fa7e6e7c6e3168d9799db62dae11678887c7464ca6d7b8563c42a"}
+  ],
+  "training_profile": {
+    "algorithm": "PPO",
+    "authority": "experiments/b1sc_d2_v1_0/execution.py::HP and N_ENVS",
+    "n_envs": 8,
+    "hp": {"lr":0.0003,"gamma":0.99,"rollout_steps":512,"minibatch":128,"epochs":4,"gae_lambda":0.95,"clip":0.2,"value_coef":0.5,"max_grad_norm":0.5,"adam_eps":1e-5}
+  },
+  "scientific_fit_contract": {
+    "conditions": ["LOCAL-S6-OFF","LOCAL-S6-LATE","LOCAL-S6-ALWAYS"],
+    "blocks": 12,
+    "fits": 36,
+    "native_steps_per_fit": 1048576,
+    "switch_after_completed_native_steps": 786432,
+    "checkpoint_786432_is_pre_switch": true,
+    "checkpoints": [262144,524288,786432,851968,917504,983040,1048576],
+    "diagnostic_episodes": 32,
+    "endpoint_episodes": 64,
+    "causal_models": ["LOCAL-S6-LATE","LOCAL-S6-ALWAYS"],
+    "causal_regimes": ["intact","sham","inactive_edge_control","permanent_all_active_lesion"],
+    "causal_episodes_per_regime": 64
+  },
+  "snapshot_contract": {
+    "count": 12,
+    "one_snapshot_per_block": true,
+    "shared_byte_for_byte_across_three_conditions": true,
+    "trainable_only": true,
+    "support_buffer_excluded": true,
+    "temporal_gate_state_excluded": true,
+    "condition_excluded": true,
+    "seed_reconstruction_at_scientific_runtime_forbidden": true
+  },
+  "qa_contract": {
+    "microfit_block": 0,
+    "microfit_conditions": ["LOCAL-S6-OFF","LOCAL-S6-LATE","LOCAL-S6-ALWAYS"],
+    "microfit_namespace": "qa",
+    "microfit_native_steps_per_condition": 1024,
+    "microfit_start_completed_steps": 785920,
+    "expected_route_schedules": {
+      "LOCAL-S6-OFF": [0.0,0.0],
+      "LOCAL-S6-LATE": [0.0,1.0],
+      "LOCAL-S6-ALWAYS": [1.0,1.0]
+    },
+    "qa_is_scientific_evidence": false
+  },
+  "execution_boundary": {
+    "start_request_exists": false,
+    "execution_authorized": false,
+    "scientific_training_performed": false,
+    "scientific_evaluation_performed": false,
+    "scientific_results_exist": false,
+    "B1E_executed": false,
+    "final_seeds_generated": false,
+    "authorized_run_attempt": 1,
+    "scientific_run_requires_separate_start_request": true
+  }
+}
