@@ -1,19 +1,21 @@
 """B1-SC-D3 v1.0 scientific runner, gated by immutable initialization preflight.
 
-This file installs the runner but does NOT authorize D3 execution.  Scientific
-execution additionally requires a separate immutable START_REQUEST.json.  The
-current repository intentionally contains no such authorization.
+The runner is executable code but is not self-authorizing. Scientific D3 fits
+require BOTH a separately created START_REQUEST.json and its immutable
+START_REQUEST_FREEZE.json receipt.  The authorization must point back to a
+successful QA-qualified runner commit.  From that qualified commit to the
+execution HEAD, only the two authorization files may differ.
 
 Ordering invariant for every fit:
-    full preflight -> START_REQUEST authorization -> block permit -> load exact
-    validated bytes -> optimizer construction -> rollout -> backward -> step.
+    full preflight -> frozen START_REQUEST authorization -> block permit
+    -> load exact validated bytes -> reset policy RNG -> optimizer construction
+    -> rollout -> backward -> step.
 """
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
-import math
 from pathlib import Path
 import random
 import subprocess
@@ -28,7 +30,6 @@ from b1s.execution.instrument import NativeEnv, runtime_lock
 from experiments.b1sc_d3_v1_0 import implementation as d3
 from experiments.b1sc_d3_v1_0.execution_preflight import (
     IMMUTABLE_BLOCKS,
-    PreflightError,
     SnapshotPermit,
     create_optimizer_after_preflight,
     full_preflight,
@@ -37,15 +38,35 @@ from experiments.b1sc_d3_v1_0.execution_preflight import (
 from experiments.b1sc_d3_v1_0.microfit_qa import qa_suite as microfit_qa_suite
 
 ROOT = Path(__file__).resolve().parent
+REPO_ROOT = ROOT.parents[1]
 REGISTRY_PATH = ROOT / "FIT_REGISTRY.json"
 START_REQUEST_PATH = ROOT / "START_REQUEST.json"
+START_FREEZE_PATH = ROOT / "START_REQUEST_FREEZE.json"
 DESIGN_PATH = ROOT / "DESIGN_FREEZE.json"
 INIT_FREEZE_PATH = ROOT / "INIT_FREEZE.json"
 PROTOCOL_PATH = ROOT / "PROTOCOL_ES.md"
 
+# Code and runtime surfaces whose exact bytes are authorized after QA.  The
+# START_REQUEST commit itself is intentionally not part of this list, avoiding
+# a self-referential commit/hash cycle.
+CRITICAL_SOURCE_PATHS = (
+    "experiments/b1sc_d3_v1_0/runner.py",
+    "experiments/b1sc_d3_v1_0/execution_preflight.py",
+    "experiments/b1sc_d3_v1_0/microfit_qa.py",
+    "experiments/b1sc_d3_v1_0/init_format.py",
+    "experiments/b1sc_d3_v1_0/implementation.py",
+    "b1s/execution/core.py",
+    "b1s/execution/instrument.py",
+    "b1s/execution/requirements.txt",
+)
+AUTHORIZATION_ONLY_PATHS = {
+    "experiments/b1sc_d3_v1_0/START_REQUEST.json",
+    "experiments/b1sc_d3_v1_0/START_REQUEST_FREEZE.json",
+}
+
 # D3 retains the historical PPO optimizer/update contract; D3 changes actor
-# information availability, not the optimization family.  These values are
-# pinned here so a later change in the historical B1-S PLAN cannot alter D3.
+# information availability, not the optimization family. Values are pinned here
+# so later edits to historical plans cannot silently alter this runner.
 PPO = {
     "lr": 3e-4,
     "gamma": 0.99,
@@ -68,7 +89,7 @@ CONDITION_MAP = {
 
 
 class AuthorizationError(RuntimeError):
-    """D3 execution is structurally ready but not explicitly authorized."""
+    """D3 execution is structurally ready but not validly authorized."""
 
 
 def sha256_file(path: Path) -> str:
@@ -105,32 +126,105 @@ def current_commit() -> str:
     try:
         return subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
     except Exception as exc:
-        raise AuthorizationError("Cannot resolve D3 runner source commit") from exc
+        raise AuthorizationError("Cannot resolve D3 execution HEAD") from exc
 
 
 def expected_snapshot_hashes() -> dict[str, str]:
     return {str(row[0]): row[2] for row in IMMUTABLE_BLOCKS}
 
 
-def require_start_request(path: Path = START_REQUEST_PATH) -> dict:
-    """Require explicit immutable authorization after full preflight.
+def critical_source_hashes() -> dict[str, str]:
+    result = {}
+    for rel in CRITICAL_SOURCE_PATHS:
+        path = REPO_ROOT / rel
+        if not path.is_file():
+            raise AuthorizationError(f"Missing D3 critical source: {rel}")
+        result[rel] = sha256_file(path)
+    return result
 
-    Absence is intentional and fail-closed.  A request must be created in a
-    separate reviewed step; this runner never creates or repairs one.
+
+def _git_is_ancestor(base: str) -> bool:
+    try:
+        result = subprocess.run(
+            ["git", "merge-base", "--is-ancestor", base, "HEAD"],
+            cwd=REPO_ROOT,
+            check=False,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except Exception as exc:
+        raise AuthorizationError("Cannot evaluate D3 qualified-commit ancestry") from exc
+    return result.returncode == 0
+
+
+def _git_changed_paths_since(base: str) -> set[str]:
+    try:
+        text = subprocess.check_output(
+            ["git", "diff", "--name-only", f"{base}..HEAD", "--"],
+            cwd=REPO_ROOT,
+            text=True,
+        )
+    except Exception as exc:
+        raise AuthorizationError("Cannot inspect D3 post-QA authorization delta") from exc
+    return {line.strip() for line in text.splitlines() if line.strip()}
+
+
+def require_start_request(
+    path: Path = START_REQUEST_PATH,
+    freeze_path: Path = START_FREEZE_PATH,
+) -> dict:
+    """Validate explicit post-QA authorization without any self-reference.
+
+    START_REQUEST pins all scientific inputs and critical code hashes to the
+    already-qualified runner commit. START_REQUEST_FREEZE pins the exact bytes
+    of the request. Any code/data change after QA therefore invalidates the
+    authorization rather than silently moving the authorized target.
     """
     if not path.is_file():
         raise AuthorizationError(
             "D3 scientific execution is NOT authorized: START_REQUEST.json is absent"
         )
+    if not freeze_path.is_file():
+        raise AuthorizationError(
+            "D3 scientific execution is NOT authorized: START_REQUEST_FREEZE.json is absent"
+        )
     try:
         request = json.loads(path.read_text(encoding="utf-8"))
+        freeze = json.loads(freeze_path.read_text(encoding="utf-8"))
     except Exception as exc:
-        raise AuthorizationError(f"Cannot parse D3 START_REQUEST.json: {exc}") from exc
+        raise AuthorizationError(f"Cannot parse D3 start authorization: {exc}") from exc
 
     if request.get("schema") != "B1-SC-D3-START-REQUEST-1.0.0-20260916":
         raise AuthorizationError("Unexpected D3 START_REQUEST schema")
     if request.get("status") != "D3_SCIENTIFIC_EXECUTION_AUTHORIZED" or request.get("authorized") is not True:
         raise AuthorizationError("D3 START_REQUEST does not explicitly authorize execution")
+    if freeze.get("schema") != "B1-SC-D3-START-FREEZE-1.0.0-20260916":
+        raise AuthorizationError("Unexpected D3 START_REQUEST freeze schema")
+    if freeze.get("status") != "D3_START_REQUEST_FROZEN_AUTHORIZED" or freeze.get("frozen") is not True:
+        raise AuthorizationError("D3 START_REQUEST is not frozen")
+    if freeze.get("start_request_sha256") != sha256_file(path):
+        raise AuthorizationError("D3 START_REQUEST bytes differ from its frozen receipt")
+
+    qualified = request.get("qualified_runner_commit")
+    if not isinstance(qualified, str) or len(qualified) != 40:
+        raise AuthorizationError("D3 START_REQUEST lacks a qualified runner commit")
+    if freeze.get("qualified_runner_commit") != qualified:
+        raise AuthorizationError("D3 START_REQUEST freeze points to a different qualified commit")
+    qa = request.get("qa", {})
+    if qa.get("conclusion") != "success" or qa.get("head_commit") != qualified:
+        raise AuthorizationError("D3 START_REQUEST does not bind to successful runner QA")
+    if freeze.get("qa_run_id") != qa.get("run_id"):
+        raise AuthorizationError("D3 START_REQUEST freeze QA receipt mismatch")
+    if not _git_is_ancestor(qualified):
+        raise AuthorizationError("Qualified D3 runner commit is not an ancestor of execution HEAD")
+    changed = _git_changed_paths_since(qualified)
+    if changed - AUTHORIZATION_ONLY_PATHS:
+        raise AuthorizationError(
+            f"D3 source changed after QA; unauthorized paths: {sorted(changed - AUTHORIZATION_ONLY_PATHS)}"
+        )
+    if not AUTHORIZATION_ONLY_PATHS.issubset(changed):
+        raise AuthorizationError("D3 execution HEAD does not contain both frozen authorization files")
+
     if request.get("snapshot_sha256s") != expected_snapshot_hashes():
         raise AuthorizationError("D3 START_REQUEST snapshot authority differs from immutable bytes")
     if request.get("design_sha256") != sha256_file(DESIGN_PATH):
@@ -141,10 +235,21 @@ def require_start_request(path: Path = START_REQUEST_PATH) -> dict:
         raise AuthorizationError("D3 START_REQUEST fit-registry hash mismatch")
     if request.get("protocol_sha256") != sha256_file(PROTOCOL_PATH):
         raise AuthorizationError("D3 START_REQUEST protocol hash mismatch")
-    if request.get("source_commit") != current_commit():
-        raise AuthorizationError("D3 START_REQUEST does not authorize this exact source commit")
-    if request.get("allow_seed_reconstruction") is not False:
-        raise AuthorizationError("D3 START_REQUEST must explicitly forbid seed reconstruction")
+    if request.get("critical_source_sha256") != critical_source_hashes():
+        raise AuthorizationError("D3 START_REQUEST critical source hashes changed")
+
+    scope = request.get("scope", {})
+    expected_fit_ids = [row["id"] for row in registry()]
+    if scope.get("fit_ids") != expected_fit_ids or scope.get("fit_count") != d3.FITS:
+        raise AuthorizationError("D3 START_REQUEST fit scope differs from frozen registry")
+    if scope.get("native_steps_per_fit") != d3.NATIVE_STEPS:
+        raise AuthorizationError("D3 START_REQUEST training budget changed")
+    if scope.get("allow_seed_reconstruction") is not False:
+        raise AuthorizationError("D3 START_REQUEST must forbid seed reconstruction")
+    if scope.get("allow_b1e") is not False or scope.get("allow_final_seeds") is not False:
+        raise AuthorizationError("D3 START_REQUEST crossed the frozen B1-E boundary")
+    if scope.get("retries_of_scientific_fits") != 0:
+        raise AuthorizationError("D3 START_REQUEST must prohibit replacement/retry fits")
     return request
 
 
@@ -171,7 +276,13 @@ def _panel_seed(row: dict, split: str, episode: int) -> int:
 
 
 @torch.no_grad()
-def evaluate_policy(actor: d3.D3RoutingActor, row: dict, split: str, episodes: int, lesion: tuple[int, ...] = ()) -> list[dict]:
+def evaluate_policy(
+    actor: d3.D3RoutingActor,
+    row: dict,
+    split: str,
+    episodes: int,
+    lesion: tuple[int, ...] = (),
+) -> list[dict]:
     if split not in {"diagnostic", "endpoint", "causal"}:
         raise ValueError("Forbidden D3 evaluation split")
     env = NativeEnv()
@@ -235,9 +346,13 @@ def _checkpoint(actor, critic, optimizer, row: dict, step: int, out: Path) -> No
 def train_fit(row: dict, permit: SnapshotPermit, out: Path) -> dict:
     """Run one authorized D3 PPO fit from its already validated block bytes."""
     permit.assert_valid(row["block"])
-    _set_fit_rng(row)
     mask, information_mode = CONDITION_MAP[row["condition"]]
     actor, critic = load_validated_models(permit, mask, information_mode)
+
+    # Constructors used while loading the snapshot may consume torch RNG. Reset
+    # policy RNG only AFTER the exact frozen parameters are installed, so the
+    # first stochastic policy sample is governed directly by policy_sampling_seed.
+    _set_fit_rng(row)
 
     # This is the only scientific optimizer construction path in D3.
     optimizer = create_optimizer_after_preflight(
@@ -395,6 +510,7 @@ def train_fit(row: dict, permit: SnapshotPermit, out: Path) -> dict:
             "condition": row["condition"],
             "snapshot_sha256": permit.sha256,
             "snapshot_validated_before_optimizer": True,
+            "policy_rng_reset_after_snapshot_load": True,
             "seed_reconstruction_used": False,
             "environment_steps": steps,
             "optimizer_updates": optimizer_updates,
@@ -407,7 +523,7 @@ def train_fit(row: dict, permit: SnapshotPermit, out: Path) -> dict:
 def run_scientific(out: Path, *, only_fit: str | None = None) -> dict:
     """Execute D3 only after all structural and explicit authorization gates pass."""
     # Full eight-block validation happens before authorization and before any
-    # optimizer can exist.  No training side effect occurs in full_preflight().
+    # optimizer can exist. No training side effect occurs in full_preflight().
     preflight_report, permits = full_preflight(range(d3.BLOCKS))
     request = require_start_request()
     rows = registry()
@@ -421,8 +537,10 @@ def run_scientific(out: Path, *, only_fit: str | None = None) -> dict:
     out.mkdir(parents=True)
     write_json(out / "RUN_STARTED.json", {
         "status": "D3_SCIENTIFIC_RUN_STARTED",
-        "source_commit": current_commit(),
+        "execution_head": current_commit(),
+        "qualified_runner_commit": request["qualified_runner_commit"],
         "start_request_sha256": sha256_file(START_REQUEST_PATH),
+        "start_request_freeze_sha256": sha256_file(START_FREEZE_PATH),
         "preflight": preflight_report,
         "runtime": runtime_lock(),
         "started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -437,7 +555,8 @@ def run_scientific(out: Path, *, only_fit: str | None = None) -> dict:
         write_json(fit_out / "STARTED.json", {
             "fit": row,
             "snapshot": permits[row["block"]].public_receipt(),
-            "source_commit": current_commit(),
+            "execution_head": current_commit(),
+            "qualified_runner_commit": request["qualified_runner_commit"],
             "started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         })
         result = train_fit(row, permits[row["block"]], fit_out)
