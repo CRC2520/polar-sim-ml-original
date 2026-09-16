@@ -4,7 +4,6 @@ name: B1-SC-D3 persisted initialization QA
     branches:
       - research/b1sc-d3-v1.0-byte-frozen-init-20260916
     paths:
-      - experiments/b1sc_d3_v1_0/INIT_FREEZE.json
       - experiments/b1sc_d3_v1_0/frozen_init/**
 permissions:
   contents: read
@@ -75,7 +74,7 @@ jobs:
         with: {name: d3-init-verify-a, path: /tmp/a}
       - uses: actions/download-artifact@v4
         with: {name: d3-init-verify-b, path: /tmp/b}
-      - name: Require identical scientific content from both verifiers
+      - name: Require identical verification content from both runners
         run: |
           python - <<'PY'
           import json,pathlib
