@@ -1,0 +1,16 @@
+{
+  "schema": "B1-SC-D3-PERSIST-INIT-1.0.0-20260916",
+  "authorize_persistence": true,
+  "qualification_run_id": 35126827282,
+  "qualification_artifact_id": 10459702781,
+  "qualification_artifact_digest": "sha256:7b5d6cef0e1fce07278bd3841a9d369165030b69f38c0787005f7bfe936d89cb",
+  "source_commit": "cdc3ef3cd7e14ff9aec1339571bfc30c7faaadc5",
+  "expected_blocks": 8,
+  "shared_across_four_conditions": true,
+  "scientific_training_authorized": false,
+  "scientific_evaluation_authorized": false,
+  "B1E_executed": false,
+  "final_seeds_generated": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED"
+}
