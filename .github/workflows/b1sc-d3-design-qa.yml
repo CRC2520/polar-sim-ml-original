@@ -1,0 +1,47 @@
+name: B1-SC-D3 design QA only
+'on':
+  push:
+    branches:
+      - research/b1sc-d3-v1.0-information-partitioning-design-20260916
+    paths:
+      - experiments/b1sc_d3_v1_0/**
+      - .github/workflows/b1sc-d3-design-qa.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: b1sc-d3-design-qa
+  cancel-in-progress: true
+defaults:
+  run:
+    shell: bash
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+jobs:
+  design_qa:
+    name: D3 information-partitioning design and anti-leakage QA
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 2}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11.16'}
+      - name: Install frozen minimal design runtime
+        run: |
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu 'numpy==1.26.4' 'torch==2.2.2+cpu'
+          python -m pip check
+      - name: Validate D3 freeze and anti-leakage contract
+        run: |
+          rm -rf /tmp/d3-design-qa
+          python -m experiments.b1sc_d3_v1_0.qa --out /tmp/d3-design-qa
+      - uses: actions/upload-artifact@v4
+        with:
+          name: b1sc-d3-design-qa
+          path: /tmp/d3-design-qa
+          retention-days: 90
+          if-no-files-found: error
