@@ -10,12 +10,7 @@
       "bytes": 51519,
       "critic_trainable_digest": "da820b7a23c4bb276c6300b76af450bcc5a6a24e0e272e66f7be9371ebc423ce",
       "sha256": "30ad184c683b471eb198aeeaeb1a24b835cefd1f36f0090d7da074cb7b7a6756",
-      "shared_conditions": [
-        "GLOBAL-G0",
-        "GLOBAL-S6",
-        "LOCAL-G0",
-        "LOCAL-S6"
-      ],
+      "shared_conditions": ["GLOBAL-G0", "GLOBAL-S6", "LOCAL-G0", "LOCAL-S6"],
       "source_seed": 500584769
     },
     {
@@ -24,12 +19,7 @@
       "bytes": 51520,
       "critic_trainable_digest": "b99e5abd6fbad6db8b20157b3191095f6cfd87b75688e19ee1c9f8d8f92b83cb",
       "sha256": "07d69728675ec90a2aa024d85f4153939bccf5a62fc4414b8209874f03deb737",
-      "shared_conditions": [
-        "GLOBAL-G0",
-        "GLOBAL-S6",
-        "LOCAL-G0",
-        "LOCAL-S6"
-      ],
+      "shared_conditions": ["GLOBAL-G0", "GLOBAL-S6", "LOCAL-G0", "LOCAL-S6"],
       "source_seed": 1942996382
     },
     {
@@ -38,12 +28,7 @@
       "bytes": 51520,
       "critic_trainable_digest": "7cdc0d79e66e5f8e0b559bf81961e2fffb8c354a06570a63add4536e101a963e",
       "sha256": "096dc088d21180f972e48e6ed1870463244b5ee4d47392880b7f700084e85b7b",
-      "shared_conditions": [
-        "GLOBAL-G0",
-        "GLOBAL-S6",
-        "LOCAL-G0",
-        "LOCAL-S6"
-      ],
+      "shared_conditions": ["GLOBAL-G0", "GLOBAL-S6", "LOCAL-G0", "LOCAL-S6"],
       "source_seed": 3051758160
     },
     {
@@ -52,12 +37,7 @@
       "bytes": 51520,
       "critic_trainable_digest": "8ad0895d89efa1b45e081e605342e6eece9d564f4292ca1f3c295fb032da9fd7",
       "sha256": "2ae02b44def6e41e12f18e0672cd2afa2406c2a409fe3be3e33a99e8690dbf9d",
-      "shared_conditions": [
-        "GLOBAL-G0",
-        "GLOBAL-S6",
-        "LOCAL-G0",
-        "LOCAL-S6"
-      ],
+      "shared_conditions": ["GLOBAL-G0", "GLOBAL-S6", "LOCAL-G0", "LOCAL-S6"],
       "source_seed": 2038421252
     },
     {
@@ -66,12 +46,7 @@
       "bytes": 51520,
       "critic_trainable_digest": "b03fc39607e38324bbe9e66bf0113a6968a4ac91bfbadd30cd2d91f313a96c6d",
       "sha256": "24eced5465c7ad649d5c9d47fe4407765c0e700e4a46b304e7b67b548112d849",
-      "shared_conditions": [
-        "GLOBAL-G0",
-        "GLOBAL-S6",
-        "LOCAL-G0",
-        "LOCAL-S6"
-      ],
+      "shared_conditions": ["GLOBAL-G0", "GLOBAL-S6", "LOCAL-G0", "LOCAL-S6"],
       "source_seed": 4289014941
     },
     {
@@ -80,12 +55,7 @@
       "bytes": 51520,
       "critic_trainable_digest": "5247edc886b7fc9c15b85401b15f654be305e56bd7b80d4cfc2c5aaab89a9dcb",
       "sha256": "7c4b337ae420d6c20d7abc6ccd9ec04677cc07389c0414a12174cad9feb9a199",
-      "shared_conditions": [
-        "GLOBAL-G0",
-        "GLOBAL-S6",
-        "LOCAL-G0",
-        "LOCAL-S6"
-      ],
+      "shared_conditions": ["GLOBAL-G0", "GLOBAL-S6", "LOCAL-G0", "LOCAL-S6"],
       "source_seed": 3098980698
     },
     {
@@ -94,12 +64,7 @@
       "bytes": 51520,
       "critic_trainable_digest": "a3a762f25e5986da2d17204cdae13c61f53160cf40818087a68e768721752d32",
       "sha256": "7f0be21fe5f192a226a055bec8b734cef9ae8a5d59487d452ad5b9a481d01c91",
-      "shared_conditions": [
-        "GLOBAL-G0",
-        "GLOBAL-S6",
-        "LOCAL-G0",
-        "LOCAL-S6"
-      ],
+      "shared_conditions": ["GLOBAL-G0", "GLOBAL-S6", "LOCAL-G0", "LOCAL-S6"],
       "source_seed": 3340279315
     },
     {
@@ -108,12 +73,7 @@
       "bytes": 51520,
       "critic_trainable_digest": "9d155cf25a8319a4b5bc9d09fa5d30ac0a415b5ce61df0fd9a4c75acd252805f",
       "sha256": "6cc4ed0b22c35988bde5a94fc5f6e571951d37a79f6ffb3fc7b8c268b40fadc1",
-      "shared_conditions": [
-        "GLOBAL-G0",
-        "GLOBAL-S6",
-        "LOCAL-G0",
-        "LOCAL-S6"
-      ],
+      "shared_conditions": ["GLOBAL-G0", "GLOBAL-S6", "LOCAL-G0", "LOCAL-S6"],
       "source_seed": 3982676336
     }
   ],
@@ -138,6 +98,28 @@
     "byte_identical_to_canonical": false,
     "interpretation": "seed reconstruction is not accepted as the scientific initialization authority; repository bytes are authoritative"
   },
+  "qualification": {
+    "blocks_verified": 8,
+    "conditions_per_block": 4,
+    "conclusion": "success",
+    "qa_head_commit": "8eb33cd302494db0e18c5096e2a185e801b6d564",
+    "qa_run_attempt": 1,
+    "qa_run_id": 35054929768,
+    "qa_run_number": 1,
+    "two_independent_persisted_verifiers_pass": true,
+    "verifier_artifacts": [
+      {
+        "digest": "sha256:f3696c8127ef5555c7b91a697bcfd7ce9f05fa589d5a33c58f1a42ae48137eca",
+        "id": 10430307710,
+        "name": "d3-init-verify-a"
+      },
+      {
+        "digest": "sha256:b1fa2a75e7396703b0bc4cef3b174bbbe548cce440757534f36746071dc9a0f4",
+        "id": 10430532118,
+        "name": "d3-init-verify-b"
+      }
+    ]
+  },
   "ready_for_b1e_confirmatory_run": false,
   "ready_for_b1e_freeze": false,
   "ready_for_b1e_protocol_design": false,
@@ -152,5 +134,5 @@
     "support_buffer_included": false,
     "trainable_only": true
   },
-  "status": "D3_FROZEN_INITIALIZATION_PERSISTED_PENDING_INDEPENDENT_VERIFICATION"
+  "status": "D3_FROZEN_INITIALIZATION_QUALIFIED_NOT_EXECUTED"
 }
