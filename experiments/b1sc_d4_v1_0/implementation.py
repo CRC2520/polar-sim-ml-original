@@ -1,7 +1,8 @@
 """B1-SC-D4 v1.0 executable design contract for temporal S6 gating.
 
-This module implements the prospectively frozen temporal lambda manipulation only.
-It contains no scientific trainer, workflow authorization, or B1-E progression.
+Implements only the prospectively frozen temporal lambda manipulation, paired
+seed registry derivation and gates.  It contains no scientific trainer,
+workflow authorization, or B1-E progression entry point.
 """
 from __future__ import annotations
 import hashlib
@@ -17,7 +18,6 @@ from experiments.b1sc_d3_v1_0 import implementation as d3
 ROOT = Path(__file__).resolve().parent
 DESIGN_PATH = ROOT / "DESIGN_FREEZE.json"
 PROTOCOL_PATH = ROOT / "PROTOCOL_ES.md"
-REGISTRY_PATH = ROOT / "FIT_REGISTRY.json"
 
 SCHEMA = "B1-SC-D4-1.0.0-20260916"
 REPOSITORY = "CRC2520/polar-sim-ml-original"
@@ -72,12 +72,8 @@ def canonical_json(obj) -> str:
     return json.dumps(obj, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
-def sha256_file(path: Path | str) -> str:
-    h = hashlib.sha256()
-    with Path(path).open("rb") as f:
-        for chunk in iter(lambda: f.read(1024 * 1024), b""):
-            h.update(chunk)
-    return h.hexdigest()
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
 
 
 def seed(split: str, identity: object) -> int:
@@ -99,7 +95,7 @@ def snapshot_seed(block: int) -> int:
 
 
 def training_lambda(condition: str, completed_native_steps: int) -> float:
-    """Route lambda used for the next rollout after exactly this many completed steps."""
+    """Route lambda for the next rollout after exactly this many completed steps."""
     require(condition in CONDITIONS, "Unknown D4 condition")
     s = int(completed_native_steps)
     require(0 <= s <= NATIVE_STEPS, "D4 completed step count outside frozen budget")
@@ -111,10 +107,7 @@ def training_lambda(condition: str, completed_native_steps: int) -> float:
 
 
 def diagnostic_lambda(condition: str, checkpoint_native_steps: int) -> float:
-    """Configured route state at a frozen diagnostic checkpoint.
-
-    The 786432 checkpoint is explicitly pre-switch for LOCAL-S6-LATE.
-    """
+    """Configured route state at a diagnostic checkpoint; 786432 is pre-switch."""
     require(condition in CONDITIONS, "Unknown D4 condition")
     s = int(checkpoint_native_steps)
     require(s in CHECKPOINTS, "Unknown D4 checkpoint")
@@ -159,40 +152,53 @@ class D4RoutingActor(d3.D3RoutingActor):
         ls = self.log_std.repeat(3).expand_as(mu)
         if trace:
             return mu, ls, {
-                "node_views": views,
-                "h": h,
-                "m": msgs,
-                "used": used,
-                "r": r,
-                "route_lambda": lam_value,
-                "edge_lambda": edge_lambda,
-                "support": self.support.clone(),
-                "mu": mu,
-                "action": mu.tanh(),
+                "node_views": views, "h": h, "m": msgs, "used": used, "r": r,
+                "route_lambda": lam_value, "edge_lambda": edge_lambda,
+                "support": self.support.clone(), "mu": mu, "action": mu.tanh(),
             }
         return mu, ls
 
 
 def registry() -> list[dict]:
-    rows = read_json(REGISTRY_PATH)
-    require(len(rows) == FITS and len({x["id"] for x in rows}) == FITS, "D4 registry must contain 36 unique fits")
+    """Derive the frozen paired 36-fit registry from the D4 seed commitment."""
+    rows = []
+    for condition in CONDITIONS:
+        for block in range(BLOCKS):
+            identity = lambda purpose: paired_seed_identity(block, purpose)
+            rows.append(dict(
+                id=f"{condition}-b{block}", condition=condition, block=block,
+                information_mode=LOCAL, support_mask=S6, native_steps=NATIVE_STEPS,
+                switch_after_completed_native_steps=SWITCH_STEPS,
+                initial_snapshot_block=block,
+                initial_snapshot_seed=snapshot_seed(block),
+                policy_sampling_seed=seed("training", identity("policy-sampling")),
+                training_environment_seed_root=seed("training", identity("environment-stream")),
+                diagnostic_panel_seed=seed("diagnostic", identity("panel")),
+                endpoint_panel_seed=seed("endpoint", identity("panel")),
+                causal_panel_seed=seed("causal", identity("panel")),
+            ))
+    require(len(rows) == FITS and len({x["id"] for x in rows}) == FITS,
+            "D4 derived registry must contain 36 unique fits")
     return rows
+
+
+def registry_bytes() -> bytes:
+    return (json.dumps(registry(), ensure_ascii=False, sort_keys=True, indent=2, allow_nan=False) + "\n").encode("utf-8")
 
 
 def practical_advantage(loss_advantage: float, displacement_advantage: float) -> bool:
     l = float(loss_advantage)
     d = float(displacement_advantage)
-    return bool(
-        (l > LOSS_MARGIN and d >= -DISPLACEMENT_MARGIN)
-        or (d > DISPLACEMENT_MARGIN and l >= -LOSS_MARGIN)
-    )
+    return bool((l > LOSS_MARGIN and d >= -DISPLACEMENT_MARGIN)
+                or (d > DISPLACEMENT_MARGIN and l >= -LOSS_MARGIN))
 
 
 def practical_harm(loss_harm: float, displacement_harm: float) -> bool:
     return practical_advantage(loss_harm, displacement_harm)
 
 
-def replicated_gate(block_flags: Sequence[bool], aggregate_flag: bool, competence_flags: Sequence[bool] | None = None) -> dict:
+def replicated_gate(block_flags: Sequence[bool], aggregate_flag: bool,
+                    competence_flags: Sequence[bool] | None = None) -> dict:
     require(len(block_flags) == BLOCKS, "D4 gate requires exactly 12 blocks")
     n = sum(bool(x) for x in block_flags)
     if competence_flags is None:
@@ -202,13 +208,8 @@ def replicated_gate(block_flags: Sequence[bool], aggregate_flag: bool, competenc
         require(len(competence_flags) == BLOCKS, "D4 competence gate requires exactly 12 blocks")
         nc = sum(bool(x) for x in competence_flags)
         passed = bool(aggregate_flag and n >= MIN_BLOCKS and nc >= MIN_BLOCKS)
-    return dict(
-        aggregate=bool(aggregate_flag),
-        blocks_passing=n,
-        competent_blocks=nc,
-        minimum_blocks=MIN_BLOCKS,
-        pass_gate=passed,
-    )
+    return dict(aggregate=bool(aggregate_flag), blocks_passing=n,
+                competent_blocks=nc, minimum_blocks=MIN_BLOCKS, pass_gate=passed)
 
 
 def validate_design() -> dict:
@@ -246,27 +247,19 @@ def validate_design() -> dict:
     for k, v in BOUNDARY.items():
         require(d["B1E_boundary"][k] == v, f"B1-E boundary changed: {k}")
 
-    paired = (
-        "initial_snapshot_block", "initial_snapshot_seed", "policy_sampling_seed",
-        "training_environment_seed_root", "diagnostic_panel_seed", "endpoint_panel_seed", "causal_panel_seed",
-    )
+    paired = ("initial_snapshot_block", "initial_snapshot_seed", "policy_sampling_seed",
+              "training_environment_seed_root", "diagnostic_panel_seed",
+              "endpoint_panel_seed", "causal_panel_seed")
     for b in range(BLOCKS):
         rs = [x for x in rows if int(x["block"]) == b]
         require(len(rs) == 3 and {x["condition"] for x in rs} == set(CONDITIONS), f"D4 block {b} incomplete")
         require(all("d3_block" not in x for x in rs), f"D3 block identity leaked into D4 registry block {b}")
         for key in paired:
             require(len({x[key] for x in rs}) == 1, f"D4 pairing mismatch block {b}: {key}")
-        require(next(iter({x["initial_snapshot_seed"] for x in rs})) == snapshot_seed(b),
-                f"D4 snapshot seed mismatch block {b}")
     return dict(
-        status="D4_IMPLEMENTATION_CONTRACT_READY_FOR_QA",
-        blocks=BLOCKS,
-        fits=FITS,
-        conditions=list(CONDITIONS),
-        switch_steps=SWITCH_STEPS,
-        registry_sha256=sha256_file(REGISTRY_PATH),
-        scientific_training_performed=False,
-        scientific_evaluation_performed=False,
-        scientific_results_exist=False,
-        **BOUNDARY,
+        status="D4_IMPLEMENTATION_CONTRACT_READY_FOR_QA", blocks=BLOCKS, fits=FITS,
+        conditions=list(CONDITIONS), switch_steps=SWITCH_STEPS,
+        registry_sha256=sha256_bytes(registry_bytes()),
+        scientific_training_performed=False, scientific_evaluation_performed=False,
+        scientific_results_exist=False, **BOUNDARY,
     )
