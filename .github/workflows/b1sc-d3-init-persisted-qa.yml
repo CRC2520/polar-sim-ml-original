@@ -5,6 +5,7 @@ name: B1-SC-D3 persisted initialization QA
       - research/b1sc-d3-v1.0-byte-frozen-init-20260916
     paths:
       - experiments/b1sc_d3_v1_0/frozen_init/**
+      - experiments/b1sc_d3_v1_0/INIT_VERIFY_REQUEST.json
 permissions:
   contents: read
   actions: read
