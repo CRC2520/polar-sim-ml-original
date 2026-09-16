@@ -1,0 +1,71 @@
+{
+  "schema": "B1-SC-D2-R1-RECOVERY-RECEIPT-1.0.0-20260916",
+  "status": "CONTROLLED_AGGREGATION_RECOVERY_COMPLETE",
+  "source_run": {
+    "id": 35037779136,
+    "run_number": 3,
+    "attempt": 1,
+    "head_commit": "bcb73c0845b6396fa70091bdbfca130f48686b37"
+  },
+  "recovery_run": {
+    "id": 35051185586,
+    "run_number": 1,
+    "attempt": 1,
+    "trigger_commit": "1495c08daf76222fd6361a35bb65e679d1d21a4d",
+    "workflow": ".github/workflows/b1sc-d2-r1-controlled-recovery.yml",
+    "conclusion": "success"
+  },
+  "frozen_source_commit": "bcb73c0845b6396fa70091bdbfca130f48686b37",
+  "qualified_source_commit": "3bc2a11f662e1fab32a2405387cc3359013887f4",
+  "execution_freeze_sha256": "a8fe94ddd2ae6675ab4e42b0f50b9015730a1f674f60287c00ab529ba23237f7",
+  "recovery_artifact": {
+    "name": "d2r1-controlled-recovery",
+    "id": 10428963324,
+    "digest": "sha256:f9043527ff55dae99d1e9b9fc889d704f4a7af670c3573b7919286ce7a062087",
+    "expires_at": "2026-12-15T03:16:42Z"
+  },
+  "source_training_artifact": {
+    "name": "d2r1-training-aggregate",
+    "id": 10426758149,
+    "digest": "sha256:e2e3fd14196ab8d6274b67b0f722cb9b97a50ff65c37e7b6421935cded9b6e4c"
+  },
+  "source_online_artifact_count": 8,
+  "source_online_artifact_ids": [
+    10426553643,
+    10426679553,
+    10427620202,
+    10426619754,
+    10427426719,
+    10426799816,
+    10426934081,
+    10427890392
+  ],
+  "outputs": {
+    "ONLINE_EFFECT_R1.json": {
+      "sha256": "3ee5deaf18d3d88eb9e96f98dce079589685b6b1078a628df106df6382dbead1"
+    },
+    "SUMMARY_R1.json": {
+      "sha256": "d640f39f2b25f73510bc17e8a64c98531524bd3e0c761fdfa8bf6cff6fc0a394"
+    },
+    "TRAINING_EFFECT_R1_SOURCE.json": {
+      "sha256": "af3382990b846ff430ba0998faf8e8bc962f09dfdf2a2ab1246a71e11f9f685e"
+    }
+  },
+  "scientific_evidence_regenerated": false,
+  "training_reexecuted": false,
+  "online_evaluation_reexecuted": false,
+  "aggregate_only": true,
+  "integrity_pass": true,
+  "H_TRAIN_D2_R1": false,
+  "H_ONLINE_D2_R1": false,
+  "mechanistic_adjudication": "NO_REPRODUCIBLE_S6_MECHANISM_UNDER_D2",
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "final_seeds_generated": false,
+  "ready_for_b1e_protocol_design": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_confirmatory_run": false,
+  "automatic_b1e_progression": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED"
+}
