@@ -1,0 +1,134 @@
+name: B1-SC-D3 post-authorization native runtime gate
+'on':
+  push:
+    branches:
+      - ops/b1sc-d3-v1.0-runtime-gate-20260916
+    paths:
+      - .github/workflows/b1sc-d3-v1-0-runtime-gate.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: b1sc-d3-post-authorization-runtime-gate
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+env:
+  SDL_VIDEODRIVER: dummy
+  SDL_AUDIODRIVER: dummy
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+  D3_AUTHORIZED_HEAD: 6c363ccce6898b09add995a13b5eac2b4c89f736
+  D3_QUALIFIED_HEAD: 3423a33813de1b942d8c943813f6ad9514259ded
+jobs:
+  gate:
+    name: Revalidate frozen D3 authorization in native runtime
+    runs-on: ubuntu-22.04
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact authorized D3 bytes
+        uses: actions/checkout@v4
+        with:
+          ref: 6c363ccce6898b09add995a13b5eac2b4c89f736
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Verify exact authorized repository state
+        run: |
+          test "$(git rev-parse HEAD)" = "$D3_AUTHORIZED_HEAD"
+          git merge-base --is-ancestor "$D3_QUALIFIED_HEAD" HEAD
+          actual="$(git diff --name-only "$D3_QUALIFIED_HEAD..HEAD" | sort)"
+          expected="$(printf '%s\n' \
+            experiments/b1sc_d3_v1_0/START_REQUEST.json \
+            experiments/b1sc_d3_v1_0/START_REQUEST_FREEZE.json | sort)"
+          test "$actual" = "$expected"
+      - name: Install preserved native runtime
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - name: Revalidate eight immutable snapshots without optimizer
+        run: |
+          python -m experiments.b1sc_d3_v1_0.runner --preflight > /tmp/d3-runtime-preflight.json
+      - name: Validate frozen START_REQUEST in exact authorized HEAD
+        run: |
+          python - <<'PY' > /tmp/d3-authorization-runtime.json
+          import json
+          from experiments.b1sc_d3_v1_0.runner import require_start_request, current_commit
+          r = require_start_request()
+          print(json.dumps({
+              'status': 'D3_POST_AUTHORIZATION_RUNTIME_GUARD_PASS',
+              'authorized_head': current_commit(),
+              'qualified_runner_commit': r['qualified_runner_commit'],
+              'qa_run_id': r['qa']['run_id'],
+              'fit_count_authorized': r['scope']['fit_count'],
+              'allow_seed_reconstruction': r['scope']['allow_seed_reconstruction'],
+              'allow_b1e': r['scope']['allow_b1e'],
+              'scientific_fit_started': False,
+              'scientific_training_performed': False,
+              'optimizer_created': False,
+          }, indent=2, sort_keys=True))
+          PY
+      - name: Smoke-test NativeEnv with QA-only seed and zero action
+        run: |
+          python - <<'PY' > /tmp/d3-native-smoke.json
+          import json
+          import numpy as np
+          from b1s.execution.instrument import NativeEnv, runtime_lock
+          env = NativeEnv()
+          try:
+              z0, info0 = env.reset(seed=374159)
+              assert np.asarray(z0).shape == (93,)
+              z1, reward, terminated, truncated, info1 = env.step(np.zeros(12, dtype=np.float32))
+              assert np.asarray(z1).shape == (93,)
+              assert np.isfinite(float(reward))
+              print(json.dumps({
+                  'status': 'D3_NATIVE_RUNTIME_SMOKE_PASS_NOT_SCIENCE',
+                  'qa_seed': 374159,
+                  'observation_shape': list(np.asarray(z0).shape),
+                  'action_shape': [12],
+                  'reward_finite': True,
+                  'terminated': bool(terminated),
+                  'truncated': bool(truncated),
+                  'optimizer_created': False,
+                  'training_step_performed': False,
+                  'scientific_evaluation_performed': False,
+                  'runtime': runtime_lock(),
+              }, indent=2, sort_keys=True))
+          finally:
+              env.close()
+          PY
+      - name: Assert gate remains pre-fit
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('/tmp/d3-runtime-preflight.json'))
+          a=json.load(open('/tmp/d3-authorization-runtime.json'))
+          n=json.load(open('/tmp/d3-native-smoke.json'))
+          assert p['blocks_validated'] == 8
+          assert p['optimizer_created'] is False
+          assert p['training_step_performed'] is False
+          assert a['status'] == 'D3_POST_AUTHORIZATION_RUNTIME_GUARD_PASS'
+          assert a['scientific_fit_started'] is False
+          assert n['status'] == 'D3_NATIVE_RUNTIME_SMOKE_PASS_NOT_SCIENCE'
+          assert n['optimizer_created'] is False
+          assert n['training_step_performed'] is False
+          print('D3_POST_AUTH_RUNTIME_GATE_PASS')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d3-post-authorization-runtime-gate
+          path: |
+            /tmp/d3-runtime-preflight.json
+            /tmp/d3-authorization-runtime.json
+            /tmp/d3-native-smoke.json
+          retention-days: 90
+          if-no-files-found: error
