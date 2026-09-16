@@ -1,0 +1,107 @@
+name: B1-SC-D3 persist canonical initialization bytes
+'on':
+  push:
+    branches:
+      - research/b1sc-d3-v1.0-byte-frozen-init-20260916
+    paths:
+      - experiments/b1sc_d3_v1_0/PERSIST_REQUEST.json
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: b1sc-d3-init-persist
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+jobs:
+  persist:
+    name: Persist predesignated generation-A bytes only
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: '${{ github.sha }}'
+          fetch-depth: 2
+      - uses: actions/download-artifact@v4
+        with:
+          name: d3-init-generation-a
+          path: /tmp/a
+          github-token: '${{ github.token }}'
+          repository: CRC2520/polar-sim-ml-original
+          run-id: '35053734681'
+      - uses: actions/download-artifact@v4
+        with:
+          name: d3-init-generation-b
+          path: /tmp/b
+          github-token: '${{ github.token }}'
+          repository: CRC2520/polar-sim-ml-original
+          run-id: '35053734681'
+      - name: Verify A/B provenance and freeze exact A bytes
+        run: |
+          python - <<'PY'
+          import hashlib,json,pathlib,shutil
+          root=pathlib.Path('experiments/b1sc_d3_v1_0')
+          req=json.loads((root/'PERSIST_REQUEST.json').read_text())
+          assert req['schema']=='B1-SC-D3-PERSIST-INIT-1.0.0-20260916'
+          assert req['source_generation_run_id']==35053734681
+          assert req['source_generation_head_commit']=='ed9513f0a2ce12e0ea8bb451ae34b874c3dd9649'
+          assert req['canonical_role']=='generation_a_predesignated'
+          assert req['scientific_training_performed'] is False and req['scientific_evaluation_performed'] is False
+          a=pathlib.Path('/tmp/a');b=pathlib.Path('/tmp/b');dst=root/'frozen_init';dst.mkdir(parents=True,exist_ok=False)
+          out=[];different=0
+          for row in req['blocks']:
+              i=int(row['block']);pa=a/f'block-{i}.bin';pb=b/f'block-{i}.bin'
+              assert pa.is_file() and pb.is_file()
+              sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+              sa,sb=sha(pa),sha(pb)
+              assert sa==row['sha256'];assert sb==row['independent_generation_b_sha256']
+              if pa.read_bytes()!=pb.read_bytes():different+=1
+              shutil.copyfile(pa,dst/f'block-{i}.bin')
+              assert sha(dst/f'block-{i}.bin')==sa
+              out.append({k:row[k] for k in ('block','source_seed','sha256','actor_trainable_digest','critic_trainable_digest','bytes','shared_conditions')})
+          assert different==8,'Expected the recorded seed-reconstruction instability in all eight blocks'
+          freeze={
+            'schema':'B1-SC-D3-INIT-FREEZE-1.0.0-20260916',
+            'status':'D3_FROZEN_INITIALIZATION_PERSISTED_PENDING_INDEPENDENT_VERIFICATION',
+            'design_commit':'53bd59db47c6f0eac123e8777dd99b47e34f4051',
+            'branch':'research/b1sc-d3-v1.0-byte-frozen-init-20260916',
+            'canonical_generation':{
+              'workflow_run_id':35053734681,'workflow_run_number':1,'attempt':1,
+              'head_commit':'ed9513f0a2ce12e0ea8bb451ae34b874c3dd9649',
+              'artifact_name':'d3-init-generation-a','artifact_id':10429664138,
+              'artifact_digest':'sha256:c7dc8795fe92c4417b07377c20b41e60db5e01a45c64e6b4eddfa491b1401538',
+              'canonical_role':'generation_a_predesignated'
+            },
+            'independent_seed_regeneration':{
+              'artifact_name':'d3-init-generation-b','artifact_id':10429821794,
+              'artifact_digest':'sha256:071897324f50e5aa19908bcd702283fd0f9d497ac0730c302ceb10b191d99195',
+              'byte_identical_to_canonical':False,'blocks_different':8,
+              'interpretation':'seed reconstruction is not accepted as the scientific initialization authority; repository bytes are authoritative'
+            },
+            'snapshot_contract':{
+              'trainable_only':True,'support_buffer_included':False,'one_snapshot_per_block':True,
+              'shared_byte_for_byte_across_four_conditions':True,'seed_reconstruction_at_scientific_runtime_forbidden':True
+            },
+            'blocks':out,
+            'scientific_training_performed':False,'scientific_evaluation_performed':False,'scientific_results_exist':False,
+            'B1E_disposition':'ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION','B1E_executed':False,'final_seeds_generated':False,
+            'ready_for_b1e_protocol_design':False,'ready_for_b1e_freeze':False,'ready_for_b1e_confirmatory_run':False,
+            'H_CAT':'NOT_EVALUABLE','H_TRANSFER':'NOT_EVALUATED'
+          }
+          (root/'INIT_FREEZE.json').write_text(json.dumps(freeze,indent=2,sort_keys=True)+'\n')
+          PY
+      - name: Commit only canonical bytes and freeze metadata
+        run: |
+          git config user.name 'CRC2520'
+          git config user.email 'crc1612@gmail.com'
+          git add experiments/b1sc_d3_v1_0/frozen_init/block-*.bin experiments/b1sc_d3_v1_0/INIT_FREEZE.json
+          python - <<'PY'
+          import subprocess
+          names=subprocess.check_output(['git','diff','--cached','--name-only'],text=True).splitlines()
+          expected=['experiments/b1sc_d3_v1_0/INIT_FREEZE.json']+[f'experiments/b1sc_d3_v1_0/frozen_init/block-{i}.bin' for i in range(8)]
+          assert sorted(names)==sorted(expected),(names,expected)
+          PY
+          git commit -m 'freeze(d3): persist eight canonical trainable initialization snapshots'
+          git push origin HEAD:research/b1sc-d3-v1.0-byte-frozen-init-20260916
