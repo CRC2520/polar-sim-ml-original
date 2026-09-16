@@ -79,7 +79,6 @@ def test_same_validated_block_bytes_load_all_four_conditions():
         actor, critic = load_validated_models(permit, mask, mode)
         assert actor.mask == mask, condition
         assert actor.information_mode == mode, condition
-        # Optimizer construction is intentionally omitted in this pairing test.
         assert sum(p.numel() for p in actor.parameters()) > 0
         assert sum(p.numel() for p in critic.parameters()) > 0
 
@@ -106,8 +105,17 @@ def test_valid_microfit_only_steps_after_snapshot_validation():
     assert result["scientific_training_performed"] is False
 
 
+def _runner_source() -> str:
+    return (
+        Path(__file__).resolve().parents[1]
+        / "experiments"
+        / "b1sc_d3_v1_0"
+        / "runner.py"
+    ).read_text(encoding="utf-8")
+
+
 def test_scientific_runner_has_no_skip_preflight_switch_and_no_direct_optimizer_constructor():
-    source = (Path(__file__).resolve().parents[1] / "experiments" / "b1sc_d3_v1_0" / "runner.py").read_text(encoding="utf-8")
+    source = _runner_source()
     assert "skip-preflight" not in source.lower()
     assert "--skip" not in source.lower()
     assert "torch.optim." not in source
@@ -115,7 +123,33 @@ def test_scientific_runner_has_no_skip_preflight_switch_and_no_direct_optimizer_
     assert "full_preflight(range(d3.BLOCKS))" in source
 
 
-def test_start_request_is_not_present_in_runner_build():
-    # This task installs a runner/preflight; it must not self-authorize science.
-    path = Path(__file__).resolve().parents[1] / "experiments" / "b1sc_d3_v1_0" / "START_REQUEST.json"
-    assert not path.exists()
+def test_policy_rng_is_reset_after_frozen_snapshot_load_and_before_optimizer():
+    source = _runner_source()
+    start = source.index("def train_fit(")
+    end = source.index("def run_scientific(", start)
+    body = source[start:end]
+    load_pos = body.index("load_validated_models(")
+    seed_pos = body.index("_set_fit_rng(row)")
+    optimizer_pos = body.index("create_optimizer_after_preflight(")
+    backward_pos = body.index("loss.backward()")
+    step_pos = body.index("optimizer.step()")
+    assert load_pos < seed_pos < optimizer_pos < backward_pos < step_pos
+
+
+def test_authorization_is_post_qa_frozen_without_self_referential_head_pin():
+    source = _runner_source()
+    assert 'START_REQUEST_FREEZE.json' in source
+    assert 'qualified_runner_commit' in source
+    assert 'critical_source_sha256' in source
+    assert 'AUTHORIZATION_ONLY_PATHS' in source
+    assert '_git_is_ancestor(qualified)' in source
+    assert '_git_changed_paths_since(qualified)' in source
+    assert 'request.get("source_commit") != current_commit()' not in source
+
+
+def test_runner_requires_both_authorization_files_but_does_not_create_them():
+    source = _runner_source()
+    assert 'START_REQUEST_PATH = ROOT / "START_REQUEST.json"' in source
+    assert 'START_FREEZE_PATH = ROOT / "START_REQUEST_FREEZE.json"' in source
+    assert '.write_text(' not in source
+    assert 'create_file' not in source
