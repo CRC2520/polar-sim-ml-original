@@ -20,8 +20,10 @@
     "start_request_path": "experiments/b1sc_d3_v1_0/START_REQUEST.json",
     "authorization_commit_must_change_only_start_request": true,
     "authorized_run_attempt": 1,
-    "workflow_dispatch_required": true,
-    "workflow_dispatch_confirmation": "EXECUTE_D3_32_FITS"
+    "execution_activation_path": "experiments/b1sc_d3_v1_0/EXECUTE_REQUEST.json",
+    "execution_activation_commit_must_change_only_execute_request": true,
+    "execution_activation_required": true,
+    "execution_confirmation": "EXECUTE_D3_32_FITS"
   },
   "scientific_scope": {
     "conditions": ["GLOBAL-G0", "GLOBAL-S6", "LOCAL-G0", "LOCAL-S6"],
