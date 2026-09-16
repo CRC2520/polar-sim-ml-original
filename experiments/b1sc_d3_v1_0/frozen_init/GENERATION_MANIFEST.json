@@ -1,0 +1,1209 @@
+{
+  "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "blocks": [
+    {
+      "actor_class": "D3RoutingActor",
+      "actor_digest": "1b0dba3431189cb6ef23e191819c4bf8fcb113bab64cd4edceb82654df945efb",
+      "block": 0,
+      "bytes": 51676,
+      "critic_class": "Value",
+      "critic_digest": "08ef8ebd75b000e9dd950c36e0ed08e59cb28ad2c92eafd1e3b4cc4c53870f07",
+      "information_mode_excluded": true,
+      "schema": "B1-SC-D3-CANONICAL-TRAINABLE-INIT-1.0.0-20260916",
+      "seed": 562149275,
+      "sha256": "8eddafb40b214b70055b74e9a6590b2ddb097b4a676979fada8f53dad326fb55",
+      "shared_conditions": [
+        "GLOBAL-G0",
+        "GLOBAL-S6",
+        "LOCAL-G0",
+        "LOCAL-S6"
+      ],
+      "support_excluded": true,
+      "tensor_count": 15,
+      "tensors": [
+        {
+          "dtype": "float32",
+          "name": "actor.A.bias",
+          "nbytes": 32,
+          "shape": [
+            8
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.A.weight",
+          "nbytes": 1024,
+          "shape": [
+            8,
+            32
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.weight",
+          "nbytes": 1536,
+          "shape": [
+            16,
+            24
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.bias",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.weight",
+          "nbytes": 256,
+          "shape": [
+            4,
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.weight",
+          "nbytes": 6144,
+          "shape": [
+            16,
+            96
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.log_std",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.weight",
+          "nbytes": 23808,
+          "shape": [
+            64,
+            93
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.weight",
+          "nbytes": 16384,
+          "shape": [
+            64,
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.bias",
+          "nbytes": 4,
+          "shape": [
+            1
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.weight",
+          "nbytes": 256,
+          "shape": [
+            1,
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "actor_class": "D3RoutingActor",
+      "actor_digest": "a727e74458f113a6cee5f2787cbdd65c77fb349962b03cf06f160eac3364c857",
+      "block": 1,
+      "bytes": 51677,
+      "critic_class": "Value",
+      "critic_digest": "3b2ba974607835dc3f524faf6c22f262d7947d72faf538c65a43c5466a9144d3",
+      "information_mode_excluded": true,
+      "schema": "B1-SC-D3-CANONICAL-TRAINABLE-INIT-1.0.0-20260916",
+      "seed": 3910932763,
+      "sha256": "98ca2661c7030c5b50ed5fbcd156e0363397e397f820e05e92a63b080ed1bad9",
+      "shared_conditions": [
+        "GLOBAL-G0",
+        "GLOBAL-S6",
+        "LOCAL-G0",
+        "LOCAL-S6"
+      ],
+      "support_excluded": true,
+      "tensor_count": 15,
+      "tensors": [
+        {
+          "dtype": "float32",
+          "name": "actor.A.bias",
+          "nbytes": 32,
+          "shape": [
+            8
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.A.weight",
+          "nbytes": 1024,
+          "shape": [
+            8,
+            32
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.weight",
+          "nbytes": 1536,
+          "shape": [
+            16,
+            24
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.bias",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.weight",
+          "nbytes": 256,
+          "shape": [
+            4,
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.weight",
+          "nbytes": 6144,
+          "shape": [
+            16,
+            96
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.log_std",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.weight",
+          "nbytes": 23808,
+          "shape": [
+            64,
+            93
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.weight",
+          "nbytes": 16384,
+          "shape": [
+            64,
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.bias",
+          "nbytes": 4,
+          "shape": [
+            1
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.weight",
+          "nbytes": 256,
+          "shape": [
+            1,
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "actor_class": "D3RoutingActor",
+      "actor_digest": "b8c92b4a5e2ef7b6de0a3ca1105963ba9bf4488b14098a38ebad810bd3eb8c64",
+      "block": 2,
+      "bytes": 51677,
+      "critic_class": "Value",
+      "critic_digest": "5e3bd90282a84ec65a6e9aa2ca67716273a90805c205f3f43d1d42926255d237",
+      "information_mode_excluded": true,
+      "schema": "B1-SC-D3-CANONICAL-TRAINABLE-INIT-1.0.0-20260916",
+      "seed": 3092145289,
+      "sha256": "722c59107ad1232f667201123c8d6b091751cd5a1fb857ce6d67b62f57c6e9d3",
+      "shared_conditions": [
+        "GLOBAL-G0",
+        "GLOBAL-S6",
+        "LOCAL-G0",
+        "LOCAL-S6"
+      ],
+      "support_excluded": true,
+      "tensor_count": 15,
+      "tensors": [
+        {
+          "dtype": "float32",
+          "name": "actor.A.bias",
+          "nbytes": 32,
+          "shape": [
+            8
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.A.weight",
+          "nbytes": 1024,
+          "shape": [
+            8,
+            32
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.weight",
+          "nbytes": 1536,
+          "shape": [
+            16,
+            24
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.bias",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.weight",
+          "nbytes": 256,
+          "shape": [
+            4,
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.weight",
+          "nbytes": 6144,
+          "shape": [
+            16,
+            96
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.log_std",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.weight",
+          "nbytes": 23808,
+          "shape": [
+            64,
+            93
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.weight",
+          "nbytes": 16384,
+          "shape": [
+            64,
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.bias",
+          "nbytes": 4,
+          "shape": [
+            1
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.weight",
+          "nbytes": 256,
+          "shape": [
+            1,
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "actor_class": "D3RoutingActor",
+      "actor_digest": "a80795186c2b61f9cce34f8f712b657792221d62dd6dd72a6a2701a8a4b38e54",
+      "block": 3,
+      "bytes": 51674,
+      "critic_class": "Value",
+      "critic_digest": "ef7e1ece69e3c4ad8ce7d055c5d4c38a3facdfc0eae663f7261f649bae1e4033",
+      "information_mode_excluded": true,
+      "schema": "B1-SC-D3-CANONICAL-TRAINABLE-INIT-1.0.0-20260916",
+      "seed": 3447954,
+      "sha256": "0f7daf84bee3e8f7faa343fa48f6f7dc49d1a19446c4dc9757e45333cb76ef9d",
+      "shared_conditions": [
+        "GLOBAL-G0",
+        "GLOBAL-S6",
+        "LOCAL-G0",
+        "LOCAL-S6"
+      ],
+      "support_excluded": true,
+      "tensor_count": 15,
+      "tensors": [
+        {
+          "dtype": "float32",
+          "name": "actor.A.bias",
+          "nbytes": 32,
+          "shape": [
+            8
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.A.weight",
+          "nbytes": 1024,
+          "shape": [
+            8,
+            32
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.weight",
+          "nbytes": 1536,
+          "shape": [
+            16,
+            24
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.bias",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.weight",
+          "nbytes": 256,
+          "shape": [
+            4,
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.weight",
+          "nbytes": 6144,
+          "shape": [
+            16,
+            96
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.log_std",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.weight",
+          "nbytes": 23808,
+          "shape": [
+            64,
+            93
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.weight",
+          "nbytes": 16384,
+          "shape": [
+            64,
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.bias",
+          "nbytes": 4,
+          "shape": [
+            1
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.weight",
+          "nbytes": 256,
+          "shape": [
+            1,
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "actor_class": "D3RoutingActor",
+      "actor_digest": "0a515c07dde9cfdfa1178b84219832a292c571eb2b3a42d8b083e1c328d8c7d1",
+      "block": 4,
+      "bytes": 51677,
+      "critic_class": "Value",
+      "critic_digest": "a0ae76ffae20fae65d1a406591374e1fffd4e5fad8f19bb57b8b8bbbb32fd618",
+      "information_mode_excluded": true,
+      "schema": "B1-SC-D3-CANONICAL-TRAINABLE-INIT-1.0.0-20260916",
+      "seed": 3575098609,
+      "sha256": "6d7d4a77134ad04432416a7b4ab8b79407ba862506c104eaa4be37da78428e7f",
+      "shared_conditions": [
+        "GLOBAL-G0",
+        "GLOBAL-S6",
+        "LOCAL-G0",
+        "LOCAL-S6"
+      ],
+      "support_excluded": true,
+      "tensor_count": 15,
+      "tensors": [
+        {
+          "dtype": "float32",
+          "name": "actor.A.bias",
+          "nbytes": 32,
+          "shape": [
+            8
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.A.weight",
+          "nbytes": 1024,
+          "shape": [
+            8,
+            32
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.weight",
+          "nbytes": 1536,
+          "shape": [
+            16,
+            24
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.bias",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.weight",
+          "nbytes": 256,
+          "shape": [
+            4,
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.weight",
+          "nbytes": 6144,
+          "shape": [
+            16,
+            96
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.log_std",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.weight",
+          "nbytes": 23808,
+          "shape": [
+            64,
+            93
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.weight",
+          "nbytes": 16384,
+          "shape": [
+            64,
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.bias",
+          "nbytes": 4,
+          "shape": [
+            1
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.weight",
+          "nbytes": 256,
+          "shape": [
+            1,
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "actor_class": "D3RoutingActor",
+      "actor_digest": "af2e28431c01c4e9593bef8c74f5d40177c0c8c7d4d9220c64fd158783a6ef49",
+      "block": 5,
+      "bytes": 51677,
+      "critic_class": "Value",
+      "critic_digest": "06121a27fc905c75c736883d086dd5f3b0de59cbf677bc4023302ec53dcecd80",
+      "information_mode_excluded": true,
+      "schema": "B1-SC-D3-CANONICAL-TRAINABLE-INIT-1.0.0-20260916",
+      "seed": 2588848457,
+      "sha256": "6e77e5706ccf2936af7a72e4ab74c1cb7eed0f9d1c4e0134f73cab38dc148fc7",
+      "shared_conditions": [
+        "GLOBAL-G0",
+        "GLOBAL-S6",
+        "LOCAL-G0",
+        "LOCAL-S6"
+      ],
+      "support_excluded": true,
+      "tensor_count": 15,
+      "tensors": [
+        {
+          "dtype": "float32",
+          "name": "actor.A.bias",
+          "nbytes": 32,
+          "shape": [
+            8
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.A.weight",
+          "nbytes": 1024,
+          "shape": [
+            8,
+            32
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.weight",
+          "nbytes": 1536,
+          "shape": [
+            16,
+            24
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.bias",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.weight",
+          "nbytes": 256,
+          "shape": [
+            4,
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.weight",
+          "nbytes": 6144,
+          "shape": [
+            16,
+            96
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.log_std",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.weight",
+          "nbytes": 23808,
+          "shape": [
+            64,
+            93
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.weight",
+          "nbytes": 16384,
+          "shape": [
+            64,
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.bias",
+          "nbytes": 4,
+          "shape": [
+            1
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.weight",
+          "nbytes": 256,
+          "shape": [
+            1,
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "actor_class": "D3RoutingActor",
+      "actor_digest": "c9075aba0b50d293f95b3ee43c75b9741cf4dbf8aaf319c8df6ba8241303b630",
+      "block": 6,
+      "bytes": 51677,
+      "critic_class": "Value",
+      "critic_digest": "cddd9b414564692cf4cd104dc78e4a3f453a6b08aa3204fc2154bfe0956c255b",
+      "information_mode_excluded": true,
+      "schema": "B1-SC-D3-CANONICAL-TRAINABLE-INIT-1.0.0-20260916",
+      "seed": 1949777704,
+      "sha256": "a53da96c6f85d3061a3065549370f91a0125dcefa15694ab26e09be0b94aae0e",
+      "shared_conditions": [
+        "GLOBAL-G0",
+        "GLOBAL-S6",
+        "LOCAL-G0",
+        "LOCAL-S6"
+      ],
+      "support_excluded": true,
+      "tensor_count": 15,
+      "tensors": [
+        {
+          "dtype": "float32",
+          "name": "actor.A.bias",
+          "nbytes": 32,
+          "shape": [
+            8
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.A.weight",
+          "nbytes": 1024,
+          "shape": [
+            8,
+            32
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.weight",
+          "nbytes": 1536,
+          "shape": [
+            16,
+            24
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.bias",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.weight",
+          "nbytes": 256,
+          "shape": [
+            4,
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.weight",
+          "nbytes": 6144,
+          "shape": [
+            16,
+            96
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.log_std",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.weight",
+          "nbytes": 23808,
+          "shape": [
+            64,
+            93
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.weight",
+          "nbytes": 16384,
+          "shape": [
+            64,
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.bias",
+          "nbytes": 4,
+          "shape": [
+            1
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.weight",
+          "nbytes": 256,
+          "shape": [
+            1,
+            64
+          ]
+        }
+      ]
+    },
+    {
+      "actor_class": "D3RoutingActor",
+      "actor_digest": "1b44c89e7b964c12f20a29b4d17c5f86359e9a1664ebc694d283e49bfa612591",
+      "block": 7,
+      "bytes": 51677,
+      "critic_class": "Value",
+      "critic_digest": "e03ed19aff008cc09ba24b9c8682a3882686f8a561c11ab226009d56cd8cdfb3",
+      "information_mode_excluded": true,
+      "schema": "B1-SC-D3-CANONICAL-TRAINABLE-INIT-1.0.0-20260916",
+      "seed": 3243337413,
+      "sha256": "6964ec459910548c9d5857f1c6e183519ca5943a446d5fc48cefef014c95eb04",
+      "shared_conditions": [
+        "GLOBAL-G0",
+        "GLOBAL-S6",
+        "LOCAL-G0",
+        "LOCAL-S6"
+      ],
+      "support_excluded": true,
+      "tensor_count": 15,
+      "tensors": [
+        {
+          "dtype": "float32",
+          "name": "actor.A.bias",
+          "nbytes": 32,
+          "shape": [
+            8
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.A.weight",
+          "nbytes": 1024,
+          "shape": [
+            8,
+            32
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.B.weight",
+          "nbytes": 1536,
+          "shape": [
+            16,
+            24
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.bias",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.D.weight",
+          "nbytes": 256,
+          "shape": [
+            4,
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.bias",
+          "nbytes": 64,
+          "shape": [
+            16
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.E.weight",
+          "nbytes": 6144,
+          "shape": [
+            16,
+            96
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "actor.log_std",
+          "nbytes": 16,
+          "shape": [
+            4
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.0.weight",
+          "nbytes": 23808,
+          "shape": [
+            64,
+            93
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.bias",
+          "nbytes": 256,
+          "shape": [
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.2.weight",
+          "nbytes": 16384,
+          "shape": [
+            64,
+            64
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.bias",
+          "nbytes": 4,
+          "shape": [
+            1
+          ]
+        },
+        {
+          "dtype": "float32",
+          "name": "critic.net.4.weight",
+          "nbytes": 256,
+          "shape": [
+            1,
+            64
+          ]
+        }
+      ]
+    }
+  ],
+  "final_seeds_generated": false,
+  "ready_for_b1e_confirmatory_run": false,
+  "ready_for_b1e_freeze": false,
+  "ready_for_b1e_protocol_design": false,
+  "schema": "B1-SC-D3-CANONICAL-TRAINABLE-INIT-1.0.0-20260916",
+  "scientific_evaluation_performed": false,
+  "scientific_training_performed": false,
+  "shared_across_four_conditions": true,
+  "status": "D3_CANONICAL_INIT_CANDIDATES_GENERATED_NOT_SCIENTIFIC"
+}

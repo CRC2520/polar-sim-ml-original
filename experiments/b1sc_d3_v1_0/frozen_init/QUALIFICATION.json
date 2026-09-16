@@ -1,0 +1,58 @@
+{
+  "B1E_executed": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "blocks": [
+    {
+      "block": 0,
+      "bytes": 51676,
+      "sha256": "8eddafb40b214b70055b74e9a6590b2ddb097b4a676979fada8f53dad326fb55"
+    },
+    {
+      "block": 1,
+      "bytes": 51677,
+      "sha256": "98ca2661c7030c5b50ed5fbcd156e0363397e397f820e05e92a63b080ed1bad9"
+    },
+    {
+      "block": 2,
+      "bytes": 51677,
+      "sha256": "722c59107ad1232f667201123c8d6b091751cd5a1fb857ce6d67b62f57c6e9d3"
+    },
+    {
+      "block": 3,
+      "bytes": 51674,
+      "sha256": "0f7daf84bee3e8f7faa343fa48f6f7dc49d1a19446c4dc9757e45333cb76ef9d"
+    },
+    {
+      "block": 4,
+      "bytes": 51677,
+      "sha256": "6d7d4a77134ad04432416a7b4ab8b79407ba862506c104eaa4be37da78428e7f"
+    },
+    {
+      "block": 5,
+      "bytes": 51677,
+      "sha256": "6e77e5706ccf2936af7a72e4ab74c1cb7eed0f9d1c4e0134f73cab38dc148fc7"
+    },
+    {
+      "block": 6,
+      "bytes": 51677,
+      "sha256": "a53da96c6f85d3061a3065549370f91a0125dcefa15694ab26e09be0b94aae0e"
+    },
+    {
+      "block": 7,
+      "bytes": 51677,
+      "sha256": "6964ec459910548c9d5857f1c6e183519ca5943a446d5fc48cefef014c95eb04"
+    }
+  ],
+  "byte_identity_across_independent_generations": true,
+  "final_seeds_generated": false,
+  "independent_generations": [
+    "A",
+    "B"
+  ],
+  "schema": "B1-SC-D3-CANONICAL-INIT-QUALIFICATION-1.0.0-20260916",
+  "scientific_evaluation_performed": false,
+  "scientific_training_performed": false,
+  "shared_across_four_conditions": true,
+  "status": "D3_CANONICAL_INITIALIZATION_QUALIFIED_NOT_SCIENTIFIC"
+}
