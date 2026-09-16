@@ -1,0 +1,139 @@
+name: B1-SC-D3 v1.0 scientific execution
+
+'on':
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Type EXECUTE_D3_32_FITS to execute the immutable D3 authorization
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: b1sc-d3-v1-0-scientific-${{ github.sha }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  authorization_preflight:
+    name: Immutable authorization preflight
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - name: Require explicit dispatch confirmation
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          test "$CONFIRMATION" = 'EXECUTE_D3_32_FITS'
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install preserved runtime
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - name: Validate START_REQUEST, preflight receipt and qualified runner bytes
+        run: |
+          python -m experiments.b1sc_d3_v1_0.authorized_runner --preflight-only | tee /tmp/D3_AUTHORIZATION_PREFLIGHT.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d3-scientific-authorization-preflight
+          path: /tmp/D3_AUTHORIZATION_PREFLIGHT.json
+          retention-days: 90
+          if-no-files-found: error
+
+  scientific_fits:
+    name: Scientific fit ${{ matrix.condition }} block ${{ matrix.block }}
+    needs: authorization_preflight
+    runs-on: ubuntu-22.04
+    timeout-minutes: 360
+    strategy:
+      fail-fast: true
+      max-parallel: 8
+      matrix:
+        condition: [GLOBAL-G0, GLOBAL-S6, LOCAL-G0, LOCAL-S6]
+        block: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install preserved runtime
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - name: Revalidate immutable authorization immediately before fit
+        run: python -m experiments.b1sc_d3_v1_0.authorized_runner --preflight-only >/tmp/AUTHORIZATION.json
+      - name: Execute one frozen D3 scientific fit
+        run: |
+          OUT="/tmp/d3-scientific/${{ matrix.condition }}/block-${{ matrix.block }}"
+          mkdir -p "$OUT"
+          python -m experiments.b1sc_d3_v1_0.authorized_runner \
+            --condition '${{ matrix.condition }}' \
+            --block '${{ matrix.block }}' \
+            --out "$OUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d3-scientific-${{ matrix.condition }}-b${{ matrix.block }}
+          path: /tmp/d3-scientific/${{ matrix.condition }}/block-${{ matrix.block }}
+          retention-days: 90
+          if-no-files-found: error
+
+  integrity:
+    name: D3 execution completeness and immutable-lineage integrity
+    needs: scientific_fits
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: d3-scientific-*
+          path: /tmp/d3-scientific-all
+      - name: Verify complete 32-fit matrix and frozen initialization lineage
+        run: |
+          mkdir -p /tmp/d3-scientific-integrity
+          python -m experiments.b1sc_d3_v1_0.scientific_integrity \
+            --root /tmp/d3-scientific-all \
+            --out /tmp/d3-scientific-integrity/SCIENTIFIC_INTEGRITY.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d3-scientific-integrity
+          path: /tmp/d3-scientific-integrity
+          retention-days: 90
+          if-no-files-found: error
