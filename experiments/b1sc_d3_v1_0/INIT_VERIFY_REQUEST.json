@@ -1,0 +1,14 @@
+{
+  "schema": "B1-SC-D3-INIT-VERIFY-1.0.0-20260916",
+  "canonical_persistence_commit": "2cdae4286880da97500c320e0dde545d0bc92fa9",
+  "canonical_generation_run_id": 35053734681,
+  "canonical_artifact_id": 10429664138,
+  "verification_mode": "two_independent_runners_load_same_repository_bytes_into_all_four_conditions",
+  "blocks": 8,
+  "conditions_per_block": 4,
+  "seed_reconstruction_for_verification": false,
+  "scientific_training_performed": false,
+  "scientific_evaluation_performed": false,
+  "B1E_executed": false,
+  "final_seeds_generated": false
+}
