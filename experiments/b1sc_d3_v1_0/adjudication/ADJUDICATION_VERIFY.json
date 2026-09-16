@@ -1,0 +1,22 @@
+{
+  "all_checks_pass": true,
+  "checks": {
+    "H_INFO_CAUSAL_false": true,
+    "H_INFO_UTILITY_false": true,
+    "adjudication_FF": true,
+    "causal_aggregate_practical_harm": true,
+    "causal_blocks_3_of_8": true,
+    "controls_exact_8_of_8": true,
+    "integrity_pass": true,
+    "local_s6_competence_2_of_8": true,
+    "no_rerun": true,
+    "results_unmodified": true,
+    "source_artifact_zip_digests_match_16_of_16": true,
+    "utility_aggregate_practical_advantage": true,
+    "utility_blocks_4_of_8": true
+  },
+  "execution_commit": "89894e6259bd361810928d0765624fc11d7722e2",
+  "schema": "B1-SC-D3-ADJUDICATION-VERIFY-1.0.0-20260916",
+  "scientific_run_id": 35059178684,
+  "status": "D3_ADJUDICATION_INDEPENDENT_RECALCULATION_PASS"
+}

@@ -1,0 +1,103 @@
+{
+  "B1E_boundary": {
+    "B1E_disposition": "ON_HOLD_FOR_CURRENT_STRUCTURAL_CONFIRMATION",
+    "B1E_executed": false,
+    "H_CAT": "NOT_EVALUABLE",
+    "H_TRANSFER": "NOT_EVALUATED",
+    "final_seeds_generated": false,
+    "ready_for_b1e_confirmatory_run": false,
+    "ready_for_b1e_freeze": false,
+    "ready_for_b1e_protocol_design": false
+  },
+  "H_INFO_CAUSAL": {
+    "H_INFO_CAUSAL": false,
+    "aggregate": {
+      "displacement_harm": 1.5831875763833523,
+      "loss_harm": 8.319530286886845
+    },
+    "aggregate_practical_harm": true,
+    "block_practical_harm": [false, false, false, false, false, true, true, true],
+    "blocks_with_practical_harm": 3,
+    "bootstrap_descriptive": {
+      "displacement_harm_ci95": [-0.06741197244264184, 3.978570534009485],
+      "loss_harm_ci95": [-2.8542394977582433, 24.055889549301728],
+      "resamples": 10000
+    },
+    "controls_exact_blocks": 8,
+    "controls_pass": true,
+    "minimum_blocks": 6
+  },
+  "H_INFO_UTILITY": {
+    "H_INFO_UTILITY": false,
+    "aggregate": {
+      "displacement_advantage": 0.9688519164919853,
+      "loss_advantage": 16.129236303717537
+    },
+    "aggregate_practical_advantage": true,
+    "block_practical_advantage": [true, false, true, false, false, false, true, true],
+    "blocks_with_practical_advantage": 4,
+    "bootstrap_descriptive": {
+      "displacement_advantage_ci95": [-0.17635120502673082, 2.2248024765402077],
+      "loss_advantage_ci95": [-12.437323417052772, 46.45182652920702],
+      "resamples": 10000
+    },
+    "local_s6_competent": [false, false, false, false, false, false, true, true],
+    "local_s6_competent_blocks": 2,
+    "minimum_blocks": 6
+  },
+  "activation_preflight": {
+    "artifact_digest": "sha256:4ba6115eaae5231f30f342aa67f9bf932caf08d87dced7bffa5f8b74cbde0aa3",
+    "artifact_id": 10431194914,
+    "status": "D3_SCIENTIFIC_EXECUTION_ACTIVATION_VALID"
+  },
+  "adjudication": "NO_REPRODUCIBLE_PARTITION_INDUCED_S6_NECESSITY",
+  "authority": {
+    "control_tolerance": 1e-08,
+    "design_freeze_git_blob": "ab9c1aff7660be1e7f8f48df25aa13103c3938c4",
+    "displacement_margin": 1.0,
+    "implementation_git_blob": "fa541f4690bf8a19b2e898172c22ad8e1e727eed",
+    "loss_margin": 4.333333333333333,
+    "minimum_blocks": 6
+  },
+  "global_context": "SECONDARY_CONTEXT_ONLY_NOT_REQUIRED_FOR_PRIMARY_GATES",
+  "integrity": {
+    "artifact_digest": "sha256:02ad9318e0acce64196da037f92e39dd779a58c73da15d893cd5a9c1eb49df42",
+    "artifact_id": 10435150366,
+    "fits_verified": 32,
+    "local_s6_causal_panels_verified": 8,
+    "status": "PASS"
+  },
+  "repository": "CRC2520/polar-sim-ml-original",
+  "schema": "B1-SC-D3-ADJUDICATION-1.0.0-20260916",
+  "scientific_rerun_performed": false,
+  "scientific_results_modified": false,
+  "scientific_run": {
+    "attempt": 1,
+    "execution_commit": "89894e6259bd361810928d0765624fc11d7722e2",
+    "id": 35059178684,
+    "qualified_runner_commit": "e05223aad09b75e075d6c4fac87565d95531779c"
+  },
+  "source_artifacts": {
+    "LOCAL-G0": [
+      {"block":0,"digest":"sha256:3bfe47c3ae9a767eca342066ec3b68d737bc2d9f1a4ae1bd45aaf0acbee6e540","id":10433660233},
+      {"block":1,"digest":"sha256:1919a61d23504faaa53bcb749af27f4ceb3d018a0eda0465c5c3c4b9e5b45b24","id":10432934864},
+      {"block":2,"digest":"sha256:109814f9be82f679df1ee4f828a126a982ba4c602ff2cdbf520f90887c1b54bf","id":10432124882},
+      {"block":3,"digest":"sha256:9ee6260e6b8093ec89f6508674a15f91c72dde1df80bfdb17ede5706869d3dd9","id":10433237590},
+      {"block":4,"digest":"sha256:99a1fff691544500502e2a1eb1fede281a1c46d839eba59fbf53d6e3f6de94fe","id":10433192901},
+      {"block":5,"digest":"sha256:977e0f87b65c60f7bbc22380ade4b991287de807ecb43a26901838af617aca5e","id":10433184344},
+      {"block":6,"digest":"sha256:8ae29e3cb1dd182f9c139c2cb45a2b858772db583d43829cf7721c7250049619","id":10433343927},
+      {"block":7,"digest":"sha256:9f73f85c6f7f0721282598e0caf733c8e3eadccecc6126fd63a512023bed236d","id":10433767616}
+    ],
+    "LOCAL-S6": [
+      {"block":0,"digest":"sha256:7ce6c77006e31bc865a107c71d4388791db2a3837c5ac6e4c4194c7b7b88546f","id":10433527155},
+      {"block":1,"digest":"sha256:f688dc703c531827439138acbff6ca73ae60b6c6deac5f87a316ef74667b1fc5","id":10433863022},
+      {"block":2,"digest":"sha256:ad84f4ba4c7186216e425fd7465a184234fff9a1f8b7322642bf95c7cfba9a69","id":10434420154},
+      {"block":3,"digest":"sha256:adcceb0afcb7622016447acb1e72d4df9287d6e867f90a6f4ea01a98f3417617","id":10433794726},
+      {"block":4,"digest":"sha256:d5237b33fcc27853db1f4125fa77e4feac7c6ac23f9cbf0479cae9e1276a99a5","id":10433324198},
+      {"block":5,"digest":"sha256:b3122a32e42d879d1958a9207657a7d3aa4b4c58130f7d2c44901f7f6557f231","id":10433144697},
+      {"block":6,"digest":"sha256:4d914ee72ba53132b6304ec3cd48034b70f63100e09e710de2bed948e973ba67","id":10434900136},
+      {"block":7,"digest":"sha256:32d611283fb0d2313c0af7b96eada4036b988303b8632d4571f3368e6d2bbd74","id":10433839096}
+    ]
+  },
+  "status": "D3_ADJUDICATION_COMPLETE"
+}
