@@ -1,0 +1,22 @@
+{
+  "schema": "B1-SC-D3-EXECUTE-1.0.0-20260916",
+  "status": "D3_SCIENTIFIC_EXECUTION_ACTIVATED",
+  "execute_b1sc_d3_v1_0": true,
+  "authorization_commit": "7ecb6e9780816be404a16472010601157719b4dc",
+  "qualified_runner_commit": "e05223aad09b75e075d6c4fac87565d95531779c",
+  "authorized_run_attempt": 1,
+  "confirmation": "EXECUTE_D3_32_FITS",
+  "scientific_fits": 32,
+  "conditions": ["GLOBAL-G0", "GLOBAL-S6", "LOCAL-G0", "LOCAL-S6"],
+  "blocks": 8,
+  "native_steps_per_fit": 1048576,
+  "total_native_steps": 33554432,
+  "preflight_run_id": 35057029187,
+  "preflight_artifact_id": 10431735009,
+  "preflight_artifact_digest": "sha256:ca2eee6c9a1007709757c76ff2622758dc62bf88bf6388dae809d19288236009",
+  "B1E_executed": false,
+  "final_seeds_generated": false,
+  "H_CAT": "NOT_EVALUABLE",
+  "H_TRANSFER": "NOT_EVALUATED",
+  "adjudication_performed": false
+}
