@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
-          fetch-depth: 2
+          fetch-depth: 3
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11.16'
@@ -44,8 +44,10 @@ jobs:
           python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
           python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu 'numpy==1.26.4' 'torch==2.2.2+cpu' 'pytest==8.3.5'
           python -m pip check
-      - name: Prove scientific authorization remains absent
-        run: test ! -e experiments/b1sc_d3_v1_0/START_REQUEST.json
+      - name: Prove scientific authorization remains absent during qualification
+        run: |
+          test ! -e experiments/b1sc_d3_v1_0/START_REQUEST.json
+          test ! -e experiments/b1sc_d3_v1_0/START_REQUEST_FREEZE.json
       - name: Compile D3 runner surfaces
         run: |
           python -m py_compile \
@@ -57,7 +59,7 @@ jobs:
       - name: Run corruption gate and bounded deterministic microfit QA
         run: python -m experiments.b1sc_d3_v1_0.microfit_qa --block 0 --condition LOCAL-S6 > /tmp/d3-microfit-qa.json
       - name: Run focused invariant tests
-        run: pytest -q tests/test_b1sc_d3_runner_preflight.py
+        run: python -m pytest -q tests/test_b1sc_d3_runner_preflight.py
       - name: Assert QA receipts are explicitly non-scientific
         run: |
           python - <<'PY'
