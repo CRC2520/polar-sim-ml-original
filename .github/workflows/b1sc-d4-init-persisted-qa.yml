@@ -4,8 +4,7 @@ name: B1-SC-D4 double persisted initialization verification
     branches:
       - research/b1sc-d4-v1.0-byte-frozen-init-20260916
     paths:
-      - experiments/b1sc_d4_v1_0/INIT_FREEZE.json
-      - experiments/b1sc_d4_v1_0/frozen_init/**
+      - experiments/b1sc_d4_v1_0/INIT_VERIFY_REQUEST.json
 
 permissions:
   contents: read
@@ -26,8 +25,36 @@ env:
   PYTHONDONTWRITEBYTECODE: '1'
 
 jobs:
+  request_guard:
+    name: Validate persisted-byte verification request
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ github.sha }}', fetch-depth: 0}
+      - name: Verify request lineage and immutable snapshot parent
+        run: |
+          python - <<'PY'
+          import json,subprocess
+          from pathlib import Path
+          req=json.loads(Path('experiments/b1sc_d4_v1_0/INIT_VERIFY_REQUEST.json').read_text())
+          assert req['schema']=='B1-SC-D4-INIT-VERIFY-REQUEST-1.0.0-20260916'
+          assert req['authorize_persisted_double_verification'] is True
+          assert req['persisted_snapshot_commit']=='ab8a80f7f44bee6a2b44d5671440e99fba05d36c'
+          assert req['snapshot_count']==12
+          assert req['scientific_training_authorized'] is False
+          assert req['scientific_evaluation_authorized'] is False
+          assert req['runner_authorized'] is False
+          assert req['B1E_executed'] is False and req['final_seeds_generated'] is False
+          parent=subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip()
+          assert parent=='ab8a80f7f44bee6a2b44d5671440e99fba05d36c'
+          names=subprocess.check_output(['git','diff','--name-only',parent,'HEAD'],text=True).splitlines()
+          assert names==['experiments/b1sc_d4_v1_0/INIT_VERIFY_REQUEST.json'],names
+          PY
+
   verify_a:
     name: Persisted bytes verifier A load-and-digest
+    needs: request_guard
     runs-on: ubuntu-22.04
     timeout-minutes: 15
     steps:
@@ -48,6 +75,7 @@ jobs:
 
   verify_b:
     name: Persisted bytes verifier B independent parser
+    needs: request_guard
     runs-on: ubuntu-22.04
     timeout-minutes: 15
     steps:
@@ -89,6 +117,7 @@ jobs:
             'schema':'B1-SC-D4-INIT-DOUBLE-VERIFY-1.0.0-20260916',
             'status':'D4_PERSISTED_INITIALIZATION_DOUBLE_VERIFICATION_PASS',
             'source_commit':os.environ['GITHUB_SHA'],
+            'persisted_snapshot_commit':'ab8a80f7f44bee6a2b44d5671440e99fba05d36c',
             'workflow_run_id':int(os.environ['GITHUB_RUN_ID']),
             'run_attempt':int(os.environ['GITHUB_RUN_ATTEMPT']),
             'block_count':12,
