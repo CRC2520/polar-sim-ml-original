@@ -1,12 +1,11 @@
 name: B1-SC-D3 v1.0 scientific execution
 
 'on':
-  workflow_dispatch:
-    inputs:
-      confirmation:
-        description: Type EXECUTE_D3_32_FITS to execute the immutable D3 authorization
-        required: true
-        type: string
+  push:
+    branches:
+      - research/b1sc-d3-v1.0-runner-readiness-20260916
+    paths:
+      - experiments/b1sc_d3_v1_0/EXECUTE_REQUEST.json
 
 permissions:
   contents: read
@@ -27,16 +26,11 @@ env:
   PYTHONDONTWRITEBYTECODE: '1'
 
 jobs:
-  authorization_preflight:
-    name: Immutable authorization preflight
+  activation_preflight:
+    name: Immutable execution activation preflight
     runs-on: ubuntu-22.04
     timeout-minutes: 30
     steps:
-      - name: Require explicit dispatch confirmation
-        env:
-          CONFIRMATION: ${{ inputs.confirmation }}
-        run: |
-          test "$CONFIRMATION" = 'EXECUTE_D3_32_FITS'
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
@@ -53,19 +47,19 @@ jobs:
           python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
           python -m pip install -r b1s/execution/requirements.txt
           python -m pip check
-      - name: Validate START_REQUEST, preflight receipt and qualified runner bytes
+      - name: Validate EXECUTE_REQUEST, START_REQUEST, receipt and qualified runner bytes
         run: |
-          python -m experiments.b1sc_d3_v1_0.authorized_runner --preflight-only | tee /tmp/D3_AUTHORIZATION_PREFLIGHT.json
+          python -m experiments.b1sc_d3_v1_0.authorized_runner --preflight-only | tee /tmp/D3_EXECUTION_ACTIVATION_PREFLIGHT.json
       - uses: actions/upload-artifact@v4
         with:
-          name: d3-scientific-authorization-preflight
-          path: /tmp/D3_AUTHORIZATION_PREFLIGHT.json
+          name: d3-scientific-activation-preflight
+          path: /tmp/D3_EXECUTION_ACTIVATION_PREFLIGHT.json
           retention-days: 90
           if-no-files-found: error
 
   scientific_fits:
     name: Scientific fit ${{ matrix.condition }} block ${{ matrix.block }}
-    needs: authorization_preflight
+    needs: activation_preflight
     runs-on: ubuntu-22.04
     timeout-minutes: 360
     strategy:
@@ -91,7 +85,7 @@ jobs:
           python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
           python -m pip install -r b1s/execution/requirements.txt
           python -m pip check
-      - name: Revalidate immutable authorization immediately before fit
+      - name: Revalidate immutable activation immediately before fit
         run: python -m experiments.b1sc_d3_v1_0.authorized_runner --preflight-only >/tmp/AUTHORIZATION.json
       - name: Execute one frozen D3 scientific fit
         run: |
