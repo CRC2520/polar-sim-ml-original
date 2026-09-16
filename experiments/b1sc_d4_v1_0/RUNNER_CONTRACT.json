@@ -26,7 +26,6 @@
     "experiments/b1sc_d4_v1_0/verify_snapshot_set_independent.py",
     "experiments/b1sc_d4_v1_0/BUILD_REQUEST.json",
     "experiments/b1sc_d4_v1_0/INIT_FREEZE.json",
-    "experiments/b1sc_d4_v1_0/VERIFY_REQUEST.json",
     "experiments/b1sc_d4_v1_0/INIT_VERIFY_RECEIPT.json"
   ],
   "immutable_snapshots": [
