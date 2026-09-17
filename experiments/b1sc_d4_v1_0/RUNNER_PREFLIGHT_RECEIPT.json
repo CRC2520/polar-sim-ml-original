@@ -1,0 +1,117 @@
+{
+  "B1E_executed": false,
+  "branch": "research/b1sc-d4-v1.0-runner-readiness-20260916",
+  "execution_authorized": false,
+  "final_seeds_generated": false,
+  "frozen_base_head": "255c520d626440dd20b8b0d626530b6aa9e09f90",
+  "frozen_path_git_blobs": {
+    "experiments/b1sc_d4_v1_0/BUILD_REQUEST.json": "a0db510fb3981df350bef9e4ae72b262b0ee161e",
+    "experiments/b1sc_d4_v1_0/DESIGN_FREEZE.json": "9161ee7f5ab2eaa492993c9a916fac026fdaa12c",
+    "experiments/b1sc_d4_v1_0/HETEROGENEITY_MOTIVATION.json": "5d24467396d9c0a44e8e6f4d488b19c2ace1b75f",
+    "experiments/b1sc_d4_v1_0/INIT_FREEZE.json": "dbf0a7238acbbd41ac6d6c0a7d69762095f3ca25",
+    "experiments/b1sc_d4_v1_0/INIT_VERIFY_RECEIPT.json": "e9b2a713772c3049609a5db3f23e7a054bd46332",
+    "experiments/b1sc_d4_v1_0/PROTOCOL_ES.md": "872fbb40b603b84615761d996027a19a8b9b733c",
+    "experiments/b1sc_d4_v1_0/generate_snapshots.py": "a30c0b6a49f85592a49e6b0244819d8983672234",
+    "experiments/b1sc_d4_v1_0/implementation.py": "7ca280b3065d4a672fd77afb3084907435c3d98f",
+    "experiments/b1sc_d4_v1_0/init_format.py": "40b7a7138bb90a4132dac6392c9ddb1a8f6ed3f7",
+    "experiments/b1sc_d4_v1_0/qa.py": "eaea570f71f3b6a221125e810f62d4fb800fcf8e",
+    "experiments/b1sc_d4_v1_0/verify_snapshot_set.py": "8fde5550b76f9bc8917811ff5ff080f99b60f73d",
+    "experiments/b1sc_d4_v1_0/verify_snapshot_set_independent.py": "d06fe6cc1876cadf1e86fee070b238acbf201a78"
+  },
+  "immutable_snapshots": [
+    {
+      "block": 0,
+      "bytes": 51584,
+      "sha256": "cb0431aff2d54aad63acced23524ea0092dde789b1511cef0c78aca1e47dc6dc",
+      "source_seed": 3537603648
+    },
+    {
+      "block": 1,
+      "bytes": 51584,
+      "sha256": "82be59782d9d817a18959dd6950eed6c16a8981fd362eaa7e1c11956c3349af4",
+      "source_seed": 3584412692
+    },
+    {
+      "block": 2,
+      "bytes": 51584,
+      "sha256": "b59beb5e1e5f241d93e4a5cc4fcdd26c036989df11238eb67a2f7040e4a18871",
+      "source_seed": 4139404918
+    },
+    {
+      "block": 3,
+      "bytes": 51583,
+      "sha256": "89693e76e375b708d15505146b1350b4a9fd664aa2999afc0835f11f49eccc9c",
+      "source_seed": 318376429
+    },
+    {
+      "block": 4,
+      "bytes": 51584,
+      "sha256": "858499a679cc143632fab388a23ec036479fc8af7fdf9df636aeec56ce2433ad",
+      "source_seed": 1631926582
+    },
+    {
+      "block": 5,
+      "bytes": 51584,
+      "sha256": "c059bf7ec2169d7ceb1f834808298776a4176ed5374fceef611b428f578a3d59",
+      "source_seed": 2118656167
+    },
+    {
+      "block": 6,
+      "bytes": 51584,
+      "sha256": "2491bb4bd1059d37a0d3e155e5d11f9caebd0f03fcded878b5d14ee1cad3d130",
+      "source_seed": 2044101970
+    },
+    {
+      "block": 7,
+      "bytes": 51584,
+      "sha256": "15b493900d93dcef844bffe622b50c961a67762770698983bd109c798f394f88",
+      "source_seed": 3886467510
+    },
+    {
+      "block": 8,
+      "bytes": 51584,
+      "sha256": "8771fa86fde3edf7a8a4c1fac565fc563ce74f01ca2cd54f1f6f6fd979010514",
+      "source_seed": 3730963840
+    },
+    {
+      "block": 9,
+      "bytes": 51584,
+      "sha256": "c193a05da6cfa22fb496e230662e5b29cc55c78f25ace68c881b0f130a62b829",
+      "source_seed": 4086587128
+    },
+    {
+      "block": 10,
+      "bytes": 51585,
+      "sha256": "934905e39eacf74f4e4d3504558d0167afe97f18183ab3b617427a6c46be893a",
+      "source_seed": 3769588824
+    },
+    {
+      "block": 11,
+      "bytes": 51585,
+      "sha256": "7b5c72dbd38fa7e6e7c6e3168d9799db62dae11678887c7464ca6d7b8563c42a",
+      "source_seed": 1437896222
+    }
+  ],
+  "initialization_authority": {
+    "double_verification_artifact_digest": "sha256:7834b9d4150f4d4976082bcb8d52b62ed8105f799e1fe6d26bdb84aabb9f56be",
+    "double_verification_artifact_id": 10436504988,
+    "double_verification_receipt_sha256": "126a09e9b0ae20472df74eca4dffba27075b5f17a3c2252fb2fbd7d22bb33f3e",
+    "double_verification_run_id": 35074145229,
+    "double_verified_receipt_commit": "255c520d626440dd20b8b0d626530b6aa9e09f90",
+    "init_verify_receipt_git_blob": "e9b2a713772c3049609a5db3f23e7a054bd46332",
+    "persistence_commit": "ab8a80f7f44bee6a2b44d5671440e99fba05d36c"
+  },
+  "microfit_status": "D4_RUNNER_MICROFIT_QA_PASS_NOT_SCIENCE",
+  "next_required_action": "SEPARATE_IMMUTABLE_START_REQUEST_AND_SCIENTIFIC_EXECUTION_WORKFLOW",
+  "qa_run_attempt": 1,
+  "qa_run_id": "35105193510",
+  "repository": "CRC2520/polar-sim-ml-original",
+  "schema": "B1-SC-D4-RUNNER-PREFLIGHT-1.0.0-20260916",
+  "scientific_evaluation_performed": false,
+  "scientific_results_exist": false,
+  "scientific_training_performed": false,
+  "source_commit": "b475a41b583b50a516bebce16d030518c8dd02f2",
+  "start_request_exists": false,
+  "static_contract_status": "D4_RUNNER_STATIC_CONTRACT_PASS",
+  "status": "D4_RUNNER_PREFLIGHT_QUALIFIED_NOT_AUTHORIZED"
+}

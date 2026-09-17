@@ -1,0 +1,40 @@
+{
+  "schema": "B1-SC-D4-EXECUTION-AUTHORITY-1.0.0-20260916",
+  "status": "D4_EXECUTION_AUTHORITY_STAGED_NOT_STARTED",
+  "repository": "CRC2520/polar-sim-ml-original",
+  "branch": "research/b1sc-d4-v1.0-runner-readiness-20260916",
+  "qualified_runner_commit": "b475a41b583b50a516bebce16d030518c8dd02f2",
+  "qualified_scientific_runner_git_blob": "8fcdad1a0bb26cf37ef3596b9bc20a1ff7f56481",
+  "qualified_runner_contract_git_blob": "da9cdf3c647960d7bd6ef1a244177e60a1fa1f52",
+  "preflight": {
+    "run_id": 35105193510,
+    "run_attempt": 1,
+    "artifact_id": 10450457252,
+    "artifact_name": "d4-runner-execution-preflight",
+    "artifact_digest": "sha256:cec902fa93740e510922f6932756f39f4950ff12ee021fe3ade0da7327ede095",
+    "receipt_file": "experiments/b1sc_d4_v1_0/RUNNER_PREFLIGHT_RECEIPT.json",
+    "receipt_sha256": "833b47fff8ad0d3088efdaad1902bc164dabc7c7d56a19d92a90b046c31d580d",
+    "receipt_status": "D4_RUNNER_PREFLIGHT_QUALIFIED_NOT_AUTHORIZED"
+  },
+  "authorization": {
+    "start_request_path": "experiments/b1sc_d4_v1_0/START_REQUEST.json",
+    "authorization_commit_must_change_only_start_request": true,
+    "authorized_run_attempt": 1,
+    "execution_activation_path": "experiments/b1sc_d4_v1_0/EXECUTE_REQUEST.json",
+    "execution_activation_commit_must_change_only_execute_request": true,
+    "execution_activation_required": true,
+    "execution_confirmation": "EXECUTE_D4_36_FITS"
+  },
+  "scientific_scope": {
+    "conditions": ["LOCAL-S6-OFF", "LOCAL-S6-LATE", "LOCAL-S6-ALWAYS"],
+    "blocks": 12,
+    "fits": 36,
+    "native_steps_per_fit": 1048576,
+    "total_native_steps": 37748736,
+    "switch_after_completed_native_steps": 786432,
+    "checkpoint_786432_is_pre_switch": true,
+    "causal_models": ["LOCAL-S6-LATE", "LOCAL-S6-ALWAYS"],
+    "B1E_executed": false,
+    "final_seeds_generated": false
+  }
+}
