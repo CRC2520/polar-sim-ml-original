@@ -1,0 +1,155 @@
+name: B1-SC-D3 authorized 32-fit scientific execution
+'on':
+  push:
+    branches:
+      - ops/b1sc-d3-v1.0-scientific-launch-20260916
+    paths:
+      - .github/workflows/b1sc-d3-v1-0-scientific-launch.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: b1sc-d3-v1-0-scientific-execution
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+env:
+  SDL_VIDEODRIVER: dummy
+  SDL_AUDIODRIVER: dummy
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+  D3_AUTHORIZED_HEAD: 6c363ccce6898b09add995a13b5eac2b4c89f736
+  D3_QUALIFIED_HEAD: 3423a33813de1b942d8c943813f6ad9514259ded
+  D3_RUNTIME_GATE_RUN: '35164518919'
+  D3_RUNTIME_GATE_ARTIFACT_DIGEST: sha256:72a64cd133e83b6dba84d04aee85c613df9e556a1a2d4afb3343568083937cc7
+jobs:
+  authorize:
+    name: Final frozen authorization guard before any D3 fit
+    runs-on: ubuntu-22.04
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact authorized D3 bytes
+        uses: actions/checkout@v4
+        with:
+          ref: 6c363ccce6898b09add995a13b5eac2b4c89f736
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Verify frozen post-QA delta
+        run: |
+          test "$(git rev-parse HEAD)" = "$D3_AUTHORIZED_HEAD"
+          git merge-base --is-ancestor "$D3_QUALIFIED_HEAD" HEAD
+          actual="$(git diff --name-only "$D3_QUALIFIED_HEAD..HEAD" | sort)"
+          expected="$(printf '%s\n' \
+            experiments/b1sc_d3_v1_0/START_REQUEST.json \
+            experiments/b1sc_d3_v1_0/START_REQUEST_FREEZE.json | sort)"
+          test "$actual" = "$expected"
+      - name: Install preserved native runtime
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - name: Final eight-byte preflight and frozen authorization check
+        run: |
+          python - <<'PY' > /tmp/d3-scientific-launch-guard.json
+          import json
+          from experiments.b1sc_d3_v1_0.execution_preflight import full_preflight
+          from experiments.b1sc_d3_v1_0.runner import require_start_request, current_commit
+          p, permits = full_preflight(range(8))
+          r = require_start_request()
+          assert p['blocks_validated'] == 8
+          assert p['optimizer_created'] is False
+          assert p['training_step_performed'] is False
+          assert len(permits) == 8
+          print(json.dumps({
+              'status': 'D3_SCIENTIFIC_LAUNCH_GUARD_PASS',
+              'authorized_head': current_commit(),
+              'qualified_runner_commit': r['qualified_runner_commit'],
+              'qa_run_id': r['qa']['run_id'],
+              'runtime_gate_run_id': 35164518919,
+              'runtime_gate_artifact_digest': 'sha256:72a64cd133e83b6dba84d04aee85c613df9e556a1a2d4afb3343568083937cc7',
+              'blocks_revalidated': p['blocks_validated'],
+              'fit_count_authorized': r['scope']['fit_count'],
+              'native_steps_per_fit': r['scope']['native_steps_per_fit'],
+              'total_native_training_steps': r['scope']['total_native_training_steps'],
+              'optimizer_created': False,
+              'training_step_performed': False,
+              'scientific_fit_started': False,
+          }, indent=2, sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d3-scientific-launch-guard
+          path: /tmp/d3-scientific-launch-guard.json
+          retention-days: 90
+          if-no-files-found: error
+
+  fit:
+    name: D3 ${{ matrix.condition }} block ${{ matrix.block }}
+    needs: authorize
+    runs-on: ubuntu-22.04
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        condition: [GLOBAL-G0, GLOBAL-S6, LOCAL-G0, LOCAL-S6]
+        block: [0,1,2,3,4,5,6,7]
+    steps:
+      - name: Checkout exact authorized D3 bytes
+        uses: actions/checkout@v4
+        with:
+          ref: 6c363ccce6898b09add995a13b5eac2b4c89f736
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.16'
+          cache: pip
+          cache-dependency-path: b1s/execution/requirements.txt
+      - name: Install preserved native runtime
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y swig
+          python -m pip install 'pip==24.0' 'setuptools==69.5.1' 'wheel==0.43.0'
+          python -m pip install -r b1s/execution/requirements.txt
+          python -m pip check
+      - name: Run one authorized byte-gated D3 scientific fit
+        run: |
+          fit_id='${{ matrix.condition }}-b${{ matrix.block }}'
+          rm -rf /tmp/d3-scientific
+          python -m experiments.b1sc_d3_v1_0.runner \
+            --execute \
+            --only-fit "$fit_id" \
+            --out /tmp/d3-scientific
+      - name: Assert one and only one requested fit completed
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          root=pathlib.Path('/tmp/d3-scientific')
+          run=json.loads((root/'RUN_COMPLETE.json').read_text())
+          assert run['status']=='D3_REQUESTED_FITS_COMPLETE'
+          assert run['fits_complete']==1
+          fit=run['fits'][0]
+          assert fit['environment_steps']==1048576
+          assert fit['snapshot_validated_before_optimizer'] is True
+          assert fit['seed_reconstruction_used'] is False
+          assert run['B1E_executed'] is False
+          assert run['H_CAT']=='NOT_EVALUABLE'
+          assert run['H_TRANSFER']=='NOT_EVALUATED'
+          print('D3_AUTHORIZED_FIT_COMPLETE', fit['fit_id'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d3-fit-${{ matrix.condition }}-b${{ matrix.block }}
+          path: /tmp/d3-scientific
+          retention-days: 90
+          if-no-files-found: warn
