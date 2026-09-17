@@ -5,7 +5,7 @@ name: B1-SC-D4 v1.0 scientific execution
     branches:
       - research/b1sc-d4-v1.0-runner-readiness-20260916
     paths:
-      - experiments/b1sc_d4_v1_0/EXECUTE_REQUEST.json
+      - experiments/b1sc_d4_v1_0/EXECUTE_REQUEST_RECOVERY_GUARD.json
 
 permissions:
   contents: read
@@ -90,7 +90,6 @@ jobs:
       - name: Execute one frozen D4 scientific fit
         run: |
           OUT="/tmp/d4-scientific/${{ matrix.condition }}/block-${{ matrix.block }}"
-          mkdir -p "$OUT"
           python -m experiments.b1sc_d4_v1_0.authorized_runner \
             --condition '${{ matrix.condition }}' \
             --block '${{ matrix.block }}' \
