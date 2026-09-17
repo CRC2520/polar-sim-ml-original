@@ -1,0 +1,57 @@
+{
+  "schema": "B1-SC-D4-EXECUTION-FAILURE-1.0.0-20260917",
+  "status": "D4_EXECUTION_ATTEMPT_1_FAILED_BEFORE_SCIENTIFIC_TRAINING_NO_EVIDENCE",
+  "repository": "CRC2520/polar-sim-ml-original",
+  "source_branch": "research/b1sc-d4-v1.0-runner-readiness-20260916",
+  "failure_provenance_branch": "research/b1sc-d4-v1.0-execution-failure-20260917",
+  "execution_commit": "db72fd0ad59bbce9bfec8bcb9be99be858e55ecb",
+  "authorization_commit": "f1d6b1d8648727156f5c1c816961daa749f12a73",
+  "authorization_base_commit": "20901215ee719d5f5f985e288513f89eef15eb27",
+  "qualified_runner_commit": "b475a41b583b50a516bebce16d030518c8dd02f2",
+  "workflow_run_id": 35173090984,
+  "workflow_run_number": 1,
+  "workflow_run_attempt": 1,
+  "workflow_conclusion": "failure",
+  "activation_preflight": {
+    "status": "D4_SCIENTIFIC_EXECUTION_ACTIVATION_VALID",
+    "artifact_id": 10477711526,
+    "artifact_name": "d4-scientific-activation-preflight",
+    "artifact_digest": "sha256:9027b099900daae0afd04bbef7456e6237a4594c4fc8793371ce4ecf0d06c357"
+  },
+  "root_failure": {
+    "job_id": 105049191035,
+    "job_name": "Scientific fit LOCAL-S6-OFF block 6",
+    "failed_step": "Execute one frozen D4 scientific fit",
+    "exception": "FileExistsError",
+    "exception_path": "/tmp/d4-scientific/LOCAL-S6-OFF/block-6",
+    "mechanism": "workflow pre-created OUT with mkdir -p while scientific_runner._train requires out.mkdir(parents=True, exist_ok=False)",
+    "failure_location": "experiments/b1sc_d4_v1_0/scientific_runner.py::_train before validate_and_load_frozen and before optimizer creation",
+    "corrective_change_required": "remove workflow-side mkdir -p of the per-fit output directory and let the qualified runner create it"
+  },
+  "fail_fast_effect": {
+    "enabled": true,
+    "remaining_matrix_jobs_cancelled": true,
+    "integrity_job_not_executed": true
+  },
+  "scientific_evidence": {
+    "fit_artifacts_created": 0,
+    "run_result_artifacts_created": 0,
+    "optimizer_steps_performed": 0,
+    "scientific_training_performed": false,
+    "scientific_evaluation_performed": false,
+    "scientific_results_exist": false,
+    "D4_executed": false,
+    "adjudication_performed": false
+  },
+  "hypotheses": {
+    "H_D4_LATE_TOTAL": "NOT_EVALUATED",
+    "H_D4_EARLY_PREPARATION": "NOT_EVALUATED",
+    "H_D4_LATE_SCAFFOLD": "NOT_EVALUATED",
+    "H_D4_ONLINE_LATE": "NOT_EVALUATED",
+    "H_D4_ONLINE_ALWAYS": "NOT_EVALUATED"
+  },
+  "B1E_executed": false,
+  "final_seeds_generated": false,
+  "rerun_performed": false,
+  "next_required_action": "PROSPECTIVE_WORKFLOW_FIX_REAUTHORIZATION_AND_NEW_EXECUTION_COMMIT_NO_GITHUB_RERUN"
+}
