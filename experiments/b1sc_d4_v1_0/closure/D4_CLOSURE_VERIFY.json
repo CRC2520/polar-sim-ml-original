@@ -1,0 +1,32 @@
+{
+  "schema": "B1-SC-D4-CLOSURE-VERIFY-1.0.0-20260917",
+  "status": "D4_CLOSURE_INDEPENDENT_VERIFICATION_PASS",
+  "all_checks_pass": true,
+  "checks": {
+    "adjudication_commit_exact": true,
+    "adjudication_blobs_exact": true,
+    "all_five_gates_false": true,
+    "primary_verdict_exact": true,
+    "scientific_run_36_of_36_integrity_pass": true,
+    "prior_failed_attempt_excluded": true,
+    "scientific_rerun_performed_false": true,
+    "scientific_results_modified_false": true,
+    "anti_selection_preserved": true,
+    "B1E_executed_false": true,
+    "final_seeds_generated_false": true,
+    "H_CAT_not_evaluable": true,
+    "H_TRANSFER_not_evaluated": true,
+    "next_phase_not_executed": true,
+    "D5_executed_false": true
+  },
+  "execution_commit": "b74b37d19717470b35e827363e1a314d1fc1aa19",
+  "adjudication_commit": "81fd24542edde30693efc5a2bf7f8afba80ed03a",
+  "scientific_run_id": 35173828866,
+  "scientific_run_attempt": 1,
+  "integrity_artifact_id": 10479939324,
+  "integrity_artifact_digest": "sha256:7eb2dc475c73b16df424d7577f772323bf0a3f83ec5cc5548698a1fe21e3e0ca",
+  "D4_ADJUDICATION_git_blob": "dd778bd4560da8260dfb5a51f9f3327020c31f4b",
+  "ADJUDICATION_VERIFY_git_blob": "0f67d1cdd8a54b017603d7d961aa7b59013a76b3",
+  "ADJUDICATION_ES_git_blob": "be233a450a58968a8cc41fb3480154241e6e5f93",
+  "verdict": "NO_REPRODUCIBLE_ROUTE_TIMING_EXPLANATION"
+}
