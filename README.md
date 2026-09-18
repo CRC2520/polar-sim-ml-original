@@ -67,12 +67,19 @@ without changing statistics or frozen sources. Read it alongside the raw report.
 
 ## Reproduce
 
-The recorded CPU environment uses Python 3.12.13. In a fresh virtual environment:
+The recorded CPU environment uses Python 3.12.13. The fully pinned
+`requirements-repro.txt` is the normative environment for numerical
+reproduction; `requirements.txt` contains broader minimum versions for
+development only. In a fresh virtual environment:
 
 ```bash
 python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements-repro.txt
-python -m unittest discover -s tests -v
+python -m unittest discover -s tests -t . -v
 ```
+
+The same command runs in GitHub Actions on every pull request and push to
+`main`. A missing dependency is an incomplete environment, not a passing test;
+the CI job installs the pinned CPU build of PyTorch before collecting tests.
 
 Study 2 uses NumPy and Matplotlib and records all raw observations, actions,
 feedback and mechanistic traces in individually hashed gzip records, transported
