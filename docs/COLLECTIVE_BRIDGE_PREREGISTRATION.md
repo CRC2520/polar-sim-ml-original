@@ -10,7 +10,7 @@ These experiments test the proposed multilevel extension of POLAR. Experiment A 
 
 Neither experiment tests phenomenal consciousness. A positive result in A would consolidate a generic transmission mechanism. Only C can support the proposed cross-level coupling, and even a positive C result will not establish specificity to POLAR until matched non-polar comparators are tested.
 
-The collective simulation engine used in the 21-study package is not present in this repository. Implementation and execution remain blocked until the exact frozen artifact `POLAR_collective_viability_v1.2.zip` (expected SHA-256 `0c69799853d13eaceb43c70ea73fb34ba76a6dec0872a1f901c011cf768b8b38`) is made available. The implementation commit, environment lock and executable freeze manifest must be added before any confirmatory run.
+The v1.3 delivery supplied after this design freeze is preserved under `collective/precursor_v1_3/polar_AC/`. It contains the collective engine and an earlier eight-seed A/C study. That study is precursor evidence, not execution of this strengthened protocol: it uses one initial composition, final restraint rather than separation point, an inherited binary trait, and no equivalent-coordinate control. Confirmatory execution remains blocked until the implementation freeze, power analysis, immutable seed list and environment lock required below are committed.
 
 ## Shared rules
 
@@ -149,8 +149,8 @@ The implementation PR must add:
 
 ## Planned sequence
 
-1. Recover and verify the exact v1.2 collective package.
-2. Implement and unit-test A; calibrate equalization on non-confirmatory seeds.
+1. Preserve the verified v1.3 precursor and keep its results separate from this confirmatory design.
+2. Adapt and unit-test A from the preserved engine; calibrate equalization on non-confirmatory seeds.
 3. Freeze A and execute it before implementing outcome-informed changes to C.
 4. Implement the endogenous local-policy bridge and equivalent-coordinate control.
 5. Freeze and execute C.

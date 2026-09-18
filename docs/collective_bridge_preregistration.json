@@ -1,13 +1,14 @@
 {
   "schema_version": "1.0",
-  "status": "DESIGN_ONLY_NO_CONFIRMATORY_RUNS",
+  "status": "DESIGN_FROZEN_PRECURSOR_IMPORTED_NO_CONFIRMATORY_RUNS",
   "registered_at_utc": "2026-09-18",
   "repository_base_commit": "7b9a0a3f7d28fab9184c3ac12a216c43c1da2fbb",
   "required_collective_artifact": {
     "filename": "POLAR_collective_viability_v1.2.zip",
     "sha256": "0c69799853d13eaceb43c70ea73fb34ba76a6dec0872a1f901c011cf768b8b38",
-    "available_in_repository": false,
-    "execution_blocked": true
+    "available_in_repository": true,
+    "execution_blocked": true,
+    "note": "v1.3 precursor engine imported; confirmatory freeze requirements remain incomplete"
   },
   "shared": {
     "seed_status": "new_untouched_to_be_generated_and_frozen",
@@ -105,5 +106,22 @@
     "trace schema and invariants",
     "non-confirmatory dry-run tests",
     "freeze JSON hash published before confirmatory execution"
-  ]
+  ],
+  "precursor_v1_3": {
+    "source_artifact": "POLAR_collective_viability_v1.3.zip",
+    "sha256": "6e4c4bd42e523888926cc007752140c293edd2a59cbf9b7ce427c03f9d1c083d",
+    "repository_path": "collective/precursor_v1_3/polar_AC",
+    "classification": "precursor_not_execution_of_this_protocol",
+    "seeds_per_cell": 8,
+    "primary_outcome": "final_restraint",
+    "initial_compositions": {
+      "A": 0.6,
+      "C": 0.5
+    },
+    "limitations": [
+      "single initial composition",
+      "inherited binary trait",
+      "no equivalent-coordinate control"
+    ]
+  }
 }

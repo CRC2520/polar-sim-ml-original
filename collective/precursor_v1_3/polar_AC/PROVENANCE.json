@@ -1,0 +1,25 @@
+{
+  "source_artifact": "POLAR_collective_viability_v1.3.zip",
+  "source_artifact_sha256": "6e4c4bd42e523888926cc007752140c293edd2a59cbf9b7ce427c03f9d1c083d",
+  "outer_delivery": "files (2).zip",
+  "outer_delivery_sha256": "3e6473c0435b9047abf4a3516039da9920f6d232df9d026ff3680d15627a7ba6",
+  "classification": "precursor_registered_study_not_pr14_confirmation",
+  "preserved_original_files": [
+    "HIPOTESIS_AC.md",
+    "polar_ac.py",
+    "polar_ac_core.py",
+    "analyze_ac.py",
+    "resultados_AC.txt",
+    "AC_A_*.json",
+    "AC_C_*.json"
+  ],
+  "added_sensitivity_analysis": "analyze_ac_paired.py",
+  "limitations": [
+    "eight seeds per cell",
+    "one initial composition per study",
+    "final restraint rather than separation point",
+    "binary restraint trait remains inherited",
+    "no equivalent-coordinate control",
+    "registration chronology is not independently timestamped"
+  ]
+}
