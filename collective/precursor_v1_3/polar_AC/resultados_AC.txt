@@ -1,0 +1,18 @@
+=== ESTUDIO A: igualación del beneficio privado (inicio 0,60) ===
+régimen              sin igualar    con igualación   efecto   p (Mann-Whitney)
+imitación del éxito  0.288 (n=8)   0.683 (n=8)    +0.395   p=0.0011
+                     vivos 0.76          vivos 0.81
+  H-A1: SE CUMPLE
+conformidad          0.906 (n=8)   0.906 (n=8)    +0.000   p=0.5212
+                     vivos 0.98          vivos 0.98
+  H-A2 (interacción): efecto +0.395 (éxito) vs +0.000 (conformidad); diferencia +0.395 IC95 [+0.200, +0.570]
+        → SE CUMPLE
+
+=== ESTUDIO C: puente entre capas (conformidad, inicio 0,50) ===
+BASE                 contención 0.790 (n=8), vivos 0.95
+sin crítico de viabilidad    0.158  efecto -0.633  vivos 0.60  p=0.0053  p(Holm)=0.0160  difiere
+horizonte corto              0.858  efecto +0.068  vivos 0.88  p=0.8746  p(Holm)=1.0000  no difiere
+sin exploración dirigida     0.881  efecto +0.091  vivos 0.99  p=0.7128  p(Holm)=1.0000  no difiere
+
+H-C1: SE CUMPLE (1 de 3 variantes difieren de BASE)
+H-C2 (sin ancla reduce la contención): efecto -0.633 → SE CUMPLE
