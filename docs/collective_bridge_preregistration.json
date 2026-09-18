@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0",
+  "status": "DESIGN_ONLY_NO_CONFIRMATORY_RUNS",
+  "registered_at_utc": "2026-09-18",
+  "repository_base_commit": "7b9a0a3f7d28fab9184c3ac12a216c43c1da2fbb",
+  "required_collective_artifact": {
+    "filename": "POLAR_collective_viability_v1.2.zip",
+    "sha256": "0c69799853d13eaceb43c70ea73fb34ba76a6dec0872a1f901c011cf768b8b38",
+    "available_in_repository": false,
+    "execution_blocked": true
+  },
+  "shared": {
+    "seed_status": "new_untouched_to_be_generated_and_frozen",
+    "seeds_per_cell": {
+      "minimum": 30,
+      "maximum": 50,
+      "selection": "simulation_based_power_before_outcome_inspection",
+      "target_power": 0.8
+    },
+    "inferential_unit": "paired seed trajectory",
+    "alpha": 0.05,
+    "sidedness": "two-sided",
+    "multiplicity": "Holm within experiment",
+    "initial_composition_grid": [
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7
+    ]
+  },
+  "experiment_A": {
+    "title": "private-benefit equalization",
+    "factors": {
+      "transmission": [
+        "success_biased",
+        "conformity"
+      ],
+      "payoff": [
+        "original",
+        "equalized"
+      ]
+    },
+    "primary_outcome": "separation_point",
+    "primary_estimand": "(equalized-original shift under success-biased) - (equalized-original shift under conformity)",
+    "predicted_direction": "less_than_zero",
+    "equalization_tolerance_abs_standardized_survival_gap": 0.05,
+    "confirmatory_secondary": [
+      "final_restraint_difference_in_differences",
+      "population_viability_difference_in_differences",
+      "private_survival_gap_manipulation_check"
+    ],
+    "decision": [
+      "manipulation_tolerance_met",
+      "Holm-adjusted 95% CI excludes zero",
+      "effect direction preregistered"
+    ]
+  },
+  "experiment_C": {
+    "title": "local-regulation to population bridge",
+    "local_factors": {
+      "vital_anchor": [
+        "present",
+        "ablated"
+      ],
+      "valuation_horizon": [
+        "short",
+        "long"
+      ],
+      "exploration": [
+        "directed",
+        "blind_matched_rate"
+      ]
+    },
+    "transmission": [
+      "success_biased",
+      "conformity"
+    ],
+    "primary_outcome": "separation_point",
+    "primary_estimand": "p_star_ablated_short_blind - p_star_anchor_long_directed",
+    "predicted_direction": "greater_than_zero",
+    "component_confirmatory_contrasts": [
+      "vital_anchor",
+      "valuation_horizon",
+      "directed_exploration"
+    ],
+    "required_control": "signed_plus_intensity_equivalent_coordinates",
+    "interpretation": {
+      "primary_and_mechanism_pass_and_coordinate_control_survives": "supports distinctive cross-level POLAR coupling",
+      "primary_and_mechanism_pass_but_coordinate_control_fails": "supports generic local regulatory quality only",
+      "primary_fails": "rejects or narrows multilevel bridge"
+    }
+  },
+  "execution_freeze_requirements": [
+    "verified collective artifact",
+    "environment lock",
+    "source hashes",
+    "fixed numerical parameters",
+    "immutable seed list",
+    "power analysis",
+    "frozen estimator and bootstrap",
+    "trace schema and invariants",
+    "non-confirmatory dry-run tests",
+    "freeze JSON hash published before confirmatory execution"
+  ]
+}
