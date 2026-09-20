@@ -1,0 +1,43 @@
+{
+  "base_r9_commit": "a0696148e568c94365a26311953430b082a3725b",
+  "criteria_locked": true,
+  "final_seeds": [
+    972001,
+    972002,
+    972003,
+    972004,
+    972005,
+    972006,
+    972007,
+    972008,
+    972009,
+    972010,
+    972011,
+    972012,
+    972013,
+    972014,
+    972015,
+    972016
+  ],
+  "freeze_sha256": "bf34f2f7cac13127dd909ed5267b43123b15971dbc581721ddb077dd5e6380ed",
+  "note": "Local Git-backed freeze before confirmatory R10 execution; not external preregistration.",
+  "pilot_seeds": [
+    970101,
+    970102,
+    970103,
+    970104
+  ],
+  "schema": "POLAR-R10-FREEZE-v1",
+  "scientific_files": {
+    "r10_completion/PREREG_R10.md": "c825bcd40c063446b38106aa68ee7276db193c8e08420548c2b61960425e468e",
+    "r10_completion/config.py": "20cbed1e99794dbe726f0cba222ac22f503fc0b60df40749c2d017722914d00d",
+    "r10_completion/core.py": "acc1bd147e9cac0232e05a5f79b3b508ebd32989394b3414be6b220d718e5e1f",
+    "r10_completion/exp1_causal_state.py": "3264c26d093a18426b08febcacfaa17e11d51752b82c5214430692d39b96a1ac",
+    "r10_completion/exp2_isomorphic.py": "daa2fdada995ed43096857aafac1d5beb83f14366348caca105bb8762aeff451",
+    "r10_completion/exp3_gate.py": "683e008aa5266ee85e052f0f081cb8831e2963e7c198b46d692b49c694e34e48",
+    "r10_completion/exp4_transfer.py": "5a13af80a310e388a7b1dd690752ac66778869232ec0462fb07f08c4e5b72e78",
+    "r10_completion/exp5_integrated.py": "36b3b82044cad41671b91e3733224bc87e81f937fb429e4799d0609e7915bcbe",
+    "r10_completion/runner.py": "f2e300d994d5d3e7725b84d5cd310b9672f0c84edf37f019ae72e726bfcb7ed1",
+    "r10_completion/test_r10.py": "43cb56d41645ea09ad17e600ea047d5baf55d97d8465332704a54f3dc2ab6e02"
+  }
+}
