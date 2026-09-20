@@ -1,0 +1,1035 @@
+{
+  "candidates": [
+    {
+      "by_rule": {
+        "conformity": {
+          "bootstrap": {
+            "conditional_in_support_ci95": null,
+            "paired_across_grid": true,
+            "replicates": 0,
+            "seed": 946991,
+            "status_counts": {
+              "above_support_or_absent": 0,
+              "at_or_below_support": 0,
+              "no_unique_crossing": 0,
+              "within_support": 0
+            },
+            "valid_fraction": null
+          },
+          "confidence_bracket": null,
+          "confidence_bracket_status": "insufficient_confident_endpoints",
+          "confident_reversal": false,
+          "crossing_interval": [
+            0.1,
+            0.2
+          ],
+          "estimate": 0.15000000000000002,
+          "grid": [
+            0.0,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            1.0
+          ],
+          "interval_method": "Clopper-Pearson exact binomial; simultaneous 95% with Bonferroni over all grid points",
+          "marginal_ci95": [
+            [
+              0.052744950526316906,
+              0.8533672003653268
+            ],
+            [
+              0.052744950526316906,
+              0.8533672003653268
+            ],
+            [
+              0.14663279963467313,
+              0.9472550494736831
+            ],
+            [
+              0.2835820638819105,
+              0.9949492366205319
+            ],
+            [
+              0.2835820638819105,
+              0.9949492366205319
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ]
+          ],
+          "n_seeds": 5,
+          "probability": [
+            0.4,
+            0.4,
+            0.6,
+            0.8,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reliable_identification": false,
+          "simultaneous_ci95": [
+            [
+              0.015309034007639902,
+              0.9369751662563186
+            ],
+            [
+              0.015309034007639902,
+              0.9369751662563186
+            ],
+            [
+              0.06302483374368097,
+              0.98469096599236
+            ],
+            [
+              0.15078249455432702,
+              0.9995450407579299
+            ],
+            [
+              0.15078249455432702,
+              0.9995450407579299
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ]
+          ],
+          "status": "within_support",
+          "successes": [
+            2,
+            2,
+            3,
+            4,
+            4,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        "success": {
+          "bootstrap": {
+            "conditional_in_support_ci95": null,
+            "paired_across_grid": true,
+            "replicates": 0,
+            "seed": 946991,
+            "status_counts": {
+              "above_support_or_absent": 0,
+              "at_or_below_support": 0,
+              "no_unique_crossing": 0,
+              "within_support": 0
+            },
+            "valid_fraction": null
+          },
+          "confidence_bracket": null,
+          "confidence_bracket_status": "insufficient_confident_endpoints",
+          "confident_reversal": false,
+          "crossing_interval": [
+            0.2,
+            0.3
+          ],
+          "estimate": 0.25,
+          "grid": [
+            0.0,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            1.0
+          ],
+          "interval_method": "Clopper-Pearson exact binomial; simultaneous 95% with Bonferroni over all grid points",
+          "marginal_ci95": [
+            [
+              0.0050507633794680575,
+              0.7164179361180895
+            ],
+            [
+              0.0050507633794680575,
+              0.7164179361180895
+            ],
+            [
+              0.052744950526316906,
+              0.8533672003653268
+            ],
+            [
+              0.14663279963467313,
+              0.9472550494736831
+            ],
+            [
+              0.2835820638819105,
+              0.9949492366205319
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ]
+          ],
+          "n_seeds": 5,
+          "probability": [
+            0.2,
+            0.2,
+            0.4,
+            0.6,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "reliable_identification": false,
+          "simultaneous_ci95": [
+            [
+              0.0004549592420700576,
+              0.8492175054456722
+            ],
+            [
+              0.0004549592420700576,
+              0.8492175054456722
+            ],
+            [
+              0.015309034007639902,
+              0.9369751662563186
+            ],
+            [
+              0.06302483374368097,
+              0.98469096599236
+            ],
+            [
+              0.15078249455432702,
+              0.9995450407579299
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ]
+          ],
+          "status": "within_support",
+          "successes": [
+            1,
+            1,
+            2,
+            3,
+            4,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ]
+        }
+      },
+      "distance_from_half": 0.3,
+      "eligible": false,
+      "endpoint_criterion_met": false,
+      "mean_threshold": 0.2,
+      "pressure": 0.3,
+      "thresholds": {
+        "conformity": 0.15000000000000002,
+        "success": 0.25
+      },
+      "unique_crossings": true
+    },
+    {
+      "by_rule": {
+        "conformity": {
+          "bootstrap": {
+            "conditional_in_support_ci95": null,
+            "paired_across_grid": true,
+            "replicates": 0,
+            "seed": 946991,
+            "status_counts": {
+              "above_support_or_absent": 0,
+              "at_or_below_support": 0,
+              "no_unique_crossing": 0,
+              "within_support": 0
+            },
+            "valid_fraction": null
+          },
+          "confidence_bracket": null,
+          "confidence_bracket_status": "insufficient_confident_endpoints",
+          "confident_reversal": false,
+          "crossing_interval": [
+            0.5,
+            0.6
+          ],
+          "estimate": 0.55,
+          "grid": [
+            0.0,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            1.0
+          ],
+          "interval_method": "Clopper-Pearson exact binomial; simultaneous 95% with Bonferroni over all grid points",
+          "marginal_ci95": [
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0050507633794680575,
+              0.7164179361180895
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.052744950526316906,
+              0.8533672003653268
+            ],
+            [
+              0.14663279963467313,
+              0.9472550494736831
+            ],
+            [
+              0.2835820638819105,
+              0.9949492366205319
+            ],
+            [
+              0.2835820638819105,
+              0.9949492366205319
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ]
+          ],
+          "n_seeds": 5,
+          "probability": [
+            0.0,
+            0.0,
+            0.0,
+            0.2,
+            0.0,
+            0.4,
+            0.6,
+            0.8,
+            0.8,
+            1.0,
+            1.0
+          ],
+          "reliable_identification": false,
+          "simultaneous_ci95": [
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0004549592420700576,
+              0.8492175054456722
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.015309034007639902,
+              0.9369751662563186
+            ],
+            [
+              0.06302483374368097,
+              0.98469096599236
+            ],
+            [
+              0.15078249455432702,
+              0.9995450407579299
+            ],
+            [
+              0.15078249455432702,
+              0.9995450407579299
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ]
+          ],
+          "status": "within_support",
+          "successes": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            2,
+            3,
+            4,
+            4,
+            5,
+            5
+          ]
+        },
+        "success": {
+          "bootstrap": {
+            "conditional_in_support_ci95": null,
+            "paired_across_grid": true,
+            "replicates": 0,
+            "seed": 946991,
+            "status_counts": {
+              "above_support_or_absent": 0,
+              "at_or_below_support": 0,
+              "no_unique_crossing": 0,
+              "within_support": 0
+            },
+            "valid_fraction": null
+          },
+          "confidence_bracket": null,
+          "confidence_bracket_status": "insufficient_confident_endpoints",
+          "confident_reversal": false,
+          "crossing_interval": [
+            0.6,
+            0.7
+          ],
+          "estimate": 0.6749999999999999,
+          "grid": [
+            0.0,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            1.0
+          ],
+          "interval_method": "Clopper-Pearson exact binomial; simultaneous 95% with Bonferroni over all grid points",
+          "marginal_ci95": [
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0050507633794680575,
+              0.7164179361180895
+            ],
+            [
+              0.14663279963467313,
+              0.9472550494736831
+            ],
+            [
+              0.14663279963467313,
+              0.9472550494736831
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ],
+            [
+              0.4781762498950185,
+              1.0
+            ]
+          ],
+          "n_seeds": 5,
+          "probability": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.2,
+            0.6,
+            0.6,
+            1.0,
+            1.0
+          ],
+          "reliable_identification": false,
+          "simultaneous_ci95": [
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0004549592420700576,
+              0.8492175054456722
+            ],
+            [
+              0.06302483374368097,
+              0.98469096599236
+            ],
+            [
+              0.06302483374368097,
+              0.98469096599236
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ],
+            [
+              0.29601210051291055,
+              1.0
+            ]
+          ],
+          "status": "within_support",
+          "successes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            3,
+            3,
+            5,
+            5
+          ]
+        }
+      },
+      "distance_from_half": 0.11250000000000004,
+      "eligible": true,
+      "endpoint_criterion_met": true,
+      "mean_threshold": 0.6125,
+      "pressure": 0.45,
+      "thresholds": {
+        "conformity": 0.55,
+        "success": 0.6749999999999999
+      },
+      "unique_crossings": true
+    },
+    {
+      "by_rule": {
+        "conformity": {
+          "bootstrap": {
+            "conditional_in_support_ci95": null,
+            "paired_across_grid": true,
+            "replicates": 0,
+            "seed": 946991,
+            "status_counts": {
+              "above_support_or_absent": 0,
+              "at_or_below_support": 0,
+              "no_unique_crossing": 0,
+              "within_support": 0
+            },
+            "valid_fraction": null
+          },
+          "confidence_bracket": null,
+          "confidence_bracket_status": "insufficient_confident_endpoints",
+          "confident_reversal": false,
+          "crossing_interval": null,
+          "estimate": null,
+          "grid": [
+            0.0,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            1.0
+          ],
+          "interval_method": "Clopper-Pearson exact binomial; simultaneous 95% with Bonferroni over all grid points",
+          "marginal_ci95": [
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ]
+          ],
+          "n_seeds": 5,
+          "probability": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reliable_identification": false,
+          "simultaneous_ci95": [
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ]
+          ],
+          "status": "above_support_or_absent",
+          "successes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "success": {
+          "bootstrap": {
+            "conditional_in_support_ci95": null,
+            "paired_across_grid": true,
+            "replicates": 0,
+            "seed": 946991,
+            "status_counts": {
+              "above_support_or_absent": 0,
+              "at_or_below_support": 0,
+              "no_unique_crossing": 0,
+              "within_support": 0
+            },
+            "valid_fraction": null
+          },
+          "confidence_bracket": null,
+          "confidence_bracket_status": "insufficient_confident_endpoints",
+          "confident_reversal": false,
+          "crossing_interval": null,
+          "estimate": null,
+          "grid": [
+            0.0,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            1.0
+          ],
+          "interval_method": "Clopper-Pearson exact binomial; simultaneous 95% with Bonferroni over all grid points",
+          "marginal_ci95": [
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ],
+            [
+              0.0,
+              0.5218237501049814
+            ]
+          ],
+          "n_seeds": 5,
+          "probability": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "reliable_identification": false,
+          "simultaneous_ci95": [
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ],
+            [
+              0.0,
+              0.7039878994870883
+            ]
+          ],
+          "status": "above_support_or_absent",
+          "successes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "distance_from_half": null,
+      "eligible": false,
+      "endpoint_criterion_met": false,
+      "mean_threshold": null,
+      "pressure": 0.6,
+      "thresholds": {
+        "conformity": null,
+        "success": null
+      },
+      "unique_crossings": false
+    }
+  ],
+  "center": 0.6,
+  "final_diagnostic_only": false,
+  "grid": [
+    0.0,
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    1.0
+  ],
+  "grid_reason": "local_refinement_with_support_endpoints",
+  "local_points_in_support": [
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75
+  ],
+  "local_points_requested": [
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75
+  ],
+  "pilot_seeds": [
+    940031,
+    940032,
+    940033,
+    940034,
+    940035
+  ],
+  "pressure": 0.45,
+  "selected_thresholds": {
+    "conformity": 0.55,
+    "success": 0.6749999999999999
+  },
+  "selection_basis": "pilot only; both endpoint criteria and one observed crossing per rule",
+  "status": "selected",
+  "threshold_spread": 0.12499999999999989
+}
