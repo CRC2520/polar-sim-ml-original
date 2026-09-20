@@ -2,6 +2,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import numpy as np
+
+def _json_default(o):
+    if isinstance(o,np.generic): return o.item()
+    if isinstance(o,np.ndarray): return o.tolist()
+    raise TypeError(type(o).__name__)
 from .config_dev import DEV_SEEDS
 from .benchmarks import relational_benchmark,gate_benchmark,transfer_benchmark,integrated_benchmark
 
@@ -15,7 +20,7 @@ def main(out):
                transfer=transfer_benchmark(seed),
                integrated=integrated_benchmark(seed))
         rows.append(r)
-        (out/f"seed_{seed}.json").write_text(json.dumps(r,indent=2))
+        (out/f"seed_{seed}.json").write_text(json.dumps(r,indent=2,default=_json_default))
     def med(path):
         vals=[]
         for r in rows:
@@ -37,7 +42,7 @@ def main(out):
                       time=med(("integrated","time")),auc=med(("integrated","metacog_auc")),
                       cf=med(("integrated","counterfactual")),memory_damage=med(("integrated","memory_damage")),
                       content_drop=med(("integrated","content_drop")),cross_drop=med(("integrated","cross_drop"))))
-    (out/"PILOT_SUMMARY.json").write_text(json.dumps(summary,indent=2))
+    (out/"PILOT_SUMMARY.json").write_text(json.dumps(summary,indent=2,default=_json_default))
     (out/"PILOT_REPORT.md").write_text("# R11 development pilot\n\n"+json.dumps(summary,indent=2)+"\n")
     print(json.dumps(summary,indent=2))
 
