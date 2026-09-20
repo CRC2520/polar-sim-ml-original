@@ -1,1 +1,1 @@
-"""POLAR R11 causal-invariance experiments."""\n
+"""POLAR R11 causal-invariance experiments."""
