@@ -169,7 +169,9 @@ class CompactCausalAgent:
                     utility=utility,feasible=feasible,uncertainty=float(cand_u[action]),
                     candidate_uncertainty=cand_u,
                     goals=w.copy(),context=self._context(obs))
-    def complete(self,obs,action,nxt,reward,policy,learn=True,learn_gate=True):
+    def complete(self,obs,action,nxt,reward,policy,learn=True,learn_gate=True,learn_model=None,learn_memory=None):
+        if learn_model is None: learn_model=learn
+        if learn_memory is None: learn_memory=learn
         target=np.r_[np.asarray(nxt,float),float(reward)]
         xl=_local_phi(obs); xc=self._interaction_phi(obs)
         pred_l=self.local[action].predict(xl); pred_f=self.cross[action].predict(xc)
