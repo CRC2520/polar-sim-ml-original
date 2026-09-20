@@ -1,0 +1,50 @@
+{
+  "repository": "CRC2520/polar-sim-ml-original",
+  "commit": "2d2d51120409ad39559e1311897bd6b99bbf748e",
+  "files": {
+    "docs/NETWORK_TENSION_SPEC.md": {
+      "git_blob": "2f3726cbe8aeb4f84edc775c25b80c669145c871",
+      "url": "https://github.com/CRC2520/polar-sim-ml-original/blob/2d2d51120409ad39559e1311897bd6b99bbf748e/docs/NETWORK_TENSION_SPEC.md"
+    },
+    "network_tension.py": {
+      "git_blob": "037e7a4464372b3e4e5067502326e2387a893470",
+      "url": "https://github.com/CRC2520/polar-sim-ml-original/blob/2d2d51120409ad39559e1311897bd6b99bbf748e/network_tension.py"
+    },
+    "polar/model.py": {
+      "git_blob": "703bfcb93d3fca7857596f8f26845b8b7410b659",
+      "url": "https://github.com/CRC2520/polar-sim-ml-original/blob/2d2d51120409ad39559e1311897bd6b99bbf748e/polar/model.py"
+    },
+    "tests/test_network_tension.py": {
+      "git_blob": "b3d701eaf6e15ae3fe519a10d203408f14ead3bf",
+      "url": "https://github.com/CRC2520/polar-sim-ml-original/blob/2d2d51120409ad39559e1311897bd6b99bbf748e/tests/test_network_tension.py"
+    },
+    "scripts/probe_network_tension.py": {
+      "git_blob": "c19bfe10ee32066bbcd9172e2d4ca0fce67f3dd7",
+      "url": "https://github.com/CRC2520/polar-sim-ml-original/blob/2d2d51120409ad39559e1311897bd6b99bbf748e/scripts/probe_network_tension.py"
+    },
+    "polar/__init__.py": {
+      "git_blob": "4b156518797f26f6da8802215940b53700e18763",
+      "url": "https://github.com/CRC2520/polar-sim-ml-original/blob/2d2d51120409ad39559e1311897bd6b99bbf748e/polar/__init__.py"
+    },
+    "polar/polarities.py": {
+      "git_blob": "0ff0dd1ca05de0421090a22eeed51801b8cd1b0f",
+      "url": "https://github.com/CRC2520/polar-sim-ml-original/blob/2d2d51120409ad39559e1311897bd6b99bbf748e/polar/polarities.py"
+    },
+    "polar/workspace.py": {
+      "git_blob": "fd312e813569ab99fb939ee4dcffd026a0651546",
+      "url": "https://github.com/CRC2520/polar-sim-ml-original/blob/2d2d51120409ad39559e1311897bd6b99bbf748e/polar/workspace.py"
+    },
+    "polar/memory.py": {
+      "git_blob": "ad4ce20499596e09fc2576d751f269e2c1a9fd29",
+      "url": "https://github.com/CRC2520/polar-sim-ml-original/blob/2d2d51120409ad39559e1311897bd6b99bbf748e/polar/memory.py"
+    },
+    "polar/tasks.py": {
+      "git_blob": "fcddaeaa8b20e130ea699928cfee6e658be6db1c",
+      "url": "https://github.com/CRC2520/polar-sim-ml-original/blob/2d2d51120409ad39559e1311897bd6b99bbf748e/polar/tasks.py"
+    },
+    "polar/baselines.py": {
+      "git_blob": "bcdfc66b1165d4f439cf7cc48feb0ff51d7f50bb",
+      "url": "https://github.com/CRC2520/polar-sim-ml-original/blob/2d2d51120409ad39559e1311897bd6b99bbf748e/polar/baselines.py"
+    }
+  }
+}
