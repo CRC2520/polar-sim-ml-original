@@ -148,7 +148,7 @@ class CompactCausalAgent:
                 mm=m.copy()
                 if permuted_content:
                     mm[:3]=mm[[2,0,1]]
-                pred[a]=.8*pred[a]+.2*mm
+                pred[a]=.65*pred[a]+.35*mm
         return pred,g,lp,fp
     def prepare(self,obs,force_gate=None,permuted_content=False,no_memory=False,no_cross=False):
         self.workspace.goal_update(obs)
