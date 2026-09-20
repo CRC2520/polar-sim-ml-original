@@ -81,8 +81,14 @@ def verify():
         relabeled = original.clone()
         relabeled.state["lineage"] = 1 - relabeled.state["lineage"]
         one, two = original.episode(2), relabeled.episode(2)
+        # Whole-state fingerprints deliberately include the altered inert labels.
+        # Their inequality is required for provenance, not a behavioral failure.
+        state_fingerprints = ("initial_state_sha256", "final_state_sha256")
+        for key in state_fingerprints:
+            if np.any(one[key] == two[key]):
+                raise AssertionError(f"Relabeling was not recorded in {key}")
         for key in one:
-            if key != "lineage_fraction":
+            if key not in ("lineage_fraction", *state_fingerprints):
                 np.testing.assert_array_equal(one[key], two[key])
         for key in original.state:
             if key != "lineage":
