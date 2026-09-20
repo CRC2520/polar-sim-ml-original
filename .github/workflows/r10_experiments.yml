@@ -50,6 +50,10 @@ jobs:
               }
               print('SEED',json.dumps(out,sort_keys=True))
           PY
+      - name: Generate candidate scientific freeze manifest
+        run: |
+          python -m r10_completion.freeze --output r10_results/pilot/FREEZE_CANDIDATE.json
+          cat r10_results/pilot/FREEZE_CANDIDATE.json
       - uses: actions/upload-artifact@v4
         with:
           name: r10-pilot-results
