@@ -1,0 +1,52 @@
+name: POLAR R10 five discriminating experiments
+
+on:
+  pull_request:
+    paths:
+      - "r10_discriminating/**"
+      - ".github/workflows/r10-discriminating.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  r10:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-repro.txt
+      - name: Install frozen CPU environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements-repro.txt
+      - name: Run R9 regression tests touched by R10
+        run: |
+          python -m unittest r9_completion.test_network r9_completion.test_workspace r9_completion.test_agent -v
+      - name: Run R10 smoke tests
+        run: python -m unittest r10_discriminating.test_r10 -v
+      - name: Execute pilot plus 12-seed confirmatory campaign
+        run: python -m r10_discriminating.run --output r10_results/current
+      - name: Print report
+        run: cat r10_results/current/REPORT_R10.md
+      - name: Upload frozen R10 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: polar-r10-five-discriminating-experiments
+          path: |
+            r10_discriminating/PREREG_R10.md
+            r10_discriminating/config.py
+            r10_discriminating/experiments.py
+            r10_results/current/
+          if-no-files-found: error
+          retention-days: 90
