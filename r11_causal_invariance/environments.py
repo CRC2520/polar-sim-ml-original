@@ -147,6 +147,7 @@ class AttributionTransferEnvV2:
         # self-dominated and mixed cases without exposing labels to the policy.
         self.shock=((idx+phase)%8==0)
         self.mixed=((idx+phase)%13==0)
+        self.supply=np.where((idx+phase)%5==0,.045,.002)
         sign=np.where(((idx+phase)//8)%2==0,1.,-1.)
         self.shock_mag=np.where(self.shock,.032*sign,0.) + np.where(self.mixed,.018*(-sign),0.)
         base=.44+.22*np.sin(2*np.pi*(idx+phase)/56.)
@@ -161,19 +162,26 @@ class AttributionTransferEnvV2:
         oldd=self.demand; self.demand=float(self.demand_tape[self.t])
         self_vec=np.array([-.20*flow,.060*(flow/.12)-.016*(flow/.12)**2,0.])
         shock=float(self.shock_mag[self.t])
-        world_vec=np.array([.50*shock,.65*shock,self.demand-oldd])
-        self.reserve=float(np.clip(self.reserve+.022+self_vec[0]+world_vec[0],0,1))
-        self.health=float(np.clip(self.health+.005+self_vec[1]+world_vec[1]-.0045*self.demand,0,1))
+        world_vec=np.array([float(self.supply[self.t])+.50*shock,
+                            .004+.65*shock-.0045*self.demand,
+                            self.demand-oldd])
+        self.reserve=float(np.clip(self.reserve+self_vec[0]+world_vec[0],0,1))
+        self.health=float(np.clip(self.health+self_vec[1]+world_vec[1],0,1))
         self.alive=bool(self.alive and self.reserve>.06 and self.health>.12)
         target=.018+.092*self.demand
         service=min(1.,flow/max(target,1e-9))
         balance=1.-min(1.,abs(self.reserve-self.health))
         reward=float(service*(.55+.30*self.health+.15*balance)*(1-.07*flow/.12) if self.alive else 0.)
         sm=float(np.linalg.norm(self_vec[:2])); wm=float(np.linalg.norm(world_vec[:2]))
-        if wm>1.35*max(sm,1e-9): source=1
-        elif sm>1.35*max(wm,1e-9): source=0
-        else: source=2
-        if wm>.018:
+        self_active=sm>.012
+        world_active=wm>.012
+        if not self_active:
+            source=1
+        elif world_active:
+            source=2
+        else:
+            source=0
+        if world_active:
             self.last_world=self.t
         age=self.t-self.last_world
         agebin=0 if age==0 else 1 if age<=2 else 2 if age<=7 else 3
