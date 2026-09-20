@@ -1,47 +1,13 @@
-name: POLAR R11 pilot only
+name: POLAR R11a pilot archived
 
 on:
-  pull_request:
-    paths:
-      - "r11_causal_invariance/**"
-      - ".github/workflows/r11-pilot.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  pilot:
+  archived:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
-    env:
-      OMP_NUM_THREADS: "1"
-      OPENBLAS_NUM_THREADS: "1"
-      MKL_NUM_THREADS: "1"
-      PYTHONHASHSEED: "0"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-          cache-dependency-path: requirements-repro.txt
-      - name: Install minimal R11 numeric environment
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install numpy==2.3.5
-      - name: R9/R10 regression smoke
-        run: |
-          python -m unittest r9_completion.test_network r9_completion.test_workspace r10_discriminating.test_r10 -v
-          python -m unittest r11_causal_invariance.test_r11 -v
-      - name: Execute pilot seeds only
-        run: python -m r11_causal_invariance.pilot --output r11_results/pilot
-      - run: cat r11_results/pilot/PILOT_REPORT.md
-      - uses: actions/upload-artifact@v4
-        with:
-          name: polar-r11-pilot
-          path: |
-            r11_causal_invariance/PREREG_R11.md
-            r11_causal_invariance/PILOT_CHOICES.md
-            r11_results/pilot/
-          retention-days: 90
+      - run: echo "R11a development pilot is archived; see R11A_PILOT_ADJUDICATION.md."
