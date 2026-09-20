@@ -1,10 +1,6 @@
 name: POLAR R10 five discriminating experiments
 
 on:
-  pull_request:
-    paths:
-      - "r10_discriminating/**"
-      - ".github/workflows/r10-discriminating.yml"
   workflow_dispatch:
 
 permissions:
