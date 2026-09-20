@@ -33,6 +33,23 @@ jobs:
         run: python -m unittest r10_completion.test_r10 -v
       - name: Run excluded R10 pilot
         run: python -m r10_completion.runner --phase pilot --output r10_results/pilot
+      - name: Print compact pilot diagnostics
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('r10_results/pilot/R10_RESULTS.json'))
+          print('AGG', json.dumps(p['aggregate'],sort_keys=True))
+          for r in p['per_seed']:
+              out={
+                'seed':r['seed'],
+                'E1':{'pass':r['E1']['pass_strong'],'d':r['E1']['selected_dimension'],'m':r['E1']['confirmatory']},
+                'E2':{'pass':r['E2']['pass_strong'],'exact':r['E2']['exact_isomorphism'],'struct':r['E2']['matched_structural']},
+                'E3':{'pass':r['E3']['pass_strong'],'m':r['E3']['confirmatory']},
+                'E4':{'pass':r['E4']['pass_strong'],'heldout':r['E4']['heldout']},
+                'E5':{'pass':r['E5']['pass_strong'],'intact':r['E5']['intact'],'signatures':r['E5']['lesion_signatures'],'n':r['E5']['signature_count']}
+              }
+              print('SEED',json.dumps(out,sort_keys=True))
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: r10-pilot-results
