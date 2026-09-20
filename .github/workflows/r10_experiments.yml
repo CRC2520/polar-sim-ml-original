@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  source-and-tests:
+  pilot-and-qa:
     if: github.head_ref == 'research/r10-five-experiments-20260920'
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -27,8 +27,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements-repro.txt
-      - name: Run current regression tests
+      - name: Run repository regression tests
         run: python -m unittest discover -s tests -t . -v
+      - name: Run R10 contract tests
+        run: python -m unittest r10_completion.test_r10 -v
+      - name: Run excluded R10 pilot
+        run: python -m r10_completion.runner --phase pilot --output r10_results/pilot
       - name: Archive exact branch source
         run: |
           git rev-parse HEAD > SOURCE_COMMIT.txt
@@ -36,8 +40,9 @@ jobs:
           sha256sum source.tar.gz > source.tar.gz.sha256
       - uses: actions/upload-artifact@v4
         with:
-          name: r10-source-snapshot
+          name: r10-pilot-and-source
           path: |
+            r10_results/pilot/
             source.tar.gz
             source.tar.gz.sha256
             SOURCE_COMMIT.txt
