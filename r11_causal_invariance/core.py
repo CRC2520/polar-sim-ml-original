@@ -94,16 +94,24 @@ class R11Agent:
         risk=np.maximum(0.,self.risk_floor-pred[:,1])
         native=(self.adapter_weight*immediate+(1-self.adapter_weight)*np.asarray(p['scores'])+
                 .12*(delayed-immediate)-1.5*risk)
-        feasible=np.asarray(p['feasible'],bool)
+        base_feasible=np.asarray(p['feasible'],bool)
+        if np.any(usable):
+            feasible=pred[:,1]>=self.risk_floor
+            if not np.any(feasible):
+                feasible=np.zeros(4,bool); feasible[int(np.argmax(pred[:,1]))]=True
+        else:
+            feasible=base_feasible.copy()
         if adaptation_probe and self.step_index<64:
-            ids=np.flatnonzero(feasible)
-            action=int(ids[self.step_index%len(ids)]) if len(ids) else int(p['action'])
+            # Declared uniform causal probe. It bypasses the inherited R9 mask only
+            # during the feasibility-audited adaptation window.
+            action=int(self.step_index%4)
         else:
             action=int(np.argmax(np.where(feasible,native,-np.inf)))
         self_effect=pred-pred[0:1]
         counterfactual_reward=pred[:,3].copy()
         out=dict(base=p,features=x,adapter_predictions=adap,adapter_usable=usable,
-                 predictions=pred,native_scores=native,action=action,
+                 predictions=pred,native_scores=native,action=action,feasible=feasible,
+                 inherited_feasible=base_feasible,
                  counterfactual_reward=counterfactual_reward,
                  confidence=float(self.confidence),source_class=int(self.source_class),
                  world_age=int(self.world_age),memory_usable=memory_usable,
