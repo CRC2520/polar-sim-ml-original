@@ -55,6 +55,7 @@ class R11Agent:
         self.step_index=0; self.last_policy=None; self.last_obs=None
         self.source_class=2; self.world_age=99; self.confidence=.5
         self.last_world_strength=0.; self.last_self_strength=0.
+        self.memory_err=.30; self.persistence_err=.30; self.memory_count=0
     def reset_episode(self,obs,variant='full',reset_adapter=False):
         self.base.reset_episode(np.asarray(obs,float),variant)
         self.step_index=0; self.last_policy=None; self.last_obs=np.asarray(obs,float).copy()
@@ -85,7 +86,11 @@ class R11Agent:
         pred[usable]=adap[usable]
         w=np.asarray(p['goals'],float); w=w/max(w.sum(),1e-9)
         immediate=w[0]*pred[:,1]+w[1]*pred[:,0]+w[2]*pred[:,3]
-        delayed=w[0]*np.asarray(p['memory_energy'])+w[1]*np.asarray(p['memory_resource'])+w[2]*pred[:,3]
+        memory_usable=bool(self.memory_count>=12 and self.memory_err+.005<self.persistence_err)
+        if memory_usable and variant!='noMemory':
+            delayed=w[0]*np.asarray(p['memory_energy'])+w[1]*np.asarray(p['memory_resource'])+w[2]*pred[:,3]
+        else:
+            delayed=w[0]*float(obs[1])+w[1]*float(obs[0])+w[2]*pred[:,3]
         risk=np.maximum(0.,self.risk_floor-pred[:,1])
         native=(self.adapter_weight*immediate+(1-self.adapter_weight)*np.asarray(p['scores'])+
                 .12*(delayed-immediate)-1.5*risk)
@@ -101,7 +106,8 @@ class R11Agent:
                  predictions=pred,native_scores=native,action=action,
                  counterfactual_reward=counterfactual_reward,
                  confidence=float(self.confidence),source_class=int(self.source_class),
-                 world_age=int(self.world_age))
+                 world_age=int(self.world_age),memory_usable=memory_usable,
+                 memory_error=float(self.memory_err),persistence_error=float(self.persistence_err))
         self.last_policy=out; self.last_obs=obs.copy()
         return out
     def complete(self,obs,action,nxt,reward,policy,learn_base=False,terminal=False,update_adapter=True):
@@ -120,8 +126,17 @@ class R11Agent:
         if wm>1.35*max(sm,1e-8): self.source_class=1
         elif sm>1.35*max(wm,1e-8): self.source_class=0
         else: self.source_class=2
-        if wm>.045: self.world_age=0
-        else: self.world_age=min(99,self.world_age+1)
+        if self.source_class in (1,2) and wm>.018:
+            self.world_age=0
+        else:
+            self.world_age=min(99,self.world_age+1)
+        mem_pred=np.array([policy['base']['memory_energy'][a],policy['base']['memory_resource'][a]],float)
+        persist_pred=np.array([obs[1],obs[0]],float)
+        mem_target=np.array([nxt[1],nxt[0]],float)
+        rate=.08
+        self.memory_err=(1-rate)*self.memory_err+rate*float(np.mean(np.abs(mem_target-mem_pred)))
+        self.persistence_err=(1-rate)*self.persistence_err+rate*float(np.mean(np.abs(mem_target-persist_pred)))
+        self.memory_count+=1
         e=float(np.mean(np.abs(target-policy['predictions'][a])))
         self.confidence=float(1./(1.+5.*e))
         self.base.complete_transition(obs,a,nxt,reward,policy['base'],learn=learn_base,terminal=terminal)
