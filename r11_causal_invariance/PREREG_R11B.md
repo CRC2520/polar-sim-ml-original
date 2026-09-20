@@ -22,6 +22,11 @@ R11 uses R9 unchanged plus the 39-dimensional causal-invariance adapter:
 15 causal-core coordinates (current factual error, uncertainty, goals, delayed memory forecasts).
 Action-specific RLS/L1 models learn only from the agent's own executed transitions.
 A reliability comparison against R9 controls whether learned predictions enter decision making.
+During the declared first-64-step adaptation window the agent cycles the four actions as a
+uniform causal probe, explicitly bypassing the inherited R9 empirical mask; this is permitted
+only because target-family feasibility is audited first. After adaptation, once adapter
+predictions are reliable, their predicted energy and the frozen risk floor replace the
+ecology-specific R9 feasibility mask, with a deterministic maximum-energy fallback.
 Memory forecasts are additionally utility-gated against a persistence baseline.
 Native source attribution is defined from predicted action effect versus unexplained residual;
 world-event age resets from the agent's own source estimate, not evaluator labels.
