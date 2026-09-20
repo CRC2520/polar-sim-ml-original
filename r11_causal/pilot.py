@@ -4,7 +4,8 @@ from pathlib import Path
 import numpy as np
 from .config_dev import DEV_SEEDS
 from .benchmarks import relational_benchmark
-from .benchmarks_v2 import gate_benchmark_v2,transfer_benchmark_v2,integrated_benchmark_v2
+from .benchmarks_v2 import gate_benchmark_v2
+from .benchmarks_v3 import transfer_benchmark_v3,integrated_benchmark_v3
 
 def _default(o):
     if isinstance(o,np.generic): return o.item()
@@ -18,8 +19,8 @@ def main(out):
         r=dict(seed=seed,
                specificity=relational_benchmark(seed),
                gate=gate_benchmark_v2(seed),
-               transfer=transfer_benchmark_v2(seed),
-               integrated=integrated_benchmark_v2(seed))
+               transfer=transfer_benchmark_v3(seed),
+               integrated=integrated_benchmark_v3(seed))
         rows.append(r)
         (out/f"seed_{seed}.json").write_text(json.dumps(r,indent=2,default=_default))
     def med(path):
@@ -33,7 +34,7 @@ def main(out):
       specificity=dict(recovered=med(("specificity","recovered")),gain=med(("specificity","mse_gain"))),
       gate=dict(accuracy=med(("gate","accuracy")),gain=med(("gate","gain")),perm_damage=med(("gate","permutation_damage"))),
       transfer=dict(
-        cyclic_oracle_return=med(("transfer","cyclic_buffer_v2","oracle","return_mean")),
+        cyclic_oracle_return=med(("transfer","cyclic_buffer_v3","oracle","return_mean")),
         cyclic_oracle_alive=med(("transfer","cyclic_buffer_v2","oracle","alive_fraction")),
         cyclic_return=med(("transfer","cyclic_buffer_v2","adaptive","return_mean")),
         cyclic_alive=med(("transfer","cyclic_buffer_v2","adaptive","alive_fraction")),
