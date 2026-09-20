@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  pilot-and-qa:
+  confirmatory:
     if: github.head_ref == 'research/r10-five-experiments-20260920'
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -29,33 +29,48 @@ jobs:
           python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements-repro.txt
       - name: Run repository regression tests
         run: python -m unittest discover -s tests -t . -v
-      - name: Run R10 contract tests
+      - name: Run frozen R10 contract tests
         run: python -m unittest r10_completion.test_r10 -v
-      - name: Run excluded R10 pilot
-        run: python -m r10_completion.runner --phase pilot --output r10_results/pilot
-      - name: Print compact pilot diagnostics
+      - name: Verify R10 scientific freeze
+        run: python -m r10_completion.freeze --verify r10_completion/FREEZE_R10.json
+      - name: Run 16-seed confirmatory campaign
+        run: python -m r10_completion.runner --phase final --output r10_results/final
+      - name: Print final decisions and per-seed pass vectors
         run: |
           python - <<'PY'
           import json
-          p=json.load(open('r10_results/pilot/R10_RESULTS.json'))
-          print('AGG', json.dumps(p['aggregate'],sort_keys=True))
+          p=json.load(open('r10_results/final/R10_RESULTS.json'))
+          print('FINAL_AGG',json.dumps(p['aggregate'],sort_keys=True))
           for r in p['per_seed']:
-              out={
-                'seed':r['seed'],
-                'E1':{'pass':r['E1']['pass_strong'],'d':r['E1']['selected_dimension'],'m':r['E1']['confirmatory']},
-                'E2':{'pass':r['E2']['pass_strong'],'exact':r['E2']['exact_isomorphism'],'struct':r['E2']['matched_structural']},
-                'E3':{'pass':r['E3']['pass_strong'],'m':r['E3']['confirmatory']},
-                'E4':{'pass':r['E4']['pass_strong'],'heldout':r['E4']['heldout']},
-                'E5':{'pass':r['E5']['pass_strong'],'intact':r['E5']['intact'],'signatures':r['E5']['lesion_signatures'],'n':r['E5']['signature_count']}
-              }
-              print('SEED',json.dumps(out,sort_keys=True))
+              print('FINAL_SEED',json.dumps({
+                  'seed':r['seed'],
+                  'pass':{k:r[k]['pass_strong'] for k in ('E1','E2','E3','E4','E5')},
+                  'E1_d':r['E1']['selected_dimension'],
+                  'E2_adv':r['E2']['matched_structural']['return_advantage'],
+                  'E3_acc':r['E3']['confirmatory']['gate_balanced_accuracy'],
+                  'E3_adv':r['E3']['confirmatory']['advantage_best_constant'],
+                  'E4_queue':r['E4']['heldout']['queue'],
+                  'E4_inertia':r['E4']['heldout']['inertia'],
+                  'E5_intact':r['E5']['intact'],
+                  'E5_signatures':r['E5']['lesion_signatures'],
+              },sort_keys=True))
           PY
-      - name: Generate candidate scientific freeze manifest
+      - name: Deterministic seed replay audit
         run: |
-          python -m r10_completion.freeze --output r10_results/pilot/FREEZE_CANDIDATE.json
-          cat r10_results/pilot/FREEZE_CANDIDATE.json
+          python - <<'PY'
+          import json
+          from r10_completion.runner import run_seed
+          from r10_completion.core import jsonable
+          old=json.load(open('r10_results/final/seed_972001.json'))
+          new=jsonable(run_seed(972001))
+          a=json.dumps(old,sort_keys=True,separators=(',',':'),allow_nan=False)
+          b=json.dumps(new,sort_keys=True,separators=(',',':'),allow_nan=False)
+          assert a==b, 'confirmatory seed replay mismatch'
+          open('r10_results/final/REPLAY_972001.txt','w').write('PASS exact deterministic replay\n')
+          print('REPLAY_972001 PASS exact')
+          PY
       - uses: actions/upload-artifact@v4
         with:
-          name: r10-pilot-results
-          path: r10_results/pilot/
+          name: r10-confirmatory-results
+          path: r10_results/final/
           if-no-files-found: error
