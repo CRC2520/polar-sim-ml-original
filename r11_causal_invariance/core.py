@@ -47,7 +47,7 @@ class R11Agent:
         self.base=copy.deepcopy(base); self.generic=bool(generic)
         self.reliability_margin=float(reliability_margin); self.adapter_weight=float(adapter_weight)
         self.risk_floor=float(risk_floor)
-        self.dim=42
+        self.dim=39
         self.adapter=OnlineAdapter(self.dim,forgetting,l1,min_samples)
         rng=np.random.default_rng(int(base.seed)^0x11CA)
         q,_=np.linalg.qr(rng.normal(size=(self.dim,self.dim)))
