@@ -1,0 +1,44 @@
+name: R10 five-experiment campaign
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  source-and-tests:
+    if: github.head_ref == 'research/r10-five-experiments-20260920'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-repro.txt
+      - name: Install frozen CPU environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements-repro.txt
+      - name: Run current regression tests
+        run: python -m unittest discover -s tests -t . -v
+      - name: Archive exact branch source
+        run: |
+          git rev-parse HEAD > SOURCE_COMMIT.txt
+          git archive --format=tar.gz --output=source.tar.gz HEAD
+          sha256sum source.tar.gz > source.tar.gz.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r10-source-snapshot
+          path: |
+            source.tar.gz
+            source.tar.gz.sha256
+            SOURCE_COMMIT.txt
+          if-no-files-found: error
