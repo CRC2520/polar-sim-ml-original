@@ -101,6 +101,8 @@ class CompactCausalAgent:
         self.cross=[RLS() for _ in range(4)]
         self.workspace=CompactWorkspace()
         self.shared=RLS()
+        self.action_effect=np.zeros((4,4),float)
+        self.effect_count=np.zeros(4,dtype=int)
         # Utility gate regression: context -> observed utility advantage full-local
         self.gate_P=np.eye(8)*GATE_RIDGE
         self.gate_coef=np.zeros(8)
