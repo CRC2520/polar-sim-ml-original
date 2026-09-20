@@ -149,7 +149,8 @@ class CompactCausalAgent:
             if m is not None:
                 mm=m.copy()
                 if permuted_content:
-                    mm[:3]=mm[[2,0,1]]
+                    # Typed-content lesion: same four scalars, wrong semantic slots.
+                    mm=mm[[2,0,3,1]]
                 pred[a]=.65*pred[a]+.35*mm
         return pred,g,lp,fp
     def prepare(self,obs,force_gate=None,permuted_content=False,no_memory=False,no_cross=False):
