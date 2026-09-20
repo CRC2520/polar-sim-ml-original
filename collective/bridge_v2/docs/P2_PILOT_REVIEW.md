@@ -1,0 +1,13 @@
+# P2 pilot and execution gate
+
+The scientific design is exploratory and fixed in `P2_IMPLEMENTATION_MANIFEST.json`. Three pilot seeds (919001–919003) were used solely before the public implementation freeze. Final seeds 920001–920030 remain unopened until that freeze is committed.
+
+The pilot executed 18 history conditions and 48 transfer conditions per seed, plus 30 source-learning episodes across five training histories/controllers. Five dedicated intervention/reconstruction unit tests pass. All eight sham, inert-label and donor-rescue trajectory comparisons are exact. Sixteen selected initial states replay to exactly the saved transitions, final states and original endpoint values. Every metric from all 96 pilot cases is independently regenerated from compact action/alive/resource traces; the maximum floating-point difference is 3.33e-16.
+
+Two interrupted storage attempts produced incomplete NPZ central directories. These artifacts were not accepted as evidence and no final seed was used. Storage was repaired by completing full transient traces outside the workspace, validating compact archives in memory, and publishing them atomically; complete state arrays are deduplicated across conditions. The accepted compact pilot contains no invalid NPZ archives and occupies approximately 9.4 MB. Scientific summaries are exactly identical to the earlier successfully completed full-storage pilot. The superseded storage attempts are intermediate debugging artifacts, not additional scientific runs.
+
+The pilot finds nonzero influence of both learned values and delayed physical ecology under matched current states, while sham/label controls behave as expected. Transfer effects relative to the shared-successor comparator vary by target; equivalent coordinates give zero survival differences. No parameter, target, outcome, or condition was selected or removed based on those signs. The final study retains all predetermined targets and failures.
+
+Thirty final seeds provide descriptive paired uncertainty, not an assertion of 80% power. Bootstrap samples resample a whole seed across its compared conditions. Intervals are not multiplicity-adjusted confirmatory tests. The `polar_minus_generic` export label means independent-max tabular value heads minus the capacity-matched common-successor controller; neither implements the complete eight-polarity tension architecture.
+
+Accepted pilot evidence: `results/p2_pilot_compact/P2_RESULTS.json.gz`, `P2_SUMMARY.json`, `P2_REPLAY.json`, all state recipes/arrays, and compact traces. This is within-project computational reproduction, not independent external replication.
