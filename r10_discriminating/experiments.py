@@ -101,14 +101,17 @@ def _reference_trace(agent, domain, episode):
 
 
 def _csd_one(agent, subset, domain='ecology_delay9', episode=851):
+    """Offline same-state diagnostics plus a genuinely closed-loop lesioned rerun."""
     from r9_completion.environments import ScalarEnvironment
-    env = ScalarEnvironment(domain)
     tape_domain = 'ecology_train' if domain == 'ecology_delay9' else domain
-    obs = env.reset(tape_seed(agent.seed, episode, tape_domain))
+    env_seed = tape_seed(agent.seed, episode, tape_domain)
+
+    # Reference trajectory: shadow lesions see exactly the same observation/internal pre-state.
+    ref_env = ScalarEnvironment(domain)
+    obs = ref_env.reset(env_seed)
     full = copy.deepcopy(agent); full.reset_episode(obs)
-    cand = copy.deepcopy(agent); cand.reset_episode(obs)
     shadow_agree=[]; gate_agree=[]; mem_err=[]; unc_err=[]
-    full_rewards=[]; full_alive=[]; cand_rewards=[]; cand_alive=[]
+    full_rewards=[]; full_alive=[]
     for step in range(PROTOCOL['steps']):
         pf = full.prepare(obs)
         shadow = copy.deepcopy(full)
@@ -120,20 +123,26 @@ def _csd_one(agent, subset, domain='ecology_delay9', episode=851):
         ms = np.r_[ps['memory_energy'], ps['memory_resource']]
         mem_err.append(float(np.mean(np.abs(mf-ms))))
         unc_err.append(abs(float(pf['gate_context'][-1])-float(ps['gate_context'][-1])))
+        action=int(pf['action'])
+        nxt,reward,_,info=ref_env.step(action)
+        full.complete_transition(obs,action,nxt,reward,pf,learn=False)
+        full_rewards.append(reward); full_alive.append(float(info['alive']))
+        obs=nxt
 
-        # Reference executes on a copied environment state so the candidate owns the factual path.
-        env_ref = copy.deepcopy(env)
-        nf, rf, _, infof = env_ref.step(int(pf['action']))
-        full.complete_transition(obs, int(pf['action']), nf, rf, pf, learn=False)
-        full_rewards.append(rf); full_alive.append(float(infof['alive']))
-
-        pc = cand.prepare(obs)
-        action = int(pc['action'])
-        nxt, reward, _, info = env.step(action)
-        cand.complete_transition(obs, action, nxt, reward, pc, learn=False)
+    # Candidate trajectory: omitted blocks are removed after every factual transition.
+    cand_env = ScalarEnvironment(domain)
+    obs = cand_env.reset(env_seed)
+    cand = copy.deepcopy(agent); cand.reset_episode(obs)
+    _lesion_dynamic_state(cand, subset, obs)
+    cand_rewards=[]; cand_alive=[]
+    for step in range(PROTOCOL['steps']):
+        pc=cand.prepare(obs); action=int(pc['action'])
+        nxt,reward,_,info=cand_env.step(action)
+        cand.complete_transition(obs,action,nxt,reward,pc,learn=False)
         _lesion_dynamic_state(cand, subset, nxt)
         cand_rewards.append(reward); cand_alive.append(float(info['alive']))
-        obs = nxt
+        obs=nxt
+
     return dict(subset=sorted(subset), action_agreement=float(np.mean(shadow_agree)),
                 gate_agreement=float(np.mean(gate_agree)), memory_mae=float(np.mean(mem_err)),
                 uncertainty_mae=float(np.mean(unc_err)),
@@ -281,11 +290,17 @@ def experiment3(seed):
                 coefficients=coef.tolist())
 
 
+def _stable_seed(seed, label):
+    raw=hashlib.sha256(f"R10|{int(seed)}|{label}".encode()).digest()
+    return int.from_bytes(raw[:8],"little") & 0xffffffff
+
+
 def experiment4(full,dense,seed):
     out={}; ok=True
     for name,env in [('cyclic_buffer',CyclicBufferEnv),('repair_queue',RepairQueueEnv)]:
-        fs=_run_custom(full,env,seed^hash(name)&0xffffffff)
-        ds=_run_custom(dense,env,seed^hash(name)&0xffffffff)
+        evseed=_stable_seed(seed,name)
+        fs=_run_custom(full,env,evseed)
+        ds=_run_custom(dense,env,evseed)
         dR=fs['return_mean']-ds['return_mean']; dA=fs['alive_fraction']-ds['alive_fraction']
         passed=(fs['alive_fraction']>=E4_ALIVE and fs['return_mean']>=E4_RETURN and
                 dR>=E4_RETURN_NONINFERIOR and dA>=E4_ALIVE_NONINFERIOR)
