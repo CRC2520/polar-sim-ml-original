@@ -35,10 +35,10 @@ def main(out):
       gate=dict(accuracy=med(("gate","accuracy")),gain=med(("gate","gain")),perm_damage=med(("gate","permutation_damage"))),
       transfer=dict(
         cyclic_oracle_return=med(("transfer","cyclic_buffer_v3","oracle","return_mean")),
-        cyclic_oracle_alive=med(("transfer","cyclic_buffer_v2","oracle","alive_fraction")),
-        cyclic_return=med(("transfer","cyclic_buffer_v2","adaptive","return_mean")),
-        cyclic_alive=med(("transfer","cyclic_buffer_v2","adaptive","alive_fraction")),
-        cyclic_gain=med(("transfer","cyclic_buffer_v2","reward_gain")),
+        cyclic_oracle_alive=med(("transfer","cyclic_buffer_v3","oracle","alive_fraction")),
+        cyclic_return=med(("transfer","cyclic_buffer_v3","adaptive","return_mean")),
+        cyclic_alive=med(("transfer","cyclic_buffer_v3","adaptive","alive_fraction")),
+        cyclic_gain=med(("transfer","cyclic_buffer_v3","reward_gain")),
         repair_oracle_return=med(("transfer","repair_queue_v2","oracle","return_mean")),
         repair_oracle_alive=med(("transfer","repair_queue_v2","oracle","alive_fraction")),
         repair_return=med(("transfer","repair_queue_v2","adaptive","return_mean")),
@@ -50,7 +50,7 @@ def main(out):
                       cf=med(("integrated","counterfactual")),memory_damage=med(("integrated","memory_damage")),
                       content_drop=med(("integrated","content_drop")),cross_drop=med(("integrated","cross_drop"))))
     (out/"PILOT_SUMMARY.json").write_text(json.dumps(summary,indent=2,default=_default))
-    (out/"PILOT_REPORT.md").write_text("# R11 development pilot v2\n\n"+json.dumps(summary,indent=2,default=_default)+"\n")
+    (out/"PILOT_REPORT.md").write_text("# R11 development pilot v3\n\n"+json.dumps(summary,indent=2,default=_default)+"\n")
     print(json.dumps(summary,indent=2,default=_default))
 
 if __name__=="__main__":
