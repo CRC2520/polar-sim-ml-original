@@ -28,8 +28,10 @@ only because target-family feasibility is audited first. After adaptation, once 
 predictions are reliable, their predicted energy and the frozen risk floor replace the
 ecology-specific R9 feasibility mask, with a deterministic maximum-energy fallback.
 Memory forecasts are additionally utility-gated against a persistence baseline.
-Native source attribution is defined from predicted action effect versus unexplained residual;
-world-event age resets from the agent's own source estimate, not evaluator labels.
+Native source attribution is defined from predicted action effect versus unexplained residual:
+below a fixed action-effect threshold it reports world/no-self, with both action and residual
+active it reports mixed, and otherwise self. World-event age resets only when the native
+world component exceeds its fixed threshold; evaluator labels are never used.
 
 ## E2 — isomorphic relational control
 Unchanged substantive R11 criterion: relational vs fixed orthogonal isomorphic basis, equal
