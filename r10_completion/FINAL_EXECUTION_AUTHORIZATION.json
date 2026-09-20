@@ -1,0 +1,25 @@
+{
+  "schema": "POLAR-R10-FINAL-AUTH-v1",
+  "authorized": true,
+  "freeze_sha256": "bf34f2f7cac13127dd909ed5267b43123b15971dbc581721ddb077dd5e6380ed",
+  "final_seeds": [
+    972001,
+    972002,
+    972003,
+    972004,
+    972005,
+    972006,
+    972007,
+    972008,
+    972009,
+    972010,
+    972011,
+    972012,
+    972013,
+    972014,
+    972015,
+    972016
+  ],
+  "authorization_scope": "Run the frozen R10 five-experiment confirmatory campaign exactly once as the primary result. Replays are audits only.",
+  "criteria_may_change": false
+}
