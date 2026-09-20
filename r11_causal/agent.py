@@ -15,6 +15,12 @@ def _phi(obs):
     r,e,d=np.asarray(obs,float)
     return np.array([1.,r,e,d,r*e,r*d,e*d,r*r,e*e,d*d],float)
 
+def _local_phi(obs):
+    # Same allocated width, but local route cannot use cross-variable interactions.
+    x=_phi(obs)
+    x[4:7]=0.
+    return x
+
 def _key(obs,action):
     r,e,d=np.clip(np.asarray(obs,float),0,1)
     q=lambda x:min(MEM_BINS-1,int(x*MEM_BINS))
@@ -27,13 +33,19 @@ class RLS:
         self.theta[1,0]=1.; self.theta[2,1]=1.; self.theta[3,2]=1.
         self.P=np.eye(nin)*RLS_RIDGE
         self.n=0
+        self.err_var=np.full(nout,.04,float)
     def predict(self,x): return np.asarray(x,float)@self.theta
+    def scale(self,x):
+        x=np.asarray(x,float)
+        leverage=max(1.,1.+float(x@self.P@x))
+        return float(np.sqrt(np.mean(self.err_var))*np.sqrt(leverage))
     def update(self,x,y):
         x=np.asarray(x,float); y=np.asarray(y,float)
         Px=self.P@x
         den=RLS_FORGET+x@Px
         k=Px/max(den,1e-9)
         err=y-x@self.theta
+        self.err_var=.97*self.err_var+.03*err*err
         self.theta += np.outer(k,err)
         self.P=(self.P-np.outer(k,x)@self.P)/RLS_FORGET
         self.P=(self.P+self.P.T)/2
@@ -88,6 +100,7 @@ class CompactCausalAgent:
         self.local=[RLS() for _ in range(4)]
         self.cross=[RLS() for _ in range(4)]
         self.workspace=CompactWorkspace()
+        self.shared=RLS()
         # Utility gate regression: context -> observed utility advantage full-local
         self.gate_P=np.eye(8)*GATE_RIDGE
         self.gate_coef=np.zeros(8)
@@ -118,7 +131,7 @@ class CompactCausalAgent:
         return 1/(1+math.exp(-max(-30,min(30,5*v))))
     def predictions(self,obs,force_gate=None,permuted_content=False,no_memory=False):
         lp=[]; fp=[]; memories=[]
-        xlocal=_phi(obs); xcross=self._interaction_phi(obs)
+        xlocal=_local_phi(obs); xcross=self._interaction_phi(obs)
         for a in range(4):
             l=self.local[a].predict(xlocal)
             f=self.cross[a].predict(xcross)
@@ -142,20 +155,25 @@ class CompactCausalAgent:
         fg=0. if no_cross else force_gate
         pred,g,lp,fp=self.predictions(obs,fg,permuted_content,no_memory)
         w=self.workspace.goal_weights
-        # [reserve, health, task/reward] utility with explicit uncertainty penalty
-        u=self.workspace.uncertainty()
-        utility=w[1]*pred[:,0]+w[0]*pred[:,1]+w[2]*pred[:,3]-.12*u
-        floor=.18
-        feasible=pred[:,1]-.75*u>=floor
-        if not feasible.any(): feasible[int(np.argmax(pred[:,1]-.75*u))]=True
+        # Action-specific epistemic/residual uncertainty plus compact ERR state.
+        xl=_local_phi(obs); xc=self._interaction_phi(obs)
+        model_u=np.array([(1-g)*self.local[a].scale(xl)+g*self.cross[a].scale(xc) for a in range(4)])
+        base_u=self.workspace.uncertainty()
+        cand_u=np.clip(.45*base_u+.55*model_u,0.,1.)
+        utility=w[1]*pred[:,0]+w[0]*pred[:,1]+w[2]*pred[:,3]-.10*cand_u
+        floor=.15
+        feasible=pred[:,1]-.55*cand_u>=floor
+        if not feasible.any(): feasible[int(np.argmax(pred[:,1]-.55*cand_u))]=True
         action=int(np.argmax(np.where(feasible,utility,-np.inf)))
         return dict(action=action,pred=pred,local=lp,full=fp,gate=float(g),
-                    utility=utility,feasible=feasible,uncertainty=float(u),
+                    utility=utility,feasible=feasible,uncertainty=float(cand_u[action]),
+                    candidate_uncertainty=cand_u,
                     goals=w.copy(),context=self._context(obs))
     def complete(self,obs,action,nxt,reward,policy,learn=True,learn_gate=True):
         target=np.r_[np.asarray(nxt,float),float(reward)]
-        xl=_phi(obs); xc=self._interaction_phi(obs)
+        xl=_local_phi(obs); xc=self._interaction_phi(obs)
         pred_l=self.local[action].predict(xl); pred_f=self.cross[action].predict(xc)
+        shared_pred=self.shared.predict(_phi(obs))
         if learn:
             el=self.local[action].update(xl,target)
             ef=self.cross[action].update(xc,target)
@@ -165,10 +183,10 @@ class CompactCausalAgent:
             self.workspace.error_hist=np.roll(self.workspace.error_hist,-1,axis=0)
             self.workspace.error_hist[-1]=err
             self.workspace.error_count+=1
-            # native source estimate: own expected action effect vs residual
-            base=self.local[0].predict(xl)[:3]
-            self_effect=pred_l[:3]-base
-            residual=np.asarray(nxt)-np.clip(pred_l[:3],0,1)
+            # Native source estimate: action-conditioned deviation from shared context model
+            # versus unpredicted residual.  No evaluator source label is used.
+            self_effect=policy["pred"][action,:3]-np.clip(shared_pred[:3],0,1)
+            residual=np.asarray(nxt)-policy["pred"][action,:3]
             sm=float(np.linalg.norm(self_effect)); wm=float(np.linalg.norm(residual))
             if wm>1.35*max(sm,1e-8): src=1
             elif sm>1.35*max(wm,1e-8): src=0
