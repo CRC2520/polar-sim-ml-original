@@ -146,12 +146,12 @@ class CompactCausalAgent:
         pred[:,3]=np.clip(pred[:,3],0,1)
         # Typed memory directly modifies the same candidate values.
         for a,m in enumerate(memories):
-            if m is not None:
-                mm=m.copy()
-                if permuted_content:
-                    # Typed-content lesion: same four scalars, wrong semantic slots.
-                    mm=mm[[2,0,3,1]]
-                pred[a]=.65*pred[a]+.35*mm
+            mm=m
+            if permuted_content:
+                # Same typed memory records but attached to the wrong candidate action.
+                mm=memories[(a+1)%4]
+            if mm is not None:
+                pred[a]=.35*pred[a]+.65*np.asarray(mm,float)
         return pred,g,lp,fp
     def prepare(self,obs,force_gate=None,permuted_content=False,no_memory=False,no_cross=False):
         self.workspace.goal_update(obs)
