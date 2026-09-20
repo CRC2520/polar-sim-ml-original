@@ -74,6 +74,8 @@ def verify_final_authorization():
     f=json.loads(freeze.read_text()); a=json.loads(auth.read_text())
     if not a.get("authorized") or a.get("freeze_sha256")!=f.get("freeze_sha256"):
         raise RuntimeError("Final authorization does not match frozen source")
+    from .freeze import verify
+    verify(f)
 
 def main():
     p=argparse.ArgumentParser()
