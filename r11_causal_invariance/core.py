@@ -131,10 +131,15 @@ class R11Agent:
         residual=observed-self_delta
         sm=float(np.linalg.norm(self_delta)); wm=float(np.linalg.norm(residual))
         self.last_self_strength=sm; self.last_world_strength=wm
-        if wm>1.35*max(sm,1e-8): self.source_class=1
-        elif sm>1.35*max(wm,1e-8): self.source_class=0
-        else: self.source_class=2
-        if self.source_class in (1,2) and wm>.018:
+        self_active=sm>.012
+        world_active=wm>.012
+        if not self_active:
+            self.source_class=1
+        elif world_active:
+            self.source_class=2
+        else:
+            self.source_class=0
+        if self.source_class in (1,2) and world_active:
             self.world_age=0
         else:
             self.world_age=min(99,self.world_age+1)
