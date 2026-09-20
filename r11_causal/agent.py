@@ -93,6 +93,9 @@ class CompactWorkspace:
         e=self.memory.get(_key(obs,action))
         if e is None: return None
         return np.r_[np.clip(np.asarray(obs)+e["delta"],0,1),e["reward"]]
+    def count(self,obs,action):
+        e=self.memory.get(_key(obs,action))
+        return 0 if e is None else int(e["n"])
 
 class CompactCausalAgent:
     def __init__(self,seed,relation_mode="polar"):
@@ -163,14 +166,16 @@ class CompactCausalAgent:
         model_u=np.array([(1-g)*self.local[a].scale(xl)+g*self.cross[a].scale(xc) for a in range(4)])
         base_u=self.workspace.uncertainty()
         cand_u=np.clip(.45*base_u+.55*model_u,0.,1.)
-        utility=w[1]*pred[:,0]+w[0]*pred[:,1]+w[2]*pred[:,3]-.10*cand_u
+        memory_counts=np.array([self.workspace.count(obs,a) for a in range(4)],float)
+        novelty=np.zeros(4) if no_memory else 1./np.sqrt(1.+memory_counts)
+        utility=w[1]*pred[:,0]+w[0]*pred[:,1]+w[2]*pred[:,3]-.10*cand_u+.05*novelty
         floor=.15
         feasible=pred[:,1]-.55*cand_u>=floor
         if not feasible.any(): feasible[int(np.argmax(pred[:,1]-.55*cand_u))]=True
         action=int(np.argmax(np.where(feasible,utility,-np.inf)))
         return dict(action=action,pred=pred,local=lp,full=fp,gate=float(g),
                     utility=utility,feasible=feasible,uncertainty=float(cand_u[action]),
-                    candidate_uncertainty=cand_u,
+                    candidate_uncertainty=cand_u,novelty=novelty,memory_counts=memory_counts,
                     goals=w.copy(),context=self._context(obs))
     def complete(self,obs,action,nxt,reward,policy,learn=True,learn_gate=True,learn_model=None,learn_memory=None):
         if learn_model is None: learn_model=learn
