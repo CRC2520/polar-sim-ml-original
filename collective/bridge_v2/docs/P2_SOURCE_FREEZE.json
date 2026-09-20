@@ -1,0 +1,14 @@
+{
+  "schema": "polar-p2-public-freeze-20260920",
+  "status": "source and design frozen before final seeds; descriptive study, not external preregistration",
+  "seed_status": "920001\u2013920030 unopened at source-freeze creation",
+  "python": "3.12.14",
+  "sha256": {
+    "collective/bridge_v2/__init__.py": "e392392d80be6066e021dd2bc32d612f63da35e89a1be85497f8457a2a8170e0",
+    "collective/bridge_v2/engine.py": "48330c1a88a2312182bb488dae0096e2ccf674c6fe2b0ca7ddf6fa9b8a29dccc",
+    "collective/bridge_v2/history_transfer.py": "fde1953830540ec61b3d84f98e175f72e5b601ffbc1572cf0fe73cbff522ef90",
+    "collective/bridge_v2/tests/test_history_transfer.py": "31d6f3fbe8d4360be45734bcf92148bc305594f7ea491ce83a8c697f9dbfdc41",
+    "collective/bridge_v2/docs/HISTORY_TRANSFER_PROTOCOL.md": "31ab4f2ff83c555b435fde434c978ab8cf1ec6bb425195ee10918e265d87dbdd",
+    "collective/bridge_v2/docs/P2_IMPLEMENTATION_MANIFEST.json": "ae2b5acac1b4c1c31111434626878c47b11077865a8fb4c9d511be3829362075"
+  }
+}

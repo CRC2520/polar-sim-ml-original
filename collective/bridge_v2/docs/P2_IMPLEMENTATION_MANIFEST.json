@@ -1,0 +1,178 @@
+{
+  "config": {
+    "agents": 20,
+    "alpha": 0.1,
+    "capacity_per_agent": 20.0,
+    "death_penalty": 50.0,
+    "epsilon": 0.05,
+    "gamma_group": 0.97,
+    "gamma_take": 0.5,
+    "gamma_vitality": 0.97,
+    "generations": 6,
+    "groups": 6,
+    "growth_amplitude": 0.085,
+    "growth_mean": 0.165,
+    "growth_period": 1000,
+    "initial_resource_fraction": 0.8,
+    "initial_restraint_prior": 0.5,
+    "initial_vitality": 5.0,
+    "max_vitality": 10.0,
+    "metabolism": 0.3,
+    "mutation": 0.01,
+    "observation_sd": 10.0,
+    "regeneration_delay": 5,
+    "replace_groups": 2,
+    "restraint_cost": 3.0,
+    "steps": 240,
+    "tail_generations": 2,
+    "temperature": 0.05,
+    "transmission": "success",
+    "viable_alive": 0.8,
+    "viable_resource": 0.2,
+    "warmup": 4
+  },
+  "consciousness_claim": false,
+  "final_seeds": [
+    920001,
+    920002,
+    920003,
+    920004,
+    920005,
+    920006,
+    920007,
+    920008,
+    920009,
+    920010,
+    920011,
+    920012,
+    920013,
+    920014,
+    920015,
+    920016,
+    920017,
+    920018,
+    920019,
+    920020,
+    920021,
+    920022,
+    920023,
+    920024,
+    920025,
+    920026,
+    920027,
+    920028,
+    920029,
+    920030
+  ],
+  "history_ecologies": {
+    "high": {
+      "growth_amplitude": 0.035,
+      "growth_mean": 0.22
+    },
+    "low": {
+      "growth_amplitude": 0.035,
+      "growth_mean": 0.12
+    }
+  },
+  "history_treatments": {
+    "all_history": [
+      "qt",
+      "qv",
+      "qg",
+      "visits",
+      "resource_history",
+      "lineage"
+    ],
+    "baseline": [],
+    "controller": [
+      "qt",
+      "qv",
+      "qg",
+      "visits"
+    ],
+    "controller_ecology": [
+      "qt",
+      "qv",
+      "qg",
+      "visits",
+      "resource_history"
+    ],
+    "counts_only": [
+      "visits"
+    ],
+    "ecology": [
+      "resource_history"
+    ],
+    "lineage": [
+      "lineage"
+    ],
+    "q_only": [
+      "qt",
+      "qv",
+      "qg"
+    ],
+    "sham": []
+  },
+  "inference": "exploratory descriptive paired-seed study",
+  "matching": {
+    "alive": true,
+    "future_generation_key": 100,
+    "initial_composition": 0.5,
+    "resource_fraction": 0.5,
+    "vitality": 5.0
+  },
+  "metrics": [
+    "alive_fraction",
+    "resource_fraction",
+    "restraint_behavior",
+    "action_mean",
+    "viable_groups"
+  ],
+  "pilot_seeds": [
+    919001,
+    919002,
+    919003
+  ],
+  "primary_metric": "alive_fraction",
+  "probe_steps": 240,
+  "schema": "polar-bridge-p2-v1",
+  "trace_schema": {
+    "Q_trajectory": "reconstructed from initial state, policy and deterministic replay",
+    "initial_state": "JSON recipes + content-addressed exact NPZ arrays",
+    "randomness": "keyed seed/generation/stream tapes; no hidden RNG",
+    "saved_fields": [
+      "action",
+      "resource_after",
+      "alive_after"
+    ]
+  },
+  "train_episodes": 6,
+  "train_steps": 240,
+  "transfer_controllers": [
+    "full",
+    "generic_shared_target",
+    "coordinate_equivalent"
+  ],
+  "transfer_memory": [
+    "trained",
+    "untrained_reset"
+  ],
+  "transfer_modes": {
+    "adaptive": true,
+    "zero_shot": false
+  },
+  "transfer_targets": {
+    "high_metabolism": {
+      "metabolism": 0.42
+    },
+    "low_growth": {
+      "growth_amplitude": 0.035,
+      "growth_mean": 0.12
+    },
+    "resource_shock": {
+      "initial_resource_fraction": 0.35
+    },
+    "source": {}
+  },
+  "uncertainty": "paired seed bootstrap, 10000 draws, 95%; no confirmatory multiplicity claim"
+}

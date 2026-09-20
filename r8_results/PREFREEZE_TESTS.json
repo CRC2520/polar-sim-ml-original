@@ -1,0 +1,8 @@
+{
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m unittest discover -s r8_completion -p tests_*.py -v",
+  "exit_code": 0,
+  "finished_at_utc": "2026-09-20T17:21:08.583106+00:00",
+  "log_sha256": "2662ee5bf0b585c8b66b3bbafdfa7384922f2b68d3ea3e29f5be0d8aceed59c1",
+  "passed_tests": 61,
+  "started_at_utc": "2026-09-20T17:21:06.173890+00:00"
+}
