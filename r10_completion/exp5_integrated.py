@@ -113,7 +113,9 @@ def _step_agent(agent,tape,t,comp_true,lesion=None,training=False,records=None):
         cue=tape.source_noise[t].copy(); cue[source_true]+=1.
         source_pred=agent.source_class(cue,lesion)
         if lesion!="memory":
-            agent.memory.append(dict(t=t,source=source_true,value=truth))
+            # Native memory stores the agent's own inferred source and decision,
+            # never evaluator-only source/primary labels.
+            agent.memory.append(dict(t=t,source=int(source_pred),value=int(pred)))
             if len(agent.memory)>128: agent.memory=agent.memory[-128:]
 
     mem_source_true=mem_source_pred=age_true=age_pred=None
