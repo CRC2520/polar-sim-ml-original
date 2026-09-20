@@ -42,10 +42,17 @@ def run(seed):
     train=_sequence(seed+101,STEPS_E3_TRAIN)
     valid=_sequence(seed+202,STEPS_E3_VALID)
     test=_sequence(seed+303,STEPS_E3_TEST)
-    # Fit only to a training label saying whether observed cross use reduced factual error.
-    # In this constructed benchmark that label is the evaluator's cross-useful state;
-    # it is never provided during final policy execution.
-    gate_w=fit_logistic(train['gate_features'],train['mode'],steps=700,lr=.06,l2=.01)
+    # Fit from factual prediction gain on exploratory training actions.
+    # The hidden regime/mode is never supplied as a training target or policy input.
+    rng=np.random.default_rng(seed+404)
+    exploratory=rng.integers(0,4,len(train['mode']))
+    idx=np.arange(len(exploratory))
+    factual=np.clip(train['true'][idx,exploratory]+rng.normal(0,.025,len(idx)),0,1)
+    local=train['local'][idx,exploratory]
+    with_cross=local+train['cross'][idx,exploratory]
+    factual_gain=(factual-local)**2-(factual-with_cross)**2
+    gate_target=(factual_gain>0).astype(float)
+    gate_w=fit_logistic(train['gate_features'],gate_target,steps=700,lr=.06,l2=.01)
     p_valid=logistic_predict(valid['gate_features'],gate_w)
     p_test=logistic_predict(test['gate_features'],gate_w)
     learned=(p_test>=.5).astype(float)
