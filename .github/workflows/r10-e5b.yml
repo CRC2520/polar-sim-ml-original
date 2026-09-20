@@ -1,10 +1,6 @@
 name: POLAR R10 E5b validity-controlled corrective
 
 on:
-  pull_request:
-    paths:
-      - "r10_followup/**"
-      - ".github/workflows/r10-e5b.yml"
   workflow_dispatch:
 
 permissions:
