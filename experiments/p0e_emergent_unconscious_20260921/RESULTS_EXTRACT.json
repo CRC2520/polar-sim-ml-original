@@ -1,0 +1,41 @@
+{
+  "campaign": "P0-E Emergent Latent Unconscious",
+  "execution_date": "2026-09-21",
+  "confirmatory_seeds": [1202001,1202002,1202003,1202004,1202005,1202006,1202007,1202008,1202009,1202010,1202011,1202012],
+  "training_steps_per_agent": 500,
+  "global_verdict": "EMERGENT_FUNCTIONAL_SEPARATION_PASS",
+  "seed_guard_pass_count": 12,
+  "medians": {
+    "hidden_memory_auc": 1.0,
+    "current_only_auc": 0.5091270365458489,
+    "workspace_near_auc": 0.6679755355304446,
+    "hidden_minus_workspace_auc": 0.3320244644695553,
+    "workspace_query_auc": 1.0,
+    "workspace_promotion_gain": 0.3320244644695553,
+    "near_action_acc": 1.0,
+    "query_report_acc": 1.0,
+    "memory_lesion_action_drop": 0.47583335638046265,
+    "memory_lesion_near_acc": 0.5241666436195374,
+    "random_lesion_action_drop": 0.0,
+    "current_evidence_base_acc": 1.0,
+    "current_evidence_lesion_drop": 0.0
+  },
+  "secondary_update_metrics": {
+    "post_action_acc": 0.8325,
+    "post_query_acc": 0.83,
+    "recon_update_acc": 0.7207450444292549,
+    "no_reactivation_preserve_acc": 0.790301974448316,
+    "reactivation_no_contradiction_preserve_acc": 1.0,
+    "post_hidden_updated_auc": 0.9399326012293212
+  },
+  "reproducibility": {
+    "executable_sha256": "296acf3a37002dc885eb76c1996ca08164f3645a01b8613b1f4f0ce097e65175",
+    "prereg_sha256": "9d946ee10d600fd44d1919a52d884b37fa8915e61d1035a462b623f74091ebbf",
+    "architecture_sha256": "29ab58bf49dae4d05754a3261a0f9b62a34ccca6adb35df3a1a32b7f14048198",
+    "confirmatory_sha256": "ece8854da71cbb9f226516c40ecf0191de8253e056b8704fbce5f7ffef179506",
+    "audit_sha256": "04d7b302d0547ab6eb9c5a034c5716cccdfe80c42e4257d1819f4fe31027fdd4",
+    "audit": "25/25 PASS",
+    "selected_byte_identical_replays": [1202001,1202010,1202012],
+    "full_12_seed_replay_claimed": false
+  }
+}
