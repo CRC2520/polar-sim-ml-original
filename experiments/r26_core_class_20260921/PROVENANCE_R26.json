@@ -1,0 +1,25 @@
+{
+  "confirmatory_run_id": 35647665203,
+  "confirmatory_artifact_id": 10661465430,
+  "confirmatory_artifact_digest": "sha256:ab68d28daf843f22920cf5565772804e349ff9ed2a836f54891450e2b72bfbfd",
+  "confirmatory_commit": "23675d73184f2819ac4e3450911ee3af4f114001",
+  "source_sha256": "5217ff2124db15eeb883c9b66816727490f74085aa1e8a4c92d4944155cf30f4",
+  "source_blob_sha": "ff62e62b95a27afa107d0c314b612940a49c5643",
+  "development_run_id": 35647228720,
+  "development_artifact_id": 10660841057,
+  "confirmatory_seeds": [
+    1407001,
+    1407002,
+    1407003,
+    1407004,
+    1407005,
+    1407006,
+    1407007,
+    1407008,
+    1407009,
+    1407010,
+    1407011,
+    1407012
+  ],
+  "note": "Raw confirmatory results are preserved in the GitHub Actions artifact; adjudication and summary are committed to the branch. R26 automatic workflows were closed after seed opening."
+}
