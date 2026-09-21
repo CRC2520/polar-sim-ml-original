@@ -10,7 +10,7 @@ A_RETENTION=.98
 
 # B — autobiographical self / identity-specific history
 B_PRED_GAIN=.05
-B_TRANSPLANT_PRED_DAMAGE=.30
+B_TRANSPLANT_PRED_DAMAGE=.20
 B_TRANSPLANT_REWARD_DAMAGE=.20
 
 # C — endogenous goal-priority adaptation
