@@ -1,0 +1,48 @@
+name: R26 core-class development
+
+on:
+  push:
+    branches: [research/r26-core-class-20260921]
+
+permissions:
+  contents: read
+
+jobs:
+  r26-dev:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install numerical dependencies
+        run: python -m pip install numpy==2.3.5 scipy==1.17.0
+      - name: Record source identity
+        run: |
+          git rev-parse HEAD > experiments/r26_core_class_20260921/DEV_COMMIT.txt
+          sha256sum experiments/r26_core_class_20260921/r26_core_class.py > experiments/r26_core_class_20260921/DEV_CODE_SHA256.txt
+      - name: Run development seeds only
+        run: |
+          python experiments/r26_core_class_20260921/r26_core_class.py             --seeds 1406001:1406004             --mode dev             --output experiments/r26_core_class_20260921/R26_DEV_RESULTS.json
+      - name: Guard against confirmatory seed leakage
+        run: |
+          python - <<'PY'
+          import json
+          p='experiments/r26_core_class_20260921/R26_DEV_RESULTS.json'
+          d=json.load(open(p))
+          assert d['seeds']==list(range(1406001,1406005))
+          assert all(x < 1407001 for x in d['seeds'])
+          print('development-only seed guard PASS')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r26-development
+          path: |
+            experiments/r26_core_class_20260921/R26_DEV_RESULTS.json
+            experiments/r26_core_class_20260921/DEV_COMMIT.txt
+            experiments/r26_core_class_20260921/DEV_CODE_SHA256.txt
