@@ -1,0 +1,17 @@
+{
+  "campaign": "P0-E Emergent Latent Unconscious",
+  "status": "PASS",
+  "checks_passed": 25,
+  "checks_total": 25,
+  "confirmatory_sha256": "ece8854da71cbb9f226516c40ecf0191de8253e056b8704fbce5f7ffef179506",
+  "audit_sha256": "04d7b302d0547ab6eb9c5a034c5716cccdfe80c42e4257d1819f4fe31027fdd4",
+  "seed_guard_pass_count": 12,
+  "all_median_criteria_pass": true,
+  "selected_exact_replays": {
+    "1202001": "e77e33f1fde92c9228a10a1235570f56809a6755edd93bf36b8e39fcee5edbac",
+    "1202010": "0212c37094240b40fabcefcf30d43eec63c22fe3111417d1be177c2193e9cb9e",
+    "1202012": "fb39d95a7409925ca56ea4f22df1580b0d283f7042b5c24913b500ad3b41dbb9"
+  },
+  "full_12_seed_exact_replay": "not claimed; session runner timed out during sequential replay",
+  "scientific_boundary": "Functional separation only; emergent reconsolidation remains open."
+}
