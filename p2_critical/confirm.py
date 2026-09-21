@@ -3,19 +3,24 @@ import argparse, hashlib, json
 from pathlib import Path
 import numpy as np
 from .experiments import experiment1,experiment2,experiment3,experiment4
-from .config_confirm import *
+from .config_confirm_v2 import *
 
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE_FILES=(
     "p2_critical/experiments.py",
-    "p2_critical/config_confirm.py",
-    "p2_critical/PREREG_P2_CRITICAL.md",
+    "p2_critical/config_confirm_v2.py",
+    "p2_critical/PREREG_P2_CRITICAL_V2.md",
     "p2_critical/confirm.py",
     "p2_critical/audit.py",
 )
 
 def sha(path):
     return hashlib.sha256((ROOT/path).read_bytes()).hexdigest()
+
+def json_default(o):
+    if isinstance(o,np.generic): return o.item()
+    if isinstance(o,np.ndarray): return o.tolist()
+    raise TypeError(type(o).__name__)
 
 def e1_check(r):
     p,g=r["polar"],r["generic"]
@@ -77,7 +82,7 @@ def main(out):
     out=Path(out);out.mkdir(parents=True,exist_ok=True)
     rows=[run_seed(s) for s in FINAL_SEEDS]
     for row in rows:
-        (out/f"seed_{row['seed']}.json").write_text(json.dumps(row,indent=2,sort_keys=True))
+        (out/f"seed_{row['seed']}.json").write_text(json.dumps(row,indent=2,sort_keys=True,default=json_default))
     counts={k:sum(r["checks"][k] for r in rows) for k in ("E1","E2","E3","E4")}
     verdicts={k:("PASS" if v>=GLOBAL_REQUIRED else "FAIL") for k,v in counts.items()}
     res_counts={}
@@ -104,7 +109,7 @@ def main(out):
         medians[f"E4_{task}_ratio"]=median(rows,("E4","tasks",task,"return_ratio"))
         medians[f"E4_{task}_alive"]=median(rows,("E4","tasks",task,"agent","alive_fraction"))
     result={
-      "protocol":"PREREG_P2_CRITICAL.md",
+      "protocol":"PREREG_P2_CRITICAL_V2.md",
       "seeds":list(FINAL_SEEDS),"required":GLOBAL_REQUIRED,
       "source_sha256":{p:sha(p) for p in SOURCE_FILES},
       "counts":counts,"verdicts":verdicts,
@@ -116,7 +121,7 @@ def main(out):
         "E4":"standard-equation OOD validation only; not independent-team replication"
       }
     }
-    text=json.dumps(result,indent=2,sort_keys=True)+"\n"
+    text=json.dumps(result,indent=2,sort_keys=True,default=json_default)+"\n"
     (out/"RESULTS_P2_CRITICAL.json").write_text(text)
     report=["# POLAR P2-Critical confirmatory results","",
             f"Seeds: {FINAL_SEEDS[0]}–{FINAL_SEEDS[-1]}; global criterion: >={GLOBAL_REQUIRED}/12.","",
