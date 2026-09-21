@@ -14,8 +14,8 @@ class P3Smoke(unittest.TestCase):
         r=experiment_d(997001)
         self.assertTrue(np.isfinite(r["full"]["resource"]))
     def test_env_shapes(self):
-        for E in (ContinualRegimeEnv,AutobiographicalEnv,GoalEnv):
-            e=E();o=e.reset(11)
-            self.assertTrue(np.asarray(o).ndim==1)
+        e=ContinualRegimeEnv(); self.assertTrue(np.asarray(e.reset(11)).ndim==1)
+        e=AutobiographicalEnv(); self.assertTrue(np.asarray(e.reset(11,12)).ndim==1)
+        e=GoalEnv(); self.assertTrue(np.asarray(e.reset(11)).ndim==1)
 
 if __name__=="__main__": unittest.main()
