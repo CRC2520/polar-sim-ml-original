@@ -1,10 +1,7 @@
 name: R28 stabilized shooting MPC
 
 on:
-  pull_request:
-    paths:
-      - "experiments/r28_shooting_mpc_20260921/**"
-      - ".github/workflows/r28_shooting_mpc.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
