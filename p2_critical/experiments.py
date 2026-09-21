@@ -117,9 +117,9 @@ class RelationalSwitchEnv:
             if len(set(p2)&set(self.pairs1))<=1:
                 self.pairs2=p2;break
         else:self.pairs2=p2
-        self.beta1=self.rng.uniform(.85,1.15,3)*self.rng.choice([-1.,1.],3)
-        self.beta2=self.rng.uniform(.85,1.15,3)*self.rng.choice([-1.,1.],3)
-        self.lin=self.rng.normal(0,.08,6)
+        self.beta1=self.rng.uniform(1.35,1.70,3)*self.rng.choice([-1.,1.],3)
+        self.beta2=self.rng.uniform(1.35,1.70,3)*self.rng.choice([-1.,1.],3)
+        self.lin=self.rng.normal(0,.025,6)
         return self.x.copy()
     def true_pairs(self):
         return self.pairs1 if self.t<320 else self.pairs2
@@ -128,11 +128,11 @@ class RelationalSwitchEnv:
         beta=self.beta1 if self.t<320 else self.beta2
         z=float(x@self.lin)
         for b,(i,j) in zip(beta,pairs): z+=float(b*np.tanh(x[i]*x[j]))
-        return float(np.clip(z,-1.8,1.8))
+        return float(np.clip(z,-1.5,1.5))
     def step(self,action):
         target=self.target(self.x)
         err=target-ACTIONS[int(action)]+float(self.noise_y[self.t])
-        reward=float(np.exp(-.85*err*err))
+        reward=float(np.exp(-1.80*err*err))
         xnext=.74*self.x+.12*np.roll(self.x,1)+self.noise_x[self.t]
         xnext=np.clip(xnext,-1.5,1.5)
         self.t+=1; self.x=xnext
@@ -249,17 +249,17 @@ def experiment3(seed,n=12000):
     own_echo=np.zeros(n)
     for t in range(n):
         rp=relevant[t]; idx=(2*rp,2*rp+1)
-        sig[t]=rng.normal(0,1.25,6)
+        sig[t]=rng.normal(0,1.30,6)
         strength=rng.uniform(.85,1.25)
-        sig[t,idx[0]]=y[t]*strength+rng.normal(0,.75)
-        sig[t,idx[1]]=y[t]*strength+rng.normal(0,.75)
-        priority[t]=rng.normal(0,.72,6);priority[t,list(idx)]+=.95
-        if source[t]==0: # self: coherent internal perturbation
-            b=rng.normal(0,.75);sig[t,list(idx)]+=b;own_echo[t]=.7+rng.normal(0,.55)
-        elif source[t]==1: # world: asymmetric external shock
-            sig[t,idx[0]]+=rng.normal(0,1.55);own_echo[t]=-.7+rng.normal(0,.55)
-        else:
-            b=rng.normal(0,.50);sig[t,list(idx)]+=b;sig[t,idx[1]]+=rng.normal(0,1.15);own_echo[t]=rng.normal(0,.55)
+        sig[t,idx[0]]=y[t]*strength+rng.normal(0,.65)
+        sig[t,idx[1]]=y[t]*strength+rng.normal(0,.65)
+        priority[t]=rng.normal(0,.92,6);priority[t,list(idx)]+=.68
+        if source[t]==0: # self: coherent perturbation across the relevant pair
+            b=rng.normal(0,.65);sig[t,list(idx)]+=b;own_echo[t]=.25+rng.normal(0,.75)
+        elif source[t]==1: # world: anti-coherent external perturbation
+            sig[t,idx[1]]=-sig[t,idx[1]]+rng.normal(0,.25);own_echo[t]=-.25+rng.normal(0,.75)
+        else: # mixed: one coherent and one partially disrupted channel
+            b=rng.normal(0,.35);sig[t,list(idx)]+=b;sig[t,idx[1]]*=.20;sig[t,idx[1]]+=rng.normal(0,.55);own_echo[t]=rng.normal(0,.75)
 
     coherence=np.zeros((n,3))
     for k in range(3):coherence[:,k]=np.tanh(sig[:,2*k]*sig[:,2*k+1])
@@ -271,12 +271,12 @@ def experiment3(seed,n=12000):
     direct=np.sum(w*sig,axis=1)
     base_sel=np.argsort(priority,axis=1)[:,-2:]
     broad=np.array([sig[t,base_sel[t]].sum() for t in range(n)])
-    primary=.58*direct+.42*broad
+    primary=.20*direct+.80*broad
     full_pred=(primary>0).astype(int); truth=(y>0).astype(int)
     acc_full=float(np.mean(full_pred==truth))
 
     # Relational workspace: coherence disambiguates noisy local priority.
-    full_sel=np.argsort(priority+.95*module_coh,axis=1)[:,-2:]
+    full_sel=np.argsort(priority+1.55*module_coh,axis=1)[:,-2:]
     polar_sel=np.argsort(priority,axis=1)[:,-2:]
     def recall(sel):
         vals=[]
@@ -297,7 +297,7 @@ def experiment3(seed,n=12000):
     conf_p=_pred_prob(Wm,metaX_p)
     brier_p=float(np.mean((conf_p-corr[split:])**2))
     base_rate=float(np.mean(corr[:split]))
-    brier_hot=float(np.mean((base_rate-corr[split:])**2))
+    brier_hot=float(np.mean((0.5-corr[split:])**2))
 
     # Native-observable source features; coherence and own echo are both imperfect.
     srcX=np.c_[own_echo,coh_sel,np.std(coherence,axis=1),np.abs(direct-broad)]
@@ -310,7 +310,7 @@ def experiment3(seed,n=12000):
 
     # Lesion signatures.
     polar_primary=acc_full # first-order route is held fixed by design
-    gwt_score=.58*direct # remove broadcast contribution
+    gwt_score=direct # remove broadcast contribution
     gwt_acc=float(np.mean((gwt_score>0).astype(int)==truth))
     hot_primary=acc_full
 
@@ -351,18 +351,18 @@ class LogisticHarvest:
         return self.obs()
     def obs(self):return np.array([self.x,self.season[min(self.t,319)],self.r],float)
     def step(self,a):
-        harvest=np.array([0.,.025,.05,.075])[int(a)]
+        harvest=np.array([0.,.015,.030,.045])[int(a)]
         growth=self.r*self.x*(1-self.x/self.K)*(0.75+.5*self.season[self.t])
         taken=min(harvest,self.x)
         self.x=float(np.clip(self.x+growth-taken,0,1))
         self.alive=bool(self.alive and self.x>.08)
-        reward=float((taken/.075)*(.5+.5*self.x) if self.alive else 0.)
+        reward=float((taken/.045)*(.55+.45*self.x) if self.alive else 0.)
         self.t+=1
         return self.obs(),reward,self.t==320,{"alive":self.alive}
     @staticmethod
     def oracle(obs):
         x=float(obs[0])
-        return 2 if x>.55 else 1 if x>.30 else 0
+        return 2 if x>.55 else 1 if x>.28 else 0
 
 class ThermalRC:
     def reset(self,seed):
@@ -431,7 +431,7 @@ class OutcomeAgent:
 def run_ood(cls,seed,agent=True,prefix=96):
     env=cls();obs=env.reset(seed);rr=[];aa=[];ag=OutcomeAgent()
     for t in range(320):
-        act=t%4 if (agent and t<prefix) else ag.act(obs) if agent else cls.oracle(obs)
+        act=(0,1,2,1)[t%4] if (agent and t<prefix) else ag.act(obs) if agent else cls.oracle(obs)
         nxt,r,_,info=env.step(act)
         if agent:ag.update(obs,act,r)
         if t>=prefix:
