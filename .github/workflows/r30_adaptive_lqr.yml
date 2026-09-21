@@ -1,0 +1,60 @@
+name: R30 dense Adaptive-LQR comparison
+
+on:
+  pull_request:
+    paths:
+      - "experiments/r30_adaptive_lqr_20260921/**"
+      - ".github/workflows/r30_adaptive_lqr.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  r30:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen numerical dependencies
+        run: python -m pip install numpy==2.3.5 scipy==1.17.0
+      - name: Verify frozen criteria and source identity
+        run: |
+          python - <<'PY'
+          import json, hashlib, pathlib
+          root=pathlib.Path("experiments/r30_adaptive_lqr_20260921")
+          c=json.loads((root/"R30_FIXED_CRITERIA.json").read_text())
+          assert c["status"]=="FROZEN_BEFORE_PR_EXECUTION"
+          assert c["confirmatory_seeds"]==list(range(1537001,1537013))
+          h=hashlib.sha256((root/"r30_adaptive_lqr.py").read_bytes()).hexdigest()
+          (root/"R30_SOURCE_SHA256.txt").write_text(h+"\n")
+          print("R30 source sha256",h)
+          PY
+      - name: Execute development and confirmatory seeds
+        run: |
+          python experiments/r30_adaptive_lqr_20260921/r30_adaptive_lqr.py \
+            --criteria experiments/r30_adaptive_lqr_20260921/R30_FIXED_CRITERIA.json \
+            --output experiments/r30_adaptive_lqr_20260921/R30_RESULTS.json
+      - name: Verify confirmatory seed set and print adjudication
+        run: |
+          python - <<'PY'
+          import json
+          p="experiments/r30_adaptive_lqr_20260921/R30_RESULTS.json"
+          d=json.load(open(p))
+          got=[r["seed"] for r in d["confirmatory"]["records"]]
+          assert got==list(range(1537001,1537013)),got
+          print(json.dumps(d["confirmatory"]["adjudication"],indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r30-adaptive-lqr
+          path: |
+            experiments/r30_adaptive_lqr_20260921/R30_RESULTS.json
+            experiments/r30_adaptive_lqr_20260921/R30_FIXED_CRITERIA.json
+            experiments/r30_adaptive_lqr_20260921/R30_SOURCE_SHA256.txt
