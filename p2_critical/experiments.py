@@ -133,7 +133,7 @@ class RelationalSwitchEnv:
         target=self.target(self.x)
         err=target-ACTIONS[int(action)]+float(self.noise_y[self.t])
         reward=float(np.exp(-1.80*err*err))
-        xnext=.74*self.x+.12*np.roll(self.x,1)+self.noise_x[self.t]
+        xnext=.72*self.x+self.noise_x[self.t]
         xnext=np.clip(xnext,-1.5,1.5)
         self.t+=1; self.x=xnext
         return xnext.copy(),reward,err,target
@@ -253,7 +253,7 @@ def experiment3(seed,n=12000):
         strength=rng.uniform(.85,1.25)
         sig[t,idx[0]]=y[t]*strength+rng.normal(0,.65)
         sig[t,idx[1]]=y[t]*strength+rng.normal(0,.65)
-        priority[t]=rng.normal(0,.92,6);priority[t,list(idx)]+=.68
+        priority[t]=rng.normal(0,.62,6);priority[t,list(idx)]+=.98
         if source[t]==0: # self: coherent perturbation across the relevant pair
             b=rng.normal(0,.65);sig[t,list(idx)]+=b;own_echo[t]=.25+rng.normal(0,.75)
         elif source[t]==1: # world: anti-coherent external perturbation
@@ -264,6 +264,7 @@ def experiment3(seed,n=12000):
     coherence=np.zeros((n,3))
     for k in range(3):coherence[:,k]=np.tanh(sig[:,2*k]*sig[:,2*k+1])
     module_coh=np.repeat(coherence,2,axis=1)
+    workspace_priority=priority+rng.normal(0,.95,priority.shape)
 
     # Primary direct route and broadcast route. Broadcast selection for primary uses local priority
     # so the POLAR lesion cannot directly alter first-order evidence.
@@ -271,13 +272,14 @@ def experiment3(seed,n=12000):
     direct=np.sum(w*sig,axis=1)
     base_sel=np.argsort(priority,axis=1)[:,-2:]
     broad=np.array([sig[t,base_sel[t]].sum() for t in range(n)])
-    primary=.20*direct+.80*broad
+    primary=.10*direct+.90*broad
     full_pred=(primary>0).astype(int); truth=(y>0).astype(int)
     acc_full=float(np.mean(full_pred==truth))
 
     # Relational workspace: coherence disambiguates noisy local priority.
-    full_sel=np.argsort(priority+1.55*module_coh,axis=1)[:,-2:]
-    polar_sel=np.argsort(priority,axis=1)[:,-2:]
+    module_strength=np.repeat(np.abs(coherence),2,axis=1)
+    full_sel=np.argsort(workspace_priority+1.35*module_strength,axis=1)[:,-2:]
+    polar_sel=np.argsort(workspace_priority,axis=1)[:,-2:]
     def recall(sel):
         vals=[]
         for t in range(n):
@@ -288,23 +290,26 @@ def experiment3(seed,n=12000):
 
     split=n//2
     corr=(full_pred==truth).astype(int)
-    coh_sel=np.array([coherence[t,relevant[t]] for t in range(n)])
-    metaX=np.c_[np.abs(primary),coh_sel]
+    pair_score_ws=np.column_stack([workspace_priority[:,2*k:2*k+2].mean(axis=1)+1.35*np.abs(coherence[:,k]) for k in range(3)])
+    chosen_pair=np.argmax(pair_score_ws,axis=1)
+    coh_chosen=np.array([coherence[t,chosen_pair[t]] for t in range(n)])
+    strength_chosen=np.array([abs(coherence[t,chosen_pair[t]]) for t in range(n)])
+    metaX=np.c_[np.abs(primary),coh_chosen,strength_chosen]
     Wm=_fit_binary(metaX[:split],corr[:split])
     conf=_pred_prob(Wm,metaX[split:])
     brier_full=float(np.mean((conf-corr[split:])**2))
-    metaX_p=metaX[split:].copy();metaX_p[:,1]=0.
+    metaX_p=metaX[split:].copy();metaX_p[:,1:]=0.
     conf_p=_pred_prob(Wm,metaX_p)
     brier_p=float(np.mean((conf_p-corr[split:])**2))
     base_rate=float(np.mean(corr[:split]))
     brier_hot=float(np.mean((0.5-corr[split:])**2))
 
     # Native-observable source features; coherence and own echo are both imperfect.
-    srcX=np.c_[own_echo,coh_sel,np.std(coherence,axis=1),np.abs(direct-broad)]
+    srcX=np.c_[own_echo,coh_chosen,strength_chosen,np.std(coherence,axis=1),np.abs(direct-broad)]
     Ws=_fit_multi(srcX[:split],source[:split],3)
     src_full=_pred_multi(Ws,srcX[split:])
     src_ba=balanced_accuracy(source[split:],src_full)
-    srcXp=srcX[split:].copy();srcXp[:,1:3]=0.
+    srcXp=srcX[split:].copy();srcXp[:,1:4]=0.
     src_p=_pred_multi(Ws,srcXp)
     src_ba_p=balanced_accuracy(source[split:],src_p)
 
@@ -431,7 +436,7 @@ class OutcomeAgent:
 def run_ood(cls,seed,agent=True,prefix=96):
     env=cls();obs=env.reset(seed);rr=[];aa=[];ag=OutcomeAgent()
     for t in range(320):
-        act=(0,1,2,1)[t%4] if (agent and t<prefix) else ag.act(obs) if agent else cls.oracle(obs)
+        pattern=(0,1,2,3,2,1); act=pattern[t%len(pattern)] if (agent and t<prefix) else ag.act(obs) if agent else cls.oracle(obs)
         nxt,r,_,info=env.step(act)
         if agent:ag.update(obs,act,r)
         if t>=prefix:
