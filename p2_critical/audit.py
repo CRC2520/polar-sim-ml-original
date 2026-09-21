@@ -1,7 +1,7 @@
 from __future__ import annotations
 import argparse, json
 from pathlib import Path
-from .config_confirm import FINAL_SEEDS,GLOBAL_REQUIRED
+from .config_confirm_v2 import FINAL_SEEDS,GLOBAL_REQUIRED
 
 def main(run1,run2,out):
     run1=Path(run1);run2=Path(run2);out=Path(out)
