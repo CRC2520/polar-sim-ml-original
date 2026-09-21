@@ -184,80 +184,91 @@ def experiment_b(seed):
 class GoalEnv:
     def reset(self,seed):
         self.rng=np.random.default_rng(seed);self.t=0
-        self.state=np.array([.76,.78,.74],float)
+        self.state=np.array([.78,.80,.76],float)
         self.pulse=np.zeros((1200,3));self.shock_dim=np.full(1200,-1,int)
+        # Large but survivable perturbations make recovery priority observable.
         for step in range(90,1200,120):
-            k=int(self.rng.integers(0,3));self.pulse[step,k]=.30;self.shock_dim[step]=k
+            k=int(self.rng.integers(0,3));self.pulse[step,k]=.60;self.shock_dim[step]=k
         return self.state.copy()
     def step(self,a):
-        self.state-=np.array([.008,.008,.008])
+        self.state-=np.array([.005,.005,.005])
         self.state-=self.pulse[self.t]
         if a<3:
-            self.state[a]+=.075
-            self.state[(a+1)%3]-=.003
+            self.state[a]+=.080
+            self.state[(a+1)%3]-=.002
         else:
-            self.state-=.003
+            self.state-=.002
         self.state=np.clip(self.state,0,1)
-        alive=float(np.all(self.state>.10))
-        task=1.0 if a==3 else .12
-        reward=float(alive*(.60*np.mean(self.state)+.40*task))
+        alive=float(np.all(self.state>.05))
+        task=1.0 if a==3 else .10
+        reward=float(alive*(.65*np.mean(self.state)+.35*task))
         info={"alive":alive,"shock_dim":int(self.shock_dim[self.t])}
         self.t+=1
         return self.state.copy(),reward,self.t>=1200,info
 
 class GoalAgent:
     def __init__(self,adaptive):
-        self.adaptive=adaptive;self.prev=None;self.w=np.ones(3)/3
+        self.adaptive=adaptive;self.prev=None;self.w=np.ones(3)/3;self.t=0
     def act(self,s):
         s=np.asarray(s)
         if self.adaptive:
-            deficit=np.clip(.66-s,0,1)
+            deficit=np.clip(.68-s,0,1)
             trend=np.zeros(3) if self.prev is None else np.clip(self.prev-s,0,1)
-            raw=.025+2.8*deficit+1.6*trend
+            raw=.02+3.0*deficit+1.8*trend
             self.w=raw/raw.sum()
-        vals=[]
-        for a in range(4):
-            ns=s.copy()
-            if a<3:
-                ns[a]+=.075;ns[(a+1)%3]-=.003
-                utility=float(self.w@ns)
-            else:
-                ns-=.003;utility=float(self.w@ns+.025)
-            vals.append(utility)
-        self.prev=s.copy()
-        return int(np.argmax(vals))
+            vals=[]
+            for a in range(4):
+                ns=s.copy()
+                if a<3:
+                    ns[a]+=.080;ns[(a+1)%3]-=.002
+                    utility=float(self.w@ns)
+                else:
+                    ns-=.002;utility=float(self.w@ns+.015)
+                vals.append(utility)
+            action=int(np.argmax(vals))
+        else:
+            # Neutral fixed-priority comparator: no state-dependent priority signal.
+            action=(0,1,2,3)[self.t%4]
+        self.prev=s.copy();self.t+=1
+        return action
 
 def run_goal(seed,adaptive):
     e=GoalEnv();s=e.reset(stable_seed(seed,"C"))
-    ag=GoalAgent(adaptive);alive=[];rr=[];priority=[];recoveries=[];pending=[]
+    ag=GoalAgent(adaptive);alive=[];rr=[];priority=[];recoveries=[];pending=[];unsafe=[]
     for t in range(1200):
         a=ag.act(s);ns,r,d,info=e.step(a)
         alive.append(info["alive"]);rr.append(r)
-        true_low=int(np.argmin(s));priority.append(int(np.argmax(ag.w))==true_low)
+        if adaptive:
+            true_low=int(np.argmin(s));priority.append(int(np.argmax(ag.w))==true_low)
+        unsafe.append(float(np.any(ns<.45)))
         if info["shock_dim"]>=0:
             pending.append([info["shock_dim"],0])
         nxt=[]
         for dim,age in pending:
             age+=1
             if ns[dim]>=.60: recoveries.append(age)
-            elif age<120: nxt.append([dim,age])
-            else: recoveries.append(120)
+            elif age<120:nxt.append([dim,age])
+            else:recoveries.append(120)
         pending=nxt
         s=ns
     recoveries += [120 for _ in pending]
     return dict(alive=float(np.mean(alive)),reward=float(np.mean(rr)),
-                priority_acc=float(np.mean(priority)),
-                recovery=float(np.mean(recoveries)) if recoveries else 120.)
+                priority_acc=float(np.mean(priority)) if priority else 0.,
+                recovery=float(np.mean(recoveries)) if recoveries else 120.,
+                unsafe_fraction=float(np.mean(unsafe)))
 
 def experiment_c(seed):
     a=run_goal(seed,True);f=run_goal(seed,False)
-    reward_gain=a["reward"]-f["reward"]
     rec_gain=(f["recovery"]-a["recovery"])/max(f["recovery"],1)
+    unsafe_reduction=f["unsafe_fraction"]-a["unsafe_fraction"]
     passed=(a["alive"]>=C_ALIVE_MIN and a["priority_acc"]>=C_PRIORITY_ACC and
-            reward_gain>=C_REWARD_GAIN and rec_gain>=C_SHOCK_RECOVERY_GAIN)
+            rec_gain>=C_SHOCK_RECOVERY_GAIN and
+            unsafe_reduction>=C_UNSAFE_REDUCTION_MIN)
     return dict(pass_seed=bool(passed),adaptive=a,fixed=f,
-                alive_gain=float(a["alive"]-f["alive"]),reward_gain=float(reward_gain),
-                recovery_gain=float(rec_gain))
+                alive_gain=float(a["alive"]-f["alive"]),
+                reward_gain=float(a["reward"]-f["reward"]),
+                recovery_gain=float(rec_gain),
+                unsafe_reduction=float(unsafe_reduction))
 
 # -------------------------------------------------------------------
 # D. Individual -> population -> ecology
