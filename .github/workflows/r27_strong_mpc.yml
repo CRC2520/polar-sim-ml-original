@@ -1,10 +1,7 @@
 name: R27 strong MPC comparison
 
 on:
-  pull_request:
-    paths:
-      - "experiments/r27_strong_mpc_20260921/**"
-      - ".github/workflows/r27_strong_mpc.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
