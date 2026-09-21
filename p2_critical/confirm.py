@@ -10,6 +10,8 @@ SOURCE_FILES=(
     "p2_critical/experiments.py",
     "p2_critical/config_confirm.py",
     "p2_critical/PREREG_P2_CRITICAL.md",
+    "p2_critical/confirm.py",
+    "p2_critical/audit.py",
 )
 
 def sha(path):
