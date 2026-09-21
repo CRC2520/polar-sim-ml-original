@@ -1,0 +1,66 @@
+{
+  "campaign": "R27 strong external controller comparison",
+  "status": "FIXED_BEFORE_PR_EXECUTION",
+  "development_seeds": [
+    1506001,
+    1506002,
+    1506003,
+    1506004
+  ],
+  "confirmatory_seeds": [
+    1507001,
+    1507002,
+    1507003,
+    1507004,
+    1507005,
+    1507006,
+    1507007,
+    1507008,
+    1507009,
+    1507010,
+    1507011,
+    1507012
+  ],
+  "trajectory_steps": 3200,
+  "controllers": [
+    "CORE",
+    "GENERIC",
+    "MPC",
+    "FROZEN",
+    "ORACLE"
+  ],
+  "primary_noninferiority": {
+    "medians": {
+      "core_stable_min": 0.95,
+      "mpc_stable_min": 0.95,
+      "core_mpc_cost_ratio_max": 1.1,
+      "core_mpc_postshift_ratio_max": 1.15,
+      "core_generic_cost_ratio_min": 0.9,
+      "core_generic_cost_ratio_max": 1.1
+    },
+    "seed_guard_required": 9,
+    "seed_guard": {
+      "core_stable_min": 0.9,
+      "mpc_stable_min": 0.9,
+      "core_mpc_cost_ratio_max": 1.2,
+      "core_mpc_postshift_ratio_max": 1.25,
+      "core_generic_cost_ratio_min": 0.8,
+      "core_generic_cost_ratio_max": 1.2
+    }
+  },
+  "exclusive_core_advantage": {
+    "core_mpc_cost_ratio_max": 0.9,
+    "seed_guard_required": 9,
+    "seed_guard_ratio_max": 0.95
+  },
+  "descriptive": {
+    "mpc_frozen_ratio": "reported_not_primary",
+    "core_oracle_ratio": "privileged_reference_only"
+  },
+  "fixed_boundaries": [
+    "E6b cannot be closed internally",
+    "E7 cannot be closed internally",
+    "failure of exclusive advantage is retained",
+    "noninferiority is not superiority"
+  ]
+}

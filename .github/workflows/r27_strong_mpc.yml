@@ -1,0 +1,59 @@
+name: R27 strong MPC comparison
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  r27:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen numerical dependencies
+        run: python -m pip install numpy==2.3.5 scipy==1.17.0
+      - name: Verify criteria precede execution and record source identity
+        run: |
+          python - <<'PY'
+          import json, hashlib, pathlib
+          root=pathlib.Path("experiments/r27_strong_mpc_20260921")
+          c=json.loads((root/"R27_FIXED_CRITERIA.json").read_text())
+          assert c["status"]=="FIXED_BEFORE_PR_EXECUTION"
+          assert c["confirmatory_seeds"]==list(range(1507001,1507013))
+          h=hashlib.sha256((root/"r27_strong_mpc.py").read_bytes()).hexdigest()
+          print("R27 source sha256",h)
+          (root/"R27_SOURCE_SHA256.txt").write_text(h+"\n")
+          PY
+      - name: Run development and confirmatory seeds under frozen criteria
+        run: |
+          python experiments/r27_strong_mpc_20260921/r27_strong_mpc.py \
+            --criteria experiments/r27_strong_mpc_20260921/R27_FIXED_CRITERIA.json \
+            --output experiments/r27_strong_mpc_20260921/R27_RESULTS.json
+      - name: Guard confirmatory seed set
+        run: |
+          python - <<'PY'
+          import json
+          p="experiments/r27_strong_mpc_20260921/R27_RESULTS.json"
+          d=json.load(open(p))
+          got=[r["seed"] for r in d["confirmatory"]["records"]]
+          assert got==list(range(1507001,1507013)),got
+          print("confirmatory seed guard PASS")
+          print(json.dumps(d["confirmatory"]["adjudication"],indent=2))
+          PY
+      - name: Upload R27 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: r27-strong-mpc
+          path: |
+            experiments/r27_strong_mpc_20260921/R27_RESULTS.json
+            experiments/r27_strong_mpc_20260921/R27_FIXED_CRITERIA.json
+            experiments/r27_strong_mpc_20260921/R27_SOURCE_SHA256.txt

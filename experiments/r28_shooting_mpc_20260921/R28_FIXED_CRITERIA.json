@@ -1,0 +1,72 @@
+{
+  "campaign": "R28 stabilized shooting-MPC comparison",
+  "status": "FROZEN_BEFORE_PR_EXECUTION",
+  "development_seeds": [
+    1516001,
+    1516002,
+    1516003,
+    1516004
+  ],
+  "confirmatory_seeds": [
+    1517001,
+    1517002,
+    1517003,
+    1517004,
+    1517005,
+    1517006,
+    1517007,
+    1517008,
+    1517009,
+    1517010,
+    1517011,
+    1517012
+  ],
+  "trajectory_steps": 3200,
+  "controllers": [
+    "CORE",
+    "GENERIC",
+    "SHOOTING_MPC",
+    "FROZEN",
+    "ORACLE_MPC"
+  ],
+  "comparator_validity": {
+    "medians": {
+      "mpc_stable_min": 0.95,
+      "mpc_frozen_ratio_max": 1.05
+    },
+    "seed_guard_required": 9,
+    "seed_guard": {
+      "mpc_stable_min": 0.9,
+      "mpc_frozen_ratio_max": 1.2
+    }
+  },
+  "primary_noninferiority": {
+    "medians": {
+      "core_stable_min": 0.95,
+      "core_mpc_cost_ratio_max": 1.1,
+      "core_mpc_postshift_ratio_max": 1.15,
+      "core_generic_cost_ratio_min": 0.9,
+      "core_generic_cost_ratio_max": 1.1
+    },
+    "seed_guard_required": 9,
+    "seed_guard": {
+      "core_stable_min": 0.9,
+      "core_mpc_cost_ratio_max": 1.2,
+      "core_mpc_postshift_ratio_max": 1.25,
+      "core_generic_cost_ratio_min": 0.8,
+      "core_generic_cost_ratio_max": 1.2
+    }
+  },
+  "exclusive_core_advantage": {
+    "core_mpc_cost_ratio_max": 0.9,
+    "seed_guard_required": 9,
+    "seed_guard_ratio_max": 0.95
+  },
+  "fixed_boundaries": [
+    "comparator validity is a prerequisite for any CORE-vs-MPC inference",
+    "noninferiority is not superiority",
+    "CORE≈GENERIC supports implementation non-privilege",
+    "E6b independent replication cannot be closed internally",
+    "E7 prospective biological validation cannot be closed internally"
+  ]
+}
