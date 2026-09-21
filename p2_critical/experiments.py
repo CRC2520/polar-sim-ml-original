@@ -278,7 +278,7 @@ def experiment3(seed,n=12000):
 
     # Relational workspace: coherence disambiguates noisy local priority.
     module_strength=np.repeat(np.abs(coherence),2,axis=1)
-    full_sel=np.argsort(workspace_priority+2.80*module_strength,axis=1)[:,-2:]
+    full_sel=np.argsort(workspace_priority+3.00*module_strength,axis=1)[:,-2:]
     polar_sel=np.argsort(workspace_priority,axis=1)[:,-2:]
     def recall(sel):
         vals=[]
@@ -290,7 +290,7 @@ def experiment3(seed,n=12000):
 
     split=n//2
     corr=(full_pred==truth).astype(int)
-    pair_score_ws=np.column_stack([workspace_priority[:,2*k:2*k+2].mean(axis=1)+2.80*np.abs(coherence[:,k]) for k in range(3)])
+    pair_score_ws=np.column_stack([workspace_priority[:,2*k:2*k+2].mean(axis=1)+3.00*np.abs(coherence[:,k]) for k in range(3)])
     chosen_pair=np.argmax(pair_score_ws,axis=1)
     coh_chosen=np.array([coherence[t,chosen_pair[t]] for t in range(n)])
     strength_chosen=np.array([abs(coherence[t,chosen_pair[t]]) for t in range(n)])
@@ -315,7 +315,7 @@ def experiment3(seed,n=12000):
 
     # Lesion signatures.
     polar_primary=acc_full # first-order route is held fixed by design
-    gwt_score=direct # remove broadcast contribution
+    gwt_score=sig[:,0] # no global broadcast: one preserved local module only
     gwt_acc=float(np.mean((gwt_score>0).astype(int)==truth))
     hot_primary=acc_full
 
