@@ -1,0 +1,53 @@
+name: R26 core-class confirmatory
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  r26-confirm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install numerical dependencies
+        run: python -m pip install numpy==2.3.5 scipy==1.17.0
+      - name: Verify frozen experiment source before seed opening
+        run: |
+          python - <<'PY'
+          import json,hashlib,pathlib
+          root=pathlib.Path('experiments/r26_core_class_20260921')
+          f=json.loads((root/'R26_CONFIRM_FREEZE.json').read_text())
+          h=hashlib.sha256((root/'r26_core_class.py').read_bytes()).hexdigest()
+          assert h==f['experiment_sha256'], (h,f['experiment_sha256'])
+          assert f['confirmatory_seeds']==list(range(1407001,1407013))
+          print('R26 confirmatory freeze PASS',h)
+          PY
+      - name: Execute confirmatory seeds exactly once for this commit
+        run: |
+          python experiments/r26_core_class_20260921/r26_core_class.py             --seeds 1407001:1407012             --mode confirm             --output experiments/r26_core_class_20260921/R26_CONFIRM_RESULTS.json
+      - name: Adjudicate frozen criteria
+        run: |
+          python experiments/r26_core_class_20260921/adjudicate_r26.py             --results experiments/r26_core_class_20260921/R26_CONFIRM_RESULTS.json             --freeze experiments/r26_core_class_20260921/R26_CONFIRM_FREEZE.json             --source experiments/r26_core_class_20260921/r26_core_class.py             --output experiments/r26_core_class_20260921/R26_CONFIRM_ADJUDICATION.json
+      - name: Record confirmatory source identity
+        run: |
+          git rev-parse HEAD > experiments/r26_core_class_20260921/CONFIRM_COMMIT.txt
+          sha256sum experiments/r26_core_class_20260921/r26_core_class.py > experiments/r26_core_class_20260921/CONFIRM_CODE_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r26-confirmatory
+          path: |
+            experiments/r26_core_class_20260921/R26_CONFIRM_RESULTS.json
+            experiments/r26_core_class_20260921/R26_CONFIRM_ADJUDICATION.json
+            experiments/r26_core_class_20260921/R26_CONFIRM_FREEZE.json
+            experiments/r26_core_class_20260921/CONFIRM_COMMIT.txt
+            experiments/r26_core_class_20260921/CONFIRM_CODE_SHA256.txt

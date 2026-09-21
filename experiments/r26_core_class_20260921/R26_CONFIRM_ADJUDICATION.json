@@ -1,0 +1,100 @@
+{
+  "R26A": {
+    "checks": {
+      "A_access": true,
+      "A_promotion": true,
+      "C_memory": true,
+      "D_damage": true,
+      "R_damage": true,
+      "full_control_mse": true,
+      "generic_equivalence": true,
+      "memory_accuracy": true,
+      "query_report_accuracy": true,
+      "relation_reidentification": true
+    },
+    "medians": {
+      "access_advantage": 0.5,
+      "access_promotion": 0.5,
+      "full_control_mse": 0.02881623783644965,
+      "full_memory_accuracy": 1,
+      "full_query_report_accuracy": 1,
+      "generic_gap": 0,
+      "memory_advantage": 0.5,
+      "noD_damage": 0.18476501849044974,
+      "noR_damage": 0.10513303664877166,
+      "relation_score": 0.9416542928844739
+    },
+    "pass": true,
+    "seed_guard_pass_count": 12
+  },
+  "R26B": {
+    "checks": {
+      "generic_equivalence": true,
+      "null_coactivation_damage": true,
+      "null_offdiag": true,
+      "null_relation_damage": true
+    },
+    "medians": {
+      "generic_gap": 0,
+      "null_coactivation_damage": 0,
+      "null_offdiag_norm": 0.0012657309470558284,
+      "null_relation_damage": 0
+    },
+    "pass": true,
+    "seed_guard_pass_count": 12
+  },
+  "R26C": {
+    "external_operation_checks": {
+      "core_stable": true,
+      "frozen_noninferiority": true,
+      "generic_equivalence_high": true,
+      "generic_equivalence_low": true,
+      "generic_stable": true,
+      "recurrent_state_utility": true
+    },
+    "external_operation_pass": true,
+    "external_operation_seed_guard_pass_count": 12,
+    "external_relational_advantage_pass": false,
+    "external_relational_checks": {
+      "core_beats_factorized": false,
+      "generic_beats_factorized": false
+    },
+    "external_relational_seed_guard_pass_count": 0,
+    "medians": {
+      "core_factorized_ratio": 1.0000712099251792,
+      "core_frozen_ratio": 0.7452838090312921,
+      "core_generic_ratio": 0.9998158858689743,
+      "core_noC_ratio": 0.01952335961863788,
+      "core_oracle_ratio": 4.132746827546426,
+      "core_stable": 1,
+      "generic_factorized_ratio": 1.0001664450364411,
+      "generic_stable": 1
+    },
+    "oracle_ratio_status": "descriptive_only_privileged_reference",
+    "strong_H_TRANSFER_pass": false
+  },
+  "campaign": "R26 minimal organizational class",
+  "global_interpretation": {
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "contingent_polarity_null_supported": true,
+    "core_class_single_agent_supported": true,
+    "external_operation_supported": true,
+    "strong_external_relational_transfer_supported": false
+  },
+  "seeds": [
+    1407001,
+    1407002,
+    1407003,
+    1407004,
+    1407005,
+    1407006,
+    1407007,
+    1407008,
+    1407009,
+    1407010,
+    1407011,
+    1407012
+  ],
+  "source_sha256": "5217ff2124db15eeb883c9b66816727490f74085aa1e8a4c92d4944155cf30f4"
+}
