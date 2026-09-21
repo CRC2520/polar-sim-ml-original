@@ -1,10 +1,7 @@
 name: R30 dense Adaptive-LQR comparison
 
 on:
-  pull_request:
-    paths:
-      - "experiments/r30_adaptive_lqr_20260921/**"
-      - ".github/workflows/r30_adaptive_lqr.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
