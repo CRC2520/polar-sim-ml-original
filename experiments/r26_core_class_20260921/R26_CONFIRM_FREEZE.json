@@ -1,0 +1,102 @@
+{
+  "date": "2026-09-21",
+  "campaign": "R26 minimal organizational class",
+  "status": "FROZEN_BEFORE_CONFIRMATORY_SEEDS",
+  "development_run_id": 35647228720,
+  "development_commit": "2a5c3d064af53f44a4324cc79974a011fd1cb11b",
+  "experiment_blob_sha": "ff62e62b95a27afa107d0c314b612940a49c5643",
+  "experiment_sha256": "5217ff2124db15eeb883c9b66816727490f74085aa1e8a4c92d4944155cf30f4",
+  "development_seeds": [
+    1406001,
+    1406002,
+    1406003,
+    1406004
+  ],
+  "confirmatory_seeds": [
+    1407001,
+    1407002,
+    1407003,
+    1407004,
+    1407005,
+    1407006,
+    1407007,
+    1407008,
+    1407009,
+    1407010,
+    1407011,
+    1407012
+  ],
+  "r26a": {
+    "median": {
+      "full_control_mse_max": 0.04,
+      "generic_gap_max": 1e-12,
+      "noD_damage_min": 0.15,
+      "noR_damage_min": 0.08,
+      "memory_advantage_min": 0.25,
+      "access_advantage_min": 0.2,
+      "access_promotion_min": 0.45,
+      "relation_score_min": 0.9,
+      "full_memory_accuracy_min": 0.95,
+      "full_query_report_accuracy_min": 0.95
+    },
+    "seed_guard_required": 9,
+    "seed_guard": {
+      "full_control_mse_max": 0.05,
+      "generic_gap_max": 1e-12,
+      "noD_damage_min": 0.12,
+      "noR_damage_min": 0.06,
+      "memory_advantage_min": 0.15,
+      "access_advantage_min": 0.1,
+      "relation_score_min": 0.85,
+      "full_memory_accuracy_min": 0.9,
+      "full_query_report_accuracy_min": 0.9
+    }
+  },
+  "r26b": {
+    "median": {
+      "generic_gap_max": 1e-12,
+      "null_offdiag_norm_max": 0.01,
+      "abs_null_relation_damage_max": 0.005,
+      "abs_null_coactivation_damage_max": 0.005
+    },
+    "seed_guard_required": 9,
+    "seed_guard": {
+      "generic_gap_max": 1e-12,
+      "null_offdiag_norm_max": 0.02,
+      "abs_null_relation_damage_max": 0.01,
+      "abs_null_coactivation_damage_max": 0.01
+    }
+  },
+  "r26c": {
+    "external_operation": {
+      "core_stable_min": 0.95,
+      "generic_stable_min": 0.95,
+      "core_generic_ratio_min": 0.9,
+      "core_generic_ratio_max": 1.1,
+      "core_noC_ratio_max": 0.25,
+      "core_frozen_ratio_max": 1.05,
+      "seed_guard_required": 9,
+      "seed_guard": {
+        "core_stable_min": 0.9,
+        "generic_stable_min": 0.9,
+        "core_generic_ratio_min": 0.8,
+        "core_generic_ratio_max": 1.2,
+        "core_noC_ratio_max": 0.5,
+        "core_frozen_ratio_max": 1.25
+      }
+    },
+    "external_relational_advantage": {
+      "core_factorized_ratio_max": 0.9,
+      "generic_factorized_ratio_max": 0.9,
+      "seed_guard_required": 9,
+      "seed_guard_ratio_max": 0.95
+    },
+    "oracle_ratio": "descriptive_only_privileged_reference"
+  },
+  "strong_transfer_rule": "PASS only if external_operation PASS AND external_relational_advantage PASS",
+  "fixed_boundaries": [
+    "E6b independent replication cannot be closed internally",
+    "E7 prospective biological validation cannot be closed internally",
+    "failure of external relational advantage does not imply universal absence of relations; it means strong H_TRANSFER is not established in these standard-dynamics tasks"
+  ]
+}
