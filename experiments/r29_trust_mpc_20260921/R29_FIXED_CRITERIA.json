@@ -1,0 +1,66 @@
+{
+  "campaign": "R29 trust-region MPC strong-comparator campaign",
+  "status": "FROZEN_BEFORE_PR_EXECUTION",
+  "development_seeds": [
+    1526001,
+    1526002,
+    1526003,
+    1526004
+  ],
+  "confirmatory_seeds": [
+    1527001,
+    1527002,
+    1527003,
+    1527004,
+    1527005,
+    1527006,
+    1527007,
+    1527008,
+    1527009,
+    1527010,
+    1527011,
+    1527012
+  ],
+  "trajectory_steps": 3200,
+  "comparator_validity": {
+    "medians": {
+      "mpc_stable_min": 0.95,
+      "mpc_frozen_ratio_max": 1.05
+    },
+    "seed_guard_required": 9,
+    "seed_guard": {
+      "mpc_stable_min": 0.9,
+      "mpc_frozen_ratio_max": 1.2
+    }
+  },
+  "noninferiority": {
+    "medians": {
+      "core_stable_min": 0.95,
+      "core_mpc_cost_ratio_max": 1.1,
+      "core_mpc_postshift_ratio_max": 1.15,
+      "core_generic_ratio_min": 0.9,
+      "core_generic_ratio_max": 1.1
+    },
+    "seed_guard_required": 9,
+    "seed_guard": {
+      "core_stable_min": 0.9,
+      "core_mpc_cost_ratio_max": 1.2,
+      "core_mpc_postshift_ratio_max": 1.25,
+      "core_generic_ratio_min": 0.8,
+      "core_generic_ratio_max": 1.2
+    }
+  },
+  "exclusive_core_advantage": {
+    "core_mpc_cost_ratio_max": 0.9,
+    "seed_guard_required": 9,
+    "seed_guard_ratio_max": 0.95
+  },
+  "fixed_boundaries": [
+    "comparator validity is prerequisite for CORE-vs-MPC inference",
+    "noninferiority is not superiority",
+    "CORE≈GENERIC supports implementation non-privilege",
+    "R26 strong relational H_TRANSFER remains FAIL unless independently re-established",
+    "E6b cannot be closed internally",
+    "E7 cannot be closed internally"
+  ]
+}
