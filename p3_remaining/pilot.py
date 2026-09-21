@@ -25,7 +25,8 @@ def summarize(rows):
              transplant_prediction_damage=med(("B","transplant_prediction_damage")),
              transplant_reward_damage=med(("B","transplant_reward_damage"))),
       C=dict(alive=med(("C","adaptive","alive")),priority_acc=med(("C","adaptive","priority_acc")),
-             reward_gain=med(("C","reward_gain")),recovery_gain=med(("C","recovery_gain"))),
+             recovery_gain=med(("C","recovery_gain")),unsafe_reduction=med(("C","unsafe_reduction")),
+             reward_tradeoff=med(("C","reward_gain"))),
       D=dict(full_alive=med(("D","full","alive")),resource_gain=med(("D","resource_gain")),
              restraint_gain=med(("D","restraint_gain")),transmission_shift=med(("D","transmission_shift")),
              ecology_transmission_effect=med(("D","ecology_transmission_effect"))))
