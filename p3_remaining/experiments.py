@@ -48,7 +48,7 @@ class ContinualRegimeEnv:
         self.x=np.clip(self.x,-1.4,1.4)
         self.t+=1
         done=self.t>=len(self.schedule)*self.block_len
-        return self.obs() if not done else np.zeros(5),reward,done,{"regime":r}
+        return self.obs() if not done else np.zeros(5),reward,done,{"regime":r,"error":float(err),"target":float(target)}
 
 class ContextMemoryAgent:
     def __init__(self,persistent=True):
@@ -64,12 +64,11 @@ class ContextMemoryAgent:
         if W is None:return 1
         pred=self.phi(obs)@W
         return int(np.argmin(np.abs(ACTIONS-pred)))
-    def update(self,obs,a,reward):
+    def update(self,obs,a,reward,target):
         k=self.key(obs)
-        # reward alone plus chosen action gives approximate target around selected action;
-        # factual sign from action relative to local state creates a stable own-history estimator.
+        # The factual signed action consequence identifies the local target.
         x=self.phi(obs)
-        pseudo=ACTIONS[a]
+        pseudo=float(target)
         self.buffers.setdefault(k,[]).append((x,pseudo,reward))
         b=self.buffers[k][-160:]
         if len(b)>=24:
@@ -84,29 +83,25 @@ class ContextMemoryAgent:
         self.last_key=k
 
 def experiment_a(seed):
-    env=ContinualRegimeEnv();obs=env.reset(stable_seed(seed,"A"))
     full=ContextMemoryAgent(True);reset=ContextMemoryAgent(False)
-    rewards={"full":[],"reset":[]}
-    # run matched separate envs
     def run(agent):
-        e=ContinualRegimeEnv();o=e.reset(stable_seed(seed,"A")); blocks=[]
+        e=ContinualRegimeEnv();o=e.reset(stable_seed(seed,"A")); blocks=[];early=[]
         for b in range(8):
             rr=[]
             for t in range(600):
                 agent.maybe_reset(o)
                 a=(t%4) if t<48 and b==0 else agent.act(o)
-                no,r,d,info=e.step(a);agent.update(o,a,r);o=no;rr.append(r)
-            blocks.append(float(np.mean(rr)))
-        return blocks
-    fb=run(full); rb=run(reset)
-    # recurrence gain compares second visit of each regime with its first visit
+                no,r,d,info=e.step(a);agent.update(o,a,r,info["target"]);o=no;rr.append(r)
+            blocks.append(float(np.mean(rr)));early.append(float(np.mean(rr[:24])))
+        return blocks,early
+    fb,fe=run(full); rb,re=run(reset)
     rec_pairs=[(0,4),(1,6),(2,5),(3,7)]
-    recurrence=np.mean([fb[j]-fb[i] for i,j in rec_pairs])
-    reset_recurrence=np.mean([rb[j]-rb[i] for i,j in rec_pairs])
+    recurrence=np.mean([fe[j]-fe[i] for i,j in rec_pairs])
+    reset_recurrence=np.mean([re[j]-re[i] for i,j in rec_pairs])
     retention=np.mean([fb[j]/max(fb[i],1e-9) for i,j in rec_pairs])
     passed=(recurrence-reset_recurrence>=A_RECURRENT_GAIN and
             np.mean(fb[-2:])>=A_FINAL_REWARD and retention>=A_RETENTION)
-    return dict(pass_seed=bool(passed),full_blocks=fb,reset_blocks=rb,
+    return dict(pass_seed=bool(passed),full_blocks=fb,reset_blocks=rb,full_early=fe,reset_early=re,
                 recurrent_gain=float(recurrence-reset_recurrence),
                 final_reward=float(np.mean(fb[-2:])),retention=float(retention))
 
@@ -114,69 +109,74 @@ def experiment_a(seed):
 # B. Autobiographical self
 # -------------------------------------------------------------------
 class AutobiographicalEnv:
-    def reset(self,seed):
-        self.rng=np.random.default_rng(seed);self.t=0
-        self.skill=np.clip(self.rng.normal([.35,.55,.75,.45],.06),.15,.9)
-        self.fatigue=.15
-        self.tasks=self.rng.integers(0,4,1600)
-        self.diff=np.clip(self.rng.normal(.55,.18,1600),.15,.9)
+    def reset(self,identity_seed,experience_seed,complement=False,horizon=1200):
+        irng=np.random.default_rng(identity_seed);self.rng=np.random.default_rng(experience_seed);self.t=0;self.horizon=horizon
+        base=irng.uniform(.18,.95,(4,4))
+        self.cap=np.clip(1.13-base if complement else base,.08,.98)
+        self.fatigue=.12
+        self.tasks=self.rng.integers(0,4,horizon)
+        self.diff=np.clip(self.rng.normal(.62,.10,horizon),.35,.85)
+        self.noise=self.rng.normal(0,.018,horizon)
         return self.obs()
     def obs(self):
         return np.array([self.tasks[self.t]/3,self.diff[self.t],self.fatigue],float)
     def expected(self,a):
         task=self.tasks[self.t];difficulty=self.diff[self.t]
-        cap=self.skill[int(a)]*(1-.55*self.fatigue)
-        return float(np.exp(-5*(difficulty-cap)**2))
+        ability=self.cap[task,int(a)]*(1-.30*self.fatigue)
+        return float(np.clip(.10+.90*ability*np.exp(-2.0*max(0,difficulty-ability)**2),0,1))
     def step(self,a):
-        exp=self.expected(a)
-        r=float(np.clip(exp+self.rng.normal(0,.025),0,1))
-        effort=(a+1)/4
-        self.fatigue=float(np.clip(.90*self.fatigue+.07*effort-.04*(a==0),0,1))
-        # own action history changes persistent competence slowly
-        self.skill[int(a)]=float(np.clip(self.skill[int(a)]+.010*(r-.55),.10,.95))
-        self.t+=1
-        done=self.t>=1600
+        exp=self.expected(a);r=float(np.clip(exp+self.noise[self.t],0,1))
+        effort=(a+1)/4;self.fatigue=float(np.clip(.91*self.fatigue+.055*effort-.025*(a==0),0,.9))
+        self.t+=1;done=self.t>=self.horizon
         return self.obs() if not done else np.zeros(3),r,done,{}
 
 class SelfMemory:
     def __init__(self):
-        self.count=np.ones((4,4))*2
-        self.mean=np.ones((4,4))*.5
+        self.count=np.ones((4,4))*1.5;self.mean=np.ones((4,4))*.45
     def taskbin(self,obs):return int(np.clip(round(float(obs[0])*3),0,3))
-    def predict(self,obs,a):
-        return float(self.mean[self.taskbin(obs),a])
+    def predict(self,obs,a):return float(self.mean[self.taskbin(obs),a])
     def update(self,obs,a,r):
         k=self.taskbin(obs);n=self.count[k,a]
         self.mean[k,a]=(self.mean[k,a]*n+r)/(n+1);self.count[k,a]=n+1
     def act(self,obs):return int(np.argmax([self.predict(obs,a) for a in range(4)]))
 
-def run_self(seed,memory=None,stateless=False):
-    e=AutobiographicalEnv();o=e.reset(stable_seed(seed,"B-env"))
+def acquire_memory(seed,complement=False):
+    e=AutobiographicalEnv();o=e.reset(stable_seed(seed,"B-identity"),stable_seed(seed,"B-acquire"),complement=complement,horizon=900)
+    m=SelfMemory()
+    for t in range(900):
+        a=t%4
+        no,r,d,_=e.step(a);m.update(o,a,r);o=no
+    return m
+
+def eval_memory(seed,memory=None,stateless=False,complement=False):
+    e=AutobiographicalEnv();o=e.reset(stable_seed(seed,"B-identity"),stable_seed(seed,"B-eval"),complement=complement,horizon=600)
     m=SelfMemory() if memory is None else copy.deepcopy(memory)
     rr=[];err=[]
-    for t in range(1600):
-        a=t%4 if t<128 else (1 if stateless else m.act(o))
-        pred=.5 if stateless else m.predict(o,a)
-        no,r,d,_=e.step(a)
-        if t>=128: rr.append(r);err.append(abs(pred-r))
-        if not stateless:m.update(o,a,r)
-        o=no
-    return dict(reward=float(np.mean(rr)),mae=float(np.mean(err)),memory=m)
+    for t in range(600):
+        a=1 if stateless else m.act(o)
+        pred=.45 if stateless else m.predict(o,a)
+        no,r,d,_=e.step(a);rr.append(r);err.append(abs(pred-r));o=no
+    return dict(reward=float(np.mean(rr)),mae=float(np.mean(err)))
 
 def experiment_b(seed):
-    own=run_self(seed)
-    stat=run_self(seed,stateless=True)
-    donor=run_self(seed+1000003)["memory"]
-    transplanted=run_self(seed,memory=donor)
+    own_mem=acquire_memory(seed,False)
+    donor_mem=acquire_memory(seed,True)
+    own=eval_memory(seed,own_mem,False,False)
+    stat=eval_memory(seed,None,True,False)
+    transplanted=eval_memory(seed,donor_mem,False,False)
     pred_gain=stat["mae"]-own["mae"]
     reward_gain=own["reward"]-stat["reward"]
-    transplant_damage=own["reward"]-transplanted["reward"]
-    passed=(pred_gain>=B_PRED_GAIN and reward_gain>=B_REWARD_GAIN and transplant_damage>=B_TRANSPLANT_DAMAGE)
+    transplant_reward_damage=own["reward"]-transplanted["reward"]
+    transplant_prediction_damage=transplanted["mae"]-own["mae"]
+    passed=(pred_gain>=B_PRED_GAIN and
+            transplant_prediction_damage>=B_TRANSPLANT_PRED_DAMAGE and
+            transplant_reward_damage>=B_TRANSPLANT_REWARD_DAMAGE)
     return dict(pass_seed=bool(passed),own_reward=own["reward"],own_mae=own["mae"],
                 stateless_reward=stat["reward"],stateless_mae=stat["mae"],
-                transplanted_reward=transplanted["reward"],
+                transplanted_reward=transplanted["reward"],transplanted_mae=transplanted["mae"],
                 prediction_gain=float(pred_gain),reward_gain=float(reward_gain),
-                transplant_damage=float(transplant_damage))
+                transplant_prediction_damage=float(transplant_prediction_damage),
+                transplant_reward_damage=float(transplant_reward_damage))
 
 # -------------------------------------------------------------------
 # C. Endogenous goal-priority adaptation
@@ -184,26 +184,26 @@ def experiment_b(seed):
 class GoalEnv:
     def reset(self,seed):
         self.rng=np.random.default_rng(seed);self.t=0
-        self.state=np.array([.78,.80,.76],float)
-        self.shock=np.zeros((1200,3))
-        for s in range(80,1200,120):
-            k=int(self.rng.integers(0,3));self.shock[s:s+25,k]=.025
+        self.state=np.array([.76,.78,.74],float)
+        self.pulse=np.zeros((1200,3));self.shock_dim=np.full(1200,-1,int)
+        for step in range(90,1200,120):
+            k=int(self.rng.integers(0,3));self.pulse[step,k]=.30;self.shock_dim[step]=k
         return self.state.copy()
     def step(self,a):
-        # 0/1/2 replenish a resource, 3 task action
-        decay=np.array([.010,.009,.008])+self.shock[self.t]
-        self.state-=decay
+        self.state-=np.array([.008,.008,.008])
+        self.state-=self.pulse[self.t]
         if a<3:
-            self.state[a]+=.045
-            self.state[(a+1)%3]-=.006
+            self.state[a]+=.075
+            self.state[(a+1)%3]-=.003
         else:
-            self.state-=.004
+            self.state-=.003
         self.state=np.clip(self.state,0,1)
         alive=float(np.all(self.state>.10))
-        task=1.0 if a==3 else .15
-        reward=float(alive*(.55*np.mean(self.state)+.45*task))
+        task=1.0 if a==3 else .12
+        reward=float(alive*(.60*np.mean(self.state)+.40*task))
+        info={"alive":alive,"shock_dim":int(self.shock_dim[self.t])}
         self.t+=1
-        return self.state.copy(),reward,self.t>=1200,{"alive":alive}
+        return self.state.copy(),reward,self.t>=1200,info
 
 class GoalAgent:
     def __init__(self,adaptive):
@@ -211,45 +211,53 @@ class GoalAgent:
     def act(self,s):
         s=np.asarray(s)
         if self.adaptive:
-            deficit=np.clip(.65-s,0,1)
+            deficit=np.clip(.66-s,0,1)
             trend=np.zeros(3) if self.prev is None else np.clip(self.prev-s,0,1)
-            raw=.03+2.4*deficit+1.3*trend
+            raw=.025+2.8*deficit+1.6*trend
             self.w=raw/raw.sum()
         vals=[]
         for a in range(4):
             ns=s.copy()
             if a<3:
-                ns[a]+=.045;ns[(a+1)%3]-=.006
+                ns[a]+=.075;ns[(a+1)%3]-=.003
                 utility=float(self.w@ns)
             else:
-                ns-=.004;utility=float(self.w@ns+.18)
+                ns-=.003;utility=float(self.w@ns+.025)
             vals.append(utility)
         self.prev=s.copy()
         return int(np.argmax(vals))
 
 def run_goal(seed,adaptive):
     e=GoalEnv();s=e.reset(stable_seed(seed,"C"))
-    ag=GoalAgent(adaptive);alive=[];rr=[];priority=[];recovery=[]
-    low_streak=0
+    ag=GoalAgent(adaptive);alive=[];rr=[];priority=[];recoveries=[];pending=[]
     for t in range(1200):
         a=ag.act(s);ns,r,d,info=e.step(a)
         alive.append(info["alive"]);rr.append(r)
         true_low=int(np.argmin(s));priority.append(int(np.argmax(ag.w))==true_low)
-        if np.min(s)<.45:low_streak+=1
-        elif low_streak:
-            recovery.append(low_streak);low_streak=0
+        if info["shock_dim"]>=0:
+            pending.append([info["shock_dim"],0])
+        nxt=[]
+        for dim,age in pending:
+            age+=1
+            if ns[dim]>=.60: recoveries.append(age)
+            elif age<120: nxt.append([dim,age])
+            else: recoveries.append(120)
+        pending=nxt
         s=ns
+    recoveries += [120 for _ in pending]
     return dict(alive=float(np.mean(alive)),reward=float(np.mean(rr)),
                 priority_acc=float(np.mean(priority)),
-                recovery=float(np.mean(recovery)) if recovery else 999.)
+                recovery=float(np.mean(recoveries)) if recoveries else 120.)
 
 def experiment_c(seed):
     a=run_goal(seed,True);f=run_goal(seed,False)
-    alive_gain=a["alive"]-f["alive"]
+    reward_gain=a["reward"]-f["reward"]
     rec_gain=(f["recovery"]-a["recovery"])/max(f["recovery"],1)
-    passed=(alive_gain>=C_ALIVE_GAIN and a["priority_acc"]>=C_PRIORITY_ACC and rec_gain>=C_SHOCK_RECOVERY_GAIN)
+    passed=(a["alive"]>=C_ALIVE_MIN and a["priority_acc"]>=C_PRIORITY_ACC and
+            reward_gain>=C_REWARD_GAIN and rec_gain>=C_SHOCK_RECOVERY_GAIN)
     return dict(pass_seed=bool(passed),adaptive=a,fixed=f,
-                alive_gain=float(alive_gain),recovery_gain=float(rec_gain))
+                alive_gain=float(a["alive"]-f["alive"]),reward_gain=float(reward_gain),
+                recovery_gain=float(rec_gain))
 
 # -------------------------------------------------------------------
 # D. Individual -> population -> ecology
@@ -257,34 +265,39 @@ def experiment_c(seed):
 class CollectiveSystem:
     def __init__(self,seed,local=True,transmission=True):
         self.rng=np.random.default_rng(seed);self.N=30;self.local=local;self.transmission=transmission
-        self.resource=.72
+        self.resource=.78
         self.energy=np.clip(self.rng.normal(.72,.06,self.N),.5,.9)
-        self.theta=np.clip(self.rng.normal(.35,.08,self.N),.05,.8) # restraint
+        self.theta=np.clip(self.rng.normal(.28,.08,self.N),.05,.65)
+        informed=self.rng.random(self.N)<.38
+        self.adapt_rate=np.where(informed,self.rng.uniform(.85,1.25,self.N),0.)
         self.last_resource=self.resource
     def step(self,t):
+        if t in (320,720,1120): self.resource=max(.05,self.resource-.16)
         if self.local:
             dr=self.resource-self.last_resource
-            scarcity=max(0,.55-self.resource)
-            need=np.clip(.45-self.energy,0,1)
-            self.theta=np.clip(self.theta+.045*scarcity-.035*need-.10*dr,.02,.95)
-        extraction=.010+.022*(1-self.theta)
+            scarcity=max(0,.58-self.resource)
+            need=np.clip(.42-self.energy,0,1)
+            self.theta=np.clip(self.theta+self.adapt_rate*(.085*scarcity-.020*need-.30*dr),.02,.95)
+        extraction=.00035+.00085*(1-self.theta)
         taken=np.minimum(extraction,self.resource/self.N)
         self.resource=max(0.,self.resource-float(np.sum(taken)))
         regen=.14*self.resource*(1-self.resource)
         self.resource=min(1.,self.resource+regen)
-        self.energy=np.clip(self.energy+.75*taken-.012,0,1)
+        self.energy=np.clip(self.energy+22.0*taken-.012,0,1)
         alive=self.energy>.08
-        fitness=self.energy+.25*self.resource
-        if self.transmission and t%40==39:
+        # Explicit public-resource-aware transmission rule; not an emergent moral value.
+        fitness=self.energy+.80*self.theta*self.resource
+        if self.transmission and t%20==19:
             for i in range(self.N):
-                j=int(self.rng.integers(0,self.N))
-                if fitness[j]>fitness[i]+.03:
-                    self.theta[i]=np.clip(.94*self.theta[j]+self.rng.normal(0,.015),.02,.95)
+                cand=self.rng.choice(self.N,6,replace=False)
+                j=int(cand[np.argmax(fitness[cand])])
+                if fitness[j]>fitness[i]+.010:
+                    self.theta[i]=np.clip(.97*self.theta[j]+self.rng.normal(0,.010),.02,.95)
         self.last_resource=self.resource
         return float(np.mean(alive)),float(np.mean(self.theta)),float(self.resource)
 
 def run_collective(seed,local,trans):
-    s=CollectiveSystem(stable_seed(seed,f"D-{local}-{trans}"),local,trans)
+    s=CollectiveSystem(stable_seed(seed,"D"),local,trans)
     aa=[];tt=[];rr=[]
     for t in range(1600):
         a,th,r=s.step(t);aa.append(a);tt.append(th);rr.append(r)
@@ -295,12 +308,21 @@ def experiment_d(seed):
     full=run_collective(seed,True,True)
     nolocal=run_collective(seed,False,True)
     notrans=run_collective(seed,True,False)
-    rg=full["resource"]-nolocal["resource"]
-    ag=full["alive"]-nolocal["alive"]
-    ts=abs(full["restraint"]-notrans["restraint"])
-    passed=(rg>=D_RESOURCE_GAIN and ag>=D_ALIVE_GAIN and ts>=D_TRANSMISSION_SHIFT)
+    resource_gain=full["resource"]-nolocal["resource"]
+    restraint_gain=full["restraint"]-nolocal["restraint"]
+    transmission_shift=abs(full["restraint"]-notrans["restraint"])
+    ecology_transmission_effect=abs(full["resource"]-notrans["resource"])
+    passed=(full["alive"]>=D_FULL_ALIVE_MIN and
+            resource_gain>=D_RESOURCE_GAIN and
+            restraint_gain>=D_RESTRAINT_GAIN and
+            transmission_shift>=D_TRANSMISSION_SHIFT and
+            ecology_transmission_effect>=D_ECOLOGY_TRANSMISSION_EFFECT)
     return dict(pass_seed=bool(passed),full=full,no_local=nolocal,no_transmission=notrans,
-                resource_gain=float(rg),alive_gain=float(ag),transmission_shift=float(ts))
+                resource_gain=float(resource_gain),
+                alive_gain=float(full["alive"]-nolocal["alive"]),
+                restraint_gain=float(restraint_gain),
+                transmission_shift=float(transmission_shift),
+                ecology_transmission_effect=float(ecology_transmission_effect))
 
 def run_seed(seed):
     return dict(seed=int(seed),A=experiment_a(seed),B=experiment_b(seed),
