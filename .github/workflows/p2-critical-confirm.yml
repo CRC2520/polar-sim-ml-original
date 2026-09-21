@@ -1,0 +1,62 @@
+name: POLAR P2-Critical confirmatory freeze
+
+on:
+  pull_request:
+    paths:
+      - "p2_critical/config_confirm.py"
+      - "p2_critical/PREREG_P2_CRITICAL.md"
+      - "p2_critical/confirm.py"
+      - "p2_critical/audit.py"
+      - ".github/workflows/p2-critical-confirm.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  confirm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen numerical dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.3.5
+      - name: Record freeze commit
+        run: git rev-parse HEAD | tee P2_CRITICAL_FREEZE_COMMIT.txt
+      - name: Contract smoke tests
+        run: python -m unittest p2_critical.test_p2_critical -v
+      - name: Confirmatory execution A
+        run: python -m p2_critical.confirm --output p2_critical_results/run1
+      - name: Confirmatory execution B
+        run: python -m p2_critical.confirm --output p2_critical_results/run2
+      - name: Exact audit
+        run: python -m p2_critical.audit --run1 p2_critical_results/run1 --run2 p2_critical_results/run2 --output p2_critical_results/AUDIT_P2_CRITICAL.json
+      - name: Print report
+        run: |
+          cat p2_critical_results/run1/REPORT_P2_CRITICAL.md
+          cat p2_critical_results/AUDIT_P2_CRITICAL.json
+      - name: Upload P2-Critical evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: polar-p2-critical-confirmatory
+          path: |
+            P2_CRITICAL_FREEZE_COMMIT.txt
+            p2_critical/config_confirm.py
+            p2_critical/PREREG_P2_CRITICAL.md
+            p2_critical/experiments.py
+            p2_critical/confirm.py
+            p2_critical/audit.py
+            p2_critical_results/run1/
+            p2_critical_results/AUDIT_P2_CRITICAL.json
+          if-no-files-found: error
+          retention-days: 90
