@@ -1,8 +1,7 @@
 name: R26 core-class confirmatory
 
 on:
-  push:
-    branches: [research/r26-core-class-20260921]
+  workflow_dispatch:
 
 permissions:
   contents: read
