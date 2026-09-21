@@ -1,10 +1,7 @@
 name: R29 trust-region MPC comparison
 
 on:
-  pull_request:
-    paths:
-      - "experiments/r29_trust_mpc_20260921/**"
-      - ".github/workflows/r29_trust_mpc.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
