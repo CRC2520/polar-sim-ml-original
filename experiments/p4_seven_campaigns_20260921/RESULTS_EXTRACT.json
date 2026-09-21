@@ -1,0 +1,10 @@
+{
+  "date":"2026-09-21",
+  "E1":{"status":"PASS","guard":"12/12","overall":0.97375,"react_contradict":0.9956356609808102,"no_reactivation":0.9557063618042055,"distractor":0.9240455630497124,"updated_memory_auc":0.9886030716422279},
+  "E2":{"status":"PASS","guard":"10/12","retained_fail_seeds":[1322003,1322005],"mean_axis_alignment":0.9966784417629242,"min_axis_alignment":0.9911454617977142,"heldout_mse":0.0010350660304538906,"alignment_gain":0.44188739359378815},
+  "E3":{"status":"PASS","guard":"12/12","mse_d4":0.0018347661825828254,"mse_d3":0.06735821813344955,"cross_agent_alignment":0.9910994160784626,"transfer_mse":0.015949906781315804,"raw_hidden_transfer_mse":0.001096737920306623,"perm_damage":0.6254048943519592},
+  "E4":{"status":"PASS","guard":"10/12","retained_fail_seeds":[1342004,1342006],"integrated_factorized_ratio":0.00004932929144360216,"integrated_monolithic_ratio":0.5571447485569407,"wins_factorized":"4/4","wins_monolithic":"3/4"},
+  "E5":{"status":"PASS","signature_counts":{"POLAR":"12/12","GNW":"12/12","HOT":"12/12"}},
+  "E6":{"status":"EXTERNAL_INDEPENDENT_REPLICATION_OPEN","internal_cross_implementation_proxy":"PASS"},
+  "E7":{"status":"PROSPECTIVE_BIOLOGICAL_VALIDATION_OPEN","retrospective_compatibility":"PARTIAL_NON_SPECIFIC"}
+}
