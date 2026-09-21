@@ -253,7 +253,8 @@ def experiment3(seed,n=12000):
         strength=rng.uniform(.85,1.25)
         sig[t,idx[0]]=y[t]*strength+rng.normal(0,.65)
         sig[t,idx[1]]=y[t]*strength+rng.normal(0,.65)
-        priority[t]=rng.normal(0,.35,6);priority[t,list(idx)]+=2.00\n        workspace_priority[t]=rng.normal(0,1.50,6);workspace_priority[t,list(idx)]+=.40
+        priority[t]=rng.normal(0,.35,6);priority[t,list(idx)]+=2.00
+        workspace_priority[t]=rng.normal(0,1.50,6);workspace_priority[t,list(idx)]+=.40
         if source[t]==0: # self: coherent perturbation across the relevant pair
             b=rng.normal(0,.65);sig[t,list(idx)]+=b;own_echo[t]=.25+rng.normal(0,.75)
         elif source[t]==1: # world: anti-coherent external perturbation
