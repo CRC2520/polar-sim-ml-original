@@ -1,0 +1,66 @@
+{
+  "campaign": "R30 qualified dense Adaptive-LQR baseline",
+  "status": "FROZEN_BEFORE_PR_EXECUTION",
+  "development_seeds": [
+    1536001,
+    1536002,
+    1536003,
+    1536004
+  ],
+  "confirmatory_seeds": [
+    1537001,
+    1537002,
+    1537003,
+    1537004,
+    1537005,
+    1537006,
+    1537007,
+    1537008,
+    1537009,
+    1537010,
+    1537011,
+    1537012
+  ],
+  "trajectory_steps": 6400,
+  "baseline_validity": {
+    "medians": {
+      "adaptive_stable_min": 0.95,
+      "adaptive_frozen_ratio_max": 1.05
+    },
+    "seed_guard_required": 9,
+    "seed_guard": {
+      "adaptive_stable_min": 0.9,
+      "adaptive_frozen_ratio_max": 1.2
+    }
+  },
+  "core_noninferiority": {
+    "medians": {
+      "core_stable_min": 0.95,
+      "core_adaptive_ratio_min": 0.9,
+      "core_adaptive_ratio_max": 1.1,
+      "core_adaptive_postshift_ratio_max": 1.15
+    },
+    "seed_guard_required": 9,
+    "seed_guard": {
+      "core_stable_min": 0.9,
+      "core_adaptive_ratio_min": 0.8,
+      "core_adaptive_ratio_max": 1.2,
+      "core_adaptive_postshift_ratio_max": 1.25
+    }
+  },
+  "exclusive_core_advantage": {
+    "core_adaptive_ratio_max": 0.9,
+    "seed_guard_required": 9,
+    "seed_guard_ratio_max": 0.95
+  },
+  "fixed_boundaries": [
+    "baseline validity is prerequisite",
+    "noninferiority is not superiority",
+    "CORE≈ADAPTIVE_LQR supports implementation non-privilege",
+    "R26 strong relational H_TRANSFER remains FAIL",
+    "R27/R29 invalid MPC attempts remain adverse engineering results",
+    "R28 cancelled attempt remains adverse engineering result",
+    "E6b cannot be closed internally",
+    "E7 cannot be closed internally"
+  ]
+}
