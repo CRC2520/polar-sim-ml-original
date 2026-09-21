@@ -1,0 +1,59 @@
+{
+  "campaign": "P0-D Latent Unconscious / Reconsolidation",
+  "execution_date": "2026-09-21",
+  "development_seeds": [1101001,1101002,1101003,1101004],
+  "confirmatory_seeds": [1102001,1102002,1102003,1102004,1102005,1102006,1102007,1102008,1102009,1102010,1102011,1102012],
+  "global_verdict": "FUNCTIONAL_LATENT_UNCONSCIOUS_PASS",
+  "D1": {
+    "pass": true,
+    "seed_guard_pass_count": 12,
+    "medians": {
+      "workspace_leakage_auc_sym": 0.5601561967712745,
+      "implicit_policy_effect": 0.1763795658497634,
+      "near_trigger_broadcast_rate": 0.0,
+      "latent_persistence": 0.7951630351790127
+    }
+  },
+  "D2": {
+    "pass": true,
+    "seed_guard_pass_count": 12,
+    "medians": {
+      "exact_trigger_broadcast": 1.0,
+      "near_trigger_broadcast": 0.0,
+      "unrelated_broadcast": 0.0,
+      "near_trigger_implicit_bias": 0.1815729980849227,
+      "unrelated_implicit_bias": 0.0023649746164413604,
+      "latent_lesion_implicit_bias": 0.0
+    }
+  },
+  "D3": {
+    "pass": true,
+    "seed_guard_pass_count": 12,
+    "medians": {
+      "reconsolidation_advantage": 0.5011722164547212,
+      "control_spread": 0.0,
+      "reactivation_gate_fraction": 1.0,
+      "reconsolidated_trace_value": 0.8904968835221156,
+      "control_trace_value_mean": -0.9956100830639354
+    }
+  },
+  "D4": {
+    "pass": true,
+    "seed_guard_pass_count": 12,
+    "medians": {
+      "true_relation_recovered": 1.0,
+      "related_module_effect": 0.1556937757472417,
+      "unrelated_module_effect": 0.019461915399483692,
+      "relation_lesion_related_effect": 0.0,
+      "local_trace_effect_preserved": 0.3455347349164653,
+      "related_minus_shuffled": 0.13596050486673886
+    }
+  },
+  "reproducibility": {
+    "executable_sha256": "08c81d9e5020af05aee73dcd1dcfa35e55fdf6cbf0c5cbcf0886880127bb5c49",
+    "preregistration_sha256": "ccb703926d55ebb9ce407fea17038af87ed7173b1978fdd7dc8600493844606b",
+    "confirmatory_sha256": "370dfe90375f803fb1e89796005192f181534d8873bcff46050edf6ea5dba0f5",
+    "replay_sha256": "370dfe90375f803fb1e89796005192f181534d8873bcff46050edf6ea5dba0f5",
+    "audit_checks": "30/30 PASS"
+  }
+}
