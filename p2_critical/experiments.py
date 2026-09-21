@@ -253,7 +253,7 @@ def experiment3(seed,n=12000):
         strength=rng.uniform(.85,1.25)
         sig[t,idx[0]]=y[t]*strength+rng.normal(0,.65)
         sig[t,idx[1]]=y[t]*strength+rng.normal(0,.65)
-        priority[t]=rng.normal(0,.68,6);priority[t,list(idx)]+=.88
+        priority[t]=rng.normal(0,.45,6);priority[t,list(idx)]+=1.40
         if source[t]==0: # self: coherent perturbation across the relevant pair
             b=rng.normal(0,.65);sig[t,list(idx)]+=b;own_echo[t]=.25+rng.normal(0,.75)
         elif source[t]==1: # world: anti-coherent external perturbation
@@ -264,7 +264,7 @@ def experiment3(seed,n=12000):
     coherence=np.zeros((n,3))
     for k in range(3):coherence[:,k]=np.tanh(sig[:,2*k]*sig[:,2*k+1])
     module_coh=np.repeat(coherence,2,axis=1)
-    workspace_priority=priority+rng.normal(0,.90,priority.shape)
+    workspace_priority=priority+rng.normal(0,1.45,priority.shape)
 
     # Primary direct route and broadcast route. Broadcast selection for primary uses local priority
     # so the POLAR lesion cannot directly alter first-order evidence.
@@ -277,7 +277,7 @@ def experiment3(seed,n=12000):
 
     # Relational workspace: coherence disambiguates noisy local priority.
     module_strength=np.repeat(np.abs(coherence),2,axis=1)
-    full_sel=np.argsort(workspace_priority+1.80*module_strength,axis=1)[:,-2:]
+    full_sel=np.argsort(workspace_priority+2.40*module_strength,axis=1)[:,-2:]
     polar_sel=np.argsort(workspace_priority,axis=1)[:,-2:]
     def recall(sel):
         vals=[]
@@ -289,15 +289,15 @@ def experiment3(seed,n=12000):
 
     split=n//2
     corr=(full_pred==truth).astype(int)
-    pair_score_ws=np.column_stack([workspace_priority[:,2*k:2*k+2].mean(axis=1)+1.80*np.abs(coherence[:,k]) for k in range(3)])
+    pair_score_ws=np.column_stack([workspace_priority[:,2*k:2*k+2].mean(axis=1)+2.40*np.abs(coherence[:,k]) for k in range(3)])
     chosen_pair=np.argmax(pair_score_ws,axis=1)
     coh_chosen=np.array([coherence[t,chosen_pair[t]] for t in range(n)])
     strength_chosen=np.array([abs(coherence[t,chosen_pair[t]]) for t in range(n)])
-    metaX=np.c_[np.abs(primary),coh_chosen,strength_chosen]
+    metaX=np.c_[coh_chosen,strength_chosen,np.abs(direct-broad)]
     Wm=_fit_binary(metaX[:split],corr[:split])
     conf=_pred_prob(Wm,metaX[split:])
     brier_full=float(np.mean((conf-corr[split:])**2))
-    metaX_p=metaX[split:].copy();metaX_p[:,1:]=0.
+    metaX_p=metaX[split:].copy();metaX_p[:,:2]=0.
     conf_p=_pred_prob(Wm,metaX_p)
     brier_p=float(np.mean((conf_p-corr[split:])**2))
     base_rate=float(np.mean(corr[:split]))
