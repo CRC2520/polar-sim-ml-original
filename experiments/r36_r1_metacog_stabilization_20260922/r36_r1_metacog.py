@@ -357,7 +357,7 @@ def run_seed(seed):
     obs = env.obs()
 
     d_damage=[]; r_damage=[]; c_gain=[]; own_damage=[]
-    plan_gain=[]; meta_gain=[]
+    plan_gain=[]; plan_candidate_gain_all=[]; plan_invoked=[]; meta_gain=[]
     reentry_p=[]; reentry_c=[]
     block_cold = []
     confs=[]; errors=[]
@@ -399,7 +399,11 @@ def run_seed(seed):
             # optimize the second step for each candidate first action under true dynamics
             def best_true_cost(first):
                 return min(env.true_two_step_cost(x, first, a2, target) for a2 in range(len(ACTIONS)))
-            plan_gain.append(best_true_cost(a_myop)-best_true_cost(a_plan))
+            candidate_gain = best_true_cost(a_myop)-best_true_cost(a_plan)
+            plan_candidate_gain_all.append(candidate_gain)
+            plan_invoked.append(float(use_plan))
+            if use_plan:
+                plan_gain.append(candidate_gain)
             actual_gate_action = a_plan if use_plan else a_myop
             reverse_gate_action = a_myop if use_plan else a_plan
             meta_gain.append(best_true_cost(reverse_gate_action)-best_true_cost(actual_gate_action))
@@ -459,6 +463,8 @@ def run_seed(seed):
         "metacog_low_conf_error": float(low_err),
         "metacog_high_conf_error": float(high_err),
         "planning_gain": float(np.mean(plan_gain)) if plan_gain else 0.0,
+        "planning_candidate_gain_all": float(np.mean(plan_candidate_gain_all)) if plan_candidate_gain_all else 0.0,
+        "planning_invocation_rate": float(np.mean(plan_invoked)) if plan_invoked else 0.0,
         "metacog_gate_gain": float(np.mean(meta_gain)) if meta_gain else 0.0,
         "stable_fraction": float(np.mean(stable)),
         "memory_entries": int(len(agent.memory)),
