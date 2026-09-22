@@ -44,8 +44,6 @@ def adaptive_train(seed,task,kind,steps=TRAIN_STEPS):
                     Anew[np.abs(Anew)<0.02]=0.0
                 Xv=seq[cut:-1]; Uv=act[cut:]; Yv=seq[cut+1:]
                 oldp=(Xv@Ahat.T)+(Uv[:,None]@Bhat.T)
-                newp=(Xv@Anew.T)+(Uv[:,None]@Bhat.T*0 + Uv[:,None]@Bnew.T)
-                # same prediction expression, written explicitly for auditability
                 newp=(Xv@Anew.T)+(Uv[:,None]@Bnew.T)
                 oldm=float(np.mean((oldp-Yv)**2))
                 newm=float(np.mean((newp-Yv)**2))
