@@ -1,0 +1,57 @@
+{
+  "campaign": "R37 external POPGym persistent-state validation",
+  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "dependency": {
+    "package": "popgym",
+    "version": "1.0.7",
+    "wheel_sha256": "23be7f754f3167f58c4ac844426f3e0f7230035bedfcd5d85b004524eef21bb6"
+  },
+  "environments": [
+    "PositionOnlyCartPoleMedium",
+    "PositionOnlyCartPoleHard",
+    "NoisyPositionOnlyCartPoleMedium",
+    "NoisyPositionOnlyCartPoleHard"
+  ],
+  "episodes_per_environment": 24,
+  "development_seeds": [
+    2036001,
+    2036002,
+    2036003,
+    2036004
+  ],
+  "confirmatory_seeds": [
+    2037001,
+    2037002,
+    2037003,
+    2037004,
+    2037005,
+    2037006,
+    2037007,
+    2037008,
+    2037009,
+    2037010,
+    2037011,
+    2037012
+  ],
+  "medians": {
+    "core_score_min": 0.7,
+    "core_minus_noC_min": 0.05,
+    "iso_gap_max": 1e-12,
+    "oracle_score_min": 0.95
+  },
+  "seed_guard_required_dev": 3,
+  "seed_guard_required_confirm": 9,
+  "seed_guard": {
+    "core_score_min": 0.6,
+    "core_minus_noC_min": 0.03,
+    "iso_gap_max": 1e-12
+  },
+  "fixed_boundaries": [
+    "R37 tests external C/persistent-state transfer, not D/R necessity",
+    "GENERIC_ISO equivalence is expected and not a POLAR advantage",
+    "ORACLE_STATE is evaluator-only descriptive reference",
+    "E6b independent replication remains OPEN",
+    "E7 remains OPEN",
+    "R36-R2 confirmatory seeds 2027001-2027012 remain unopened"
+  ]
+}
