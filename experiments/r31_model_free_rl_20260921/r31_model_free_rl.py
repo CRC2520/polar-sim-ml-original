@@ -29,16 +29,25 @@ def features(task, est):
     return np.asarray(vals,float)
 
 def residual_actions(task,uclip):
-    frac=np.array([-0.10,-0.05,0.0,0.05,0.10],float)
+    frac=np.array([-0.05,-0.025,0.0,0.025,0.05],float)
     return frac*uclip
 
-def choose_rl_action(W,phi,residuals,u_nom,epsilon,rng,uclip):
+def greedy_rl_index(W,phi,residuals,uclip,margin=0.01):
     q=W@phi
     penalty=0.002*(residuals/(uclip+1e-12))**2
+    z=int(np.argmin(np.abs(residuals)))
+    b=int(np.argmin(q+penalty))
+    if b!=z and (q[b]+penalty[b]) > (q[z]+penalty[z]-margin):
+        b=z
+    return b,q
+
+def choose_rl_action(W,phi,residuals,u_nom,epsilon,rng,uclip):
+    z=int(np.argmin(np.abs(residuals)))
     if rng.random()<epsilon:
         idx=int(rng.integers(0,len(residuals)))
+        q=W@phi
     else:
-        idx=int(np.argmin(q+penalty))
+        idx,q=greedy_rl_index(W,phi,residuals,uclip)
     u=float(np.clip(u_nom+residuals[idx],-uclip,uclip))
     return idx,u,q
 
@@ -94,7 +103,26 @@ def adaptive_train(seed,task,kind,steps=TRAIN_STEPS):
         prev_o=o; prev_v=vel; est_prev=est.copy(); u_prev=u; state=next_state
     return {"K_nom":K_nom,"K_adapt":K_adapt}
 
-def rl_train(seed,task,steps=TRAIN_STEPS,alpha0=0.025,gamma=0.985):
+def refit_fqi(W,buffer,gamma=0.985,lam=0.5,iters=6):
+    if len(buffer)<250:
+        return W
+    A=W.shape[0]
+    Wcur=W.copy()
+    for _ in range(iters):
+        next_phi=np.stack([b[3] for b in buffer])
+        next_q=next_phi@Wcur.T
+        min_next=np.min(next_q,axis=1)
+        for a in range(A):
+            ids=[i for i,b in enumerate(buffer) if b[1]==a]
+            if len(ids)<20:
+                continue
+            X=np.stack([buffer[i][0] for i in ids])
+            y=np.array([min(5.0,float(buffer[i][2])) + gamma*min_next[i] for i in ids])
+            w=np.linalg.solve(X.T@X+lam*np.eye(X.shape[1]),X.T@y)
+            Wcur[a]=w
+    return Wcur
+
+def rl_train(seed,task,steps=TRAIN_STEPS,gamma=0.985):
     rng=np.random.default_rng(seed)
     step,n,params,Q,R,uclip,state,obs,estimate,cost,stable=base.task_spec(task,rng,steps)
     Anom,Bnom=base.base.numeric_linearization(step,n,params[0])
@@ -102,6 +130,7 @@ def rl_train(seed,task,steps=TRAIN_STEPS,alpha0=0.025,gamma=0.985):
     residuals=residual_actions(task,uclip)
     dim=len(features(task,np.zeros(n)))
     W=np.zeros((len(residuals),dim),float)
+    buffer=[]
     prev_o=None; prev_v=None
     seg=steps//len(TRAIN_SCHEDULE)
     for t in range(steps):
@@ -113,20 +142,22 @@ def rl_train(seed,task,steps=TRAIN_STEPS,alpha0=0.025,gamma=0.985):
         est,vel=estimate(o,prev_o,prev_v)
         phi=features(task,est)
         un=float(-(K_nom@est)[0]) if K_nom is not None else 0.0
-        epsilon=max(0.02,0.12*(1.0-t/max(1,steps-1)))
-        ai,u,q=choose_rl_action(W,phi,residuals,un,epsilon,rng,uclip)
+        epsilon=max(0.015,0.08*(1.0-t/max(1,steps-1)))
+        ai,u,_=choose_rl_action(W,phi,residuals,un,epsilon,rng,uclip)
         c=cost(state,u)
         next_state=step(state,u,p)
         no=obs(next_state,min(t+1,steps))
         nest,nvel=estimate(no,o,vel)
         nphi=features(task,nest)
-        q_next=W@nphi
-        target=min(5.0,float(c)) + gamma*float(np.min(q_next))
-        td=target-float(q[ai])
-        alpha=alpha0/(1.0+0.00025*t)
-        W[ai]+=alpha*td*phi
-        W*=1.0-1e-6
+        buffer.append((phi.copy(),ai,float(c),nphi.copy()))
+        if len(buffer)>2200:
+            buffer=buffer[-2200:]
+        if t>=300 and t%100==0:
+            Wfit=refit_fqi(W,buffer,gamma=gamma,lam=0.5,iters=6)
+            W=.55*W+.45*Wfit
         prev_o=o; prev_v=vel; state=next_state
+    Wfit=refit_fqi(W,buffer,gamma=gamma,lam=0.5,iters=10)
+    W=.35*W+.65*Wfit
     return {"K_nom":K_nom,"W":W,"residuals":residuals}
 
 def eval_controller(seed,task,controller,trained=None,steps=EVAL_STEPS):
@@ -135,7 +166,7 @@ def eval_controller(seed,task,controller,trained=None,steps=EVAL_STEPS):
     Anom,Bnom=base.base.numeric_linearization(step,n,params[0])
     K_nom=base.base.infinite_lqr_gain(Anom,Bnom,Q,R)
     prev_o=None; prev_v=None
-    costs=[]; stables=[]; shift_costs=[]
+    costs=[]; stables=[]; shift_costs=[]; rl_nonzero=[]
     seg=steps//len(EVAL_SCHEDULE)
     prev_rid=EVAL_SCHEDULE[0]
     for t in range(steps):
@@ -160,10 +191,9 @@ def eval_controller(seed,task,controller,trained=None,steps=EVAL_STEPS):
             phi=features(task,est)
             un=float(-(K_nom@est)[0]) if K_nom is not None else 0.0
             W=trained["W"]; residuals=trained["residuals"]
-            q=W@phi
-            penalty=0.002*(residuals/(uclip+1e-12))**2
-            ai=int(np.argmin(q+penalty))
+            ai,_=greedy_rl_index(W,phi,residuals,uclip)
             u=un+residuals[ai]
+            rl_nonzero.append(float(abs(residuals[ai])>1e-12))
         else:
             raise ValueError(controller)
         u=float(np.clip(u,-uclip,uclip))
@@ -177,7 +207,8 @@ def eval_controller(seed,task,controller,trained=None,steps=EVAL_STEPS):
     return {
       "mean_cost":float(np.mean(costs)),
       "postshift_cost":float(np.mean(shift_costs)),
-      "stable_fraction":float(np.mean(stables))
+      "stable_fraction":float(np.mean(stables)),
+      "rl_nonzero_fraction":float(np.mean(rl_nonzero)) if rl_nonzero else 0.0
     }
 
 def eval_seed(seed):
@@ -207,12 +238,13 @@ def eval_seed(seed):
       "core_adaptive_ratio":ratio("CORE","ADAPTIVE_LQR","mean_cost"),
       "core_stable":float(np.mean([tasks[t]["CORE"]["stable_fraction"] for t in tasks])),
       "rl_stable":float(np.mean([tasks[t]["MODEL_FREE_RL"]["stable_fraction"] for t in tasks])),
-      "adaptive_stable":float(np.mean([tasks[t]["ADAPTIVE_LQR"]["stable_fraction"] for t in tasks]))
+      "adaptive_stable":float(np.mean([tasks[t]["ADAPTIVE_LQR"]["stable_fraction"] for t in tasks])),
+      "rl_nonzero_fraction":float(np.mean([tasks[t]["MODEL_FREE_RL"]["rl_nonzero_fraction"] for t in tasks]))
     }
 
 def summarize(records):
     keys=["rl_frozen_ratio","rl_adaptive_ratio","core_rl_ratio","core_rl_postshift_ratio",
-          "core_adaptive_ratio","core_stable","rl_stable","adaptive_stable"]
+          "core_adaptive_ratio","core_stable","rl_stable","adaptive_stable","rl_nonzero_fraction"]
     return {k:float(np.median([r[k] for r in records])) for k in keys}
 
 def main():
