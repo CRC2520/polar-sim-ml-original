@@ -19,10 +19,11 @@ def main():
 
     r=json.loads(Path(a.results).read_text())
     f=json.loads(Path(a.freeze).read_text())
-    sha=hashlib.sha256(Path(a.source).read_bytes()).hexdigest()
+    source_bytes=Path(a.source).read_bytes()
+    git_blob=hashlib.sha1(("blob "+str(len(source_bytes))+"\\0").encode()+source_bytes).hexdigest()
 
     assert f["status"]=="FROZEN_BEFORE_CONFIRMATORY_SEEDS"
-    assert sha==f["source_sha256"], (sha,f["source_sha256"])
+    assert git_blob==f["source_git_blob_sha"], (git_blob,f["source_git_blob_sha"])
     assert r["mode"]=="confirm"
     assert r["seeds"]==f["confirmatory_seeds"]
     assert r["confirmatory_families"]==f["confirmatory_families"]
@@ -91,7 +92,7 @@ def main():
 
     out={
       "campaign":f["campaign"],
-      "source_sha256":sha,
+      "source_git_blob_sha":git_blob,
       "confirmatory_seeds":f["confirmatory_seeds"],
       "confirmatory_families":f["confirmatory_families"],
       "strict_heldout_families":f["strict_heldout_families"],
