@@ -1,0 +1,77 @@
+name: R34 access hypotheses development
+
+on:
+  push:
+    branches: [research/r34-access-hypotheses-20260922]
+    paths:
+      - experiments/r34_access_hypotheses_20260922/r34_access_hypotheses.py
+      - experiments/r34_access_hypotheses_20260922/PREREG_R34.md
+      - .github/workflows/r34_access_hypotheses_dev.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - experiments/r34_access_hypotheses_20260922/**
+      - .github/workflows/r34_access_hypotheses_dev.yml
+
+permissions:
+  contents: read
+
+jobs:
+  dev:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - hyp: H1
+            seeds: "1806001:1806004"
+          - hyp: H2
+            seeds: "1816001:1816004"
+          - hyp: H3
+            seeds: "1826001:1826004"
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen numerical stack
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu torch==2.14.0+cpu numpy==2.3.5
+      - name: Syntax check
+        run: python -m py_compile experiments/r34_access_hypotheses_20260922/r34_access_hypotheses.py
+      - name: Record source identity
+        run: git hash-object experiments/r34_access_hypotheses_20260922/r34_access_hypotheses.py > experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_DEV_SOURCE_GIT_BLOB.txt
+      - name: Run development panel
+        run: |
+          python experiments/r34_access_hypotheses_20260922/r34_access_hypotheses.py \
+            --hypothesis ${{ matrix.hyp }} \
+            --mode dev \
+            --seeds ${{ matrix.seeds }} \
+            --output experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_DEV_RESULTS.json
+      - name: Guard development split
+        run: |
+          python - <<'PY'
+          import json
+          hyp="${{ matrix.hyp }}"
+          p=f"experiments/r34_access_hypotheses_20260922/R34_{hyp}_DEV_RESULTS.json"
+          d=json.load(open(p))
+          assert d["mode"]=="dev"
+          assert d["hypothesis"]==hyp
+          if hyp=="H1": assert d["seeds"]==list(range(1806001,1806005))
+          if hyp=="H2": assert d["seeds"]==list(range(1816001,1816005))
+          if hyp=="H3": assert d["seeds"]==list(range(1826001,1826005))
+          print(json.dumps(d["medians"],indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r34-${{ matrix.hyp }}-development
+          path: |
+            experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_DEV_RESULTS.json
+            experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_DEV_SOURCE_GIT_BLOB.txt
