@@ -20,7 +20,8 @@ def main():
     r=json.loads(Path(a.results).read_text())
     f=json.loads(Path(a.freeze).read_text())
     source_bytes=Path(a.source).read_bytes()
-    git_blob=hashlib.sha1(("blob "+str(len(source_bytes))+"\\0").encode()+source_bytes).hexdigest()
+    header=("blob "+str(len(source_bytes))).encode()+bytes([0])
+    git_blob=hashlib.sha1(header+source_bytes).hexdigest()
 
     assert f["status"]=="FROZEN_BEFORE_CONFIRMATORY_SEEDS"
     assert git_blob==f["source_git_blob_sha"], (git_blob,f["source_git_blob_sha"])
