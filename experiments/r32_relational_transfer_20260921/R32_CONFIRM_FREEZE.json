@@ -4,7 +4,7 @@
   "freeze_date": "2026-09-21",
   "parent_theory": "POLAR Core v1.0 F0/F1",
   "source_git_blob_sha": "be82b21e835cea75f493cc47c10c83c5f40d96d0",
-  "adjudicator_git_blob_sha": "e06b6ea9223a2db4a23217578a8a52b9fe66bba6",
+  "adjudicator_git_blob_sha": "b5c1f76f2e97f97eb847af7eaa2f26a7b3762533",
   "development_run": {
     "run_id": 35685412213,
     "head_sha": "b8fe6a9d78a04e2c264b306dcdae356b8d71d899",
@@ -124,5 +124,6 @@
     "global_minimality": "OPEN",
     "RL_field_superiority": "NOT_TESTED",
     "R30_R31_equivalence": "UNCHANGED"
-  }
+  },
+  "post_opening_technical_note": "Only the adjudicator Git-blob identity reconstruction was corrected after the first confirmatory simulation; runner source, seeds, topology families, metrics, thresholds and decision rules are unchanged. First simulation run 35685648824 produced results but failed before adjudication/artifact upload."
 }
