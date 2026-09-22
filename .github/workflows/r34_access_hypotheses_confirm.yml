@@ -1,0 +1,82 @@
+name: R34 access hypotheses confirmatory
+
+on:
+  push:
+    branches: [research/r34-access-hypotheses-20260922]
+    paths:
+      - .github/workflows/r34_access_hypotheses_confirm.yml
+
+permissions:
+  contents: read
+
+jobs:
+  confirm:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - hyp: H1
+            seeds: "1807001:1807012"
+          - hyp: H2
+            seeds: "1817001:1817012"
+          - hyp: H3
+            seeds: "1827001:1827012"
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen numerical stack
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu torch==2.14.0+cpu numpy==2.3.5
+      - name: Verify frozen source adjudicator and split
+        run: |
+          python - <<'PY'
+          import json, pathlib, subprocess
+          hyp="${{ matrix.hyp }}"
+          root=pathlib.Path("experiments/r34_access_hypotheses_20260922")
+          f=json.loads((root/f"R34_{hyp}_CONFIRM_FREEZE.json").read_text())
+          assert f["status"]=="FROZEN_BEFORE_CONFIRMATORY_SEEDS"
+          src=subprocess.check_output(["git","hash-object",str(root/"r34_access_hypotheses.py")],text=True).strip()
+          adj=subprocess.check_output(["git","hash-object",str(root/"adjudicate_r34.py")],text=True).strip()
+          assert src==f["source_git_blob_sha"],(src,f["source_git_blob_sha"])
+          assert adj==f["adjudicator_git_blob_sha"],(adj,f["adjudicator_git_blob_sha"])
+          print("R34 freeze PASS",hyp,src,adj)
+          PY
+      - name: Execute untouched confirmatory panel
+        run: |
+          python experiments/r34_access_hypotheses_20260922/r34_access_hypotheses.py \
+            --hypothesis ${{ matrix.hyp }} \
+            --mode confirm \
+            --seeds ${{ matrix.seeds }} \
+            --output experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_CONFIRM_RESULTS.json
+      - name: Adjudicate frozen criteria
+        run: |
+          python experiments/r34_access_hypotheses_20260922/adjudicate_r34.py \
+            --results experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_CONFIRM_RESULTS.json \
+            --freeze experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_CONFIRM_FREEZE.json \
+            --source experiments/r34_access_hypotheses_20260922/r34_access_hypotheses.py \
+            --output experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_CONFIRM_ADJUDICATION.json
+      - name: Record provenance
+        run: |
+          git rev-parse HEAD > experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_CONFIRM_COMMIT.txt
+          sha256sum experiments/r34_access_hypotheses_20260922/r34_access_hypotheses.py > experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_CONFIRM_SOURCE_SHA256.txt
+          sha256sum experiments/r34_access_hypotheses_20260922/adjudicate_r34.py > experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_CONFIRM_ADJUDICATOR_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r34-${{ matrix.hyp }}-confirmatory
+          path: |
+            experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_CONFIRM_RESULTS.json
+            experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_CONFIRM_ADJUDICATION.json
+            experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_CONFIRM_FREEZE.json
+            experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_CONFIRM_COMMIT.txt
+            experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_CONFIRM_SOURCE_SHA256.txt
+            experiments/r34_access_hypotheses_20260922/R34_${{ matrix.hyp }}_CONFIRM_ADJUDICATOR_SHA256.txt
