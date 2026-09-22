@@ -1,3 +1,4 @@
+# exact replay after adjudicator identity-check fix; experimental source and criteria unchanged
 name: R32 relational transfer confirmatory
 
 on:
