@@ -1,0 +1,176 @@
+{
+  "architecture_adjudication": {
+    "CURRENT_MLP": {
+      "DCRA_conjunction": false,
+      "mechanism_count": 1,
+      "mechanisms": {
+        "A": false,
+        "C": false,
+        "D": true,
+        "R": false
+      },
+      "success": false
+    },
+    "GRU": {
+      "DCRA_conjunction": false,
+      "mechanism_count": 3,
+      "mechanisms": {
+        "A": false,
+        "C": true,
+        "D": true,
+        "R": true
+      },
+      "success": true
+    },
+    "LSTM": {
+      "DCRA_conjunction": false,
+      "mechanism_count": 3,
+      "mechanisms": {
+        "A": false,
+        "C": true,
+        "D": true,
+        "R": true
+      },
+      "success": true
+    },
+    "RNN": {
+      "DCRA_conjunction": true,
+      "mechanism_count": 4,
+      "mechanisms": {
+        "A": true,
+        "C": true,
+        "D": true,
+        "R": true
+      },
+      "success": true
+    },
+    "WINDOW_MLP": {
+      "DCRA_conjunction": true,
+      "mechanism_count": 4,
+      "mechanisms": {
+        "A": true,
+        "C": true,
+        "D": true,
+        "R": true
+      },
+      "success": true
+    }
+  },
+  "architecture_medians": {
+    "CURRENT_MLP": {
+      "A_history_specificity": 0,
+      "C_history_damage": 0,
+      "D_rank1_damage": 0.01463733508829429,
+      "R_decode_r2": -16.42061464343234,
+      "R_transplant_damage": 0,
+      "adapt_cost": 0.001589775332459748,
+      "control_gain_vs_current": 0,
+      "oracle_adapt_cost": 0.0005123776550603942,
+      "performance_score": 0,
+      "prediction_gain_vs_current": 0,
+      "stable": 1
+    },
+    "GRU": {
+      "A_history_specificity": 0.00015997098186441383,
+      "C_history_damage": 0.003338235692353919,
+      "D_rank1_damage": 0.014742806926842704,
+      "R_decode_r2": -21.930556667803653,
+      "R_transplant_damage": 0.0010147623291535033,
+      "adapt_cost": 0.0013909026056116345,
+      "control_gain_vs_current": 0.13115523252055009,
+      "oracle_adapt_cost": 0.0005148437487752071,
+      "performance_score": 0.10426376041466986,
+      "prediction_gain_vs_current": 0.062239845017361226,
+      "stable": 1
+    },
+    "LSTM": {
+      "A_history_specificity": 0.000004613835092944331,
+      "C_history_damage": 0.005565775160600121,
+      "D_rank1_damage": 0.01325628396649008,
+      "R_decode_r2": -19.282263887557228,
+      "R_transplant_damage": 0.0007650705438209116,
+      "adapt_cost": 0.0014798492233025744,
+      "control_gain_vs_current": 0.07603758422993696,
+      "oracle_adapt_cost": 0.0004979147194698184,
+      "performance_score": 0.008233040260742036,
+      "prediction_gain_vs_current": 0.029247316511391248,
+      "stable": 1
+    },
+    "RNN": {
+      "A_history_specificity": 0.00034051084063927795,
+      "C_history_damage": 0.0033098787195437276,
+      "D_rank1_damage": 0.015509638436137582,
+      "R_decode_r2": -30.432031388018473,
+      "R_transplant_damage": 0.001604200904694153,
+      "adapt_cost": 0.0011280369047424277,
+      "control_gain_vs_current": 0.3881707556090386,
+      "oracle_adapt_cost": 0.0004902211768085083,
+      "performance_score": 0.31837240811582945,
+      "prediction_gain_vs_current": 0.33366413355741703,
+      "stable": 1
+    },
+    "WINDOW_MLP": {
+      "A_history_specificity": 0.0004638327682187083,
+      "C_history_damage": 0.00164519936030653,
+      "D_rank1_damage": 0.014875174636025274,
+      "R_decode_r2": -17.146262312220408,
+      "R_transplant_damage": 0.0028867703913419973,
+      "adapt_cost": 0.0007421023412853768,
+      "control_gain_vs_current": 0.7673885194966772,
+      "oracle_adapt_cost": 0.0005054303714351938,
+      "performance_score": 0.6053349966019784,
+      "prediction_gain_vs_current": 0.4419299374641489,
+      "stable": 1
+    }
+  },
+  "boundaries": {
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "R30_R31_implementation_nonprivilege": "UNCHANGED",
+    "R32": "UNCHANGED",
+    "consciousness": "NOT_ESTABLISHED",
+    "global_architectural_necessity": "NOT_ESTABLISHED",
+    "independent_task_generation": "NOT_ESTABLISHED",
+    "scope": "SAME_PROGRAM_GENERIC_LEARNERS_ON_HELDOUT_TOPOLOGIES_AND_ARCHITECTURES"
+  },
+  "campaign": "R33 mechanism emergence in generic learners",
+  "confirmatory_seeds": [
+    1707001,
+    1707002,
+    1707003,
+    1707004,
+    1707005,
+    1707006,
+    1707007,
+    1707008,
+    1707009,
+    1707010,
+    1707011,
+    1707012
+  ],
+  "conjunction_rate_among_successful": 0.5,
+  "current_negative_control_pass": true,
+  "heldout_conjunction_rate": 0.5,
+  "heldout_successful_architectures": [
+    "WINDOW_MLP",
+    "LSTM"
+  ],
+  "heldout_successful_conjunction_architectures": [
+    "WINDOW_MLP"
+  ],
+  "performance_mechanism_spearman_secondary": 0.3366261398176292,
+  "resolution": "R33_INCONCLUSIVE_CAPABILITY",
+  "severe_counterexamples": [],
+  "source_git_blob_sha": "1f5f36a8da5eebc2b4a61876b727c4f616529170",
+  "strong_pass": false,
+  "successful_architectures": [
+    "RNN",
+    "GRU",
+    "WINDOW_MLP",
+    "LSTM"
+  ],
+  "successful_conjunction_architectures": [
+    "RNN",
+    "WINDOW_MLP"
+  ]
+}
