@@ -1,0 +1,69 @@
+name: R36 unified persistent agent confirmatory
+
+on:
+  push:
+    branches: [research/r36-unified-persistent-agent-20260922]
+    paths:
+      - .github/workflows/r36_unified_persistent_agent_confirm.yml
+
+permissions:
+  contents: read
+
+jobs:
+  r36-confirm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen dependency
+        run: python -m pip install numpy==2.3.5
+      - name: Verify frozen source adjudicator and seed contract
+        run: |
+          python - <<'PY'
+          import json,pathlib,subprocess
+          root=pathlib.Path("experiments/r36_unified_persistent_agent_20260922")
+          f=json.loads((root/"R36_CONFIRM_FREEZE.json").read_text())
+          assert f["status"]=="FROZEN_BEFORE_CONFIRMATORY_SEEDS"
+          assert f["confirmatory_seeds"]==list(range(2007001,2007013))
+          src=subprocess.check_output(["git","hash-object",str(root/"r36_unified_persistent_agent.py")],text=True).strip()
+          adj=subprocess.check_output(["git","hash-object",str(root/"adjudicate_r36.py")],text=True).strip()
+          assert src==f["source_git_blob_sha"],(src,f["source_git_blob_sha"])
+          assert adj==f["adjudicator_git_blob_sha"],(adj,f["adjudicator_git_blob_sha"])
+          print("R36 freeze PASS",src,adj)
+          PY
+      - name: Execute untouched confirmatory seeds
+        run: |
+          python experiments/r36_unified_persistent_agent_20260922/r36_unified_persistent_agent.py \
+            --mode confirm \
+            --seeds 2007001:2007012 \
+            --output experiments/r36_unified_persistent_agent_20260922/R36_CONFIRM_RESULTS.json
+      - name: Adjudicate frozen conjunction
+        run: |
+          python experiments/r36_unified_persistent_agent_20260922/adjudicate_r36.py \
+            --results experiments/r36_unified_persistent_agent_20260922/R36_CONFIRM_RESULTS.json \
+            --freeze experiments/r36_unified_persistent_agent_20260922/R36_CONFIRM_FREEZE.json \
+            --source experiments/r36_unified_persistent_agent_20260922/r36_unified_persistent_agent.py \
+            --output experiments/r36_unified_persistent_agent_20260922/R36_CONFIRM_ADJUDICATION.json
+      - name: Record provenance
+        run: |
+          git rev-parse HEAD > experiments/r36_unified_persistent_agent_20260922/R36_CONFIRM_COMMIT.txt
+          sha256sum experiments/r36_unified_persistent_agent_20260922/r36_unified_persistent_agent.py > experiments/r36_unified_persistent_agent_20260922/R36_CONFIRM_SOURCE_SHA256.txt
+          sha256sum experiments/r36_unified_persistent_agent_20260922/adjudicate_r36.py > experiments/r36_unified_persistent_agent_20260922/R36_CONFIRM_ADJUDICATOR_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r36-unified-persistent-confirmatory
+          path: |
+            experiments/r36_unified_persistent_agent_20260922/R36_CONFIRM_RESULTS.json
+            experiments/r36_unified_persistent_agent_20260922/R36_CONFIRM_ADJUDICATION.json
+            experiments/r36_unified_persistent_agent_20260922/R36_CONFIRM_FREEZE.json
+            experiments/r36_unified_persistent_agent_20260922/R36_CONFIRM_COMMIT.txt
+            experiments/r36_unified_persistent_agent_20260922/R36_CONFIRM_SOURCE_SHA256.txt
+            experiments/r36_unified_persistent_agent_20260922/R36_CONFIRM_ADJUDICATOR_SHA256.txt
