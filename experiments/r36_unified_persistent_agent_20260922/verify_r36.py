@@ -30,7 +30,14 @@ check(adj["component_counts"]["R"]==11,"R 11/12")
 check(adj["component_counts"]["metacog_calibration"]==7,"metacog calibration 7/12")
 check(adj["component_counts"]["metacog_function"]==8,"metacog function 8/12")
 check(adj["component_counts"]["planning"]==9,"planning 9/12")
-check(all(adj["median_checks"].values()),"all median checks pass")
+for k,v in freeze["median_criteria"].items():
+    val=float(adj["medians"][k])
+    if "min" in v:
+        check(val>=float(v["min"]),f"median {k} passes")
+    elif "eq" in v:
+        check(abs(val-float(v["eq"]))<1e-12,f"median {k} exact")
+    else:
+        raise ValueError(k)
 check(prov["confirmatory"]["run_id"]==35738004777,"confirmatory run provenance")
 check(prov["confirmatory"]["artifact_id"]==10697874816,"artifact provenance")
 check(prov["thresholds_changed_after_confirmatory_opening"] is False,"thresholds unchanged")
