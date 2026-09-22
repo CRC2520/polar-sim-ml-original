@@ -1,0 +1,87 @@
+{
+  "architecture_adjudication": {
+    "CURRENT_MLP": {
+      "A_switch_pass": false,
+      "capable": true,
+      "direct_A": false,
+      "history_q1_pass": false
+    },
+    "GRU": {
+      "A_switch_pass": true,
+      "capable": true,
+      "direct_A": true,
+      "history_q1_pass": true
+    },
+    "LSTM": {
+      "A_switch_pass": true,
+      "capable": true,
+      "direct_A": true,
+      "history_q1_pass": true
+    }
+  },
+  "architecture_medians": {
+    "CURRENT_MLP": {
+      "A_switch": 0,
+      "history_damage_q0": 0,
+      "history_damage_q1": 0,
+      "q0_mse": 0.0006827479119237978,
+      "q0_ratio_vs_current": 1,
+      "q1_gain_vs_current": 0,
+      "q1_mse": 0.001734307547141927
+    },
+    "GRU": {
+      "A_switch": 0.0006732481247632272,
+      "history_damage_q0": 0.0011922009382740522,
+      "history_damage_q1": 0.002076948374855824,
+      "q0_mse": 0.0004375591132783383,
+      "q0_ratio_vs_current": 0.6763615460197563,
+      "q1_gain_vs_current": -0.09752097506985268,
+      "q1_mse": 0.0018721681384098094
+    },
+    "LSTM": {
+      "A_switch": 0.0022578287114103862,
+      "history_damage_q0": 0.0022586221005238055,
+      "history_damage_q1": 0.004555872846241173,
+      "q0_mse": 0.00019964143120887456,
+      "q0_ratio_vs_current": 0.2805631632079031,
+      "q1_gain_vs_current": -0.148856067210365,
+      "q1_mse": 0.0020493029494698728
+    }
+  },
+  "boundaries": {
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "POLAR_Core_v1": "UNCHANGED_D_PLUS_C_PLUS_R_PLUS_A",
+    "R33": "UNCHANGED_INCONCLUSIVE_CAPABILITY",
+    "consciousness": "NOT_ESTABLISHED",
+    "global_minimality": "NOT_ESTABLISHED",
+    "independent_task_generation": "NOT_ESTABLISHED",
+    "interpretation": "architecture capacity for direct context-sensitive history use; not proof R33 was false-negative"
+  },
+  "campaign": "R34 contextual-access discrimination",
+  "confirmatory_seeds": [
+    1817001,
+    1817002,
+    1817003,
+    1817004,
+    1817005,
+    1817006,
+    1817007,
+    1817008,
+    1817009,
+    1817010,
+    1817011,
+    1817012
+  ],
+  "hypothesis": "H2",
+  "resolution": "R34_H2_BROADER_A_CAPACITY_SUPPORTED",
+  "seed_guard_counts": {
+    "GRU": 8,
+    "LSTM": 8
+  },
+  "source_git_blob_sha": "d20877489b14ac482beecca75bbbb6c26ad5fb78",
+  "supporting_architectures": [
+    "GRU",
+    "LSTM"
+  ]
+}
