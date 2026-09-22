@@ -5,7 +5,8 @@
     "popgym": "1.0.7",
     "stable_baselines3": "2.7.1",
     "sb3_contrib": "2.7.1",
-    "torch": "2.7.1"
+    "torch": "2.7.1",
+    "scipy": "1.17.0"
   },
   "environments": [
     "PositionOnlyCartPoleMedium",
@@ -90,5 +91,6 @@
     "R37 confirmatory seeds 2037001-2037012 remain unopened",
     "R38 confirmatory seeds 2047001-2047012 remain unopened",
     "POLAR Core v1.1 remains D+C+R with A conditional unless separately revised"
-  ]
+  ],
+  "pre_execution_amendment": "R39_PRE_EXECUTION_AMENDMENT.md"
 }
