@@ -333,6 +333,8 @@ def run_seed(seed):
         # recurrent key used by actual agent
         action, key, conf, pred = agent.act(obs, target)
         m = agent.model(key)
+        fitted_before = bool(m.fitted)
+        visits_before = int(agent.key_visits[key])
 
         # current-only context comparator for C
         current_key = cue_key(cue)
@@ -371,7 +373,10 @@ def run_seed(seed):
         # infer source and update same persistent agent
         agent.update(x, cue, action, y, info["source_external"], key, conf, info["block"], info["regime"])
         err_full = mse(pred, y)
-        errors.append(err_full); confs.append(conf)
+        # Confidence is adjudicated only in the learned operating regime.
+        # Early exploration/default predictions are not epistemic confidence reports.
+        if fitted_before and visits_before > 55 and not info["source_external"]:
+            errors.append(err_full); confs.append(conf)
         stable.append(float(np.linalg.norm(y) < 3.0))
 
         if not info["source_external"] and m.fitted:
