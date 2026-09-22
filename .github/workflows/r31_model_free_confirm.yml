@@ -1,0 +1,63 @@
+name: R31 model-free RL confirmatory
+
+on:
+  pull_request:
+    paths:
+      - "experiments/r31_model_free_rl_20260921/**"
+      - ".github/workflows/r31_model_free_confirm.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  r31-confirm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen numerical dependencies
+        run: python -m pip install numpy==2.3.5 scipy==1.17.0
+      - name: Verify frozen source and confirmatory seed contract
+        run: |
+          python - <<'PY'
+          import json, hashlib, pathlib
+          root=pathlib.Path("experiments/r31_model_free_rl_20260921")
+          f=json.loads((root/"R31_CONFIRM_FREEZE.json").read_text())
+          assert f["status"]=="FROZEN_BEFORE_CONFIRMATORY_SEEDS"
+          assert f["confirmatory_seeds"]==list(range(1547001,1547013))
+          h=hashlib.sha256((root/"r31_model_free_rl.py").read_bytes()).hexdigest()
+          assert h==f["source_sha256"], (h,f["source_sha256"])
+          print("R31 frozen source PASS",h)
+          PY
+      - name: Execute confirmatory seeds
+        run: |
+          python experiments/r31_model_free_rl_20260921/r31_model_free_rl.py \
+            --seeds 1547001:1547012 \
+            --output experiments/r31_model_free_rl_20260921/R31_CONFIRM_RESULTS.json
+      - name: Adjudicate frozen criteria
+        run: |
+          python experiments/r31_model_free_rl_20260921/adjudicate_r31.py \
+            --results experiments/r31_model_free_rl_20260921/R31_CONFIRM_RESULTS.json \
+            --freeze experiments/r31_model_free_rl_20260921/R31_CONFIRM_FREEZE.json \
+            --source experiments/r31_model_free_rl_20260921/r31_model_free_rl.py \
+            --output experiments/r31_model_free_rl_20260921/R31_CONFIRM_ADJUDICATION.json
+      - name: Record confirmatory provenance
+        run: |
+          git rev-parse HEAD > experiments/r31_model_free_rl_20260921/R31_CONFIRM_COMMIT.txt
+          sha256sum experiments/r31_model_free_rl_20260921/r31_model_free_rl.py > experiments/r31_model_free_rl_20260921/R31_CONFIRM_SOURCE_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r31-model-free-confirmatory
+          path: |
+            experiments/r31_model_free_rl_20260921/R31_CONFIRM_RESULTS.json
+            experiments/r31_model_free_rl_20260921/R31_CONFIRM_ADJUDICATION.json
+            experiments/r31_model_free_rl_20260921/R31_CONFIRM_FREEZE.json
+            experiments/r31_model_free_rl_20260921/R31_CONFIRM_COMMIT.txt
+            experiments/r31_model_free_rl_20260921/R31_CONFIRM_SOURCE_SHA256.txt
