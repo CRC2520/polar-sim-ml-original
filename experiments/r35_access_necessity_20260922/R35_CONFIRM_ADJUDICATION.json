@@ -1,0 +1,201 @@
+{
+  "campaign": "R35 representation-independent contextual-access necessity",
+  "source_git_blob_sha": "8664e40269d477cd0bbad1bca1032632be7c0dcb",
+  "confirmatory_seeds": [
+    1907001,
+    1907002,
+    1907003,
+    1907004,
+    1907005,
+    1907006,
+    1907007,
+    1907008,
+    1907009,
+    1907010,
+    1907011,
+    1907012
+  ],
+  "architecture_adjudication": {
+    "CURRENT_MLP": {
+      "capable": false,
+      "necessity_pattern": false
+    },
+    "RNN": {
+      "capable": true,
+      "necessity_pattern": true
+    },
+    "GRU": {
+      "capable": true,
+      "necessity_pattern": false
+    },
+    "WINDOW_MLP": {
+      "capable": false,
+      "necessity_pattern": false
+    },
+    "LSTM": {
+      "capable": true,
+      "necessity_pattern": false
+    }
+  },
+  "capable_architectures": [
+    "RNN",
+    "GRU",
+    "LSTM"
+  ],
+  "necessity_pattern_architectures": [
+    "RNN"
+  ],
+  "heldout_necessity_pattern_architectures": [],
+  "seed_guard_counts": {
+    "RNN": 11,
+    "GRU": 8,
+    "WINDOW_MLP": 3,
+    "LSTM": 8
+  },
+  "current_negative_control_pass": true,
+  "necessity_supported": false,
+  "core_necessity_weakened": true,
+  "resolution": "R35_A_CORE_NECESSITY_WEAKENED",
+  "architecture_medians": {
+    "CURRENT_MLP": {
+      "access_specificity_interaction": 0,
+      "selective": {
+        "contextual_gain_vs_current": 0,
+        "contextual_vs_always": 0,
+        "contextual_vs_random": 0,
+        "contextual_vs_blocked": 0,
+        "history_contribution_energy": 0,
+        "loss_contextual": 0.0012928045416376536,
+        "loss_always": 0.0012928045416376536,
+        "loss_random": 0.0012928045416376536,
+        "loss_blocked": 0.0012928045416376536
+      },
+      "uniform": {
+        "contextual_gain_vs_current": 0,
+        "contextual_vs_always": 0,
+        "contextual_vs_random": 0,
+        "contextual_vs_blocked": 0,
+        "history_contribution_energy": 0,
+        "loss_contextual": 0.0013245183618487823,
+        "loss_always": 0.0013245183618487823,
+        "loss_random": 0.0013245183618487823,
+        "loss_blocked": 0.0013245183618487823
+      },
+      "uniform_always_advantage": 0
+    },
+    "RNN": {
+      "access_specificity_interaction": 0.00002118580493970523,
+      "selective": {
+        "contextual_gain_vs_current": -0.10070848216520759,
+        "contextual_vs_always": 0.00002131320282690774,
+        "contextual_vs_random": 0.000026567095220444666,
+        "contextual_vs_blocked": 0.0033635063150414786,
+        "history_contribution_energy": 0.0029471433392447783,
+        "loss_contextual": 0.0015157653257347192,
+        "loss_always": 0.0015409954477895048,
+        "loss_random": 0.00154381673131512,
+        "loss_blocked": 0.004718475241639276
+      },
+      "uniform": {
+        "contextual_gain_vs_current": 0.23150772655939625,
+        "contextual_vs_always": 5.288947275199573e-8,
+        "contextual_vs_random": 1.7021260292593942e-7,
+        "contextual_vs_blocked": 0.002732547256057514,
+        "history_contribution_energy": 0.0027225771370669666,
+        "loss_contextual": 0.0010360192544441008,
+        "loss_always": 0.0010355835774160166,
+        "loss_random": 0.00103454500352503,
+        "loss_blocked": 0.0038924861772910747
+      },
+      "uniform_always_advantage": -5.288947275202283e-8
+    },
+    "GRU": {
+      "access_specificity_interaction": 0.00002372722574111536,
+      "selective": {
+        "contextual_gain_vs_current": 0.0993898149713103,
+        "contextual_vs_always": 0.000033642681254756696,
+        "contextual_vs_random": 0.00004300565298207294,
+        "contextual_vs_blocked": 0.002008489753216559,
+        "history_contribution_energy": 0.00204632507544981,
+        "loss_contextual": 0.001107718824641779,
+        "loss_always": 0.0011478925054891282,
+        "loss_random": 0.0011622025069628864,
+        "loss_blocked": 0.0030294525285070348
+      },
+      "uniform": {
+        "contextual_gain_vs_current": 0.05496303350948596,
+        "contextual_vs_always": 0.000010588115957135483,
+        "contextual_vs_random": 0.00002606320656342275,
+        "contextual_vs_blocked": 0.0031646946939771527,
+        "history_contribution_energy": 0.0029806090100868866,
+        "loss_contextual": 0.0013390308737528914,
+        "loss_always": 0.0013501178352820866,
+        "loss_random": 0.001379631984807222,
+        "loss_blocked": 0.004428545015091206
+      },
+      "uniform_always_advantage": -0.000010588115957135564
+    },
+    "LSTM": {
+      "access_specificity_interaction": 0.00009191969445510021,
+      "selective": {
+        "contextual_gain_vs_current": 0.10144186624887225,
+        "contextual_vs_always": 0.00012152896924691152,
+        "contextual_vs_random": 0.00017064757639357394,
+        "contextual_vs_blocked": 0.0029776586401339955,
+        "history_contribution_energy": 0.0029446134427012615,
+        "loss_contextual": 0.0011710874491781295,
+        "loss_always": 0.0012915599839023648,
+        "loss_random": 0.0013374902205151153,
+        "loss_blocked": 0.004061641688369693
+      },
+      "uniform": {
+        "contextual_gain_vs_current": 0.00040940722521740774,
+        "contextual_vs_always": 0.000017712402344235127,
+        "contextual_vs_random": 0.000048017254951244345,
+        "contextual_vs_blocked": 0.005506938152759883,
+        "history_contribution_energy": 0.005944291737654971,
+        "loss_contextual": 0.0014623337266609978,
+        "loss_always": 0.0014876334726889378,
+        "loss_random": 0.001519328027256961,
+        "loss_blocked": 0.006885977561372177
+      },
+      "uniform_always_advantage": -0.0000177124023442351
+    },
+    "WINDOW_MLP": {
+      "access_specificity_interaction": 0.0000638301223653394,
+      "selective": {
+        "contextual_gain_vs_current": -0.01979587506571147,
+        "contextual_vs_always": 0.00006424201834912913,
+        "contextual_vs_random": 0.00006568931985384555,
+        "contextual_vs_blocked": 0.0002912701074882938,
+        "history_contribution_energy": 0.00031902438798978337,
+        "loss_contextual": 0.001368073814938321,
+        "loss_always": 0.0014499433539943616,
+        "loss_random": 0.0014493553174664462,
+        "loss_blocked": 0.0016015392297958897
+      },
+      "uniform": {
+        "contextual_gain_vs_current": 0.4474152127907179,
+        "contextual_vs_always": 2.1990314280626098e-7,
+        "contextual_vs_random": -1.8892608169256554e-7,
+        "contextual_vs_blocked": 0.0014338917881673297,
+        "history_contribution_energy": 0.0014589707028436452,
+        "loss_contextual": 0.000740579747773356,
+        "loss_always": 0.0007399925114113001,
+        "loss_random": 0.0007399012601530962,
+        "loss_blocked": 0.002215220380271098
+      },
+      "uniform_always_advantage": -2.199031428062881e-7
+    }
+  },
+  "boundaries": {
+    "scope": "SAME_PROGRAM_SYNTHETIC_CAUSAL_ACCESS_INTERVENTION",
+    "POLAR_Core_v1": "UNCHANGED_D_PLUS_C_PLUS_R_PLUS_A_UNTIL_ADJUDICATION",
+    "R34": "UNCHANGED",
+    "global_minimality": "NOT_ESTABLISHED",
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "consciousness": "NOT_ESTABLISHED",
+    "independent_task_generation": "NOT_ESTABLISHED"
+  }
+}
