@@ -45,7 +45,7 @@ def choose_rl_action(W,phi,residuals,u_nom,epsilon,rng,uclip):
 def adaptive_train(seed,task,kind,steps=TRAIN_STEPS):
     rng=np.random.default_rng(seed)
     step,n,params,Q,R,uclip,state,obs,estimate,cost,stable=base.task_spec(task,rng,steps)
-    Anom,Bnom=base.numeric_linearization(step,n,params[0])
+    Anom,Bnom=base.base.numeric_linearization(step,n,params[0])
     K_nom=base.base.infinite_lqr_gain(Anom,Bnom,Q,R)
     Ahat=Anom.copy(); Bhat=Bnom.copy()
     K_adapt=K_nom.copy() if K_nom is not None else np.zeros((1,n))
@@ -97,7 +97,7 @@ def adaptive_train(seed,task,kind,steps=TRAIN_STEPS):
 def rl_train(seed,task,steps=TRAIN_STEPS,alpha0=0.025,gamma=0.985):
     rng=np.random.default_rng(seed)
     step,n,params,Q,R,uclip,state,obs,estimate,cost,stable=base.task_spec(task,rng,steps)
-    Anom,Bnom=base.numeric_linearization(step,n,params[0])
+    Anom,Bnom=base.base.numeric_linearization(step,n,params[0])
     K_nom=base.base.infinite_lqr_gain(Anom,Bnom,Q,R)
     residuals=residual_actions(task,uclip)
     dim=len(features(task,np.zeros(n)))
@@ -132,7 +132,7 @@ def rl_train(seed,task,steps=TRAIN_STEPS,alpha0=0.025,gamma=0.985):
 def eval_controller(seed,task,controller,trained=None,steps=EVAL_STEPS):
     rng=np.random.default_rng(seed)
     step,n,params,Q,R,uclip,state,obs,estimate,cost,stable=base.task_spec(task,rng,steps)
-    Anom,Bnom=base.numeric_linearization(step,n,params[0])
+    Anom,Bnom=base.base.numeric_linearization(step,n,params[0])
     K_nom=base.base.infinite_lqr_gain(Anom,Bnom,Q,R)
     prev_o=None; prev_v=None
     costs=[]; stables=[]; shift_costs=[]
@@ -148,7 +148,7 @@ def eval_controller(seed,task,controller,trained=None,steps=EVAL_STEPS):
         if controller=="FROZEN":
             u=float(-(K_nom@est)[0]) if K_nom is not None else 0.0
         elif controller=="ORACLE_LQR":
-            At,Bt=base.base.numeric_linearization(step,n,p)
+            At,Bt=base.base.base.numeric_linearization(step,n,p)
             Ko=base.base.infinite_lqr_gain(At,Bt,Q,R)
             u=float(-(Ko@state)[0]) if Ko is not None else 0.0
         elif controller in ("CORE","ADAPTIVE_LQR"):
