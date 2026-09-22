@@ -134,6 +134,8 @@ class ModelState:
         self.B = np.eye(N)*0.90
         self.resid_ema = 0.10
         self.fitted = False
+        self.meta_states = []
+        self.meta_errors = []
 
     def add(self, x, u, y, include=True):
         if include:
@@ -149,6 +151,23 @@ class ModelState:
 
     def predict(self, x, action_idx):
         return self.A@np.asarray(x) + self.B@ACTIONS[int(action_idx)]
+
+    def record_error(self, x, err):
+        self.meta_states.append(np.asarray(x, float).copy())
+        self.meta_errors.append(float(err))
+        self.meta_states = self.meta_states[-MODEL_WINDOW:]
+        self.meta_errors = self.meta_errors[-MODEL_WINDOW:]
+
+    def expected_error(self, x):
+        if len(self.meta_states) < 16:
+            return float(self.resid_ema)
+        X = np.asarray(self.meta_states)
+        d = np.sum((X - np.asarray(x, float)[None,:])**2, axis=1)
+        k = min(14, len(d))
+        idx = np.argpartition(d, k-1)[:k]
+        # distance-weighted local factual error estimate
+        w = 1.0/(0.02 + d[idx])
+        return float(np.sum(w*np.asarray(self.meta_errors)[idx]) / np.sum(w))
 
 class PersistentAgent:
     def __init__(self):
@@ -170,11 +189,12 @@ class PersistentAgent:
             self.models[key] = ModelState()
         return self.models[key]
 
-    def confidence(self, key):
+    def confidence(self, key, x):
         m = self.model(key)
         n = len(m.X)
-        sample_factor = min(1.0, n/55.0)
-        return float(sample_factor*np.exp(-5.0*np.sqrt(max(m.resid_ema, 1e-9))))
+        sample_factor = min(1.0, n/45.0)
+        expected = m.expected_error(x)
+        return float(sample_factor/(1.0 + 260.0*max(expected, 0.0)))
 
     def myopic_action(self, x, target, key):
         m = self.model(key)
@@ -207,11 +227,11 @@ class PersistentAgent:
         self.key_visits[key] = self.key_visits.get(key, 0)+1
         visit = self.key_visits[key]
         m = self.model(key)
-        conf = self.confidence(key)
+        conf = self.confidence(key, x)
         if visit <= 42 or not m.fitted:
             action = (visit-1) % len(ACTIONS)
         else:
-            action = self.plan_action(x, target, key) if conf >= 0.34 else self.myopic_action(x, target, key)
+            action = self.plan_action(x, target, key) if conf >= 0.58 else self.myopic_action(x, target, key)
         pred = m.predict(x, action)
         self.last_pred = pred
         self.last_key = key
@@ -224,7 +244,9 @@ class PersistentAgent:
         source_pred = bool(np.linalg.norm(residual) > 0.17) if m.fitted else False
         # preserve external-source events in episodic memory but exclude detected large shocks from dynamics fitting
         include = not source_pred
-        m.resid_ema = 0.93*m.resid_ema + 0.07*float(np.mean(residual*residual))
+        factual_err = float(np.mean(residual*residual))
+        m.resid_ema = 0.93*m.resid_ema + 0.07*factual_err
+        m.record_error(x, factual_err)
         m.add(x, ACTIONS[action], y, include=include)
         self.memory.append({
             "t": int(self.clock),
@@ -254,7 +276,7 @@ def acquire_donor(seed):
         a = t % len(ACTIONS)
         pred = agent.model(key).predict(x, a)
         nxt, rew, done, info = env.step(a)
-        agent.update(x, cue, a, nxt[:N], info["source_external"], key, agent.confidence(key), info["block"], info["regime"])
+        agent.update(x, cue, a, nxt[:N], info["source_external"], key, agent.confidence(key, x), info["block"], info["regime"])
         obs = nxt
         if done: break
     return agent
@@ -337,8 +359,8 @@ def run_seed(seed):
             def best_true_cost(first):
                 return min(env.true_two_step_cost(x, first, a2, target) for a2 in range(len(ACTIONS)))
             plan_gain.append(best_true_cost(a_myop)-best_true_cost(a_plan))
-            actual_gate_action = a_plan if conf >= 0.34 else a_myop
-            reverse_gate_action = a_myop if conf >= 0.34 else a_plan
+            actual_gate_action = a_plan if conf >= 0.58 else a_myop
+            reverse_gate_action = a_myop if conf >= 0.58 else a_plan
             meta_gain.append(best_true_cost(reverse_gate_action)-best_true_cost(actual_gate_action))
 
         # block-local cold comparator for recurrent-regime reentry
