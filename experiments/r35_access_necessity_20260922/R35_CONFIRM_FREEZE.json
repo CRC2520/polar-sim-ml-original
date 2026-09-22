@@ -1,0 +1,91 @@
+{
+  "campaign": "R35 representation-independent contextual-access necessity",
+  "status": "FROZEN_BEFORE_CONFIRMATORY_SEEDS",
+  "freeze_date": "2026-09-22",
+  "parent_evidence": "POLAR Core v1.0 + R34",
+  "source_git_blob_sha": "8664e40269d477cd0bbad1bca1032632be7c0dcb",
+  "adjudicator_git_blob_sha": "a3309973d3544374b38f55219c8e65d28d362080",
+  "confirmatory_seeds": [
+    1907001,
+    1907002,
+    1907003,
+    1907004,
+    1907005,
+    1907006,
+    1907007,
+    1907008,
+    1907009,
+    1907010,
+    1907011,
+    1907012
+  ],
+  "architectures": [
+    "CURRENT_MLP",
+    "RNN",
+    "GRU",
+    "WINDOW_MLP",
+    "LSTM"
+  ],
+  "strict_heldout_architectures": [
+    "WINDOW_MLP",
+    "LSTM"
+  ],
+  "confirmatory_families": [
+    "random_dag",
+    "skew"
+  ],
+  "access_modes": [
+    "contextual",
+    "always",
+    "random",
+    "blocked"
+  ],
+  "capability": {
+    "selective_contextual_gain_min": -0.55,
+    "history_energy_min": 0.0005,
+    "interpretation": "noninferior/capable history-bearing learner; superiority to CURRENT_MLP is not required"
+  },
+  "criteria": {
+    "selective_vs_always_min": 0.00001,
+    "selective_vs_random_min": 0.00001,
+    "selective_vs_blocked_min": 0.0005,
+    "uniform_always_advantage_min": -0.000005,
+    "interaction_min": 0.00001
+  },
+  "seed_guard": {
+    "selective_contextual_gain_min": -0.6,
+    "history_energy_min": 0.0004,
+    "selective_vs_always_min": 0,
+    "selective_vs_random_min": 0,
+    "selective_vs_blocked_min": 0.0004,
+    "uniform_always_advantage_min": -0.00002,
+    "interaction_min": 0
+  },
+  "seed_guard_required": 8,
+  "minimum_passing_architectures": 3,
+  "minimum_heldout_passing_architectures": 1,
+  "minimum_capable_architectures": 3,
+  "max_passing_for_weakening": 1,
+  "current_null_abs_max": 1e-12,
+  "development": {
+    "dev1_run_id": 35722584906,
+    "dev1_head": "c22018827e3cff65b3bae215a33a1f8880c3ceed",
+    "dev1_artifact_id": 10692417034,
+    "dev1_artifact_digest": "sha256:31a7e342aef500301c775e5bbe2a0de1c9c605a40a7df7dc935503e3a5e8aa83",
+    "dev1_status": "RETAINED_INVALID_C_VS_A_INTERVENTION",
+    "corrected_run_id": 35722883093,
+    "corrected_head": "d02346a3f97d3ace06348964a03e6cfcdaa80c16",
+    "corrected_artifact_id": 10692042896,
+    "corrected_artifact_digest": "sha256:e38bb5abf0b65cfc35a9d9913db0e4fb76bc5d21c5280cdb2da41e9944bf4666"
+  },
+  "fixed_boundaries": {
+    "scope": "SAME_PROGRAM_SYNTHETIC_CAUSAL_ACCESS_INTERVENTION",
+    "POLAR_Core_v1": "UNCHANGED_D_PLUS_C_PLUS_R_PLUS_A_UNTIL_ADJUDICATION",
+    "R34": "UNCHANGED",
+    "global_minimality": "NOT_ESTABLISHED",
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "consciousness": "NOT_ESTABLISHED",
+    "independent_task_generation": "NOT_ESTABLISHED"
+  }
+}
