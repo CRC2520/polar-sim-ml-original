@@ -14,11 +14,12 @@ CONTROL_REG=0.03
 SEQ=96
 BLOCKS=3
 BLOCK_LEN=SEQ//BLOCKS
-TRAIN_EPISODES=112
-EPOCHS=24
+TRAIN_EPISODES=160
+EPOCHS=30
 BATCH=16
 HIDDEN=32
-WINDOW=6
+WINDOW=8
+ADAPT_BURN=8
 TRAIN_FAMILIES=["sparse","modular","dense_lowrank"]
 DEV_EVAL_FAMILIES=["ring"]
 CONFIRM_EVAL_FAMILIES=["random_dag","skew"]
@@ -256,7 +257,8 @@ def train_model(seed,kind,X,Y):
         for s in range(0,n,BATCH):
             idx=perm[s:s+BATCH]
             pred,_=model.forward_seq(X[idx])
-            loss=lossfn(pred,Y[idx])
+            mask=torch.tensor([(t%BLOCK_LEN)>=ADAPT_BURN for t in range(SEQ)],dtype=torch.bool)
+            loss=lossfn(pred[:,mask,:],Y[idx][:,mask,:])
             opt.zero_grad(set_to_none=True)
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(),2.0)
@@ -273,8 +275,9 @@ def fixed_eval(model,episode):
         pred,z=model.forward_seq(x)
         reset=model.reset_predictions(x)
     pred=pred[0].numpy(); z=z[0].numpy(); reset=reset[0].numpy()
-    intact=mse(pred,y)
-    reset_mse=mse(reset,y)
+    mask=np.array([(t%BLOCK_LEN)>=ADAPT_BURN for t in range(SEQ)],dtype=bool)
+    intact=mse(pred[mask],y[mask])
+    reset_mse=mse(reset[mask],y[mask])
     return {
       "intact_mse":intact,
       "reset_mse":reset_mse,
@@ -363,7 +366,7 @@ def rollout(model,kind,seed,family):
     x=rng.normal(0,0.035,N)
     prev_u=np.zeros(N)
     tokens=[]
-    costs=[]; stable=[]
+    costs=[]; adapt_costs=[]; stable=[]
     for t in range(SEQ):
         A=As[t//BLOCK_LEN]
         token=np.concatenate([x+rng.normal(0,0.003,N),prev_u]).astype(np.float32)
@@ -379,24 +382,28 @@ def rollout(model,kind,seed,family):
         u=np.linalg.solve(B.T@B+CONTROL_REG*np.eye(N),B.T@rhs)
         u=np.clip(u,-1.5,1.5)
         xnext=A@x+B@u+rng.normal(0,0.006,N)
-        costs.append(float(np.mean((xnext-target[t])**2)+0.01*np.mean(u*u)))
+        cc=float(np.mean((xnext-target[t])**2)+0.01*np.mean(u*u))
+        costs.append(cc)
+        if (t%BLOCK_LEN)>=ADAPT_BURN: adapt_costs.append(cc)
         stable.append(float(np.linalg.norm(xnext)<2.5))
         x=xnext; prev_u=u
-    return float(np.mean(costs)),float(np.mean(stable))
+    return float(np.mean(costs)),float(np.mean(adapt_costs)),float(np.mean(stable))
 
 def oracle_rollout(seed,family):
     As=matrices(seed,family,"relational_shift")
     target=target_sequence(seed)
     rng=np.random.default_rng(seed+404)
     x=rng.normal(0,0.035,N)
-    costs=[]
+    costs=[]; adapt_costs=[]
     for t in range(SEQ):
         A=As[t//BLOCK_LEN]
         u=choose_oracle(A,x,target[t])
         xnext=A@x+B@u+rng.normal(0,0.006,N)
-        costs.append(float(np.mean((xnext-target[t])**2)+0.01*np.mean(u*u)))
+        cc=float(np.mean((xnext-target[t])**2)+0.01*np.mean(u*u))
+        costs.append(cc)
+        if (t%BLOCK_LEN)>=ADAPT_BURN: adapt_costs.append(cc)
         x=xnext
-    return float(np.mean(costs))
+    return float(np.mean(costs)),float(np.mean(adapt_costs))
 
 def evaluate_arch(seed,kind,model,families,current_ref=None):
     per_family={}
@@ -419,8 +426,8 @@ def evaluate_arch(seed,kind,model,families,current_ref=None):
             condres["relational_shift"]["history_damage"]
         ])
         a_spec=float(hist_rel-condres["diagonal"]["history_damage"])
-        roll_cost,roll_stable=rollout(model,kind,seed*10000+fi*1000+333,fam)
-        o_cost=oracle_rollout(seed*10000+fi*1000+333,fam)
+        roll_cost,adapt_cost,roll_stable=rollout(model,kind,seed*10000+fi*1000+333,fam)
+        o_cost,o_adapt_cost=oracle_rollout(seed*10000+fi*1000+333,fam)
         per_family[fam]={
           "drift_mse_rel":condres["relational_shift"]["intact_mse"],
           "D_rank1_damage":ddamage,
@@ -429,12 +436,14 @@ def evaluate_arch(seed,kind,model,families,current_ref=None):
           "R_decode_r2":r2,
           "A_history_specificity":a_spec,
           "roll_cost":roll_cost,
+          "adapt_cost":adapt_cost,
           "oracle_cost":o_cost,
+          "oracle_adapt_cost":o_adapt_cost,
           "stable":roll_stable,
           "condition_history_damage":{c:float(condres[c]["history_damage"]) for c in CONDITIONS}
         }
     keys=["drift_mse_rel","D_rank1_damage","C_history_damage","R_transplant_damage",
-          "R_decode_r2","A_history_specificity","roll_cost","oracle_cost","stable"]
+          "R_decode_r2","A_history_specificity","roll_cost","adapt_cost","oracle_cost","oracle_adapt_cost","stable"]
     agg={k:float(np.mean([per_family[f][k] for f in families])) for k in keys}
     agg["per_family"]=per_family
     return agg
@@ -462,12 +471,12 @@ def eval_seed(seed,mode):
         raw[kind]=evaluate_arch(seed+ai*10,kind,model,fams)
 
     cur=raw["CURRENT_MLP"]
-    cur_cost=cur["roll_cost"]; cur_mse=cur["drift_mse_rel"]
+    cur_cost=cur["adapt_cost"]; cur_mse=cur["drift_mse_rel"]
     rows={}
     for kind in archs:
         q=raw[kind]
-        denom_cost=max(cur_cost-q["oracle_cost"],1e-4)
-        control_gain=float((cur_cost-q["roll_cost"])/denom_cost)
+        denom_cost=max(cur_cost-q["oracle_adapt_cost"],1e-4)
+        control_gain=float((cur_cost-q["adapt_cost"])/denom_cost)
         prediction_gain=float((cur_mse-q["drift_mse_rel"])/max(cur_mse,1e-6))
         perf=float(0.5*control_gain+0.5*prediction_gain)
         rows[kind]={
@@ -484,7 +493,7 @@ def summarize(records):
     out={}
     for a in archs:
         keys=["drift_mse_rel","D_rank1_damage","C_history_damage","R_transplant_damage",
-              "R_decode_r2","A_history_specificity","roll_cost","oracle_cost","stable",
+              "R_decode_r2","A_history_specificity","roll_cost","adapt_cost","oracle_cost","oracle_adapt_cost","stable",
               "control_gain_vs_current","prediction_gain_vs_current","performance_score"]
         out[a]={k:float(np.median([r["architectures"][a][k] for r in records])) for k in keys}
     return out
