@@ -1,0 +1,34 @@
+{
+  "campaign": "R32 strong relational transfer / relation-specific intervention",
+  "development": {
+    "run_id": 35685412213,
+    "execution_head": "b8fe6a9d78a04e2c264b306dcdae356b8d71d899",
+    "artifact_id": 10676312863,
+    "artifact_digest": "sha256:d0cc16225783aba23d182bd4df28e53242f729399f02743d83c753ef085374e2"
+  },
+  "confirmatory_first_run": {
+    "run_id": 35685648824,
+    "execution_head": "728fc0b0752ca96adbe9e1cede9ee0ad269fa463",
+    "simulation_completed": true,
+    "adjudication_completed": false,
+    "failure": "technical Git-blob reconstruction in adjudicator"
+  },
+  "confirmatory_exact_replay": {
+    "run_id": 35685849021,
+    "execution_head": "4954846118c6ad2a25ccce7da780eac791e0f9f5",
+    "artifact_id": 10676148531,
+    "artifact_digest": "sha256:489fd4bf49df98a10b2fb9da65d2da2c92144e5136ade4e55fd13c77a994715c"
+  },
+  "frozen_source": {
+    "git_blob_sha": "be82b21e835cea75f493cc47c10c83c5f40d96d0",
+    "sha256": "81a2a7e5646f41ab7ab69bed76dafe147ed95dab9ed7a1e0658fb081a922e58b"
+  },
+  "final_adjudicator": {
+    "git_blob_sha": "b5c1f76f2e97f97eb847af7eaa2f26a7b3762533",
+    "sha256": "321ef81f32702df4e94681e7b5a1e2bbcbec5c73409b7f3de8918e81583185b6"
+  },
+  "thresholds_changed_after_confirmatory_opening": false,
+  "runner_changed_after_confirmatory_opening": false,
+  "adjudicator_change_after_opening": "identity-check bug only; frozen criteria unchanged",
+  "resolution": "R32_STRONG_RELATIONAL_TRANSFER_PASS_INTERNAL_HELDOUT"
+}
