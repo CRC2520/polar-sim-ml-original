@@ -13,93 +13,12 @@ r34 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(r34)
 
 DEV_ARCHS = ["CURRENT_MLP", "RNN", "GRU"]
-INPUT_DIM = 19
-TRAIN_EPISODES = 160
-TRAIN_EPOCHS = 30
-TRAIN_BATCH = 16
 CONFIRM_ARCHS = ["CURRENT_MLP", "RNN", "GRU", "WINDOW_MLP", "LSTM"]
 STRICT_HELDOUT_ARCHS = ["WINDOW_MLP", "LSTM"]
 DEV_FAMILIES = ["ring"]
 CONFIRM_FAMILIES = ["random_dag", "skew"]
 TASKS = ["selective", "uniform"]
 MODES = ["contextual", "always", "random", "blocked"]
-
-def make_model(kind, seed):
-    r34.base.set_seed(seed)
-    if kind == "CURRENT_MLP":
-        return r34.base.CurrentMLP(inp=INPUT_DIM)
-    if kind == "WINDOW_MLP":
-        return r34.base.WindowMLP(inp=INPUT_DIM)
-    return r34.base.RecurrentAgent(kind, inp=INPUT_DIM)
-
-def make_episode(seed, family, condition, task_variant):
-    ep = r34.base.make_episode(seed, family, condition)
-    rng = np.random.default_rng(seed + 551)
-    cue = rng.integers(0, 2, size=r34.base.SEQ).astype(np.float32)
-    for b in range(r34.base.BLOCKS):
-        start = b * r34.base.BLOCK_LEN + r34.base.ADAPT_BURN
-        cue[start:start+6] = np.array([0,1,0,1,0,1], np.float32)
-
-    # Six-dimensional current-only signal: independent at each step and supplied
-    # directly in the current token. History cannot improve its Bayes estimate.
-    current_signal = rng.normal(0.0, 0.18, size=(r34.base.SEQ, r34.base.N)).astype(np.float32)
-
-    tokens = np.concatenate([
-        ep["tokens"],
-        cue[:, None],
-        current_signal,
-    ], axis=1).astype(np.float32)
-
-    if task_variant == "selective":
-        target = cue[:, None] * ep["drift"] + (1.0 - cue[:, None]) * current_signal
-    elif task_variant == "uniform":
-        target = ep["drift"].copy()
-    else:
-        raise ValueError(task_variant)
-
-    return {
-        "tokens": tokens,
-        "target": target.astype(np.float32),
-        "drift": ep["drift"],
-        "current_signal": current_signal,
-        "cue": cue,
-        "family": family,
-        "condition": condition,
-    }
-
-def training_set(seed, task_variant):
-    rng = np.random.default_rng(seed + 712)
-    eps = []
-    for i in range(TRAIN_EPISODES):
-        fam = r34.base.TRAIN_FAMILIES[int(rng.integers(0, len(r34.base.TRAIN_FAMILIES)))]
-        cond = r34.base.CONDITIONS[int(rng.integers(0, len(r34.base.CONDITIONS)))]
-        eps.append(make_episode(seed * 1000 + 100 + i, fam, cond, task_variant))
-    import torch
-    X = torch.tensor(np.stack([e["tokens"] for e in eps]))
-    Y = torch.tensor(np.stack([e["target"] for e in eps]))
-    return X, Y
-
-def train_model(seed, kind, X, Y):
-    import torch
-    from torch import nn
-    model = make_model(kind, seed + r34.stable_hash_seed(kind))
-    opt = torch.optim.Adam(model.parameters(), lr=0.0025, weight_decay=1e-5)
-    lossfn = nn.MSELoss()
-    gen = torch.Generator().manual_seed(seed + 77)
-    mask = torch.tensor([(t % r34.base.BLOCK_LEN) >= r34.base.ADAPT_BURN for t in range(r34.base.SEQ)], dtype=torch.bool)
-    n = X.shape[0]
-    model.train()
-    for _ in range(TRAIN_EPOCHS):
-        perm = torch.randperm(n, generator=gen)
-        for s in range(0, n, TRAIN_BATCH):
-            idx = perm[s:s+TRAIN_BATCH]
-            pred, _ = model.forward_seq(X[idx])
-            loss = lossfn(pred[:, mask, :], Y[idx][:, mask, :])
-            opt.zero_grad(set_to_none=True)
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 2.0)
-            opt.step()
-    return model.eval()
 
 def access_predictions(model, kind, ep, task_variant, seed):
     rng = np.random.default_rng(seed + 8123)
@@ -138,7 +57,7 @@ def access_predictions(model, kind, ep, task_variant, seed):
         hist_norm.append(float(0.5 * (np.mean(h0 * h0) + np.mean(h1 * h1))))
 
         base_pred = p_reset1 if q == 1 else p_reset0
-        target = ep["drift"][t] if (task_variant == "uniform" or q == 1) else ep["current_signal"][t]
+        target = ep["drift"][t] if (task_variant == "uniform" or q == 1) else ep["local"][t]
         access_rate.append(random_choice)
 
         preds = {
@@ -175,13 +94,13 @@ def access_predictions(model, kind, ep, task_variant, seed):
 
 def eval_task(seed, mode, task_variant, archs):
     fams = DEV_FAMILIES if mode == "dev" else CONFIRM_FAMILIES
-    X, Y = training_set(seed, task_variant)
+    X, Y = r34.q_training_set(seed, task_variant)
     rows = {}
     for ai, kind in enumerate(archs):
-        model = train_model(seed + ai * 100, kind, X, Y)
+        model = r34.q_train(seed + ai * 100, kind, X, Y)
         per_family = {}
         for fi, fam in enumerate(fams):
-            ep = make_episode(seed * 10000 + fi * 1000 + 711, fam, "relational_shift", task_variant)
+            ep = r34.q_episode(seed * 10000 + fi * 1000 + 711, fam, "relational_shift", task_variant)
             per_family[fam] = access_predictions(
                 model, kind, ep, task_variant,
                 seed * 10000 + fi * 1000 + ai * 100 + 911
