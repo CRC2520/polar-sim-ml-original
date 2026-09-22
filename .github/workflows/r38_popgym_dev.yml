@@ -1,0 +1,66 @@
+name: R38 POPGym robust observer development
+
+on:
+  pull_request:
+    paths:
+      - "experiments/r38_popgym_robust_observer_20260922/**"
+      - ".github/workflows/r38_popgym_dev.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  r38-dev:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen external benchmark
+        run: |
+          python -m pip install numpy==2.3.5 scipy==1.17.0 popgym==1.0.7
+          python - <<'PY'
+          import importlib.metadata as m
+          assert m.version("popgym")=="1.0.7"
+          print("popgym",m.version("popgym"))
+          PY
+      - name: Verify frozen development protocol and source identity
+        run: |
+          python - <<'PY'
+          import json,hashlib,pathlib
+          root=pathlib.Path("experiments/r38_popgym_robust_observer_20260922")
+          c=json.loads((root/"R38_DEV_CRITERIA.json").read_text())
+          assert c["status"]=="FROZEN_BEFORE_DEVELOPMENT"
+          assert c["development_seeds"]==list(range(2046001,2046009))
+          assert c["confirmatory_seeds"]==list(range(2047001,2047013))
+          h=hashlib.sha256((root/"r38_dev.py").read_bytes()).hexdigest()
+          (root/"R38_DEV_SOURCE_SHA256.txt").write_text(h+"\n")
+          print("R38 source sha256",h)
+          PY
+      - name: Run development variants only
+        run: |
+          python experiments/r38_popgym_robust_observer_20260922/r38_dev.py \
+            --criteria experiments/r38_popgym_robust_observer_20260922/R38_DEV_CRITERIA.json \
+            --output experiments/r38_popgym_robust_observer_20260922/R38_DEV_RESULTS.json
+      - name: Verify confirmatory seeds unopened
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("experiments/r38_popgym_robust_observer_20260922/R38_DEV_RESULTS.json"))
+          assert d["seeds"]==list(range(2046001,2046009))
+          assert d["confirmatory_seeds_status"]=="UNOPENED_2047001_2047012"
+          print(json.dumps({"selected_variant":d["selected_variant"],"confirmatory_authorized":d["confirmatory_authorized"]},indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r38-popgym-observer-development
+          path: |
+            experiments/r38_popgym_robust_observer_20260922/R38_DEV_RESULTS.json
+            experiments/r38_popgym_robust_observer_20260922/R38_DEV_CRITERIA.json
+            experiments/r38_popgym_robust_observer_20260922/R38_DEV_SOURCE_SHA256.txt

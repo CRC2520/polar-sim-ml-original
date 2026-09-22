@@ -1,0 +1,73 @@
+{
+  "campaign": "R38 external POPGym robust recurrent observer",
+  "resolution": "R38_DEVELOPMENT_FAIL_NO_CONFIRM",
+  "development_run_id": 35769153215,
+  "artifact_id": 10713681513,
+  "artifact_digest": "sha256:66ab40632165ae39813b85a179516b22428610d52005c58c3c2368f80e64fdb7",
+  "source_sha256": "67ceab61814575c26ba8fd1fff9f3a47c7cae0df9cd925639351046ff3892144",
+  "development_seeds": [
+    2046001,
+    2046002,
+    2046003,
+    2046004,
+    2046005,
+    2046006,
+    2046007,
+    2046008
+  ],
+  "confirmatory_seeds_status": "UNOPENED_2047001_2047012",
+  "confirmatory_authorized": false,
+  "selected_variant": null,
+  "variants": {
+    "KF_ADAPT": {
+      "eligible": false,
+      "core_score": 0.643671875,
+      "core_minus_noC": 0.509357638888889,
+      "iso_gap": 0,
+      "min_env_core": 0.19979166666666667,
+      "oracle_score": 1,
+      "seed_guard_pass_count": 8
+    },
+    "KF_R01": {
+      "eligible": false,
+      "core_score": 0.636796875,
+      "core_minus_noC": 0.5029123263888889,
+      "iso_gap": 0,
+      "min_env_core": 0.19052083333333333,
+      "oracle_score": 1,
+      "seed_guard_pass_count": 8
+    },
+    "KF_R04": {
+      "eligible": false,
+      "core_score": 0.645078125,
+      "core_minus_noC": 0.5157942708333334,
+      "iso_gap": 0,
+      "min_env_core": 0.21020833333333333,
+      "oracle_score": 1,
+      "seed_guard_pass_count": 8
+    },
+    "KF_R09": {
+      "eligible": false,
+      "core_score": 0.6584635416666667,
+      "core_minus_noC": 0.5242534722222223,
+      "iso_gap": 0,
+      "min_env_core": 0.22270833333333334,
+      "oracle_score": 1,
+      "seed_guard_pass_count": 8
+    }
+  },
+  "interpretation": {
+    "recurrence_effect": "SUPPORTED_DEVELOPMENT",
+    "coordinate_non_privilege": "SUPPORTED_DEVELOPMENT",
+    "absolute_external_robustness": "FAILED_FROZEN_0_70_GATE",
+    "conclusion": "Generic model-based recurrent observers improve POPGym performance and pass every per-seed guard, but none meets the unchanged absolute external-control median threshold. Confirmation is not authorized.",
+    "next_step": "Do not continue same-program observer tuning on this benchmark. Preserve external robustness as unresolved and move to independently developed recurrent baselines/replication."
+  },
+  "boundaries": {
+    "core_v1_1": "UNCHANGED_D+C+R_A_CONDITIONAL",
+    "R37_confirm": "UNOPENED_2037001_2037012",
+    "R38_confirm": "UNOPENED_2047001_2047012",
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL"
+  }
+}

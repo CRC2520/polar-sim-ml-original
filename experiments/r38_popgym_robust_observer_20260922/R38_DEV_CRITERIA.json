@@ -1,0 +1,102 @@
+{
+  "campaign": "R38 external POPGym robust recurrent observer",
+  "status": "FROZEN_BEFORE_DEVELOPMENT",
+  "parent": "R37_DEVELOPMENT_FAIL_NO_CONFIRM",
+  "dependency": {
+    "package": "popgym",
+    "version": "1.0.7",
+    "wheel_sha256": "23be7f754f3167f58c4ac844426f3e0f7230035bedfcd5d85b004524eef21bb6"
+  },
+  "environments": [
+    "PositionOnlyCartPoleMedium",
+    "PositionOnlyCartPoleHard",
+    "NoisyPositionOnlyCartPoleMedium",
+    "NoisyPositionOnlyCartPoleHard"
+  ],
+  "episodes_per_environment": 24,
+  "development_seeds": [
+    2046001,
+    2046002,
+    2046003,
+    2046004,
+    2046005,
+    2046006,
+    2046007,
+    2046008
+  ],
+  "confirmatory_seeds": [
+    2047001,
+    2047002,
+    2047003,
+    2047004,
+    2047005,
+    2047006,
+    2047007,
+    2047008,
+    2047009,
+    2047010,
+    2047011,
+    2047012
+  ],
+  "variants": [
+    "KF_R01",
+    "KF_R04",
+    "KF_R09",
+    "KF_ADAPT"
+  ],
+  "medians": {
+    "core_score_min": 0.7,
+    "core_minus_noC_min": 0.05,
+    "iso_gap_max": 1e-12,
+    "oracle_score_min": 0.95
+  },
+  "seed_guard": {
+    "core_score_min": 0.6,
+    "core_minus_noC_min": 0.03,
+    "iso_gap_max": 1e-12
+  },
+  "development_guard_required": 6,
+  "selection_order": [
+    "KF_R04",
+    "KF_R09",
+    "KF_R01",
+    "KF_ADAPT"
+  ],
+  "observer": {
+    "process_diag": [
+      0.00001,
+      0.003,
+      0.00001,
+      0.008
+    ],
+    "initial_cov_diag": [
+      0.05,
+      1,
+      0.05,
+      1
+    ],
+    "KF_R01": {
+      "measurement_variance": 0.01
+    },
+    "KF_R04": {
+      "measurement_variance": 0.04
+    },
+    "KF_R09": {
+      "measurement_variance": 0.09
+    },
+    "KF_ADAPT": {
+      "initial_measurement_variance": 0.04,
+      "min_variance": 0.01,
+      "max_variance": 0.16,
+      "innovation_ema": 0.05
+    }
+  },
+  "boundaries": [
+    "R38 tests external C/observer robustness only",
+    "R37 confirmatory seeds 2037001-2037012 remain unopened",
+    "R36-R2 confirmatory seeds 2027001-2027012 remain unopened",
+    "E6b independent replication remains OPEN",
+    "E7 remains OPEN",
+    "no POLAR algorithmic privilege is predicted"
+  ]
+}
