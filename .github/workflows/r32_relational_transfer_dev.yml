@@ -1,0 +1,63 @@
+name: R32 relational transfer development
+
+on:
+  push:
+    branches: [research/r32-relational-transfer-20260921]
+    paths:
+      - experiments/r32_relational_transfer_20260921/r32_relational_transfer.py
+      - experiments/r32_relational_transfer_20260921/PREREG_R32.md
+      - .github/workflows/r32_relational_transfer_dev.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - experiments/r32_relational_transfer_20260921/r32_relational_transfer.py
+      - experiments/r32_relational_transfer_20260921/PREREG_R32.md
+      - .github/workflows/r32_relational_transfer_dev.yml
+
+permissions:
+  contents: read
+
+jobs:
+  r32-dev:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen numerical dependency
+        run: python -m pip install numpy==2.3.5
+      - name: Syntax check
+        run: python -m py_compile experiments/r32_relational_transfer_20260921/r32_relational_transfer.py
+      - name: Record development source identity
+        run: |
+          sha256sum experiments/r32_relational_transfer_20260921/r32_relational_transfer.py > experiments/r32_relational_transfer_20260921/R32_DEV_SOURCE_SHA256.txt
+      - name: Run development seeds only
+        run: |
+          python experiments/r32_relational_transfer_20260921/r32_relational_transfer.py \
+            --mode dev \
+            --seeds 1606001:1606004 \
+            --output experiments/r32_relational_transfer_20260921/R32_DEV_RESULTS.json
+      - name: Guard development split
+        run: |
+          python - <<'PY'
+          import json
+          p="experiments/r32_relational_transfer_20260921/R32_DEV_RESULTS.json"
+          d=json.load(open(p))
+          assert d["mode"]=="dev"
+          assert d["seeds"]==list(range(1606001,1606005))
+          assert d["development_families"]==["sparse","modular"]
+          assert all(s<1607001 for s in d["seeds"])
+          print(json.dumps(d["medians"],indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r32-relational-development
+          path: |
+            experiments/r32_relational_transfer_20260921/R32_DEV_RESULTS.json
+            experiments/r32_relational_transfer_20260921/R32_DEV_SOURCE_SHA256.txt

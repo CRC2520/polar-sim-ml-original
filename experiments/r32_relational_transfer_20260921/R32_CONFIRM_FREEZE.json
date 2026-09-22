@@ -1,0 +1,129 @@
+{
+  "campaign": "R32 strong relational transfer / relation-specific intervention",
+  "status": "FROZEN_BEFORE_CONFIRMATORY_SEEDS",
+  "freeze_date": "2026-09-21",
+  "parent_theory": "POLAR Core v1.0 F0/F1",
+  "source_git_blob_sha": "be82b21e835cea75f493cc47c10c83c5f40d96d0",
+  "adjudicator_git_blob_sha": "b5c1f76f2e97f97eb847af7eaa2f26a7b3762533",
+  "development_run": {
+    "run_id": 35685412213,
+    "head_sha": "b8fe6a9d78a04e2c264b306dcdae356b8d71d899",
+    "seeds": [
+      1606001,
+      1606002,
+      1606003,
+      1606004
+    ],
+    "families": [
+      "sparse",
+      "modular"
+    ],
+    "artifact_id": 10676312863,
+    "artifact_digest": "sha256:d0cc16225783aba23d182bd4df28e53242f729399f02743d83c753ef085374e2"
+  },
+  "confirmatory_seeds": [
+    1607001,
+    1607002,
+    1607003,
+    1607004,
+    1607005,
+    1607006,
+    1607007,
+    1607008,
+    1607009,
+    1607010,
+    1607011,
+    1607012
+  ],
+  "confirmatory_families": [
+    "dense_lowrank",
+    "ring",
+    "random_dag",
+    "skew"
+  ],
+  "strict_heldout_families": [
+    "random_dag",
+    "skew"
+  ],
+  "median_criteria": {
+    "delta_R_relational_shift": {
+      "min": 0.001
+    },
+    "specificity_margin": {
+      "min": 0.0003
+    },
+    "delta_R_diagonal": {
+      "max": 0.00125
+    },
+    "delta_R_gain_shift": {
+      "max": 0.00125
+    },
+    "delta_R_static_relational": {
+      "max": 0.00125
+    },
+    "core_generic_ratio_rel": {
+      "min": 0.94,
+      "max": 1.06
+    },
+    "core_factorized_ratio_rel": {
+      "max": 0.7
+    },
+    "core_frozen_ratio_rel": {
+      "max": 0.5
+    },
+    "relation_recovery_gain": {
+      "min": 0.15
+    },
+    "wrong_relation_damage": {
+      "min": 0.0013
+    },
+    "correct_relation_rescue": {
+      "min": 0.0015
+    },
+    "core_stable": {
+      "min": 0.98
+    },
+    "heldout_delta_R_relational_shift": {
+      "min": 0.0007
+    },
+    "heldout_specificity_margin": {
+      "min": 0.00005
+    },
+    "heldout_core_generic_ratio_rel": {
+      "min": 0.88,
+      "max": 1.12
+    },
+    "heldout_core_factorized_ratio_rel": {
+      "max": 0.85
+    },
+    "heldout_relation_recovery_gain": {
+      "min": 0.05
+    }
+  },
+  "seed_guard": {
+    "delta_R_relational_shift_min": 0.0006,
+    "specificity_margin_min": 0,
+    "core_generic_ratio_min": 0.85,
+    "core_generic_ratio_max": 1.15,
+    "relation_recovery_gain_min": 0.05,
+    "wrong_relation_damage_min": 0.0008,
+    "core_stable_min": 0.95,
+    "heldout_delta_R_relational_shift_min": 0.0004,
+    "heldout_specificity_margin_min": 0,
+    "heldout_core_generic_ratio_min": 0.8,
+    "heldout_core_generic_ratio_max": 1.2
+  },
+  "seed_guard_required": 9,
+  "heldout_seed_guard_required": 8,
+  "fixed_boundaries": {
+    "scope": "INTERNAL_HELDOUT_TOPOLOGY_FAMILIES_ONLY",
+    "external_team_task_generation": "NOT_ESTABLISHED",
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "consciousness": "NOT_ESTABLISHED",
+    "global_minimality": "OPEN",
+    "RL_field_superiority": "NOT_TESTED",
+    "R30_R31_equivalence": "UNCHANGED"
+  },
+  "post_opening_technical_note": "Only the adjudicator Git-blob identity reconstruction was corrected after the first confirmatory simulation; runner source, seeds, topology families, metrics, thresholds and decision rules are unchanged. First simulation run 35685648824 produced results but failed before adjudication/artifact upload."
+}
