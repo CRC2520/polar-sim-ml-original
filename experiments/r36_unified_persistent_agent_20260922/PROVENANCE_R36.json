@@ -1,0 +1,57 @@
+{
+  "campaign": "R36 unified persistent agent",
+  "development": {
+    "dev1": {
+      "run_id": 35737075162,
+      "status": "RETAINED_METACOGNITIVE_ANTICALIBRATION_FAILURE"
+    },
+    "dev2": {
+      "run_id": 35737338854,
+      "status": "IMPROVED_BUT_NEGATIVE_MEDIAN_CALIBRATION"
+    },
+    "dev3": {
+      "run_id": 35737650674,
+      "status": "FINAL_DEVELOPMENT",
+      "artifact_id": 10697834239,
+      "digest": "sha256:91be729072f0b26292fa985972e38929ba32a407b2ae9926abecc5dd6c84ce44"
+    }
+  },
+  "confirmatory": {
+    "run_id": 35738004777,
+    "execution_head": "bcfef3d001912a90986e4167c5bb0b25484a5615",
+    "artifact_id": 10697874816,
+    "artifact_digest": "sha256:60b0c10d735370c924aa4a80b96c0444b4aa039872c2cd93e311d9d62f9e4be9",
+    "seeds": [
+      2007001,
+      2007002,
+      2007003,
+      2007004,
+      2007005,
+      2007006,
+      2007007,
+      2007008,
+      2007009,
+      2007010,
+      2007011,
+      2007012
+    ],
+    "resolution": "R36_FAIL"
+  },
+  "frozen_source": {
+    "git_blob_sha": "ed6ffe0eecc66477e798779b3be8aad8ac308a65",
+    "sha256": "17728c18e4ec8b39a75257df33b93c74bb3079d86bec9572b385a08b215f15ee"
+  },
+  "frozen_adjudicator": {
+    "git_blob_sha": "2ac86c569f0eacb87aeddf39d3291f74b08347e0",
+    "sha256": "dbb150000a3d9f31101e04e226bab04cf5a301723b1f7ca53a0bfce283e55748"
+  },
+  "thresholds_changed_after_confirmatory_opening": false,
+  "experiment_source_changed_after_confirmatory_opening": false,
+  "resolution": "R36_FAIL",
+  "boundaries": {
+    "E6b": "OPEN",
+    "E7": "OPEN",
+    "global_minimality": "OPEN",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}
