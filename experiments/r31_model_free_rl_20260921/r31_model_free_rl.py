@@ -13,44 +13,6 @@ EVAL_STEPS=3200
 TRAIN_SCHEDULE=[0,1,0,2,1,2,0,1]
 EVAL_SCHEDULE=[3,2,0,1,3,0,2,1]
 
-def features(task, est):
-    est=np.asarray(est,float)
-    if task=="cartpole":
-        scale=np.array([2.4,4.0,0.35,4.0])
-    else:
-        scale=np.array([0.5,4.0])
-    z=np.clip(est/scale,-2.0,2.0)
-    vals=[1.0]
-    vals.extend(z.tolist())
-    vals.extend((z*z).tolist())
-    for i in range(len(z)):
-        for j in range(i+1,len(z)):
-            vals.append(float(z[i]*z[j]))
-    return np.asarray(vals,float)
-
-def residual_actions(task,uclip):
-    frac=np.array([-0.05,-0.025,0.0,0.025,0.05],float)
-    return frac*uclip
-
-def greedy_rl_index(W,phi,residuals,uclip,margin=0.01):
-    q=W@phi
-    penalty=0.002*(residuals/(uclip+1e-12))**2
-    z=int(np.argmin(np.abs(residuals)))
-    b=int(np.argmin(q+penalty))
-    if b!=z and (q[b]+penalty[b]) > (q[z]+penalty[z]-margin):
-        b=z
-    return b,q
-
-def choose_rl_action(W,phi,residuals,u_nom,epsilon,rng,uclip):
-    z=int(np.argmin(np.abs(residuals)))
-    if rng.random()<epsilon:
-        idx=int(rng.integers(0,len(residuals)))
-        q=W@phi
-    else:
-        idx,q=greedy_rl_index(W,phi,residuals,uclip)
-    u=float(np.clip(u_nom+residuals[idx],-uclip,uclip))
-    return idx,u,q
-
 def adaptive_train(seed,task,kind,steps=TRAIN_STEPS):
     rng=np.random.default_rng(seed)
     step,n,params,Q,R,uclip,state,obs,estimate,cost,stable=base.task_spec(task,rng,steps)
@@ -82,6 +44,8 @@ def adaptive_train(seed,task,kind,steps=TRAIN_STEPS):
                     Anew[np.abs(Anew)<0.02]=0.0
                 Xv=seq[cut:-1]; Uv=act[cut:]; Yv=seq[cut+1:]
                 oldp=(Xv@Ahat.T)+(Uv[:,None]@Bhat.T)
+                newp=(Xv@Anew.T)+(Uv[:,None]@Bhat.T*0 + Uv[:,None]@Bnew.T)
+                # same prediction expression, written explicitly for auditability
                 newp=(Xv@Anew.T)+(Uv[:,None]@Bnew.T)
                 oldm=float(np.mean((oldp-Yv)**2))
                 newm=float(np.mean((newp-Yv)**2))
@@ -103,62 +67,44 @@ def adaptive_train(seed,task,kind,steps=TRAIN_STEPS):
         prev_o=o; prev_v=vel; est_prev=est.copy(); u_prev=u; state=next_state
     return {"K_nom":K_nom,"K_adapt":K_adapt}
 
-def refit_fqi(W,buffer,gamma=0.985,lam=0.5,iters=6):
-    if len(buffer)<250:
-        return W
-    A=W.shape[0]
-    Wcur=W.copy()
-    for _ in range(iters):
-        next_phi=np.stack([b[3] for b in buffer])
-        next_q=next_phi@Wcur.T
-        min_next=np.min(next_q,axis=1)
-        for a in range(A):
-            ids=[i for i,b in enumerate(buffer) if b[1]==a]
-            if len(ids)<20:
-                continue
-            X=np.stack([buffer[i][0] for i in ids])
-            y=np.array([min(5.0,float(buffer[i][2])) + gamma*min_next[i] for i in ids])
-            w=np.linalg.solve(X.T@X+lam*np.eye(X.shape[1]),X.T@y)
-            Wcur[a]=w
-    return Wcur
-
-def rl_train(seed,task,steps=TRAIN_STEPS,gamma=0.985):
+def policy_rollout_cost(task,seed,gain_scale,regime,steps=200):
     rng=np.random.default_rng(seed)
     step,n,params,Q,R,uclip,state,obs,estimate,cost,stable=base.task_spec(task,rng,steps)
     Anom,Bnom=base.base.numeric_linearization(step,n,params[0])
     K_nom=base.base.infinite_lqr_gain(Anom,Bnom,Q,R)
-    residuals=residual_actions(task,uclip)
-    dim=len(features(task,np.zeros(n)))
-    W=np.zeros((len(residuals),dim),float)
-    buffer=[]
-    prev_o=None; prev_v=None
-    seg=steps//len(TRAIN_SCHEDULE)
+    prev_o=None; prev_v=None; costs=[]
+    p=params[regime]
     for t in range(steps):
-        rid=TRAIN_SCHEDULE[min(len(TRAIN_SCHEDULE)-1,t//seg)]
-        p=params[rid]
         o=obs(state,t)
         if prev_v is None:
             prev_v=np.zeros(2 if task=="cartpole" else 1)
         est,vel=estimate(o,prev_o,prev_v)
-        phi=features(task,est)
-        un=float(-(K_nom@est)[0]) if K_nom is not None else 0.0
-        epsilon=max(0.015,0.08*(1.0-t/max(1,steps-1)))
-        ai,u,_=choose_rl_action(W,phi,residuals,un,epsilon,rng,uclip)
-        c=cost(state,u)
-        next_state=step(state,u,p)
-        no=obs(next_state,min(t+1,steps))
-        nest,nvel=estimate(no,o,vel)
-        nphi=features(task,nest)
-        buffer.append((phi.copy(),ai,float(c),nphi.copy()))
-        if len(buffer)>2200:
-            buffer=buffer[-2200:]
-        if t>=300 and t%100==0:
-            Wfit=refit_fqi(W,buffer,gamma=gamma,lam=0.5,iters=6)
-            W=.55*W+.45*Wfit
-        prev_o=o; prev_v=vel; state=next_state
-    Wfit=refit_fqi(W,buffer,gamma=gamma,lam=0.5,iters=10)
-    W=.35*W+.65*Wfit
-    return {"K_nom":K_nom,"W":W,"residuals":residuals}
+        u=float(np.clip(-(gain_scale*K_nom@est)[0],-uclip,uclip))
+        costs.append(cost(state,u))
+        state=step(state,u,p)
+        prev_o=o; prev_v=vel
+    return float(np.mean(costs))
+
+def model_free_bandit_train(seed,task):
+    # Seven fixed feedback policies; selection uses realized scalar cost only.
+    candidates=[0.40,0.50,0.60,0.70,0.85,1.00,1.15]
+    scores={g:[] for g in candidates}
+    # Two paired rounds across all policies: 2*7*200 = 2800 interactions.
+    for rnd in range(2):
+        regime=(seed+rnd)%3
+        rollout_seed=seed+rnd*1000
+        for g in candidates:
+            scores[g].append(policy_rollout_cost(task,rollout_seed,g,regime,200))
+    means={g:float(np.mean(v)) for g,v in scores.items()}
+    top=sorted(candidates,key=lambda g:means[g])[:2]
+    # Final paired refinement of the top two: 2*200 = 400 interactions.
+    regime=(seed+2)%3
+    rollout_seed=seed+2000
+    for g in top:
+        scores[g].append(policy_rollout_cost(task,rollout_seed,g,regime,200))
+    means={g:float(np.mean(v)) for g,v in scores.items()}
+    best=min(candidates,key=lambda g:means[g])
+    return {"K_nom":None,"gain_scale":float(best),"candidate_costs":means,"training_interactions":3200}
 
 def eval_controller(seed,task,controller,trained=None,steps=EVAL_STEPS):
     rng=np.random.default_rng(seed)
@@ -188,12 +134,9 @@ def eval_controller(seed,task,controller,trained=None,steps=EVAL_STEPS):
             un=float(-(K_nom@est)[0]) if K_nom is not None else 0.0
             u=.70*un+.30*ua
         elif controller=="MODEL_FREE_RL":
-            phi=features(task,est)
-            un=float(-(K_nom@est)[0]) if K_nom is not None else 0.0
-            W=trained["W"]; residuals=trained["residuals"]
-            ai,_=greedy_rl_index(W,phi,residuals,uclip)
-            u=un+residuals[ai]
-            rl_nonzero.append(float(abs(residuals[ai])>1e-12))
+            g=float(trained["gain_scale"])
+            u=float(-(g*K_nom@est)[0]) if K_nom is not None else 0.0
+            rl_nonzero.append(float(abs(g-1.0)>1e-12))
         else:
             raise ValueError(controller)
         u=float(np.clip(u,-uclip,uclip))
@@ -212,13 +155,14 @@ def eval_controller(seed,task,controller,trained=None,steps=EVAL_STEPS):
     }
 
 def eval_seed(seed):
-    tasks={}
+    tasks={}; rl_scales=[]
     for ti,task in enumerate(("cartpole","pendulum")):
         tr_seed=seed+10000*ti
         ev_seed=seed+500000+10000*ti
         core=adaptive_train(tr_seed,task,"CORE")
         adp=adaptive_train(tr_seed+100,task,"ADAPTIVE_LQR")
-        rl=rl_train(tr_seed+200,task)
+        rl=model_free_bandit_train(tr_seed+200,task)
+        rl_scales.append(float(rl["gain_scale"]))
         tasks[task]={
           "CORE":eval_controller(ev_seed,task,"CORE",core),
           "ADAPTIVE_LQR":eval_controller(ev_seed,task,"ADAPTIVE_LQR",adp),
@@ -239,12 +183,13 @@ def eval_seed(seed):
       "core_stable":float(np.mean([tasks[t]["CORE"]["stable_fraction"] for t in tasks])),
       "rl_stable":float(np.mean([tasks[t]["MODEL_FREE_RL"]["stable_fraction"] for t in tasks])),
       "adaptive_stable":float(np.mean([tasks[t]["ADAPTIVE_LQR"]["stable_fraction"] for t in tasks])),
-      "rl_nonzero_fraction":float(np.mean([tasks[t]["MODEL_FREE_RL"]["rl_nonzero_fraction"] for t in tasks]))
+      "rl_nonzero_fraction":float(np.mean([tasks[t]["MODEL_FREE_RL"]["rl_nonzero_fraction"] for t in tasks])),
+      "rl_gain_scale_mean":float(np.mean(rl_scales))
     }
 
 def summarize(records):
     keys=["rl_frozen_ratio","rl_adaptive_ratio","core_rl_ratio","core_rl_postshift_ratio",
-          "core_adaptive_ratio","core_stable","rl_stable","adaptive_stable","rl_nonzero_fraction"]
+          "core_adaptive_ratio","core_stable","rl_stable","adaptive_stable","rl_nonzero_fraction","rl_gain_scale_mean"]
     return {k:float(np.median([r[k] for r in records])) for k in keys}
 
 def main():
