@@ -1,0 +1,70 @@
+name: R32 relational transfer confirmatory
+
+on:
+  push:
+    branches: [research/r32-relational-transfer-20260921]
+    paths:
+      - .github/workflows/r32_relational_transfer_confirm.yml
+
+permissions:
+  contents: read
+
+jobs:
+  r32-confirm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen numerical dependency
+        run: python -m pip install numpy==2.3.5
+      - name: Verify frozen source, adjudicator and seed contract
+        run: |
+          python - <<'PY'
+          import json, pathlib, subprocess
+          root=pathlib.Path("experiments/r32_relational_transfer_20260921")
+          f=json.loads((root/"R32_CONFIRM_FREEZE.json").read_text())
+          assert f["status"]=="FROZEN_BEFORE_CONFIRMATORY_SEEDS"
+          assert f["confirmatory_seeds"]==list(range(1607001,1607013))
+          assert f["confirmatory_families"]==["dense_lowrank","ring","random_dag","skew"]
+          assert f["strict_heldout_families"]==["random_dag","skew"]
+          src=subprocess.check_output(["git","hash-object",str(root/"r32_relational_transfer.py")],text=True).strip()
+          adj=subprocess.check_output(["git","hash-object",str(root/"adjudicate_r32.py")],text=True).strip()
+          assert src==f["source_git_blob_sha"], (src,f["source_git_blob_sha"])
+          assert adj==f["adjudicator_git_blob_sha"], (adj,f["adjudicator_git_blob_sha"])
+          print("R32 freeze PASS",src,adj)
+          PY
+      - name: Execute untouched confirmatory seeds
+        run: |
+          python experiments/r32_relational_transfer_20260921/r32_relational_transfer.py \
+            --mode confirm \
+            --seeds 1607001:1607012 \
+            --output experiments/r32_relational_transfer_20260921/R32_CONFIRM_RESULTS.json
+      - name: Adjudicate frozen criteria
+        run: |
+          python experiments/r32_relational_transfer_20260921/adjudicate_r32.py \
+            --results experiments/r32_relational_transfer_20260921/R32_CONFIRM_RESULTS.json \
+            --freeze experiments/r32_relational_transfer_20260921/R32_CONFIRM_FREEZE.json \
+            --source experiments/r32_relational_transfer_20260921/r32_relational_transfer.py \
+            --output experiments/r32_relational_transfer_20260921/R32_CONFIRM_ADJUDICATION.json
+      - name: Record confirmatory provenance
+        run: |
+          git rev-parse HEAD > experiments/r32_relational_transfer_20260921/R32_CONFIRM_COMMIT.txt
+          sha256sum experiments/r32_relational_transfer_20260921/r32_relational_transfer.py > experiments/r32_relational_transfer_20260921/R32_CONFIRM_SOURCE_SHA256.txt
+          sha256sum experiments/r32_relational_transfer_20260921/adjudicate_r32.py > experiments/r32_relational_transfer_20260921/R32_CONFIRM_ADJUDICATOR_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r32-relational-confirmatory
+          path: |
+            experiments/r32_relational_transfer_20260921/R32_CONFIRM_RESULTS.json
+            experiments/r32_relational_transfer_20260921/R32_CONFIRM_ADJUDICATION.json
+            experiments/r32_relational_transfer_20260921/R32_CONFIRM_FREEZE.json
+            experiments/r32_relational_transfer_20260921/R32_CONFIRM_COMMIT.txt
+            experiments/r32_relational_transfer_20260921/R32_CONFIRM_SOURCE_SHA256.txt
+            experiments/r32_relational_transfer_20260921/R32_CONFIRM_ADJUDICATOR_SHA256.txt
