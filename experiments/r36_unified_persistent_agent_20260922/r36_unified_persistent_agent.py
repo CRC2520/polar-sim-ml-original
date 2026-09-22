@@ -132,7 +132,7 @@ class ModelState:
         self.Y = []
         self.A = np.eye(N)*0.54
         self.B = np.eye(N)*0.90
-        self.resid_ema = 0.10
+        self.resid_ema = 0.0030
         self.fitted = False
         self.meta_states = []
         self.meta_errors = []
@@ -191,10 +191,8 @@ class PersistentAgent:
 
     def confidence(self, key, x):
         m = self.model(key)
-        n = len(m.X)
-        sample_factor = min(1.0, n/45.0)
         expected = m.expected_error(x)
-        return float(sample_factor/(1.0 + 260.0*max(expected, 0.0)))
+        return float(1.0/(1.0 + 260.0*max(expected, 0.0)))
 
     def myopic_action(self, x, target, key):
         m = self.model(key)
