@@ -1,0 +1,118 @@
+{
+  "campaign": "R36-R1 metacognitive stabilization in unified persistent agent",
+  "status": "FROZEN_BEFORE_CONFIRMATORY_SEEDS",
+  "freeze_date": "2026-09-22",
+  "parent_result": "R36_FAIL",
+  "parent_theory": "POLAR Core v1.1 = D+C+R; A conditional",
+  "source_git_blob_sha": "99c6ac712e26abbbe7a1202709701e5af94c6ab4",
+  "adjudicator_git_blob_sha": "5ecb746dd98b93f20d1feccbdc92eee46c272498",
+  "confirmatory_seeds": [
+    2017001,
+    2017002,
+    2017003,
+    2017004,
+    2017005,
+    2017006,
+    2017007,
+    2017008,
+    2017009,
+    2017010,
+    2017011,
+    2017012
+  ],
+  "component_required": 9,
+  "joint_required": 9,
+  "criteria": {
+    "same_agent_steps": 1760,
+    "memory_entries": 1760,
+    "D_prediction_damage_min": 0.009,
+    "C_recurrent_context_gain_min": 0.0027,
+    "R_relation_lesion_damage_min": 0.0018,
+    "memory_reentry_gain_min": 0.0003,
+    "own_history_transplant_damage_min": 0.0012,
+    "source_balanced_accuracy_min": 0.94,
+    "time_order_accuracy_min": 0.98,
+    "metacog_calibration_gap_min": 0,
+    "metacog_gate_gain_min": 0,
+    "planning_gain_min": 0.00002,
+    "planning_invocation_rate_min": 0.015,
+    "stable_fraction_min": 0.99,
+    "models_learned_min": 4
+  },
+  "median_criteria": {
+    "D_prediction_damage": {
+      "min": 0.01
+    },
+    "C_recurrent_context_gain": {
+      "min": 0.003
+    },
+    "R_relation_lesion_damage": {
+      "min": 0.002
+    },
+    "memory_reentry_gain": {
+      "min": 0.0004
+    },
+    "own_history_transplant_damage": {
+      "min": 0.0015
+    },
+    "source_balanced_accuracy": {
+      "min": 0.95
+    },
+    "time_order_accuracy": {
+      "min": 0.99
+    },
+    "metacog_calibration_gap": {
+      "min": 0.00001
+    },
+    "metacog_gate_gain": {
+      "min": 0.00004
+    },
+    "planning_gain": {
+      "min": 0.00005
+    },
+    "planning_invocation_rate": {
+      "min": 0.02
+    },
+    "stable_fraction": {
+      "min": 0.995
+    },
+    "models_learned": {
+      "min": 4
+    },
+    "same_agent_steps": {
+      "eq": 1760
+    },
+    "memory_entries": {
+      "eq": 1760
+    }
+  },
+  "development": {
+    "dev1_run_id": 35743474176,
+    "dev1_status": "METACOG_IMPROVED_PLANNING_EXPOSURE_REGRESSION",
+    "dev2_run_id": 35743785065,
+    "dev2_status": "METACOG_STRONG_RAW_PLANNING_CANDIDATE_STILL_NEGATIVE",
+    "dev3_run_id": 35744003028,
+    "dev3_status": "FINAL_DEVELOPMENT",
+    "dev3_artifact_id": 10703010150,
+    "dev3_artifact_digest": "sha256:a07d47680c548b6e3a22be9276250e4e3fd2618738f0738106f0adcf5366e9cf"
+  },
+  "metric_governance": {
+    "planning_gain": "true two-step gain measured only on states where the metacognitive gate invokes planning",
+    "planning_candidate_gain_all": "diagnostic only; preserves the former all-candidate quantity",
+    "planning_invocation_rate": "new guardrail to prevent trivial pass by almost-never planning"
+  },
+  "fixed_boundaries": {
+    "scope": "SAME_PROGRAM_SYNTHETIC_SINGLE_AGENT_1760_STEP_LIFETIME",
+    "mandatory_core": "D+C+R_POLAR_CORE_V1_1",
+    "A": "OPTIONAL_CONDITIONAL_EXTENSION_NOT_REQUIRED_FOR_PASS",
+    "identity": "OPERATIONAL_OWN_HISTORY_AND_TRANSPLANT_SENSITIVITY_ONLY",
+    "source": "RESIDUAL_BASED_EXTERNAL_EVENT_ATTRIBUTION",
+    "time": "EXPLICIT_INTERNAL_CLOCK_TAGGING_NOT_EMERGENT_TIME_CONCEPT",
+    "metacognition": "ACTION_CONDITIONAL_FACTUAL_ERROR_CONFIDENCE_AND_FUNCTIONAL_GATE_NOT_INTROSPECTION",
+    "planning": "TWO_STEP_MODEL_BASED_PLANNING_WHEN_GATE_INVOKES_PLAN",
+    "global_minimality": "NOT_ESTABLISHED",
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}
