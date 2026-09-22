@@ -17,8 +17,8 @@ spec = importlib.util.spec_from_file_location("r33base", BASE_PATH)
 base = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(base)
 
-Q_TRAIN_EPISODES = 120
-Q_EPOCHS = 20
+Q_TRAIN_EPISODES = 160
+Q_EPOCHS = 30
 Q_BATCH = 16
 Q_INP = 13
 Q_ARCH_DEV_H2 = ["CURRENT_MLP", "GRU"]
