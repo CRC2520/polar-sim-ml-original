@@ -1,0 +1,96 @@
+{
+  "campaign": "R36-R1 metacognitive stabilization in unified persistent agent",
+  "resolution": "R36_R1_COMPONENTS_PASS_JOINT_FAIL",
+  "strong_pass": false,
+  "component_pass": true,
+  "median_pass": true,
+  "joint_pass": false,
+  "component_required": 9,
+  "joint_required": 9,
+  "confirmatory_seeds": [
+    2017001,
+    2017002,
+    2017003,
+    2017004,
+    2017005,
+    2017006,
+    2017007,
+    2017008,
+    2017009,
+    2017010,
+    2017011,
+    2017012
+  ],
+  "component_counts": {
+    "D": 12,
+    "C": 11,
+    "R": 11,
+    "memory_reentry": 10,
+    "own_history": 11,
+    "source": 11,
+    "time": 12,
+    "metacog_calibration": 10,
+    "metacog_function": 12,
+    "planning": 9,
+    "planning_invocation": 12,
+    "same_agent_lifetime": 12,
+    "stability": 12,
+    "models": 12
+  },
+  "joint_pass_count": 7,
+  "medians": {
+    "D_prediction_damage": 0.013158787938232044,
+    "C_recurrent_context_gain": 0.0035179206310393656,
+    "R_relation_lesion_damage": 0.0022733563212256336,
+    "memory_reentry_gain": 0.0005846359503555935,
+    "own_history_transplant_damage": 0.0027475871818481447,
+    "source_balanced_accuracy": 0.9648614018271093,
+    "time_order_accuracy": 1,
+    "metacog_calibration_gap": 0.00030168277191199824,
+    "metacog_gate_gain": 0.00016998525240432551,
+    "planning_gain": 0.002423817681709831,
+    "planning_invocation_rate": 0.044805194805194806,
+    "stable_fraction": 1,
+    "models_learned": 4,
+    "same_agent_steps": 1760,
+    "memory_entries": 1760
+  },
+  "retained_joint_failures": {
+    "2017004": [
+      "C",
+      "R",
+      "memory_reentry",
+      "metacog_calibration",
+      "own_history",
+      "source"
+    ],
+    "2017005": [
+      "memory_reentry"
+    ],
+    "2017007": [
+      "metacog_calibration",
+      "planning"
+    ],
+    "2017010": [
+      "planning"
+    ],
+    "2017012": [
+      "planning"
+    ]
+  },
+  "source_git_blob_sha": "99c6ac712e26abbbe7a1202709701e5af94c6ab4",
+  "boundaries": {
+    "scope": "SAME_PROGRAM_SYNTHETIC_SINGLE_AGENT_1760_STEP_LIFETIME",
+    "mandatory_core": "D+C+R_POLAR_CORE_V1_1",
+    "A": "OPTIONAL_CONDITIONAL_EXTENSION_NOT_REQUIRED_FOR_PASS",
+    "identity": "OPERATIONAL_OWN_HISTORY_AND_TRANSPLANT_SENSITIVITY_ONLY",
+    "source": "RESIDUAL_BASED_EXTERNAL_EVENT_ATTRIBUTION",
+    "time": "EXPLICIT_INTERNAL_CLOCK_TAGGING_NOT_EMERGENT_TIME_CONCEPT",
+    "metacognition": "ACTION_CONDITIONAL_FACTUAL_ERROR_CONFIDENCE_AND_FUNCTIONAL_GATE_NOT_INTROSPECTION",
+    "planning": "TWO_STEP_MODEL_BASED_PLANNING_WHEN_GATE_INVOKES_PLAN",
+    "global_minimality": "NOT_ESTABLISHED",
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}

@@ -1,0 +1,63 @@
+name: R36-R1 metacognitive stabilization development
+
+on:
+  push:
+    branches: [research/r36-r1-metacog-stabilization-20260922]
+    paths:
+      - experiments/r36_r1_metacog_stabilization_20260922/r36_r1_metacog.py
+      - experiments/r36_r1_metacog_stabilization_20260922/PREREG_R36_R1.md
+      - .github/workflows/r36_r1_metacog_dev.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - experiments/r36_r1_metacog_stabilization_20260922/**
+      - .github/workflows/r36_r1_metacog_dev.yml
+
+permissions:
+  contents: read
+
+jobs:
+  r36-r1-dev:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen dependency
+        run: python -m pip install numpy==2.3.5
+      - name: Syntax check
+        run: python -m py_compile experiments/r36_r1_metacog_stabilization_20260922/r36_r1_metacog.py
+      - name: Record source identity
+        run: git hash-object experiments/r36_r1_metacog_stabilization_20260922/r36_r1_metacog.py > experiments/r36_r1_metacog_stabilization_20260922/R36_R1_DEV_SOURCE_GIT_BLOB.txt
+      - name: Run development seeds only
+        run: |
+          python experiments/r36_r1_metacog_stabilization_20260922/r36_r1_metacog.py \
+            --mode dev \
+            --seeds 2016001:2016004 \
+            --output experiments/r36_r1_metacog_stabilization_20260922/R36_R1_DEV_RESULTS.json
+      - name: Guard split
+        run: |
+          python - <<'PY'
+          import json
+          p="experiments/r36_r1_metacog_stabilization_20260922/R36_R1_DEV_RESULTS.json"
+          d=json.load(open(p))
+          assert d["mode"]=="dev"
+          assert d["seeds"]==list(range(2016001,2016005))
+          assert d["same_agent_requirement"].startswith("single PersistentAgent")
+          print(json.dumps(d["medians"],indent=2,sort_keys=True))
+          PY
+      - name: Verify frozen R36-R1 evidence
+        run: python experiments/r36_r1_metacog_stabilization_20260922/verify_r36_r1.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r36-r1-metacog-development
+          path: |
+            experiments/r36_r1_metacog_stabilization_20260922/R36_R1_DEV_RESULTS.json
+            experiments/r36_r1_metacog_stabilization_20260922/R36_R1_DEV_SOURCE_GIT_BLOB.txt

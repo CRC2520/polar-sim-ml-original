@@ -1,0 +1,57 @@
+{
+  "campaign": "R36-R1 metacognitive stabilization in unified persistent agent",
+  "development": {
+    "dev1": {
+      "run_id": 35743474176,
+      "status": "METACOG_IMPROVED_PLANNING_EXPOSURE_REGRESSION"
+    },
+    "dev2": {
+      "run_id": 35743785065,
+      "status": "METACOG_STRONG_RAW_PLANNING_CANDIDATE_STILL_NEGATIVE"
+    },
+    "dev3": {
+      "run_id": 35744003028,
+      "status": "FINAL_DEVELOPMENT",
+      "artifact_id": 10703010150,
+      "digest": "sha256:a07d47680c548b6e3a22be9276250e4e3fd2618738f0738106f0adcf5366e9cf"
+    }
+  },
+  "confirmatory": {
+    "run_id": 35744364683,
+    "execution_head": "7b8423e5e62b873873c2e77b6290673c5f612d52",
+    "artifact_id": 10702766030,
+    "artifact_digest": "sha256:d757ae8ef10c3b25d4a530b8bde0f525b9f19b3c56f6eb661d7fc31df2e0b281",
+    "seeds": [
+      2017001,
+      2017002,
+      2017003,
+      2017004,
+      2017005,
+      2017006,
+      2017007,
+      2017008,
+      2017009,
+      2017010,
+      2017011,
+      2017012
+    ],
+    "resolution": "R36_R1_COMPONENTS_PASS_JOINT_FAIL"
+  },
+  "frozen_source": {
+    "git_blob_sha": "99c6ac712e26abbbe7a1202709701e5af94c6ab4",
+    "sha256": "220a62e14e4f40d66c61577538fbe82c3cf63347ae2e6e3ccfa90a333d76a1d6"
+  },
+  "frozen_adjudicator": {
+    "git_blob_sha": "5ecb746dd98b93f20d1feccbdc92eee46c272498",
+    "sha256": "18263a95afc6a1be3aa718acb3aa3c7c6a21e61308e8fbbc37aae14e03ee187d"
+  },
+  "thresholds_changed_after_confirmatory_opening": false,
+  "experiment_source_changed_after_confirmatory_opening": false,
+  "metric_definition_changed_after_confirmatory_opening": false,
+  "boundaries": {
+    "E6b": "OPEN",
+    "E7": "OPEN",
+    "global_minimality": "OPEN",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}
