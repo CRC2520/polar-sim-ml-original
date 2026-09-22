@@ -53,6 +53,8 @@ jobs:
           assert d["same_agent_requirement"].startswith("single PersistentAgent")
           print(json.dumps(d["medians"],indent=2,sort_keys=True))
           PY
+      - name: Verify frozen R36-R1 evidence
+        run: python experiments/r36_r1_metacog_stabilization_20260922/verify_r36_r1.py
       - uses: actions/upload-artifact@v4
         with:
           name: r36-r1-metacog-development
