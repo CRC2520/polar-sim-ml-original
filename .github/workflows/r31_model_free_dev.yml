@@ -1,10 +1,8 @@
 name: R31 model-free RL development
 
+
 on:
-  pull_request:
-    paths:
-      - "experiments/r31_model_free_rl_20260921/**"
-      - ".github/workflows/r31_model_free_dev.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
