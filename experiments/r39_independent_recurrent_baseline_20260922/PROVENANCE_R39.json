@@ -1,0 +1,20 @@
+{
+  "run_id": 35778626788,
+  "artifact_id": 10717985488,
+  "artifact_digest": "sha256:effe8ba5363e5c9367b3b76397573cfed5759f3eb3294c70acf2f16f358a0126",
+  "execution_head": "1068f1b98accb824e252c36f9bc86c17b01a6fb7",
+  "merge_commit": "1ca28660ec22ea97210c44c4620c9e9980f0c1f7",
+  "source_sha256": "20e9d617d19cf5dd8744751a666f47e397574db31fae53ee5e56b81b1aac9ff8",
+  "package_versions": {
+    "popgym": "1.0.7",
+    "stable_baselines3": "2.7.1",
+    "sb3_contrib": "2.7.1",
+    "torch": "2.7.1+cpu",
+    "scipy": "1.17.0"
+  },
+  "infrastructure_amendments": [
+    "R39_PRE_EXECUTION_AMENDMENT.md",
+    "R39_PARALLEL_EXECUTION_AMENDMENT.md"
+  ],
+  "raw_results_location": "GitHub Actions artifact 10717985488"
+}
