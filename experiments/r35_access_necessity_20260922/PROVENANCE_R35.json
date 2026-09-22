@@ -1,0 +1,55 @@
+{
+  "campaign": "R35 representation-independent contextual-access necessity",
+  "development": {
+    "dev1": {
+      "run_id": 35722584906,
+      "head": "c22018827e3cff65b3bae215a33a1f8880c3ceed",
+      "artifact_id": 10692417034,
+      "digest": "sha256:31a7e342aef500301c775e5bbe2a0de1c9c605a40a7df7dc935503e3a5e8aa83",
+      "status": "RETAINED_INVALID_C_VS_A_INTERVENTION"
+    },
+    "corrected": {
+      "run_id": 35722883093,
+      "head": "d02346a3f97d3ace06348964a03e6cfcdaa80c16",
+      "artifact_id": 10692042896,
+      "digest": "sha256:e38bb5abf0b65cfc35a9d9913db0e4fb76bc5d21c5280cdb2da41e9944bf4666"
+    }
+  },
+  "confirmatory": {
+    "run_id": 35723294150,
+    "execution_head": "b40ed155ca18acc8e1d0feeab8f5bface90963a1",
+    "artifact_id": 10691904220,
+    "artifact_digest": "sha256:b1bd094ea5a45fa87a2bb96dfd8683e2d3dda2e90e58639ebcd8849aff89f6a9",
+    "seeds": [
+      1907001,
+      1907002,
+      1907003,
+      1907004,
+      1907005,
+      1907006,
+      1907007,
+      1907008,
+      1907009,
+      1907010,
+      1907011,
+      1907012
+    ],
+    "resolution": "R35_A_CORE_NECESSITY_WEAKENED"
+  },
+  "frozen_source": {
+    "git_blob_sha": "8664e40269d477cd0bbad1bca1032632be7c0dcb",
+    "sha256": "8bd7f658800b08271ed316ce10d25180b8183c6cebde5d4a546115e31e41c956"
+  },
+  "frozen_adjudicator": {
+    "git_blob_sha": "a3309973d3544374b38f55219c8e65d28d362080",
+    "sha256": "c9ffa182cf161e5a5eeb0f54ccace28ed820fe324185dcd2eb066d5db1687fcd"
+  },
+  "thresholds_changed_after_confirmatory_opening": false,
+  "experiment_source_changed_after_confirmatory_opening": false,
+  "boundaries": {
+    "E6b": "OPEN",
+    "E7": "OPEN",
+    "global_minimality": "OPEN",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}
