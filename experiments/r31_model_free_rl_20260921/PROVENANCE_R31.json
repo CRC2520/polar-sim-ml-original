@@ -1,0 +1,28 @@
+{
+  "campaign": "R31 matched model-free policy-bandit",
+  "development_run_id": 35678551174,
+  "development_artifact_id": 10673569020,
+  "development_artifact_digest": "sha256:f7d6aaf080753ae40faf0a75ccceca786a4fa21055af5ccf723749b222a97700",
+  "development_head_sha": "a7cedeca8fe15da34ae3558932463d22b77c3148",
+  "confirmatory_run_id": 35680918266,
+  "confirmatory_artifact_id": 10674197612,
+  "confirmatory_artifact_digest": "sha256:f29ce5312f6e3a5b760211adba5cbd9b99d2cab910035c73dafbf6f0d252e3b8",
+  "workflow_checkout_commit": "4e252298de3ef736dd371cdd4bd25243dd4472e0",
+  "frozen_source_sha256": "18fb92e78688d4a3a62713370275916005196d1ad6f318926a1d172feac9c989",
+  "frozen_source_blob_sha": "6b472c6166e1cc02aa8e09c49820b537e9c6e6c1",
+  "confirmatory_seeds": [
+    1547001,
+    1547002,
+    1547003,
+    1547004,
+    1547005,
+    1547006,
+    1547007,
+    1547008,
+    1547009,
+    1547010,
+    1547011,
+    1547012
+  ],
+  "note": "Raw development and confirmatory result files are preserved in GitHub Actions artifacts. Committed adjudication is a compact record; scientific FAILs are preserved and workflow success denotes execution integrity only."
+}
