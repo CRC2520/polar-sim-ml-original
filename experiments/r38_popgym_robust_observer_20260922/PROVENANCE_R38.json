@@ -1,0 +1,12 @@
+{
+  "campaign": "R38 external POPGym robust recurrent observer",
+  "parent": "R37_DEVELOPMENT_FAIL_NO_CONFIRM",
+  "upstream_repo": "proroklab/popgym",
+  "upstream_commit": "96ab5be64f41587feab634dbc115ad7be8bdd094",
+  "package_version": "1.0.7",
+  "development_run_id": 35769153215,
+  "artifact_id": 10713681513,
+  "artifact_digest": "sha256:66ab40632165ae39813b85a179516b22428610d52005c58c3c2368f80e64fdb7",
+  "source_sha256": "67ceab61814575c26ba8fd1fff9f3a47c7cae0df9cd925639351046ff3892144",
+  "confirmatory_status": "NOT_AUTHORIZED_UNOPENED_2047001_2047012"
+}
