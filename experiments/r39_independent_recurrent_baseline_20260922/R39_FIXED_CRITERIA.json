@@ -1,0 +1,96 @@
+{
+  "campaign": "R39 independent RecurrentPPO external baseline",
+  "status": "FROZEN_BEFORE_EXECUTION",
+  "dependencies": {
+    "popgym": "1.0.7",
+    "stable_baselines3": "2.7.1",
+    "sb3_contrib": "2.7.1",
+    "torch": "2.7.1",
+    "scipy": "1.17.0"
+  },
+  "environments": [
+    "PositionOnlyCartPoleMedium",
+    "PositionOnlyCartPoleHard",
+    "NoisyPositionOnlyCartPoleMedium",
+    "NoisyPositionOnlyCartPoleHard"
+  ],
+  "frozen_core": {
+    "parent": "R38",
+    "variant": "KF_R09",
+    "source": "experiments/r38_popgym_robust_observer_20260922/r38_dev.py"
+  },
+  "training": {
+    "timesteps_per_environment": 100000,
+    "training_seeds": {
+      "PositionOnlyCartPoleMedium": 30501,
+      "PositionOnlyCartPoleHard": 30502,
+      "NoisyPositionOnlyCartPoleMedium": 30503,
+      "NoisyPositionOnlyCartPoleHard": 30504
+    },
+    "recurrent_ppo": {
+      "learning_rate": 0.0003,
+      "n_steps": 128,
+      "batch_size": 128,
+      "n_epochs": 5,
+      "gamma": 0.99,
+      "gae_lambda": 0.95,
+      "ent_coef": 0,
+      "vf_coef": 0.5,
+      "lstm_hidden_size": 64
+    }
+  },
+  "episodes_per_environment": 24,
+  "development_eval_seeds": [
+    2056001,
+    2056002,
+    2056003,
+    2056004
+  ],
+  "confirmatory_eval_seeds": [
+    2057001,
+    2057002,
+    2057003,
+    2057004,
+    2057005,
+    2057006,
+    2057007,
+    2057008,
+    2057009,
+    2057010,
+    2057011,
+    2057012
+  ],
+  "baseline_validity": {
+    "medians": {
+      "rppo_score_min": 0.7,
+      "rppo_min_env_min": 0.45
+    },
+    "development_seed_guard_required": 3,
+    "confirm_seed_guard_required": 9,
+    "seed_guard": {
+      "rppo_score_min": 0.6,
+      "rppo_min_env_min": 0.3
+    }
+  },
+  "frozen_core_competitiveness": {
+    "core_minus_rppo_min": -0.1,
+    "development_seed_guard_required": 3,
+    "confirm_seed_guard_required": 9,
+    "seed_guard_core_minus_rppo_min": -0.15
+  },
+  "external_baseline_advantage": {
+    "rppo_minus_core_min": 0.1,
+    "confirm_seed_guard_required": 9,
+    "seed_guard_rppo_minus_core_min": 0.05
+  },
+  "fixed_boundaries": [
+    "R39 introduces no new POLAR tuning",
+    "RecurrentPPO is third-party baseline code; orchestration remains same-program",
+    "R39 cannot close E6b independent replication",
+    "R39 cannot close E7",
+    "R37 confirmatory seeds 2037001-2037012 remain unopened",
+    "R38 confirmatory seeds 2047001-2047012 remain unopened",
+    "POLAR Core v1.1 remains D+C+R with A conditional unless separately revised"
+  ],
+  "pre_execution_amendment": "R39_PRE_EXECUTION_AMENDMENT.md"
+}

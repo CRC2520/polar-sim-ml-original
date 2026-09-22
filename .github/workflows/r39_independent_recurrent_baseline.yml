@@ -1,0 +1,149 @@
+name: R39 independent recurrent baseline
+
+on:
+  pull_request:
+    paths:
+      - "experiments/r39_independent_recurrent_baseline_20260922/**"
+      - ".github/workflows/r39_independent_recurrent_baseline.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  train:
+    name: train-${{ matrix.env }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        env:
+          - PositionOnlyCartPoleMedium
+          - PositionOnlyCartPoleHard
+          - NoisyPositionOnlyCartPoleMedium
+          - NoisyPositionOnlyCartPoleHard
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      NUMEXPR_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned external baseline stack
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install scipy==1.17.0 popgym==1.0.7 stable-baselines3==2.7.1 sb3-contrib==2.7.1
+      - name: Train one frozen RecurrentPPO model
+        env:
+          ENV_NAME: ${{ matrix.env }}
+        run: |
+          mkdir -p experiments/r39_independent_recurrent_baseline_20260922/models
+          python experiments/r39_independent_recurrent_baseline_20260922/r39_recurrent_ppo.py \
+            --criteria experiments/r39_independent_recurrent_baseline_20260922/R39_FIXED_CRITERIA.json \
+            --mode train \
+            --env "$ENV_NAME" \
+            --output "experiments/r39_independent_recurrent_baseline_20260922/models/${ENV_NAME}_training.json" \
+            --model-dir experiments/r39_independent_recurrent_baseline_20260922/models
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r39-model-${{ matrix.env }}
+          path: |
+            experiments/r39_independent_recurrent_baseline_20260922/models/${{ matrix.env }}_recurrent_ppo.zip
+            experiments/r39_independent_recurrent_baseline_20260922/models/${{ matrix.env }}_training.json
+          if-no-files-found: error
+
+  evaluate:
+    name: frozen-development-and-conditional-confirmation
+    needs: train
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      NUMEXPR_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned external baseline stack
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install scipy==1.17.0 popgym==1.0.7 stable-baselines3==2.7.1 sb3-contrib==2.7.1
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r39-model-*
+          path: experiments/r39_independent_recurrent_baseline_20260922/models
+          merge-multiple: true
+      - name: Verify frozen identity and model set
+        run: |
+          python - <<'PY'
+          import hashlib, importlib.metadata as md, json, pathlib
+          root=pathlib.Path("experiments/r39_independent_recurrent_baseline_20260922")
+          cfg=json.loads((root/"R39_FIXED_CRITERIA.json").read_text())
+          assert cfg["status"]=="FROZEN_BEFORE_EXECUTION"
+          assert cfg["confirmatory_eval_seeds"]==list(range(2057001,2057013))
+          versions={
+            "popgym":md.version("popgym"),
+            "stable-baselines3":md.version("stable-baselines3"),
+            "sb3-contrib":md.version("sb3-contrib"),
+            "torch":md.version("torch"),
+            "scipy":md.version("scipy"),
+          }
+          assert versions["popgym"]==cfg["dependencies"]["popgym"]
+          assert versions["stable-baselines3"]==cfg["dependencies"]["stable_baselines3"]
+          assert versions["sb3-contrib"]==cfg["dependencies"]["sb3_contrib"]
+          assert versions["torch"].split("+")[0]==cfg["dependencies"]["torch"]
+          assert versions["scipy"]==cfg["dependencies"]["scipy"]
+          for env in cfg["environments"]:
+              assert (root/"models"/f"{env}_recurrent_ppo.zip").is_file(), env
+          h=hashlib.sha256((root/"r39_recurrent_ppo.py").read_bytes()).hexdigest()
+          (root/"R39_SOURCE_SHA256.txt").write_text(h+"\n")
+          (root/"R39_PACKAGE_VERSIONS.json").write_text(json.dumps(versions,indent=2)+"\n")
+          print("R39 source",h)
+          print(versions)
+          PY
+      - name: Run frozen development gate and conditional confirmation
+        run: |
+          python experiments/r39_independent_recurrent_baseline_20260922/r39_recurrent_ppo.py \
+            --criteria experiments/r39_independent_recurrent_baseline_20260922/R39_FIXED_CRITERIA.json \
+            --mode evaluate \
+            --output experiments/r39_independent_recurrent_baseline_20260922/R39_RESULTS.json \
+            --model-dir experiments/r39_independent_recurrent_baseline_20260922/models
+      - name: Verify confirmatory seed policy
+        run: |
+          python - <<'PY'
+          import json
+          p="experiments/r39_independent_recurrent_baseline_20260922/R39_RESULTS.json"
+          d=json.load(open(p))
+          if d["development"]["adjudication"]["baseline_valid"]:
+              assert d["confirmatory"] is not None
+              got=[r["seed"] for r in d["confirmatory"]["records"]]
+              assert got==list(range(2057001,2057013)),got
+              print("development gate PASS; confirmatory panel executed")
+          else:
+              assert d["confirmatory"] is None
+              assert d["confirmatory_eval_seeds_status"]=="UNOPENED"
+              print("development gate FAIL; confirmatory panel remains unopened")
+          print(json.dumps(d["development"]["adjudication"],indent=2))
+          if d["confirmatory"] is not None:
+              print(json.dumps(d["confirmatory"]["adjudication"],indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r39-independent-recurrent-baseline
+          path: |
+            experiments/r39_independent_recurrent_baseline_20260922/R39_RESULTS.json
+            experiments/r39_independent_recurrent_baseline_20260922/R39_FIXED_CRITERIA.json
+            experiments/r39_independent_recurrent_baseline_20260922/R39_SOURCE_SHA256.txt
+            experiments/r39_independent_recurrent_baseline_20260922/R39_PACKAGE_VERSIONS.json
+            experiments/r39_independent_recurrent_baseline_20260922/models/*.zip
+            experiments/r39_independent_recurrent_baseline_20260922/models/*_training.json
+          if-no-files-found: error
