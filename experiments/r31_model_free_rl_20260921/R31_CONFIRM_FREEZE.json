@@ -1,0 +1,115 @@
+{
+  "date": "2026-09-21",
+  "campaign": "R31 matched model-free policy-bandit",
+  "status": "FROZEN_BEFORE_CONFIRMATORY_SEEDS",
+  "source_path": "experiments/r31_model_free_rl_20260921/r31_model_free_rl.py",
+  "source_blob_sha": "6b472c6166e1cc02aa8e09c49820b537e9c6e6c1",
+  "source_sha256": "18fb92e78688d4a3a62713370275916005196d1ad6f318926a1d172feac9c989",
+  "development_run_id": 35678551174,
+  "development_head_sha": "a7cedeca8fe15da34ae3558932463d22b77c3148",
+  "development_artifact_id": 10673569020,
+  "development_artifact_digest": "sha256:f7d6aaf080753ae40faf0a75ccceca786a4fa21055af5ccf723749b222a97700",
+  "development_seeds": [
+    1546001,
+    1546002,
+    1546003,
+    1546004
+  ],
+  "confirmatory_seeds": [
+    1547001,
+    1547002,
+    1547003,
+    1547004,
+    1547005,
+    1547006,
+    1547007,
+    1547008,
+    1547009,
+    1547010,
+    1547011,
+    1547012
+  ],
+  "development_medians": {
+    "adaptive_stable": 1,
+    "core_adaptive_ratio": 1.0006224548872553,
+    "core_rl_postshift_ratio": 0.9965282033114238,
+    "core_rl_ratio": 1.0469702628777406,
+    "core_stable": 1,
+    "rl_adaptive_ratio": 1.0197097019797954,
+    "rl_frozen_ratio": 0.5309455090429909,
+    "rl_gain_scale_mean": 0.6875,
+    "rl_nonzero_fraction": 1,
+    "rl_stable": 1
+  },
+  "baseline_validity": {
+    "median": {
+      "rl_stable_min": 0.95,
+      "rl_frozen_ratio_max": 0.8,
+      "rl_adaptive_ratio_max": 1.2,
+      "rl_nonzero_fraction_min": 0.75
+    },
+    "seed_guard_required": 9,
+    "seed_guard": {
+      "rl_stable_min": 0.9,
+      "rl_frozen_ratio_max": 0.9,
+      "rl_adaptive_ratio_max": 1.35,
+      "rl_nonzero_fraction_min": 0.5
+    }
+  },
+  "core_noninferiority": {
+    "median": {
+      "core_stable_min": 0.95,
+      "core_rl_ratio_max": 1.15,
+      "core_rl_postshift_ratio_max": 1.15,
+      "core_adaptive_ratio_min": 0.9,
+      "core_adaptive_ratio_max": 1.1
+    },
+    "seed_guard_required": 9,
+    "seed_guard": {
+      "core_stable_min": 0.9,
+      "core_rl_ratio_max": 1.25,
+      "core_rl_postshift_ratio_max": 1.25,
+      "core_adaptive_ratio_min": 0.8,
+      "core_adaptive_ratio_max": 1.2
+    }
+  },
+  "practical_equivalence": {
+    "median": {
+      "core_rl_ratio_min": 0.9,
+      "core_rl_ratio_max": 1.1,
+      "core_rl_postshift_ratio_min": 0.9,
+      "core_rl_postshift_ratio_max": 1.1
+    },
+    "seed_guard_required": 9,
+    "seed_guard": {
+      "core_rl_ratio_min": 0.8,
+      "core_rl_ratio_max": 1.2,
+      "core_rl_postshift_ratio_min": 0.8,
+      "core_rl_postshift_ratio_max": 1.2
+    }
+  },
+  "exclusive_core_advantage": {
+    "median_core_rl_ratio_max": 0.9,
+    "seed_guard_required": 9,
+    "seed_guard_core_rl_ratio_max": 0.95
+  },
+  "exclusive_rl_advantage": {
+    "median_core_rl_ratio_min": 1.1111111111111112,
+    "seed_guard_required": 9,
+    "seed_guard_core_rl_ratio_min": 1.0526315789473684
+  },
+  "decision_rule": {
+    "baseline_must_be_valid_for_any_core_vs_rl_inference": true,
+    "noninferiority_is_not_superiority": true,
+    "equivalence_is_separate_from_exclusive_advantage": true,
+    "scientific_fail_does_not_fail_workflow": true
+  },
+  "fixed_boundaries": [
+    "R31 evaluates this specific matched model-free policy-bandit, not RL as a field",
+    "R30 strong classical Adaptive-LQR comparison remains valid and unchanged",
+    "R26 strong relational H_TRANSFER remains FAIL",
+    "E6b independent replication remains OPEN",
+    "E7 prospective biological validation remains OPEN",
+    "confirmatory seeds 1547001-1547012 must not be used for tuning"
+  ]
+}
