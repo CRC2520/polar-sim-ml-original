@@ -1,0 +1,37 @@
+{
+  "campaign": "R39 independent RecurrentPPO external baseline",
+  "resolution": "R39_DEVELOPMENT_FAIL_NO_CONFIRM",
+  "run_id": 35778626788,
+  "execution_head": "1068f1b98accb824e252c36f9bc86c17b01a6fb7",
+  "merge_commit": "1ca28660ec22ea97210c44c4620c9e9980f0c1f7",
+  "artifact_id": 10717985488,
+  "artifact_digest": "sha256:effe8ba5363e5c9367b3b76397573cfed5759f3eb3294c70acf2f16f358a0126",
+  "source_sha256": "20e9d617d19cf5dd8744751a666f47e397574db31fae53ee5e56b81b1aac9ff8",
+  "development_seeds": [
+    2056001,
+    2056002,
+    2056003,
+    2056004
+  ],
+  "confirmatory_seeds_status": "UNOPENED_2057001_2057012",
+  "medians": {
+    "rppo_score": 0.3066840277777778,
+    "rppo_min_env": 0.1720833333333333,
+    "core_score": 0.6657291666666667,
+    "core_minus_rppo": 0.35782118055555556,
+    "rppo_minus_core": -0.35782118055555556,
+    "core_minus_noC": 0.5296180555555556,
+    "iso_gap": 0,
+    "oracle_score": 1
+  },
+  "baseline_validity": {
+    "pass": false,
+    "guard_pass_count": 0,
+    "guard_required": 3,
+    "rppo_score_threshold": 0.7,
+    "rppo_min_env_threshold": 0.45
+  },
+  "core_v1_1_changed": false,
+  "E6b": "OPEN",
+  "E7": "OPEN"
+}
