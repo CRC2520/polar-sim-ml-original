@@ -200,11 +200,24 @@ def package_versions():
         "stable-baselines3":md.version("stable-baselines3"),
         "sb3-contrib":md.version("sb3-contrib"),
         "torch":md.version("torch"),
+        "scipy":md.version("scipy"),
     }
+
+def load_models(cfg,model_dir):
+    from sb3_contrib import RecurrentPPO
+    models={}
+    for env_name in cfg["environments"]:
+        path=Path(model_dir)/f"{env_name}_recurrent_ppo.zip"
+        if not path.is_file():
+            raise FileNotFoundError(path)
+        models[env_name]=RecurrentPPO.load(str(path),device="cpu")
+    return models
 
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--criteria",required=True)
+    ap.add_argument("--mode",choices=["train","evaluate"],required=True)
+    ap.add_argument("--env")
     ap.add_argument("--output",required=True)
     ap.add_argument("--model-dir",required=True)
     args=ap.parse_args()
@@ -212,22 +225,41 @@ def main():
     model_dir=Path(args.model_dir)
     model_dir.mkdir(parents=True,exist_ok=True)
 
-    models={}
-    training_records={}
-    for env_name in cfg["environments"]:
+    if args.mode=="train":
+        if args.env not in cfg["environments"]:
+            raise ValueError(f"invalid --env {args.env}")
+        env_name=args.env
         seed=int(cfg["training"]["training_seeds"][env_name])
-        models[env_name]=train_rppo(env_name,seed,cfg,model_dir)
-        training_records[env_name]={
+        train_rppo(env_name,seed,cfg,model_dir)
+        out={
+            "campaign":cfg["campaign"],
+            "mode":"train",
+            "environment":env_name,
             "seed":seed,
             "timesteps":int(cfg["training"]["timesteps_per_environment"]),
             "model_path":str(model_dir/f"{env_name}_recurrent_ppo.zip"),
+            "package_versions":package_versions(),
         }
+        Path(args.output).write_text(json.dumps(out,indent=2,sort_keys=True)+"\n")
+        print(json.dumps(out,indent=2,sort_keys=True))
+        return
 
-    dev=[eval_seed(s,models,cfg) for s in cfg["development_eval_seeds"]]
+    models=load_models(cfg,model_dir)
+    training_records={
+        env_name:{
+            "seed":int(cfg["training"]["training_seeds"][env_name]),
+            "timesteps":int(cfg["training"]["timesteps_per_environment"]),
+            "model_path":str(model_dir/f"{env_name}_recurrent_ppo.zip"),
+        }
+        for env_name in cfg["environments"]
+    }
+
+    dev=[eval_seed(seed,models,cfg) for seed in cfg["development_eval_seeds"]]
     dev_adj=adjudicate(dev,cfg,"dev")
     out={
         "campaign":cfg["campaign"],
         "criteria_status":cfg["status"],
+        "execution_mode":"parallel_training_then_single_evaluation",
         "package_versions":package_versions(),
         "training":training_records,
         "development":{
@@ -240,7 +272,7 @@ def main():
     }
 
     if dev_adj["baseline_valid"]:
-        conf=[eval_seed(s,models,cfg) for s in cfg["confirmatory_eval_seeds"]]
+        conf=[eval_seed(seed,models,cfg) for seed in cfg["confirmatory_eval_seeds"]]
         out["confirmatory"]={
             "records":conf,
             "adjudication":adjudicate(conf,cfg,"confirm"),
