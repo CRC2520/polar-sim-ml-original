@@ -1,0 +1,59 @@
+{
+  "campaign": "R34 contextual-access discrimination",
+  "hypothesis": "H1",
+  "status": "FROZEN_BEFORE_CONFIRMATORY_SEEDS",
+  "freeze_date": "2026-09-22",
+  "source_git_blob_sha": "d20877489b14ac482beecca75bbbb6c26ad5fb78",
+  "adjudicator_git_blob_sha": "fad1644bb95d41c76f42db8a088c9ca32af65e05",
+  "confirmatory_seeds": [
+    1807001,
+    1807002,
+    1807003,
+    1807004,
+    1807005,
+    1807006,
+    1807007,
+    1807008,
+    1807009,
+    1807010,
+    1807011,
+    1807012
+  ],
+  "architectures": [
+    "CURRENT_MLP",
+    "GRU",
+    "LSTM"
+  ],
+  "strict_heldout_architectures": [
+    "LSTM"
+  ],
+  "success_rule": {
+    "stable_min": 0.98,
+    "control_gain_min": 0.05,
+    "prediction_gain_min": 0.15,
+    "other_metric_floor": -0.1
+  },
+  "mechanism_thresholds": {
+    "D_min": 0.01,
+    "C_min": 0.001,
+    "R_min": 0.0005,
+    "A_min": 0.0002
+  },
+  "seed_guard_required": 8,
+  "minimum_successful_architectures": 2,
+  "development": {
+    "run_id": 35690109288,
+    "head_sha": "6e88e361b2e1c13b62e5878eded494a641189909",
+    "artifact_id": 10677463649,
+    "artifact_digest": "sha256:1b649138a78e6b69ae886db2df02cc7b196e2c8b1a54ee1d072c41c1d6275eee"
+  },
+  "fixed_boundaries": {
+    "POLAR_Core_v1": "UNCHANGED_D_PLUS_C_PLUS_R_PLUS_A",
+    "R33": "UNCHANGED_INCONCLUSIVE_CAPABILITY",
+    "global_minimality": "NOT_ESTABLISHED",
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "consciousness": "NOT_ESTABLISHED",
+    "independent_task_generation": "NOT_ESTABLISHED"
+  }
+}
