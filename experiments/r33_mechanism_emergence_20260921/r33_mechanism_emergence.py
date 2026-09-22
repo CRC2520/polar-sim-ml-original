@@ -409,7 +409,7 @@ def evaluate_arch(seed,kind,model,families,current_ref=None):
             condres[cond]=fixed_eval(model,ep)
         rel=episodes["relational_shift"]
         z=condres["relational_shift"]["repr"]
-        ddamage=d_rank1_damage(model,z,rel["oracle"])
+        ddamage=d_rank1_damage(model,z,rel["drift"])
         r2=relation_decode_r2(z,rel["relations"])
         epB=make_episode(seed*10000+fi*1000+9999,fam,"relational_shift")
         transplant=relation_transplant_damage(model,kind,rel,epB)
@@ -433,7 +433,7 @@ def evaluate_arch(seed,kind,model,families,current_ref=None):
           "stable":roll_stable,
           "condition_history_damage":{c:float(condres[c]["history_damage"]) for c in CONDITIONS}
         }
-    keys=["fixed_intact_mse_rel","D_rank1_damage","C_history_damage","R_transplant_damage",
+    keys=["drift_mse_rel","D_rank1_damage","C_history_damage","R_transplant_damage",
           "R_decode_r2","A_history_specificity","roll_cost","oracle_cost","stable"]
     agg={k:float(np.mean([per_family[f][k] for f in families])) for k in keys}
     agg["per_family"]=per_family
@@ -462,18 +462,18 @@ def eval_seed(seed,mode):
         raw[kind]=evaluate_arch(seed+ai*10,kind,model,fams)
 
     cur=raw["CURRENT_MLP"]
-    cur_cost=cur["roll_cost"]; cur_mse=cur["fixed_intact_mse_rel"]
+    cur_cost=cur["roll_cost"]; cur_mse=cur["drift_mse_rel"]
     rows={}
     for kind in archs:
         q=raw[kind]
         denom_cost=max(cur_cost-q["oracle_cost"],1e-4)
         control_gain=float((cur_cost-q["roll_cost"])/denom_cost)
-        imitation_gain=float((cur_mse-q["fixed_intact_mse_rel"])/max(cur_mse,1e-6))
+        prediction_gain=float((cur_mse-q["drift_mse_rel"])/max(cur_mse,1e-6))
         perf=float(0.5*control_gain+0.5*prediction_gain)
         rows[kind]={
           **q,
           "control_gain_vs_current":control_gain,
-          "prediction_gain_vs_current":imitation_gain,
+          "prediction_gain_vs_current":prediction_gain,
           "performance_score":perf
         }
 
@@ -483,7 +483,7 @@ def summarize(records):
     archs=sorted(records[0]["architectures"].keys())
     out={}
     for a in archs:
-        keys=["fixed_intact_mse_rel","D_rank1_damage","C_history_damage","R_transplant_damage",
+        keys=["drift_mse_rel","D_rank1_damage","C_history_damage","R_transplant_damage",
               "R_decode_r2","A_history_specificity","roll_cost","oracle_cost","stable",
               "control_gain_vs_current","prediction_gain_vs_current","performance_score"]
         out[a]={k:float(np.median([r["architectures"][a][k] for r in records])) for k in keys}
