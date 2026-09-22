@@ -12,24 +12,21 @@ R35 does not search for a privileged neural gate. It intervenes on the causal co
 
 ## Representation-independent access intervention
 
-For each trained architecture and evaluation state, compute:
+For each trained architecture and evaluation state, compute cue-conditioned historical contributions:
 
-- intact-history prediction under q=1: p_hist1
-- current-only/reset prediction under q=1: p_reset1
-- current-only/reset prediction under q=0: p_reset0
+- h0 = p_hist(q=0) - p_reset(q=0)
+- h1 = p_hist(q=1) - p_reset(q=1)
 
-Define the learned historical contribution:
-
-h_t = p_hist1 - p_reset1.
-
-The history state is still computed in every condition. Only its access to the readout is manipulated.
+The history state is still computed in every condition. Only selection of the already-computed historical contribution at the readout is manipulated.
 
 Four access modes are evaluated:
 
-1. contextual: p_reset(q) + q * h_t
-2. always: p_reset(q) + h_t
-3. random: p_reset(q) + Bernoulli(0.5) * h_t
+1. contextual: p_reset(q) + h_q
+2. always: p_reset(q) + 0.5*(h0+h1), a cue-independent pooled historical contribution
+3. random: p_reset(q) + h_r where r is Bernoulli(0.5)
 4. blocked: p_reset(q)
+
+This amendment follows the retained DEV1 failure in R35_DEV1_AMENDMENT.md and occurred before confirmatory freeze.
 
 Thus C and R remain available upstream; A alone is manipulated at the causal interface.
 
