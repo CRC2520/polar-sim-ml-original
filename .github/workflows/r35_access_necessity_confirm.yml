@@ -1,0 +1,74 @@
+name: R35 access necessity confirmatory
+
+on:
+  push:
+    branches: [research/r35-access-necessity-20260922]
+    paths:
+      - .github/workflows/r35_access_necessity_confirm.yml
+
+permissions:
+  contents: read
+
+jobs:
+  r35-confirm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen numerical stack
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu torch==2.14.0+cpu numpy==2.3.5
+      - name: Verify frozen source adjudicator and split
+        run: |
+          python - <<'PY'
+          import json,pathlib,subprocess
+          root=pathlib.Path("experiments/r35_access_necessity_20260922")
+          f=json.loads((root/"R35_CONFIRM_FREEZE.json").read_text())
+          assert f["status"]=="FROZEN_BEFORE_CONFIRMATORY_SEEDS"
+          assert f["confirmatory_seeds"]==list(range(1907001,1907013))
+          assert f["architectures"]==["CURRENT_MLP","RNN","GRU","WINDOW_MLP","LSTM"]
+          assert f["strict_heldout_architectures"]==["WINDOW_MLP","LSTM"]
+          assert f["confirmatory_families"]==["random_dag","skew"]
+          src=subprocess.check_output(["git","hash-object",str(root/"r35_access_necessity.py")],text=True).strip()
+          adj=subprocess.check_output(["git","hash-object",str(root/"adjudicate_r35.py")],text=True).strip()
+          assert src==f["source_git_blob_sha"],(src,f["source_git_blob_sha"])
+          assert adj==f["adjudicator_git_blob_sha"],(adj,f["adjudicator_git_blob_sha"])
+          print("R35 freeze PASS",src,adj)
+          PY
+      - name: Execute untouched confirmatory seeds
+        run: |
+          python experiments/r35_access_necessity_20260922/r35_access_necessity.py \
+            --mode confirm \
+            --seeds 1907001:1907012 \
+            --output experiments/r35_access_necessity_20260922/R35_CONFIRM_RESULTS.json
+      - name: Adjudicate frozen criteria
+        run: |
+          python experiments/r35_access_necessity_20260922/adjudicate_r35.py \
+            --results experiments/r35_access_necessity_20260922/R35_CONFIRM_RESULTS.json \
+            --freeze experiments/r35_access_necessity_20260922/R35_CONFIRM_FREEZE.json \
+            --source experiments/r35_access_necessity_20260922/r35_access_necessity.py \
+            --output experiments/r35_access_necessity_20260922/R35_CONFIRM_ADJUDICATION.json
+      - name: Record provenance
+        run: |
+          git rev-parse HEAD > experiments/r35_access_necessity_20260922/R35_CONFIRM_COMMIT.txt
+          sha256sum experiments/r35_access_necessity_20260922/r35_access_necessity.py > experiments/r35_access_necessity_20260922/R35_CONFIRM_SOURCE_SHA256.txt
+          sha256sum experiments/r35_access_necessity_20260922/adjudicate_r35.py > experiments/r35_access_necessity_20260922/R35_CONFIRM_ADJUDICATOR_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r35-access-necessity-confirmatory
+          path: |
+            experiments/r35_access_necessity_20260922/R35_CONFIRM_RESULTS.json
+            experiments/r35_access_necessity_20260922/R35_CONFIRM_ADJUDICATION.json
+            experiments/r35_access_necessity_20260922/R35_CONFIRM_FREEZE.json
+            experiments/r35_access_necessity_20260922/R35_CONFIRM_COMMIT.txt
+            experiments/r35_access_necessity_20260922/R35_CONFIRM_SOURCE_SHA256.txt
+            experiments/r35_access_necessity_20260922/R35_CONFIRM_ADJUDICATOR_SHA256.txt
