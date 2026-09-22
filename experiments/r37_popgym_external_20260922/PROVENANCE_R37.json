@@ -1,0 +1,11 @@
+{
+  "campaign": "R37 external POPGym persistent-state validation",
+  "upstream_repo": "proroklab/popgym",
+  "upstream_commit": "96ab5be64f41587feab634dbc115ad7be8bdd094",
+  "package_version": "1.0.7",
+  "wheel_sha256": "23be7f754f3167f58c4ac844426f3e0f7230035bedfcd5d85b004524eef21bb6",
+  "development_run_id": 35768252808,
+  "artifact_id": 10712409469,
+  "artifact_digest": "sha256:0fc874a018cd4f949fb2a32a3de988dd4b4377b9584c7978fa25afb02537b960",
+  "confirmatory_status": "NOT_AUTHORIZED_UNOPENED_2037001_2037012"
+}

@@ -1,0 +1,69 @@
+{
+  "campaign": "R37 external POPGym persistent-state validation",
+  "resolution": "R37_DEVELOPMENT_FAIL_NO_CONFIRM",
+  "development_run_id": 35768252808,
+  "artifact_id": 10712409469,
+  "artifact_digest": "sha256:0fc874a018cd4f949fb2a32a3de988dd4b4377b9584c7978fa25afb02537b960",
+  "development_seeds": [
+    2036001,
+    2036002,
+    2036003,
+    2036004
+  ],
+  "confirmatory_seeds_status": "UNOPENED_2037001_2037012",
+  "confirmatory_authorized": false,
+  "medians": {
+    "core_score": 0.5741406250000001,
+    "core_minus_noC": 0.448984375,
+    "iso_gap": 0,
+    "oracle_score": 1,
+    "min_env_core": 0.13625
+  },
+  "median_checks": {
+    "core_score": false,
+    "core_minus_noC": true,
+    "iso_gap": true,
+    "oracle_score": true
+  },
+  "seed_guard_pass_count": 0,
+  "seed_guard_required": 3,
+  "environment_means": {
+    "PositionOnlyCartPoleMedium": {
+      "CORE_C": 1,
+      "NO_C_CURRENT": 0.09984375,
+      "GENERIC_ISO": 1,
+      "ORACLE_STATE": 1
+    },
+    "PositionOnlyCartPoleHard": {
+      "CORE_C": 1,
+      "NO_C_CURRENT": 0.06848958,
+      "GENERIC_ISO": 1,
+      "ORACLE_STATE": 1
+    },
+    "NoisyPositionOnlyCartPoleMedium": {
+      "CORE_C": 0.16213542,
+      "NO_C_CURRENT": 0.20859375,
+      "GENERIC_ISO": 0.16213542,
+      "ORACLE_STATE": 1
+    },
+    "NoisyPositionOnlyCartPoleHard": {
+      "CORE_C": 0.14083333,
+      "NO_C_CURRENT": 0.14427083,
+      "GENERIC_ISO": 0.14083333,
+      "ORACLE_STATE": 1
+    }
+  },
+  "interpretation": {
+    "clean_external_memory_effect": "SUPPORTED_DEVELOPMENT",
+    "noisy_external_robustness": "FAILED",
+    "coordinate_non_privilege": "SUPPORTED_DEVELOPMENT",
+    "conclusion": "Causal recurrence is useful on clean third-party partial-observation CartPole, but the naive finite-difference recurrent observer is not robust to POPGym observation noise. Confirmation is not authorized.",
+    "next_step": "Use fresh seeds to evaluate a preregistered generic robust observer on the same unmodified external tasks; do not relax R37 thresholds or open R37 confirmatory seeds."
+  },
+  "boundaries": {
+    "core_v1_1": "UNCHANGED_D+C+R_A_CONDITIONAL",
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}
