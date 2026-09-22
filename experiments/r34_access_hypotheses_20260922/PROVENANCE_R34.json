@@ -1,0 +1,86 @@
+{
+  "campaign": "R34 contextual-access discrimination",
+  "branch": "research/r34-access-hypotheses-20260922",
+  "final_source_git_blob_sha": "d20877489b14ac482beecca75bbbb6c26ad5fb78",
+  "source_sha256": "70cfbf8f38db0c5f9f3c3d3472e28df50121cba01bfb2139f87bccbd21b985b3",
+  "adjudicator_git_blob_sha": "fad1644bb95d41c76f42db8a088c9ca32af65e05",
+  "adjudicator_sha256": "4cd417ae71beada00e321f4b7250ff384d8ba2c1763698fa3e73bc1cdee61c2f",
+  "dev1": {
+    "run_id": 35689987395,
+    "role": "initial H2/H3 capacity-design failure; preserved"
+  },
+  "final_development": {
+    "run_id": 35690109288,
+    "head_sha": "6e88e361b2e1c13b62e5878eded494a641189909"
+  },
+  "confirmatory": {
+    "run_id": 35690305505,
+    "execution_head": "74697d1331a4b08047d654733a4767c79ee9905e",
+    "H1": {
+      "seeds": [
+        1807001,
+        1807002,
+        1807003,
+        1807004,
+        1807005,
+        1807006,
+        1807007,
+        1807008,
+        1807009,
+        1807010,
+        1807011,
+        1807012
+      ],
+      "artifact_id": 10677969365,
+      "artifact_digest": "sha256:127250d027ae9165569a81b020f659ea489cccbe396d51d44f5c92cb2642a033",
+      "resolution": "R34_H1_INCONCLUSIVE"
+    },
+    "H2": {
+      "seeds": [
+        1817001,
+        1817002,
+        1817003,
+        1817004,
+        1817005,
+        1817006,
+        1817007,
+        1817008,
+        1817009,
+        1817010,
+        1817011,
+        1817012
+      ],
+      "artifact_id": 10678109078,
+      "artifact_digest": "sha256:429d25431b655dea66b42a6df71a893e144fa57419ddffee8e4a9786d5c4dcf6",
+      "resolution": "R34_H2_BROADER_A_CAPACITY_SUPPORTED"
+    },
+    "H3": {
+      "seeds": [
+        1827001,
+        1827002,
+        1827003,
+        1827004,
+        1827005,
+        1827006,
+        1827007,
+        1827008,
+        1827009,
+        1827010,
+        1827011,
+        1827012
+      ],
+      "artifact_id": 10678433994,
+      "artifact_digest": "sha256:bd76ad130811289fde802a8fc7295bc8b5198c96fbe010522400a2719791695e",
+      "resolution": "R34_H3_A_TASK_CONTINGENCY_NOT_SUPPORTED"
+    }
+  },
+  "confirmatory_thresholds_changed_after_opening": false,
+  "experiment_source_changed_after_opening": false,
+  "core_spec_changed": false,
+  "boundaries": {
+    "E6b": "OPEN",
+    "E7": "OPEN",
+    "global_minimality": "OPEN",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}

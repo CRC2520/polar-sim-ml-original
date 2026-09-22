@@ -1,0 +1,70 @@
+{
+  "campaign": "R34 contextual-access discrimination",
+  "hypothesis": "H3",
+  "status": "FROZEN_BEFORE_CONFIRMATORY_SEEDS",
+  "freeze_date": "2026-09-22",
+  "source_git_blob_sha": "d20877489b14ac482beecca75bbbb6c26ad5fb78",
+  "adjudicator_git_blob_sha": "fad1644bb95d41c76f42db8a088c9ca32af65e05",
+  "confirmatory_seeds": [
+    1827001,
+    1827002,
+    1827003,
+    1827004,
+    1827005,
+    1827006,
+    1827007,
+    1827008,
+    1827009,
+    1827010,
+    1827011,
+    1827012
+  ],
+  "architectures": [
+    "CURRENT_MLP",
+    "RNN",
+    "GRU",
+    "WINDOW_MLP",
+    "LSTM"
+  ],
+  "strict_heldout_architectures": [
+    "WINDOW_MLP",
+    "LSTM"
+  ],
+  "capability_selective": {
+    "q1_gain_min": -0.35,
+    "q0_ratio_max": 1.5
+  },
+  "capability_uniform": {
+    "q1_gain_min": -0.1,
+    "q0_ratio_max": 1.25
+  },
+  "selective_A_min": 0.0003,
+  "uniform_A_abs_max": 0.0006,
+  "interaction_min": 0.0005,
+  "current_interaction_abs_max": 1e-9,
+  "seed_guard": {
+    "selective_A_min": 0.00005,
+    "uniform_A_abs_max": 0.001,
+    "interaction_min": 0.0001
+  },
+  "seed_guard_required": 8,
+  "minimum_pattern_architectures": 2,
+  "minimum_heldout_pattern_architectures": 1,
+  "minimum_capable_architectures": 3,
+  "development": {
+    "run_id": 35690109288,
+    "head_sha": "6e88e361b2e1c13b62e5878eded494a641189909",
+    "artifact_id": 10678213518,
+    "artifact_digest": "sha256:6f444abd3437eefefb8187616c0d6f3d8107a688dc614164840161e436a48ccb"
+  },
+  "fixed_boundaries": {
+    "POLAR_Core_v1": "UNCHANGED_D_PLUS_C_PLUS_R_PLUS_A",
+    "R33": "UNCHANGED_INCONCLUSIVE_CAPABILITY",
+    "global_minimality": "NOT_ESTABLISHED",
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "consciousness": "NOT_ESTABLISHED",
+    "independent_task_generation": "NOT_ESTABLISHED",
+    "interpretation": "task-demand contingency; not universal necessity"
+  }
+}

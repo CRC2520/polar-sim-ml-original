@@ -1,0 +1,98 @@
+{
+  "A_fail_DCR_success_seed_counts": {
+    "GRU": 2,
+    "LSTM": 1
+  },
+  "architecture_adjudication": {
+    "CURRENT_MLP": {
+      "A_fail": true,
+      "DCR": false,
+      "mechanisms": {
+        "A": false,
+        "C": false,
+        "D": true,
+        "R": false
+      },
+      "success": false
+    },
+    "GRU": {
+      "A_fail": false,
+      "DCR": true,
+      "mechanisms": {
+        "A": true,
+        "C": true,
+        "D": true,
+        "R": true
+      },
+      "success": true
+    },
+    "LSTM": {
+      "A_fail": false,
+      "DCR": true,
+      "mechanisms": {
+        "A": true,
+        "C": true,
+        "D": true,
+        "R": true
+      },
+      "success": false
+    }
+  },
+  "architecture_medians": {
+    "CURRENT_MLP": {
+      "A_history_specificity": 0,
+      "C_history_damage": 0,
+      "D_rank1_damage": 0.01495237480381543,
+      "R_transplant_damage": 0,
+      "control_gain_vs_current": 0,
+      "prediction_gain_vs_current": 0,
+      "stable": 1
+    },
+    "GRU": {
+      "A_history_specificity": 0.0002983101882515862,
+      "C_history_damage": 0.0029422760344459675,
+      "D_rank1_damage": 0.01571194564850737,
+      "R_transplant_damage": 0.0009562972494071195,
+      "control_gain_vs_current": 0.17618167062407594,
+      "prediction_gain_vs_current": 0.12772284195939365,
+      "stable": 1
+    },
+    "LSTM": {
+      "A_history_specificity": 0.0004438107268166882,
+      "C_history_damage": 0.006321795590338297,
+      "D_rank1_damage": 0.016228213333784155,
+      "R_transplant_damage": 0.0006979033829945063,
+      "control_gain_vs_current": 0.046419461761669834,
+      "prediction_gain_vs_current": -0.037368739200288284,
+      "stable": 1
+    }
+  },
+  "boundaries": {
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "POLAR_Core_v1": "UNCHANGED_D_PLUS_C_PLUS_R_PLUS_A",
+    "R33": "UNCHANGED_INCONCLUSIVE_CAPABILITY",
+    "consciousness": "NOT_ESTABLISHED",
+    "global_minimality": "NOT_ESTABLISHED",
+    "independent_task_generation": "NOT_ESTABLISHED"
+  },
+  "campaign": "R34 contextual-access discrimination",
+  "confirmatory_seeds": [
+    1807001,
+    1807002,
+    1807003,
+    1807004,
+    1807005,
+    1807006,
+    1807007,
+    1807008,
+    1807009,
+    1807010,
+    1807011,
+    1807012
+  ],
+  "hypothesis": "H1",
+  "resolution": "R34_H1_INCONCLUSIVE",
+  "source_git_blob_sha": "d20877489b14ac482beecca75bbbb6c26ad5fb78",
+  "supporting_architectures": []
+}
