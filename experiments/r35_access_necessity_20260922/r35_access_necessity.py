@@ -45,25 +45,28 @@ def access_predictions(model, kind, ep, task_variant, seed):
         p_hist0 = r34.q_predict_from_state(model, kind, state, tok0)
         p_hist1 = r34.q_predict_from_state(model, kind, state, tok1)
 
-        # Representation-independent historical contribution:
-        # derive the causal contribution of intact history under the history-demanding q=1 query.
-        h = p_hist1 - p_reset1
-        hist_norm.append(float(np.mean(h * h)))
+        # Representation-independent, cue-conditioned historical contributions.
+        # C/R are computed in both h0 and h1. A controls which historical
+        # contribution reaches the readout, not whether history exists upstream.
+        h0 = p_hist0 - p_reset0
+        h1 = p_hist1 - p_reset1
+        h_context = h1 if q == 1 else h0
+        h_pooled = 0.5 * (h0 + h1)
+        random_choice = int(rng.integers(0, 2))
+        h_random = h1 if random_choice == 1 else h0
+        hist_norm.append(float(0.5 * (np.mean(h0 * h0) + np.mean(h1 * h1))))
 
         base_pred = p_reset1 if q == 1 else p_reset0
         target = ep["drift"][t] if (task_variant == "uniform" or q == 1) else ep["local"][t]
+        access_rate.append(random_choice)
 
-        random_gate = int(rng.integers(0, 2))
-        gates = {
-            "contextual": q,
-            "always": 1,
-            "random": random_gate,
-            "blocked": 0,
+        preds = {
+            "contextual": base_pred + h_context,
+            "always": base_pred + h_pooled,
+            "random": base_pred + h_random,
+            "blocked": base_pred,
         }
-        access_rate.append(random_gate)
-
-        for mode, gate in gates.items():
-            pred = base_pred + float(gate) * h
+        for mode, pred in preds.items():
             e = r34.base.mse(pred, target)
             losses[mode].append(e)
             by_query[mode][q].append(e)
