@@ -57,6 +57,8 @@ jobs:
           assert d["development_families"]==["ring"]
           print(json.dumps(d["medians"],indent=2,sort_keys=True))
           PY
+      - name: Verify frozen R35 adjudication and provenance
+        run: python experiments/r35_access_necessity_20260922/verify_r35.py
       - uses: actions/upload-artifact@v4
         with:
           name: r35-access-necessity-development
