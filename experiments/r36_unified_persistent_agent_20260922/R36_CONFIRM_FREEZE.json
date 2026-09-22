@@ -1,0 +1,107 @@
+{
+  "campaign": "R36 unified persistent agent",
+  "status": "FROZEN_BEFORE_CONFIRMATORY_SEEDS",
+  "freeze_date": "2026-09-22",
+  "parent_theory": "POLAR Core v1.1 = D+C+R; A conditional",
+  "source_git_blob_sha": "ed6ffe0eecc66477e798779b3be8aad8ac308a65",
+  "adjudicator_git_blob_sha": "2ac86c569f0eacb87aeddf39d3291f74b08347e0",
+  "confirmatory_seeds": [
+    2007001,
+    2007002,
+    2007003,
+    2007004,
+    2007005,
+    2007006,
+    2007007,
+    2007008,
+    2007009,
+    2007010,
+    2007011,
+    2007012
+  ],
+  "component_required": 9,
+  "joint_required": 9,
+  "criteria": {
+    "same_agent_steps": 1760,
+    "memory_entries": 1760,
+    "D_prediction_damage_min": 0.009,
+    "C_recurrent_context_gain_min": 0.0027,
+    "R_relation_lesion_damage_min": 0.0018,
+    "memory_reentry_gain_min": 0.0003,
+    "own_history_transplant_damage_min": 0.0012,
+    "source_balanced_accuracy_min": 0.94,
+    "time_order_accuracy_min": 0.98,
+    "metacog_calibration_gap_min": 0,
+    "metacog_gate_gain_min": 0,
+    "planning_gain_min": 0.00002,
+    "stable_fraction_min": 0.99,
+    "models_learned_min": 4
+  },
+  "median_criteria": {
+    "D_prediction_damage": {
+      "min": 0.01
+    },
+    "C_recurrent_context_gain": {
+      "min": 0.003
+    },
+    "R_relation_lesion_damage": {
+      "min": 0.002
+    },
+    "memory_reentry_gain": {
+      "min": 0.0004
+    },
+    "own_history_transplant_damage": {
+      "min": 0.0015
+    },
+    "source_balanced_accuracy": {
+      "min": 0.95
+    },
+    "time_order_accuracy": {
+      "min": 0.99
+    },
+    "metacog_calibration_gap": {
+      "min": 0.00001
+    },
+    "metacog_gate_gain": {
+      "min": 0.00004
+    },
+    "planning_gain": {
+      "min": 0.00005
+    },
+    "stable_fraction": {
+      "min": 0.995
+    },
+    "models_learned": {
+      "min": 4
+    },
+    "same_agent_steps": {
+      "eq": 1760
+    },
+    "memory_entries": {
+      "eq": 1760
+    }
+  },
+  "development": {
+    "dev1_run_id": 35737075162,
+    "dev1_status": "RETAINED_METACOGNITIVE_ANTICALIBRATION_FAILURE",
+    "dev2_run_id": 35737338854,
+    "dev2_status": "IMPROVED_BUT_STILL_NEGATIVE_MEDIAN_CALIBRATION",
+    "dev3_run_id": 35737491515,
+    "dev3_status": "FINAL_DEVELOPMENT",
+    "final_artifact_id": 10697834239,
+    "final_artifact_digest": "sha256:91be729072f0b26292fa985972e38929ba32a407b2ae9926abecc5dd6c84ce44"
+  },
+  "fixed_boundaries": {
+    "scope": "SAME_PROGRAM_SYNTHETIC_SINGLE_AGENT_1760_STEP_LIFETIME",
+    "A": "OPTIONAL_CONDITIONAL_EXTENSION_NOT_REQUIRED_FOR_PASS",
+    "identity": "OPERATIONAL_OWN_HISTORY_AND_TRANSPLANT_SENSITIVITY_ONLY",
+    "time": "EXPLICIT_INTERNAL_CLOCK_TAGGING_NOT_EMERGENT_TIME_CONCEPT",
+    "source": "RESIDUAL_BASED_EXTERNAL_EVENT_ATTRIBUTION",
+    "metacognition": "ERROR_CONFIDENCE_CALIBRATION_AND_FUNCTIONAL_GATE_NOT_INTROSPECTION",
+    "planning": "TWO_STEP_MODEL_BASED_COUNTERFACTUAL_PLANNING",
+    "global_minimality": "NOT_ESTABLISHED",
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}
