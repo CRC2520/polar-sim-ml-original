@@ -15,7 +15,7 @@ SEQ=96
 BLOCKS=3
 BLOCK_LEN=SEQ//BLOCKS
 TRAIN_EPISODES=112
-EPOCHS=18
+EPOCHS=24
 BATCH=16
 HIDDEN=32
 WINDOW=6
@@ -148,10 +148,10 @@ def make_episode(seed,family,condition):
         b=t//BLOCK_LEN
         A=As[b]
         obs=x+rng.normal(0,0.003,N)
-        token=np.concatenate([obs,prev_u,target[t]])
-        oracle=choose_oracle(A,x,target[t])
+        token=np.concatenate([obs,prev_u])
+        drift=A@x
         tokens.append(token)
-        y.append(oracle)
+        y.append(drift)
         rel.append(offdiag(A).reshape(-1))
         xs.append(x.copy())
         # independent exploratory behavior; no learner receives the true A
@@ -161,7 +161,7 @@ def make_episode(seed,family,condition):
         prev_u=beh
     return {
       "tokens":np.asarray(tokens,np.float32),
-      "oracle":np.asarray(y,np.float32),
+      "drift":np.asarray(y,np.float32),
       "relations":np.asarray(rel,np.float32),
       "states":np.asarray(xs,np.float32),
       "matrices":np.asarray([As[t//BLOCK_LEN] for t in range(SEQ)],np.float32),
@@ -170,7 +170,7 @@ def make_episode(seed,family,condition):
     }
 
 class CurrentMLP(nn.Module):
-    def __init__(self,inp=18,h=HIDDEN):
+    def __init__(self,inp=12,h=HIDDEN):
         super().__init__()
         self.body=nn.Sequential(nn.Linear(inp,64),nn.Tanh(),nn.Linear(64,h),nn.Tanh())
         self.head=nn.Linear(h,N)
@@ -181,7 +181,7 @@ class CurrentMLP(nn.Module):
         return self.forward_seq(x)[0]
 
 class WindowMLP(nn.Module):
-    def __init__(self,inp=18,h=HIDDEN,k=WINDOW):
+    def __init__(self,inp=12,h=HIDDEN,k=WINDOW):
         super().__init__()
         self.inp=inp; self.k=k
         self.body=nn.Sequential(nn.Linear(inp*k,80),nn.Tanh(),nn.Linear(80,h),nn.Tanh())
@@ -206,7 +206,7 @@ class WindowMLP(nn.Module):
         return self.head(z)
 
 class RecurrentAgent(nn.Module):
-    def __init__(self,kind,inp=18,h=HIDDEN):
+    def __init__(self,kind,inp=12,h=HIDDEN):
         super().__init__()
         self.kind=kind
         if kind=="RNN":
@@ -241,7 +241,7 @@ def make_training_set(seed):
         cond=CONDITIONS[int(rng.integers(0,len(CONDITIONS)))]
         eps.append(make_episode(seed*1000+100+i,fam,cond))
     X=torch.tensor(np.stack([e["tokens"] for e in eps]))
-    Y=torch.tensor(np.stack([e["oracle"] for e in eps]))
+    Y=torch.tensor(np.stack([e["drift"] for e in eps]))
     return X,Y
 
 def train_model(seed,kind,X,Y):
@@ -268,7 +268,7 @@ def mse(a,b):
 
 def fixed_eval(model,episode):
     x=torch.tensor(episode["tokens"])[None,:,:]
-    y=episode["oracle"]
+    y=episode["drift"]
     with torch.no_grad():
         pred,z=model.forward_seq(x)
         reset=model.reset_predictions(x)
@@ -351,7 +351,7 @@ def relation_transplant_damage(model,kind,epA,epB):
         token=epA["tokens"][t]
         pa=predict_from_state(model,kind,sa,token)
         pb=predict_from_state(model,kind,sb,token)
-        y=epA["oracle"][t]
+        y=epA["drift"][t]
         ds.append(mse(pb,y)-mse(pa,y))
     return float(np.mean(ds))
 
@@ -366,7 +366,7 @@ def rollout(model,kind,seed,family):
     costs=[]; stable=[]
     for t in range(SEQ):
         A=As[t//BLOCK_LEN]
-        token=np.concatenate([x+rng.normal(0,0.003,N),prev_u,target[t]]).astype(np.float32)
+        token=np.concatenate([x+rng.normal(0,0.003,N),prev_u]).astype(np.float32)
         tokens.append(token)
         if kind=="CURRENT_MLP":
             prefix=np.asarray([token],np.float32)
@@ -374,7 +374,10 @@ def rollout(model,kind,seed,family):
             prefix=np.asarray(tokens,np.float32)
         with torch.no_grad():
             p,_=model.forward_seq(torch.tensor(prefix)[None,:,:])
-        u=np.clip(p[0,-1].numpy(),-1.5,1.5)
+        drift=p[0,-1].numpy()
+        rhs=target[t]-drift
+        u=np.linalg.solve(B.T@B+CONTROL_REG*np.eye(N),B.T@rhs)
+        u=np.clip(u,-1.5,1.5)
         xnext=A@x+B@u+rng.normal(0,0.006,N)
         costs.append(float(np.mean((xnext-target[t])**2)+0.01*np.mean(u*u)))
         stable.append(float(np.linalg.norm(xnext)<2.5))
@@ -419,7 +422,7 @@ def evaluate_arch(seed,kind,model,families,current_ref=None):
         roll_cost,roll_stable=rollout(model,kind,seed*10000+fi*1000+333,fam)
         o_cost=oracle_rollout(seed*10000+fi*1000+333,fam)
         per_family[fam]={
-          "fixed_intact_mse_rel":condres["relational_shift"]["intact_mse"],
+          "drift_mse_rel":condres["relational_shift"]["intact_mse"],
           "D_rank1_damage":ddamage,
           "C_history_damage":float(hist_rel),
           "R_transplant_damage":transplant,
@@ -466,11 +469,11 @@ def eval_seed(seed,mode):
         denom_cost=max(cur_cost-q["oracle_cost"],1e-4)
         control_gain=float((cur_cost-q["roll_cost"])/denom_cost)
         imitation_gain=float((cur_mse-q["fixed_intact_mse_rel"])/max(cur_mse,1e-6))
-        perf=float(0.5*control_gain+0.5*imitation_gain)
+        perf=float(0.5*control_gain+0.5*prediction_gain)
         rows[kind]={
           **q,
           "control_gain_vs_current":control_gain,
-          "imitation_gain_vs_current":imitation_gain,
+          "prediction_gain_vs_current":imitation_gain,
           "performance_score":perf
         }
 
@@ -482,7 +485,7 @@ def summarize(records):
     for a in archs:
         keys=["fixed_intact_mse_rel","D_rank1_damage","C_history_damage","R_transplant_damage",
               "R_decode_r2","A_history_specificity","roll_cost","oracle_cost","stable",
-              "control_gain_vs_current","imitation_gain_vs_current","performance_score"]
+              "control_gain_vs_current","prediction_gain_vs_current","performance_score"]
         out[a]={k:float(np.median([r["architectures"][a][k] for r in records])) for k in keys}
     return out
 
