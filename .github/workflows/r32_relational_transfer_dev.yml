@@ -7,6 +7,12 @@ on:
       - experiments/r32_relational_transfer_20260921/r32_relational_transfer.py
       - experiments/r32_relational_transfer_20260921/PREREG_R32.md
       - .github/workflows/r32_relational_transfer_dev.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - experiments/r32_relational_transfer_20260921/r32_relational_transfer.py
+      - experiments/r32_relational_transfer_20260921/PREREG_R32.md
+      - .github/workflows/r32_relational_transfer_dev.yml
 
 permissions:
   contents: read
