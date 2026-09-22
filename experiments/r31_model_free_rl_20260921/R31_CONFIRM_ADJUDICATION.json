@@ -1,0 +1,66 @@
+{
+  "baseline_valid": true,
+  "baseline_validity_checks": {
+    "rl_adaptive_ratio": true,
+    "rl_frozen_ratio": true,
+    "rl_nonzero_fraction": true,
+    "rl_stable": true
+  },
+  "baseline_validity_seed_guard_count": 12,
+  "campaign": "R31 matched model-free policy-bandit",
+  "confirmatory_seeds": [
+    1547001,
+    1547002,
+    1547003,
+    1547004,
+    1547005,
+    1547006,
+    1547007,
+    1547008,
+    1547009,
+    1547010,
+    1547011,
+    1547012
+  ],
+  "core_noninferiority_checks": {
+    "core_adaptive_high": true,
+    "core_adaptive_low": true,
+    "core_rl_postshift_ratio": true,
+    "core_rl_ratio": true,
+    "core_stable": true
+  },
+  "core_noninferiority_pass": true,
+  "core_noninferiority_seed_guard_count": 11,
+  "exclusive_core_advantage_pass": false,
+  "exclusive_core_advantage_seed_guard_count": 4,
+  "exclusive_model_free_advantage_pass": false,
+  "exclusive_model_free_advantage_seed_guard_count": 4,
+  "medians": {
+    "adaptive_stable": 1,
+    "core_adaptive_ratio": 1.0016065974745099,
+    "core_rl_postshift_ratio": 1.0019543744415773,
+    "core_rl_ratio": 1.0123237076773721,
+    "core_stable": 1,
+    "rl_adaptive_ratio": 0.9968363566955281,
+    "rl_frozen_ratio": 0.5527425538318327,
+    "rl_gain_scale_mean": 0.7,
+    "rl_nonzero_fraction": 1,
+    "rl_stable": 1
+  },
+  "practical_equivalence_checks": {
+    "core_rl_postshift_band": true,
+    "core_rl_ratio_band": true
+  },
+  "practical_equivalence_pass": true,
+  "practical_equivalence_seed_guard_count": 11,
+  "resolution": "PRACTICAL_EQUIVALENCE_CORE_MODEL_FREE_RL",
+  "source_sha256": "18fb92e78688d4a3a62713370275916005196d1ad6f318926a1d172feac9c989",
+  "boundaries": [
+    "R31 evaluates this specific matched model-free policy-bandit, not RL as a field",
+    "R30 strong classical Adaptive-LQR comparison remains valid and unchanged",
+    "R26 strong relational H_TRANSFER remains FAIL",
+    "E6b independent replication remains OPEN",
+    "E7 prospective biological validation remains OPEN",
+    "confirmatory seeds 1547001-1547012 must not be used for tuning"
+  ]
+}
