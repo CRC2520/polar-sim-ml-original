@@ -148,7 +148,7 @@ def eval_controller(seed,task,controller,trained=None,steps=EVAL_STEPS):
         if controller=="FROZEN":
             u=float(-(K_nom@est)[0]) if K_nom is not None else 0.0
         elif controller=="ORACLE_LQR":
-            At,Bt=base.base.base.numeric_linearization(step,n,p)
+            At,Bt=base.base.numeric_linearization(step,n,p)
             Ko=base.base.infinite_lqr_gain(At,Bt,Q,R)
             u=float(-(Ko@state)[0]) if Ko is not None else 0.0
         elif controller in ("CORE","ADAPTIVE_LQR"):
