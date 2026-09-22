@@ -1,0 +1,47 @@
+{
+  "campaign": "R33 mechanism emergence in generic learners",
+  "development_runs": [
+    {
+      "run_id": 35687548192,
+      "role": "DEV1 direct action imitation; retained design failure"
+    },
+    {
+      "run_id": 35687689461,
+      "role": "DEV3 hidden-dynamics target development"
+    },
+    {
+      "run_id": 35687835348,
+      "role": "FINAL DEVELOPMENT used for freeze",
+      "head_sha": "7cdc616981f6f5b43359c0437facbf7704a1e331",
+      "artifact_id": 10677084444,
+      "artifact_digest": "sha256:53d0b8b4110d134652b3c334299bbbe6a4c1d015b55d2d88a400f54aac278d8e"
+    }
+  ],
+  "confirmatory": {
+    "run_id": 35688075375,
+    "execution_head": "d71bff0c47c60b229341eaac427e2050af6229ba",
+    "artifact_id": 10677740816,
+    "artifact_digest": "sha256:a1d6378398fbff379aa4a8570e31a8180cfceb86a68d1bce60c5d89dd6062d2a",
+    "source_git_blob_sha": "1f5f36a8da5eebc2b4a61876b727c4f616529170",
+    "source_sha256": "841d830fa714b4c8a80b4a5d3cec73ac41197287b13947e28eb6abf3cbae0e5a",
+    "adjudicator_sha256": "1f4d70383d62e3d24b620a8d73e7c81730ceda096430c6ee5ccc2655b4ef9cc0",
+    "seeds": [
+      1707001,
+      1707002,
+      1707003,
+      1707004,
+      1707005,
+      1707006,
+      1707007,
+      1707008,
+      1707009,
+      1707010,
+      1707011,
+      1707012
+    ],
+    "result": "R33_INCONCLUSIVE_CAPABILITY"
+  },
+  "confirmatory_thresholds_changed_after_opening": false,
+  "experiment_source_changed_after_opening": false,
+  "interpretation": "Four memory-capable generic architectures are successful, but only RNN and WINDOW_MLP meet the full D+C+R+A conjunction. D+C+R is common; A-like contextual access is not universal under this probe."
+}
