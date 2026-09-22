@@ -1,0 +1,169 @@
+{
+  "architecture_adjudication": {
+    "GRU": {
+      "capable_selective": true,
+      "capable_uniform": true,
+      "contingency_pattern": true
+    },
+    "LSTM": {
+      "capable_selective": true,
+      "capable_uniform": true,
+      "contingency_pattern": false
+    },
+    "RNN": {
+      "capable_selective": true,
+      "capable_uniform": true,
+      "contingency_pattern": false
+    },
+    "WINDOW_MLP": {
+      "capable_selective": true,
+      "capable_uniform": true,
+      "contingency_pattern": false
+    }
+  },
+  "architecture_medians": {
+    "CURRENT_MLP": {
+      "A_interaction": 0,
+      "selective": {
+        "A_switch": 0,
+        "history_damage_q0": 0,
+        "history_damage_q1": 0,
+        "q0_mse": 0.0006700238924774263,
+        "q0_ratio_vs_current": 1,
+        "q1_gain_vs_current": 0,
+        "q1_mse": 0.001718340551936611
+      },
+      "uniform": {
+        "A_switch": 0,
+        "history_damage_q0": 0,
+        "history_damage_q1": 0,
+        "q0_mse": 0.0015199430749311836,
+        "q0_ratio_vs_current": 1,
+        "q1_gain_vs_current": 0,
+        "q1_mse": 0.0014876395915861293
+      }
+    },
+    "GRU": {
+      "A_interaction": 0.0008329824689402209,
+      "selective": {
+        "A_switch": 0.0005546381298699999,
+        "history_damage_q0": 0.0017277417090453026,
+        "history_damage_q1": 0.0024051968147331434,
+        "q0_mse": 0.0004501992004103764,
+        "q0_ratio_vs_current": 0.6325382988310758,
+        "q1_gain_vs_current": -0.06859971424605474,
+        "q1_mse": 0.001769174198772008
+      },
+      "uniform": {
+        "A_switch": -0.00021422226766137302,
+        "history_damage_q0": 0.0036259849130146904,
+        "history_damage_q1": 0.0033087857830954213,
+        "q0_mse": 0.0013736740038439166,
+        "q0_ratio_vs_current": 0.8750828120582059,
+        "q1_gain_vs_current": 0.14439764478290767,
+        "q1_mse": 0.0013187497994901303
+      }
+    },
+    "LSTM": {
+      "A_interaction": 0.0030393779827338424,
+      "selective": {
+        "A_switch": 0.002396101456522754,
+        "history_damage_q0": 0.0022693105924594826,
+        "history_damage_q1": 0.004815005530973495,
+        "q0_mse": 0.00018934356285171816,
+        "q0_ratio_vs_current": 0.296508371081701,
+        "q1_gain_vs_current": -0.0850933660247966,
+        "q1_mse": 0.0017314053354008745
+      },
+      "uniform": {
+        "A_switch": -0.0009205968999594918,
+        "history_damage_q0": 0.005783901034091186,
+        "history_damage_q1": 0.005003655072464931,
+        "q0_mse": 0.0015792207420114817,
+        "q0_ratio_vs_current": 0.9963262788056635,
+        "q1_gain_vs_current": 0.006113599233298296,
+        "q1_mse": 0.001555542506038263
+      }
+    },
+    "RNN": {
+      "A_interaction": 0.0003278811784386763,
+      "selective": {
+        "A_switch": 0.0003731691457586645,
+        "history_damage_q0": 0.003232426401559173,
+        "history_damage_q1": 0.0039496199598134905,
+        "q0_mse": 0.0008215177642543698,
+        "q0_ratio_vs_current": 1.2229522185797066,
+        "q1_gain_vs_current": -0.1363917230583092,
+        "q1_mse": 0.001923365939041509
+      },
+      "uniform": {
+        "A_switch": 4.2129997584387617e-7,
+        "history_damage_q0": 0.003724733779260229,
+        "history_damage_q1": 0.0037322056290981383,
+        "q0_mse": 0.0011198929576292154,
+        "q0_ratio_vs_current": 0.7832075302629546,
+        "q1_gain_vs_current": 0.1974014163173743,
+        "q1_mse": 0.0011207164193870588
+      }
+    },
+    "WINDOW_MLP": {
+      "A_interaction": 0.000007136799568898952,
+      "selective": {
+        "A_switch": -0.000014455079205314768,
+        "history_damage_q0": 0.0003093347182180474,
+        "history_damage_q1": 0.00026931930965980026,
+        "q0_mse": 0.0008338655892051369,
+        "q0_ratio_vs_current": 1.2729863169293893,
+        "q1_gain_vs_current": 0.024835404044624233,
+        "q1_mse": 0.0015111212823184258
+      },
+      "uniform": {
+        "A_switch": -0.000015251761194829479,
+        "history_damage_q0": 0.001492731053480788,
+        "history_damage_q1": 0.0014831657107505533,
+        "q0_mse": 0.0007716935915595968,
+        "q0_ratio_vs_current": 0.47933323939358846,
+        "q1_gain_vs_current": 0.5165302628058843,
+        "q1_mse": 0.0007747387276645491
+      }
+    }
+  },
+  "boundaries": {
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "POLAR_Core_v1": "UNCHANGED_D_PLUS_C_PLUS_R_PLUS_A",
+    "R33": "UNCHANGED_INCONCLUSIVE_CAPABILITY",
+    "consciousness": "NOT_ESTABLISHED",
+    "global_minimality": "NOT_ESTABLISHED",
+    "independent_task_generation": "NOT_ESTABLISHED",
+    "interpretation": "task-demand contingency; not universal necessity"
+  },
+  "campaign": "R34 contextual-access discrimination",
+  "confirmatory_seeds": [
+    1827001,
+    1827002,
+    1827003,
+    1827004,
+    1827005,
+    1827006,
+    1827007,
+    1827008,
+    1827009,
+    1827010,
+    1827011,
+    1827012
+  ],
+  "heldout_pattern_architectures": [],
+  "hypothesis": "H3",
+  "pattern_architectures": [
+    "GRU"
+  ],
+  "resolution": "R34_H3_A_TASK_CONTINGENCY_NOT_SUPPORTED",
+  "seed_guard_counts": {
+    "GRU": 8,
+    "LSTM": 6,
+    "RNN": 6,
+    "WINDOW_MLP": 1
+  },
+  "source_git_blob_sha": "d20877489b14ac482beecca75bbbb6c26ad5fb78"
+}
