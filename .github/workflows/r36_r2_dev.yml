@@ -1,0 +1,53 @@
+name: R36-R2 joint robustness development
+
+on:
+  pull_request:
+    paths:
+      - "experiments/r36_r2_joint_robustness_20260922/**"
+      - ".github/workflows/r36_r2_dev.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  dev:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install numerical dependencies
+        run: python -m pip install numpy==2.3.5 scipy==1.17.0
+      - name: Verify development-only protocol
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("experiments/r36_r2_joint_robustness_20260922/PREREG_R36_R2_DEV.md").read_text()
+          assert "2026001–2026008" in p
+          assert "2027001–2027012 MUST NOT be executed" in p
+          print("R36-R2 development protocol guard PASS")
+          PY
+      - name: Execute development variants only
+        run: |
+          python experiments/r36_r2_joint_robustness_20260922/r36_r2_dev.py \
+            --seeds 2026001:2026008 \
+            --output experiments/r36_r2_joint_robustness_20260922/R36_R2_DEV_RESULTS.json
+      - name: Confirm seed isolation
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open("experiments/r36_r2_joint_robustness_20260922/R36_R2_DEV_RESULTS.json"))
+          assert d["development_seeds"]==list(range(2026001,2026009))
+          assert d["confirmatory_seeds_status"]=="UNOPENED_2027001_2027012"
+          print(json.dumps(d["selected_variant"],indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r36-r2-development
+          path: experiments/r36_r2_joint_robustness_20260922/R36_R2_DEV_RESULTS.json
