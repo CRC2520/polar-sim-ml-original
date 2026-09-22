@@ -1,0 +1,100 @@
+{
+  "campaign": "R33 mechanism emergence in generic learners",
+  "status": "FROZEN_BEFORE_CONFIRMATORY_SEEDS",
+  "freeze_date": "2026-09-21",
+  "parent_evidence": "POLAR Core v1.0 + R32 internal held-out transfer",
+  "source_git_blob_sha": "1f5f36a8da5eebc2b4a61876b727c4f616529170",
+  "adjudicator_git_blob_sha": "001ee79eb277cfd106dcb2f8f1de020963f7dbf5",
+  "development_run": {
+    "run_id": 35687835348,
+    "head_sha": "7cdc616981f6f5b43359c0437facbf7704a1e331",
+    "seeds": [
+      1706001,
+      1706002,
+      1706003,
+      1706004
+    ],
+    "eval_families": [
+      "ring"
+    ],
+    "architectures": [
+      "CURRENT_MLP",
+      "RNN",
+      "GRU"
+    ],
+    "artifact_id": 10677084444,
+    "artifact_digest": "sha256:53d0b8b4110d134652b3c334299bbbe6a4c1d015b55d2d88a400f54aac278d8e"
+  },
+  "confirmatory_seeds": [
+    1707001,
+    1707002,
+    1707003,
+    1707004,
+    1707005,
+    1707006,
+    1707007,
+    1707008,
+    1707009,
+    1707010,
+    1707011,
+    1707012
+  ],
+  "train_families": [
+    "sparse",
+    "modular",
+    "dense_lowrank"
+  ],
+  "confirmatory_eval_families": [
+    "random_dag",
+    "skew"
+  ],
+  "confirmatory_architectures": [
+    "CURRENT_MLP",
+    "RNN",
+    "GRU",
+    "WINDOW_MLP",
+    "LSTM"
+  ],
+  "strict_heldout_architectures": [
+    "WINDOW_MLP",
+    "LSTM"
+  ],
+  "success_rule": {
+    "stable_min": 0.98,
+    "control_gain_min": 0.05,
+    "prediction_gain_min": 0.15,
+    "other_metric_floor": -0.1,
+    "interpretation": "Architecture-level median success requires stability plus material improvement in either post-burn closed-loop control or hidden-drift prediction, with the other metric no worse than 10% relative to CURRENT_MLP."
+  },
+  "mechanism_thresholds": {
+    "D_rank1_damage_min": 0.01,
+    "C_history_damage_min": 0.001,
+    "R_transplant_damage_min": 0.0005,
+    "A_history_specificity_min": 0.0002,
+    "R_decode_r2": "DIAGNOSTIC_ONLY_NOT_A_GATE"
+  },
+  "negative_control": {
+    "C_max": 1e-9,
+    "R_max": 1e-9,
+    "A_max": 1e-9
+  },
+  "minimum_successful_architectures": 2,
+  "minimum_successful_heldout_architectures": 1,
+  "partial_conjunction_rate_min": 0.75,
+  "resolution_rules": {
+    "strong_pass": "At least two non-current architectures are successful; every successful architecture passes all D/C/R/A-like probes; at least one strict held-out architecture is both successful and DCRA-conjunctive; CURRENT_MLP negative control passes.",
+    "partial": "At least two architectures are successful; >=75% of successful architectures pass the full conjunction; no successful architecture passes <=2 mechanisms; CURRENT_MLP remains negative.",
+    "counterexample": "CURRENT_MLP is successful despite lacking history, or any successful architecture passes <=2 of the four mechanisms.",
+    "inconclusive": "Fewer than two capable architecture families or other primary conditions are not met without a direct counterexample."
+  },
+  "fixed_boundaries": {
+    "scope": "SAME_PROGRAM_GENERIC_LEARNERS_ON_HELDOUT_TOPOLOGIES_AND_ARCHITECTURES",
+    "global_architectural_necessity": "NOT_ESTABLISHED",
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "independent_task_generation": "NOT_ESTABLISHED",
+    "consciousness": "NOT_ESTABLISHED",
+    "R32": "UNCHANGED",
+    "R30_R31_implementation_nonprivilege": "UNCHANGED"
+  }
+}
