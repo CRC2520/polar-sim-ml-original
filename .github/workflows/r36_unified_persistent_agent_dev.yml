@@ -53,6 +53,8 @@ jobs:
           assert d["same_agent_requirement"].startswith("single PersistentAgent")
           print(json.dumps(d["medians"],indent=2,sort_keys=True))
           PY
+      - name: Verify frozen R36 confirmatory evidence
+        run: python experiments/r36_unified_persistent_agent_20260922/verify_r36.py
       - uses: actions/upload-artifact@v4
         with:
           name: r36-unified-persistent-development
