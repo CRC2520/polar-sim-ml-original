@@ -1,0 +1,59 @@
+{
+  "campaign": "R34 contextual-access discrimination",
+  "hypothesis": "H2",
+  "status": "FROZEN_BEFORE_CONFIRMATORY_SEEDS",
+  "freeze_date": "2026-09-22",
+  "source_git_blob_sha": "d20877489b14ac482beecca75bbbb6c26ad5fb78",
+  "adjudicator_git_blob_sha": "fad1644bb95d41c76f42db8a088c9ca32af65e05",
+  "confirmatory_seeds": [
+    1817001,
+    1817002,
+    1817003,
+    1817004,
+    1817005,
+    1817006,
+    1817007,
+    1817008,
+    1817009,
+    1817010,
+    1817011,
+    1817012
+  ],
+  "architectures": [
+    "CURRENT_MLP",
+    "GRU",
+    "LSTM"
+  ],
+  "strict_heldout_architectures": [
+    "LSTM"
+  ],
+  "capability": {
+    "q1_gain_min": -0.25,
+    "q0_ratio_max": 1.5,
+    "interpretation": "non-inferior query performance, not superiority"
+  },
+  "A_switch_min": 0.0003,
+  "history_q1_damage_min": 0.001,
+  "current_A_abs_max": 1e-9,
+  "seed_guard": {
+    "A_switch_min": 0.00005,
+    "history_q1_damage_min": 0.0005
+  },
+  "seed_guard_required": 8,
+  "development": {
+    "run_id": 35690109288,
+    "head_sha": "6e88e361b2e1c13b62e5878eded494a641189909",
+    "artifact_id": 10678198520,
+    "artifact_digest": "sha256:f7404731c36beb70ec7cf6954e9f694502add101eeb0b402a12b236401ef2952"
+  },
+  "fixed_boundaries": {
+    "POLAR_Core_v1": "UNCHANGED_D_PLUS_C_PLUS_R_PLUS_A",
+    "R33": "UNCHANGED_INCONCLUSIVE_CAPABILITY",
+    "global_minimality": "NOT_ESTABLISHED",
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "consciousness": "NOT_ESTABLISHED",
+    "independent_task_generation": "NOT_ESTABLISHED",
+    "interpretation": "architecture capacity for direct context-sensitive history use; not proof R33 was false-negative"
+  }
+}
