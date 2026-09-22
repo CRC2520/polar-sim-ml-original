@@ -1,0 +1,93 @@
+{
+  "campaign": "R36-R2 joint robustness development",
+  "resolution": "R36_R2_DEVELOPMENT_FAIL_NO_CONFIRM",
+  "development_run_id": 35755362797,
+  "artifact_id": 10707691563,
+  "artifact_digest": "sha256:bc6d85753e0d7f04539b34ff983bc2574977187a877014c7adb0da8131ad023d",
+  "development_seeds": [
+    2026001,
+    2026002,
+    2026003,
+    2026004,
+    2026005,
+    2026006,
+    2026007,
+    2026008
+  ],
+  "confirmatory_seeds_status": "UNOPENED_2027001_2027012",
+  "confirmatory_authorized": false,
+  "selected_variant": null,
+  "variants": {
+    "BASE_R1": {
+      "joint": 4,
+      "memory_reentry": 6,
+      "planning": 6,
+      "metacog_calibration": 7,
+      "metacog_function": 5,
+      "C": 7,
+      "R": 7,
+      "eligible": false
+    },
+    "FAST_CONTEXT": {
+      "joint": 3,
+      "memory_reentry": 8,
+      "planning": 6,
+      "metacog_calibration": 8,
+      "metacog_function": 5,
+      "C": 7,
+      "R": 7,
+      "eligible": false
+    },
+    "LONG_MEMORY": {
+      "joint": 0,
+      "memory_reentry": 7,
+      "planning": 8,
+      "metacog_calibration": 7,
+      "metacog_function": 6,
+      "C": 0,
+      "R": 6,
+      "eligible": false
+    },
+    "ROBUST_PLAN": {
+      "joint": 4,
+      "memory_reentry": 6,
+      "planning": 6,
+      "metacog_calibration": 7,
+      "metacog_function": 5,
+      "C": 7,
+      "R": 7,
+      "eligible": false
+    },
+    "COMBINED_A": {
+      "joint": 0,
+      "memory_reentry": 8,
+      "planning": 7,
+      "metacog_calibration": 7,
+      "metacog_function": 7,
+      "C": 0,
+      "R": 0,
+      "eligible": false
+    },
+    "COMBINED_B": {
+      "joint": 0,
+      "memory_reentry": 8,
+      "planning": 6,
+      "metacog_calibration": 6,
+      "metacog_function": 5,
+      "C": 0,
+      "R": 2,
+      "eligible": false
+    }
+  },
+  "interpretation": {
+    "parent_core": "POLAR Core v1.1 = D+C+R; A conditional",
+    "parent_resolution": "R36_R1_COMPONENTS_PASS_JOINT_FAIL",
+    "conclusion": "No preregistered development variant preserved all mandatory components at >=6/8. Confirmation is not authorized.",
+    "next_step": "Do not continue same-program tuning of the unified conjunction; prioritize independent/external validation and retain robust-unification as open."
+  },
+  "boundaries": {
+    "E6b": "OPEN_EXTERNAL_ONLY",
+    "E7": "OPEN_PROSPECTIVE_BIOLOGICAL",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}
