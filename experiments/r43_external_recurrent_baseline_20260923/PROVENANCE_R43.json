@@ -1,0 +1,11 @@
+{
+  "campaign": "R43 external recurrent baseline qualification",
+  "protocol_commit": "eebe5e1d80134dfbfadc89eef36babc27393ba80",
+  "source_git_blob_sha": "1d6330846973ee901bd13998a8b408013223db20",
+  "protocol_git_blob_sha": "a61be491df343656e2a81f84c5e10ebf7bd032c9",
+  "workflow_run": 35828621896,
+  "execution_head": "bdf5523fbab7c32d96830740af2c1e30d7edf73f",
+  "scientific_changes_after_opening": false,
+  "confirmation_opened": false,
+  "independent_replication": false
+}
