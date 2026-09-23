@@ -1,0 +1,104 @@
+name: R40 P0-P2 prospective design audit
+on:
+  push:
+    branches: [research/r40-p0-p2-design-audit-20260922]
+    paths: [.github/workflows/r40_p0_p2.yml]
+permissions:
+  contents: read
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONHASHSEED: '0'
+jobs:
+  p0_train:
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [2066001, 2066002, 2066003]
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: experiments/r40_p0_p2_20260922/PROTOCOL.md
+      - name: Install fixed external stack
+        run: |
+          python -m pip install torch==2.7.1+cpu --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install numpy==2.3.5 scipy==1.16.2 gymnasium==1.2.1 stable-baselines3==2.7.1 sb3-contrib==2.7.1 popgym==1.0.7
+      - name: Syntax and environment contract
+        run: |
+          python -m py_compile experiments/r40_p0_p2_20260922/*.py
+          python -c "from popgym.envs.repeat_previous import RepeatPreviousEasy; e=RepeatPreviousEasy(); assert e.k==4; print(e.reset(seed=1)); e.close()"
+      - name: Train fixed checkpoint
+        run: python experiments/r40_p0_p2_20260922/p0_baseline.py --stage train --seed ${{ matrix.seed }} --out r40_results/p0
+      - name: Provenance
+        if: always()
+        run: |
+          mkdir -p r40_results/p0
+          python -m pip freeze > r40_results/p0/packages_${{ matrix.seed }}.txt
+          git rev-parse HEAD > r40_results/p0/commit_${{ matrix.seed }}.txt
+          sha256sum experiments/r40_p0_p2_20260922/* > r40_results/p0/source_${{ matrix.seed }}.sha256 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r40-p0-model-${{ matrix.seed }}
+          path: r40_results/p0/
+  p0_evaluate:
+    needs: p0_train
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: experiments/r40_p0_p2_20260922/PROTOCOL.md
+      - run: |
+          python -m pip install torch==2.7.1+cpu --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install numpy==2.3.5 scipy==1.16.2 gymnasium==1.2.1 stable-baselines3==2.7.1 sb3-contrib==2.7.1 popgym==1.0.7
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r40-p0-model-*
+          path: r40_results/p0
+          merge-multiple: true
+      - name: Development gate then held-out evaluation if authorized
+        run: python experiments/r40_p0_p2_20260922/p0_baseline.py --stage evaluate --out r40_results/p0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r40-P0-evidence
+          path: r40_results/p0/
+  p1_p2:
+    strategy:
+      fail-fast: false
+      matrix:
+        stage: [p1, p2, e7]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install numpy==2.3.5 scipy==1.16.2
+      - name: Syntax checks
+        run: python -m py_compile experiments/r40_p0_p2_20260922/*.py
+      - name: Run fixed experiment and retain negative results
+        run: python experiments/r40_p0_p2_20260922/run_suite.py --stage ${{ matrix.stage }} --out r40_results/${{ matrix.stage }}
+      - name: Export source and versions
+        if: always()
+        run: |
+          mkdir -p r40_results/${{ matrix.stage }}
+          python -m pip freeze > r40_results/${{ matrix.stage }}/packages.txt
+          git rev-parse HEAD > r40_results/${{ matrix.stage }}/commit.txt
+          tar -czf r40_results/${{ matrix.stage }}/reproduction_source.tar.gz experiments/r40_p0_p2_20260922 experiments/r36_r1_metacog_stabilization_20260922
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r40-${{ matrix.stage }}-evidence
+          path: r40_results/${{ matrix.stage }}/

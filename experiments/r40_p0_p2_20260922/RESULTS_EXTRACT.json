@@ -1,0 +1,98 @@
+{
+  "campaign": "R40 post-R39 P0-P2 design repair and evaluation",
+  "run_id": 35814392593,
+  "execution_commit": "e1a361b6febaf3b3660f275d13ab597060017168",
+  "protocol_commit": "aa6d1371cabd6dbce8940912a0687dbe696a420c",
+  "simulator_base": "d28958279eae052cffcc319146a200614575c030",
+  "manuscript_base": "737c67333f85dd5fa5bd0d7d465b0298fe9f1b54",
+  "execution_local_date": "2026-09-22 America/Lima",
+  "execution_utc_date": "2026-09-23",
+  "scientific_changes_after_opening": false,
+  "P0": {
+    "resolution": "P0_BASELINE_DEV_FAIL_NO_CONFIRM",
+    "external_task": "popgym.envs.repeat_previous.RepeatPreviousEasy",
+    "algorithm": "sb3_contrib.RecurrentPPO/MlpLstmPolicy",
+    "training_steps_per_model": 262144,
+    "total_training_steps": 786432,
+    "models": [
+      {"seed": 2066001, "development_accuracy": 0.75, "history_benefit": 0.5260416666666666, "eligible": false},
+      {"seed": 2066002, "development_accuracy": 0.7447916666666669, "history_benefit": 0.49305555555555564, "eligible": false},
+      {"seed": 2066003, "development_accuracy": 0.7447916666666665, "history_benefit": 0.4913194444444444, "eligible": false}
+    ],
+    "accuracy_threshold": 0.8,
+    "required_models": 2,
+    "eligible_models": 0,
+    "development_episode_records": 72,
+    "oracle_instrument_pass": true,
+    "confirmation_opened": false,
+    "reserved_confirmatory_episode_seeds": [2067001, 2067032],
+    "old_noisy_control_baseline_closed": false,
+    "POLAR_superiority": "NOT_TESTED"
+  },
+  "P1": {
+    "resolution": "P1_NEW_DOMAIN_JOINT_FAIL",
+    "development_seed_range": [2076001, 2076004],
+    "confirmatory_seed_range": [2077001, 2077032],
+    "primary_lifetimes": 144,
+    "steps_per_lifetime": 1760,
+    "confirmatory_denominator_per_group": 32,
+    "required_strict_joint": 24,
+    "groups": {
+      "FROZEN_standard": {"strict_joint": 0, "invoked_joint": 1, "mean_cost": 0.05632828678881014},
+      "BAYES_CUE_standard": {"strict_joint": 0, "invoked_joint": 1, "mean_cost": 0.05694446476836203},
+      "FROZEN_stress": {"strict_joint": 0, "invoked_joint": 0, "mean_cost": 0.05579895119663135},
+      "BAYES_CUE_stress": {"strict_joint": 0, "invoked_joint": 0, "mean_cost": 0.056035467072990175}
+    },
+    "paired_cost_improvement_standard": {"mean": -0.0006161779795518885, "ci95": [-0.001810226449982779, 0.0004131591573791055]},
+    "paired_cost_improvement_stress": {"mean": -0.0002365158763588263, "ci95": [-0.0012364929925477448, 0.0009017797970539117]},
+    "adopt_BAYES_CUE_as_validated_improvement": false,
+    "planning_primary": "unconditional over eligible states; invoked-only endpoint secondary",
+    "mechanism_absence_inferred_from_threshold_failure": false
+  },
+  "P1_P2_state_and_identity": {
+    "resolution": "P2_PROFILE_SPECIFICITY_PASS_LOCAL",
+    "confirmatory_seed_range": [2087001, 2087032],
+    "denominator": 32,
+    "profile_specificity_pass_count": 25,
+    "required_profile_count": 24,
+    "profile_margin_min": 0.0001,
+    "median_profile_margin": 0.0007386901093938583,
+    "clone_exact_count": 32,
+    "archive_removal_action_prediction_invariance_count": 32,
+    "archive_transplant_action_invariance_count": 32,
+    "recurrent_reset_action_change_count": 27,
+    "full_capacity_reduction_pass_count": 0,
+    "median_serialized_bytes_before": 332866,
+    "median_serialized_bytes_after": 137633,
+    "scope": "actuator-profile specialization and action-state reduction only; archived reporting is lost",
+    "phenomenal_identity": "NOT_ESTABLISHED",
+    "global_causal_minimality": "OPEN"
+  },
+  "E7_instrument": {
+    "resolution": "PASS_SYNTHETIC_INSTRUMENT",
+    "simulated_studies": 1000,
+    "paired_units_per_study": 64,
+    "outcomes": 4,
+    "alternative_standardized_effect": 0.5,
+    "null_familywise_rejection_rate": 0.046,
+    "alternative_any_detection_power": 0.999,
+    "alternative_all_four_power": 0.753,
+    "real_biological_rows": 0,
+    "biological_adjudication": "BLOCKED_REAL_DATA_PENDING"
+  },
+  "postrun_reconstruction": {"checks_passed": 477, "artifact_sha256_matches": 4, "independent_replication": false},
+  "artifacts": {
+    "P0": {"id": 10730949430, "sha256": "a2b775ef2162147cee0a7a031813cbb80d9d690b48b77fd11b3436426a795322"},
+    "P1": {"id": 10731210026, "sha256": "a997f24f0cfbee999445327f35e716e63d85f4c181e3aa51c0add1a1b38d7da3"},
+    "P2": {"id": 10730749515, "sha256": "6311988f6f2ad531c68ce2dd8ded0f35cefbb1d1eba59808b962cbd3121aa66a"},
+    "E7": {"id": 10730594451, "sha256": "9d01a2c85828d2a027b310c93eda68145a60c91c9c42b61123a5331598a4c73b"}
+  },
+  "retained_boundaries": {
+    "core": "POLAR Core v1.1 candidate D+C+R with conditional A; unchanged",
+    "E6b": "OPEN_SEPARATE_TEAM_REQUIRED",
+    "E7": "OPEN_REAL_BIOLOGICAL_DATA_REQUIRED",
+    "unified_robustness": "NOT_ESTABLISHED",
+    "consciousness": "NOT_ESTABLISHED",
+    "global_minimality": "OPEN"
+  }
+}
