@@ -1,0 +1,22 @@
+name: R43 evidence integrity
+on:
+  push:
+    branches: [research/r43-external-recurrent-baseline-20260923]
+    paths:
+      - experiments/r43_external_recurrent_baseline_20260923/**
+      - .github/workflows/r43_verify.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - experiments/r43_external_recurrent_baseline_20260923/**
+      - .github/workflows/r43_verify.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python experiments/r43_external_recurrent_baseline_20260923/verify_r43.py
