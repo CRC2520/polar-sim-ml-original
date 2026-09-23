@@ -1,18 +1,7 @@
 name: R45 official POPGym LSTM paired comparator
 
 on:
-  push:
-    branches: [research/r45-official-popgym-lstm-20260923]
-    paths:
-      - experiments/r45_official_popgym_lstm_20260923/PREREG_R45.md
-      - experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py
-      - .github/workflows/r45_official_lstm.yml
-  pull_request:
-    branches: [main]
-    paths:
-      - experiments/r45_official_popgym_lstm_20260923/PREREG_R45.md
-      - experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py
-      - .github/workflows/r45_official_lstm.yml
+  workflow_dispatch:
 
 permissions:
   contents: read
