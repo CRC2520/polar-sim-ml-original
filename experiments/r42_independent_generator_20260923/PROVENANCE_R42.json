@@ -1,0 +1,23 @@
+{
+  "campaign": "R42 independent-generator / independent-implementation D+C+R transport",
+  "protocol_commit": "ca844665de8326e8372cb55bfcd32080f78616b0",
+  "source_git_blob_sha": "9936e8364f212563d6d103fe1cdb285b71541ec3",
+  "source_sha256": "065d939d8e0383da95fa945c4f98305deeb9d32b7db3723cfb623075c35e05dc",
+  "development": {
+    "run_id": 35825673856,
+    "head": "ab7eed9c74c4c28486265499734e55c2eef051f0",
+    "artifact_id": 10735117122,
+    "artifact_digest": "sha256:209703d1957d96708ab6c88e1e63341285dca495ce440be8e4badbaf73c91de3"
+  },
+  "confirmatory": {
+    "run_id": 35825857334,
+    "head": "0e6144ce948806cb6124b0a4fd7b77367c481a94",
+    "artifact_id": 10735063067,
+    "artifact_digest": "sha256:c994afa98fd97f869635fc4d024e437197b4d4db9d7287328d3d3ca9e54c3d05"
+  },
+  "source_changed_after_opening": false,
+  "thresholds_changed_after_opening": false,
+  "confirmatory_seeds_changed_after_opening": false,
+  "same_program": true,
+  "independent_replication": false
+}
