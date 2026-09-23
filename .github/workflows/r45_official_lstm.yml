@@ -68,7 +68,7 @@ jobs:
   development:
     needs: engineering
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 240
     strategy:
       fail-fast: false
       max-parallel: 3
@@ -89,26 +89,26 @@ jobs:
           python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5e"
       - name: Run frozen Easy development checkpoint
         run: |
-          mkdir -p r45_outputs/dev_\${{ matrix.train_seed }}
+          mkdir -p r45_outputs/dev_${{ matrix.train_seed }}
           python experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py train-eval \
             --level Easy \
-            --train-seed \${{ matrix.train_seed }} \
+            --train-seed ${{ matrix.train_seed }} \
             --steps 1048576 \
-            --output r45_outputs/dev_\${{ matrix.train_seed }}/R45_EASY_\${{ matrix.train_seed }}_RESULT.json \
-            --checkpoint-dir r45_outputs/dev_\${{ matrix.train_seed }}/checkpoint
+            --output r45_outputs/dev_${{ matrix.train_seed }}/R45_EASY_${{ matrix.train_seed }}_RESULT.json \
+            --checkpoint-dir r45_outputs/dev_${{ matrix.train_seed }}/checkpoint
       - name: Record execution provenance
         if: always()
         run: |
-          git rev-parse HEAD > r45_outputs/dev_\${{ matrix.train_seed }}/EXECUTION_COMMIT.txt
-          python --version > r45_outputs/dev_\${{ matrix.train_seed }}/PYTHON_VERSION.txt
-          python -m pip freeze > r45_outputs/dev_\${{ matrix.train_seed }}/PIP_FREEZE.txt
-          sha256sum experiments/r45_official_popgym_lstm_20260923/PREREG_R45.md > r45_outputs/dev_\${{ matrix.train_seed }}/PROTOCOL_SHA256.txt
-          sha256sum experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py > r45_outputs/dev_\${{ matrix.train_seed }}/RUNNER_SHA256.txt
+          git rev-parse HEAD > r45_outputs/dev_${{ matrix.train_seed }}/EXECUTION_COMMIT.txt
+          python --version > r45_outputs/dev_${{ matrix.train_seed }}/PYTHON_VERSION.txt
+          python -m pip freeze > r45_outputs/dev_${{ matrix.train_seed }}/PIP_FREEZE.txt
+          sha256sum experiments/r45_official_popgym_lstm_20260923/PREREG_R45.md > r45_outputs/dev_${{ matrix.train_seed }}/PROTOCOL_SHA256.txt
+          sha256sum experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py > r45_outputs/dev_${{ matrix.train_seed }}/RUNNER_SHA256.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r45-dev-\${{ matrix.train_seed }}
-          path: r45_outputs/dev_\${{ matrix.train_seed }}
+          name: r45-dev-${{ matrix.train_seed }}
+          path: r45_outputs/dev_${{ matrix.train_seed }}
           retention-days: 30
 
   development_gate:
@@ -117,8 +117,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
-      authorize_confirm: \${{ steps.gate.outputs.authorize_confirm }}
-      resolution: \${{ steps.gate.outputs.resolution }}
+      authorize_confirm: ${{ steps.gate.outputs.authorize_confirm }}
+      resolution: ${{ steps.gate.outputs.resolution }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -155,7 +155,7 @@ jobs:
     needs: development_gate
     if: needs.development_gate.outputs.authorize_confirm == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 240
     strategy:
       fail-fast: false
       max-parallel: 6
@@ -177,26 +177,26 @@ jobs:
           python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5e"
       - name: Run reserved confirmatory checkpoint
         run: |
-          mkdir -p r45_outputs/conf_\${{ matrix.level }}_\${{ matrix.train_seed }}
+          mkdir -p r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}
           python experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py train-eval \
-            --level \${{ matrix.level }} \
-            --train-seed \${{ matrix.train_seed }} \
+            --level ${{ matrix.level }} \
+            --train-seed ${{ matrix.train_seed }} \
             --steps 1048576 \
-            --output r45_outputs/conf_\${{ matrix.level }}_\${{ matrix.train_seed }}/R45_\${{ matrix.level }}_\${{ matrix.train_seed }}_RESULT.json \
-            --checkpoint-dir r45_outputs/conf_\${{ matrix.level }}_\${{ matrix.train_seed }}/checkpoint
+            --output r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/R45_${{ matrix.level }}_${{ matrix.train_seed }}_RESULT.json \
+            --checkpoint-dir r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/checkpoint
       - name: Record execution provenance
         if: always()
         run: |
-          git rev-parse HEAD > r45_outputs/conf_\${{ matrix.level }}_\${{ matrix.train_seed }}/EXECUTION_COMMIT.txt
-          python --version > r45_outputs/conf_\${{ matrix.level }}_\${{ matrix.train_seed }}/PYTHON_VERSION.txt
-          python -m pip freeze > r45_outputs/conf_\${{ matrix.level }}_\${{ matrix.train_seed }}/PIP_FREEZE.txt
-          sha256sum experiments/r45_official_popgym_lstm_20260923/PREREG_R45.md > r45_outputs/conf_\${{ matrix.level }}_\${{ matrix.train_seed }}/PROTOCOL_SHA256.txt
-          sha256sum experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py > r45_outputs/conf_\${{ matrix.level }}_\${{ matrix.train_seed }}/RUNNER_SHA256.txt
+          git rev-parse HEAD > r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/EXECUTION_COMMIT.txt
+          python --version > r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/PYTHON_VERSION.txt
+          python -m pip freeze > r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/PIP_FREEZE.txt
+          sha256sum experiments/r45_official_popgym_lstm_20260923/PREREG_R45.md > r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/PROTOCOL_SHA256.txt
+          sha256sum experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py > r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/RUNNER_SHA256.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: r45-conf-\${{ matrix.level }}-\${{ matrix.train_seed }}
-          path: r45_outputs/conf_\${{ matrix.level }}_\${{ matrix.train_seed }}
+          name: r45-conf-${{ matrix.level }}-${{ matrix.train_seed }}
+          path: r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}
           retention-days: 30
 
   confirmatory_gate:
