@@ -1,0 +1,23 @@
+name: R41 evidence integrity
+on:
+  push:
+    branches: [research/r41-p0-p2-redesign-20260922]
+    paths:
+      - experiments/r41_p0_p2_20260922/**
+      - .github/workflows/r41_verify.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - experiments/r41_p0_p2_20260922/**
+      - .github/workflows/r41_verify.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - name: Verify frozen R41 evidence
+        run: python experiments/r41_p0_p2_20260922/verify_r41.py
