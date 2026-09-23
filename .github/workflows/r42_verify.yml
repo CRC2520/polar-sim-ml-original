@@ -1,0 +1,26 @@
+name: R42 evidence integrity
+
+on:
+  push:
+    branches: [research/r42-independent-generator-implementation-20260923, main]
+    paths:
+      - experiments/r42_independent_generator_20260923/**
+      - .github/workflows/r42_verify.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - experiments/r42_independent_generator_20260923/**
+      - .github/workflows/r42_verify.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python experiments/r42_independent_generator_20260923/verify_r42.py

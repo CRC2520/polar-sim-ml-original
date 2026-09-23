@@ -1,0 +1,67 @@
+name: R42 independent generator confirmatory
+
+on:
+  push:
+    branches: [research/r42-independent-generator-implementation-20260923]
+    paths:
+      - .github/workflows/r42_confirm.yml
+
+permissions:
+  contents: read
+
+jobs:
+  confirm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install numpy==2.3.5
+      - name: Verify frozen source and split
+        run: |
+          python - <<'PY'
+          import json,subprocess,pathlib
+          root=pathlib.Path("experiments/r42_independent_generator_20260923")
+          f=json.loads((root/"R42_CONFIRM_FREEZE.json").read_text())
+          assert f["status"]=="FROZEN_BEFORE_CONFIRMATORY_SEEDS"
+          src=subprocess.check_output(["git","hash-object",str(root/"r42_independent.py")],text=True).strip()
+          assert src==f["source_git_blob_sha"],(src,f["source_git_blob_sha"])
+          assert f["confirmatory"]["seeds"]==list(range(2137001,2137017))
+          assert f["confirmatory"]["families"]==["ring_signed","lowrank_skew"]
+          print("R42 freeze PASS",src)
+          PY
+      - name: Execute confirmatory panel
+        run: |
+          python experiments/r42_independent_generator_20260923/r42_independent.py \
+            --mode confirm \
+            --out experiments/r42_independent_generator_20260923/R42_CONFIRM_RESULTS.json
+      - name: Assert frozen criteria are embedded and provenance
+        run: |
+          python - <<'PY'
+          import json
+          p="experiments/r42_independent_generator_20260923/R42_CONFIRM_RESULTS.json"
+          d=json.load(open(p))
+          f=json.load(open("experiments/r42_independent_generator_20260923/R42_CONFIRM_FREEZE.json"))
+          assert d["mode"]=="confirm"
+          assert d["confirmatory_seeds"]==f["confirmatory"]["seeds"]
+          assert d["confirmatory_families"]==f["confirmatory"]["families"]
+          assert d["criteria"]==f["criteria"]
+          print(json.dumps({"resolution":d["resolution"],"summary":d["summary"]},indent=2,sort_keys=True))
+          PY
+          git rev-parse HEAD > experiments/r42_independent_generator_20260923/R42_CONFIRM_COMMIT.txt
+          sha256sum experiments/r42_independent_generator_20260923/r42_independent.py > experiments/r42_independent_generator_20260923/R42_CONFIRM_SOURCE_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r42-confirmatory
+          path: |
+            experiments/r42_independent_generator_20260923/R42_CONFIRM_RESULTS.json
+            experiments/r42_independent_generator_20260923/R42_CONFIRM_FREEZE.json
+            experiments/r42_independent_generator_20260923/R42_CONFIRM_COMMIT.txt
+            experiments/r42_independent_generator_20260923/R42_CONFIRM_SOURCE_SHA256.txt

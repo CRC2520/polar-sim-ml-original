@@ -1,0 +1,129 @@
+{
+  "campaign": "R42 independent-generator / independent-implementation D+C+R transport",
+  "resolution": "R42_INDEPENDENT_IMPLEMENTATION_TRANSPORT_PASS_INTERNAL",
+  "protocol_commit": "ca844665de8326e8372cb55bfcd32080f78616b0",
+  "frozen_source_git_blob_sha": "9936e8364f212563d6d103fe1cdb285b71541ec3",
+  "frozen_source_sha256": "065d939d8e0383da95fa945c4f98305deeb9d32b7db3723cfb623075c35e05dc",
+  "development": {
+    "run_id": 35825673856,
+    "execution_head": "ab7eed9c74c4c28486265499734e55c2eef051f0",
+    "family": "sparse_mixed",
+    "seeds": [
+      2136001,
+      2136002,
+      2136003,
+      2136004
+    ],
+    "artifact_id": 10735117122,
+    "artifact_digest": "sha256:209703d1957d96708ab6c88e1e63341285dca495ce440be8e4badbaf73c91de3",
+    "resolution": "R42_DEVELOPMENT_INSTRUMENT_PASS",
+    "pass_count": 4,
+    "denominator": 4,
+    "medians": {
+      "normalized_score": 0.8849172312335477,
+      "D_dz": 1.3659861950369685,
+      "C_dz": 0.4143674332230234,
+      "R_dz": 0.8587142316542189,
+      "stable_fraction": 1,
+      "action_agreement": 1,
+      "score_gap": 0
+    }
+  },
+  "confirmatory": {
+    "run_id": 35825857334,
+    "execution_head": "0e6144ce948806cb6124b0a4fd7b77367c481a94",
+    "seeds": [
+      2137001,
+      2137002,
+      2137003,
+      2137004,
+      2137005,
+      2137006,
+      2137007,
+      2137008,
+      2137009,
+      2137010,
+      2137011,
+      2137012,
+      2137013,
+      2137014,
+      2137015,
+      2137016
+    ],
+    "artifact_id": 10735063067,
+    "artifact_digest": "sha256:c994afa98fd97f869635fc4d024e437197b4d4db9d7287328d3d3ca9e54c3d05",
+    "families": {
+      "ring_signed": {
+        "native_pass_count": 16,
+        "denominator": 16,
+        "instrument_valid_count": 16,
+        "median_action_agreement": 1,
+        "median_score_gap": 0,
+        "medians": {
+          "normalized_score": 0.881311682339601,
+          "D_dz": 1.3587020158809628,
+          "C_dz": 0.42880996371711466,
+          "R_dz": 0.8528763903354193,
+          "stable_fraction": 1,
+          "mean_cost": 0.0462072209850972
+        },
+        "failed_seeds": []
+      },
+      "lowrank_skew": {
+        "native_pass_count": 14,
+        "denominator": 16,
+        "instrument_valid_count": 16,
+        "median_action_agreement": 1,
+        "median_score_gap": 0,
+        "medians": {
+          "normalized_score": 0.8800328346661984,
+          "D_dz": 1.5594086836213297,
+          "C_dz": 0.36796727440425586,
+          "R_dz": 0.33784355776026687,
+          "stable_fraction": 1,
+          "mean_cost": 0.04169657230406016
+        },
+        "failed_seeds": [
+          {
+            "seed": 2137010,
+            "failed_component": "R",
+            "normalized_score": 0.8665148574685062,
+            "D_dz": 1.387319857206256,
+            "C_dz": 0.4583487934037816,
+            "R_dz": 0.19318345846719226,
+            "stable_fraction": 1
+          },
+          {
+            "seed": 2137014,
+            "failed_component": "C",
+            "normalized_score": 0.8992569386281665,
+            "D_dz": 1.9021921405759006,
+            "C_dz": 0.17789073205407596,
+            "R_dz": 0.27256149635729443,
+            "stable_fraction": 1
+          }
+        ]
+      }
+    }
+  },
+  "criteria": {
+    "normalized_score_min": 0.5,
+    "D_dz_min": 0.2,
+    "C_dz_min": 0.2,
+    "R_dz_min": 0.2,
+    "stable_fraction_min": 0.99,
+    "family_pass_required": 12,
+    "family_denominator": 16,
+    "median_action_agreement_min": 0.98,
+    "median_score_gap_max": 0.02
+  },
+  "interpretation": "Fresh same-program code and task generator reproduce D+C+R causal signatures and normalized control capability across two held-out structural families. Exact orthogonal-coordinate action/performance equivalence supports organizational rather than coordinate privilege.",
+  "boundaries": {
+    "E6b": "OPEN_SAME_PROGRAM",
+    "E7": "OPEN",
+    "global_minimality": "OPEN",
+    "implementation_privilege": "NOT_SUPPORTED",
+    "consciousness": "NOT_ESTABLISHED",
+    "core_version": "POLAR Core v1.1 D+C+R with conditional A unchanged"
+  }
+}
