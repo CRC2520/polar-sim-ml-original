@@ -180,7 +180,13 @@ def run_lstm_episode(algo, cls, wrappers, episode_seed: int, reset_each_step: bo
         raise RuntimeError("historical max_episode_length unavailable")
 
     q = env.reset(seed=int(episode_seed))
-    obs = q[0] if isinstance(q, tuple) else q
+    # Historical Gym 0.24 wrappers return a tuple-structured observation here.
+    # Only treat a 2-tuple with a dict in position 1 as the newer (obs, info)
+    # reset API; otherwise preserve the wrapper observation structure intact.
+    if isinstance(q, tuple) and len(q) == 2 and isinstance(q[1], dict):
+        obs = q[0]
+    else:
+        obs = q
     policy = algo.get_policy()
     initial = clone_state(policy.get_initial_state())
     state = clone_state(initial)
