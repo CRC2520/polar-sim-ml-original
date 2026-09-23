@@ -1,0 +1,30 @@
+{
+  "campaign": "R44 published external-reference compatibility",
+  "protocol_commit": "cb43ebe3cb1b222d9d0b881e9f256d9bb053298b",
+  "source_git_blob_sha": "bc69823e20443a63c9eefd12577de05177bbcf03",
+  "protocol_git_blob_sha": "454a75d9d8f162870a3e550bfcddf864f5fd3813",
+  "source_sha256": "8e219f018857538660492a34927703c65da63e494379da2c0bd49949f3ee5224",
+  "protocol_sha256": "79f38934c6eb714574c006b6bf79be0e05c87a24901242b5c657be92e62b2b92",
+  "workflow_run": 35838427290,
+  "execution_head": "58c40b9c146494dfb801d8295b41d44036ec9554",
+  "development_artifact": {
+    "id": 10739339691,
+    "digest": "sha256:b721a060628b9e9f6d7fe068608d757e2ed1472cb9f873c3775a04a4c59b8144"
+  },
+  "confirmatory_artifact": {
+    "id": 10739339774,
+    "digest": "sha256:c9c821a16c45c7a04f1448386e9039f6ff39f4f6218072590cd46e3f1cac3ed4"
+  },
+  "external_reference": {
+    "authors": "Morad et al.",
+    "venue": "ICLR 2023",
+    "popgym_commit": "e397e5e",
+    "endpoint": "Appendix Table 3 MMER/max-training reward",
+    "independent_execution": true,
+    "checkpoint_available_in_campaign": false
+  },
+  "source_changed_after_opening": false,
+  "thresholds_changed_after_opening": false,
+  "confirmatory_seeds_changed_after_opening": false,
+  "independent_replication": false
+}
