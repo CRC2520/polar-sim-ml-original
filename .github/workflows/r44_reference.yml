@@ -1,0 +1,113 @@
+name: R44 published external-reference compatibility
+
+on:
+  push:
+    branches: [research/r44-published-external-reference-20260923]
+    paths:
+      - experiments/r44_published_external_reference_20260923/PREREG_R44.md
+      - experiments/r44_published_external_reference_20260923/r44_reference.py
+      - .github/workflows/r44_reference.yml
+
+permissions:
+  contents: read
+
+env:
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+  PYTHONHASHSEED: "0"
+
+jobs:
+  development:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      authorize_confirm: ${{ steps.gate.outputs.authorize_confirm }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install historical benchmark stack
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==1.22.4 scipy==1.10.1 gym==0.24.0 mazelib
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5e"
+      - name: Verify source and historical environment
+        run: |
+          python -m py_compile experiments/r44_published_external_reference_20260923/r44_reference.py
+          git hash-object experiments/r44_published_external_reference_20260923/r44_reference.py > experiments/r44_published_external_reference_20260923/R44_SOURCE_BLOB.txt
+          git hash-object experiments/r44_published_external_reference_20260923/PREREG_R44.md > experiments/r44_published_external_reference_20260923/R44_PROTOCOL_BLOB.txt
+          python - <<'PY'
+          import popgym
+          from pathlib import Path
+          e=popgym.StatelessCartPoleEasy()
+          assert tuple(e.observation_space.shape)==(2,)
+          assert e.action_space.n==2
+          assert e.max_episode_length==200
+          q=e.reset(seed=1)
+          assert len(q)==2
+          e.close()
+          print("historical environment contract PASS")
+          PY
+      - name: Run Easy development gate only
+        run: |
+          python experiments/r44_published_external_reference_20260923/r44_reference.py             --mode dev             --output experiments/r44_published_external_reference_20260923/R44_DEV_RESULTS.json
+      - name: Freeze gate decision
+        id: gate
+        run: |
+          python - <<'PY'
+          import json, os
+          p="experiments/r44_published_external_reference_20260923/R44_DEV_RESULTS.json"
+          d=json.load(open(p))
+          ok=d["resolution"]=="R44_DEVELOPMENT_AUTHORIZE_CONFIRM"
+          with open(os.environ["GITHUB_OUTPUT"],"a") as f:
+              f.write(f"authorize_confirm={'true' if ok else 'false'}\n")
+          print(json.dumps(d["summary"],indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r44-development
+          path: |
+            experiments/r44_published_external_reference_20260923/R44_DEV_RESULTS.json
+            experiments/r44_published_external_reference_20260923/R44_SOURCE_BLOB.txt
+            experiments/r44_published_external_reference_20260923/R44_PROTOCOL_BLOB.txt
+
+  confirmatory:
+    needs: development
+    if: needs.development.outputs.authorize_confirm == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install historical benchmark stack
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==1.22.4 scipy==1.10.1 gym==0.24.0 mazelib
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5e"
+      - name: Verify unchanged source
+        run: |
+          python -m py_compile experiments/r44_published_external_reference_20260923/r44_reference.py
+          git hash-object experiments/r44_published_external_reference_20260923/r44_reference.py
+          git hash-object experiments/r44_published_external_reference_20260923/PREREG_R44.md
+      - name: Run reserved Medium and Hard panels
+        run: |
+          python experiments/r44_published_external_reference_20260923/r44_reference.py             --mode confirm             --output experiments/r44_published_external_reference_20260923/R44_CONFIRM_RESULTS.json
+      - name: Record provenance
+        run: |
+          git rev-parse HEAD > experiments/r44_published_external_reference_20260923/R44_CONFIRM_COMMIT.txt
+          sha256sum experiments/r44_published_external_reference_20260923/r44_reference.py > experiments/r44_published_external_reference_20260923/R44_SOURCE_SHA256.txt
+          sha256sum experiments/r44_published_external_reference_20260923/PREREG_R44.md > experiments/r44_published_external_reference_20260923/R44_PROTOCOL_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r44-confirmatory
+          path: |
+            experiments/r44_published_external_reference_20260923/R44_CONFIRM_RESULTS.json
+            experiments/r44_published_external_reference_20260923/R44_CONFIRM_COMMIT.txt
+            experiments/r44_published_external_reference_20260923/R44_SOURCE_SHA256.txt
+            experiments/r44_published_external_reference_20260923/R44_PROTOCOL_SHA256.txt
