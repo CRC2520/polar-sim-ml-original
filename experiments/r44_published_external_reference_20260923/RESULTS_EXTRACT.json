@@ -1,0 +1,129 @@
+{
+  "campaign": "R44 published external-reference compatibility",
+  "resolution": "R44_PUBLISHED_REFERENCE_COMPATIBILITY_PASS",
+  "workflow_run_id": 35838427290,
+  "execution_head": "58c40b9c146494dfb801d8295b41d44036ec9554",
+  "source_git_blob_sha": "bc69823e20443a63c9eefd12577de05177bbcf03",
+  "protocol_git_blob_sha": "454a75d9d8f162870a3e550bfcddf864f5fd3813",
+  "source_sha256": "8e219f018857538660492a34927703c65da63e494379da2c0bd49949f3ee5224",
+  "protocol_sha256": "79f38934c6eb714574c006b6bf79be0e05c87a24901242b5c657be92e62b2b92",
+  "external_environment": {
+    "repository": "proroklab/popgym",
+    "commit": "e397e5e",
+    "benchmark": "StatelessCartPole Easy/Medium/Hard",
+    "historical_api": "gym 0.24.0",
+    "observation": "cart position and pole angle; velocities hidden"
+  },
+  "published_reference": {
+    "source": "Morad et al., POPGym, ICLR 2023, Appendix Table 3",
+    "endpoint": "published MMER/max-training reward, not paired held-out evaluation",
+    "Easy": {
+      "LSTM_mean": 1,
+      "LSTM_sd": 0,
+      "MLP_mean": 0.722,
+      "MLP_sd": 0.001
+    },
+    "Medium": {
+      "LSTM_mean": 1,
+      "LSTM_sd": 0,
+      "MLP_mean": 0.398,
+      "MLP_sd": 0.006
+    },
+    "Hard": {
+      "LSTM_mean": 1,
+      "LSTM_sd": 0,
+      "MLP_mean": 0.265,
+      "MLP_sd": 0.002
+    }
+  },
+  "development": {
+    "seeds": [
+      2156001,
+      2156002,
+      2156003,
+      2156004,
+      2156005,
+      2156006,
+      2156007,
+      2156008
+    ],
+    "episodes_per_seed": 4,
+    "resolution": "R44_DEVELOPMENT_AUTHORIZE_CONFIRM",
+    "summary": {
+      "median_core_score": 1,
+      "median_core_minus_noC": 0.785625,
+      "median_iso_gap": 0,
+      "median_oracle_score": 1,
+      "median_paper_lstm_gap": 0,
+      "mean_full_fraction": 1,
+      "seed_guard_count": 8,
+      "seed_guard_required": 7
+    },
+    "artifact": {
+      "id": 10739339691,
+      "sha256": "b721a060628b9e9f6d7fe068608d757e2ed1472cb9f873c3775a04a4c59b8144"
+    }
+  },
+  "confirmatory": {
+    "seeds": [
+      2157001,
+      2157002,
+      2157003,
+      2157004,
+      2157005,
+      2157006,
+      2157007,
+      2157008,
+      2157009,
+      2157010,
+      2157011,
+      2157012,
+      2157013,
+      2157014,
+      2157015,
+      2157016,
+      2157017,
+      2157018,
+      2157019,
+      2157020
+    ],
+    "episodes_per_seed": 4,
+    "Medium": {
+      "median_core_score": 1,
+      "median_core_minus_noC": 0.9009375,
+      "median_iso_gap": 0,
+      "median_oracle_score": 1,
+      "median_paper_lstm_gap": 0,
+      "mean_full_fraction": 1,
+      "seed_guard_count": 20,
+      "seed_guard_required": 18,
+      "pass": true
+    },
+    "Hard": {
+      "median_core_score": 1,
+      "median_core_minus_noC": 0.9339583333333333,
+      "median_iso_gap": 0,
+      "median_oracle_score": 1,
+      "median_paper_lstm_gap": 0,
+      "mean_full_fraction": 1,
+      "seed_guard_count": 20,
+      "seed_guard_required": 18,
+      "pass": true
+    },
+    "artifact": {
+      "id": 10739339774,
+      "sha256": "c9c821a16c45c7a04f1448386e9039f6ff39f4f6218072590cd46e3f1cac3ed4"
+    }
+  },
+  "interpretation": "Frozen recurrent observer/controller reaches the benchmark ceiling on held-out Medium and Hard under the exact historical POPGym environment and shows a large recurrence contrast plus exact coordinate-equivalent implementation. This is compatibility with an externally published ceiling, not paired checkpoint noninferiority.",
+  "boundaries": {
+    "comparison_type": "BENCHMARK_CEILING_COMPATIBILITY_NOT_PAIRED_CHECKPOINT_COMPARISON",
+    "POLAR_superiority": "NOT_ESTABLISHED",
+    "E6b": "OPEN",
+    "E7": "OPEN",
+    "D_or_R": "NOT_TESTED",
+    "universal_recurrence_benefit": "NOT_ESTABLISHED",
+    "consciousness": "NOT_ESTABLISHED",
+    "core_version": "POLAR Core v1.1 unchanged"
+  }
+}
