@@ -1,0 +1,103 @@
+name: R41 redesigned P0-P2 campaign
+on:
+  push:
+    branches: [research/r41-p0-p2-redesign-20260922]
+    paths: [.github/workflows/r41_p0_p2.yml]
+permissions:
+  contents: read
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+  PYTHONHASHSEED: '0'
+
+jobs:
+  p0_train:
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [2106001,2106002,2106003]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - name: Install fixed recurrent stack
+        run: |
+          python -m pip install torch==2.7.1+cpu --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install numpy==2.3.5 gymnasium==1.2.1 stable-baselines3==2.7.1 sb3-contrib==2.7.1 popgym==1.0.7
+      - name: Syntax and train
+        run: |
+          python -m py_compile experiments/r41_p0_p2_20260922/*.py
+          python experiments/r41_p0_p2_20260922/p0_memory_baseline.py --stage train --seed ${{ matrix.seed }} --out r41_results/p0
+      - name: Provenance
+        if: always()
+        run: |
+          mkdir -p r41_results/p0
+          git rev-parse HEAD > r41_results/p0/commit_${{ matrix.seed }}.txt
+          python -m pip freeze > r41_results/p0/packages_${{ matrix.seed }}.txt
+          sha256sum experiments/r41_p0_p2_20260922/* > r41_results/p0/source_${{ matrix.seed }}.sha256 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r41-p0-model-${{ matrix.seed }}
+          path: r41_results/p0/
+
+  p0_eval:
+    needs: p0_train
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: |
+          python -m pip install torch==2.7.1+cpu --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install numpy==2.3.5 gymnasium==1.2.1 stable-baselines3==2.7.1 sb3-contrib==2.7.1 popgym==1.0.7
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r41-p0-model-*
+          path: r41_results/p0
+          merge-multiple: true
+      - name: Evaluate frozen checkpoints
+        run: python experiments/r41_p0_p2_20260922/p0_memory_baseline.py --stage evaluate --out r41_results/p0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r41-p0-evidence
+          path: r41_results/p0/
+
+  p1_p2:
+    strategy:
+      fail-fast: false
+      matrix:
+        stage: [p1,p2]
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python -m pip install numpy==2.3.5
+      - name: Syntax
+        run: python -m py_compile experiments/r41_p0_p2_20260922/*.py
+      - name: Execute frozen stage
+        run: |
+          if [ "${{ matrix.stage }}" = "p1" ]; then
+            python experiments/r41_p0_p2_20260922/p1_core_transport.py --out r41_results/p1
+          else
+            python experiments/r41_p0_p2_20260922/p2_episodic_identity.py --out r41_results/p2
+          fi
+      - name: Provenance
+        if: always()
+        run: |
+          mkdir -p r41_results/${{ matrix.stage }}
+          git rev-parse HEAD > r41_results/${{ matrix.stage }}/commit.txt
+          python -m pip freeze > r41_results/${{ matrix.stage }}/packages.txt
+          tar -czf r41_results/${{ matrix.stage }}/source.tar.gz experiments/r41_p0_p2_20260922 experiments/r36_r1_metacog_stabilization_20260922
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r41-${{ matrix.stage }}-evidence
+          path: r41_results/${{ matrix.stage }}/

@@ -1,0 +1,131 @@
+{
+  "campaign": "R41 redesigned P0-P2 campaign after R40",
+  "run_id": 35818698334,
+  "execution_head": "59f13bbcb303f141e8f3218cd029c9fecaaca68b",
+  "protocol_path": "experiments/r41_p0_p2_20260922/PROTOCOL_R41.md",
+  "scientific_changes_after_opening": false,
+  "P0": {
+    "resolution": "P0_DEV_FAIL_NO_CONFIRM",
+    "task": "POPGym RepeatFirstEasy",
+    "train_steps_per_checkpoint": 1048576,
+    "development": [
+      {
+        "seed": 2106001,
+        "accuracy": 0.5,
+        "history_benefit": 0,
+        "eligible": false
+      },
+      {
+        "seed": 2106002,
+        "accuracy": 0.4987745098039216,
+        "history_benefit": -0.001225490196078434,
+        "eligible": false
+      },
+      {
+        "seed": 2106003,
+        "accuracy": 0.47549019607843135,
+        "history_benefit": 0.03676470588235295,
+        "eligible": false
+      }
+    ],
+    "supervised_instrument": {
+      "accuracy": 0.7406466603279114,
+      "required": 0.98,
+      "pass": false
+    },
+    "confirmation_opened": false,
+    "reserved_confirmatory_seed_range": [
+      2107001,
+      2107064
+    ],
+    "artifact": {
+      "id": 10733010433,
+      "sha256": "ed3ca9b10cdb90094ecb4d234db4183ec98c58b187a8cce59d43c6411130a0a7"
+    },
+    "POLAR_superiority": "NOT_TESTED"
+  },
+  "P1": {
+    "resolution": "P1_SCALE_NORMALIZED_CORE_TRANSPORT_PASS",
+    "required_per_condition": 24,
+    "denominator": 32,
+    "standard": {
+      "core_pass": 30,
+      "normalized_score_count": 32,
+      "D_count": 32,
+      "C_count": 30,
+      "R_count": 32,
+      "stable_count": 32,
+      "medians": {
+        "normalized_score": 0.8451838791083863,
+        "D_dz": 1.159956560870122,
+        "C_dz": 0.27482645967375696,
+        "R_dz": 0.7271068841226295,
+        "cost": 0.046810090490425074,
+        "noC_cost": 0.04413466894742299
+      }
+    },
+    "stress": {
+      "core_pass": 31,
+      "normalized_score_count": 32,
+      "D_count": 32,
+      "C_count": 31,
+      "R_count": 32,
+      "stable_count": 32,
+      "medians": {
+        "normalized_score": 0.8307336009003229,
+        "D_dz": 1.0219662622427133,
+        "C_dz": 0.35109218851228086,
+        "R_dz": 0.4691316099405821,
+        "cost": 0.0469354164512721,
+        "noC_cost": 0.04227901967766187
+      }
+    },
+    "interpretation": "scale-normalized causal/predictive D+C+R transport; no universal closed-loop benefit of C",
+    "artifact": {
+      "id": 10732079053,
+      "sha256": "6ea0b15d849f5d72a9bc236a4ffa674ba10ba8b73a4f5e4adc11fd8ec851fd7a"
+    }
+  },
+  "P2": {
+    "resolution": "P2_EPISODIC_OR_IDENTITY_PARTIAL_FAIL",
+    "required": 24,
+    "denominator": 32,
+    "archive_deletion": {
+      "positive_count": 11,
+      "mean": -0.0006251968908162917,
+      "ci95": [
+        -0.0017035090657427263,
+        0.0004502924018613318
+      ],
+      "pass": false
+    },
+    "profile_specificity": {
+      "nonnegative_count": 16,
+      "mean": 0.00015968562438703027,
+      "ci95": [
+        -0.0004478409645273936,
+        0.0008943979680230587
+      ],
+      "pass": false
+    },
+    "history_fork": {
+      "excess_ge_005_count": 10,
+      "mean_excess": 0.043164062499999996,
+      "pass": false
+    },
+    "epi_vs_base_mean_cost_advantage": 0.0011949050554678885,
+    "interpretation": "archive is policy-causal by construction but not shown beneficial; no robust profile/history identity",
+    "artifact": {
+      "id": 10733180795,
+      "sha256": "faf0ee25a39bf52e34a1f46668bbfedeb8460101a5eef1fbaba895d7109952fe"
+    }
+  },
+  "retained_boundaries": {
+    "core": "POLAR Core v1.1 D+C+R with conditional A unchanged",
+    "implementation_privilege": "NOT_SUPPORTED",
+    "global_minimality": "OPEN",
+    "E6b": "OPEN",
+    "E7": "OPEN",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}
