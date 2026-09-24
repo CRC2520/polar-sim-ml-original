@@ -1,0 +1,176 @@
+name: R47 external integrated D+C+R on POPGym Concentration
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+
+jobs:
+  engineering:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install exact historical POPGym environment
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "numpy==1.23.5" "gym==0.24.0" mazelib
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5eac9965f9963d18c9f455cd1983bca14fb"
+      - name: Verify frozen source and external API contract
+        run: |
+          python -m py_compile experiments/r47_external_integrated_dcr_20260924/r47_concentration_dcr.py
+          python -m py_compile experiments/r47_external_integrated_dcr_20260924/verify_r47.py
+          python - <<'PY'
+          import popgym
+          e=popgym.ConcentrationHard()
+          assert e.action_space.n==52
+          assert tuple(e.observation_space.shape)==(52,)
+          assert e.facedown_card==13
+          assert e.episode_length==104
+          assert e.obs_requires_prev_action is True
+          o=e.reset(seed=2185000)
+          assert o.shape==(52,)
+          e.close()
+          print("R47 historical ConcentrationHard contract PASS")
+          PY
+      - name: Run non-scientific engineering smoke
+        run: |
+          mkdir -p r47_smoke
+          python experiments/r47_external_integrated_dcr_20260924/r47_concentration_dcr.py             --mode smoke             --output r47_smoke/R47_SMOKE.json
+          python - <<'PY'
+          import json
+          d=json.load(open("r47_smoke/R47_SMOKE.json"))
+          s=d["summary"]
+          assert s["iso_completion_gap"] <= 1e-12
+          assert s["iso_return_gap"] <= 1e-12
+          assert s["oracle_completion"] == 1.0
+          print("R47 engineering invariants PASS")
+          PY
+      - name: Record engineering provenance
+        run: |
+          git rev-parse HEAD > r47_smoke/EXECUTION_COMMIT.txt
+          git hash-object experiments/r47_external_integrated_dcr_20260924/PREREG_R47.md > r47_smoke/PROTOCOL_BLOB.txt
+          git hash-object experiments/r47_external_integrated_dcr_20260924/r47_concentration_dcr.py > r47_smoke/RUNNER_BLOB.txt
+          sha256sum experiments/r47_external_integrated_dcr_20260924/PREREG_R47.md > r47_smoke/PROTOCOL_SHA256.txt
+          sha256sum experiments/r47_external_integrated_dcr_20260924/r47_concentration_dcr.py > r47_smoke/RUNNER_SHA256.txt
+          python -m pip freeze > r47_smoke/PIP_FREEZE.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r47-engineering-smoke
+          path: r47_smoke/
+          retention-days: 30
+
+  development:
+    needs: engineering
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      authorize_confirm: ${{ steps.gate.outputs.authorize_confirm }}
+      resolution: ${{ steps.gate.outputs.resolution }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install exact historical POPGym environment
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "numpy==1.23.5" "gym==0.24.0" mazelib
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5eac9965f9963d18c9f455cd1983bca14fb"
+      - name: Execute frozen development panel
+        run: |
+          mkdir -p r47_dev
+          python experiments/r47_external_integrated_dcr_20260924/r47_concentration_dcr.py             --mode development             --output r47_dev/R47_DEVELOPMENT.json
+      - name: Freeze development gate
+        id: gate
+        run: |
+          python - <<'PY'
+          import json, os
+          d=json.load(open("r47_dev/R47_DEVELOPMENT.json"))
+          ok=bool(d["authorize_confirm"])
+          with open(os.environ["GITHUB_OUTPUT"],"a") as f:
+              f.write("authorize_confirm=" + ("true" if ok else "false") + "\n")
+              f.write("resolution=" + d["resolution"] + "\n")
+          print(json.dumps(d["summary"],indent=2,sort_keys=True))
+          print("resolution",d["resolution"])
+          PY
+      - name: Record development provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r47_dev/EXECUTION_COMMIT.txt
+          sha256sum experiments/r47_external_integrated_dcr_20260924/PREREG_R47.md > r47_dev/PROTOCOL_SHA256.txt
+          sha256sum experiments/r47_external_integrated_dcr_20260924/r47_concentration_dcr.py > r47_dev/RUNNER_SHA256.txt
+          python -m pip freeze > r47_dev/PIP_FREEZE.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r47-development
+          path: r47_dev/
+          retention-days: 30
+
+  confirmatory:
+    needs: development
+    if: needs.development.outputs.authorize_confirm == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install exact historical POPGym environment
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "numpy==1.23.5" "gym==0.24.0" mazelib
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5eac9965f9963d18c9f455cd1983bca14fb"
+      - name: Execute reserved confirmatory panel
+        run: |
+          mkdir -p r47_confirm
+          python experiments/r47_external_integrated_dcr_20260924/r47_concentration_dcr.py             --mode confirmatory             --output r47_confirm/R47_CONFIRMATORY.json
+      - name: Record confirmatory provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r47_confirm/EXECUTION_COMMIT.txt
+          sha256sum experiments/r47_external_integrated_dcr_20260924/PREREG_R47.md > r47_confirm/PROTOCOL_SHA256.txt
+          sha256sum experiments/r47_external_integrated_dcr_20260924/r47_concentration_dcr.py > r47_confirm/RUNNER_SHA256.txt
+          python -m pip freeze > r47_confirm/PIP_FREEZE.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r47-confirmatory
+          path: r47_confirm/
+          retention-days: 30
+
+  integrity:
+    needs: [development, confirmatory]
+    if: always() && needs.development.result == 'success' && needs.confirmatory.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r47-development
+          path: r47_audit/dev
+      - uses: actions/download-artifact@v4
+        with:
+          name: r47-confirmatory
+          path: r47_audit/confirm
+      - name: Verify frozen R47 adjudication
+        run: |
+          python experiments/r47_external_integrated_dcr_20260924/verify_r47.py             --development r47_audit/dev/R47_DEVELOPMENT.json             --confirmatory r47_audit/confirm/R47_CONFIRMATORY.json             | tee r47_audit/VERIFY_R47.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r47-integrity
+          path: r47_audit/
+          retention-days: 30
