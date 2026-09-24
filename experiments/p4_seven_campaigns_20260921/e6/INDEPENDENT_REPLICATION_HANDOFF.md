@@ -1,5 +1,7 @@
 # E6 — Independent replication handoff
 
+> **Post-R47 publication-facing handoff:** the current E6b-Core v2 specification is frozen in `CRC2520/POLAR_MODEL_CRC` at merge commit `48966fd5746fe90054c9bcd26750b67609844ab7`, entry point `reviews/e6b/README.md`. This historical file remains preserved for the broader E1–E5 targets. Scientific E6b evidence remains OPEN until an external independent replicator completes a valid preregistered panel.
+
 ## Frozen scientific target
 
 A third party should implement the current POLAR specification without importing this repository's executable implementation.
