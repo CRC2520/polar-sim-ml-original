@@ -1,0 +1,218 @@
+name: R45 official POPGym LSTM paired comparator
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+  RAY_DEDUP_LOGS: "0"
+
+jobs:
+  engineering:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install frozen historical stack
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install torch==1.13.1
+          python -m pip install "ray[rllib]==2.0.0"
+          python -m pip install mazelib pygame==2.6.1
+          python -m pip install --force-reinstall --no-deps numpy==1.23.5 scipy==1.10.1 gym==0.24.0
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5e"
+      - name: Engineering-only import and contract smoke
+        run: |
+          python -m py_compile experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py
+          python - <<'PY'
+          import popgym, ray
+          from popgym import wrappers
+          from popgym.baselines.ray_models.ray_lstm import LSTM
+          e=popgym.StatelessCartPoleEasy()
+          assert tuple(e.observation_space.shape)==(2,)
+          assert e.action_space.n==2
+          assert e.max_episode_length==200
+          w=wrappers.Antialias(wrappers.PreviousAction(e))
+          q=w.reset(seed=2165000)
+          assert q is not None
+          w.close()
+          print("R45 engineering smoke PASS", ray.__version__, LSTM.__name__)
+          PY
+      - name: Freeze source identities
+        run: |
+          git hash-object experiments/r45_official_popgym_lstm_20260923/PREREG_R45.md
+          git hash-object experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py
+          sha256sum experiments/r45_official_popgym_lstm_20260923/PREREG_R45.md
+          sha256sum experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py
+
+  development:
+    needs: engineering
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        train_seed: [2166001, 2166002, 2166003]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install frozen historical stack
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install torch==1.13.1
+          python -m pip install "ray[rllib]==2.0.0"
+          python -m pip install mazelib pygame==2.6.1
+          python -m pip install --force-reinstall --no-deps numpy==1.23.5 scipy==1.10.1 gym==0.24.0
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5e"
+      - name: Run frozen Easy development checkpoint
+        run: |
+          mkdir -p r45_outputs/dev_${{ matrix.train_seed }}
+          python experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py train-eval \
+            --level Easy \
+            --train-seed ${{ matrix.train_seed }} \
+            --steps 1048576 \
+            --output r45_outputs/dev_${{ matrix.train_seed }}/R45_EASY_${{ matrix.train_seed }}_RESULT.json \
+            --checkpoint-dir r45_outputs/dev_${{ matrix.train_seed }}/checkpoint
+      - name: Record execution provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r45_outputs/dev_${{ matrix.train_seed }}/EXECUTION_COMMIT.txt
+          python --version > r45_outputs/dev_${{ matrix.train_seed }}/PYTHON_VERSION.txt
+          python -m pip freeze > r45_outputs/dev_${{ matrix.train_seed }}/PIP_FREEZE.txt
+          sha256sum experiments/r45_official_popgym_lstm_20260923/PREREG_R45.md > r45_outputs/dev_${{ matrix.train_seed }}/PROTOCOL_SHA256.txt
+          sha256sum experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py > r45_outputs/dev_${{ matrix.train_seed }}/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r45-dev-${{ matrix.train_seed }}
+          path: r45_outputs/dev_${{ matrix.train_seed }}
+          retention-days: 30
+
+  development_gate:
+    needs: development
+    if: always() && needs.development.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      authorize_confirm: ${{ steps.gate.outputs.authorize_confirm }}
+      resolution: ${{ steps.gate.outputs.resolution }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install aggregation dependency
+        run: python -m pip install numpy==1.23.5
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r45-dev-*
+          path: r45_downloads
+      - name: Adjudicate frozen development gate
+        id: gate
+        run: |
+          python experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py aggregate \
+            --phase development \
+            --input-dir r45_downloads \
+            --output R45_DEVELOPMENT_GATE.json
+          python - <<'PY'
+          import json, os
+          d=json.load(open("R45_DEVELOPMENT_GATE.json"))
+          with open(os.environ["GITHUB_OUTPUT"],"a") as f:
+              f.write("authorize_confirm=" + ("true" if d["authorize_confirm"] else "false") + "\n")
+              f.write("resolution=" + d["resolution"] + "\n")
+          print(json.dumps(d,indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r45-development-gate
+          path: R45_DEVELOPMENT_GATE.json
+          retention-days: 30
+
+  confirmatory:
+    needs: development_gate
+    if: needs.development_gate.outputs.authorize_confirm == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        level: [Medium, Hard]
+        train_seed: [2167001, 2167002, 2167003]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install frozen historical stack
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install torch==1.13.1
+          python -m pip install "ray[rllib]==2.0.0"
+          python -m pip install mazelib pygame==2.6.1
+          python -m pip install --force-reinstall --no-deps numpy==1.23.5 scipy==1.10.1 gym==0.24.0
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5e"
+      - name: Run reserved confirmatory checkpoint
+        run: |
+          mkdir -p r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}
+          python experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py train-eval \
+            --level ${{ matrix.level }} \
+            --train-seed ${{ matrix.train_seed }} \
+            --steps 1048576 \
+            --output r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/R45_${{ matrix.level }}_${{ matrix.train_seed }}_RESULT.json \
+            --checkpoint-dir r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/checkpoint
+      - name: Record execution provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/EXECUTION_COMMIT.txt
+          python --version > r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/PYTHON_VERSION.txt
+          python -m pip freeze > r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/PIP_FREEZE.txt
+          sha256sum experiments/r45_official_popgym_lstm_20260923/PREREG_R45.md > r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/PROTOCOL_SHA256.txt
+          sha256sum experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py > r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r45-conf-${{ matrix.level }}-${{ matrix.train_seed }}
+          path: r45_outputs/conf_${{ matrix.level }}_${{ matrix.train_seed }}
+          retention-days: 30
+
+  confirmatory_gate:
+    needs: confirmatory
+    if: always() && needs.confirmatory.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install aggregation dependency
+        run: python -m pip install numpy==1.23.5
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r45-conf-*
+          path: r45_downloads
+      - name: Adjudicate frozen confirmatory panel
+        run: |
+          python experiments/r45_official_popgym_lstm_20260923/r45_official_lstm.py aggregate \
+            --phase confirmatory \
+            --input-dir r45_downloads \
+            --output R45_CONFIRMATORY_GATE.json
+          cat R45_CONFIRMATORY_GATE.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r45-confirmatory-gate
+          path: R45_CONFIRMATORY_GATE.json
+          retention-days: 30
