@@ -1,13 +1,7 @@
 name: R47 external integrated D+C+R on POPGym Concentration
 
 on:
-  push:
-    branches: [research/r47-external-integrated-dcr-20260924]
-    paths:
-      - experiments/r47_external_integrated_dcr_20260924/PREREG_R47.md
-      - experiments/r47_external_integrated_dcr_20260924/r47_concentration_dcr.py
-      - experiments/r47_external_integrated_dcr_20260924/verify_r47.py
-      - .github/workflows/r47_external_integrated_dcr.yml
+  workflow_dispatch:
 
 permissions:
   contents: read
