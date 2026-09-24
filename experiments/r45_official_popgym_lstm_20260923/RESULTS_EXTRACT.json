@@ -1,0 +1,98 @@
+{
+  "campaign": "R45 official POPGym LSTM reproduction",
+  "canonical_run_id": 35924763722,
+  "canonical_execution_commit": "e1052cf9e766d5e6f8a3fcfd6f40a472a093cea1",
+  "external_source": "proroklab/popgym@e397e5e",
+  "training_budget_timesteps_per_checkpoint": 1048576,
+  "development": {
+    "environment": "StatelessCartPoleEasy",
+    "training_seeds": [
+      2166001,
+      2166002,
+      2166003
+    ],
+    "eligible_checkpoints": 3,
+    "required_eligible_checkpoints": 2,
+    "resolution": "R45_DEVELOPMENT_AUTHORIZE_CONFIRM",
+    "artifact_id": 10782023347,
+    "checkpoints": [
+      {
+        "train_seed": 2166001,
+        "median_lstm_intact_score": 1,
+        "median_lstm_step_reset_score": 0.233125,
+        "median_history_benefit": 0.766875,
+        "n_eval_seeds": 12,
+        "eligible": true
+      },
+      {
+        "train_seed": 2166002,
+        "median_lstm_intact_score": 1,
+        "median_lstm_step_reset_score": 0.1825,
+        "median_history_benefit": 0.8175,
+        "n_eval_seeds": 12,
+        "eligible": true
+      },
+      {
+        "train_seed": 2166003,
+        "median_lstm_intact_score": 1,
+        "median_lstm_step_reset_score": 0.1825,
+        "median_history_benefit": 0.8175,
+        "n_eval_seeds": 12,
+        "eligible": true
+      }
+    ]
+  },
+  "confirmatory": {
+    "resolution": "R45_DIRECT_REPRODUCED_CHECKPOINT_COMPATIBILITY_PASS",
+    "artifact_id": 10785928926,
+    "Medium": {
+      "training_seeds": [
+        2167001,
+        2167002,
+        2167003
+      ],
+      "eligible_checkpoints": 3,
+      "required_eligible_checkpoints": 2,
+      "median_core_score": 1,
+      "median_core_minus_lstm": 0,
+      "median_iso_gap": 0,
+      "noninferiority_margin": -0.05,
+      "pass": true,
+      "history_benefits": [
+        0.88625,
+        0.91125,
+        0.91125
+      ]
+    },
+    "Hard": {
+      "training_seeds": [
+        2167001,
+        2167002,
+        2167003
+      ],
+      "eligible_checkpoints": 3,
+      "required_eligible_checkpoints": 2,
+      "median_core_score": 1,
+      "median_core_minus_lstm": 0,
+      "median_iso_gap": 0,
+      "noninferiority_margin": -0.05,
+      "pass": true,
+      "history_benefits": [
+        0.9408333333333333,
+        0.9408333333333334,
+        0.9408333333333333
+      ]
+    }
+  },
+  "boundaries": {
+    "POLAR_superiority": "NOT_ESTABLISHED",
+    "author_provided_paper_checkpoint": false,
+    "full_15M_paper_endpoint_reproduced": false,
+    "external_D_or_R": "NOT_TESTED",
+    "global_minimality": "OPEN",
+    "E6b": "OPEN",
+    "E7": "OPEN",
+    "consciousness": "NOT_ESTABLISHED",
+    "core_version": "POLAR Core v1.1 unchanged"
+  }
+}
