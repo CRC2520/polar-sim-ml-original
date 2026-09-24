@@ -1,0 +1,178 @@
+name: R46 external D/R causal transport on MPE2
+
+on:
+  push:
+    branches: [research/r46-mpe2-external-dr-20260924]
+    paths:
+      - experiments/r46_mpe2_external_dr_20260924/PREREG_R46.md
+      - experiments/r46_mpe2_external_dr_20260924/r46_mpe2_dr.py
+      - .github/workflows/r46_mpe2_dr.yml
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+  SDL_VIDEODRIVER: "dummy"
+  PYGAME_HIDE_SUPPORT_PROMPT: "1"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+
+jobs:
+  engineering:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install exact external benchmark
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Farama-Foundation/MPE2.git@7590d9d52791e321974d4fda6090fb18f34dbf49"
+      - name: Verify source and API contracts
+        run: |
+          python -m py_compile experiments/r46_mpe2_external_dr_20260924/r46_mpe2_dr.py
+          python -m py_compile experiments/r46_mpe2_external_dr_20260924/verify_r46.py
+          python - <<'PY'
+          import importlib.metadata
+          from mpe2 import simple_reference_v3, simple_crypto_v3
+          r=simple_reference_v3.parallel_env(max_cycles=25, continuous_actions=False, dynamic_rescaling=False)
+          o,_=r.reset(seed=2175000)
+          assert set(o)=={"agent_0","agent_1"}
+          assert all(v.shape==(21,) for v in o.values())
+          assert all(r.action_space(a).n==50 for a in o)
+          r.close()
+          c=simple_crypto_v3.parallel_env(max_cycles=25, continuous_actions=False, dynamic_rescaling=False)
+          o,_=c.reset(seed=2175000)
+          assert set(o)=={"eve_0","bob_0","alice_0"}
+          assert o["eve_0"].shape==(4,)
+          assert o["bob_0"].shape==(8,)
+          assert o["alice_0"].shape==(8,)
+          assert all(c.action_space(a).n==4 for a in o)
+          c.close()
+          print("mpe2",importlib.metadata.version("mpe2"))
+          print("R46 external API contract PASS")
+          PY
+      - name: Run non-scientific smoke
+        run: |
+          mkdir -p r46_smoke
+          python experiments/r46_mpe2_external_dr_20260924/r46_mpe2_dr.py             --mode smoke             --output r46_smoke/R46_SMOKE.json
+      - name: Record engineering provenance
+        run: |
+          git rev-parse HEAD > r46_smoke/EXECUTION_COMMIT.txt
+          git hash-object experiments/r46_mpe2_external_dr_20260924/PREREG_R46.md > r46_smoke/PROTOCOL_BLOB.txt
+          git hash-object experiments/r46_mpe2_external_dr_20260924/r46_mpe2_dr.py > r46_smoke/RUNNER_BLOB.txt
+          sha256sum experiments/r46_mpe2_external_dr_20260924/PREREG_R46.md > r46_smoke/PROTOCOL_SHA256.txt
+          sha256sum experiments/r46_mpe2_external_dr_20260924/r46_mpe2_dr.py > r46_smoke/RUNNER_SHA256.txt
+          python -m pip freeze > r46_smoke/PIP_FREEZE.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r46-engineering-smoke
+          path: r46_smoke/
+          retention-days: 30
+
+  development:
+    needs: engineering
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    outputs:
+      authorize_confirm: ${{ steps.gate.outputs.authorize_confirm }}
+      resolution: ${{ steps.gate.outputs.resolution }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install exact external benchmark
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Farama-Foundation/MPE2.git@7590d9d52791e321974d4fda6090fb18f34dbf49"
+      - name: Execute frozen Simple Reference development panel
+        run: |
+          mkdir -p r46_dev
+          python experiments/r46_mpe2_external_dr_20260924/r46_mpe2_dr.py             --mode development             --output r46_dev/R46_DEVELOPMENT.json
+      - name: Freeze development decision
+        id: gate
+        run: |
+          python - <<'PY'
+          import json, os
+          d=json.load(open("r46_dev/R46_DEVELOPMENT.json"))
+          ok=bool(d["authorize_confirm"])
+          with open(os.environ["GITHUB_OUTPUT"],"a") as f:
+              f.write("authorize_confirm=" + ("true" if ok else "false") + "\n")
+              f.write("resolution=" + d["resolution"] + "\n")
+          print(json.dumps(d["summary"],indent=2,sort_keys=True))
+          print("resolution",d["resolution"])
+          PY
+      - name: Record development provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r46_dev/EXECUTION_COMMIT.txt
+          sha256sum experiments/r46_mpe2_external_dr_20260924/PREREG_R46.md > r46_dev/PROTOCOL_SHA256.txt
+          sha256sum experiments/r46_mpe2_external_dr_20260924/r46_mpe2_dr.py > r46_dev/RUNNER_SHA256.txt
+          python -m pip freeze > r46_dev/PIP_FREEZE.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r46-development
+          path: r46_dev/
+          retention-days: 30
+
+  confirmatory:
+    needs: development
+    if: needs.development.outputs.authorize_confirm == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install exact external benchmark
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/Farama-Foundation/MPE2.git@7590d9d52791e321974d4fda6090fb18f34dbf49"
+      - name: Execute reserved confirmatory families
+        run: |
+          mkdir -p r46_confirm
+          python experiments/r46_mpe2_external_dr_20260924/r46_mpe2_dr.py             --mode confirmatory             --output r46_confirm/R46_CONFIRMATORY.json
+      - name: Record confirmatory provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r46_confirm/EXECUTION_COMMIT.txt
+          sha256sum experiments/r46_mpe2_external_dr_20260924/PREREG_R46.md > r46_confirm/PROTOCOL_SHA256.txt
+          sha256sum experiments/r46_mpe2_external_dr_20260924/r46_mpe2_dr.py > r46_confirm/RUNNER_SHA256.txt
+          python -m pip freeze > r46_confirm/PIP_FREEZE.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r46-confirmatory
+          path: r46_confirm/
+          retention-days: 30
+
+  integrity:
+    needs: [development, confirmatory]
+    if: always() && needs.development.result == 'success' && needs.confirmatory.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r46-development
+          path: r46_audit/dev
+      - uses: actions/download-artifact@v4
+        with:
+          name: r46-confirmatory
+          path: r46_audit/confirm
+      - name: Verify frozen adjudication
+        run: |
+          python experiments/r46_mpe2_external_dr_20260924/verify_r46.py             --development r46_audit/dev/R46_DEVELOPMENT.json             --confirmatory r46_audit/confirm/R46_CONFIRMATORY.json             | tee r46_audit/VERIFY_R46.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r46-integrity
+          path: r46_audit/
+          retention-days: 30
