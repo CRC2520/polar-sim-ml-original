@@ -1,12 +1,7 @@
 name: R46 external D/R causal transport on MPE2
 
 on:
-  push:
-    branches: [research/r46-mpe2-external-dr-20260924]
-    paths:
-      - experiments/r46_mpe2_external_dr_20260924/PREREG_R46.md
-      - experiments/r46_mpe2_external_dr_20260924/r46_mpe2_dr.py
-      - .github/workflows/r46_mpe2_dr.yml
+  workflow_dispatch:
 
 permissions:
   contents: read
