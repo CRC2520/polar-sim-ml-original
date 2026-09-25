@@ -1,0 +1,56 @@
+name: E7 IBL metadata-only panel freeze
+
+on:
+  push:
+    branches: [research/e7-ibl-brainwidemap-20260925]
+    paths:
+      - experiments/e7_ibl_brainwidemap_20260925/METADATA_IMPLEMENTATION_FREEZE.md
+      - experiments/e7_ibl_brainwidemap_20260925/select_panel_metadata.py
+      - .github/workflows/e7_ibl_panel_freeze.yml
+
+permissions:
+  contents: read
+
+jobs:
+  freeze-panel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install metadata-only IBL tooling
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install pandas pyarrow ibllib
+          python -m pip install "ONE-api==3.5.2"
+          python -m pip install --no-deps "git+https://github.com/int-brain-lab/paper-brain-wide-map.git"
+      - name: Execute metadata-only deterministic panel selection
+        run: |
+          mkdir -p e7_panel
+          python experiments/e7_ibl_brainwidemap_20260925/select_panel_metadata.py --output e7_panel/E7_PANEL_METADATA.json --cache-dir .e7_one_cache
+      - name: Enforce no neural outcomes in panel artifact
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('e7_panel/E7_PANEL_METADATA.json'))
+          assert d['neural_data_opened'] is False
+          assert len(d['development'])==8
+          assert len(d['confirmatory'])==16
+          raw=json.dumps(d).lower()
+          for forbidden in ['spike_times','firing_rates','decoder_scores']:
+              assert forbidden not in raw.replace('forbidden_outputs','') or forbidden in d['forbidden_outputs']
+          print('E7 metadata-only panel freeze PASS')
+          PY
+      - name: Record provenance
+        run: |
+          git rev-parse HEAD > e7_panel/EXECUTION_COMMIT.txt
+          sha256sum experiments/e7_ibl_brainwidemap_20260925/METADATA_IMPLEMENTATION_FREEZE.md > e7_panel/METADATA_FREEZE_SHA256.txt
+          sha256sum experiments/e7_ibl_brainwidemap_20260925/select_panel_metadata.py > e7_panel/SELECTOR_SHA256.txt
+          python -m pip freeze > e7_panel/PIP_FREEZE.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e7-metadata-panel-freeze
+          path: e7_panel/
+          retention-days: 90
