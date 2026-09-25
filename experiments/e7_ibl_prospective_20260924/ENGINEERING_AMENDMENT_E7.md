@@ -31,3 +31,14 @@ Unchanged:
 
 This amendment is infrastructure-only and does not alter the preregistered
 scientific design.
+
+## Aggregate-table version repair
+
+Repaired metadata-freeze run `36090200540` authenticated successfully and downloaded metadata, but the upstream helper defaulted to tag `2026_Q2_IBL_et_al_BWM`, whose internal MD5 registry contains `clusters` but not `trials`; the helper therefore raised `KeyError: trials` after downloading `trials.pqt`.
+
+No panel was produced and no spike/neural endpoint was inspected.
+
+Repair:
+- pin both aggregate metadata tables to upstream tag `2024_Q2_IBL_et_al_BWM`, the helper version that includes published MD5 hashes for both `clusters` and `trials` and is compatible with the frozen BWM paper query.
+
+Unchanged: all panel hashing, eligibility thresholds, D/C/R endpoints, cross-validation and confirmatory rules.
