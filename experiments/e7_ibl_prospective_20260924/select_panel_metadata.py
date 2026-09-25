@@ -24,7 +24,7 @@ def main():
     from brainwidemap import bwm_query
     from brainwidemap.bwm_loading import download_aggregate_tables
 
-    one=ONE(base_url="https://openalyx.internationalbrainlab.org", silent=True)
+    one=ONE(base_url="https://openalyx.internationalbrainlab.org", username="intbrainlab", password="international", silent=True)
     bwm=bwm_query(one=one, freeze=FREEZE).copy()
 
     clusters_path=download_aggregate_tables(one, type="clusters")
