@@ -1,0 +1,47 @@
+name: R52 canonical integrity repair
+
+on:
+  push:
+    branches: [research/r52-bounded-minimality-20260925]
+    paths:
+      - .github/workflows/r52_integrity_repair.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install verifier dependency
+        run: python -m pip install "numpy==1.23.5"
+      - uses: actions/download-artifact@v4
+        with:
+          name: r52-development
+          path: r52_audit/dev
+          run-id: 36191159816
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r52-confirmatory
+          path: r52_audit/confirm
+          run-id: 36191159816
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify canonical R52 artifacts only
+        run: |
+          python experiments/r52_bounded_minimality_20260925/verify_r52.py --development r52_audit/dev/R52_DEVELOPMENT.json --confirmatory r52_audit/confirm/R52_CONFIRMATORY.json | tee r52_audit/VERIFY_R52_REPAIR.txt
+      - name: Record repair provenance
+        run: |
+          printf '%s\n' 36191159816 > r52_audit/CANONICAL_SCIENTIFIC_RUN.txt
+          git rev-parse HEAD > r52_audit/REPAIR_COMMIT.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r52-integrity-repair
+          path: r52_audit/
+          retention-days: 30

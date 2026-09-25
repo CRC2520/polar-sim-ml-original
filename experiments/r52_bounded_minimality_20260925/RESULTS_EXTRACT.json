@@ -1,0 +1,72 @@
+{
+  "campaign": "R52 bounded minimality challenge",
+  "canonical_run_id": 36191159816,
+  "canonical_scientific_sha": "79a1de4d43147c041e0b606656e8b7769c8cfd59",
+  "resolution": "R52_BOUNDED_DCR_NECESSITY_PASS",
+  "external_source": "proroklab/popgym@e397e5eac9965f9963d18c9f455cd1983bca14fb",
+  "development": {
+    "seeds": "2226001-2226016",
+    "seed_guard_count": 16,
+    "required": 13,
+    "pass": true
+  },
+  "confirmatory": {
+    "seeds": "2227001-2227032",
+    "seed_guard_count": 32,
+    "required": 28,
+    "pass": true,
+    "tasks": {
+      "ConcentrationHard": {
+        "full": 1,
+        "D": 0.8461538461538461,
+        "C": 0.9487179487179487,
+        "R": 0.9871794871794872,
+        "sham_gap": 0,
+        "iso_gap": 0,
+        "iso_action_agreement": 1
+      },
+      "CountRecallHard": {
+        "full": 0.9452495974235106,
+        "D": 0.887278582930757,
+        "C": 0.8848631239935589,
+        "R": 0.7536231884057971,
+        "sham_gap": 0,
+        "iso_gap": 0,
+        "iso_action_agreement": 1
+      },
+      "AutoencodeHard": {
+        "full": 1,
+        "D": 0.75,
+        "C": 0.7446581196581197,
+        "R": 0.7457264957264957,
+        "sham_gap": 0,
+        "iso_gap": 0,
+        "iso_action_agreement": 1
+      },
+      "RepeatPreviousHard": {
+        "full": 1,
+        "D": 0.7536231884057971,
+        "C": 0.7536231884057971,
+        "R": 0.7554347826086957,
+        "sham_gap": 0,
+        "iso_gap": 0,
+        "iso_action_agreement": 1
+      }
+    }
+  },
+  "integrity_repair": {
+    "original_integrity_failure": "NumPy 1.23.5 install attempted under Python 3.12 before verifier execution",
+    "scientific_results_affected": false
+  },
+  "boundaries": {
+    "claim_scope": "bounded necessity across four tested external task families",
+    "global_minimality": "NOT_ESTABLISHED",
+    "universal_sufficiency": "NOT_ESTABLISHED",
+    "unique_decomposition": "NOT_ESTABLISHED",
+    "neural_learnability": "NOT_ESTABLISHED",
+    "POLAR_superiority": "NOT_ESTABLISHED",
+    "E6b": "OPEN",
+    "E7": "OPEN",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}

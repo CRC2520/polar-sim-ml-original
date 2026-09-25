@@ -1,0 +1,165 @@
+name: R52 bounded D+C+R necessity challenge
+
+on:
+  push:
+    branches: [research/r52-bounded-minimality-20260925]
+    paths:
+      - experiments/r52_bounded_minimality_20260925/PREREG_R52.md
+      - experiments/r52_bounded_minimality_20260925/r52_bounded_minimality.py
+      - experiments/r52_bounded_minimality_20260925/verify_r52.py
+      - .github/workflows/r52_bounded_minimality.yml
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+
+jobs:
+  engineering:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install frozen external stack
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "numpy==1.23.5" "gym==0.24.0" mazelib
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5eac9965f9963d18c9f455cd1983bca14fb"
+      - name: Verify syntax
+        run: |
+          python -m py_compile experiments/r52_bounded_minimality_20260925/r52_bounded_minimality.py
+          python -m py_compile experiments/r52_bounded_minimality_20260925/verify_r52.py
+      - name: Run non-scientific smoke
+        run: |
+          mkdir -p r52_smoke
+          python experiments/r52_bounded_minimality_20260925/r52_bounded_minimality.py --mode smoke --output r52_smoke/R52_SMOKE.json
+          python - <<'PY'
+          import json
+          d=json.load(open('r52_smoke/R52_SMOKE.json'))
+          r=d['records'][0]
+          for task,x in r['tasks'].items():
+              assert x['full_metric'] >= 0.90, (task,x['full_metric'])
+              assert x['sham_gap'] <= 0.02
+              assert x['iso_gap'] <= 1e-12
+              assert x['iso_action_agreement'] >= 1-1e-12
+          print('R52 engineering smoke PASS')
+          PY
+      - name: Record provenance
+        run: |
+          git rev-parse HEAD > r52_smoke/EXECUTION_COMMIT.txt
+          sha256sum experiments/r52_bounded_minimality_20260925/PREREG_R52.md > r52_smoke/PROTOCOL_SHA256.txt
+          sha256sum experiments/r52_bounded_minimality_20260925/r52_bounded_minimality.py > r52_smoke/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r52-engineering-smoke
+          path: r52_smoke/
+          retention-days: 30
+
+  development:
+    needs: engineering
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    outputs:
+      authorize_confirm: ${{ steps.gate.outputs.authorize_confirm }}
+      resolution: ${{ steps.gate.outputs.resolution }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install frozen external stack
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "numpy==1.23.5" "gym==0.24.0" mazelib
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5eac9965f9963d18c9f455cd1983bca14fb"
+      - name: Execute development challenge
+        run: |
+          mkdir -p r52_dev
+          python experiments/r52_bounded_minimality_20260925/r52_bounded_minimality.py --mode development --output r52_dev/R52_DEVELOPMENT.json
+      - name: Freeze development gate
+        id: gate
+        run: |
+          python experiments/r52_bounded_minimality_20260925/verify_r52.py --development r52_dev/R52_DEVELOPMENT.json
+          python - <<'PY'
+          import json, os
+          d=json.load(open('r52_dev/R52_DEVELOPMENT.json'))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('authorize_confirm=' + ('true' if d['authorize_confirm'] else 'false') + '\n')
+              f.write('resolution=' + d['resolution'] + '\n')
+          PY
+      - name: Record provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r52_dev/EXECUTION_COMMIT.txt
+          sha256sum experiments/r52_bounded_minimality_20260925/PREREG_R52.md > r52_dev/PROTOCOL_SHA256.txt
+          sha256sum experiments/r52_bounded_minimality_20260925/r52_bounded_minimality.py > r52_dev/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r52-development
+          path: r52_dev/
+          retention-days: 30
+
+  confirmatory:
+    needs: development
+    if: needs.development.outputs.authorize_confirm == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install frozen external stack
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "numpy==1.23.5" "gym==0.24.0" mazelib
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5eac9965f9963d18c9f455cd1983bca14fb"
+      - name: Execute reserved confirmatory challenge
+        run: |
+          mkdir -p r52_confirm
+          python experiments/r52_bounded_minimality_20260925/r52_bounded_minimality.py --mode confirmatory --output r52_confirm/R52_CONFIRMATORY.json
+      - name: Record provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r52_confirm/EXECUTION_COMMIT.txt
+          sha256sum experiments/r52_bounded_minimality_20260925/PREREG_R52.md > r52_confirm/PROTOCOL_SHA256.txt
+          sha256sum experiments/r52_bounded_minimality_20260925/r52_bounded_minimality.py > r52_confirm/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r52-confirmatory
+          path: r52_confirm/
+          retention-days: 30
+
+  integrity:
+    needs: [development, confirmatory]
+    if: always() && needs.development.result == 'success' && needs.confirmatory.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r52-development
+          path: r52_audit/dev
+      - uses: actions/download-artifact@v4
+        with:
+          name: r52-confirmatory
+          path: r52_audit/confirm
+      - name: Verify final R52 adjudication
+        run: |
+          python -m pip install "numpy==1.23.5"
+          python experiments/r52_bounded_minimality_20260925/verify_r52.py --development r52_audit/dev/R52_DEVELOPMENT.json --confirmatory r52_audit/confirm/R52_CONFIRMATORY.json | tee r52_audit/VERIFY_R52.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r52-integrity
+          path: r52_audit/
+          retention-days: 30
