@@ -1,0 +1,39 @@
+name: R48 canonical development adjudication repair
+
+on:
+  push:
+    branches: [research/r48-neural-relation-learning-20260924]
+    paths:
+      - .github/workflows/r48_adjudicate_canonical_dev.yml
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  adjudicate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r48-dev-*
+          path: r48_canonical
+          run-id: 36089447230
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Adjudicate frozen canonical development artifacts
+        run: |
+          mkdir -p r48_adjudication
+          mapfile -t files < <(find r48_canonical -name result.json | sort)
+          test "${#files[@]}" -eq 3
+          python experiments/r48_neural_relation_learning_20260924/adjudicate_canonical_dev.py --inputs "${files[@]}" --output r48_adjudication/R48_DEVELOPMENT.json
+      - name: Record repair provenance
+        run: |
+          git rev-parse HEAD > r48_adjudication/ADJUDICATION_COMMIT.txt
+          printf '%s\n' 36089447230 > r48_adjudication/CANONICAL_SCIENTIFIC_RUN.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r48-canonical-development-adjudication
+          path: r48_adjudication/
+          retention-days: 90
