@@ -1,0 +1,165 @@
+name: R51 fresh external robustness battery
+
+on:
+  push:
+    branches: [research/r51-external-robustness-battery-20260924]
+    paths:
+      - experiments/r51_external_robustness_20260924/PREREG_R51.md
+      - experiments/r51_external_robustness_20260924/r51_external_robustness.py
+      - experiments/r51_external_robustness_20260924/adjudicate_r51.py
+      - experiments/r51_external_robustness_20260924/verify_r51.py
+      - .github/workflows/r51_external_robustness.yml
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+
+jobs:
+  engineering:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install frozen external stack
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "numpy==1.23.5" "gym==0.24.0" mazelib
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5eac9965f9963d18c9f455cd1983bca14fb"
+      - name: Verify syntax and external contracts
+        run: |
+          python -m py_compile experiments/r51_external_robustness_20260924/r51_external_robustness.py
+          python -m py_compile experiments/r51_external_robustness_20260924/adjudicate_r51.py
+          python -m py_compile experiments/r51_external_robustness_20260924/verify_r51.py
+          python - <<'PY'
+          import popgym
+          a=popgym.AutoencodeMedium(); assert a.action_space.n==4; a.close()
+          r=popgym.RepeatPreviousMedium(); assert r.action_space.n==4 and r.k==32; r.close()
+          print('R51 external task contracts PASS')
+          PY
+      - name: Run non-scientific smoke
+        run: |
+          mkdir -p r51_smoke
+          python experiments/r51_external_robustness_20260924/r51_external_robustness.py smoke --output r51_smoke/R51_SMOKE.json
+      - name: Record smoke provenance
+        run: |
+          git rev-parse HEAD > r51_smoke/EXECUTION_COMMIT.txt
+          sha256sum experiments/r51_external_robustness_20260924/PREREG_R51.md > r51_smoke/PROTOCOL_SHA256.txt
+          sha256sum experiments/r51_external_robustness_20260924/r51_external_robustness.py > r51_smoke/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r51-engineering-smoke
+          path: r51_smoke/
+          retention-days: 30
+
+  development:
+    needs: engineering
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    outputs:
+      authorize_confirm: ${{ steps.gate.outputs.authorize_confirm }}
+      resolution: ${{ steps.gate.outputs.resolution }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install frozen external stack
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "numpy==1.23.5" "gym==0.24.0" mazelib
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5eac9965f9963d18c9f455cd1983bca14fb"
+      - name: Execute Medium development battery
+        run: |
+          mkdir -p r51_dev
+          python experiments/r51_external_robustness_20260924/r51_external_robustness.py run --seeds 2216001:2216016 --level medium --output r51_dev/R51_DEV_RAW.json
+      - name: Adjudicate development
+        id: gate
+        run: |
+          python experiments/r51_external_robustness_20260924/adjudicate_r51.py --input r51_dev/R51_DEV_RAW.json --phase development --output r51_dev/R51_DEVELOPMENT.json
+          python - <<'PY'
+          import json, os
+          d=json.load(open('r51_dev/R51_DEVELOPMENT.json'))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('authorize_confirm=' + ('true' if d['authorize_confirm'] else 'false') + '\n')
+              f.write('resolution=' + d['resolution'] + '\n')
+          PY
+      - name: Verify development
+        run: python experiments/r51_external_robustness_20260924/verify_r51.py --development r51_dev/R51_DEVELOPMENT.json
+      - name: Record development provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r51_dev/EXECUTION_COMMIT.txt
+          sha256sum experiments/r51_external_robustness_20260924/PREREG_R51.md > r51_dev/PROTOCOL_SHA256.txt
+          sha256sum experiments/r51_external_robustness_20260924/r51_external_robustness.py > r51_dev/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r51-development
+          path: r51_dev/
+          retention-days: 30
+
+  confirmatory:
+    needs: development
+    if: needs.development.outputs.authorize_confirm == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install frozen external stack
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "numpy==1.23.5" "gym==0.24.0" mazelib
+          python -m pip install --no-deps "git+https://github.com/proroklab/popgym.git@e397e5eac9965f9963d18c9f455cd1983bca14fb"
+      - name: Execute reserved Hard battery
+        run: |
+          mkdir -p r51_confirm
+          python experiments/r51_external_robustness_20260924/r51_external_robustness.py run --seeds 2217001:2217032 --level hard --output r51_confirm/R51_CONFIRM_RAW.json
+      - name: Adjudicate confirmation
+        run: python experiments/r51_external_robustness_20260924/adjudicate_r51.py --input r51_confirm/R51_CONFIRM_RAW.json --phase confirmatory --output r51_confirm/R51_CONFIRMATORY.json
+      - name: Record confirmatory provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r51_confirm/EXECUTION_COMMIT.txt
+          sha256sum experiments/r51_external_robustness_20260924/PREREG_R51.md > r51_confirm/PROTOCOL_SHA256.txt
+          sha256sum experiments/r51_external_robustness_20260924/r51_external_robustness.py > r51_confirm/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r51-confirmatory
+          path: r51_confirm/
+          retention-days: 30
+
+  integrity:
+    needs: [development, confirmatory]
+    if: always() && needs.development.result == 'success' && needs.confirmatory.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r51-development
+          path: r51_audit/dev
+      - uses: actions/download-artifact@v4
+        with:
+          name: r51-confirmatory
+          path: r51_audit/confirm
+      - name: Verify final R51 adjudication
+        run: |
+          python experiments/r51_external_robustness_20260924/verify_r51.py --development r51_audit/dev/R51_DEVELOPMENT.json --confirmatory r51_audit/confirm/R51_CONFIRMATORY.json | tee r51_audit/VERIFY_R51.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r51-integrity
+          path: r51_audit/
+          retention-days: 30
