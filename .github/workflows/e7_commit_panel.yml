@@ -1,0 +1,51 @@
+name: E7 commit frozen metadata panel
+
+on:
+  push:
+    branches: [research/e7-ibl-prospective-20260924]
+    paths:
+      - .github/workflows/e7_commit_panel.yml
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  commit_panel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: research/e7-ibl-prospective-20260924
+      - uses: actions/download-artifact@v4
+        with:
+          name: e7-metadata-panel-freeze
+          path: frozen_artifact
+          run-id: 36090357428
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify canonical provenance and stage exact panel bytes
+        run: |
+          test "$(cat frozen_artifact/EXECUTION_COMMIT.txt)" = "d6a8127d3161efbb4d45d56dc879d1977dd9308d"
+          python - <<'PY'
+          import json
+          d=json.load(open('frozen_artifact/E7_PANEL_FREEZE.json'))
+          assert d['neural_outcomes_inspected'] is False
+          assert d['eligible_subject_level_insertions']==138
+          assert sum(x['phase']=='development' for x in d['panel'])==8
+          assert sum(x['phase']=='confirmatory' for x in d['panel'])==16
+          assert sum(x['phase']=='reserve' for x in d['panel'])==24
+          PY
+          mkdir -p experiments/e7_ibl_prospective_20260924/frozen
+          cp frozen_artifact/E7_PANEL_FREEZE.json experiments/e7_ibl_prospective_20260924/frozen/E7_PANEL_FREEZE.json
+          cp frozen_artifact/E7_PANEL_FREEZE.csv experiments/e7_ibl_prospective_20260924/frozen/E7_PANEL_FREEZE.csv
+          cp frozen_artifact/SELECTOR_SHA256.txt experiments/e7_ibl_prospective_20260924/frozen/SELECTOR_SHA256.txt
+          cp frozen_artifact/PIP_FREEZE.txt experiments/e7_ibl_prospective_20260924/frozen/PANEL_PIP_FREEZE.txt
+          cp frozen_artifact/EXECUTION_COMMIT.txt experiments/e7_ibl_prospective_20260924/frozen/PANEL_EXECUTION_COMMIT.txt
+      - name: Commit immutable panel to branch
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add experiments/e7_ibl_prospective_20260924/frozen/
+          git commit -m 'e7: freeze metadata-selected development and confirmatory panel'
+          git push origin HEAD:research/e7-ibl-prospective-20260924
