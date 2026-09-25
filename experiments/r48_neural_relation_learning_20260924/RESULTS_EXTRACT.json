@@ -1,0 +1,62 @@
+{
+  "campaign": "R48 neural relation discovery from reward",
+  "canonical_scientific_run": 36089447230,
+  "canonical_scientific_sha": "33ef845eca64ad80ea956b8ecc5a758f6a883843",
+  "adjudication_repair_run": 36090760519,
+  "resolution": "R48_DEVELOPMENT_FAIL_NO_CONFIRM",
+  "external_source": "proroklab/popgym@e397e5eac9965f9963d18c9f455cd1983bca14fb",
+  "task": "CountRecallMedium",
+  "architecture": "LSTM",
+  "training_episodes_per_checkpoint": 12000,
+  "eligible_checkpoints": 0,
+  "required_eligible_checkpoints": 2,
+  "confirmatory_opened": false,
+  "checkpoints": [
+    {
+      "train_seed": 2196001,
+      "intact_accuracy": 0.18648867313915857,
+      "d_effect": 0.0008090614886731295,
+      "c_effect": 0.14603559870550162,
+      "r_effect": 0,
+      "iso_gap": 0,
+      "iso_action_agreement": 1,
+      "eligible": false
+    },
+    {
+      "train_seed": 2196002,
+      "intact_accuracy": 0.19093851132686085,
+      "d_effect": -0.003236245954692546,
+      "c_effect": 0.16059870550161814,
+      "r_effect": -0.001618122977346259,
+      "iso_gap": 0,
+      "iso_action_agreement": 1,
+      "eligible": false
+    },
+    {
+      "train_seed": 2196003,
+      "intact_accuracy": 0.21642394822006472,
+      "d_effect": 0.002831715210355995,
+      "c_effect": 0.18608414239482202,
+      "r_effect": 0.0012135922330097082,
+      "iso_gap": 0,
+      "iso_action_agreement": 1,
+      "eligible": false
+    }
+  ],
+  "interpretation": {
+    "persistent_history_use": "SUPPORTED_WEAKLY_IN_DEVELOPMENT",
+    "differentiated_identity_use": "NOT_SUPPORTED",
+    "relation_specific_query_to_history_use": "NOT_SUPPORTED",
+    "reward_only_neural_R_learnability": "NOT_SUPPORTED_UNDER_R48_DESIGN",
+    "generic_iso_equivalence": "SUPPORTED_EXACT"
+  },
+  "boundaries": {
+    "R47_functional_DCR_result": "UNCHANGED",
+    "R49": "NOT_OPENED_PREREQUISITE_FAILED",
+    "E6b": "OPEN",
+    "E7": "OPEN",
+    "global_minimality": "OPEN",
+    "POLAR_superiority": "NOT_ESTABLISHED",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}
