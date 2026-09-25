@@ -1,0 +1,39 @@
+name: E7 metadata-only IBL panel freeze
+
+on:
+  push:
+    branches: [research/e7-ibl-prospective-20260924]
+    paths:
+      - experiments/e7_ibl_prospective_20260924/select_panel_metadata.py
+      - .github/workflows/e7_ibl_panel_freeze.yml
+
+permissions:
+  contents: read
+
+jobs:
+  freeze_panel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned metadata stack
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "ONE-api==3.5.2" pandas pyarrow
+          python -m pip install "git+https://github.com/int-brain-lab/paper-brain-wide-map.git@118fc36cb3602934466ad2c6087c2b3b441f9f1f"
+      - name: Freeze metadata-only panel
+        run: |
+          python experiments/e7_ibl_prospective_20260924/select_panel_metadata.py
+      - name: Record provenance
+        run: |
+          git rev-parse HEAD > e7_panel/EXECUTION_COMMIT.txt
+          sha256sum experiments/e7_ibl_prospective_20260924/select_panel_metadata.py > e7_panel/SELECTOR_SHA256.txt
+          python -m pip freeze > e7_panel/PIP_FREEZE.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e7-metadata-panel-freeze
+          path: e7_panel/
+          retention-days: 90
