@@ -1,0 +1,160 @@
+name: R50 fresh higher-order integration
+
+on:
+  push:
+    branches: [research/r50-fresh-higher-order-integration-20260924]
+    paths:
+      - experiments/r50_fresh_higher_order_integration_20260924/PREREG_R50.md
+      - experiments/r50_fresh_higher_order_integration_20260924/r50_fresh_integration.py
+      - experiments/r50_fresh_higher_order_integration_20260924/adjudicate_r50.py
+      - experiments/r50_fresh_higher_order_integration_20260924/verify_r50.py
+      - .github/workflows/r50_fresh_integration.yml
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+
+jobs:
+  engineering:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen runtime
+        run: python -m pip install "numpy==2.1.1"
+      - name: Verify syntax
+        run: |
+          python -m py_compile experiments/r50_fresh_higher_order_integration_20260924/r50_fresh_integration.py
+          python -m py_compile experiments/r50_fresh_higher_order_integration_20260924/adjudicate_r50.py
+          python -m py_compile experiments/r50_fresh_higher_order_integration_20260924/verify_r50.py
+      - name: Run non-scientific engineering smoke
+        run: |
+          mkdir -p r50_smoke
+          python experiments/r50_fresh_higher_order_integration_20260924/r50_fresh_integration.py --seeds 2205000:2205000 --output r50_smoke/R50_SMOKE.json --mode dev
+          python - <<'PY'
+          import json, math
+          d=json.load(open('r50_smoke/R50_SMOKE.json'))
+          r=d['records'][0]
+          assert r['same_agent_steps']==1800
+          assert r['models_learned']>=5
+          for k,v in r.items():
+              if k!='seed' and isinstance(v,(int,float)): assert math.isfinite(v)
+          print(json.dumps(r,indent=2,sort_keys=True))
+          PY
+      - name: Record smoke provenance
+        run: |
+          git rev-parse HEAD > r50_smoke/EXECUTION_COMMIT.txt
+          sha256sum experiments/r50_fresh_higher_order_integration_20260924/PREREG_R50.md > r50_smoke/PROTOCOL_SHA256.txt
+          sha256sum experiments/r50_fresh_higher_order_integration_20260924/r50_fresh_integration.py > r50_smoke/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r50-engineering-smoke
+          path: r50_smoke/
+          retention-days: 30
+
+  development:
+    needs: engineering
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      authorize_confirm: ${{ steps.gate.outputs.authorize_confirm }}
+      resolution: ${{ steps.gate.outputs.resolution }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen runtime
+        run: python -m pip install "numpy==2.1.1"
+      - name: Execute fresh development panel
+        run: |
+          mkdir -p r50_dev
+          python experiments/r50_fresh_higher_order_integration_20260924/r50_fresh_integration.py --seeds 2206001:2206006 --output r50_dev/R50_DEV_RAW.json --mode dev
+      - name: Adjudicate frozen development gate
+        id: gate
+        run: |
+          python experiments/r50_fresh_higher_order_integration_20260924/adjudicate_r50.py --input r50_dev/R50_DEV_RAW.json --phase development --output r50_dev/R50_DEVELOPMENT.json
+          python - <<'PY'
+          import json, os
+          d=json.load(open('r50_dev/R50_DEVELOPMENT.json'))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('authorize_confirm=' + ('true' if d['authorize_confirm'] else 'false') + '\n')
+              f.write('resolution=' + d['resolution'] + '\n')
+          PY
+      - name: Verify development adjudication
+        run: python experiments/r50_fresh_higher_order_integration_20260924/verify_r50.py --development r50_dev/R50_DEVELOPMENT.json
+      - name: Record development provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r50_dev/EXECUTION_COMMIT.txt
+          sha256sum experiments/r50_fresh_higher_order_integration_20260924/PREREG_R50.md > r50_dev/PROTOCOL_SHA256.txt
+          sha256sum experiments/r50_fresh_higher_order_integration_20260924/r50_fresh_integration.py > r50_dev/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r50-development
+          path: r50_dev/
+          retention-days: 30
+
+  confirmatory:
+    needs: development
+    if: needs.development.outputs.authorize_confirm == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen runtime
+        run: python -m pip install "numpy==2.1.1"
+      - name: Execute reserved confirmatory panel
+        run: |
+          mkdir -p r50_confirm
+          python experiments/r50_fresh_higher_order_integration_20260924/r50_fresh_integration.py --seeds 2207001:2207016 --output r50_confirm/R50_CONFIRM_RAW.json --mode confirm
+      - name: Adjudicate frozen confirmation
+        run: python experiments/r50_fresh_higher_order_integration_20260924/adjudicate_r50.py --input r50_confirm/R50_CONFIRM_RAW.json --phase confirmatory --output r50_confirm/R50_CONFIRMATORY.json
+      - name: Record confirmatory provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r50_confirm/EXECUTION_COMMIT.txt
+          sha256sum experiments/r50_fresh_higher_order_integration_20260924/PREREG_R50.md > r50_confirm/PROTOCOL_SHA256.txt
+          sha256sum experiments/r50_fresh_higher_order_integration_20260924/r50_fresh_integration.py > r50_confirm/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r50-confirmatory
+          path: r50_confirm/
+          retention-days: 30
+
+  integrity:
+    needs: [development, confirmatory]
+    if: always() && needs.development.result == 'success' && needs.confirmatory.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r50-development
+          path: r50_audit/dev
+      - uses: actions/download-artifact@v4
+        with:
+          name: r50-confirmatory
+          path: r50_audit/confirm
+      - name: Verify final R50 adjudication
+        run: |
+          python experiments/r50_fresh_higher_order_integration_20260924/verify_r50.py --development r50_audit/dev/R50_DEVELOPMENT.json --confirmatory r50_audit/confirm/R50_CONFIRMATORY.json | tee r50_audit/VERIFY_R50.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r50-integrity
+          path: r50_audit/
+          retention-days: 30

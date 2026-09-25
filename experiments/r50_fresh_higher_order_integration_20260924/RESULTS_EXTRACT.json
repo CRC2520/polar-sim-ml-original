@@ -1,0 +1,86 @@
+{
+  "campaign": "R50 fresh higher-order integration in persistent agent",
+  "canonical_run_id": 36094560746,
+  "scientific_head_sha": "aa63053788b9ea171c3abc6075c3539347ef6c69",
+  "resolution": "R50_DEVELOPMENT_FAIL_NO_CONFIRM",
+  "development": {
+    "seeds": [
+      2206001,
+      2206002,
+      2206003,
+      2206004,
+      2206005,
+      2206006
+    ],
+    "required_seed_count": 4,
+    "component_counts": {
+      "D": 6,
+      "C": 6,
+      "R": 6,
+      "memory": 6,
+      "own_history": 6,
+      "source": 6,
+      "time": 6,
+      "metacog_calibration": 6,
+      "metacog_gate": 5,
+      "planning": 3,
+      "planning_invocation": 6,
+      "stability": 6,
+      "same_lifetime": 6,
+      "models": 6,
+      "joint": 3
+    },
+    "medians": {
+      "D_prediction_damage": 0.008848590939188876,
+      "C_recurrent_context_gain": 0.0016724844418606341,
+      "R_relation_lesion_damage": 0.001077006041136267,
+      "memory_reentry_gain": 0.000771814442483432,
+      "own_history_transplant_damage": 0.00225832252784106,
+      "source_balanced_accuracy": 0.9841811823700185,
+      "time_order_accuracy": 1,
+      "metacog_calibration_gap": 0.0006795112774931375,
+      "metacog_gate_gain": 0.0003285624173196997,
+      "planning_gain": 0.0003360666209235292,
+      "planning_candidate_gain_all": -0.00027028010752991815,
+      "planning_invocation_rate": 0.042281879194630875,
+      "stable_fraction": 1,
+      "models_learned": 5
+    }
+  },
+  "confirmatory": {
+    "opened": false,
+    "seeds": [
+      2207001,
+      2207002,
+      2207003,
+      2207004,
+      2207005,
+      2207006,
+      2207007,
+      2207008,
+      2207009,
+      2207010,
+      2207011,
+      2207012,
+      2207013,
+      2207014,
+      2207015,
+      2207016
+    ]
+  },
+  "interpretation": {
+    "broad_integration_failure": "NOT_SUPPORTED",
+    "primary_bottleneck": "THREE_STEP_MODEL_BASED_PLANNING_FIDELITY",
+    "secondary_bottleneck": "METACOG_GATE_SINGLE_SEED",
+    "DCR": "ROBUST_6_OF_6",
+    "memory_reentry": "ROBUST_6_OF_6",
+    "metacognitive_calibration": "ROBUST_6_OF_6"
+  },
+  "boundaries": {
+    "core_version": "POLAR Core v1.1 unchanged",
+    "E6b": "OPEN",
+    "E7": "OPEN",
+    "global_minimality": "OPEN",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}
