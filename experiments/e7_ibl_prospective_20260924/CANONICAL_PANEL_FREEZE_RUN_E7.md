@@ -2,17 +2,24 @@
 
 Date: 24 September 2026, America/Lima.
 
-The initial run `36090053919` failed before panel selection because the public
-OpenAlyx password was omitted. No panel or neural outcome was produced.
+Two pre-panel engineering attempts are non-adjudicative:
+
+- `36090053919`: failed before metadata selection because the documented public
+  OpenAlyx password was omitted.
+- `36090200540`: authenticated and downloaded aggregate metadata but failed
+  before panel creation because the upstream helper's default 2026 aggregate
+  MD5 registry lacks a `trials` key.
+
+Neither run produced an E7 panel or inspected spike/neural endpoint values.
 
 Canonical metadata-only panel-freeze run:
 
-- run: `36090200540`
-- head SHA: `3f663815202489f4e7e9fe9888e4a97ec9954638`
+- run: `36090357428`
+- head SHA: `d6a8127d3161efbb4d45d56dc879d1977dd9308d`
 - event: `push`
 
-This selection is recorded before the repaired run's panel artifact is
-inspected.
+This selection is recorded before the run's panel artifact is inspected.
 
-The only change from the failed run is use of the documented public OpenAlyx
-credentials. Scientific selection rules and E7 endpoints are unchanged.
+The only repairs are public authentication and pinning matched upstream
+aggregate metadata tables with published hashes. Scientific panel hashing,
+eligibility, D/C/R endpoints and confirmatory thresholds are unchanged.
