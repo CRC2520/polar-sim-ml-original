@@ -1,0 +1,158 @@
+name: R53 causal identity continuity
+
+on:
+  push:
+    branches: [research/r53-causal-identity-continuity-20260925]
+    paths:
+      - experiments/r53_causal_identity_continuity_20260925/PREREG_R53.md
+      - experiments/r53_causal_identity_continuity_20260925/r53_causal_identity.py
+      - experiments/r53_causal_identity_continuity_20260925/verify_r53.py
+      - .github/workflows/r53_causal_identity.yml
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+
+jobs:
+  engineering:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install runtime
+        run: python -m pip install "numpy==2.1.1"
+      - name: Verify syntax
+        run: |
+          python -m py_compile experiments/r53_causal_identity_continuity_20260925/r53_causal_identity.py
+          python -m py_compile experiments/r53_causal_identity_continuity_20260925/verify_r53.py
+      - name: Run non-scientific smoke
+        run: |
+          mkdir -p r53_smoke
+          python experiments/r53_causal_identity_continuity_20260925/r53_causal_identity.py --mode smoke --output r53_smoke/R53_SMOKE.json
+          python - <<'PY'
+          import json, math
+          d=json.load(open('r53_smoke/R53_SMOKE.json'))
+          r=d['records'][0]
+          assert r['body_inverse_map_accuracy']==1.0
+          assert r['common_current_input_equal']
+          assert math.isfinite(r['intact_accuracy'])
+          print(json.dumps(r,indent=2,sort_keys=True))
+          PY
+      - name: Record provenance
+        run: |
+          git rev-parse HEAD > r53_smoke/EXECUTION_COMMIT.txt
+          sha256sum experiments/r53_causal_identity_continuity_20260925/PREREG_R53.md > r53_smoke/PROTOCOL_SHA256.txt
+          sha256sum experiments/r53_causal_identity_continuity_20260925/r53_causal_identity.py > r53_smoke/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r53-engineering-smoke
+          path: r53_smoke/
+          retention-days: 30
+
+  development:
+    needs: engineering
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      authorize_confirm: ${{ steps.gate.outputs.authorize_confirm }}
+      resolution: ${{ steps.gate.outputs.resolution }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install runtime
+        run: python -m pip install "numpy==2.1.1"
+      - name: Execute development panel
+        run: |
+          mkdir -p r53_dev
+          python experiments/r53_causal_identity_continuity_20260925/r53_causal_identity.py --mode development --output r53_dev/R53_DEVELOPMENT.json
+      - name: Freeze development gate
+        id: gate
+        run: |
+          python experiments/r53_causal_identity_continuity_20260925/verify_r53.py --development r53_dev/R53_DEVELOPMENT.json
+          python - <<'PY'
+          import json, os
+          d=json.load(open('r53_dev/R53_DEVELOPMENT.json'))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('authorize_confirm=' + ('true' if d['authorize_confirm'] else 'false') + '\n')
+              f.write('resolution=' + d['resolution'] + '\n')
+          PY
+      - name: Record provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r53_dev/EXECUTION_COMMIT.txt
+          sha256sum experiments/r53_causal_identity_continuity_20260925/PREREG_R53.md > r53_dev/PROTOCOL_SHA256.txt
+          sha256sum experiments/r53_causal_identity_continuity_20260925/r53_causal_identity.py > r53_dev/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r53-development
+          path: r53_dev/
+          retention-days: 30
+
+  confirmatory:
+    needs: development
+    if: needs.development.outputs.authorize_confirm == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install runtime
+        run: python -m pip install "numpy==2.1.1"
+      - name: Execute reserved confirmatory panel
+        run: |
+          mkdir -p r53_confirm
+          python experiments/r53_causal_identity_continuity_20260925/r53_causal_identity.py --mode confirmatory --output r53_confirm/R53_CONFIRMATORY.json
+      - name: Record provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > r53_confirm/EXECUTION_COMMIT.txt
+          sha256sum experiments/r53_causal_identity_continuity_20260925/PREREG_R53.md > r53_confirm/PROTOCOL_SHA256.txt
+          sha256sum experiments/r53_causal_identity_continuity_20260925/r53_causal_identity.py > r53_confirm/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r53-confirmatory
+          path: r53_confirm/
+          retention-days: 30
+
+  integrity:
+    needs: [development, confirmatory]
+    if: always() && needs.development.result == 'success' && needs.confirmatory.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install verifier dependency
+        run: python -m pip install "numpy==2.1.1"
+      - uses: actions/download-artifact@v4
+        with:
+          name: r53-development
+          path: r53_audit/dev
+      - uses: actions/download-artifact@v4
+        with:
+          name: r53-confirmatory
+          path: r53_audit/confirm
+      - name: Verify final R53 adjudication
+        run: |
+          python experiments/r53_causal_identity_continuity_20260925/verify_r53.py --development r53_audit/dev/R53_DEVELOPMENT.json --confirmatory r53_audit/confirm/R53_CONFIRMATORY.json | tee r53_audit/VERIFY_R53.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r53-integrity
+          path: r53_audit/
+          retention-days: 30

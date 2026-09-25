@@ -1,0 +1,37 @@
+{
+  "campaign": "R53 causal identity continuity",
+  "canonical_run_id": 36192020469,
+  "canonical_scientific_sha": "4aa34c8d277100571a5c7d16468e4274869391d7",
+  "resolution": "R53_CAUSAL_IDENTITY_CONTINUITY_PASS_BOUNDED",
+  "development": {
+    "seeds": "2236001-2236016",
+    "authorized": true
+  },
+  "confirmatory": {
+    "seeds": "2237001-2237032",
+    "seed_guard_count": 31,
+    "required": 28,
+    "pass": true,
+    "medians": {
+      "intact_accuracy": 1,
+      "relevant_deletion_damage": 0.75,
+      "same_body_donor_damage": 0.75,
+      "selective_deletion_specificity": 0.75,
+      "reconstruction_damage": 0.75,
+      "different_history_divergence": 0.8125,
+      "identical_history_divergence": 0,
+      "fork_excess_divergence": 0.8125,
+      "body_inverse_map_accuracy": 1
+    }
+  },
+  "boundaries": {
+    "claim_scope": "bounded own-history causal continuity in synthetic deferred-commitment task",
+    "phenomenal_self": "NOT_ESTABLISHED",
+    "subjective_identity": "NOT_ESTABLISHED",
+    "consciousness": "NOT_ESTABLISHED",
+    "E6b": "OPEN",
+    "E7": "OPEN",
+    "AGI_ASI": "NOT_ESTABLISHED",
+    "core_version": "POLAR Core v1.1 unchanged"
+  }
+}
