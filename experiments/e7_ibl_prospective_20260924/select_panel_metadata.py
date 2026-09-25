@@ -27,8 +27,8 @@ def main():
     one=ONE(base_url="https://openalyx.internationalbrainlab.org", username="intbrainlab", password="international", silent=True)
     bwm=bwm_query(one=one, freeze=FREEZE).copy()
 
-    clusters_path=download_aggregate_tables(one, type="clusters")
-    trials_path=download_aggregate_tables(one, type="trials")
+    clusters_path=download_aggregate_tables(one, type="clusters", tag="2024_Q2_IBL_et_al_BWM")
+    trials_path=download_aggregate_tables(one, type="trials", tag="2024_Q2_IBL_et_al_BWM")
     clusters=pd.read_parquet(clusters_path)
     trials=pd.read_parquet(trials_path)
 
