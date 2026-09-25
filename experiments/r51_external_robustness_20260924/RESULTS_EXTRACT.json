@@ -1,0 +1,95 @@
+{
+  "campaign": "R51 fresh external robustness battery",
+  "canonical_run_id": 36095588879,
+  "scientific_head_sha": "59f355b5a6152fa3435b4db8896a18089f80a591",
+  "resolution": "R51_EXTERNAL_ROBUSTNESS_BATTERY_PASS",
+  "external_source": "proroklab/popgym@e397e5eac9965f9963d18c9f455cd1983bca14fb",
+  "development": {
+    "seeds": "2216001-2216016",
+    "seed_guard_count": 16,
+    "required": 13,
+    "pass": true
+  },
+  "confirmatory": {
+    "seeds": "2217001-2217032",
+    "seed_guard_count": 32,
+    "required": 28,
+    "pass": true,
+    "autoencode": {
+      "CLEAN": {
+        "full": 1,
+        "D": 0.75,
+        "C": 0.74359,
+        "R": 0.75,
+        "iso_gap": 0,
+        "iso_action_agreement": 1
+      },
+      "NOISE_05": {
+        "full": 0.948718,
+        "D": 0.698718,
+        "C": 0.69391,
+        "R": 0.698718
+      },
+      "OCCLUSION_10": {
+        "full": 0.926282,
+        "D": 0.676282,
+        "C": 0.671474,
+        "R": 0.68109
+      },
+      "STALE_05": {
+        "full": 0.963141,
+        "D": 0.713141,
+        "C": 0.706731,
+        "R": 0.708333
+      },
+      "SEMANTIC_SHIFT_HALF": {
+        "full": 0.5,
+        "D": 0.25,
+        "C": 0.25,
+        "R": 0.25
+      }
+    },
+    "repeat_previous": {
+      "CLEAN": {
+        "full": 1,
+        "D": 0.752717,
+        "C": 0.752717,
+        "R": 0.755435,
+        "iso_gap": 0,
+        "iso_action_agreement": 1
+      },
+      "NOISE_05": {
+        "full": 0.951087,
+        "D": 0.706522,
+        "C": 0.706522,
+        "R": 0.69837
+      },
+      "OCCLUSION_10": {
+        "full": 0.934783,
+        "D": 0.684783,
+        "C": 0.684783,
+        "R": 0.682065
+      },
+      "STALE_05": {
+        "full": 0.961957,
+        "D": 0.717391,
+        "C": 0.717391,
+        "R": 0.671196
+      },
+      "SEMANTIC_SHIFT_HALF": {
+        "full": 0.847826,
+        "D": 0.600543,
+        "C": 0.600543,
+        "R": 0.608696
+      }
+    }
+  },
+  "boundaries": {
+    "neural_learnability": "NOT_TESTED",
+    "global_minimality": "OPEN",
+    "E6b": "OPEN",
+    "E7": "OPEN",
+    "higher_order_integration": "NOT_TESTED",
+    "consciousness": "NOT_ESTABLISHED"
+  }
+}
