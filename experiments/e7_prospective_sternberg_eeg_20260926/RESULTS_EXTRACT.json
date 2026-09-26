@@ -1,0 +1,46 @@
+{
+  "campaign": "E7 prospective biological correspondence",
+  "canonical_run_id": 36228475030,
+  "canonical_scientific_sha": "dbb659d3309391436b86c7a7796257be93490ae3",
+  "resolution": "E7_DEVELOPMENT_INVALID",
+  "dataset": {
+    "nemar": "on005095",
+    "nemar_version": "v1.0.0",
+    "openneuro": "ds005095",
+    "metadata_repo_commit": "e7246fbd0c0372161e8dbfbf19cdd387442472c7"
+  },
+  "development": {
+    "subjects": "sub-04-sub-19",
+    "scientifically_valid_subjects": 2,
+    "valid_required": 14,
+    "valid_subject_ids": [
+      "sub-06",
+      "sub-16"
+    ],
+    "D_pass_count": 2,
+    "C_pass_count": 2,
+    "R_pass_count": 0,
+    "joint_pass_count": 0,
+    "medians": {
+      "D_specificity": 0.4848174603174603,
+      "C_specificity": 0.41487301587301584,
+      "R_specificity": -0.014897696257990423
+    }
+  },
+  "confirmatory": {
+    "opened": false,
+    "subjects": "sub-21-sub-52"
+  },
+  "interpretation": {
+    "dataset_quality_contract": "FAILED",
+    "biological_correspondence": "NOT_ESTABLISHED",
+    "follow_up": "NEW_DATASET_AND_NEW_PREREGISTRATION_REQUIRED"
+  },
+  "boundaries": {
+    "causal_neural_necessity": "NOT_ESTABLISHED",
+    "biological_identity": "NOT_ESTABLISHED",
+    "E6b": "OPEN",
+    "consciousness": "NOT_ESTABLISHED",
+    "core_version": "POLAR Core v1.1 unchanged"
+  }
+}
