@@ -1,0 +1,147 @@
+name: R56 bounded causal social interaction
+
+on:
+  push:
+    branches: [research/r56-causal-social-interaction-20260926]
+    paths:
+      - experiments/r56_causal_social_interaction_20260926/PREREG_R56.md
+      - experiments/r56_causal_social_interaction_20260926/r56_social_interaction.py
+      - experiments/r56_causal_social_interaction_20260926/verify_r56.py
+      - .github/workflows/r56_social_interaction.yml
+
+permissions:
+  contents: read
+
+jobs:
+  engineering:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install runtime
+        run: python -m pip install "numpy==2.1.1"
+      - name: Verify syntax
+        run: |
+          python -m py_compile experiments/r56_causal_social_interaction_20260926/r56_social_interaction.py
+          python -m py_compile experiments/r56_causal_social_interaction_20260926/verify_r56.py
+      - name: Run non-scientific smoke
+        run: |
+          mkdir -p r56_smoke
+          python experiments/r56_causal_social_interaction_20260926/r56_social_interaction.py --mode smoke --output r56_smoke/R56_SMOKE.json
+          python - <<'PY'
+          import json,math
+          r=json.load(open('r56_smoke/R56_SMOKE.json'))['record']
+          assert r['sham_gap'] <= 1e-12
+          for k in ['full_mean_reward','identity_effect','history_effect','relation_effect','long_horizon_effect']:
+              assert math.isfinite(r[k])
+          print(json.dumps(r,indent=2,sort_keys=True))
+          PY
+      - name: Record provenance
+        run: |
+          git rev-parse HEAD > r56_smoke/EXECUTION_COMMIT.txt
+          sha256sum experiments/r56_causal_social_interaction_20260926/PREREG_R56.md > r56_smoke/PROTOCOL_SHA256.txt
+          sha256sum experiments/r56_causal_social_interaction_20260926/r56_social_interaction.py > r56_smoke/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r56-engineering
+          path: r56_smoke/
+          retention-days: 30
+
+  development:
+    needs: engineering
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    outputs:
+      authorize_confirm: ${{ steps.gate.outputs.authorize_confirm }}
+      resolution: ${{ steps.gate.outputs.resolution }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install runtime
+        run: python -m pip install "numpy==2.1.1"
+      - name: Run frozen development panel
+        run: |
+          mkdir -p r56_dev
+          python experiments/r56_causal_social_interaction_20260926/r56_social_interaction.py --mode development --output r56_dev/R56_DEVELOPMENT.json
+      - name: Verify and expose gate
+        id: gate
+        run: |
+          python experiments/r56_causal_social_interaction_20260926/verify_r56.py --development r56_dev/R56_DEVELOPMENT.json | tee r56_dev/VERIFY_R56_DEV.txt
+          python - <<'PY'
+          import json,os
+          d=json.load(open('r56_dev/R56_DEVELOPMENT.json'))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('authorize_confirm=' + ('true' if d['authorize_confirm'] else 'false') + '\n')
+              f.write('resolution=' + d['resolution'] + '\n')
+          PY
+      - name: Record provenance
+        run: |
+          git rev-parse HEAD > r56_dev/EXECUTION_COMMIT.txt
+          sha256sum experiments/r56_causal_social_interaction_20260926/PREREG_R56.md > r56_dev/PROTOCOL_SHA256.txt
+          sha256sum experiments/r56_causal_social_interaction_20260926/r56_social_interaction.py > r56_dev/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r56-development
+          path: r56_dev/
+          retention-days: 30
+
+  confirmatory:
+    needs: development
+    if: needs.development.outputs.authorize_confirm == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install runtime
+        run: python -m pip install "numpy==2.1.1"
+      - name: Run reserved confirmatory panel
+        run: |
+          mkdir -p r56_confirm
+          python experiments/r56_causal_social_interaction_20260926/r56_social_interaction.py --mode confirmatory --output r56_confirm/R56_CONFIRMATORY.json
+      - name: Record provenance
+        run: |
+          git rev-parse HEAD > r56_confirm/EXECUTION_COMMIT.txt
+          sha256sum experiments/r56_causal_social_interaction_20260926/PREREG_R56.md > r56_confirm/PROTOCOL_SHA256.txt
+          sha256sum experiments/r56_causal_social_interaction_20260926/r56_social_interaction.py > r56_confirm/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r56-confirmatory
+          path: r56_confirm/
+          retention-days: 30
+
+  integrity:
+    needs: [development, confirmatory]
+    if: always() && needs.development.result == 'success' && needs.confirmatory.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install verifier runtime
+        run: python -m pip install "numpy==2.1.1"
+      - uses: actions/download-artifact@v4
+        with:
+          name: r56-development
+          path: r56_audit/dev
+      - uses: actions/download-artifact@v4
+        with:
+          name: r56-confirmatory
+          path: r56_audit/confirm
+      - name: Verify final adjudication
+        run: |
+          python experiments/r56_causal_social_interaction_20260926/verify_r56.py --development r56_audit/dev/R56_DEVELOPMENT.json --confirmatory r56_audit/confirm/R56_CONFIRMATORY.json | tee r56_audit/VERIFY_R56.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r56-integrity
+          path: r56_audit/
+          retention-days: 30
