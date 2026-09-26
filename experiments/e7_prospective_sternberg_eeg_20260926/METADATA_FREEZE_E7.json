@@ -1,0 +1,124 @@
+{
+  "campaign": "E7 prospective biological correspondence",
+  "dataset": {
+    "openneuro": "ds005095",
+    "nemar": "on005095",
+    "nemar_version": "v1.0.0",
+    "openneuro_doi": "10.18112/openneuro.ds005095.v1.0.2",
+    "nemar_doi": "10.82901/nemar.on005095",
+    "metadata_repository": "nemarDatasets/on005095",
+    "metadata_repo_commit": "e7246fbd0c0372161e8dbfbf19cdd387442472c7"
+  },
+  "subjects": {
+    "development": [
+      "04",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19"
+    ],
+    "confirmatory": [
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "30",
+      "31",
+      "32",
+      "33",
+      "34",
+      "35",
+      "36",
+      "37",
+      "38",
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44",
+      "45",
+      "46",
+      "47",
+      "48",
+      "49",
+      "50",
+      "51",
+      "52"
+    ]
+  },
+  "event_map": {
+    "31": {
+      "set_size": 3,
+      "relation": "OUT_OF_SET"
+    },
+    "32": {
+      "set_size": 3,
+      "relation": "IN_SET"
+    },
+    "61": {
+      "set_size": 6,
+      "relation": "OUT_OF_SET"
+    },
+    "62": {
+      "set_size": 6,
+      "relation": "IN_SET"
+    },
+    "91": {
+      "set_size": 9,
+      "relation": "OUT_OF_SET"
+    },
+    "92": {
+      "set_size": 9,
+      "relation": "IN_SET"
+    },
+    "121": {
+      "set_size": 12,
+      "relation": "OUT_OF_SET"
+    },
+    "122": {
+      "set_size": 12,
+      "relation": "IN_SET"
+    },
+    "151": {
+      "set_size": 15,
+      "relation": "OUT_OF_SET"
+    },
+    "152": {
+      "set_size": 15,
+      "relation": "IN_SET"
+    }
+  },
+  "phase_windows_seconds": {
+    "encoding": [
+      0.2,
+      1.4
+    ],
+    "retention": [
+      1.8,
+      3.3
+    ],
+    "early_retrieval": [
+      3.55,
+      4.25
+    ]
+  },
+  "signal_opened": false,
+  "note": "Only Git/BIDS metadata and event sidecars were inspected to freeze subject split and true relation labels. No EEG waveform-derived quantity has been inspected."
+}
