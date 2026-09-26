@@ -1,0 +1,76 @@
+name: R10 five-experiment campaign
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  confirmatory:
+    if: github.head_ref == 'research/r10-five-experiments-20260920'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-repro.txt
+      - name: Install frozen CPU environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements-repro.txt
+      - name: Run repository regression tests
+        run: python -m unittest discover -s tests -t . -v
+      - name: Run frozen R10 contract tests
+        run: python -m unittest r10_completion.test_r10 -v
+      - name: Verify R10 scientific freeze
+        run: python -m r10_completion.freeze --verify r10_completion/FREEZE_R10.json
+      - name: Run 16-seed confirmatory campaign
+        run: python -m r10_completion.runner --phase final --output r10_results/final
+      - name: Print final decisions and per-seed pass vectors
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('r10_results/final/R10_RESULTS.json'))
+          print('FINAL_AGG',json.dumps(p['aggregate'],sort_keys=True))
+          for r in p['per_seed']:
+              print('FINAL_SEED',json.dumps({
+                  'seed':r['seed'],
+                  'pass':{k:r[k]['pass_strong'] for k in ('E1','E2','E3','E4','E5')},
+                  'E1_d':r['E1']['selected_dimension'],
+                  'E2_adv':r['E2']['matched_structural']['return_advantage'],
+                  'E3_acc':r['E3']['confirmatory']['gate_balanced_accuracy'],
+                  'E3_adv':r['E3']['confirmatory']['advantage_best_constant'],
+                  'E4_queue':r['E4']['heldout']['queue'],
+                  'E4_inertia':r['E4']['heldout']['inertia'],
+                  'E5_intact':r['E5']['intact'],
+                  'E5_signatures':r['E5']['lesion_signatures'],
+              },sort_keys=True))
+          PY
+      - name: Deterministic seed replay audit
+        run: |
+          python - <<'PY'
+          import json
+          from r10_completion.runner import run_seed
+          from r10_completion.core import jsonable
+          old=json.load(open('r10_results/final/seed_972001.json'))
+          new=jsonable(run_seed(972001))
+          a=json.dumps(old,sort_keys=True,separators=(',',':'),allow_nan=False)
+          b=json.dumps(new,sort_keys=True,separators=(',',':'),allow_nan=False)
+          assert a==b, 'confirmatory seed replay mismatch'
+          open('r10_results/final/REPLAY_972001.txt','w').write('PASS exact deterministic replay\n')
+          print('REPLAY_972001 PASS exact')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r10-confirmatory-results
+          path: r10_results/final/
+          if-no-files-found: error
