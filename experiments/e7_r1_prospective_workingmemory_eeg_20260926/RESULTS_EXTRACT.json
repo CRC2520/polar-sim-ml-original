@@ -1,0 +1,68 @@
+{
+  "campaign": "E7-R1 prospective biological correspondence",
+  "canonical_run_id": 36251413857,
+  "canonical_scientific_sha": "ed10df20c5c4966736d4a8085a6ac52a18e9a3ca",
+  "resolution": "E7_R1_DEVELOPMENT_FAIL_NO_CONFIRM",
+  "dataset": {
+    "nemar": "on004117",
+    "nemar_version": "v1.0.0",
+    "openneuro": "ds004117",
+    "openneuro_version": "v1.0.1",
+    "metadata_repo_commit": "7f607906883e117658534aa2879d59a7a7b5d145"
+  },
+  "development": {
+    "subjects": [
+      "001",
+      "002",
+      "003",
+      "004",
+      "005",
+      "006",
+      "007",
+      "008"
+    ],
+    "scientifically_valid_subjects": 8,
+    "D_pass_count": 8,
+    "C_pass_count": 2,
+    "R_pass_count": 1,
+    "joint_pass_count": 1,
+    "medians": {
+      "D_specificity": 0.21272937733602826,
+      "C_specificity": 0.017774470899470873,
+      "R_specificity": 0.022104978354978405
+    }
+  },
+  "confirmatory": {
+    "opened": false,
+    "subjects": [
+      "009",
+      "010",
+      "011",
+      "012",
+      "014",
+      "015",
+      "016",
+      "017",
+      "018",
+      "019",
+      "020",
+      "021",
+      "022",
+      "023",
+      "024"
+    ]
+  },
+  "interpretation": {
+    "D_encoding_role_correspondence": "SUPPORTED_DEVELOPMENT",
+    "C_maintenance_load_correspondence": "NOT_SUPPORTED_AT_FROZEN_GATE",
+    "R_probe_relation_correspondence": "NOT_SUPPORTED_AT_FROZEN_GATE",
+    "full_DCR_biological_correspondence": "NOT_SUPPORTED"
+  },
+  "boundaries": {
+    "causal_neural_necessity": "NOT_ESTABLISHED",
+    "biological_identity": "NOT_ESTABLISHED",
+    "E6b": "OPEN",
+    "consciousness": "NOT_ESTABLISHED",
+    "core_version": "POLAR Core v1.1 unchanged"
+  }
+}
