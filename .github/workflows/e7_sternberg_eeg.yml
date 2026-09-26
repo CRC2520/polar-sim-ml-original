@@ -1,0 +1,234 @@
+name: E7 prospective Sternberg EEG correspondence
+
+on:
+  push:
+    branches: [research/e7-prospective-sternberg-eeg-20260926]
+    paths:
+      - experiments/e7_prospective_sternberg_eeg_20260926/PREREG_E7.md
+      - experiments/e7_prospective_sternberg_eeg_20260926/METADATA_FREEZE_E7.json
+      - experiments/e7_prospective_sternberg_eeg_20260926/e7_subject_analysis.py
+      - experiments/e7_prospective_sternberg_eeg_20260926/adjudicate_e7.py
+      - experiments/e7_prospective_sternberg_eeg_20260926/verify_e7.py
+      - .github/workflows/e7_sternberg_eeg.yml
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+
+jobs:
+  metadata_contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install analysis stack
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0"
+      - name: Verify frozen code and metadata-only contract
+        run: |
+          python -m py_compile experiments/e7_prospective_sternberg_eeg_20260926/e7_subject_analysis.py
+          python -m py_compile experiments/e7_prospective_sternberg_eeg_20260926/adjudicate_e7.py
+          python -m py_compile experiments/e7_prospective_sternberg_eeg_20260926/verify_e7.py
+          python - <<'PY'
+          import json
+          d=json.load(open('experiments/e7_prospective_sternberg_eeg_20260926/METADATA_FREEZE_E7.json'))
+          assert d['signal_opened'] is False
+          assert len(d['subjects']['development'])==16
+          assert len(d['subjects']['confirmatory'])==32
+          assert set(d['event_map'])=={'31','32','61','62','91','92','121','122','151','152'}
+          print('E7 metadata freeze contract PASS')
+          PY
+      - name: Record pre-signal provenance
+        run: |
+          mkdir -p e7_meta
+          git rev-parse HEAD > e7_meta/EXECUTION_COMMIT.txt
+          sha256sum experiments/e7_prospective_sternberg_eeg_20260926/PREREG_E7.md > e7_meta/PROTOCOL_SHA256.txt
+          sha256sum experiments/e7_prospective_sternberg_eeg_20260926/METADATA_FREEZE_E7.json > e7_meta/METADATA_SHA256.txt
+          sha256sum experiments/e7_prospective_sternberg_eeg_20260926/e7_subject_analysis.py > e7_meta/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e7-metadata-freeze
+          path: e7_meta/
+          retention-days: 30
+
+  development_subject:
+    needs: metadata_contract
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        subject: ["04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install frozen analysis stack
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0"
+      - name: Open development EEG and analyze frozen subject
+        run: |
+          mkdir -p e7_dev/${{ matrix.subject }}
+          python experiments/e7_prospective_sternberg_eeg_20260926/e7_subject_analysis.py \
+            --subject ${{ matrix.subject }} \
+            --output e7_dev/${{ matrix.subject }}/result.json \
+            --cache e7_dev/${{ matrix.subject }}/cache
+      - name: Record subject provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > e7_dev/${{ matrix.subject }}/EXECUTION_COMMIT.txt
+          sha256sum experiments/e7_prospective_sternberg_eeg_20260926/PREREG_E7.md > e7_dev/${{ matrix.subject }}/PROTOCOL_SHA256.txt
+          sha256sum experiments/e7_prospective_sternberg_eeg_20260926/e7_subject_analysis.py > e7_dev/${{ matrix.subject }}/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e7-dev-${{ matrix.subject }}
+          path: e7_dev/${{ matrix.subject }}/
+          retention-days: 30
+
+  development_gate:
+    needs: development_subject
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      authorize_confirm: ${{ steps.gate.outputs.authorize_confirm }}
+      resolution: ${{ steps.gate.outputs.resolution }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install adjudication dependency
+        run: python -m pip install "numpy==1.26.4"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: e7-dev-*
+          path: e7_dev_all
+      - name: Aggregate frozen development panel
+        id: gate
+        run: |
+          mkdir -p e7_dev_gate
+          mapfile -t files < <(find e7_dev_all -name result.json | sort)
+          test "${#files[@]}" -eq 16
+          python experiments/e7_prospective_sternberg_eeg_20260926/adjudicate_e7.py --inputs "${files[@]}" --phase development --output e7_dev_gate/E7_DEVELOPMENT.json
+          python experiments/e7_prospective_sternberg_eeg_20260926/verify_e7.py --development e7_dev_gate/E7_DEVELOPMENT.json | tee e7_dev_gate/VERIFY_E7_DEV.txt
+          python - <<'PY'
+          import json, os
+          d=json.load(open('e7_dev_gate/E7_DEVELOPMENT.json'))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('authorize_confirm=' + ('true' if d['authorize_confirm'] else 'false') + '\n')
+              f.write('resolution=' + d['resolution'] + '\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e7-development-gate
+          path: e7_dev_gate/
+          retention-days: 30
+
+  confirmatory_subject:
+    needs: development_gate
+    if: needs.development_gate.outputs.authorize_confirm == 'true'
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        subject: ["21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52"]
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install frozen analysis stack
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0"
+      - name: Open reserved confirmatory EEG and analyze frozen subject
+        run: |
+          mkdir -p e7_confirm/${{ matrix.subject }}
+          python experiments/e7_prospective_sternberg_eeg_20260926/e7_subject_analysis.py \
+            --subject ${{ matrix.subject }} \
+            --output e7_confirm/${{ matrix.subject }}/result.json \
+            --cache e7_confirm/${{ matrix.subject }}/cache
+      - name: Record subject provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > e7_confirm/${{ matrix.subject }}/EXECUTION_COMMIT.txt
+          sha256sum experiments/e7_prospective_sternberg_eeg_20260926/PREREG_E7.md > e7_confirm/${{ matrix.subject }}/PROTOCOL_SHA256.txt
+          sha256sum experiments/e7_prospective_sternberg_eeg_20260926/e7_subject_analysis.py > e7_confirm/${{ matrix.subject }}/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e7-confirm-${{ matrix.subject }}
+          path: e7_confirm/${{ matrix.subject }}/
+          retention-days: 30
+
+  confirmatory_gate:
+    needs: [development_gate, confirmatory_subject]
+    if: always() && needs.development_gate.outputs.authorize_confirm == 'true' && needs.confirmatory_subject.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install adjudication dependency
+        run: python -m pip install "numpy==1.26.4"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: e7-confirm-*
+          path: e7_confirm_all
+      - name: Aggregate final E7 panel
+        run: |
+          mkdir -p e7_final
+          mapfile -t files < <(find e7_confirm_all -name result.json | sort)
+          test "${#files[@]}" -eq 32
+          python experiments/e7_prospective_sternberg_eeg_20260926/adjudicate_e7.py --inputs "${files[@]}" --phase confirmatory --output e7_final/E7_CONFIRMATORY.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e7-confirmatory-gate
+          path: e7_final/
+          retention-days: 30
+
+  integrity:
+    needs: [development_gate, confirmatory_gate]
+    if: always() && needs.development_gate.result == 'success' && needs.confirmatory_gate.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install verifier dependency
+        run: python -m pip install "numpy==1.26.4"
+      - uses: actions/download-artifact@v4
+        with:
+          name: e7-development-gate
+          path: e7_audit/dev
+      - uses: actions/download-artifact@v4
+        with:
+          name: e7-confirmatory-gate
+          path: e7_audit/confirm
+      - name: Verify final E7 adjudication
+        run: |
+          python experiments/e7_prospective_sternberg_eeg_20260926/verify_e7.py --development e7_audit/dev/E7_DEVELOPMENT.json --confirmatory e7_audit/confirm/E7_CONFIRMATORY.json | tee e7_audit/VERIFY_E7.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e7-integrity
+          path: e7_audit/
+          retention-days: 30
