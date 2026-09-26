@@ -32,7 +32,7 @@ jobs:
       - name: Install frozen analysis stack
         run: |
           python -m pip install --upgrade "pip<25"
-          python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0"
+          python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0" "pymatreader==1.0.0" "h5py==3.12.1"
       - name: Verify frozen code and metadata
         run: |
           python -m py_compile experiments/e7_r1_prospective_workingmemory_eeg_20260926/e7_r1_subject_analysis.py
@@ -77,7 +77,7 @@ jobs:
       - name: Install frozen analysis stack
         run: |
           python -m pip install --upgrade "pip<25"
-          python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0"
+          python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0" "pymatreader==1.0.0" "h5py==3.12.1"
       - name: Open development EEG and analyze frozen subject
         run: |
           mkdir -p e7r1_dev/${{ matrix.subject }}
@@ -155,7 +155,7 @@ jobs:
       - name: Install frozen analysis stack
         run: |
           python -m pip install --upgrade "pip<25"
-          python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0"
+          python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0" "pymatreader==1.0.0" "h5py==3.12.1"
       - name: Open reserved confirmatory EEG and analyze frozen subject
         run: |
           mkdir -p e7r1_confirm/${{ matrix.subject }}
