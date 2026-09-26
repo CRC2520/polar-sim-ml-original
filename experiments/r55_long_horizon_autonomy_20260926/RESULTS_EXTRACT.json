@@ -1,0 +1,40 @@
+{
+  "campaign": "R55 bounded long-horizon functional autonomy",
+  "canonical_run_id": 36252249684,
+  "canonical_scientific_sha": "04f8b3e414cb6f45b1af2c5449e9a3c0967ed14d",
+  "resolution": "R55_DEVELOPMENT_FAIL_NO_CONFIRM",
+  "development": {
+    "seeds": "2246001-2246016",
+    "seed_guard_count": 0,
+    "required": 13,
+    "medians": {
+      "full_safety": 1,
+      "full_viability": 0.9135351924710802,
+      "goal_effect": 0.0034710565618909506,
+      "model_effect": 0,
+      "self_selection_effect": 0,
+      "sham_gap": 0,
+      "post_shift_safety": 1,
+      "goal_switch_rate": 0.045625
+    }
+  },
+  "confirmatory": {
+    "opened": false,
+    "seeds": "2247001-2247032"
+  },
+  "interpretation": {
+    "intact_long_horizon_viability": "SUPPORTED_DEVELOPMENT",
+    "persistent_goal_causal_value_on_frozen_safety_endpoint": "NOT_SUPPORTED",
+    "learned_resource_model_causal_value": "NOT_SUPPORTED",
+    "internal_self_selection_advantage_over_script": "NOT_SUPPORTED",
+    "strong_bounded_autonomy_claim": "NOT_SUPPORTED"
+  },
+  "boundaries": {
+    "free_will": "NOT_ESTABLISHED",
+    "consciousness": "NOT_ESTABLISHED",
+    "intrinsic_value_formation": "NOT_TESTED",
+    "E6b": "OPEN",
+    "E7": "NO_FULL_PASS",
+    "AGI_ASI": "NOT_ESTABLISHED"
+  }
+}
