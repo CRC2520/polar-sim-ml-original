@@ -74,17 +74,26 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install frozen analysis stack
+      - name: Install frozen analysis stack and annex transport
         run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y git-annex datalad
           python -m pip install --upgrade "pip<25"
           python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0" "pymatreader==1.0.0" "h5py==3.12.1"
+      - name: Materialize immutable OpenNeuro subject snapshot
+        run: |
+          datalad install -s https://github.com/OpenNeuroDatasets/ds004117.git e7r1_dataset
+          git -C e7r1_dataset checkout 1.0.1
+          test "$(git -C e7r1_dataset rev-parse HEAD)" = "065e38865296e7707166eb3b1b561044ac62ab4c"
+          datalad get -r -d e7r1_dataset e7r1_dataset/sub-${{ matrix.subject }}/ses-01/eeg
       - name: Open development EEG and analyze frozen subject
         run: |
           mkdir -p e7r1_dev/${{ matrix.subject }}
           python experiments/e7_r1_prospective_workingmemory_eeg_20260926/e7_r1_subject_analysis.py \
             --subject ${{ matrix.subject }} \
             --output e7r1_dev/${{ matrix.subject }}/result.json \
-            --cache e7r1_dev/${{ matrix.subject }}/cache
+            --cache e7r1_dev/${{ matrix.subject }}/cache \
+            --dataset-root e7r1_dataset
       - name: Record subject provenance
         if: always()
         run: |
@@ -152,17 +161,26 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install frozen analysis stack
+      - name: Install frozen analysis stack and annex transport
         run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y git-annex datalad
           python -m pip install --upgrade "pip<25"
           python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0" "pymatreader==1.0.0" "h5py==3.12.1"
+      - name: Materialize immutable OpenNeuro subject snapshot
+        run: |
+          datalad install -s https://github.com/OpenNeuroDatasets/ds004117.git e7r1_dataset
+          git -C e7r1_dataset checkout 1.0.1
+          test "$(git -C e7r1_dataset rev-parse HEAD)" = "065e38865296e7707166eb3b1b561044ac62ab4c"
+          datalad get -r -d e7r1_dataset e7r1_dataset/sub-${{ matrix.subject }}/ses-01/eeg
       - name: Open reserved confirmatory EEG and analyze frozen subject
         run: |
           mkdir -p e7r1_confirm/${{ matrix.subject }}
           python experiments/e7_r1_prospective_workingmemory_eeg_20260926/e7_r1_subject_analysis.py \
             --subject ${{ matrix.subject }} \
             --output e7r1_confirm/${{ matrix.subject }}/result.json \
-            --cache e7r1_confirm/${{ matrix.subject }}/cache
+            --cache e7r1_confirm/${{ matrix.subject }}/cache \
+            --dataset-root e7r1_dataset
       - name: Record subject provenance
         if: always()
         run: |
