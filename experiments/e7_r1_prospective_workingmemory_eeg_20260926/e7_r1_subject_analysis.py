@@ -48,16 +48,24 @@ def download(url: str, dest: Path) -> None:
     with urlopen(url,timeout=180) as r, dest.open("wb") as f:
         shutil.copyfileobj(r,f,length=1024*1024)
 
-def fetch_run(subject: str, run: int, root: Path):
+def fetch_run(subject: str, run: int, root: Path, dataset_root: Path | None = None):
     sub=f"sub-{subject}"
     stem=f"{sub}_ses-01_task-WorkingMemory_run-{run}"
-    eegdir=root/sub/"ses-01"/"eeg"
     names={
         "set":f"{stem}_eeg.set",
         "fdt":f"{stem}_eeg.fdt",
         "events":f"{stem}_events.tsv",
         "channels":f"{stem}_channels.tsv",
     }
+    if dataset_root is not None:
+        eegdir=Path(dataset_root)/sub/"ses-01"/"eeg"
+        paths={k:eegdir/v for k,v in names.items()}
+        missing=[str(p) for p in paths.values() if not p.exists()]
+        if missing:
+            raise FileNotFoundError(f"materialized OpenNeuro files missing: {missing}")
+        return paths
+
+    eegdir=root/sub/"ses-01"/"eeg"
     paths={k:eegdir/v for k,v in names.items()}
     rel=f"{sub}/ses-01/eeg"
     for k,name in names.items():
@@ -129,14 +137,14 @@ def permute_within(y, strata, seed):
         y[idx]=rng.permutation(y[idx])
     return y
 
-def analyze_subject(subject: str, outpath: Path, cache: Path):
+def analyze_subject(subject: str, outpath: Path, cache: Path, dataset_root: Path | None = None):
     XD=[]; yD=[]; gD=[]; sD=[]
     XC=[]; yC=[]; gC=[]
     XR=[]; yR=[]; gR=[]; sR=[]
     raw_sfreqs=[]; eeg_counts=[]
 
     for run in RUN_MAP[subject]:
-        paths=fetch_run(subject,run,cache)
+        paths=fetch_run(subject,run,cache,dataset_root=dataset_root)
         ch=pd.read_csv(paths["channels"],sep="\t")
         eeg_names=ch.loc[ch["type"].str.upper()=="EEG","name"].astype(str).tolist()
         ev=pd.read_csv(paths["events"],sep="\t")
@@ -182,10 +190,12 @@ def analyze_subject(subject: str, outpath: Path, cache: Path):
             sR.append(f"{run}|{int(row['memory_cond'])}")
 
         raw.close()
-        # immediately delete run bytes
-        for p in paths.values():
-            try: p.unlink()
-            except FileNotFoundError: pass
+        # Direct-NEMAR fallback downloads are ephemeral. Materialized OpenNeuro
+        # snapshot files are managed by the workflow dataset checkout.
+        if dataset_root is None:
+            for p in paths.values():
+                try: p.unlink()
+                except FileNotFoundError: pass
 
     yD=np.asarray(yD,int); yC=np.asarray(yC,int); yR=np.asarray(yR,int)
     counts={
@@ -242,8 +252,10 @@ def main():
     p.add_argument("--subject",required=True,choices=sorted(RUN_MAP))
     p.add_argument("--output",required=True)
     p.add_argument("--cache",required=True)
+    p.add_argument("--dataset-root")
     a=p.parse_args()
-    analyze_subject(a.subject,Path(a.output),Path(a.cache))
+    dataset_root=Path(a.dataset_root) if a.dataset_root else None
+    analyze_subject(a.subject,Path(a.output),Path(a.cache),dataset_root=dataset_root)
 
 if __name__=="__main__":
     main()
