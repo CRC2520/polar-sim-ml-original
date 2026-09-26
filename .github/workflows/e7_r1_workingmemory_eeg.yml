@@ -77,8 +77,9 @@ jobs:
       - name: Install frozen analysis stack and annex transport
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y git-annex datalad
+          sudo apt-get install -y git-annex
           python -m pip install --upgrade "pip<25"
+          python -m pip install "datalad==1.6.4"
           python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0" "pymatreader==1.0.0" "h5py==3.12.1"
       - name: Materialize immutable OpenNeuro subject snapshot
         run: |
@@ -164,8 +165,9 @@ jobs:
       - name: Install frozen analysis stack and annex transport
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y git-annex datalad
+          sudo apt-get install -y git-annex
           python -m pip install --upgrade "pip<25"
+          python -m pip install "datalad==1.6.4"
           python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0" "pymatreader==1.0.0" "h5py==3.12.1"
       - name: Materialize immutable OpenNeuro subject snapshot
         run: |
