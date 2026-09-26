@@ -1,0 +1,258 @@
+name: E7-R1 prospective WorkingMemory EEG correspondence
+
+on:
+  push:
+    branches: [research/e7-r1-prospective-workingmemory-eeg-20260926]
+    paths:
+      - experiments/e7_r1_prospective_workingmemory_eeg_20260926/PREREG_E7_R1.md
+      - experiments/e7_r1_prospective_workingmemory_eeg_20260926/METADATA_FREEZE_E7_R1.json
+      - experiments/e7_r1_prospective_workingmemory_eeg_20260926/e7_r1_subject_analysis.py
+      - experiments/e7_r1_prospective_workingmemory_eeg_20260926/adjudicate_e7_r1.py
+      - experiments/e7_r1_prospective_workingmemory_eeg_20260926/verify_e7_r1.py
+      - .github/workflows/e7_r1_workingmemory_eeg.yml
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+
+jobs:
+  metadata_contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install frozen analysis stack
+        run: |
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0" "pymatreader==1.0.0" "h5py==3.12.1"
+      - name: Verify frozen code and metadata
+        run: |
+          python -m py_compile experiments/e7_r1_prospective_workingmemory_eeg_20260926/e7_r1_subject_analysis.py
+          python -m py_compile experiments/e7_r1_prospective_workingmemory_eeg_20260926/adjudicate_e7_r1.py
+          python -m py_compile experiments/e7_r1_prospective_workingmemory_eeg_20260926/verify_e7_r1.py
+          python - <<'PY'
+          import json
+          d=json.load(open('experiments/e7_r1_prospective_workingmemory_eeg_20260926/METADATA_FREEZE_E7_R1.json'))
+          assert d['signal_opened'] is False
+          assert len(d['subjects']['development'])==8
+          assert len(d['subjects']['confirmatory'])==15
+          assert d['prospective_labels']['R']['task_roles']==['probe_target','probe_not_shown']
+          print('E7-R1 metadata contract PASS')
+          PY
+      - name: Record pre-signal provenance
+        run: |
+          mkdir -p e7r1_meta
+          git rev-parse HEAD > e7r1_meta/EXECUTION_COMMIT.txt
+          sha256sum experiments/e7_r1_prospective_workingmemory_eeg_20260926/PREREG_E7_R1.md > e7r1_meta/PROTOCOL_SHA256.txt
+          sha256sum experiments/e7_r1_prospective_workingmemory_eeg_20260926/METADATA_FREEZE_E7_R1.json > e7r1_meta/METADATA_SHA256.txt
+          sha256sum experiments/e7_r1_prospective_workingmemory_eeg_20260926/e7_r1_subject_analysis.py > e7r1_meta/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e7-r1-metadata-freeze
+          path: e7r1_meta/
+          retention-days: 30
+
+  development_subject:
+    needs: metadata_contract
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        subject: ["001", "002", "003", "004", "005", "006", "007", "008"]
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install frozen analysis stack and annex transport
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y git-annex
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "datalad==1.6.4"
+          python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0" "pymatreader==1.0.0" "h5py==3.12.1"
+      - name: Materialize immutable OpenNeuro subject snapshot
+        run: |
+          git config --global user.name "POLAR E7-R1 CI"
+          git config --global user.email "e7-r1-ci@invalid.local"
+          datalad install -s https://github.com/OpenNeuroDatasets/ds004117.git e7r1_dataset
+          git -C e7r1_dataset checkout 1.0.1
+          test "$(git -C e7r1_dataset rev-parse HEAD)" = "065e38865296e7707166eb3b1b561044ac62ab4c"
+          datalad get -r -d e7r1_dataset e7r1_dataset/sub-${{ matrix.subject }}/ses-01/eeg
+      - name: Open development EEG and analyze frozen subject
+        run: |
+          mkdir -p e7r1_dev/${{ matrix.subject }}
+          python experiments/e7_r1_prospective_workingmemory_eeg_20260926/e7_r1_subject_analysis.py \
+            --subject ${{ matrix.subject }} \
+            --output e7r1_dev/${{ matrix.subject }}/result.json \
+            --cache e7r1_dev/${{ matrix.subject }}/cache \
+            --dataset-root e7r1_dataset
+      - name: Record subject provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > e7r1_dev/${{ matrix.subject }}/EXECUTION_COMMIT.txt
+          sha256sum experiments/e7_r1_prospective_workingmemory_eeg_20260926/PREREG_E7_R1.md > e7r1_dev/${{ matrix.subject }}/PROTOCOL_SHA256.txt
+          sha256sum experiments/e7_r1_prospective_workingmemory_eeg_20260926/e7_r1_subject_analysis.py > e7r1_dev/${{ matrix.subject }}/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e7-r1-dev-${{ matrix.subject }}
+          path: e7r1_dev/${{ matrix.subject }}/
+          retention-days: 30
+
+  development_gate:
+    needs: development_subject
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      authorize_confirm: ${{ steps.gate.outputs.authorize_confirm }}
+      resolution: ${{ steps.gate.outputs.resolution }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install adjudication dependency
+        run: python -m pip install "numpy==1.26.4"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: e7-r1-dev-*
+          path: e7r1_dev_all
+      - name: Aggregate frozen development panel
+        id: gate
+        run: |
+          mkdir -p e7r1_dev_gate
+          mapfile -t files < <(find e7r1_dev_all -name result.json | sort)
+          test "${#files[@]}" -eq 8
+          python experiments/e7_r1_prospective_workingmemory_eeg_20260926/adjudicate_e7_r1.py --inputs "${files[@]}" --phase development --output e7r1_dev_gate/E7_R1_DEVELOPMENT.json
+          python experiments/e7_r1_prospective_workingmemory_eeg_20260926/verify_e7_r1.py --development e7r1_dev_gate/E7_R1_DEVELOPMENT.json | tee e7r1_dev_gate/VERIFY_E7_R1_DEV.txt
+          python - <<'PY'
+          import json, os
+          d=json.load(open('e7r1_dev_gate/E7_R1_DEVELOPMENT.json'))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('authorize_confirm=' + ('true' if d['authorize_confirm'] else 'false') + '\n')
+              f.write('resolution=' + d['resolution'] + '\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e7-r1-development-gate
+          path: e7r1_dev_gate/
+          retention-days: 30
+
+  confirmatory_subject:
+    needs: development_gate
+    if: needs.development_gate.outputs.authorize_confirm == 'true'
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        subject: ["009", "010", "011", "012", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024"]
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install frozen analysis stack and annex transport
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y git-annex
+          python -m pip install --upgrade "pip<25"
+          python -m pip install "datalad==1.6.4"
+          python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0" "pymatreader==1.0.0" "h5py==3.12.1"
+      - name: Materialize immutable OpenNeuro subject snapshot
+        run: |
+          git config --global user.name "POLAR E7-R1 CI"
+          git config --global user.email "e7-r1-ci@invalid.local"
+          datalad install -s https://github.com/OpenNeuroDatasets/ds004117.git e7r1_dataset
+          git -C e7r1_dataset checkout 1.0.1
+          test "$(git -C e7r1_dataset rev-parse HEAD)" = "065e38865296e7707166eb3b1b561044ac62ab4c"
+          datalad get -r -d e7r1_dataset e7r1_dataset/sub-${{ matrix.subject }}/ses-01/eeg
+      - name: Open reserved confirmatory EEG and analyze frozen subject
+        run: |
+          mkdir -p e7r1_confirm/${{ matrix.subject }}
+          python experiments/e7_r1_prospective_workingmemory_eeg_20260926/e7_r1_subject_analysis.py \
+            --subject ${{ matrix.subject }} \
+            --output e7r1_confirm/${{ matrix.subject }}/result.json \
+            --cache e7r1_confirm/${{ matrix.subject }}/cache \
+            --dataset-root e7r1_dataset
+      - name: Record subject provenance
+        if: always()
+        run: |
+          git rev-parse HEAD > e7r1_confirm/${{ matrix.subject }}/EXECUTION_COMMIT.txt
+          sha256sum experiments/e7_r1_prospective_workingmemory_eeg_20260926/PREREG_E7_R1.md > e7r1_confirm/${{ matrix.subject }}/PROTOCOL_SHA256.txt
+          sha256sum experiments/e7_r1_prospective_workingmemory_eeg_20260926/e7_r1_subject_analysis.py > e7r1_confirm/${{ matrix.subject }}/RUNNER_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e7-r1-confirm-${{ matrix.subject }}
+          path: e7r1_confirm/${{ matrix.subject }}/
+          retention-days: 30
+
+  confirmatory_gate:
+    needs: [development_gate, confirmatory_subject]
+    if: always() && needs.development_gate.outputs.authorize_confirm == 'true' && needs.confirmatory_subject.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install adjudication dependency
+        run: python -m pip install "numpy==1.26.4"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: e7-r1-confirm-*
+          path: e7r1_confirm_all
+      - name: Aggregate final E7-R1 panel
+        run: |
+          mkdir -p e7r1_final
+          mapfile -t files < <(find e7r1_confirm_all -name result.json | sort)
+          test "${#files[@]}" -eq 15
+          python experiments/e7_r1_prospective_workingmemory_eeg_20260926/adjudicate_e7_r1.py --inputs "${files[@]}" --phase confirmatory --output e7r1_final/E7_R1_CONFIRMATORY.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e7-r1-confirmatory-gate
+          path: e7r1_final/
+          retention-days: 30
+
+  integrity:
+    needs: [development_gate, confirmatory_gate]
+    if: always() && needs.development_gate.result == 'success' && needs.confirmatory_gate.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install verifier dependency
+        run: python -m pip install "numpy==1.26.4"
+      - uses: actions/download-artifact@v4
+        with:
+          name: e7-r1-development-gate
+          path: e7r1_audit/dev
+      - uses: actions/download-artifact@v4
+        with:
+          name: e7-r1-confirmatory-gate
+          path: e7r1_audit/confirm
+      - name: Verify final E7-R1 adjudication
+        run: |
+          python experiments/e7_r1_prospective_workingmemory_eeg_20260926/verify_e7_r1.py --development e7r1_audit/dev/E7_R1_DEVELOPMENT.json --confirmatory e7r1_audit/confirm/E7_R1_CONFIRMATORY.json | tee e7r1_audit/VERIFY_E7_R1.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: e7-r1-integrity
+          path: e7r1_audit/
+          retention-days: 30
