@@ -1,0 +1,44 @@
+{
+  "campaign": "R56 bounded causal social interaction",
+  "canonical_run_id": 36252774670,
+  "canonical_scientific_sha": "4e21f0bfd536e56fd0cff4c0f916123f48a4d931",
+  "resolution": "R56_DEVELOPMENT_FAIL_NO_CONFIRM",
+  "development": {
+    "seeds": "2256001-2256016",
+    "seed_guard_count": 0,
+    "required": 13,
+    "medians": {
+      "full_reward": 0.3469875,
+      "revisit_reward": 0.35428240740740735,
+      "responsive_contrast": 0.3714377013142297,
+      "responsive_cooperation": 0.33511111111111114,
+      "p3_cooperation": 0.004,
+      "identity_effect": 0.21392083333333328,
+      "history_effect": 0.03272500000000003,
+      "relation_effect": -0.03952916666666667,
+      "long_horizon_effect": 0.21870833333333334,
+      "sham_gap": 0
+    }
+  },
+  "confirmatory": {
+    "opened": false,
+    "seeds": "2257001-2257032"
+  },
+  "interpretation": {
+    "partner_identity_value": "SUPPORTED_DEVELOPMENT",
+    "action_to_future_partner_response_learning": "SUPPORTED_DIAGNOSTIC",
+    "nonmyopic_advantage": "SUPPORTED_DEVELOPMENT",
+    "cross_visit_history": "BELOW_FROZEN_GATE",
+    "relation_specific_causal_use": "NOT_SUPPORTED",
+    "strong_social_interaction_claim": "NOT_SUPPORTED"
+  },
+  "boundaries": {
+    "empathy": "NOT_ESTABLISHED",
+    "theory_of_mind_human_sense": "NOT_ESTABLISHED",
+    "moral_agency": "NOT_ESTABLISHED",
+    "intrinsic_values": "NOT_TESTED",
+    "consciousness": "NOT_ESTABLISHED",
+    "E6b": "OPEN",
+    "E7": "NO_FULL_PASS"
+  }
+}
