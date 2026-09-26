@@ -1,0 +1,203 @@
+{
+  "campaign": "E7-R1 prospective biological correspondence",
+  "dataset": {
+    "nemar": "on004117",
+    "nemar_version": "v1.0.0",
+    "openneuro": "ds004117",
+    "openneuro_doi": "10.18112/openneuro.ds004117.v1.0.1",
+    "nemar_doi": "10.82901/nemar.on004117",
+    "metadata_repository": "nemarDatasets/on004117",
+    "metadata_repo_commit": "7f607906883e117658534aa2879d59a7a7b5d145",
+    "task": "WorkingMemory",
+    "hed_version": "8.0.0"
+  },
+  "subjects": {
+    "development": [
+      "sub-001",
+      "sub-002",
+      "sub-003",
+      "sub-004",
+      "sub-005",
+      "sub-006",
+      "sub-007",
+      "sub-008"
+    ],
+    "confirmatory": [
+      "sub-009",
+      "sub-010",
+      "sub-011",
+      "sub-012",
+      "sub-014",
+      "sub-015",
+      "sub-016",
+      "sub-017",
+      "sub-018",
+      "sub-019",
+      "sub-020",
+      "sub-021",
+      "sub-022",
+      "sub-023",
+      "sub-024"
+    ]
+  },
+  "runs": {
+    "sub-001": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "sub-002": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "sub-003": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "sub-004": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "sub-005": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "sub-006": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "sub-007": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "sub-008": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "sub-009": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "sub-010": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "sub-011": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "sub-012": [
+      1,
+      2,
+      3
+    ],
+    "sub-014": [
+      1,
+      2,
+      3
+    ],
+    "sub-015": [
+      1,
+      2,
+      3
+    ],
+    "sub-016": [
+      1,
+      2,
+      3
+    ],
+    "sub-017": [
+      1,
+      2,
+      3
+    ],
+    "sub-018": [
+      1,
+      2,
+      3
+    ],
+    "sub-019": [
+      1,
+      2,
+      3
+    ],
+    "sub-020": [
+      1,
+      2,
+      3
+    ],
+    "sub-021": [
+      1,
+      2,
+      3
+    ],
+    "sub-022": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "sub-023": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "sub-024": [
+      1,
+      2,
+      3
+    ]
+  },
+  "prospective_labels": {
+    "D": {
+      "event_type": "show_letter",
+      "task_roles": [
+        "to_remember",
+        "to_ignore"
+      ]
+    },
+    "C": {
+      "event_type": "show_dash",
+      "task_role": "work_memory",
+      "memory_cond": [
+        3,
+        5,
+        7
+      ]
+    },
+    "R": {
+      "event_type": "show_letter",
+      "task_roles": [
+        "probe_target",
+        "probe_not_shown"
+      ]
+    }
+  },
+  "signal_opened": false,
+  "note": "Only public dataset/task metadata and BIDS/HED event tables were inspected before this freeze. No EEG waveform-derived quantity from on004117/ds004117 has been inspected by the POLAR E7-R1 campaign."
+}
