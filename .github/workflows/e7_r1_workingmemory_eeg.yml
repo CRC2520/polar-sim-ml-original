@@ -83,6 +83,8 @@ jobs:
           python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0" "pymatreader==1.0.0" "h5py==3.12.1"
       - name: Materialize immutable OpenNeuro subject snapshot
         run: |
+          git config --global user.name "POLAR E7-R1 CI"
+          git config --global user.email "e7-r1-ci@invalid.local"
           datalad install -s https://github.com/OpenNeuroDatasets/ds004117.git e7r1_dataset
           git -C e7r1_dataset checkout 1.0.1
           test "$(git -C e7r1_dataset rev-parse HEAD)" = "065e38865296e7707166eb3b1b561044ac62ab4c"
@@ -171,6 +173,8 @@ jobs:
           python -m pip install "numpy==1.26.4" "scipy==1.13.1" "pandas==2.2.3" "scikit-learn==1.5.2" "mne==1.8.0" "pymatreader==1.0.0" "h5py==3.12.1"
       - name: Materialize immutable OpenNeuro subject snapshot
         run: |
+          git config --global user.name "POLAR E7-R1 CI"
+          git config --global user.email "e7-r1-ci@invalid.local"
           datalad install -s https://github.com/OpenNeuroDatasets/ds004117.git e7r1_dataset
           git -C e7r1_dataset checkout 1.0.1
           test "$(git -C e7r1_dataset rev-parse HEAD)" = "065e38865296e7707166eb3b1b561044ac62ab4c"
