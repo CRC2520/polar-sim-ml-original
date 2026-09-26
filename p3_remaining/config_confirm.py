@@ -1,0 +1,26 @@
+"""Frozen confirmatory criteria for POLAR P3."""
+FINAL_SEEDS=tuple(range(998001,998013))
+GLOBAL_REQUIRED=9
+
+# A — prolonged continual autonomy
+A_RECURRENT_GAIN_MIN=.075
+A_FINAL_REWARD_MIN=.90
+A_RETENTION_MIN=.98
+
+# B — autobiographical self / identity-specific history
+B_PREDICTION_GAIN_MIN=.05
+B_TRANSPLANT_PRED_DAMAGE_MIN=.20
+B_TRANSPLANT_REWARD_DAMAGE_MIN=.20
+
+# C — endogenous goal-priority adaptation
+C_ALIVE_MIN=.99
+C_PRIORITY_ACC_MIN=.90
+C_RECOVERY_GAIN_MIN=.65
+C_UNSAFE_REDUCTION_MIN=.015
+
+# D — individual -> population -> ecology
+D_FULL_ALIVE_MIN=.99
+D_RESOURCE_GAIN_MIN=.02
+D_RESTRAINT_GAIN_MIN=.08
+D_TRANSMISSION_SHIFT_MIN=.15
+D_ECOLOGY_TRANSMISSION_EFFECT_MIN=.05

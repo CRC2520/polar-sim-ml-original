@@ -1,0 +1,65 @@
+name: POLAR P3 confirmatory freeze
+
+on:
+  pull_request:
+    paths:
+      - "p3_remaining/config_confirm.py"
+      - "p3_remaining/PREREG_P3.md"
+      - "p3_remaining/experiments.py"
+      - "p3_remaining/config_dev.py"
+      - "p3_remaining/confirm.py"
+      - "p3_remaining/audit.py"
+      - ".github/workflows/p3-confirm.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  confirm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install frozen numerical dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.3.5
+      - name: Record freeze commit
+        run: git rev-parse HEAD | tee P3_FREEZE_COMMIT.txt
+      - name: Contract smoke tests
+        run: python -m unittest p3_remaining.test_p3 -v
+      - name: Confirmatory execution A
+        run: python -m p3_remaining.confirm --output p3_results/run1
+      - name: Confirmatory execution B
+        run: python -m p3_remaining.confirm --output p3_results/run2
+      - name: Exact audit
+        run: python -m p3_remaining.audit --run1 p3_results/run1 --run2 p3_results/run2 --output p3_results/AUDIT_P3.json
+      - name: Print report
+        run: |
+          cat p3_results/run1/REPORT_P3.md
+          cat p3_results/AUDIT_P3.json
+      - name: Upload P3 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: polar-p3-confirmatory
+          path: |
+            P3_FREEZE_COMMIT.txt
+            p3_remaining/config_dev.py
+            p3_remaining/config_confirm.py
+            p3_remaining/PREREG_P3.md
+            p3_remaining/experiments.py
+            p3_remaining/confirm.py
+            p3_remaining/audit.py
+            p3_results/run1/
+            p3_results/AUDIT_P3.json
+          if-no-files-found: error
+          retention-days: 90
